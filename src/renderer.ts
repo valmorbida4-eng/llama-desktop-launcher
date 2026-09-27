@@ -87,5 +87,3 @@ window.llama.onChatOutput(data=>{const box=$('chat-output');box.textContent=(box
 window.llama.onChatStopped(result=>{$('chat-output').textContent+=`\n[Conversa encerrada: ${result.code??result.signal??'sem código'}]\n`;$('stop-chat').hidden=true;$('stop-chat').disabled=false;$('send-chat').disabled=true;$('start-chat').disabled=false;$('launch').disabled=false;});
 refresh().catch(e=>message(e.message,true));
 })();
-
-

@@ -13,5 +13,3 @@ const renderer = spawnSync(process.execPath, [compiler, '--project', path.join(r
 if (renderer.error) throw renderer.error;
 if (renderer.status !== 0) process.exit(renderer.status ?? 1);
 for (const file of ['index.html', 'style.css']) fs.copyFileSync(path.join(root, 'src', file), path.join(output, file));
-
-
