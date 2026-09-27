@@ -1,0 +1,36 @@
+name: macOS build preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15-intel
+            arch: x64
+          - os: macos-latest
+            arch: arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run dist:mac
+      - name: Smoke test the DMG contents
+        run: node scripts/smoke-macos-dmg.js "$(find dist -maxdepth 1 -type f -name '*.dmg' -print -quit)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-preview-${{ matrix.arch }}
+          path: dist/*.dmg
+          if-no-files-found: error
+          retention-days: 3

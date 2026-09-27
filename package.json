@@ -1,0 +1,42 @@
+{
+  "name": "llama-desktop-launcher",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Célio",
+  "description": "Instalador e launcher multiplataforma para llama.cpp",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "dist:win": "electron-builder --win nsis --publish never",
+    "dist:linux": "electron-builder --linux AppImage deb rpm --publish never",
+    "dist:mac": "electron-builder --mac dmg --publish never"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "br.celio.llamadesktoplauncher",
+    "productName": "Llama Desktop Launcher",
+    "directories": { "output": "dist" },
+    "files": ["src/**/*", "README.md"],
+    "extraResources": [{"from":"docs","to":"docs"}],
+    "win": { "target": "nsis", "signAndEditExecutable": false },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "deleteAppDataOnUninstall": false,
+      "include": "build/installer.nsh"
+    },
+    "linux": {
+      "target": ["AppImage", "deb", "rpm"],
+      "category": "Utility",
+      "desktop": { "Name": "Llama Desktop Launcher" }
+    },
+    "mac": { "target": "dmg", "category": "public.app-category.utilities" }
+  }
+}
