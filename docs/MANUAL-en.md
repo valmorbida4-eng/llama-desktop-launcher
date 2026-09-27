@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.1.1 · English
+Version 0.2.0 · English
 
 ## 1. What the application does
 
@@ -14,17 +14,21 @@ The interface has three screens: **Llama** for chat and starting the server, **M
 
 | System | Package | GPU backend |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.1.1.exe` | Vulkan with a compatible display driver |
-| Linux x64/arm64 | AppImage, DEB, or RPM | Vulkan with compatible drivers and libraries |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.0.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
+| Linux x64/arm64 | AppImage, DEB, or RPM | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
 Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. The GitHub Actions matrix is configured for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon, but Linux and macOS artifacts are validated only after their jobs run and the packages are opened on their target systems.
 
 ## 3. Install the application
 
+The [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher) is planned to become public. Access to the source code is not the same as access to an installer: the GitHub Actions workflow stores packages as run artifacts, but does not publish them automatically as [Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install without the project, obtain the package for your system from a published Release or directly from its distributor. If that package is not listed yet, it is not available for public download.
+
+For this version, the Windows x64 installer was built locally. Linux 0.2.0 packages and the macOS Intel/Apple Silicon DMGs still require builds and validation on their target systems. The previously tested Linux x64 DEB belongs to version 0.1.1. Follow the steps below only after obtaining the appropriate package. If you have the source code, build the package on the corresponding system using the README instructions.
+
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.1.1.exe`.
+1. Open `Llama Desktop Launcher Setup 0.2.0.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.
@@ -37,7 +41,7 @@ Required disk space depends on the model. Allow room for the GGUF, cache, and en
 
 DEB and RPM use the standard locations chosen by the distribution and package manager. Model folders are selected inside the application.
 
-For the current version, use the DEB, RPM, or AppImage package for your system. Experimental portable archives from earlier versions do not replace those packages.
+When a package for your platform is available, use the corresponding DEB, RPM, or AppImage. Experimental portable archives from earlier versions do not replace those packages.
 
 ### macOS
 
@@ -53,10 +57,10 @@ On first launch, **Settings** opens automatically if the engine is not ready, th
 
 In **Motor llama.cpp**, choose one of these options:
 
-1. **Baixar motor oficial / Download official engine:** the app downloads release `b11193` directly from `ggml-org/llama.cpp` on GitHub. Windows/Linux use Vulkan; macOS uses Metal. The engine is stored in your user data folder, outside the app installation folder.
+1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b11193` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
 2. **Escolher pasta existente / Choose existing folder:** select a folder containing `llama-server` (or `llama-server.exe`). This lets you reuse an existing installation, including the `b11193-vulkan` directory used by the earlier Windows launcher.
 
-Downloading requires internet access. If the release has no package for your CPU architecture, select a compatible engine you built or installed yourself. The app checks SHA-256 when the GitHub release API provides a digest. You can replace a selected engine later by choosing a different existing folder or downloading the official package again.
+Downloading requires internet access. Choose according to your GPU, independent of CPU brand: Vulkan supports compatible AMD, Intel, and NVIDIA GPUs; CUDA is for NVIDIA, ROCm for AMD, and SYCL for Intel. For an RTX 4060 on Windows x64, start with **NVIDIA CUDA 12.4** and keep the NVIDIA driver current. ROCm and SYCL may require additional runtimes and drivers. If the release has no package for your CPU architecture, select a compatible engine you built or installed yourself. The app checks SHA-256 when the GitHub release API provides a digest. You can replace a selected engine later by choosing a different existing folder or downloading the official package again.
 
 If you used the previous Windows launcher, first select the folder containing your GGUF files. Under **Configurações > Perfis do launcher anterior / Settings > Previous launcher profiles**, click **Importar perfis TSV / Import TSV profiles** and select `launcher-profiles.tsv` from the old launcher folder. Import matches the model's full path; if you moved the GGUF files, select the original folder or adjust profiles manually. Existing profiles in this app are preserved. The result reports imported, missing, already existing, and invalid profiles.
 
@@ -143,7 +147,7 @@ The benchmark may load the model more than once and can take several minutes. It
 | Engine download fails | Check internet access, free space, and GitHub access; retry or select an existing engine folder. |
 | “Package without llama-server” | The release layout may have changed; select a compatible runtime manually. |
 | Server exits during startup | Read the engine log; lower context/batch, try `-ngl auto`, or reduce GPU layers. |
-| GPU not used | Update Vulkan drivers on Windows/Linux; on macOS check that you installed a Metal build. Read the engine log. |
+| GPU not used | Check the selected backend, GPU compatibility, and drivers; on macOS check that you installed a Metal build. Read the engine log. |
 | Benchmark fails | Ensure the runtime folder contains `llama-bench`; try more conservative settings. |
 | Model fails to load | Check all shards, `b11193` compatibility, model repository instructions, and available memory. |
 
@@ -157,4 +161,4 @@ On Linux, remove DEB/RPM with your package manager, or delete the AppImage file.
 
 ## 11. Credits
 
-[llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). This independent launcher was developed for Célio with Codex, based on the earlier WinForms launcher, and is released under the [MIT license](../LICENSE), with copyright held by Célio. The repository and npm package may remain private for now. The llama.cpp authors do not participate in or endorse this app. Each model has its own license.
+[llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). This independent launcher was developed for Célio with Codex, based on the earlier WinForms launcher, and is released under the [MIT license](../LICENSE), with copyright held by Célio. Public release of the repository is planned; installers require separate publication. The llama.cpp authors do not participate in or endorse this app. Each model has its own license.

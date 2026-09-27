@@ -6,8 +6,8 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 ## Funcionalidades
 
-- Permite baixar o binário oficial do llama.cpp na primeira execução ou depois, ou usar uma pasta de runtime já existente. A versão testada é `b11193`.
-- Usa Vulkan no Windows/Linux e Metal no macOS. Para GPU, drivers compatíveis precisam estar instalados no sistema.
+- Permite escolher e baixar um pacote oficial do llama.cpp na primeira execução ou depois, ou usar uma pasta de runtime já existente. A versão do motor usada é `b11193`.
+- No Windows/Linux, oferece Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL e CPU conforme a arquitetura e os pacotes disponíveis; no macOS, Metal. A escolha depende da GPU, não da marca do processador. Para aceleração, drivers e bibliotecas compatíveis precisam estar instalados no sistema.
 - Configura até duas pastas de modelos GGUF, independentes da pasta do aplicativo. Detecta `mmproj` no mesmo diretório do modelo.
 - Mantém perfis por modelo com GPU layers, dispositivo, contexto, cache K/V, camadas MoE na CPU, Flash Attention, threads, batch e microbatch.
 - Apresenta três telas: **Llama** para conversa e servidor, **Modelos** para catálogo local e sugestões, e **Configurações** para motor, pastas e perfis. Sem motor ou modelo selecionado, abre em Configurações.
@@ -18,6 +18,18 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 - Permite 1 a 8 sessões simultâneas (`--parallel`) e copia os links da API e da interface para conexão.
 - Permite conversar via `llama-cli` na janela do aplicativo ou abri-lo em um terminal separado, usando o perfil do modelo selecionado.
 - No Windows, oferece criação opcional de regra de firewall limitada ao executável, à porta ativa e à faixa privada informada; o Windows solicita autorização de administrador.
+
+## Obter o aplicativo sem o código-fonte
+
+O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. A publicação do código não disponibiliza instaladores automaticamente: eles precisam ser compilados, testados e anexados a uma [Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) ou distribuídos separadamente. Não confunda o código do repositório, os artefatos temporários do GitHub Actions e um instalador publicado para usuários.
+
+| Plataforma | Arquivo a obter | Situação da versão 0.2.0 |
+| --- | --- | --- |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.0.exe` | Instalador gerado localmente; ainda depende de publicação para download público. |
+| Linux x64/arm64 | DEB, RPM ou AppImage para a arquitetura correta | Os pacotes 0.2.0 ainda precisam de build e validação no sistema de destino. |
+| macOS Intel/Apple Silicon | DMG da arquitetura correta | Build e validação em macOS ainda pendentes. |
+
+Quando houver uma Release com o pacote do seu sistema, baixe o instalador por ela e siga o [manual em português](docs/MANUAL-pt-BR.md) ou [em inglês](docs/MANUAL-en.md). Se houver apenas o código-fonte, será preciso gerar o pacote na plataforma correspondente pelas instruções abaixo. O instalador não inclui modelos GGUF; o motor llama.cpp pode ser baixado pelo aplicativo na primeira execução.
 
 ## Instalação e uso
 
@@ -33,9 +45,9 @@ Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux`
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-Os instaladores atuais são identificados pela versão `0.1.1`. Um arquivo portátil experimental de `0.1.0` pode continuar em `dist/`, mas pertence à versão anterior.
+O instalador Windows atual é identificado pela versão `0.2.0`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem a seleção de backend desta versão.
 
-Para economizar minutos e armazenamento em um repositório privado, `.github/workflows/build-macos-preview.yml` executa manualmente apenas os dois builds macOS (Intel e Apple Silicon), verifica o conteúdo dos DMGs e guarda os artefatos por três dias. A execução ainda depende de enviar este código para um repositório GitHub; nenhum DMG foi gerado neste computador Windows.
+Enquanto o repositório ainda é privado, para economizar minutos e armazenamento, `.github/workflows/build-macos-preview.yml` executa manualmente apenas os dois builds macOS (Intel e Apple Silicon), verifica o conteúdo dos DMGs e guarda os artefatos por três dias. A execução ainda depende de enviar este código para um repositório GitHub; nenhum DMG foi gerado neste computador Windows.
 
 No Windows, o instalador NSIS permite escolher a pasta do aplicativo e marcar um atalho da área de trabalho. No Linux, DEB/RPM seguem o gerenciador de pacotes da distribuição; AppImage é uma opção portátil. No macOS, abra o DMG e arraste o aplicativo para a pasta escolhida. As duas localizações de modelos são escolhidas e podem ser alteradas no primeiro uso e depois, dentro do aplicativo. Modelos não são removidos ao desinstalar o app.
 
@@ -43,7 +55,7 @@ No Windows, o instalador NSIS permite escolher a pasta do aplicativo e marcar um
 
 Feche o aplicativo normalmente antes de desinstalar; isso encerra o `llama-server` iniciado por ele. No Windows, o desinstalador pede para fechar o app e permite tentar novamente, sem encerrá-lo à força. Use **Configurações > Aplicativos instalados** do Windows. Ele remove a pasta do aplicativo e os atalhos, mas preserva por padrão `settings.json`, os motores baixados sob `engines/` e as pastas de modelos. No Linux, remova DEB/RPM pelo gerenciador de pacotes; para AppImage, apague o arquivo. No macOS, mova o `.app` para o Lixo. Em todos os sistemas, revise separadamente os dados do usuário antes de apagá-los manualmente. O app impede escolher pastas de modelos dentro da instalação ou de seus dados internos.
 
-No primeiro uso, a tela **Configurações** permite baixar ou selecionar `llama.cpp` e escolher até duas pastas de GGUF. Você pode clicar em **Concluir e ir para Llama** e voltar a **Configurações** a qualquer momento. Use **Modelos** para localizar GGUF e avaliar sugestões; use **Llama** para conversar no terminal integrado, abrir a CLI externa ou iniciar o servidor no navegador. Se já usa o launcher antigo, selecione a pasta `b11193-vulkan` existente e a pasta que contém seus modelos. Depois, em **Configurações**, use **Importar perfis TSV** e selecione `launcher-profiles.tsv`. A importação preserva perfis já existentes e associa apenas os caminhos de modelos encontrados nas pastas configuradas.
+No primeiro uso, a tela **Configurações** permite escolher o backend antes de baixar `llama.cpp`, selecionar uma pasta de motor existente e escolher até duas pastas de GGUF. Para uma RTX 4060 no Windows x64, escolha **NVIDIA CUDA 12.4**; o aplicativo baixa também as DLLs CUDA oficiais. O driver NVIDIA precisa ser compatível. Vulkan continua disponível para GPUs AMD, Intel e NVIDIA; ROCm e SYCL exigem hardware e runtime compatíveis. A marca da CPU não determina o backend. Você pode clicar em **Concluir e ir para Llama** e voltar a **Configurações** a qualquer momento. Use **Modelos** para localizar GGUF e avaliar sugestões; use **Llama** para conversar no terminal integrado, abrir a CLI externa ou iniciar o servidor no navegador. Se já usa o launcher antigo, selecione a pasta `b11193-vulkan` existente e a pasta que contém seus modelos. Depois, em **Configurações**, use **Importar perfis TSV** e selecione `launcher-profiles.tsv`. A importação preserva perfis já existentes e associa apenas os caminhos de modelos encontrados nas pastas configuradas.
 
 ## Empacotamento e limites atuais
 
@@ -53,6 +65,6 @@ As versões oficiais de Linux usadas aqui são construídas em Ubuntu; a compati
 
 - **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b11193); consulte a licença no repositório original.
 - **Launcher original para Célio:** interface WinForms, ponte local e auxiliar de firewall criados com Codex para Célio; serviram como base funcional para os ajustes avançados deste aplicativo.
-- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. O repositório e o pacote npm podem permanecer privados enquanto a publicação pública é preparada. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
+- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. A publicação pública do repositório está planejada; os instaladores terão de ser publicados separadamente para download direto. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
 
 Os créditos não implicam participação ou endosso dos autores do llama.cpp neste launcher.

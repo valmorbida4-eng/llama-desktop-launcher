@@ -32,6 +32,9 @@ async function main(){
     const importButton=!!document.getElementById('import-profiles');
     const chatButton=!!document.getElementById('start-chat');
     const firewallButton=!!document.getElementById('create-firewall');
+    const backendSelect=document.getElementById('engine-backend');
+    const backendChoices=Array.from(backendSelect?.options||[]).map(option=>option.value);
+    const backendReady=backendChoices.length>0 && (state.platform!=='win32'||backendChoices.includes('cuda-12.4'));
     document.getElementById('nav-models').click();
     await new Promise(r=>setTimeout(r,250));
     const modelsVisible=!document.getElementById('models-view').hidden;
@@ -44,7 +47,7 @@ async function main(){
     const saveInAccordion=!document.getElementById('save-settings-profile').hidden;
     document.getElementById('nav-settings').click();
     const tuningInSettings=document.getElementById('tuning-settings-content').contains(document.getElementById('tuning-panel'));
-    return {firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,chatButton,firewallButton,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
+    return {firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
   })()`);
   const expected=withModel?{firstRun:false,settingsVisible:false,llamaInitiallyVisible:true,selectedModel:true}:{firstRun:true,settingsVisible:true,llamaInitiallyVisible:false,selectedModel:true};
   if(Object.entries(result).some(([key,value])=>value!==(key in expected?expected[key]:true)))throw Error(`Estado da interface inesperado: ${JSON.stringify(result)}`);

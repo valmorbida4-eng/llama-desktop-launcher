@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.1.1 · Português (Brasil)
+Versão 0.2.0 · Português (Brasil)
 
 ## 1. O que o aplicativo faz
 
@@ -14,17 +14,21 @@ A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **M
 
 | Sistema | Instalador | Aceleração de GPU |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.1.1.exe` | Vulkan com driver de vídeo compatível |
-| Linux x64/arm64 | AppImage, DEB ou RPM | Vulkan com driver e bibliotecas compatíveis |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.0.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
+| Linux x64/arm64 | AppImage, DEB ou RPM | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
 O espaço necessário depende do modelo escolhido. Reserve espaço para o arquivo GGUF, para o cache e para o motor. Modelos grandes podem exigir muito mais memória do que o tamanho do arquivo em disco. Se o computador não tiver GPU compatível, a execução pode cair para CPU e ficar lenta. No Linux, o pacote oficial do motor é compilado no Ubuntu; outras distribuições podem precisar de bibliotecas compatíveis. A matriz do GitHub Actions está configurada para Windows x64, Linux x64/arm64 e macOS Intel/Apple Silicon, mas os artefatos Linux e macOS só estarão validados depois que os jobs correspondentes forem executados e os pacotes forem abertos nos sistemas de destino.
 
 ## 3. Instalar o aplicativo
 
+O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Ter acesso ao código-fonte não equivale a ter um instalador: o workflow do GitHub Actions guarda pacotes como artefatos da execução, mas não os publica automaticamente como [Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). Para instalar sem o projeto, obtenha o pacote correspondente ao seu sistema por uma Release publicada ou diretamente com quem o distribui. Se a página ainda não tiver esse pacote, ele ainda não está disponível para download público.
+
+Nesta versão, o instalador Windows x64 foi gerado localmente. Os pacotes Linux 0.2.0 e DMG para macOS Intel/Apple Silicon ainda dependem de build e validação nos sistemas de destino. O DEB Linux x64 testado anteriormente pertence à versão 0.1.1. Use os passos abaixo apenas quando tiver o pacote apropriado. Quem tem o código-fonte pode gerar o pacote no sistema correspondente seguindo o README.
+
 ### Windows
 
-1. Abra o instalador `Llama Desktop Launcher Setup 0.1.1.exe`.
+1. Abra o instalador `Llama Desktop Launcher Setup 0.2.0.exe`.
 2. Escolha a pasta de instalação. O instalador trabalha por usuário, então não precisa colocar o aplicativo em `Program Files`.
 3. Marque ou desmarque a criação do atalho da área de trabalho.
 4. Conclua a instalação e abra o aplicativo pelo Menu Iniciar ou pelo atalho.
@@ -37,7 +41,7 @@ O espaço necessário depende do modelo escolhido. Reserve espaço para o arquiv
 
 Os pacotes DEB/RPM usam os diretórios definidos pelo sistema e pelo gerenciador de pacotes. A escolha das pastas de modelos é feita dentro do aplicativo.
 
-Para a versão atual, use o pacote DEB, RPM ou AppImage correspondente ao seu sistema. Arquivos portáteis experimentais de versões anteriores não substituem esses pacotes.
+Quando o pacote da sua plataforma estiver disponível, use o DEB, RPM ou AppImage correspondente ao seu sistema. Arquivos portáteis experimentais de versões anteriores não substituem esses pacotes.
 
 ### macOS
 
@@ -53,10 +57,10 @@ No primeiro início, a tela **Configurações** abre automaticamente quando o mo
 
 Na seção **Motor llama.cpp**, escolha uma das opções:
 
-1. **Baixar motor oficial:** o aplicativo acessa a release `b11193` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote correspondente ao sistema. Windows/Linux usam Vulkan; macOS usa Metal. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
+1. **Baixar motor oficial:** escolha o **Backend do pacote oficial** antes de clicar no botão. O aplicativo acessa a release `b11193` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote da plataforma e do backend escolhidos. No Windows/Linux, as opções exibidas dependem da arquitetura e incluem Vulkan, NVIDIA CUDA, CPU e, em x64, AMD ROCm e Intel SYCL. No macOS, usa Metal. CUDA baixa também as bibliotecas oficiais correspondentes. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
 2. **Escolher pasta existente:** a pasta selecionada precisa conter `llama-server` (ou `llama-server.exe`). Use esta opção para aproveitar uma instalação já preparada, como a pasta `b11193-vulkan` do launcher Windows anterior.
 
-O download requer internet. Se a release não tiver pacote para a arquitetura detectada, selecione um runtime compilado por você. O aplicativo verifica o SHA-256 quando a API da release fornece o digest. Se você já escolheu um motor e quiser substituí-lo, use **Escolher pasta existente** ou baixe novamente o pacote oficial na mesma tela.
+O download requer internet. Escolha pelo tipo de GPU, independentemente da marca da CPU: Vulkan funciona com GPUs compatíveis de AMD, Intel ou NVIDIA; CUDA é para NVIDIA, ROCm para AMD e SYCL para Intel. Para uma RTX 4060 no Windows x64, comece por **NVIDIA CUDA 12.4** e mantenha o driver NVIDIA atualizado. ROCm e SYCL podem exigir runtimes e drivers adicionais. Se a release não tiver pacote para a arquitetura detectada, selecione um runtime compilado por você. O aplicativo verifica o SHA-256 quando a API da release fornece o digest. Se você já escolheu um motor e quiser substituí-lo, use **Escolher pasta existente** ou baixe novamente o pacote oficial na mesma tela.
 
 Se você usa o launcher Windows anterior, selecione primeiro a pasta que contém seus GGUF. Em **Configurações > Perfis do launcher anterior**, clique em **Importar perfis TSV** e escolha `launcher-profiles.tsv` da pasta do launcher antigo. A importação associa perfis pelo caminho completo do modelo; se você moveu os GGUF, selecione a pasta antiga ou ajuste os perfis manualmente. Perfis já salvos no aplicativo não são sobrescritos. O resultado mostra quantos perfis foram importados, não localizados, já existentes ou inválidos.
 
@@ -143,7 +147,7 @@ O teste pode carregar o modelo mais de uma vez e levar vários minutos. Ele não
 | O download do motor falhou | Confira internet, espaço livre e acesso ao GitHub. Tente de novo ou use **Escolher pasta existente**. |
 | “Pacote sem llama-server” | O arquivo da release pode ter mudado; escolha um runtime compatível manualmente. |
 | O servidor encerra ao abrir | Consulte **Registro do motor**; reduza contexto/batch, experimente `-ngl auto` ou menos camadas de GPU. |
-| GPU não é usada | Atualize o driver Vulkan no Windows/Linux; no macOS, confirme o pacote Metal. Verifique mensagens do motor. |
+| GPU não é usada | Confira o backend escolhido, a compatibilidade da GPU e seus drivers; no macOS, confirme o pacote Metal. Verifique mensagens do motor. |
 | Benchmark falha | Confirme que a pasta do runtime inclui `llama-bench`; tente parâmetros mais conservadores. |
 | Modelo não carrega | Verifique todos os shards, compatibilidade com `b11193`, licença/instruções do repositório e memória disponível. |
 
@@ -157,4 +161,4 @@ No Linux, use o gerenciador de pacotes para remover DEB/RPM, ou apague o arquivo
 
 ## 11. Créditos
 
-O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. O repositório e o pacote npm podem permanecer privados por enquanto. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.
+O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. A publicação pública do repositório está planejada; os instaladores exigem publicação separada. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.
