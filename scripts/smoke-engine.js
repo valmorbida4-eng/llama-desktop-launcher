@@ -1,5 +1,5 @@
 'use strict';
-// Opt-in local smoke test: node scripts/smoke-engine.js <engine-directory> <model.gguf>
+// Opt-in local smoke test: npm run smoke:engine -- <engine-directory> <model.gguf>
 const fs=require('node:fs');
 const path=require('node:path');
 const net=require('node:net');

@@ -1,5 +1,5 @@
 'use strict';
-// Opt-in local smoke test: node scripts/smoke-bench.js <engine-directory> <model.gguf>
+// Opt-in local smoke test: npm run smoke:bench -- <engine-directory> <model.gguf>
 const fs=require('node:fs');
 const {defaults}=require('../build/app/core');
 const {tune}=require('../build/app/benchmark');

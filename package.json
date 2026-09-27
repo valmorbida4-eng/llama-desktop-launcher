@@ -15,7 +15,13 @@
     "dist:mac": "npm run build && electron-builder --mac dmg --publish never",
     "build": "node scripts/build.js",
     "smoke:ui": "npm run build && electron scripts/smoke-ui.js",
-    "smoke:ui:model": "npm run build && electron scripts/smoke-ui.js --with-model"
+    "smoke:ui:model": "npm run build && electron scripts/smoke-ui.js --with-model",
+    "smoke:bench": "npm run build && node scripts/smoke-bench.js",
+    "smoke:cli": "npm run build && node scripts/smoke-cli.js",
+    "smoke:engine": "npm run build && node scripts/smoke-engine.js",
+    "smoke:network": "npm run build && node scripts/smoke-network.js",
+    "smoke:external:win": "npm run build && node scripts/smoke-external-cli-win.js",
+    "smoke:external:linux": "npm run build && node scripts/smoke-external-cli-linux.js"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
