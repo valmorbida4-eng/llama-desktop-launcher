@@ -15,7 +15,7 @@ function tier(memoryGiB) {
   return { quantized: '14B a 30B', full: 'até 14B', maxFileGiB: 22, example: 'Qwen2.5 14B Instruct', exampleUrl: 'https://huggingface.co/Qwen/Qwen2.5-14B-Instruct-GGUF' };
 }
 
-function buildGuidance({ hardware, gpu = {}, availableDiskBytes = null, model = null, settings = null }) {
+function buildGuidance({ hardware, gpu = {}, availableDiskBytes = null, model = null, settings = null }: any) {
   if (!hardware || !Number.isFinite(hardware.memoryBytes) || hardware.memoryBytes <= 0) throw Error('Dados de memória indisponíveis.');
   const ramGiB = hardware.memoryBytes / GIB;
   const fit = tier(ramGiB);

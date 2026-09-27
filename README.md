@@ -33,10 +33,12 @@ Quando houver uma Release com o pacote do seu sistema, baixe o instalador por el
 
 ## Instalação e uso
 
-O código-fonte usa Node.js 20.19+ (ou 22.12+) e npm:
+O código-fonte usa Node.js 20.19+ (ou 22.12+) e npm. O aplicativo é escrito em TypeScript e compilado para `build/app/` antes de iniciar, testar ou empacotar:
 
 ```sh
 npm ci
+npm run build
+npm test
 npm run version:check
 npm start
 ```

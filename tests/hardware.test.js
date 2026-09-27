@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { detectGpu } = require('../src/hardware');
+const { detectGpu } = require('../build/app/hardware');
 
 function runnerFor(responses, calls = []) {
   return async (command, args, options) => {

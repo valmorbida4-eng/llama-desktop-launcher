@@ -1,0 +1,72 @@
+interface ModelSettings {
+  gpuLayers: string | number;
+  device: string;
+  context: string | number;
+  cpuMoe: string | number;
+  cacheK: string;
+  cacheV: string;
+  flash: string;
+  threads: string | number;
+  batch: string | number;
+  ubatch: string | number;
+}
+
+interface ProgressUpdate { percent: number; label: string }
+interface ChatOutput { stream: 'stdout' | 'stderr'; text: string }
+interface ProcessExit { code: number | null; signal: NodeJS.Signals | null }
+interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
+interface RendererApi {
+  state(): Promise<any>;
+  selectModel(modelPath: string): Promise<any>;
+  completeSetup(): Promise<any>;
+  chooseDir(kind: 'engine' | 'models', index?: number): Promise<any>;
+  clearDir(index: number): Promise<any>;
+  installEngine(backend: string): Promise<any>;
+  saveProfile(modelPath: string, settings: ModelSettings): Promise<any>;
+  importLegacyProfiles(): Promise<ImportedProfiles | null>;
+  recommend(modelPath: string): Promise<ModelSettings>;
+  modelGuidance(): Promise<any>;
+  copyGuidancePrompt(): Promise<string>;
+  analyzeWithModel(modelPath: string, settings: ModelSettings): Promise<{ prompt: string }>;
+  tune(modelPath: string, settings: ModelSettings): Promise<any>;
+  launch(modelPath: string, settings: ModelSettings, options: { host: string; parallel: number }): Promise<any>;
+  stop(): Promise<boolean>;
+  startChat(modelPath: string, settings: ModelSettings): Promise<boolean>;
+  openCliTerminal(modelPath: string, settings: ModelSettings): Promise<boolean>;
+  sendChat(value: string): Promise<any>;
+  stopChat(): Promise<boolean>;
+  getKey(): Promise<string>;
+  copyKey(): Promise<boolean>;
+  rotateKey(): Promise<string>;
+  copyEndpoint(): Promise<string>;
+  copyBrowserLink(): Promise<string>;
+  createFirewallRule(address: string): Promise<any>;
+  openHF(kind: 'moe' | 'dense' | 'full'): Promise<string>;
+  openModelExample(url: string): Promise<string>;
+  openModelDir(index: number): Promise<boolean>;
+  openManual(lang: 'pt-BR' | 'en'): Promise<boolean>;
+  onProgress(callback: (value: ProgressUpdate) => void): void;
+  onTuneProgress(callback: (value: string) => void): void;
+  onLog(callback: (value: string) => void): void;
+  onStopped(callback: (value: number | null) => void): void;
+  onChatOutput(callback: (value: ChatOutput) => void): void;
+  onChatStopped(callback: (value: ProcessExit) => void): void;
+}
+
+declare global {
+  interface ModelSettings {
+    gpuLayers: string | number;
+    device: string;
+    context: string | number;
+    cpuMoe: string | number;
+    cacheK: string;
+    cacheV: string;
+    flash: string;
+    threads: string | number;
+    batch: string | number;
+    ubatch: string | number;
+  }
+  interface Window { llama: RendererApi }
+}
+
+export {};

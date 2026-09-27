@@ -16,7 +16,7 @@ function scopeOf(address) {
 function accessOptions() {
   const list=[{name:'Somente este computador (127.0.0.1)',host:'127.0.0.1',scope:'Local'}];
   const seen=new Set(['127.0.0.1']);
-  for(const [nic,addresses] of Object.entries(os.networkInterfaces())) for(const info of addresses||[]) {
+  for(const [nic,addresses] of Object.entries(os.networkInterfaces()) as [string, import('node:os').NetworkInterfaceInfo[] | undefined][]) for(const info of addresses||[]) {
     if(info.internal||seen.has(info.address)) continue;
     const scope=scopeOf(info.address);if(!scope)continue;seen.add(info.address);
     list.push({name:`${scope==='LAN'?'Rede interna':'Tailscale'} — ${nic} (${info.address})`,host:info.address,scope});

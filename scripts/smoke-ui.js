@@ -15,7 +15,7 @@ if(withModel){
   fs.writeFileSync(path.join(engineDir,process.platform==='win32'?'llama-server.exe':'llama-server'),'');
   fs.writeFileSync(path.join(temporary,'settings.json'),JSON.stringify({modelDirs:[modelDir,''],engineDir,profiles:{},selectedModelPath:modelPath,firstRun:false,accessHost:'127.0.0.1',parallel:1}));
 }
-require('../src/main');
+require('../build/app/main');
 
 async function main(){
   await app.whenReady();

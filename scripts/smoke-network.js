@@ -7,8 +7,8 @@ const net=require('node:net');
 const http=require('node:http');
 const crypto=require('node:crypto');
 const {spawn}=require('node:child_process');
-const {defaults,argsForModel}=require('../src/core');
-const network=require('../src/network');
+const {defaults,argsForModel}=require('../build/app/core');
+const network=require('../build/app/network');
 async function freePort(host){return new Promise((resolve,reject)=>{const server=net.createServer();server.once('error',reject);server.listen(0,host,()=>{const port=server.address().port;server.close(()=>resolve(port));});});}
 async function check(host,port,key,pathname='/health'){return new Promise((resolve,reject)=>{const headers={Host:`${host}:${port}`};if(key)headers.Authorization=`Bearer ${key}`;const request=http.get({hostname:host,port,path:pathname,headers,timeout:2000},response=>{response.resume();resolve(response.statusCode);});request.once('error',reject);request.once('timeout',()=>request.destroy(Error('HTTP timeout')));});}
 async function main(){

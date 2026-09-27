@@ -5,26 +5,49 @@
   "license": "MIT",
   "author": "Célio",
   "description": "Instalador e launcher multiplataforma para llama.cpp",
-  "main": "src/main.js",
+  "main": "build/app/main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "node --test",
+    "start": "npm run build && electron .",
+    "test": "npm run build && node --test",
     "version:check": "node scripts/check-version.js",
-    "dist:win": "electron-builder --win nsis --publish never",
-    "dist:linux": "electron-builder --linux AppImage deb rpm --publish never",
-    "dist:mac": "electron-builder --mac dmg --publish never"
+    "dist:win": "npm run build && electron-builder --win nsis --publish never",
+    "dist:linux": "npm run build && electron-builder --linux AppImage deb rpm --publish never",
+    "dist:mac": "npm run build && electron-builder --mac dmg --publish never",
+    "build": "node scripts/build.js",
+    "smoke:ui": "npm run build && electron scripts/smoke-ui.js",
+    "smoke:ui:model": "npm run build && electron scripts/smoke-ui.js --with-model"
   },
   "devDependencies": {
+    "@types/node": "^26.6.3",
     "electron": "^38.0.0",
-    "electron-builder": "24.13.3"
+    "electron-builder": "24.13.3",
+    "typescript": "^7.0.2"
   },
   "build": {
     "appId": "br.celio.llamadesktoplauncher",
     "productName": "Llama Desktop Launcher",
-    "directories": { "output": "dist" },
-    "files": ["src/**/*", "README.md", "LICENSE"],
-    "extraResources": [{"from":"docs","to":"docs"},{"from":"LICENSE","to":"LICENSE"}],
-    "win": { "target": "nsis", "signAndEditExecutable": false },
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/app/**/*",
+      "README.md",
+      "LICENSE"
+    ],
+    "extraResources": [
+      {
+        "from": "docs",
+        "to": "docs"
+      },
+      {
+        "from": "LICENSE",
+        "to": "LICENSE"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": false
+    },
     "nsis": {
       "oneClick": false,
       "perMachine": false,
@@ -34,10 +57,19 @@
       "include": "build/installer.nsh"
     },
     "linux": {
-      "target": ["AppImage", "deb", "rpm"],
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
       "category": "Utility",
-      "desktop": { "Name": "Llama Desktop Launcher" }
+      "desktop": {
+        "Name": "Llama Desktop Launcher"
+      }
     },
-    "mac": { "target": "dmg", "category": "public.app-category.utilities" }
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities"
+    }
   }
 }

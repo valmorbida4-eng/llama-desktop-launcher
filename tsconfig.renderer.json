@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "legacy",
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "rootDir": "src",
+    "outDir": "build/app",
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/renderer.ts", "src/electron-api.d.ts"]
+}

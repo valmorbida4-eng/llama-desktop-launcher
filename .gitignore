@@ -4,3 +4,5 @@ dist/
 *.zip
 *.tar.gz
 build-output.log
+
+build/app/

@@ -19,7 +19,7 @@ function argsForConversation(model, settings) {
   return core.argsForModel(model, settings, 'cli');
 }
 
-function createSession({ engineDir, model, settings, onOutput = () => {}, onExit = () => {}, onError = () => {}, spawnProcess = spawn }) {
+function createSession({ engineDir, model, settings, onOutput = () => {}, onExit = () => {}, onError = () => {}, spawnProcess = spawn }: any) {
   const executable = executablePath(engineDir);
   if (!fs.existsSync(executable)) throw Error(`Não encontrei ${executableName()} na pasta do llama.cpp.`);
   const args = argsForConversation(model, settings);
@@ -56,7 +56,7 @@ function createSession({ engineDir, model, settings, onOutput = () => {}, onExit
     if (closed || !child.stdin || child.stdin.destroyed || child.stdin.writableEnded) return Promise.reject(Error('A conversa foi encerrada.'));
     if (typeof message !== 'string' || !message.trim()) return Promise.reject(Error('Digite uma mensagem antes de enviar.'));
     if (message.length > 100000 || message.includes('\0')) return Promise.reject(Error('Mensagem inválida ou longa demais.'));
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const payload = `${message}\n`;
       if (child.stdin.write(payload, 'utf8')) resolve();
       else {

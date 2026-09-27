@@ -1,7 +1,7 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
-const engine=require('../src/engine');
+const engine=require('../build/app/engine');
 
 const release={tag_name:'b11193',assets:[
   'llama-b11193-bin-win-vulkan-x64.zip',

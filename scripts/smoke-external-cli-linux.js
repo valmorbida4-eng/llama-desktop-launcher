@@ -4,8 +4,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { openExternalCli, shQuote } = require('../src/terminal_cli');
-const { defaults } = require('../src/core');
+const { openExternalCli, shQuote } = require('../build/app/terminal_cli');
+const { defaults } = require('../build/app/core');
 
 async function main() {
   if (process.platform !== 'linux') throw Error('Execute este smoke test somente no Linux.');

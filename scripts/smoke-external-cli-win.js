@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
-const { powershellScript } = require('../src/terminal_cli');
+const { powershellScript } = require('../build/app/terminal_cli');
 
 async function main() {
   if (process.platform !== 'win32') throw Error('Execute este smoke test somente no Windows.');

@@ -1,8 +1,8 @@
 'use strict';
 // Opt-in local smoke test: node scripts/smoke-bench.js <engine-directory> <model.gguf>
 const fs=require('node:fs');
-const {defaults}=require('../src/core');
-const {tune}=require('../src/benchmark');
+const {defaults}=require('../build/app/core');
+const {tune}=require('../build/app/benchmark');
 async function main(){
   const [engineDir,modelPath]=process.argv.slice(2);
   if(!engineDir||!modelPath||!fs.existsSync(modelPath))throw Error('Uso: node scripts/smoke-bench.js <pasta-motor> <modelo.gguf>');

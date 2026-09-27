@@ -1,8 +1,8 @@
 'use strict';
 // Opt-in local smoke test: node scripts/smoke-cli.js <engine-directory> <model.gguf>
 const fs=require('node:fs');
-const {defaults}=require('../src/core');
-const cli=require('../src/cli');
+const {defaults}=require('../build/app/core');
+const cli=require('../build/app/cli');
 
 async function main(){
   const [engineDir,modelPath]=process.argv.slice(2);

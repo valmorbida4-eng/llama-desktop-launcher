@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { buildGuidance, links } = require('../src/guidance');
+const { buildGuidance, links } = require('../build/app/guidance');
 
 test('sugere modelos antes de existir GGUF e reduz a faixa em hardware limitado', () => {
   const hardware = { memoryBytes: 8 * 1024 ** 3, logicalCores: 4, platform: 'linux', arch: 'x64' };

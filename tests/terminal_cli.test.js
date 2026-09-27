@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { shQuote, psQuote, posixScript, powershellScript, terminalCommand } = require('../src/terminal_cli');
+const { shQuote, psQuote, posixScript, powershellScript, terminalCommand } = require('../build/app/terminal_cli');
 
 test('caminhos com aspas e metacaracteres ficam literais nos scripts da CLI', () => {
   assert.equal(shQuote("a'b;$(touch unsafe)"), "'a'\\''b;$(touch unsafe)'");

@@ -5,7 +5,7 @@ const path=require('node:path');
 const net=require('node:net');
 const http=require('node:http');
 const {spawn}=require('node:child_process');
-const {defaults,argsForModel}=require('../src/core');
+const {defaults,argsForModel}=require('../build/app/core');
 
 async function freePort(){return new Promise((resolve,reject)=>{const server=net.createServer();server.once('error',reject);server.listen(0,'127.0.0.1',()=>{const port=server.address().port;server.close(()=>resolve(port));});});}
 async function check(port,pathname){return new Promise((resolve,reject)=>{const request=http.get({hostname:'127.0.0.1',port,path:pathname,timeout:2000},response=>{response.resume();resolve(response.statusCode);});request.once('error',reject);request.once('timeout',()=>request.destroy(Error('HTTP timeout')));});}

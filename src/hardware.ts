@@ -5,7 +5,7 @@ const { execFile } = require('node:child_process');
 const DEFAULT_TIMEOUT_MS = 1500;
 const NULL_GPU = Object.freeze({ name: null, memoryBytes: null, source: null });
 
-function runCommand(command, args, options = {}) {
+function runCommand(command: string, args: string[], options: {timeoutMs?: number} = {}) {
   return new Promise((resolve, reject) => {
     execFile(command, args, {
       encoding: 'utf8',
@@ -19,9 +19,9 @@ function runCommand(command, args, options = {}) {
   });
 }
 
-function result(name, memoryBytes, source) {
+function result(name: unknown, memoryBytes: unknown, source: string) {
   const cleanName = typeof name === 'string' && name.trim() ? name.trim() : null;
-  const cleanMemory = Number.isSafeInteger(memoryBytes) && memoryBytes > 0 ? memoryBytes : null;
+  const cleanMemory = typeof memoryBytes === 'number' && Number.isSafeInteger(memoryBytes) && memoryBytes > 0 ? memoryBytes : null;
   return cleanName || cleanMemory ? { name: cleanName, memoryBytes: cleanMemory, source } : null;
 }
 
@@ -115,7 +115,7 @@ function psScript() {
  * @param {{platform?: string, run?: (command: string, args: string[], options: {timeoutMs: number}) => Promise<string>, timeoutMs?: number}} options
  * @returns {Promise<{name: string|null, memoryBytes: number|null, source: string|null}>}
  */
-async function detectGpu(options = {}) {
+async function detectGpu(options: any = {}) {
   const platform = options.platform || process.platform;
   const run = options.run || runCommand;
   const timeoutMs = Number.isFinite(options.timeoutMs) ? Math.max(100, Math.min(options.timeoutMs, 5000)) : DEFAULT_TIMEOUT_MS;
@@ -130,7 +130,7 @@ async function detectGpu(options = {}) {
     probes.push(['system_profiler', ['SPDisplaysDataType', '-json'], parseSystemProfiler]);
   }
   let best = null;
-  for (const [command, args, parse] of probes) {
+  for (const [command, args, parse] of probes as [string, string[], (output: string) => any][]) {
     try {
       const output = await run(command, args, { timeoutMs });
       const found = parse(typeof output === 'string' ? output : output?.stdout || '');

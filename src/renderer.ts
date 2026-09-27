@@ -1,5 +1,7 @@
 'use strict';
-const $=id=>document.getElementById(id);
+(() => {
+type DomControl = HTMLElement & HTMLInputElement & HTMLSelectElement & HTMLTextAreaElement & HTMLDetailsElement;
+const $=(id: string): DomControl => { const element=document.getElementById(id); if(!element) throw Error("Elemento não encontrado: " + id); return element as DomControl; };
 let snapshot,activePath='',currentView=null,guidance=null;
 const tuning=$('tuning-panel');
 
@@ -12,12 +14,13 @@ function showView(view){
   if(view==='settings'){$('tuning-settings-content').append(tuning);$('tuning-settings-content').hidden=false;$('save-settings-profile').hidden=false;$('tuning-accordion').open=true;}
   else{$('tuning-content').append(tuning);$('tuning-settings-content').hidden=true;$('save-settings-profile').hidden=false;$('tuning-accordion').open=false;}
 }
-const keys=['gpuLayers','device','context','cpuMoe','cacheK','cacheV','flash','threads','batch','ubatch'];
+type SettingKey = keyof ModelSettings;
+const keys: SettingKey[]=['gpuLayers','device','context','cpuMoe','cacheK','cacheV','flash','threads','batch','ubatch'];
 const caches=['f16','q8_0','q4_0','q5_0','q4_1','q5_1','f32','bf16','iq4_nl'];
 for(const key of ['cacheK','cacheV'])$(key).innerHTML=caches.map(v=>`<option>${v}</option>`).join('');
 function message(text,error=false){const box=currentView==='settings'?$('settings-message'):$('message');box.textContent=text;box.classList.toggle('error',error);}
 async function action(fn){try{await fn();}catch(e){message(e.message||String(e),true);}}
-function settings(){const v={};for(const key of keys)v[key]=$(key).value.trim();return v;}
+function settings(): ModelSettings {const v: ModelSettings={gpuLayers:"",device:"",context:"",cpuMoe:"",cacheK:"",cacheV:"",flash:"",threads:"",batch:"",ubatch:""};for(const key of keys)v[key]=$(key).value.trim();return v;}
 function applySettings(v){for(const key of keys)$(key).value=String(v?.[key]??'');}
 function selected(){return snapshot?.models?.find(m=>m.path===$('model').value);}
 function selectedSettingsModel(){return snapshot?.models?.find(m=>m.path===$('settings-model').value)||selected();}
@@ -39,7 +42,7 @@ function updateNetwork(){$('network-controls').hidden=$('access-host').value==='
 function updateBackendHint(){const id=$('engine-backend').value;$('engine-backend-hint').textContent=id.startsWith('cuda-')?'Para placas NVIDIA. O download inclui as bibliotecas CUDA; é necessário um driver NVIDIA compatível.':id.startsWith('rocm-')?'Para placas AMD compatíveis com ROCm; requer driver e runtime compatíveis.':id.startsWith('sycl')?'Para GPUs Intel compatíveis com SYCL; pode exigir runtime Intel.':id==='cpu'?'Executa sem aceleração de GPU.':id==='metal'?'Aceleração Apple Metal.':'Aceleração Vulkan; requer driver compatível.';}
 function fillBackends(s){const select=$('engine-backend'),previous=select.value,options=s.backendOptions||[];select.replaceChildren(...options.map(item=>{const option=document.createElement('option');option.value=item.id;option.textContent=item.label;return option;}));const desired=options.find(item=>item.id===previous)||options.find(item=>item.id===s.config.engineBackend)||options[0];select.value=desired?.id||'';select.disabled=s.running||s.chatRunning||!options.length;updateBackendHint();}
 function showConnection(result){$('connection').hidden=!result;$('firewall-controls').hidden=snapshot?.platform!=='win32'||!result||result.scope==='Local';if(result){$('endpoint').textContent=`API: ${result.endpoint} · Interface: ${result.remoteUrl}`;if(result.scope!=='Local')$('firewall-range').value=result.scope==='Tailscale'?'100.64.0.0/10':result.host.split('.').slice(0,3).join('.')+'.0/24';}}
-async function refresh(preferred){snapshot=await window.llama.state();const s=snapshot;const old=preferred||s.config.selectedModelPath||$('model').value;
+async function refresh(preferred?: string){snapshot=await window.llama.state();const s=snapshot;const old=preferred||s.config.selectedModelPath||$('model').value;
   if(currentView===null)showView((!s.engineReady||!s.models.length||!s.config.selectedModelPath)?'settings':'llama');
   $('memory').textContent=bytes(s.hardware.memoryBytes);$('cpu').textContent=`${s.hardware.logicalCores} threads`;$('models-memory').textContent=bytes(s.hardware.memoryBytes);$('models-cpu').textContent=`${s.hardware.logicalCores} threads`;$('local-count').textContent=String(s.models.length);
   $('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';fillBackends(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
@@ -53,9 +56,9 @@ $('nav-llama').onclick=()=>showView('llama');$('nav-models').onclick=()=>showVie
 $('finish-setup').onclick=()=>action(async()=>{await window.llama.completeSetup();await refresh();showView('llama');});
 $('model').addEventListener('change',()=>{const path=$('model').value;$('settings-model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});$('settings-model').addEventListener('change',()=>{const path=$('settings-model').value;$('model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});
 $('refresh').onclick=()=>action(()=>refresh());$('refresh-settings-models').onclick=()=>action(()=>refresh());$('refresh-guidance').onclick=()=>action(async()=>{guidance=null;await loadGuidance();});
-document.querySelectorAll('[data-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.chooseDir('models',Number(b.dataset.folder));await refresh();}));
-document.querySelectorAll('[data-clear-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.clearDir(Number(b.dataset.clearFolder));await refresh();}));
-document.querySelectorAll('[data-open-folder]').forEach(b=>b.onclick=()=>action(()=>window.llama.openModelDir(Number(b.dataset.openFolder))));
+document.querySelectorAll<HTMLElement>('[data-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.chooseDir('models',Number(b.dataset.folder));await refresh();}));
+document.querySelectorAll<HTMLElement>('[data-clear-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.clearDir(Number(b.dataset.clearFolder));await refresh();}));
+document.querySelectorAll<HTMLElement>('[data-open-folder]').forEach(b=>b.onclick=()=>action(()=>window.llama.openModelDir(Number(b.dataset.openFolder))));
 $('select-engine').onclick=()=>action(async()=>{await window.llama.chooseDir('engine');await refresh();});
 $('import-profiles').onclick=()=>action(async()=>{const result=await window.llama.importLegacyProfiles();if(!result)return;await refresh();message(`Perfis importados: ${result.imported}. Sem modelo no local configurado: ${result.missing}. Já existentes: ${result.existing}. Linhas inválidas: ${result.invalid}.`);});
 $('engine-backend').onchange=updateBackendHint;
@@ -83,3 +86,6 @@ window.llama.onStopped(code=>{message(`Servidor encerrado (${code??'sem código'
 window.llama.onChatOutput(data=>{const box=$('chat-output');box.textContent=(box.textContent+data.text).slice(-100000);box.scrollTop=box.scrollHeight;});
 window.llama.onChatStopped(result=>{$('chat-output').textContent+=`\n[Conversa encerrada: ${result.code??result.signal??'sem código'}]\n`;$('stop-chat').hidden=true;$('stop-chat').disabled=false;$('send-chat').disabled=true;$('start-chat').disabled=false;$('launch').disabled=false;});
 refresh().catch(e=>message(e.message,true));
+})();
+
+

@@ -4,10 +4,10 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const os=require('node:os');
 const path=require('node:path');
-const {defaults,argsForModel,validateSettings,recommend,isWithin,scanModels}=require('../src/core');
-const {assetFor}=require('../src/engine');
-const network=require('../src/network');
-const cli=require('../src/cli');
+const {defaults,argsForModel,validateSettings,recommend,isWithin,scanModels}=require('../build/app/core');
+const {assetFor}=require('../build/app/engine');
+const network=require('../build/app/network');
+const cli=require('../build/app/cli');
 
 test('argumentos densos e MoE preservam cada ajuste',()=>{
   const m={path:'/models/a.gguf',projector:'/models/mmproj.gguf'};

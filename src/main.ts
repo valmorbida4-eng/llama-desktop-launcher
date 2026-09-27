@@ -16,7 +16,7 @@ const guidance=require('./guidance');
 const hardware=require('./hardware');
 const firewall=require('./firewall');
 const {parseLegacyProfiles}=require('./profile_import');
-let win,server=null,proxy=null,active=null,conversation=null,tuneAbort=null,configuration,configPath;
+let win: import('electron').BrowserWindow | null,server: any=null,proxy: any=null,active: any=null,conversation: any=null,tuneAbort: AbortController | null=null,configuration: any,configPath: string;
 let gpuProbe;
 
 function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',profiles:{},selectedModelPath:'',firstRun:true,accessHost:'127.0.0.1',parallel:1};}
@@ -24,10 +24,10 @@ function save() {fs.mkdirSync(path.dirname(configPath),{recursive:true});fs.writ
 function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}}
 function send(channel,data) {if(win&&!win.isDestroyed()) win.webContents.send(channel,data);}
 function state() {return {config:configuration,models:core.scanModels(configuration.modelDirs),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:!!(configuration.engineDir&&fs.existsSync(path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server'))),running:!!server,chatRunning:!!conversation,accessOptions:network.accessOptions(),active};}
-function freePort(host='127.0.0.1',first=0,last=0) {return new Promise((resolve,reject)=>{let port=first;const tryNext=()=>{const s=net.createServer();s.once('error',e=>{if(e.code==='EADDRINUSE'&&port<last){port++;tryNext();}else reject(e);});s.listen(port,host,()=>{const found=s.address().port;s.close(()=>resolve(found));});};tryNext();});}
-function waitReady(host,port,child,key) {return new Promise((resolve,reject)=>{let count=0,done=false;const finish=(error)=>{if(done)return;done=true;clearInterval(timer);error?reject(error):resolve();};child.once('error',e=>finish(e));const timer=setInterval(()=>{if(child.exitCode!==null){finish(Error('llama-server encerrou antes de ficar pronto.'));return;}http.get({hostname:host,port,path:'/health',headers:key?{Authorization:`Bearer ${key}`}:{},timeout:3000},r=>{r.resume();if(r.statusCode===200)finish();}).on('error',()=>{});if(++count>300)finish(Error('Tempo esgotado ao carregar o modelo.'));},1000);});}
+function freePort(host: string='127.0.0.1',first=0,last=0): Promise<number> {return new Promise<number>((resolve,reject)=>{let port=first;const tryNext=()=>{const s=net.createServer();s.once('error',e=>{if(e.code==='EADDRINUSE'&&port<last){port++;tryNext();}else reject(e);});s.listen(port,host,()=>{const found=s.address().port;s.close(()=>resolve(found));});};tryNext();});}
+function waitReady(host: string,port: number,child: any,key: string | null): Promise<void> {return new Promise<void>((resolve,reject)=>{let count=0,done=false;const finish=(error?: Error)=>{if(done)return;done=true;clearInterval(timer);error?reject(error):resolve();};child.once('error',(e: Error)=>finish(e));const timer=setInterval(()=>{if(child.exitCode!==null){finish(Error('llama-server encerrou antes de ficar pronto.'));return;}http.get({hostname:host,port,path:'/health',headers:key?{Authorization:`Bearer ${key}`}:{},timeout:3000},r=>{r.resume();if(r.statusCode===200)finish();}).on('error',()=>{});if(++count>300)finish(Error('Tempo esgotado ao carregar o modelo.'));},1000);});}
 function apiKeyPath(){return path.join(app.getPath('userData'),'server-api-key.txt');}
-function addressInRange(address,range){const [networkAddress,prefixText]=range.split('/');const prefix=prefixText===undefined?32:Number(prefixText);const toInt=value=>value.split('.').reduce((number,octet)=>(number*256+Number(octet))>>>0,0);const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;return (toInt(address)&mask)===(toInt(networkAddress)&mask);}
+function addressInRange(address: string,range: string){const [networkAddress,prefixText]=range.split('/');const prefix=prefixText===undefined?32:Number(prefixText);const toInt=(value: string)=>value.split('.').reduce((number,octet)=>(number*256+Number(octet))>>>0,0);const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;return (toInt(address)&mask)===(toInt(networkAddress)&mask);}
 function selectedModel(modelPath) {const model=core.scanModels(configuration.modelDirs).find(m=>m.path===modelPath);if(!model) throw Error('Modelo não encontrado nas pastas configuradas.');return model;}
 function availableModelDiskBytes() {for(const configured of configuration.modelDirs){if(!configured)continue;let dir=configured;while(!fs.existsSync(dir)){const parent=path.dirname(dir);if(parent===dir)break;dir=parent;}try{const stat=fs.statfsSync(dir);return Number(stat.bavail)*Number(stat.bsize);}catch{}}return null;}
 async function gpuDetails(){gpuProbe ||= hardware.detectGpu().catch(()=>({name:null,memoryBytes:null,source:null}));return gpuProbe;}
@@ -50,8 +50,8 @@ ipcMain.handle('import-legacy-profiles',async()=>{
   const file=result.filePaths[0],content=fs.readFileSync(file,'utf8');
   if(Buffer.byteLength(content,'utf8')>10*1024*1024)throw Error('Arquivo de perfis grande demais.');
   const parsed=parseLegacyProfiles(content),models=core.scanModels(configuration.modelDirs);
-  const normalize=value=>process.platform==='win32'?path.win32.normalize(value).toLowerCase():path.normalize(value);
-  const byPath=new Map(models.map(model=>[normalize(model.path),model.path]));
+  const normalize=(value: string)=>process.platform==='win32'?path.win32.normalize(value).toLowerCase():path.normalize(value);
+  const byPath=new Map<string,string>(models.map((model: any)=>[normalize(model.path),model.path] as [string,string]));
   let imported=0,missing=0,existing=0;
   for(const profile of parsed.profiles){const current=byPath.get(normalize(profile.path));if(!current){missing++;continue;}if(configuration.profiles[current]){existing++;continue;}configuration.profiles[current]=profile.settings;imported++;}
   if(imported)save();return {imported,missing,existing,invalid:parsed.ignored.length};
@@ -73,7 +73,7 @@ ipcMain.handle('analyze-with-model',async(_e,modelPath,settings)=>{
   return {prompt};
 });
 ipcMain.handle('tune',async(_e,modelPath,settings)=>{if(server||conversation)throw Error('Pare o servidor ou a conversa antes do teste.');if(tuneAbort)throw Error('Já existe um teste em execução.');const model=selectedModel(modelPath);if(!configuration.engineDir)throw Error('Instale o motor primeiro.');const controller=new AbortController();tuneAbort=controller;try{return await benchmark.tune(configuration.engineDir,model,settings,text=>send('tune-progress',text),controller.signal);}finally{tuneAbort=null;}});
-ipcMain.handle('launch',async(_e,modelPath,settings,options={})=>{
+ipcMain.handle('launch',async(_e,modelPath,settings,options: {host?: string; parallel?: number}={})=>{
   if(server||conversation||tuneAbort)throw Error('Pare a execução atual antes de iniciar outra.');
   const model=selectedModel(modelPath);core.validateSettings(settings);
   const access=network.accessOptions().find(item=>item.host===options.host);
@@ -132,4 +132,4 @@ ipcMain.handle('create-firewall-rule',async(_e,remoteAddress)=>{
 ipcMain.handle('open-hf',async(_e,kind)=>{const url=guidance.links[kind];if(!url)throw Error('Filtro inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('open-model-example',async(_e,url)=>{if(typeof url!=='string'||!/^https:\/\/huggingface\.co\/Qwen\/Qwen2\.5-(?:0\.5|1\.5|3|7|14)B-Instruct-GGUF$/.test(url))throw Error('Link de modelo inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('open-model-dir',async(_e,index)=>{const dir=configuration.modelDirs[index];if(!dir)throw Error('Localização vazia.');fs.mkdirSync(dir,{recursive:true});await shell.openPath(dir);return true;});
-ipcMain.handle('open-manual',async(_e,language)=>{if(!['pt-BR','en'].includes(language))throw Error('Idioma inválido.');const base=app.isPackaged?path.join(process.resourcesPath,'docs'):path.join(__dirname,'..','docs');const error=await shell.openPath(path.join(base,`MANUAL-${language}.pdf`));if(error)throw Error(error);return true;});
+ipcMain.handle('open-manual',async(_e,language)=>{if(!['pt-BR','en'].includes(language))throw Error('Idioma inválido.');const resourcesPath=(process as NodeJS.Process & {resourcesPath: string}).resourcesPath;const base=app.isPackaged?path.join(resourcesPath,'docs'):path.join(__dirname,'..','docs');const error=await shell.openPath(path.join(base,`MANUAL-${language}.pdf`));if(error)throw Error(error);return true;});

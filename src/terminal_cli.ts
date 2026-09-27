@@ -75,7 +75,7 @@ function openExternalCli({ engineDir, model, settings, platform = process.platfo
   let command;
   try { command = terminalCommand(platform, scriptPath); }
   catch (error) { fs.rmSync(directory, { recursive: true, force: true }); throw error; }
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     let child;
     try { child = spawnProcess(command.file, command.args, { detached: true, stdio: 'ignore', windowsHide: false, shell: false }); }
     catch (error) { fs.rmSync(directory, { recursive: true, force: true }); reject(error); return; }

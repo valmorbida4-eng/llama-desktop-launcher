@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule } = require('../src/firewall');
+const { PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule } = require('../build/app/firewall');
 
 const valid = { program: 'C:\\Engines\\llama-server.exe', port: 8123, remoteAddress: '192.168.1.0/24' };
 

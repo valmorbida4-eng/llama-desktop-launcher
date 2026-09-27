@@ -17,7 +17,7 @@ function request(url, redirects=0) {
 }
 async function releaseInfo() {
   const stream=await request('https://api.github.com/repos/ggml-org/llama.cpp/releases/tags/b11193');
-  let body=''; for await (const chunk of stream) {body+=chunk;if(body.length>5e6) throw Error('Resposta de release grande demais.');}
+  let body=''; for await (const chunk of stream as AsyncIterable<Buffer>) {body+=chunk;if(body.length>5e6) throw Error('Resposta de release grande demais.');}
   return JSON.parse(body);
 }
 function backendOptions(platform=process.platform,arch=process.arch) {
@@ -75,13 +75,13 @@ async function download(asset,file,onProgress) {
   const stream=await request(asset.browser_download_url);
   const out=fs.createWriteStream(file,{flags:'wx'});
   const hash=crypto.createHash('sha256'); let bytes=0;
-  try { for await(const chunk of stream) {bytes+=chunk.length;if(bytes>1.5e9) throw Error('Arquivo maior que o limite permitido.');hash.update(chunk);if(!out.write(chunk)) await new Promise(resolve=>out.once('drain',resolve));onProgress?.(Math.round(bytes/(asset.size||bytes)*100));} }
-  finally {out.end();await new Promise(resolve=>out.once('close',resolve));}
+  try { for await(const chunk of stream as AsyncIterable<Buffer>) {bytes+=chunk.length;if(bytes>1.5e9) throw Error('Arquivo maior que o limite permitido.');hash.update(chunk);if(!out.write(chunk)) await new Promise<void>(resolve=>out.once('drain',resolve));onProgress?.(Math.round(bytes/(asset.size||bytes)*100));} }
+  finally {out.end();await new Promise<void>(resolve=>out.once('close',resolve));}
   const digest=hash.digest('hex');
   if(asset.digest && asset.digest.startsWith('sha256:') && digest!==asset.digest.slice(7)) throw Error('Checksum SHA-256 do llama.cpp não confere.');
   return digest;
 }
-function run(file,args,cwd) {return new Promise((resolve,reject)=>{const p=spawn(file,args,{cwd,windowsHide:true});let err='';p.stderr.on('data',d=>err+=d.toString().slice(0,1000));p.on('error',reject);p.on('exit',c=>c===0?resolve():reject(Error(`${file} falhou (${c}): ${err.slice(-500)}`)));});}
+function run(file,args,cwd): Promise<void> {return new Promise<void>((resolve,reject)=>{const p=spawn(file,args,{cwd,windowsHide:true});let err='';p.stderr.on('data',d=>err+=d.toString().slice(0,1000));p.on('error',reject);p.on('exit',c=>c===0?resolve():reject(Error(`${file} falhou (${c}): ${err.slice(-500)}`)));});}
 async function findExecutable(root,name='llama-server') {
   const expected=name+(process.platform==='win32'?'.exe':''); const todo=[root];
   while(todo.length) {const dir=todo.pop();for(const e of await fsp.readdir(dir,{withFileTypes:true})) {const p=path.join(dir,e.name);if(e.isDirectory()) todo.push(p);else if(e.isFile()&&e.name===expected) return p;}}

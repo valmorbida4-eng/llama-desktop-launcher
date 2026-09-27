@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { parseLegacyProfiles } = require('../src/profile_import');
+const { parseLegacyProfiles } = require('../build/app/profile_import');
 
 function row(modelPath, values = ['auto', '8192', 'q8_0', 'q8_0', '', 'on', '', '', '', 'Vulkan0']) {
   return [Buffer.from(modelPath, 'utf8').toString('base64'), ...values].join('\t');
