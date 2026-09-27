@@ -8,6 +8,8 @@ O Llama Desktop Launcher instala ou localiza o motor [llama.cpp](https://github.
 
 O instalador do aplicativo **não inclui modelos**. O motor oficial também é baixado na primeira execução, ou você pode indicar uma instalação já existente. A versão do motor testada é `b11193`.
 
+A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **Modelos**, para encontrar GGUF e consultar recomendações; e **Configurações**, para preparar o motor, as pastas e os perfis. A navegação para Configurações permanece disponível em todas as telas.
+
 ## 2. Requisitos
 
 | Sistema | Instalador | Aceleração de GPU |
@@ -47,7 +49,9 @@ As versões de desenvolvimento sem assinatura/notarização podem exigir autoriz
 
 ## 4. Primeiro uso: motor llama.cpp
 
-No primeiro início, o aplicativo abre a tela **Configurações**. Você pode preencher as opções agora ou clicar em **Concluir agora, baixar depois**. Mais tarde, a aba **Configurações** continua disponível para baixar o motor, apontar para outra instalação ou alterar as pastas de modelos. Na seção **Motor llama.cpp**, escolha uma das opções:
+No primeiro início, a tela **Configurações** abre automaticamente quando o motor ainda não está pronto, ainda não há modelos, ou não existe um modelo selecionado e salvo. Depois de preparar o motor e escolher um modelo, as próximas aberturas vão para **Llama**. Você pode voltar às **Configurações** pela navegação a qualquer momento. A tela explica o que ainda falta; é possível concluir a configuração depois.
+
+Na seção **Motor llama.cpp**, escolha uma das opções:
 
 1. **Baixar motor oficial:** o aplicativo acessa a release `b11193` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote correspondente ao sistema. Windows/Linux usam Vulkan; macOS usa Metal. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
 2. **Escolher pasta existente:** a pasta selecionada precisa conter `llama-server` (ou `llama-server.exe`). Use esta opção para aproveitar uma instalação já preparada, como a pasta `b11193-vulkan` do launcher Windows anterior.
@@ -58,25 +62,29 @@ Se você usa o launcher Windows anterior, selecione primeiro a pasta que contém
 
 ## 5. Pastas e modelos GGUF
 
-O aplicativo aceita **duas localizações** de modelos na tela **Configurações**. A primeira começa sugerida em `~/Models/GGUF`; clique em **Alterar** para escolher outro disco ou pasta. A segunda é opcional e pode ser adicionada ou removida. Você pode mudar as duas pastas depois. A tela **Modelos** procura arquivos `.gguf` dentro das subpastas.
+O aplicativo aceita **duas localizações** de modelos na tela **Configurações**. A primeira começa sugerida em `~/Models/GGUF`; clique em **Alterar** para escolher outro disco ou pasta. A segunda é opcional e pode ser adicionada ou removida. Você pode mudar as duas pastas depois. A tela **Modelos** procura arquivos `.gguf` dentro das subpastas. Nela, escolha o modelo que deseja usar; o aplicativo guarda a seleção e os ajustes associados ao caminho daquele arquivo.
+
+Mesmo antes de baixar o primeiro modelo, **Modelos** mostra estimativas baseadas na RAM, CPU, GPU/VRAM detectáveis e espaço livre nas pastas de modelos. As faixas são pontos de partida conservadores, não uma garantia de compatibilidade ou desempenho. Confira sempre o tamanho do arquivo GGUF, a licença, os requisitos publicados pelo autor e o espaço disponível. Para MoE, considere o tamanho total dos pesos, não apenas os parâmetros ativos.
 
 Para obter um modelo:
 
-1. Clique em **MoE Q4_K_M** para abrir o [filtro de modelos MoE](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m), ou em **GGUF Q4_K_M** para abrir o [filtro geral Q4_K_M](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m). Os dois links já incluem GGUF, aplicativo llama.cpp e relação de modelo quantizado.
+1. Em **Modelos**, escolha uma das opções para abrir o Hugging Face no navegador: **MoE Q4_K_M** para modelos MoE quantizados; **Denso Q4_K_M** para modelos densos quantizados; ou **Completo F16** para arquivos sem quantização. Os filtros incluem GGUF e llama.cpp; os filtros Q4_K_M também restringem a modelos quantizados. Você também pode abrir diretamente os [modelos MoE Q4_K_M](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m), [modelos densos Q4_K_M](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m) e [modelos completos F16](https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=f16).
 2. Escolha um repositório e confira a **licença do modelo**, requisitos de RAM/VRAM, quantização e instruções do autor.
 3. Baixe o arquivo `.gguf` para uma das pastas configuradas. Esta versão abre o Hugging Face no navegador; o download do arquivo é feito pelo navegador.
-4. Volte ao aplicativo e clique em **Atualizar lista**.
+4. Volte ao aplicativo e atualize a lista de modelos. Em **Modelos**, confira a recomendação compatível com seu hardware e selecione o GGUF desejado.
 
 Se um modelo usa projetor multimodal, mantenha um único arquivo `mmproj*.gguf` na mesma pasta. O aplicativo o associa automaticamente. Em modelos divididos em vários arquivos, todos os shards devem permanecer juntos; a lista mostra apenas o primeiro shard.
 
 **Atenção:** GGUF descreve o formato, mas não garante que todo modelo seja compatível com esta versão do llama.cpp. Repositórios podem exigir uma versão mais nova do motor.
 
-## 6. Iniciar uma conversa
+## 6. Tela Llama: iniciar uma conversa
 
-1. Escolha um GGUF na lista **Modelo e desempenho**.
-2. Aceite os parâmetros iniciais ou clique em **Aplicar sugestão inicial**. Essa ação preenche os campos sem executar o modelo.
-3. Clique em **Abrir no navegador**. O aplicativo inicia `llama-server`, espera o carregamento do modelo e abre a interface web local.
+1. Na lista **Modelo GGUF**, escolha um modelo já detectado nas pastas configuradas. Se ainda não existir um modelo selecionado e salvo, a tela inicial será **Configurações**; baixe ou localize um modelo primeiro na tela **Modelos**.
+2. Para conversar dentro do aplicativo, clique em **Conversar aqui**, digite a mensagem e envie. Use Enter para enviar e Shift+Enter para inserir uma linha. O histórico não é salvo.
+3. Clique em **Abrir no navegador** para iniciar `llama-server`, aguardar o carregamento e abrir a interface web. A tela mostra o endereço de acesso e as sessões configuradas.
 4. Ao terminar, clique em **Parar servidor** no aplicativo.
+
+Use **Abrir CLI no terminal** para iniciar `llama-cli` (`llama-cli.exe` no Windows) em um terminal separado, com o modelo e ajustes atuais. Converse e encerre pelo terminal. Pare o servidor ou a conversa integrada antes de iniciar a CLI externa.
 
 O carregamento de um modelo grande pode levar alguns minutos. O registro do motor na parte inferior mostra mensagens e erros. Se a aba do navegador for fechada, o servidor continua ativo até você clicar em **Parar servidor** ou encerrar o aplicativo.
 
@@ -90,13 +98,13 @@ Ao iniciar em LAN/Tailscale, use **Mostrar chave**, **Copiar chave** ou **Nova c
 
 O aplicativo não altera o firewall ao iniciar o servidor. No Windows, com o servidor LAN/Tailscale ativo, informe a **faixa de clientes permitidos** na seção **Firewall do Windows** e clique em **Criar regra para a porta ativa**. Confirme a solicitação de administrador do Windows. A regra limita o acesso ao executável `llama-server.exe`, à porta ativa e à faixa indicada. Confira a faixa antes de confirmar; se mudar de porta, crie outra regra. No Linux/macOS, siga as regras do firewall da distribuição. O servidor usa uma porta livre de 8080 a 8180. Prefira Tailscale ou uma LAN confiável, pois o HTTP direto na LAN não cifra o tráfego.
 
-### Conversa via llama-cli
-
-Na seção **Conversa via llama-cli**, escolha o modelo e ajuste seus parâmetros acima. Clique em **Conversar aqui** para usar a janela do aplicativo: digite a mensagem e clique em **Enviar**; Enter envia e Shift+Enter cria uma linha. Clique em **Encerrar conversa** ao terminar. O aplicativo mostra a saída do motor nessa janela e não salva o histórico.
+### Conversa integrada e CLI externa
 
 Quem prefere o programa original pode clicar em **Abrir CLI no terminal**. O aplicativo abre `llama-cli` (`llama-cli.exe` no Windows) em uma janela de terminal separada, com o modelo e os ajustes atuais. Use o próprio terminal para conversar e encerrá-lo; o botão **Encerrar conversa** controla apenas a conversa interna. Pare o servidor ou a conversa interna antes de abrir a CLI externa. Um terminal gráfico precisa estar instalado no Linux. O terminal externo pode continuar aberto depois que o launcher for fechado.
 
-Cada modelo tem seu próprio perfil. Clique em **Salvar ajustes** para guardá-lo. **Aplicar sugestão inicial** preenche os campos com base na RAM, no número de threads de CPU, no tamanho e no nome do arquivo GGUF. É um ponto de partida, não uma garantia de velocidade ou de uso exato de memória. A sugestão só é salva quando você clica em **Salvar ajustes**, abre o modelo no navegador ou inicia uma conversa pelo aplicativo.
+Os parâmetros avançados aparecem na tela **Llama** dentro do acordeão **Ajustes avançados deste modelo**, fechado inicialmente. Abra-o para revisar os valores, aplicar uma sugestão inicial ou comparar microbatch. Clique em **Salvar ajustes deste modelo** para guardar o perfil do GGUF selecionado. A tela **Configurações** também oferece o seletor de modelo/perfil e mantém seus ajustes abertos para edição. Os parâmetros são salvos por caminho de modelo.
+
+**Aplicar sugestão inicial** preenche os campos com base na RAM, no número de threads de CPU e nos dados do GGUF. A estimativa pode incluir GPU/VRAM se o sistema conseguir detectá-las. É um ponto de partida, não uma garantia de velocidade ou de uso exato de memória. Revise os valores e salve o perfil quando quiser mantê-los.
 
 | Campo | Argumento do llama.cpp | Como usar |
 | --- | --- | --- |
@@ -112,14 +120,18 @@ Cada modelo tem seu próprio perfil. Clique em **Salvar ajustes** para guardá-l
 
 O motor recebe também `-fit on` para adaptar a carga à memória disponível. Um modelo denso não deve receber `-ncmoe`; deixe o campo vazio. Para um MoE que não cabe totalmente na VRAM, teste o número de camadas MoE na CPU e observe o desempenho e o consumo de RAM.
 
-## 8. Testar o desempenho com o primeiro modelo
+## 8. Analisar recomendações e testar o desempenho
 
-Depois de baixar o primeiro GGUF e instalar o motor:
+Na tela **Modelos**, o aplicativo prepara um prompt com as informações de hardware disponíveis, o modelo selecionado e seus ajustes. Use **Copiar prompt de análise** para colá-lo em outro lugar, ou **Analisar com modelo selecionado** para enviá-lo pela conversa integrada ao modelo atual. Se ainda não houver modelo, você pode copiar o prompt e usar as sugestões locais; a análise com IA fica disponível depois de selecionar um GGUF.
 
-1. Selecione o modelo. Se desejar uma sugestão para vários campos, clique em **Aplicar sugestão inicial**; isso não executa o modelo.
-2. Se desejar medir o microbatch, pare o servidor e clique em **Comparar microbatch**. O `llama-bench` testa o valor atual e outro de até 128, limitado pelo batch. Quando os dois valores coincidem, há apenas um teste.
+A resposta do modelo é uma recomendação para você revisar. Ela não altera nem salva os parâmetros automaticamente. Confira compatibilidade, memória, licença e os resultados reais antes de aplicar qualquer mudança. As sugestões locais também são estimativas; o benchmark abaixo mede o desempenho no computador.
+
+Para medir o microbatch depois de selecionar e carregar um GGUF:
+
+1. Na tela **Llama**, abra **Ajustes avançados deste modelo**. Se desejar uma sugestão para vários campos, clique em **Aplicar sugestão inicial**; isso não executa o modelo.
+2. Pare o servidor ou conversa ativa e clique em **Comparar microbatch**. O `llama-bench` testa o valor atual e outro de até 128, limitado pelo batch. Quando os dois valores coincidem, há apenas um teste.
 3. Aguarde os resultados de processamento de prompt e geração, em tokens por segundo. O aplicativo coloca no campo **Microbatch** o valor com melhor pontuação; os outros campos permanecem como estavam.
-4. Revise os campos e clique em **Salvar ajustes** para manter o resultado sem iniciar o modelo.
+4. Revise os campos e clique em **Salvar ajustes deste modelo** para manter o resultado sem iniciar o modelo.
 
 O teste pode carregar o modelo mais de uma vez e levar vários minutos. Ele não salva o perfil sozinho nem otimiza contexto, cache, camadas de GPU ou camadas MoE. Esses valores continuam ajustáveis manualmente.
 

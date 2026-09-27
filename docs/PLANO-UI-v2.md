@@ -19,5 +19,12 @@
 
 ## 4. Manual e validação
 
-- Atualizar os manuais detalhados em português e inglês e gerar versões PDF de ambos com a navegação nova e capturas de tela verificadas.
+- Atualizar os manuais detalhados em português e inglês, gerar versões PDF de ambos e revisar visualmente todas as páginas.
 - Validar os três fluxos: sem modelo, com modelo e após reinstalação; testar conversa integrada, CLI externa, navegador, perfis, links e preservação dos dados na desinstalação. Recompilar instaladores Windows/Linux e prévia macOS depois da revisão.
+
+## 5. Versões e releases
+
+- Adotar Semantic Versioning (`MAJOR.MINOR.PATCH`), iniciando em `0.1.0`: incremento de PATCH para correções compatíveis e MINOR para novos recursos enquanto o produto estiver antes de `1.0.0`. Reservar `1.0.0` para a primeira versão estável; depois dela, mudanças incompatíveis incrementam MAJOR.
+- Manter a versão de `package.json` igual à versão raiz de `package-lock.json`. Conferir com `npm run version:check`; o teste automatizado também valida SemVer estrito e a sincronia dos arquivos.
+- Ao preparar uma versão, atualizar os dois arquivos com `npm version patch|minor|major --no-git-tag-version`, revisar a mudança e criar uma tag `vX.Y.Z` correspondente. A tag inicia a matriz de instaladores; a publicação dos artefatos continua manual.
+- A chave para LAN/Tailscale e o endpoint `/v1` já existem. Na VM Linux, uma chamada OpenAI-compatible a `/v1/chat/completions` respondeu com Bearer; `/v1/models` retornou 401 sem chave e 200 com chave. Ainda validar a configuração ponta a ponta de um harness externo escolhido pelo usuário e o acesso por outro dispositivo na rede.

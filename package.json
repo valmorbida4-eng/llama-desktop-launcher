@@ -9,6 +9,7 @@
   "scripts": {
     "start": "electron .",
     "test": "node --test",
+    "version:check": "node scripts/check-version.js",
     "dist:win": "electron-builder --win nsis --publish never",
     "dist:linux": "electron-builder --linux AppImage deb rpm --publish never",
     "dist:mac": "electron-builder --mac dmg --publish never"

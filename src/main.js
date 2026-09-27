@@ -12,11 +12,14 @@ const benchmark=require('./benchmark');
 const network=require('./network');
 const cli=require('./cli');
 const terminalCli=require('./terminal_cli');
+const guidance=require('./guidance');
+const hardware=require('./hardware');
 const firewall=require('./firewall');
 const {parseLegacyProfiles}=require('./profile_import');
 let win,server=null,proxy=null,active=null,conversation=null,tuneAbort=null,configuration,configPath;
+let gpuProbe;
 
-function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',profiles:{},firstRun:true,accessHost:'127.0.0.1',parallel:1};}
+function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',profiles:{},selectedModelPath:'',firstRun:true,accessHost:'127.0.0.1',parallel:1};}
 function save() {fs.mkdirSync(path.dirname(configPath),{recursive:true});fs.writeFileSync(configPath,JSON.stringify(configuration,null,2));}
 function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}}
 function send(channel,data) {if(win&&!win.isDestroyed()) win.webContents.send(channel,data);}
@@ -26,12 +29,16 @@ function waitReady(host,port,child,key) {return new Promise((resolve,reject)=>{l
 function apiKeyPath(){return path.join(app.getPath('userData'),'server-api-key.txt');}
 function addressInRange(address,range){const [networkAddress,prefixText]=range.split('/');const prefix=prefixText===undefined?32:Number(prefixText);const toInt=value=>value.split('.').reduce((number,octet)=>(number*256+Number(octet))>>>0,0);const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;return (toInt(address)&mask)===(toInt(networkAddress)&mask);}
 function selectedModel(modelPath) {const model=core.scanModels(configuration.modelDirs).find(m=>m.path===modelPath);if(!model) throw Error('Modelo não encontrado nas pastas configuradas.');return model;}
+function availableModelDiskBytes() {for(const configured of configuration.modelDirs){if(!configured)continue;let dir=configured;while(!fs.existsSync(dir)){const parent=path.dirname(dir);if(parent===dir)break;dir=parent;}try{const stat=fs.statfsSync(dir);return Number(stat.bavail)*Number(stat.bsize);}catch{}}return null;}
+async function gpuDetails(){gpuProbe ||= hardware.detectGpu().catch(()=>({name:null,memoryBytes:null,source:null}));return gpuProbe;}
+async function modelGuidance(model=null,settings=null){return guidance.buildGuidance({hardware:core.detectHardware(),gpu:await gpuDetails(),availableDiskBytes:availableModelDiskBytes(),model,settings});}
 function createWindow() {win=new BrowserWindow({width:1100,height:850,minWidth:860,minHeight:650,webPreferences:{preload:path.join(__dirname,'preload.js'),contextIsolation:true,nodeIntegration:false,sandbox:true}});win.loadFile(path.join(__dirname,'index.html'));win.webContents.setWindowOpenHandler(({url})=>{if(url.startsWith('https://')) shell.openExternal(url);return {action:'deny'};});}
 app.whenReady().then(()=>{load();createWindow();app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin') app.quit();});
 app.on('before-quit',()=>{tuneAbort?.abort();proxy?.close();conversation?.stop();if(server)server.kill();});
 
 ipcMain.handle('state',()=>state());
+ipcMain.handle('select-model',(_e,modelPath)=>{selectedModel(modelPath);configuration.selectedModelPath=modelPath;save();return state();});
 ipcMain.handle('complete-setup',()=>{configuration.firstRun=false;save();return state();});
 ipcMain.handle('choose-dir',async(_e,kind,index)=>{if(kind==='engine'&&(server||conversation||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:kind==='engine'?'Pasta dos binários llama.cpp':'Pasta de modelos GGUF'});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
 ipcMain.handle('clear-dir',(_e,index)=>{if(index!==1)throw Error('A primeira localização é obrigatória.');configuration.modelDirs[1]='';save();return state();});
@@ -49,7 +56,22 @@ ipcMain.handle('import-legacy-profiles',async()=>{
   for(const profile of parsed.profiles){const current=byPath.get(normalize(profile.path));if(!current){missing++;continue;}if(configuration.profiles[current]){existing++;continue;}configuration.profiles[current]=profile.settings;imported++;}
   if(imported)save();return {imported,missing,existing,invalid:parsed.ignored.length};
 });
-ipcMain.handle('recommend',(_e,modelPath)=>{const model=selectedModel(modelPath);return core.recommend(model,core.detectHardware());});
+ipcMain.handle('recommend',async(_e,modelPath)=>{const model=selectedModel(modelPath);const gpu=await gpuDetails();return core.recommend(model,{...core.detectHardware(),gpuMemoryBytes:gpu.memoryBytes});});
+ipcMain.handle('model-guidance',()=>modelGuidance());
+ipcMain.handle('copy-guidance-prompt',async()=>{const result=await modelGuidance();clipboard.writeText(result.prompt);return result.prompt;});
+ipcMain.handle('analyze-with-model',async(_e,modelPath,settings)=>{
+  if(server||conversation||tuneAbort)throw Error('Pare o servidor, a conversa ou o teste antes da análise.');
+  const model=selectedModel(modelPath);core.validateSettings(settings);
+  const {prompt}=await modelGuidance(model,settings);
+  const session=cli.createSession({engineDir:configuration.engineDir,model,settings,
+    onOutput:data=>send('chat-output',data),
+    onExit:result=>{if(conversation===session){conversation=null;send('chat-stopped',result);}},
+    onError:error=>send('chat-output',{stream:'stderr',text:`\n${error.message}\n`})});
+  conversation=session;
+  try{await session.send(prompt);}catch(error){session.stop();conversation=null;throw error;}
+  configuration.profiles[modelPath]=settings;configuration.firstRun=false;save();
+  return {prompt};
+});
 ipcMain.handle('tune',async(_e,modelPath,settings)=>{if(server||conversation)throw Error('Pare o servidor ou a conversa antes do teste.');if(tuneAbort)throw Error('Já existe um teste em execução.');const model=selectedModel(modelPath);if(!configuration.engineDir)throw Error('Instale o motor primeiro.');const controller=new AbortController();tuneAbort=controller;try{return await benchmark.tune(configuration.engineDir,model,settings,text=>send('tune-progress',text),controller.signal);}finally{tuneAbort=null;}});
 ipcMain.handle('launch',async(_e,modelPath,settings,options={})=>{
   if(server||conversation||tuneAbort)throw Error('Pare a execução atual antes de iniciar outra.');
@@ -107,6 +129,7 @@ ipcMain.handle('create-firewall-rule',async(_e,remoteAddress)=>{
   if(network.scopeOf(range.split('/')[0])!==active.scope||!addressInRange(active.host,range))throw Error('A faixa de clientes precisa conter o endereço da rede selecionada.');
   return firewall.createRule({program:active.executable,port:active.port,remoteAddress:range});
 });
-ipcMain.handle('open-hf',async(_e,kind)=>{const urls={moe:'https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m',dense:'https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m'};const url=urls[kind];if(!url)throw Error('Filtro inválido.');await shell.openExternal(url);return url;});
+ipcMain.handle('open-hf',async(_e,kind)=>{const url=guidance.links[kind];if(!url)throw Error('Filtro inválido.');await shell.openExternal(url);return url;});
+ipcMain.handle('open-model-example',async(_e,url)=>{if(typeof url!=='string'||!/^https:\/\/huggingface\.co\/Qwen\/Qwen2\.5-(?:0\.5|1\.5|3|7|14)B-Instruct-GGUF$/.test(url))throw Error('Link de modelo inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('open-model-dir',async(_e,index)=>{const dir=configuration.modelDirs[index];if(!dir)throw Error('Localização vazia.');fs.mkdirSync(dir,{recursive:true});await shell.openPath(dir);return true;});
-ipcMain.handle('open-manual',async(_e,language)=>{if(!['pt-BR','en'].includes(language))throw Error('Idioma inválido.');const base=app.isPackaged?path.join(process.resourcesPath,'docs'):path.join(__dirname,'..','docs');const error=await shell.openPath(path.join(base,`MANUAL-${language}.md`));if(error)throw Error(error);return true;});
+ipcMain.handle('open-manual',async(_e,language)=>{if(!['pt-BR','en'].includes(language))throw Error('Idioma inválido.');const base=app.isPackaged?path.join(process.resourcesPath,'docs'):path.join(__dirname,'..','docs');const error=await shell.openPath(path.join(base,`MANUAL-${language}.pdf`));if(error)throw Error(error);return true;});

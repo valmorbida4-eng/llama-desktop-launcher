@@ -8,6 +8,8 @@ Llama Desktop Launcher installs or locates the [llama.cpp](https://github.com/gg
 
 The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b11193`.
 
+The interface has three screens: **Llama** for chat and starting the server, **Models** for finding GGUF files and viewing recommendations, and **Settings** for preparing the engine, folders, and profiles. Settings remains available in the navigation on every screen.
+
 ## 2. Requirements
 
 | System | Package | GPU backend |
@@ -47,7 +49,9 @@ Unsigned development builds may require an explicit exception in macOS security 
 
 ## 4. First use: set up llama.cpp
 
-On first launch, the app opens **Configurações / Settings**. You can set up the engine and folders now, or click **Concluir agora, baixar depois / Finish now, download later**. The Settings tab remains available later to download the engine, choose another installation, or change model folders. In **Motor llama.cpp**, choose one of these options:
+On first launch, **Settings** opens automatically if the engine is not ready, there are no models, or no selected model has been saved. After preparing the engine and selecting a model, later launches open **Llama**. You can return to **Settings** from the navigation at any time. The screen explains the remaining setup steps, which you can complete later.
+
+In **Motor llama.cpp**, choose one of these options:
 
 1. **Baixar motor oficial / Download official engine:** the app downloads release `b11193` directly from `ggml-org/llama.cpp` on GitHub. Windows/Linux use Vulkan; macOS uses Metal. The engine is stored in your user data folder, outside the app installation folder.
 2. **Escolher pasta existente / Choose existing folder:** select a folder containing `llama-server` (or `llama-server.exe`). This lets you reuse an existing installation, including the `b11193-vulkan` directory used by the earlier Windows launcher.
@@ -58,25 +62,29 @@ If you used the previous Windows launcher, first select the folder containing yo
 
 ## 5. Model folders and GGUF files
 
-The **Settings** screen supports **two model locations**. The first defaults to `~/Models/GGUF`; click **Alterar / Change** to select a different folder or drive. The second location is optional and can be added or removed. You can change both later. The **Models** screen scans subfolders for `.gguf` files.
+The **Settings** screen supports **two model locations**. The first defaults to `~/Models/GGUF`; click **Alterar / Change** to select a different folder or drive. The second location is optional and can be added or removed. You can change both later. The **Models** screen scans subfolders for `.gguf` files. Choose the model you want to use there; the app saves the selection and settings associated with that file path.
+
+Even before you download a model, **Models** shows estimates based on available RAM, CPU, detectable GPU/VRAM, and free space in the model folders. These ranges are conservative starting points, not guarantees of compatibility or performance. Always check the GGUF file size, license, author requirements, and available disk space. For MoE models, consider the total weight size, not just the active parameters.
 
 To get a model:
 
-1. Click **MoE Q4_K_M** to open the [MoE model filter](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m), or **GGUF Q4_K_M** to open the [general Q4_K_M filter](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m). Both links include the GGUF library, llama.cpp app, and quantized base-model relation.
+1. In **Models**, choose **MoE Q4_K_M** for quantized MoE models, **Denso Q4_K_M** (“Dense Q4_K_M”) for quantized dense models, or **Completo F16** (“Full F16”) for unquantized files. The filters include GGUF and llama.cpp; the Q4_K_M filters also restrict results to quantized models. You can also open the [MoE Q4_K_M models](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m), [dense Q4_K_M models](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m), and [full F16 models](https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=f16) directly.
 2. Choose a repository. Review the **model license**, RAM/VRAM requirements, quantization, and the author's instructions.
 3. Download a `.gguf` file into one of your configured model folders. This version opens Hugging Face in your browser; your browser handles the file download.
-4. Return to the app and click **Atualizar lista / Refresh list**.
+4. Return to the app and refresh the model list. In **Models**, review the hardware recommendation and select the GGUF you want.
 
 For a multimodal model, keep exactly one `mmproj*.gguf` file beside the model; the app will pair it automatically. For split GGUF models, keep all shards in the same folder. The list displays only the first shard.
 
 **Note:** GGUF is a file format, not a guarantee that every model works with this llama.cpp version. Some repositories may require a newer engine.
 
-## 6. Start a conversation
+## 6. Llama screen: start a conversation
 
-1. Select a GGUF in **Modelo e desempenho / Model and performance**.
-2. Keep the initial settings or click **Aplicar sugestão inicial / Apply initial suggestion**. This fills in the fields without running the model.
-3. Click **Abrir no navegador / Open in browser**. The app starts `llama-server`, waits for model loading, and opens its local web UI.
-4. When finished, click **Parar servidor / Stop server** in the app.
+1. Choose a model detected in your configured folders from **Modelo GGUF** (“GGUF model”). If no selected model has been saved yet, the app opens **Configurações** (“Settings”); first download or locate a model from **Modelos** (“Models”).
+2. To chat inside the app, click **Conversar aqui** (“Chat here”), enter a message, and send it. Enter sends; Shift+Enter inserts a line break. Chat history is not saved.
+3. Click **Abrir no navegador** (“Open in browser”) to start `llama-server`, wait for the model to load, and open its web interface. The screen shows the access address and configured sessions.
+4. When finished, click **Parar servidor** (“Stop server”) in the app.
+
+Use **Abrir CLI no terminal** (“Open CLI in terminal”) to launch `llama-cli` (`llama-cli.exe` on Windows) in a separate terminal with the selected model and current settings. Chat and exit from that terminal. Stop the server or integrated chat before starting the external CLI.
 
 Large models may take several minutes to load. Expand the engine log near the bottom of the window to inspect messages or errors. Closing the browser tab does not stop the server. Use **Stop server** or quit the app.
 
@@ -90,13 +98,13 @@ For LAN/Tailscale, use **Mostrar chave / Show key**, **Copiar chave / Copy key**
 
 The app does not change firewall rules when starting the server. On Windows, while a LAN/Tailscale server is running, enter the **allowed client address or CIDR range** in **Firewall do Windows / Windows Firewall** and click **Criar regra para a porta ativa / Create rule for active port**. Confirm the Windows administrator prompt. The rule is limited to `llama-server.exe`, the active port, and the entered client range. Check the range before confirming; if the port changes, create another rule. On Linux/macOS, use your distribution's firewall controls. The server selects a free port from 8080 to 8180. Prefer Tailscale or a trusted LAN; direct HTTP on a LAN does not encrypt traffic.
 
-### Conversation with llama-cli
+### Integrated chat and external CLI
 
-Under **Conversa via llama-cli / Conversation via llama-cli**, select the model and settings above. Click **Conversar aqui / Chat here** to use the app window: enter a message and click **Enviar / Send**. Enter sends; Shift+Enter inserts a new line. Click **Encerrar conversa / End conversation** when finished. Engine output appears in the app and the chat history is not saved.
+If you prefer the original program, click **Abrir CLI no terminal** (“Open CLI in terminal”). The app opens `llama-cli` (`llama-cli.exe` on Windows) in a separate terminal with the selected model and current settings. Use that terminal to chat and close it; **Encerrar conversa** (“End chat”) controls only the integrated chat. Stop the server or integrated chat before opening the external CLI. Linux needs a graphical terminal installed. The external terminal may remain open after the launcher closes.
 
-If you prefer the original program, click **Abrir CLI no terminal / Open CLI in terminal**. The app opens `llama-cli` (`llama-cli.exe` on Windows) in a separate terminal with the selected model and current settings. Use that terminal to chat and close it; **End conversation** controls only the in-app chat. Stop the server or in-app chat before opening the external CLI. Linux needs a graphical terminal installed. The external terminal may remain open after the launcher closes.
+Advanced settings are in the **Ajustes avançados deste modelo** (“Advanced settings for this model”) accordion on the **Llama** screen; it is collapsed initially. Open it to review values, apply an initial suggestion, or compare microbatch. Click **Salvar ajustes deste modelo** (“Save settings for this model”) to save the selected GGUF profile. The **Settings** screen also provides the model/profile selector and keeps its settings open for editing. Settings are saved per model path.
 
-Settings are saved per model. Click **Salvar ajustes / Save settings** to store them. **Aplicar sugestão inicial / Apply initial suggestion** fills in the fields using system RAM, CPU thread count, GGUF file size, and model filename. It provides a starting point rather than a guarantee of speed or exact memory usage. The suggestion is saved only when you click **Save settings**, open the model in the browser, or start an in-app conversation.
+**Aplicar sugestão inicial** (“Apply initial suggestion”) fills in fields using RAM, CPU thread count, and GGUF information. The estimate may include GPU/VRAM when the system can detect them. It is a starting point, not a guarantee of speed or exact memory use. Review the values and save the profile when you want to keep them.
 
 | Field | llama.cpp flag | Meaning |
 | --- | --- | --- |
@@ -112,14 +120,18 @@ Settings are saved per model. Click **Salvar ajustes / Save settings** to store 
 
 The app also passes `-fit on` so the engine can adapt to available memory. Leave `-ncmoe` empty for dense models. For an MoE too large for VRAM, adjust CPU MoE layers while watching RAM use and throughput.
 
-## 8. Tune with your first model
+## 8. Review recommendations and benchmark performance
 
-After downloading your first GGUF and installing the engine:
+On the **Models** screen, the app prepares a prompt with available hardware information, the selected model, and its settings. Click **Copiar prompt de análise** (“Copy analysis prompt”) to copy it for use elsewhere, or **Analisar com modelo selecionado** (“Analyze with selected model”) to send it through the integrated chat to the current model. If you do not have a model yet, you can copy the prompt and use the local recommendations; AI analysis becomes available after selecting a GGUF.
 
-1. Select the model. If you want suggested values for several fields, click **Aplicar sugestão inicial / Apply initial suggestion**; this does not run the model.
-2. To measure the microbatch, stop the server and click **Comparar microbatch / Compare microbatch**. `llama-bench` tests the current value and another value of up to 128, capped by batch. If they match, it runs only one test.
+The model's response is a recommendation for you to review. It does not automatically change or save settings. Check compatibility, memory, license, and actual measurements before applying changes. Local suggestions are also estimates; the benchmark below measures performance on your computer.
+
+To measure microbatch after selecting and loading a GGUF:
+
+1. On the **Llama** screen, open **Ajustes avançados deste modelo** (“Advanced settings for this model”). To get suggestions for several fields, click **Aplicar sugestão inicial** (“Apply initial suggestion”); this does not run the model.
+2. Stop the server or active chat and click **Comparar microbatch** (“Compare microbatch”). `llama-bench` tests the current value and another value of up to 128, capped by batch. If they match, it runs only one test.
 3. Wait for prompt processing and generation results in tokens per second. The app fills in **Microbatch** with the better value and leaves the other fields unchanged.
-4. Review the fields and click **Salvar ajustes / Save settings** to keep the result without starting the model.
+4. Review the fields and click **Salvar ajustes deste modelo** (“Save settings for this model”) to keep the result without starting the model.
 
 The benchmark may load the model more than once and can take several minutes. It does not save the profile by itself or optimize context, cache, GPU layers, or MoE layers. You can adjust those fields manually.
 
