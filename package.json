@@ -1,8 +1,8 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": "Célio",
   "description": "Instalador e launcher multiplataforma para llama.cpp",
   "main": "src/main.js",
@@ -22,8 +22,8 @@
     "appId": "br.celio.llamadesktoplauncher",
     "productName": "Llama Desktop Launcher",
     "directories": { "output": "dist" },
-    "files": ["src/**/*", "README.md"],
-    "extraResources": [{"from":"docs","to":"docs"}],
+    "files": ["src/**/*", "README.md", "LICENSE"],
+    "extraResources": [{"from":"docs","to":"docs"},{"from":"LICENSE","to":"LICENSE"}],
     "win": { "target": "nsis", "signAndEditExecutable": false },
     "nsis": {
       "oneClick": false,

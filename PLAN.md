@@ -11,9 +11,12 @@
 9. **Paridade com o launcher anterior — implementada para os recursos identificados.** Acesso local/LAN/Tailscale, chave de API, ponte local, links para conexão, sessões simultâneas, conversa por `llama-cli`, criação opcional de regra do Firewall do Windows e importação manual dos perfis TSV foram adicionados. Os fluxos novos ainda requerem teste interativo com GGUF e dispositivos reais.
 10. **Outros sistemas — em andamento.** Um tar.gz portátil Linux x64 foi gerado no Windows, teve permissões de execução corrigidas e seu conteúdo foi verificado. AppImage falhou neste host pela falta de privilégio para criar links simbólicos; DEB/RPM exigem URL do projeto e contato do mantenedor. O WSL registrado não inicia porque o VHDX está ausente. DMG só pode ser gerado em macOS. O workflow nativo está preparado, mas este checkout não possui remoto Git; falta definir repositório privado e metadados antes de executar a matriz.
 
+## Licença
+
+O código do launcher está sob licença MIT, com aviso de copyright em `LICENSE`. O motor llama.cpp e cada modelo GGUF conservam suas próprias licenças.
+
 ## Decisões ainda abertas
 
 - Nome definitivo (provisório: Llama Desktop Launcher).
 - O usuário escolheu navegação no Hugging Face com dois filtros Q4_K_M; implementado.
-- Licença do código do launcher para publicação pública. Até definição, `UNLICENSED`.
 - Assinatura do instalador Windows e assinatura/notarização no macOS para distribuição pública.

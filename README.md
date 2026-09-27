@@ -33,7 +33,7 @@ Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux`
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-Para um teste preliminar em Linux x64, há o arquivo portátil `dist/llama-desktop-launcher-0.1.0-portable-x64.tar.gz`. Extraia com `tar -xzf` e execute `./llama-desktop-launcher-0.1.0/llama-desktop-launcher`. Ele foi montado por compilação cruzada no Windows e ainda não foi aberto em Linux; não equivale aos instaladores AppImage/DEB/RPM.
+Os instaladores atuais são identificados pela versão `0.1.1`. Um arquivo portátil experimental de `0.1.0` pode continuar em `dist/`, mas pertence à versão anterior.
 
 Para economizar minutos e armazenamento em um repositório privado, `.github/workflows/build-macos-preview.yml` executa manualmente apenas os dois builds macOS (Intel e Apple Silicon), verifica o conteúdo dos DMGs e guarda os artefatos por três dias. A execução ainda depende de enviar este código para um repositório GitHub; nenhum DMG foi gerado neste computador Windows.
 
@@ -53,6 +53,6 @@ As versões oficiais de Linux usadas aqui são construídas em Ubuntu; a compati
 
 - **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b11193); consulte a licença no repositório original.
 - **Launcher original para Célio:** interface WinForms, ponte local e auxiliar de firewall criados com Codex para Célio; serviram como base funcional para os ajustes avançados deste aplicativo.
-- **Este aplicativo:** desenvolvido para Célio com Codex. O código do launcher permanece sem licença pública definida (`UNLICENSED`) e o pacote npm é privado. Defina os termos de licença antes de publicar ou redistribuir o código.
+- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. O repositório e o pacote npm podem permanecer privados enquanto a publicação pública é preparada. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
 
 Os créditos não implicam participação ou endosso dos autores do llama.cpp neste launcher.

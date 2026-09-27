@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const { isSemVer, checkVersions } = require('../scripts/check-version');
 
 test('project version uses strict SemVer and matches the lockfile', () => {
-  assert.equal(checkVersions(), '0.1.0');
+  assert.equal(checkVersions(), require('../package.json').version);
 });
 
 test('SemVer accepts prerelease and build metadata', () => {

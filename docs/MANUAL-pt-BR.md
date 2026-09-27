@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.1.0 · Português (Brasil)
+Versão 0.1.1 · Português (Brasil)
 
 ## 1. O que o aplicativo faz
 
@@ -14,7 +14,7 @@ A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **M
 
 | Sistema | Instalador | Aceleração de GPU |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.1.0.exe` | Vulkan com driver de vídeo compatível |
+| Windows x64 | `Llama Desktop Launcher Setup 0.1.1.exe` | Vulkan com driver de vídeo compatível |
 | Linux x64/arm64 | AppImage, DEB ou RPM | Vulkan com driver e bibliotecas compatíveis |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
@@ -24,7 +24,7 @@ O espaço necessário depende do modelo escolhido. Reserve espaço para o arquiv
 
 ### Windows
 
-1. Abra o instalador `Llama Desktop Launcher Setup 0.1.0.exe`.
+1. Abra o instalador `Llama Desktop Launcher Setup 0.1.1.exe`.
 2. Escolha a pasta de instalação. O instalador trabalha por usuário, então não precisa colocar o aplicativo em `Program Files`.
 3. Marque ou desmarque a criação do atalho da área de trabalho.
 4. Conclua a instalação e abra o aplicativo pelo Menu Iniciar ou pelo atalho.
@@ -37,7 +37,7 @@ O espaço necessário depende do modelo escolhido. Reserve espaço para o arquiv
 
 Os pacotes DEB/RPM usam os diretórios definidos pelo sistema e pelo gerenciador de pacotes. A escolha das pastas de modelos é feita dentro do aplicativo.
 
-Para teste preliminar em Linux x64, você também pode extrair `llama-desktop-launcher-0.1.0-portable-x64.tar.gz` com `tar -xzf` e iniciar `./llama-desktop-launcher-0.1.0/llama-desktop-launcher`. Esse arquivo foi montado no Windows e ainda não teve execução validada em Linux. Ele não instala entradas no menu nem substitui os pacotes AppImage/DEB/RPM.
+Para a versão atual, use o pacote DEB, RPM ou AppImage correspondente ao seu sistema. Arquivos portáteis experimentais de versões anteriores não substituem esses pacotes.
 
 ### macOS
 
@@ -157,4 +157,4 @@ No Linux, use o gerenciador de pacotes para remover DEB/RPM, ou apague o arquivo
 
 ## 11. Créditos
 
-O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior. O código do launcher não tem licença pública definida (`UNLICENSED`) e o pacote npm é privado; defina os termos antes de publicar ou redistribuir o código. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.
+O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. O repositório e o pacote npm podem permanecer privados por enquanto. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.

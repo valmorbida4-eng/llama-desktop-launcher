@@ -39,14 +39,16 @@ STYLES = {
 
 def inline(text: str) -> str:
     """Converte apenas os elementos inline usados nos manuais."""
-    token = re.compile(r"\[([^\]]+)\]\((https?://[^)]+)\)|\*\*(.+?)\*\*|`([^`]+)`")
+    token = re.compile(r"\[([^\]]+)\]\(([^)]+)\)|\*\*(.+?)\*\*|`([^`]+)`")
     pieces = []
     last = 0
     for match in token.finditer(text):
         pieces.append(html.escape(text[last:match.start()]))
         label, url, bold, code = match.groups()
-        if url:
+        if url and url.startswith(("https://", "http://")):
             pieces.append(f'<link href="{html.escape(url, quote=True)}" color="#16624b">{html.escape(label)}</link>')
+        elif url:
+            pieces.append(f"<b>{html.escape(label)}</b>")
         elif bold:
             pieces.append(f"<b>{html.escape(bold)}</b>")
         else:

@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.1.0 · English
+Version 0.1.1 · English
 
 ## 1. What the application does
 
@@ -14,7 +14,7 @@ The interface has three screens: **Llama** for chat and starting the server, **M
 
 | System | Package | GPU backend |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.1.0.exe` | Vulkan with a compatible display driver |
+| Windows x64 | `Llama Desktop Launcher Setup 0.1.1.exe` | Vulkan with a compatible display driver |
 | Linux x64/arm64 | AppImage, DEB, or RPM | Vulkan with compatible drivers and libraries |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
@@ -24,7 +24,7 @@ Required disk space depends on the model. Allow room for the GGUF, cache, and en
 
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.1.0.exe`.
+1. Open `Llama Desktop Launcher Setup 0.1.1.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.
@@ -37,7 +37,7 @@ Required disk space depends on the model. Allow room for the GGUF, cache, and en
 
 DEB and RPM use the standard locations chosen by the distribution and package manager. Model folders are selected inside the application.
 
-For a preliminary Linux x64 test, extract `llama-desktop-launcher-0.1.0-portable-x64.tar.gz` with `tar -xzf` and run `./llama-desktop-launcher-0.1.0/llama-desktop-launcher`. This archive was assembled on Windows and has not yet been run on Linux. It does not add menu entries and does not replace the AppImage/DEB/RPM packages.
+For the current version, use the DEB, RPM, or AppImage package for your system. Experimental portable archives from earlier versions do not replace those packages.
 
 ### macOS
 
@@ -157,4 +157,4 @@ On Linux, remove DEB/RPM with your package manager, or delete the AppImage file.
 
 ## 11. Credits
 
-[llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). This independent launcher was developed for Célio with Codex, based on the earlier WinForms launcher. The launcher source has no public license (`UNLICENSED`), and the npm package is private; define license terms before publishing or redistributing it. The llama.cpp authors do not participate in or endorse this app. Each model has its own license.
+[llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). This independent launcher was developed for Célio with Codex, based on the earlier WinForms launcher, and is released under the [MIT license](../LICENSE), with copyright held by Célio. The repository and npm package may remain private for now. The llama.cpp authors do not participate in or endorse this app. Each model has its own license.
