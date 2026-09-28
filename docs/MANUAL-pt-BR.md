@@ -28,7 +28,7 @@ O espaço necessário depende do modelo escolhido. Reserve espaço para o arquiv
 
 ## 3. Instalar o aplicativo
 
-O [repositório oficial do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) disponibiliza o código-fonte e instaladores oficiais compilados e publicados automaticamente nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases), acompanhados de arquivos de verificação de integridade (`SHA256SUMS.txt`). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
+O código-fonte está no [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher). Os links diretos da versão 0.2.6 na tabela acima só funcionarão depois que os instaladores e os arquivos de verificação de integridade (`SHA256SUMS.txt`) forem publicados na [Release correspondente do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
 
 ### Windows
 
@@ -165,4 +165,4 @@ No Linux, use o gerenciador de pacotes para remover DEB/RPM, ou apague o arquivo
 
 ## 11. Créditos
 
-O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. A publicação pública do repositório está planejada; os instaladores exigem publicação separada. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.
+O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. Os instaladores exigem publicação separada na Release correspondente para download direto. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.

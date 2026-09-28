@@ -45,6 +45,19 @@ function allowLocalRequest(request,port,sessionToken=null) {
   }
   return true;
 }
+function upstreamRequestDetails(request,localPort,authority,key) {
+  const url=new URL(request.url||'/',`http://127.0.0.1:${localPort}`);
+  url.searchParams.delete('token');
+  const headers={...request.headers,host:authority,authorization:`Bearer ${key}`};
+  delete headers.connection;
+  delete headers.referer;
+  if(typeof headers.cookie==='string') {
+    const cookies=headers.cookie.split(';').map(cookie=>cookie.trim()).filter(cookie=>cookie&&!cookie.startsWith('llama_token='));
+    if(cookies.length) headers.cookie=cookies.join('; ');
+    else delete headers.cookie;
+  }
+  return {path:url.pathname+url.search,headers};
+}
 function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
   if(!['LAN','Tailscale'].includes(scopeOf(targetHost)))throw Error('Destino remoto inválido.');
   const authority=`${targetHost}:${targetPort}`;
@@ -62,8 +75,8 @@ function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
         }
       }catch{}
     }
-    const headers={...req.headers,host:authority,authorization:`Bearer ${key}`};delete headers.connection;
-    const upstream=http.request({hostname:targetHost,port:targetPort,method:req.method,path:req.url,headers},incoming=>{
+    const {path,headers}=upstreamRequestDetails(req,localPort,authority,key);
+    const upstream=http.request({hostname:targetHost,port:targetPort,method:req.method,path,headers},incoming=>{
       const outgoing={...incoming.headers};delete outgoing['access-control-allow-origin'];delete outgoing['access-control-allow-credentials'];
       if(setCookieHeader) outgoing['set-cookie']=setCookieHeader;
       res.writeHead(incoming.statusCode||502,outgoing);incoming.pipe(res);
@@ -73,8 +86,9 @@ function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
   proxy.on('upgrade',(req,client,head)=>{
     if(!allowLocalRequest(req,localPort,sessionToken)){client.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');return;}
     const upstream=net.connect(targetPort,targetHost,()=>{
-      upstream.write(`${req.method} ${req.url} HTTP/1.1\r\n`);
-      for(const [name,value] of Object.entries(req.headers))if(!['host','authorization','connection'].includes(name))upstream.write(`${name}: ${value}\r\n`);
+      const {path,headers}=upstreamRequestDetails(req,localPort,authority,key);
+      upstream.write(`${req.method} ${path} HTTP/1.1\r\n`);
+      for(const [name,value] of Object.entries(headers))if(!['host','authorization','connection'].includes(name))upstream.write(`${name}: ${value}\r\n`);
       upstream.write(`Host: ${authority}\r\nAuthorization: Bearer ${key}\r\nConnection: Upgrade\r\n\r\n`);
       if(head.length)upstream.write(head);client.pipe(upstream).pipe(client);
     });
@@ -83,4 +97,4 @@ function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
   proxy.on('clientError',(_e,socket)=>socket.destroy());
   return new Promise((resolve,reject)=>{proxy.once('error',reject);proxy.listen(localPort,'127.0.0.1',()=>resolve(proxy));});
 }
-module.exports={scopeOf,accessOptions,validateParallel,ensureKey,rotateKey,allowLocalRequest,createProxy};
+module.exports={scopeOf,accessOptions,validateParallel,ensureKey,rotateKey,allowLocalRequest,upstreamRequestDetails,createProxy};

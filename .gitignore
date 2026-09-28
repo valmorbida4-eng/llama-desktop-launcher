@@ -7,6 +7,9 @@ build-output.log
 
 build/app/
 
+# Local security review artifacts (not part of the public package)
+docs/security-audit/
+
 # Graphify temporary caches
 graphify-out/cache/
 graphify-out/.graphify_*

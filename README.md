@@ -21,7 +21,7 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 ## Obter o aplicativo sem o código-fonte
 
-O [repositório oficial do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) disponibiliza o código-fonte e instaladores oficiais compilados automaticamente para todas as plataformas suportadas nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases), acompanhados de somas de verificação (`SHA256SUMS.txt`).
+O código-fonte está no [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher). Os links diretos da versão 0.2.6 abaixo só funcionarão depois que os instaladores e as somas de verificação (`SHA256SUMS.txt`) forem publicados na [Release correspondente do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases).
 
 | Plataforma / Distribuição | Arquitetura | Pacote / Download direto | Descrição |
 | --- | --- | --- | --- |
@@ -74,6 +74,6 @@ As versões oficiais de Linux usadas aqui são construídas em Ubuntu; a compati
 
 - **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b11193); consulte a licença no repositório original.
 - **Launcher original para Célio:** interface WinForms, ponte local e auxiliar de firewall criados com Codex para Célio; serviram como base funcional para os ajustes avançados deste aplicativo.
-- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. A publicação pública do repositório está planejada; os instaladores terão de ser publicados separadamente para download direto. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
+- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. Os links diretos dependem da publicação dos instaladores como assets da Release correspondente. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
 
 Os créditos não implicam participação ou endosso dos autores do llama.cpp neste launcher.
