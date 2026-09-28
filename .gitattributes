@@ -1,0 +1,8 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# GitHub Linguist overrides
+# Ignore tests, tooling scripts, and documentation from repository language statistics
+tests/** linguist-detectable=false
+scripts/** linguist-detectable=false
+docs/** linguist-documentation=true
