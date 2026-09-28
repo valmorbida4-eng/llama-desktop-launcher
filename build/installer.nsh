@@ -3,7 +3,7 @@
 
 !macro customCheckAppRunning
   checkAppAgain:
-  !insertmacro FIND_PROCESS "${APP_EXECUTABLE_FILENAME}" $R0
+  ${nsProcess::FindProcess} "${APP_EXECUTABLE_FILENAME}" $R0
   ${If} $R0 == 0
     MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "Feche o Llama Desktop Launcher para encerrar o servidor e continuar com seguranca." /SD IDCANCEL IDRETRY checkAppAgain
     Quit
@@ -40,7 +40,7 @@ FunctionEnd
 
 !macro customUnInstallCheck
   checkAppAgainUn:
-  !insertmacro FIND_PROCESS "${APP_EXECUTABLE_FILENAME}" $R0
+  ${nsProcess::FindProcess} "${APP_EXECUTABLE_FILENAME}" $R0
   ${If} $R0 == 0
     MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "O Llama Desktop Launcher ainda esta em execucao. Feche o aplicativo para continuar com a desinstalacao." /SD IDCANCEL IDRETRY checkAppAgainUn
     Quit
@@ -51,12 +51,10 @@ FunctionEnd
   Delete "$INSTDIR\locales\${locale}.pak"
 !macroend
 
-!macro customUnInstall
-  ${IfNot} ${isKeepShortcuts}
-    Delete "$DESKTOP\Llama Desktop Launcher.lnk"
-  ${EndIf}
+!macro customRemoveFiles
   Delete "$INSTDIR\${APP_EXECUTABLE_FILENAME}"
   Delete "$INSTDIR\resources\app.asar"
+  Delete "$INSTDIR\resources\elevate.exe"
   Delete "$INSTDIR\resources\LICENSE"
   Delete "$INSTDIR\resources\docs\MANUAL-pt-BR.pdf"
   Delete "$INSTDIR\resources\docs\MANUAL-en.pdf"
@@ -135,5 +133,15 @@ FunctionEnd
   Delete "$INSTDIR\vk_swiftshader_icd.json"
   Delete "$INSTDIR\vk_swiftshader.dll"
   Delete "$INSTDIR\vulkan-1.dll"
+  Delete "$INSTDIR\${UNINSTALL_FILENAME}"
+  !ifdef UNINSTALLER_ICON
+    Delete "$INSTDIR\uninstallerIcon.ico"
+  !endif
   RMDir "$INSTDIR"
+!macroend
+
+!macro customUnInstall
+  ${IfNot} ${isKeepShortcuts}
+    Delete "$DESKTOP\Llama Desktop Launcher.lnk"
+  ${EndIf}
 !macroend

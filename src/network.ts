@@ -75,7 +75,14 @@ function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
         }
       }catch{}
     }
-    const {path,headers}=upstreamRequestDetails(req,localPort,authority,key);
+    let path,headers;
+    try{
+      ({path,headers}=upstreamRequestDetails(req,localPort,authority,key));
+    }catch{
+      res.writeHead(400,{'content-type':'text/plain; charset=utf-8','connection':'close'});
+      res.end('Pedido inválido.');
+      return;
+    }
     const upstream=http.request({hostname:targetHost,port:targetPort,method:req.method,path,headers},incoming=>{
       const outgoing={...incoming.headers};delete outgoing['access-control-allow-origin'];delete outgoing['access-control-allow-credentials'];
       if(setCookieHeader) outgoing['set-cookie']=setCookieHeader;
@@ -85,8 +92,14 @@ function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
   });
   proxy.on('upgrade',(req,client,head)=>{
     if(!allowLocalRequest(req,localPort,sessionToken)){client.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');return;}
+    let path,headers;
+    try{
+      ({path,headers}=upstreamRequestDetails(req,localPort,authority,key));
+    }catch{
+      client.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n');
+      return;
+    }
     const upstream=net.connect(targetPort,targetHost,()=>{
-      const {path,headers}=upstreamRequestDetails(req,localPort,authority,key);
       upstream.write(`${req.method} ${path} HTTP/1.1\r\n`);
       for(const [name,value] of Object.entries(headers))if(!['host','authorization','connection'].includes(name))upstream.write(`${name}: ${value}\r\n`);
       upstream.write(`Host: ${authority}\r\nAuthorization: Bearer ${key}\r\nConnection: Upgrade\r\n\r\n`);

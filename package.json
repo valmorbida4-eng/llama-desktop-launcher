@@ -1,6 +1,6 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": true,
   "license": "MIT",
   "author": "Célio <valmorbida4@gmail.com>",
@@ -25,8 +25,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "electron": "^38.0.0",
-    "electron-builder": "24.13.3",
+    "electron": "44.4.5",
+    "electron-builder": "26.15.3",
     "typescript": "^7.0.2"
   },
   "build": {
@@ -74,10 +74,7 @@
         "deb",
         "rpm"
       ],
-      "category": "Utility",
-      "desktop": {
-        "Name": "Llama Desktop Launcher"
-      }
+      "category": "Utility"
     },
     "mac": {
       "target": "dmg",

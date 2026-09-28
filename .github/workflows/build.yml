@@ -46,10 +46,37 @@ jobs:
           fpm --version
           echo "USE_SYSTEM_FPM=true" >> "$GITHUB_ENV"
       - run: npm run ${{ matrix.command }}
-      - uses: actions/upload-artifact@v4
+      - name: Stage final package files
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          MATRIX_ID: ${{ matrix.id }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const destination = path.join('release-stage', process.env.MATRIX_ID);
+          fs.mkdirSync(destination, { recursive: true });
+          const packageExtensions = new Set(['.exe', '.dmg', '.appimage', '.deb', '.rpm']);
+          const files = fs.readdirSync('dist', { withFileTypes: true })
+            .filter((entry) => entry.isFile() && packageExtensions.has(path.extname(entry.name).toLowerCase()));
+          const expectedCount = process.env.MATRIX_ID.startsWith('linux-') ? 3 : 1;
+          if (files.length !== expectedCount) {
+            throw new Error(`Expected ${expectedCount} installer files for ${process.env.MATRIX_ID}; found ${files.length}.`);
+          }
+          for (const file of files) {
+            fs.copyFileSync(path.join('dist', file.name), path.join(destination, file.name));
+          }
+          NODE
+      # Caches avoid the 500 MB Actions-artifact allowance, but remain subject
+      # to cache quota and eviction. A missing cache fails the release closed.
+      # Include run_attempt so reruns cannot publish stale binaries from a prior attempt.
+      - uses: actions/cache/save@v4
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
-          name: installer-${{ matrix.id }}
-          path: dist/*
+          path: release-stage/${{ matrix.id }}
+          key: release-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.id }}
+          enableCrossOsArchive: true
 
   release:
     needs: package
@@ -59,11 +86,56 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Download all installers
-        uses: actions/download-artifact@v4
+      - name: Restore Windows x64 package cache
+        uses: actions/cache/restore@v4
         with:
-          path: release-artifacts
-          merge-multiple: true
+          path: release-stage/windows-x64
+          key: release-${{ github.run_id }}-${{ github.run_attempt }}-windows-x64
+          fail-on-cache-miss: true
+          enableCrossOsArchive: true
+      - name: Restore Linux x64 package cache
+        uses: actions/cache/restore@v4
+        with:
+          path: release-stage/linux-x64
+          key: release-${{ github.run_id }}-${{ github.run_attempt }}-linux-x64
+          fail-on-cache-miss: true
+          enableCrossOsArchive: true
+      - name: Restore Linux ARM64 package cache
+        uses: actions/cache/restore@v4
+        with:
+          path: release-stage/linux-arm64
+          key: release-${{ github.run_id }}-${{ github.run_attempt }}-linux-arm64
+          fail-on-cache-miss: true
+          enableCrossOsArchive: true
+      - name: Restore macOS ARM64 package cache
+        uses: actions/cache/restore@v4
+        with:
+          path: release-stage/macos-arm64
+          key: release-${{ github.run_id }}-${{ github.run_attempt }}-macos-arm64
+          fail-on-cache-miss: true
+          enableCrossOsArchive: true
+      - name: Restore macOS x64 package cache
+        uses: actions/cache/restore@v4
+        with:
+          path: release-stage/macos-x64
+          key: release-${{ github.run_id }}-${{ github.run_attempt }}-macos-x64
+          fail-on-cache-miss: true
+          enableCrossOsArchive: true
+      - name: Assemble release files
+        run: |
+          mkdir -p release-artifacts
+          for platform in windows-x64 linux-x64 linux-arm64 macos-arm64 macos-x64; do
+            for file in release-stage/"$platform"/*; do
+              [ -f "$file" ] || continue
+              name="${file##*/}"
+              if [ -e "release-artifacts/$name" ]; then
+                echo "Duplicate release asset name: $name" >&2
+                exit 1
+              fi
+              cp "$file" release-artifacts/
+            done
+          done
+          test "$(find release-artifacts -maxdepth 1 -type f | wc -l)" -gt 0
       - name: Generate SHA256 checksums
         working-directory: release-artifacts
         run: |
