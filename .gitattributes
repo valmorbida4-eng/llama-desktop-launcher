@@ -1,10 +1,51 @@
 # Auto-detect text files and normalize line endings
 * text=auto
+
+# Text files line ending normalization (LF for cross-platform consistency)
+*.ts text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.sh text eol=lf
+
+# Windows-specific script files (preserve CRLF)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.nsh text eol=crlf
+
+# Binary files (preserve exact bytes, prevent CRLF conversion)
 *.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.icns binary
+*.zip binary
+*.tar.gz binary
+*.tgz binary
+*.7z binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.gguf binary
 
 # GitHub Linguist overrides
-# Ignore tests, tooling scripts, and documentation from repository language statistics
+# Ignore tests, tooling scripts, documentation, and generated files from repository language statistics
 tests/** linguist-detectable=false
 scripts/** linguist-detectable=false
+build/** linguist-detectable=false linguist-vendored=true
 docs/** linguist-documentation=true
 docs/security-audit/** linguist-documentation=true
+graphify-out/** linguist-generated=true linguist-documentation=true linguist-vendored=true
+.agents/** linguist-documentation=true linguist-vendored=true
+*.md linguist-documentation=true
+package-lock.json linguist-generated=true
