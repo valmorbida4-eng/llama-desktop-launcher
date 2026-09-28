@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.2.8 · Português (Brasil)
+Versão 0.2.9 · Português (Brasil)
 
 ## 1. O que o aplicativo faz
 
@@ -14,25 +14,25 @@ A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **M
 
 | Plataforma / Distribuição | Arquitetura | Pacote oficial / Download direto | Aceleração de GPU |
 | --- | --- | --- | --- |
-| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.2.8.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/Llama%20Desktop%20Launcher%20Setup%200.2.8.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
-| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.2.8_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/llama-desktop-launcher_0.2.8_amd64.deb) | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
-| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.2.8_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/llama-desktop-launcher_0.2.8_arm64.deb) | Vulkan ou CPU |
-| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.2.8.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/llama-desktop-launcher-0.2.8.x86_64.rpm) | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
-| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.2.8.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/llama-desktop-launcher-0.2.8.aarch64.rpm) | Vulkan ou CPU |
-| Linux (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.2.8.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/Llama%20Desktop%20Launcher-0.2.8.AppImage) | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
-| Linux (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.2.8-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/Llama%20Desktop%20Launcher-0.2.8-arm64.AppImage) | Vulkan ou CPU |
-| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.2.8-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/Llama%20Desktop%20Launcher-0.2.8-arm64.dmg) | Metal |
-| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.2.8.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.8/Llama%20Desktop%20Launcher-0.2.8.dmg) | Metal |
+| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.2.9.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/Llama.Desktop.Launcher.Setup.0.2.9.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
+| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.2.9_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/llama-desktop-launcher_0.2.9_amd64.deb) | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
+| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.2.9_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/llama-desktop-launcher_0.2.9_arm64.deb) | Vulkan ou CPU |
+| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.2.9.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/llama-desktop-launcher-0.2.9.x86_64.rpm) | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
+| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.2.9.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/llama-desktop-launcher-0.2.9.aarch64.rpm) | Vulkan ou CPU |
+| Linux (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.2.9.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/Llama.Desktop.Launcher-0.2.9.AppImage) | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
+| Linux (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.2.9-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/Llama.Desktop.Launcher-0.2.9-arm64.AppImage) | Vulkan ou CPU |
+| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.2.9-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/Llama.Desktop.Launcher-0.2.9-arm64.dmg) | Metal |
+| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.2.9.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.9/Llama.Desktop.Launcher-0.2.9.dmg) | Metal |
 
 O espaço necessário depende do modelo escolhido. Reserve espaço para o arquivo GGUF, para o cache e para o motor. Modelos grandes podem exigir muito mais memória do que o tamanho do arquivo em disco. Se o computador não tiver GPU compatível, a execução pode cair para CPU e ficar lenta. No Linux, o pacote oficial do motor é compilado no Ubuntu; outras distribuições podem precisar de bibliotecas compatíveis. O GitHub Actions compila instaladores oficiais nativos para Windows x64, Linux x64/arm64 e macOS Intel/Apple Silicon.
 
 ## 3. Instalar o aplicativo
 
-O código-fonte está no [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher). Os links diretos da versão 0.2.8 na tabela acima só funcionarão depois que os instaladores e os arquivos de verificação de integridade (`SHA256SUMS.txt`) forem publicados na [Release correspondente do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
+O código-fonte está no [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher). Os links diretos da versão 0.2.9 na tabela acima só funcionarão depois que os instaladores e os arquivos de verificação de integridade (`SHA256SUMS.txt`) forem publicados na [Release correspondente do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
 
 ### Windows
 
-1. Abra o instalador `Llama Desktop Launcher Setup 0.2.8.exe`.
+1. Abra o instalador `Llama Desktop Launcher Setup 0.2.9.exe`.
 2. Escolha a pasta de instalação. O instalador trabalha por usuário, então não precisa colocar o aplicativo em `Program Files`.
 3. Marque ou desmarque a criação do atalho da área de trabalho.
 4. Conclua a instalação e abra o aplicativo pelo Menu Iniciar ou pelo atalho.

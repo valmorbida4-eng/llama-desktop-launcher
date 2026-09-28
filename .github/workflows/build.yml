@@ -65,7 +65,10 @@ jobs:
             throw new Error(`Expected ${expectedCount} installer files for ${process.env.MATRIX_ID}; found ${files.length}.`);
           }
           for (const file of files) {
-            fs.copyFileSync(path.join('dist', file.name), path.join(destination, file.name));
+            const publishedName = file.name.replaceAll(' ', '.');
+            const publishedPath = path.join(destination, publishedName);
+            if (fs.existsSync(publishedPath)) throw new Error(`Duplicate release asset name: ${publishedName}`);
+            fs.copyFileSync(path.join('dist', file.name), publishedPath);
           }
           NODE
       # Caches avoid the 500 MB Actions-artifact allowance, but remain subject
