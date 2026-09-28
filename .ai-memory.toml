@@ -1,0 +1,18 @@
+# ai-memory project marker (akitaonrails/ai-memory)
+project = "llama-desktop-launcher"
+project_strategy = "repo-root"
+workspace = "default"
+server_url = "http://127.0.0.1:48374"
+
+[capture]
+# Ignora arquivos temporarios e caches pesados de spool
+ignore_paths = [
+    "node_modules/**",
+    "dist/**",
+    "build/app/**",
+    ".git/**",
+    "graphify-out/cache/**",
+    "graphify-out/*.json",
+    "**/*.gguf",
+    "engines/**",
+]
