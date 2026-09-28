@@ -1,13 +1,13 @@
-# Community 20
+﻿# Community 20
 
 > 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
 - **smoke-bench.js** (9 connections) — `scripts/smoke-bench.js`
-- **project_build_app_core_defaults** (6 connections)
+- **app_build_app_core_defaults** (6 connections)
 - **build_app_benchmark** (1 connections)
-- **project_build_app_benchmark_tune** (1 connections)
+- **app_build_app_benchmark_tune** (1 connections)
 - **{defaults}** (1 connections) — `scripts/smoke-bench.js`
 - **fs** (1 connections) — `scripts/smoke-bench.js`
 - **main()** (1 connections) — `scripts/smoke-bench.js`

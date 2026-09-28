@@ -1,4 +1,4 @@
-# Graph Report - llama-desktop-launcher  (2026-09-27)
+﻿# Graph Report - llama-desktop-launcher  (2026-09-27)
 
 ## Corpus Check
 - 63 files · ~37,884 words
@@ -101,7 +101,7 @@
 
 ### Community 0 - "firewall.test.js"
 Cohesion: 0.17
-Nodes (11): build_app_firewall, project_build_app_firewall_buildfirewallscript, project_build_app_firewall_createrule, project_build_app_firewall_port_max, project_build_app_firewall_port_min, project_build_app_firewall_validateremoteaddress, project_build_app_firewall_validateruleoptions, assert (+3 more)
+Nodes (11): build_app_firewall, app_build_app_firewall_buildfirewallscript, app_build_app_firewall_createrule, app_build_app_firewall_port_max, app_build_app_firewall_port_min, app_build_app_firewall_validateremoteaddress, app_build_app_firewall_validateruleoptions, assert (+3 more)
 
 ### Community 1 - "RendererApi"
 Cohesion: 0.05
@@ -121,7 +121,7 @@ Nodes (34): author, description, devDependencies, electron, electron-builder, @t
 
 ### Community 5 - "smoke-external-cli-linux.js"
 Cohesion: 0.20
-Nodes (8): project_build_app_terminal_cli_openexternalcli, project_build_app_terminal_cli_shquote, assert, { defaults }, fs, { openExternalCli, shQuote }, os, path
+Nodes (8): app_build_app_terminal_cli_openexternalcli, app_build_app_terminal_cli_shquote, assert, { defaults }, fs, { openExternalCli, shQuote }, os, path
 
 ### Community 6 - "core.ts"
 Cohesion: 0.10
@@ -157,7 +157,7 @@ Nodes (15): compilerOptions, esModuleInterop, forceConsistentCasingInFileNames, 
 
 ### Community 14 - "core.test.js"
 Cohesion: 0.13
-Nodes (14): project_build_app_core_iswithin, project_build_app_core_recommend, project_build_app_core_scanmodels, project_build_app_core_validatesettings, project_build_app_engine_assetfor, assert, {assetFor}, cli (+6 more)
+Nodes (14): app_build_app_core_iswithin, app_build_app_core_recommend, app_build_app_core_scanmodels, app_build_app_core_validatesettings, app_build_app_engine_assetfor, assert, {assetFor}, cli (+6 more)
 
 ### Community 15 - "network.ts"
 Cohesion: 0.15
@@ -173,7 +173,7 @@ Nodes (13): build_app_network, check(), crypto, {defaults,argsForModel}, freePor
 
 ### Community 18 - "smoke-engine.js"
 Cohesion: 0.22
-Nodes (10): project_build_app_core_argsformodel, check(), {defaults,argsForModel}, freePort(), fs, http, main(), net (+2 more)
+Nodes (10): app_build_app_core_argsformodel, check(), {defaults,argsForModel}, freePort(), fs, http, main(), net (+2 more)
 
 ### Community 19 - "hardware.ts"
 Cohesion: 0.33
@@ -181,7 +181,7 @@ Nodes (10): detectGpu(), { execFile }, NULL_GPU, parseLspci(), parseNvidiaSmi(),
 
 ### Community 20 - "smoke-bench.js"
 Cohesion: 0.25
-Nodes (6): build_app_benchmark, project_build_app_benchmark_tune, project_build_app_core_defaults, {defaults}, fs, {tune}
+Nodes (6): build_app_benchmark, app_build_app_benchmark_tune, app_build_app_core_defaults, {defaults}, fs, {tune}
 
 ### Community 21 - "smoke-cli.js"
 Cohesion: 0.29
@@ -213,7 +213,7 @@ Nodes (8): graphify reference: extra exports and benchmark, Step 6b - Wiki (only
 
 ### Community 28 - "smoke-external-cli-win.js"
 Cohesion: 0.22
-Nodes (7): project_build_app_terminal_cli_powershellscript, assert, fs, os, path, { powershellScript }, { spawn }
+Nodes (7): app_build_app_terminal_cli_powershellscript, assert, fs, os, path, { powershellScript }, { spawn }
 
 ### Community 29 - "AGENTS.md"
 Cohesion: 0.25
@@ -221,7 +221,7 @@ Nodes (7): graphify, Knowledge Architecture: ai-memory + Graphify, Long-term mem
 
 ### Community 30 - "terminal_cli.test.js"
 Cohesion: 0.25
-Nodes (7): build_app_terminal_cli, project_build_app_terminal_cli_posixscript, project_build_app_terminal_cli_psquote, project_build_app_terminal_cli_terminalcommand, assert, { shQuote, psQuote, posixScript, powershellScript, terminalCommand }, test
+Nodes (7): build_app_terminal_cli, app_build_app_terminal_cli_posixscript, app_build_app_terminal_cli_psquote, app_build_app_terminal_cli_terminalcommand, assert, { shQuote, psQuote, posixScript, powershellScript, terminalCommand }, test
 
 ### Community 31 - "ai-memory handoff"
 Cohesion: 0.29
@@ -237,15 +237,15 @@ Nodes (6): build_app_engine, ref_node_assert, assert, engine, release, test
 
 ### Community 34 - "guidance.test.js"
 Cohesion: 0.29
-Nodes (6): build_app_guidance, project_build_app_guidance_buildguidance, project_build_app_guidance_links, assert, { buildGuidance, links }, test
+Nodes (6): build_app_guidance, app_build_app_guidance_buildguidance, app_build_app_guidance_links, assert, { buildGuidance, links }, test
 
 ### Community 35 - "hardware.test.js"
 Cohesion: 0.29
-Nodes (5): build_app_hardware, project_build_app_hardware_detectgpu, assert, { detectGpu }, test
+Nodes (5): build_app_hardware, app_build_app_hardware_detectgpu, assert, { detectGpu }, test
 
 ### Community 36 - "profile_import.test.js"
 Cohesion: 0.29
-Nodes (5): build_app_profile_import, project_build_app_profile_import_parselegacyprofiles, assert, { parseLegacyProfiles }, test
+Nodes (5): build_app_profile_import, app_build_app_profile_import_parselegacyprofiles, assert, { parseLegacyProfiles }, test
 
 ### Community 37 - "Plano simples da interface"
 Cohesion: 0.29

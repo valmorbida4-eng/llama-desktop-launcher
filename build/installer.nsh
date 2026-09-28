@@ -51,8 +51,20 @@ FunctionEnd
   ${IfNot} ${isKeepShortcuts}
     Delete "$DESKTOP\Llama Desktop Launcher.lnk"
   ${EndIf}
-  RMDir /r "$INSTDIR\resources"
-  RMDir /r "$INSTDIR\locales"
   Delete "$INSTDIR\${APP_EXECUTABLE_FILENAME}"
+  Delete "$INSTDIR\resources\app.asar"
+  Delete "$INSTDIR\resources\LICENSE"
+  Delete "$INSTDIR\resources\docs\MANUAL-pt-BR.pdf"
+  Delete "$INSTDIR\resources\docs\MANUAL-en.pdf"
+  RMDir "$INSTDIR\resources\docs"
+  RMDir "$INSTDIR\resources"
+  Delete "$INSTDIR\locales\*.pak"
+  RMDir "$INSTDIR\locales"
+  Delete "$INSTDIR\*.dll"
+  Delete "$INSTDIR\*.bin"
+  Delete "$INSTDIR\*.dat"
+  Delete "$INSTDIR\*.pak"
+  Delete "$INSTDIR\LICENSE*"
+  Delete "$INSTDIR\version"
   RMDir "$INSTDIR"
 !macroend

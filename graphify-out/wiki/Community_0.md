@@ -1,4 +1,4 @@
-# Community 0
+﻿# Community 0
 
 > 47 nodes · cohesion 0.05
 
@@ -19,16 +19,16 @@
 - **build_app_guidance** (1 connections)
 - **build_app_hardware** (1 connections)
 - **build_app_profile_import** (1 connections)
-- **project_build_app_firewall_buildfirewallscript** (1 connections)
-- **project_build_app_firewall_createrule** (1 connections)
-- **project_build_app_firewall_port_max** (1 connections)
-- **project_build_app_firewall_port_min** (1 connections)
-- **project_build_app_firewall_validateremoteaddress** (1 connections)
-- **project_build_app_firewall_validateruleoptions** (1 connections)
-- **project_build_app_guidance_buildguidance** (1 connections)
-- **project_build_app_guidance_links** (1 connections)
-- **project_build_app_hardware_detectgpu** (1 connections)
-- **project_build_app_profile_import_parselegacyprofiles** (1 connections)
+- **app_build_app_firewall_buildfirewallscript** (1 connections)
+- **app_build_app_firewall_createrule** (1 connections)
+- **app_build_app_firewall_port_max** (1 connections)
+- **app_build_app_firewall_port_min** (1 connections)
+- **app_build_app_firewall_validateremoteaddress** (1 connections)
+- **app_build_app_firewall_validateruleoptions** (1 connections)
+- **app_build_app_guidance_buildguidance** (1 connections)
+- **app_build_app_guidance_links** (1 connections)
+- **app_build_app_hardware_detectgpu** (1 connections)
+- **app_build_app_profile_import_parselegacyprofiles** (1 connections)
 - *... and 22 more nodes in this community*
 
 ## Relationships

@@ -1,15 +1,15 @@
-# Community 14
+﻿# Community 14
 
 > 15 nodes · cohesion 0.13
 
 ## Key Concepts
 
 - **core.test.js** (25 connections) — `tests/core.test.js`
-- **project_build_app_core_iswithin** (1 connections)
-- **project_build_app_core_recommend** (1 connections)
-- **project_build_app_core_scanmodels** (1 connections)
-- **project_build_app_core_validatesettings** (1 connections)
-- **project_build_app_engine_assetfor** (1 connections)
+- **app_build_app_core_iswithin** (1 connections)
+- **app_build_app_core_recommend** (1 connections)
+- **app_build_app_core_scanmodels** (1 connections)
+- **app_build_app_core_validatesettings** (1 connections)
+- **app_build_app_engine_assetfor** (1 connections)
 - **assert** (1 connections) — `tests/core.test.js`
 - **{assetFor}** (1 connections) — `tests/core.test.js`
 - **cli** (1 connections) — `tests/core.test.js`

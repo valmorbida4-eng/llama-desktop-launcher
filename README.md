@@ -21,7 +21,7 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 ## Obter o aplicativo sem o código-fonte
 
-O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Os instaladores oficiais são compilados automaticamente para todas as plataformas suportadas e disponibilizados nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) acompanhados de somas de verificação (`SHA256SUMS.txt`).
+O [repositório oficial do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) disponibiliza o código-fonte e instaladores oficiais compilados automaticamente para todas as plataformas suportadas nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases), acompanhados de somas de verificação (`SHA256SUMS.txt`).
 
 | Plataforma / Distribuição | Arquitetura | Pacote / Download direto | Descrição |
 | --- | --- | --- | --- |

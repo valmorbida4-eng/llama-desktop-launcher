@@ -43,8 +43,12 @@
     ],
     "extraResources": [
       {
-        "from": "docs",
-        "to": "docs"
+        "from": "docs/MANUAL-pt-BR.pdf",
+        "to": "docs/MANUAL-pt-BR.pdf"
+      },
+      {
+        "from": "docs/MANUAL-en.pdf",
+        "to": "docs/MANUAL-en.pdf"
       },
       {
         "from": "LICENSE",

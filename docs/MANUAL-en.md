@@ -28,7 +28,7 @@ Required disk space depends on the model. Allow room for the GGUF, cache, and en
 
 ## 3. Install the application
 
-The [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher) is planned to become public. Official installers are automatically compiled and published to [GitHub Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) alongside SHA256 integrity checksums (`SHA256SUMS.txt`). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
+The [official project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher) provides the source code and official installers automatically compiled and published to [GitHub Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) alongside SHA256 integrity checksums (`SHA256SUMS.txt`). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
 
 ### Windows
 

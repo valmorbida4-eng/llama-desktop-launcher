@@ -1,4 +1,4 @@
-# Community 18
+﻿# Community 18
 
 > 13 nodes · cohesion 0.18
 
@@ -7,7 +7,7 @@
 - **smoke-engine.js** (17 connections) — `scripts/smoke-engine.js`
 - **ref_node_http** (4 connections)
 - **ref_node_net** (4 connections)
-- **project_build_app_core_argsformodel** (3 connections)
+- **app_build_app_core_argsformodel** (3 connections)
 - **main()** (3 connections) — `scripts/smoke-engine.js`
 - **check()** (2 connections) — `scripts/smoke-engine.js`
 - **freePort()** (2 connections) — `scripts/smoke-engine.js`

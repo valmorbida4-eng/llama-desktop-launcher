@@ -1,4 +1,4 @@
-# Community 5
+﻿# Community 5
 
 > 27 nodes · cohesion 0.08
 
@@ -8,12 +8,12 @@
 - **smoke-external-cli-win.js** (14 connections) — `scripts/smoke-external-cli-win.js`
 - **terminal_cli.test.js** (11 connections) — `tests/terminal_cli.test.js`
 - **build_app_terminal_cli** (3 connections)
-- **project_build_app_terminal_cli_powershellscript** (2 connections)
-- **project_build_app_terminal_cli_shquote** (2 connections)
-- **project_build_app_terminal_cli_openexternalcli** (1 connections)
-- **project_build_app_terminal_cli_posixscript** (1 connections)
-- **project_build_app_terminal_cli_psquote** (1 connections)
-- **project_build_app_terminal_cli_terminalcommand** (1 connections)
+- **app_build_app_terminal_cli_powershellscript** (2 connections)
+- **app_build_app_terminal_cli_shquote** (2 connections)
+- **app_build_app_terminal_cli_openexternalcli** (1 connections)
+- **app_build_app_terminal_cli_posixscript** (1 connections)
+- **app_build_app_terminal_cli_psquote** (1 connections)
+- **app_build_app_terminal_cli_terminalcommand** (1 connections)
 - **assert** (1 connections) — `scripts/smoke-external-cli-linux.js`
 - **{ defaults }** (1 connections) — `scripts/smoke-external-cli-linux.js`
 - **fs** (1 connections) — `scripts/smoke-external-cli-linux.js`

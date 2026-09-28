@@ -28,7 +28,7 @@ O espaço necessário depende do modelo escolhido. Reserve espaço para o arquiv
 
 ## 3. Instalar o aplicativo
 
-O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Os instaladores oficiais são compilados e publicados automaticamente nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) acompanhados de arquivos de verificação de integridade (`SHA256SUMS.txt`). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
+O [repositório oficial do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) disponibiliza o código-fonte e instaladores oficiais compilados e publicados automaticamente nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases), acompanhados de arquivos de verificação de integridade (`SHA256SUMS.txt`). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
 
 ### Windows
 
