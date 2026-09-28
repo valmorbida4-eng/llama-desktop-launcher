@@ -6,3 +6,4 @@ dist/
 build-output.log
 
 build/app/
+docs/security-audit/

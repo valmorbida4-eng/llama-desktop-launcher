@@ -74,9 +74,24 @@ function assetFor(release,platform=process.platform,arch=process.arch,backend) {
 async function download(asset,file,onProgress) {
   const stream=await request(asset.browser_download_url);
   const out=fs.createWriteStream(file,{flags:'wx'});
+  let writeError: Error|null=null;
+  out.on('error',(err: Error)=>{writeError=err;});
   const hash=crypto.createHash('sha256'); let bytes=0;
-  try { for await(const chunk of stream as AsyncIterable<Buffer>) {bytes+=chunk.length;if(bytes>1.5e9) throw Error('Arquivo maior que o limite permitido.');hash.update(chunk);if(!out.write(chunk)) await new Promise<void>(resolve=>out.once('drain',resolve));onProgress?.(Math.round(bytes/(asset.size||bytes)*100));} }
-  finally {out.end();await new Promise<void>(resolve=>out.once('close',resolve));}
+  try {
+    for await(const chunk of stream as AsyncIterable<Buffer>) {
+      if(writeError) throw writeError;
+      bytes+=chunk.length;
+      if(bytes>1.5e9) throw Error('Arquivo maior que o limite permitido.');
+      hash.update(chunk);
+      if(!out.write(chunk)) await new Promise<void>((resolve,reject)=>{out.once('drain',resolve);out.once('error',reject);});
+      onProgress?.(Math.round(bytes/(asset.size||bytes)*100));
+    }
+    if(writeError) throw writeError;
+  }
+  finally {
+    out.end();
+    await new Promise<void>((resolve,reject)=>{out.once('close',()=>{if(writeError) reject(writeError); else resolve();});out.once('error',reject);});
+  }
   const digest=hash.digest('hex');
   if(asset.digest && asset.digest.startsWith('sha256:') && digest!==asset.digest.slice(7)) throw Error('Checksum SHA-256 do llama.cpp não confere.');
   return digest;

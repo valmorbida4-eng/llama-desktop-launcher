@@ -32,7 +32,12 @@ function selectedModel(modelPath) {const model=core.scanModels(configuration.mod
 function availableModelDiskBytes() {for(const configured of configuration.modelDirs){if(!configured)continue;let dir=configured;while(!fs.existsSync(dir)){const parent=path.dirname(dir);if(parent===dir)break;dir=parent;}try{const stat=fs.statfsSync(dir);return Number(stat.bavail)*Number(stat.bsize);}catch{}}return null;}
 async function gpuDetails(){gpuProbe ||= hardware.detectGpu().catch(()=>({name:null,memoryBytes:null,source:null}));return gpuProbe;}
 async function modelGuidance(model=null,settings=null){return guidance.buildGuidance({hardware:core.detectHardware(),gpu:await gpuDetails(),availableDiskBytes:availableModelDiskBytes(),model,settings});}
-function createWindow() {win=new BrowserWindow({width:1100,height:850,minWidth:860,minHeight:650,webPreferences:{preload:path.join(__dirname,'preload.js'),contextIsolation:true,nodeIntegration:false,sandbox:true}});win.loadFile(path.join(__dirname,'index.html'));win.webContents.setWindowOpenHandler(({url})=>{if(url.startsWith('https://')) shell.openExternal(url);return {action:'deny'};});}
+function createWindow() {
+  win=new BrowserWindow({width:1100,height:850,minWidth:860,minHeight:650,webPreferences:{preload:path.join(__dirname,'preload.js'),contextIsolation:true,nodeIntegration:false,sandbox:true}});
+  win.loadFile(path.join(__dirname,'index.html'));
+  win.webContents.setWindowOpenHandler(({url})=>{if(url.startsWith('https://')||url.startsWith('http://')) shell.openExternal(url);return {action:'deny'};});
+  win.webContents.on('will-navigate',(event,url)=>{event.preventDefault();if(url.startsWith('https://')||url.startsWith('http://')) shell.openExternal(url);});
+}
 app.whenReady().then(()=>{load();createWindow();app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin') app.quit();});
 app.on('before-quit',()=>{tuneAbort?.abort();proxy?.close();conversation?.stop();if(server)server.kill();});
@@ -88,7 +93,9 @@ ipcMain.handle('launch',async(_e,modelPath,settings,options: {host?: string; par
   const child=spawn(executable,args,{cwd:configuration.engineDir,windowsHide:true,stdio:['ignore','pipe','pipe']});server=child;
   child.stdout.on('data',d=>send('log',String(d).slice(-3000)));
   child.stderr.on('data',d=>send('log',String(d).slice(-3000)));
-  child.on('exit',code=>{if(server===child){server=null;proxy?.close();proxy=null;active=null;send('stopped',code);}});
+  const cleanupServer=(code: any)=>{if(server===child){server=null;proxy?.close();proxy=null;active=null;send('stopped',code);}};
+  child.on('exit',cleanupServer);
+  child.on('error',err=>{send('log',`\n[erro ao iniciar llama-server: ${err.message}]\n`);cleanupServer(err);});
   try {
     await waitReady(access.host,port,child,key);
     let browserUrl=`http://127.0.0.1:${port}/`;
@@ -96,7 +103,7 @@ ipcMain.handle('launch',async(_e,modelPath,settings,options: {host?: string; par
     active={host:access.host,scope:access.scope,port,parallel,executable,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}/`};
     await shell.openExternal(browserUrl);
     return active;
-  }catch(e){proxy?.close();proxy=null;child.kill();throw e;}
+  }catch(e){proxy?.close();proxy=null;cleanupServer(null);try{child.kill();}catch{}throw e;}
 });
 ipcMain.handle('stop',()=>{proxy?.close();proxy=null;server?.kill();return true;});
 ipcMain.handle('start-chat',(_e,modelPath,settings)=>{

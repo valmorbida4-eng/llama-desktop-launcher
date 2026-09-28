@@ -67,7 +67,7 @@ jobs:
         working-directory: release-artifacts
         run: |
           for f in *; do
-            if [ -f "$f" ]; then
+            if [ -f "$f" ] && [ "$f" != "SHA256SUMS.txt" ]; then
               sha256sum "$f"
             fi
           done > SHA256SUMS.txt

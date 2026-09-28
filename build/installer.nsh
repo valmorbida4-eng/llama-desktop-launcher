@@ -49,7 +49,10 @@ FunctionEnd
 
 !macro customUnInstall
   ${IfNot} ${isKeepShortcuts}
-    Delete "$DESKTOP\\Llama Desktop Launcher.lnk"
+    Delete "$DESKTOP\Llama Desktop Launcher.lnk"
   ${EndIf}
-  RMDir /r "$INSTDIR"
+  RMDir /r "$INSTDIR\resources"
+  RMDir /r "$INSTDIR\locales"
+  Delete "$INSTDIR\${APP_EXECUTABLE_FILENAME}"
+  RMDir "$INSTDIR"
 !macroend
