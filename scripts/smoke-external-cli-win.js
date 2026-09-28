@@ -1,5 +1,5 @@
 'use strict';
-
+// Opt-in local smoke test (Windows only): npm run smoke:external:win
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');

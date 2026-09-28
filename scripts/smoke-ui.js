@@ -1,5 +1,5 @@
 'use strict';
-// Opt-in Electron UI smoke test: node_modules/.bin/electron scripts/smoke-ui.js
+// Opt-in Electron UI smoke test: npm run smoke:ui (or npm run smoke:ui:model)
 const fs=require('node:fs');
 const os=require('node:os');
 const path=require('node:path');

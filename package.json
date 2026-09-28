@@ -24,7 +24,7 @@
     "smoke:external:linux": "npm run build && node scripts/smoke-external-cli-linux.js"
   },
   "devDependencies": {
-    "@types/node": "^26.6.3",
+    "@types/node": "^22.0.0",
     "electron": "^38.0.0",
     "electron-builder": "24.13.3",
     "typescript": "^7.0.2"
@@ -37,6 +37,7 @@
     },
     "files": [
       "build/app/**/*",
+      "!build/app/**/*.map",
       "README.md",
       "LICENSE"
     ],

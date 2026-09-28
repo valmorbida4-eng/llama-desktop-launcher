@@ -13,7 +13,7 @@ interface ModelSettings {
 
 interface ProgressUpdate { percent: number; label: string }
 interface ChatOutput { stream: 'stdout' | 'stderr'; text: string }
-interface ProcessExit { code: number | null; signal: NodeJS.Signals | null }
+interface ProcessExit { code: number | null; signal: string | null }
 interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
 interface RendererApi {
   state(): Promise<any>;
