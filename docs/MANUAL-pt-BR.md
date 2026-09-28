@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.2.0 · Português (Brasil)
+Versão 0.2.1 · Português (Brasil)
 
 ## 1. O que o aplicativo faz
 
@@ -14,21 +14,19 @@ A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **M
 
 | Sistema | Instalador | Aceleração de GPU |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.2.0.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.1.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
 | Linux x64/arm64 | AppImage, DEB ou RPM | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
-O espaço necessário depende do modelo escolhido. Reserve espaço para o arquivo GGUF, para o cache e para o motor. Modelos grandes podem exigir muito mais memória do que o tamanho do arquivo em disco. Se o computador não tiver GPU compatível, a execução pode cair para CPU e ficar lenta. No Linux, o pacote oficial do motor é compilado no Ubuntu; outras distribuições podem precisar de bibliotecas compatíveis. A matriz do GitHub Actions está configurada para Windows x64, Linux x64/arm64 e macOS Intel/Apple Silicon, mas os artefatos Linux e macOS só estarão validados depois que os jobs correspondentes forem executados e os pacotes forem abertos nos sistemas de destino.
+O espaço necessário depende do modelo escolhido. Reserve espaço para o arquivo GGUF, para o cache e para o motor. Modelos grandes podem exigir muito mais memória do que o tamanho do arquivo em disco. Se o computador não tiver GPU compatível, a execução pode cair para CPU e ficar lenta. No Linux, o pacote oficial do motor é compilado no Ubuntu; outras distribuições podem precisar de bibliotecas compatíveis. O GitHub Actions compila instaladores oficiais nativos para Windows x64, Linux x64/arm64 e macOS Intel/Apple Silicon.
 
 ## 3. Instalar o aplicativo
 
-O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Ter acesso ao código-fonte não equivale a ter um instalador: o workflow do GitHub Actions guarda pacotes como artefatos da execução, mas não os publica automaticamente como [Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). Para instalar sem o projeto, obtenha o pacote correspondente ao seu sistema por uma Release publicada ou diretamente com quem o distribui. Se a página ainda não tiver esse pacote, ele ainda não está disponível para download público.
-
-Nesta versão, o instalador Windows x64 foi gerado localmente. Os pacotes Linux 0.2.0 e DMG para macOS Intel/Apple Silicon ainda dependem de build e validação nos sistemas de destino. O DEB Linux x64 testado anteriormente pertence à versão 0.1.1. Use os passos abaixo apenas quando tiver o pacote apropriado. Quem tem o código-fonte pode gerar o pacote no sistema correspondente seguindo o README.
+O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Os instaladores oficiais são compilados e publicados automaticamente nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) acompanhados de arquivos de verificação de integridade (`SHA256SUMS.txt`). Para instalar, obtenha o pacote correspondente à sua plataforma na página de Releases ou gere o instalador a partir do código-fonte seguindo o README.
 
 ### Windows
 
-1. Abra o instalador `Llama Desktop Launcher Setup 0.2.0.exe`.
+1. Abra o instalador `Llama Desktop Launcher Setup 0.2.1.exe`.
 2. Escolha a pasta de instalação. O instalador trabalha por usuário, então não precisa colocar o aplicativo em `Program Files`.
 3. Marque ou desmarque a criação do atalho da área de trabalho.
 4. Conclua a instalação e abra o aplicativo pelo Menu Iniciar ou pelo atalho.

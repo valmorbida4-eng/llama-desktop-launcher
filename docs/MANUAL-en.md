@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.2.0 · English
+Version 0.2.1 · English
 
 ## 1. What the application does
 
@@ -14,21 +14,19 @@ The interface has three screens: **Llama** for chat and starting the server, **M
 
 | System | Package | GPU backend |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.2.0.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.1.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
 | Linux x64/arm64 | AppImage, DEB, or RPM | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
-Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. The GitHub Actions matrix is configured for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon, but Linux and macOS artifacts are validated only after their jobs run and the packages are opened on their target systems.
+Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. GitHub Actions compiles native official packages for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon.
 
 ## 3. Install the application
 
-The [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher) is planned to become public. Access to the source code is not the same as access to an installer: the GitHub Actions workflow stores packages as run artifacts, but does not publish them automatically as [Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install without the project, obtain the package for your system from a published Release or directly from its distributor. If that package is not listed yet, it is not available for public download.
-
-For this version, the Windows x64 installer was built locally. Linux 0.2.0 packages and the macOS Intel/Apple Silicon DMGs still require builds and validation on their target systems. The previously tested Linux x64 DEB belongs to version 0.1.1. Follow the steps below only after obtaining the appropriate package. If you have the source code, build the package on the corresponding system using the README instructions.
+The [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher) is planned to become public. Official installers are automatically compiled and published to [GitHub Releases](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) alongside SHA256 integrity checksums (`SHA256SUMS.txt`). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
 
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.2.0.exe`.
+1. Open `Llama Desktop Launcher Setup 0.2.1.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.

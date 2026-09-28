@@ -21,13 +21,13 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 ## Obter o aplicativo sem o código-fonte
 
-O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. A publicação do código não disponibiliza instaladores automaticamente: eles precisam ser compilados, testados e anexados a uma [Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) ou distribuídos separadamente. Não confunda o código do repositório, os artefatos temporários do GitHub Actions e um instalador publicado para usuários.
+O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Os instaladores oficiais são compilados automaticamente para todas as plataformas suportadas e disponibilizados nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) acompanhados de somas de verificação (`SHA256SUMS.txt`).
 
-| Plataforma | Arquivo a obter | Situação da versão 0.2.0 |
+| Plataforma | Arquivo a obter | Situação da versão 0.2.1 |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.2.0.exe` | Instalador gerado localmente; ainda depende de publicação para download público. |
-| Linux x64/arm64 | DEB, RPM ou AppImage para a arquitetura correta | Os pacotes 0.2.0 ainda precisam de build e validação no sistema de destino. |
-| macOS Intel/Apple Silicon | DMG da arquitetura correta | Build e validação em macOS ainda pendentes. |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.1.exe` | Instalador oficial NSIS gerado e disponível nas Releases. |
+| Linux x64/arm64 | DEB, RPM ou AppImage para a arquitetura correta | Pacotes oficiais construídos no CI e disponíveis nas Releases. |
+| macOS Intel/Apple Silicon | DMG da arquitetura correta | Imagens de disco oficiais construídas no CI e disponíveis nas Releases. |
 
 Quando houver uma Release com o pacote do seu sistema, baixe o instalador por ela e siga o [manual em português](docs/MANUAL-pt-BR.md) ou [em inglês](docs/MANUAL-en.md). Se houver apenas o código-fonte, será preciso gerar o pacote na plataforma correspondente pelas instruções abaixo. O instalador não inclui modelos GGUF; o motor llama.cpp pode ser baixado pelo aplicativo na primeira execução.
 
@@ -43,13 +43,13 @@ npm run version:check
 npm start
 ```
 
-Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux` no Linux ou `npm run dist:mac` no macOS. O workflow `.github/workflows/build.yml` prepara builds Windows x64, Linux x64/arm64 e macOS x64/arm64 em runners nativos ao executar manualmente ou com uma tag `v*`. Ele guarda os arquivos como artefatos da execução; não cria uma publicação/release automaticamente. O instalador Windows foi gerado localmente e o DEB x64 foi gerado e testado na VM Ubuntu `agentes-dev`. Os demais pacotes Linux e macOS dependem de builds e testes nos sistemas de destino.
+Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux` no Linux ou `npm run dist:mac` no macOS. O workflow `.github/workflows/build.yml` prepara builds Windows x64, Linux x64/arm64 e macOS x64/arm64 em runners nativos ao receber uma tag `v*` (ou despacho manual), gerando os checksums `SHA256SUMS.txt` e publicando os instaladores diretamente na GitHub Release correspondente.
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-O instalador Windows atual é identificado pela versão `0.2.0`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem a seleção de backend desta versão.
+O instalador atual é identificado pela versão `0.2.1`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
 
-Enquanto o repositório ainda é privado, para economizar minutos e armazenamento, `.github/workflows/build-macos-preview.yml` executa manualmente apenas os dois builds macOS (Intel e Apple Silicon), verifica o conteúdo dos DMGs e guarda os artefatos por três dias. A execução ainda depende de enviar este código para um repositório GitHub; nenhum DMG foi gerado neste computador Windows.
+Para verificações pontuais de macOS sem executar a matriz completa de plataformas, o workflow `.github/workflows/build-macos-preview.yml` pode ser acionado manualmente para testar e validar os pacotes Intel e Apple Silicon.
 
 No Windows, o instalador NSIS permite escolher a pasta do aplicativo e marcar um atalho da área de trabalho. No Linux, DEB/RPM seguem o gerenciador de pacotes da distribuição; AppImage é uma opção portátil. No macOS, abra o DMG e arraste o aplicativo para a pasta escolhida. As duas localizações de modelos são escolhidas e podem ser alteradas no primeiro uso e depois, dentro do aplicativo. Modelos não são removidos ao desinstalar o app.
 
