@@ -80,5 +80,6 @@
       "target": "dmg",
       "category": "public.app-category.utilities"
     }
-  }
+  },
+  "homepage": "https://github.com/valmorbida4-eng/llama-desktop-launcher"
 }
