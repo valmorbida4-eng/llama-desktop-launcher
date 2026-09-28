@@ -38,8 +38,18 @@ FunctionEnd
   ${EndIf}
 !macroend
 
+!macro customUnInstallCheck
+  checkAppAgainUn:
+  !insertmacro FIND_PROCESS "${APP_EXECUTABLE_FILENAME}" $R0
+  ${If} $R0 == 0
+    MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "O Llama Desktop Launcher ainda esta em execucao. Feche o aplicativo para continuar com a desinstalacao." /SD IDCANCEL IDRETRY checkAppAgainUn
+    Quit
+  ${EndIf}
+!macroend
+
 !macro customUnInstall
   ${IfNot} ${isKeepShortcuts}
     Delete "$DESKTOP\\Llama Desktop Launcher.lnk"
   ${EndIf}
+  RMDir /r "$INSTDIR"
 !macroend
