@@ -41,7 +41,7 @@ interface RendererApi {
   copyEndpoint(): Promise<string>;
   copyBrowserLink(): Promise<string>;
   createFirewallRule(address: string): Promise<any>;
-  openHF(kind: 'moe' | 'dense' | 'full'): Promise<string>;
+  openHF(kind: 'all' | 'quantized' | 'moe' | 'dense' | 'full' | string): Promise<string>;
   openModelExample(url: string): Promise<string>;
   openModelDir(index: number): Promise<boolean>;
   openManual(lang: 'pt-BR' | 'en'): Promise<boolean>;

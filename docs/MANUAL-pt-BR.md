@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.2.1 · Português (Brasil)
+Versão 0.2.2 · Português (Brasil)
 
 ## 1. O que o aplicativo faz
 
@@ -14,7 +14,7 @@ A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **M
 
 | Sistema | Instalador | Aceleração de GPU |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.2.1.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.2.exe` | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU |
 | Linux x64/arm64 | AppImage, DEB ou RPM | Vulkan, CUDA ou CPU; ROCm/SYCL em x64 |
 | macOS Intel/Apple Silicon | DMG | Metal |
 
@@ -26,7 +26,7 @@ O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-lau
 
 ### Windows
 
-1. Abra o instalador `Llama Desktop Launcher Setup 0.2.1.exe`.
+1. Abra o instalador `Llama Desktop Launcher Setup 0.2.2.exe`.
 2. Escolha a pasta de instalação. O instalador trabalha por usuário, então não precisa colocar o aplicativo em `Program Files`.
 3. Marque ou desmarque a criação do atalho da área de trabalho.
 4. Conclua a instalação e abra o aplicativo pelo Menu Iniciar ou pelo atalho.
@@ -70,7 +70,7 @@ Mesmo antes de baixar o primeiro modelo, **Modelos** mostra estimativas baseadas
 
 Para obter um modelo:
 
-1. Em **Modelos**, escolha uma das opções para abrir o Hugging Face no navegador: **MoE Q4_K_M** para modelos MoE quantizados; **Denso Q4_K_M** para modelos densos quantizados; ou **Completo F16** para arquivos sem quantização. Os filtros incluem GGUF e llama.cpp; os filtros Q4_K_M também restringem a modelos quantizados. Você também pode abrir diretamente os [modelos MoE Q4_K_M](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m), [modelos densos Q4_K_M](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m) e [modelos completos F16](https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=f16).
+1. Em **Modelos**, explore as opções para abrir o Hugging Face no navegador: **Explorar todos os GGUF** para busca livre sem restrições; **Modelos Quantizados** (onde sugerimos Q4_K_M pelo equilíbrio de memória, mas você pode optar por Q5, Q8, etc.); **Modelos MoE** para arquiteturas esparsas com especialistas; ou **Modelos Densos (sem quantização)** para pesos originais F16/BF16. Você também pode acessar diretamente a busca de [todos os modelos GGUF](https://huggingface.co/models?library=gguf&sort=most_params), [modelos quantizados](https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params), [modelos MoE](https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=moe) e [modelos densos F16](https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=f16).
 2. Escolha um repositório e confira a **licença do modelo**, requisitos de RAM/VRAM, quantização e instruções do autor.
 3. Baixe o arquivo `.gguf` para uma das pastas configuradas. Esta versão abre o Hugging Face no navegador; o download do arquivo é feito pelo navegador.
 4. Volte ao aplicativo e atualize a lista de modelos. Em **Modelos**, confira a recomendação compatível com seu hardware e selecione o GGUF desejado.

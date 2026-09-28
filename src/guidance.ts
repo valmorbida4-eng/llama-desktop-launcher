@@ -2,8 +2,10 @@
 
 const GIB = 1024 ** 3;
 const links = Object.freeze({
-  moe: 'https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=moe+q4_k_m',
-  dense: 'https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params&search=q4_k_m',
+  all: 'https://huggingface.co/models?library=gguf&sort=most_params',
+  quantized: 'https://huggingface.co/models?library=gguf&apps=llama.cpp&base_model_relation=quantized&sort=most_params',
+  moe: 'https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=moe',
+  dense: 'https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=f16',
   full: 'https://huggingface.co/models?library=gguf&apps=llama.cpp&sort=most_params&search=f16',
 });
 
@@ -25,9 +27,9 @@ function buildGuidance({ hardware, gpu = {}, availableDiskBytes = null, model = 
   const summary = `${ramGiB.toFixed(1)} GB RAM · ${hardware.logicalCores || '?'} threads de CPU · GPU ${gpuName} · VRAM ${vramText}${diskGiB === null ? '' : ` · ${diskGiB.toFixed(1)} GB livres para modelos`}`;
   const caution = diskGiB !== null && diskGiB < fit.maxFileGiB * 1.5 ? 'O espaço livre pode limitar o download; confira o tamanho do GGUF antes de escolher.' : 'Comece com contexto 2048 e uma sessão; aumente depois de medir memória e velocidade.';
   const suggestions = [
-    { title: 'Densos Q4_K_M', detail: `Comece por modelos de ${fit.quantized}. Arquivo GGUF de até cerca de ${fit.maxFileGiB} GB é um ponto de partida conservador para esta RAM. Exemplo: ${fit.example}; confira licença e arquivo Q4_K_M no repositório.`, kind: 'dense', exampleUrl: fit.exampleUrl },
-    { title: 'MoE Q4_K_M', detail: `Escolha pelo tamanho total do GGUF, não só pelos parâmetros ativos. Comece com arquivo de até cerca de ${fit.maxFileGiB} GB.`, kind: 'moe' },
-    { title: 'Completos F16', detail: `Sem quantização, comece com até ${fit.full}; o arquivo e a memória exigida serão maiores.`, kind: 'full' },
+    { title: 'Modelos Quantizados', detail: `Inicie com modelos de ${fit.quantized}. Sugerimos a quantização Q4_K_M (até cerca de ${fit.maxFileGiB} GB) pelo equilíbrio de memória, mas você pode optar por Q5 ou Q8 se sua RAM permitir. Exemplo sugerido: ${fit.example}.`, kind: 'quantized', exampleUrl: fit.exampleUrl, exampleName: fit.example, buttonText: 'Buscar quantizados no HF ↗' },
+    { title: 'Modelos MoE (Mixture of Experts)', detail: `Modelos com especialistas esparsos. O arquivo total no disco e na RAM precisa comportar todos os especialistas (sugerimos arquivos de até cerca de ${fit.maxFileGiB} GB). Também disponíveis em Q4_K_M, Q5, Q8, etc.`, kind: 'moe', buttonText: 'Buscar MoE no HF ↗' },
+    { title: 'Modelos Densos (sem quantização)', detail: `Modelos originais sem quantização (F16/BF16); preservam a fidelidade máxima, mas exigem muito mais RAM e espaço em disco (comece com até ${fit.full}).`, kind: 'dense', buttonText: 'Buscar densos F16 ↗' },
   ];
   const current = model ? `Modelo atual: ${model.name || 'GGUF selecionado'} (${(model.size / GIB).toFixed(2)} GB).` : 'Nenhum modelo foi instalado ainda.';
   const currentSettings = settings ? `Ajustes atuais: ${JSON.stringify(settings)}.` : '';
@@ -35,7 +37,7 @@ function buildGuidance({ hardware, gpu = {}, availableDiskBytes = null, model = 
 
 Hardware: ${summary}. Sistema: ${hardware.platform || 'desconhecido'} (${hardware.arch || 'arquitetura desconhecida'}). ${current} ${currentSettings}
 
-Responda em português do Brasil com: (1) valores sugeridos para contexto, threads, batch, microbatch, camadas GPU, cache K/V, Flash Attention e camadas MoE na CPU, explicando o que depende da VRAM não medida; (2) até três modelos ou famílias GGUF compatíveis, separando denso Q4_K_M, MoE Q4_K_M e completo F16; (3) tamanho estimado de arquivo e RAM para cada faixa; (4) riscos e medições que devo fazer. Se citar nomes específicos, peça para verificar repositório, licença e compatibilidade antes do download. Não invente URLs. Trate tudo como estimativa e não afirme que testou o hardware.`;
+Responda em português do Brasil com: (1) valores sugeridos para contexto, threads, batch, microbatch, camadas GPU, cache K/V, Flash Attention e camadas MoE na CPU, explicando o que depende da VRAM não medida; (2) até três modelos ou famílias GGUF compatíveis, separando modelo quantizado (Q4_K_M/Q5/Q8), MoE e denso sem quantização (F16/BF16); (3) tamanho estimado de arquivo e RAM para cada faixa; (4) riscos e medições que devo fazer. Se citar nomes específicos, peça para verificar repositório, licença e compatibilidade antes do download. Não invente URLs. Trate tudo como estimativa e não afirme que testou o hardware.`;
   return { hardware: { ...hardware, gpuName: gpu.name || null, gpuMemoryBytes: gpu.memoryBytes || null }, availableDiskBytes, summary, suggestions, caution, prompt, links };
 }
 

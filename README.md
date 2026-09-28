@@ -23,9 +23,9 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 O [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher) está previsto para se tornar público. Os instaladores oficiais são compilados automaticamente para todas as plataformas suportadas e disponibilizados nas [Releases do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases) acompanhados de somas de verificação (`SHA256SUMS.txt`).
 
-| Plataforma | Arquivo a obter | Situação da versão 0.2.1 |
+| Plataforma | Arquivo a obter | Situação da versão 0.2.2 |
 | --- | --- | --- |
-| Windows x64 | `Llama Desktop Launcher Setup 0.2.1.exe` | Instalador oficial NSIS gerado e disponível nas Releases. |
+| Windows x64 | `Llama Desktop Launcher Setup 0.2.2.exe` | Instalador oficial NSIS gerado e disponível nas Releases. |
 | Linux x64/arm64 | DEB, RPM ou AppImage para a arquitetura correta | Pacotes oficiais construídos no CI e disponíveis nas Releases. |
 | macOS Intel/Apple Silicon | DMG da arquitetura correta | Imagens de disco oficiais construídas no CI e disponíveis nas Releases. |
 
@@ -47,7 +47,7 @@ Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux`
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-O instalador atual é identificado pela versão `0.2.1`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
+O instalador atual é identificado pela versão `0.2.2`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
 
 Para verificações pontuais de macOS sem executar a matriz completa de plataformas, o workflow `.github/workflows/build-macos-preview.yml` pode ser acionado manualmente para testar e validar os pacotes Intel e Apple Silicon.
 

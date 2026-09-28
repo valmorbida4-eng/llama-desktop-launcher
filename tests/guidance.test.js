@@ -24,6 +24,14 @@ test('inclui hardware conhecido e ajustes atuais sem afirmar que o modelo foi te
   assert.match(result.summary, /GPU de teste/);
   assert.match(result.prompt, /modelo\.gguf/);
   assert.match(result.prompt, /não afirme que testou/);
+  assert.match(links.all, /library=gguf/);
+  assert.match(links.quantized, /base_model_relation=quantized/);
+  assert.match(links.dense, /search=f16/);
+  assert.doesNotMatch(links.dense, /base_model_relation=quantized/);
   assert.match(links.full, /search=f16/);
   assert.doesNotMatch(links.full, /base_model_relation=quantized/);
+  assert.equal(result.suggestions[0].title, 'Modelos Quantizados');
+  assert.equal(result.suggestions[1].title, 'Modelos MoE (Mixture of Experts)');
+  assert.equal(result.suggestions[2].title, 'Modelos Densos (sem quantização)');
+  assert.ok(result.suggestions.every(s => !!s.buttonText && !!s.kind));
 });
