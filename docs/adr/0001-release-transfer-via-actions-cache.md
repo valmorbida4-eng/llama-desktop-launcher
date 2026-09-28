@@ -16,4 +16,4 @@ O workflow de CI roda `npm ci`, `npm run version:check` e `npm test` em pull req
 
 ## Consequências
 
-O cache tem cota e política de expiração próprias. Uma entrada ausente faz a publicação falhar sem divulgar um conjunto incompleto de pacotes. A correção evita novos artefatos do workflow de release, mas não remove os antigos nem garante que um bloqueio atual de Billing seja levantado. A publicação deve ser verificada em uma execução real, depois de resolvido o bloqueio da conta. A imutabilidade ainda precisa ser ativada nas configurações do GitHub; a edição local do workflow não altera essa configuração.
+O cache tem cota e política de expiração próprias. Uma entrada ausente faz a publicação falhar sem divulgar um conjunto incompleto de pacotes. A correção evita novos artefatos do workflow de release, mas não remove os antigos nem garante que um bloqueio atual de Billing seja levantado. A publicação deve ser verificada em uma execução real, depois de resolvido o bloqueio da conta. A imutabilidade foi ativada no GitHub em 2026-09-28 e vale para releases futuras. A publicação pelo novo fluxo de rascunho será verificada na próxima tag.
