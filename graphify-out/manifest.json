@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1790565286.7688954,
-    "seen": 1790565605.279938,
-    "ast_hash": "50812982347dfedaa47fdb6726ca2ca8",
+    "mtime": 1790567490.073267,
+    "seen": 1790567662.7498713,
+    "ast_hash": "4435a74eca6f9c6b4d9bafb0726c9b04",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "src/network.ts": {
-    "mtime": 1790563571.2504513,
-    "seen": 1790563972.7678187,
-    "ast_hash": "b4a529576009e6db1a85cbc7105a748d",
+    "mtime": 1790566414.9105706,
+    "seen": 1790567662.7498713,
+    "ast_hash": "08b7822a950ad050d2e3165ecfc5f5da",
     "semantic_hash": ""
   },
   "src/preload.ts": {
@@ -204,9 +204,9 @@
     "semantic_hash": "93b168d0e221b7859e5a720b8d678304"
   },
   "tests/semver.test.js": {
-    "mtime": 1790565545.0799935,
-    "seen": 1790565605.279938,
-    "ast_hash": "511c7b5a08dd936bea801cf4145939ac",
+    "mtime": 1790565621.228659,
+    "seen": 1790567662.7498713,
+    "ast_hash": "07ef787fb586e3dae58d99b37d32f2cb",
     "semantic_hash": ""
   },
   "tests/terminal_cli.test.js": {
@@ -226,12 +226,6 @@
     "seen": 1790563037.4105282,
     "ast_hash": "90b804237cb74c9b8a820688034f799e",
     "semantic_hash": "90b804237cb74c9b8a820688034f799e"
-  },
-  "docs/security-audit/gerar_relatorio.py": {
-    "mtime": 1790565461.1307218,
-    "seen": 1790565605.279938,
-    "ast_hash": "8f5c8df182d787076ec516c40de35499",
-    "semantic_hash": ""
   },
   ".agents/rules/graphify.md": {
     "mtime": 1790563013.4954586,
@@ -372,21 +366,21 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1790565319.2764988,
-    "seen": 1790565605.279938,
-    "ast_hash": "b1d4b6c599d21ce295fae8f1773a14e0",
+    "mtime": 1790567512.5498085,
+    "seen": 1790567662.7498713,
+    "ast_hash": "2abbfa1427fc752f3231d9ec5d500b47",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
-    "mtime": 1790565350.2217543,
-    "seen": 1790565605.279938,
-    "ast_hash": "8918ebc399caf320142a07259628c1d0",
+    "mtime": 1790567549.6856487,
+    "seen": 1790567662.7498713,
+    "ast_hash": "6fa701647a74f0341b854946542208b3",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.md": {
-    "mtime": 1790565334.8050277,
-    "seen": 1790565605.279938,
-    "ast_hash": "e1294e2bc22140c20a526ee344e6bc72",
+    "mtime": 1790567531.450273,
+    "seen": 1790567662.7498713,
+    "ast_hash": "bbafa1f6460c0408962433701a8658a3",
     "semantic_hash": ""
   },
   "src/index.html": {
@@ -396,21 +390,21 @@
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {
-    "mtime": 1790565360.9815445,
-    "seen": 1790565605.279938,
-    "ast_hash": "961f2fb21f9f32de87593d115bc655e0",
+    "mtime": 1790567572.944667,
+    "seen": 1790567662.7498713,
+    "ast_hash": "ad899f0d141008295af561b9ea33ed77",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.pdf": {
-    "mtime": 1790565360.8812327,
-    "seen": 1790565605.279938,
-    "ast_hash": "4bfcfa7b5018de409ec0a2b7e136e853",
+    "mtime": 1790567572.8424058,
+    "seen": 1790567662.7498713,
+    "ast_hash": "655520e3dc4d6ab6d7cc381a2efdd957",
     "semantic_hash": ""
   },
-  "docs/security-audit/relatorio-auditoria-seguranca.pdf": {
-    "mtime": 1790565475.9966717,
-    "seen": 1790565605.279938,
-    "ast_hash": "a36d806b11053d5eef3e27aabddc3100",
+  "tests/network.test.js": {
+    "mtime": 1790566442.087988,
+    "seen": 1790567662.7498713,
+    "ast_hash": "33e440767e1bbc9e2b7e8131ba1299f1",
     "semantic_hash": ""
   }
 }

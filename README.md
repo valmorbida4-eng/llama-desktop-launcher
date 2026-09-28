@@ -21,20 +21,20 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 ## Obter o aplicativo sem o código-fonte
 
-O código-fonte está no [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher). Os links diretos da versão 0.2.6 abaixo só funcionarão depois que os instaladores e as somas de verificação (`SHA256SUMS.txt`) forem publicados na [Release correspondente do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases).
+O código-fonte está no [repositório do projeto](https://github.com/valmorbida4-eng/llama-desktop-launcher). Os links diretos da versão 0.2.7 abaixo só funcionarão depois que os instaladores e as somas de verificação (`SHA256SUMS.txt`) forem publicados na [Release correspondente do GitHub](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases).
 
 | Plataforma / Distribuição | Arquitetura | Pacote / Download direto | Descrição |
 | --- | --- | --- | --- |
-| **Windows** (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.2.6.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/Llama%20Desktop%20Launcher%20Setup%200.2.6.exe) | Instalador oficial NSIS com atalho opcional na área de trabalho. |
-| **Linux** (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.2.6_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/llama-desktop-launcher_0.2.6_amd64.deb) | Pacote nativo `.deb` para instalação via `apt` / `dpkg`. |
-| **Linux** (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.2.6_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/llama-desktop-launcher_0.2.6_arm64.deb) | Pacote nativo `.deb` para placas e servidores ARM64. |
-| **Linux** (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.2.6.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/llama-desktop-launcher-0.2.6.x86_64.rpm) | Pacote nativo `.rpm` para instalação via `dnf` / `rpm`. |
-| **Linux** (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.2.6.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/llama-desktop-launcher-0.2.6.aarch64.rpm) | Pacote nativo `.rpm` para distribuições RPM em ARM64. |
-| **Linux** (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.2.6.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/Llama%20Desktop%20Launcher-0.2.6.AppImage) | Executável portátil sem necessidade de instalação root. |
-| **Linux** (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.2.6-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/Llama%20Desktop%20Launcher-0.2.6-arm64.AppImage) | Executável portátil para sistemas ARM64. |
-| **macOS** (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.2.6-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/Llama%20Desktop%20Launcher-0.2.6-arm64.dmg) | Imagem de disco DMG nativa com aceleração Metal. |
-| **macOS** (Intel) | x64 | [`Llama Desktop Launcher-0.2.6.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/Llama%20Desktop%20Launcher-0.2.6.dmg) | Imagem de disco DMG para Macs com processador Intel. |
-| **Verificação de Integridade** | Todas | [`SHA256SUMS.txt`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.6/SHA256SUMS.txt) | Checksums SHA-256 de todos os arquivos da versão 0.2.6. |
+| **Windows** (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.2.7.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/Llama%20Desktop%20Launcher%20Setup%200.2.7.exe) | Instalador oficial NSIS com atalho opcional na área de trabalho. |
+| **Linux** (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.2.7_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/llama-desktop-launcher_0.2.7_amd64.deb) | Pacote nativo `.deb` para instalação via `apt` / `dpkg`. |
+| **Linux** (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.2.7_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/llama-desktop-launcher_0.2.7_arm64.deb) | Pacote nativo `.deb` para placas e servidores ARM64. |
+| **Linux** (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.2.7.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/llama-desktop-launcher-0.2.7.x86_64.rpm) | Pacote nativo `.rpm` para instalação via `dnf` / `rpm`. |
+| **Linux** (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.2.7.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/llama-desktop-launcher-0.2.7.aarch64.rpm) | Pacote nativo `.rpm` para distribuições RPM em ARM64. |
+| **Linux** (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.2.7.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/Llama%20Desktop%20Launcher-0.2.7.AppImage) | Executável portátil sem necessidade de instalação root. |
+| **Linux** (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.2.7-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/Llama%20Desktop%20Launcher-0.2.7-arm64.AppImage) | Executável portátil para sistemas ARM64. |
+| **macOS** (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.2.7-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/Llama%20Desktop%20Launcher-0.2.7-arm64.dmg) | Imagem de disco DMG nativa com aceleração Metal. |
+| **macOS** (Intel) | x64 | [`Llama Desktop Launcher-0.2.7.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/Llama%20Desktop%20Launcher-0.2.7.dmg) | Imagem de disco DMG para Macs com processador Intel. |
+| **Verificação de Integridade** | Todas | [`SHA256SUMS.txt`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.2.7/SHA256SUMS.txt) | Checksums SHA-256 de todos os arquivos da versão 0.2.7. |
 
 Quando houver uma Release com o pacote do seu sistema, baixe o instalador por ela e siga o [manual em português](docs/MANUAL-pt-BR.md) ou [em inglês](docs/MANUAL-en.md). Se houver apenas o código-fonte, será preciso gerar o pacote na plataforma correspondente pelas instruções abaixo. O instalador não inclui modelos GGUF; o motor llama.cpp pode ser baixado pelo aplicativo na primeira execução.
 
@@ -54,7 +54,7 @@ Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux`
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-O instalador atual é identificado pela versão `0.2.6`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
+O instalador atual é identificado pela versão `0.2.7`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
 
 Para verificações pontuais de macOS sem executar a matriz completa de plataformas, o workflow `.github/workflows/build-macos-preview.yml` pode ser acionado manualmente para testar e validar os pacotes Intel e Apple Silicon.
 
