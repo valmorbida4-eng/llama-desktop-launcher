@@ -36,7 +36,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y rpm
+        run: sudo apt-get update && sudo apt-get install -y rpm qemu-user-static binfmt-support
       - run: npm run ${{ matrix.command }}
       - uses: actions/upload-artifact@v4
         with:
