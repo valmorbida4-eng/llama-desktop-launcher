@@ -6,7 +6,6 @@ dist/
 build-output.log
 
 build/app/
-docs/security-audit/
 
 # Graphify temporary caches
 graphify-out/cache/

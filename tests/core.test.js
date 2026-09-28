@@ -27,7 +27,7 @@ test('acesso remoto exige chave e aceita sessões configuradas',()=>{
   const a=argsForModel(m,defaults,'server',8080,{host:'192.168.1.3',parallel:2,keyPath:'C:/key.txt'});
   assert.deepEqual(a.slice(-8),['--host','192.168.1.3','--port','8080','--parallel','2','--api-key-file','C:/key.txt']);
 });
-test('rede valida sessões e protege a ponte local contra outra origem',()=>{
+test('rede valida sessões e protege a ponte local contra outra origem e processos não autorizados',async()=>{
   assert.equal(network.validateParallel('8'),8);
   assert.throws(()=>network.validateParallel(9),/Sessões/);
   assert.equal(network.scopeOf('100.100.1.2'),'Tailscale');
@@ -35,6 +35,29 @@ test('rede valida sessões e protege a ponte local contra outra origem',()=>{
   assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567'}},4567),true);
   assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567',origin:'https://example.org'}},4567),false);
   assert.equal(network.allowLocalRequest({headers:{host:'other.example:4567'}},4567),false);
+  // Proteção da ponte local com sessionToken (Achado A-01)
+  const token='secret-token-123';
+  assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567'}},4567,token),false);
+  assert.equal(network.allowLocalRequest({url:`/?token=${token}`,headers:{host:'127.0.0.1:4567'}},4567,token),true);
+  assert.equal(network.allowLocalRequest({url:'/?token=wrong-token',headers:{host:'127.0.0.1:4567'}},4567,token),false);
+  assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567',cookie:`llama_token=${token}`}},4567,token),true);
+  assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567',cookie:'llama_token=wrong'}},4567,token),false);
+  assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567',authorization:`Bearer ${token}`}},4567,token),true);
+  assert.equal(network.allowLocalRequest({headers:{host:'127.0.0.1:4567',authorization:'Bearer wrong'}},4567,token),false);
+
+  // Servidor proxy rejeita cliente local sem token com 403 Forbidden
+  const proxy=await network.createProxy('192.168.1.1',8080,'upstream-key',0,token);
+  const proxyPort=proxy.address().port;
+  try{
+    const res=await new Promise((resolve,reject)=>{
+      const req=require('node:http').get({hostname:'127.0.0.1',port:proxyPort,path:'/v1/models'},resolve);
+      req.on('error',reject);
+    });
+    assert.equal(res.statusCode,403);
+    res.resume();
+  }finally{
+    proxy.close();
+  }
 });
 test('CLI mantém perfil do modelo com as opções aceitas pelo motor instalado',()=>{
   const model={path:'C:/models/a.gguf'};

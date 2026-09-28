@@ -29,26 +29,49 @@ function ensureKey(file) {
   return rotateKey(file);
 }
 function rotateKey(file) {const key=crypto.randomBytes(32).toString('base64url');fs.mkdirSync(require('node:path').dirname(file),{recursive:true});fs.writeFileSync(file,key+'\n',{mode:0o600});return key;}
-function allowLocalRequest(request,port) {
+function allowLocalRequest(request,port,sessionToken=null) {
   const host=request.headers.host;
   if(host!==`127.0.0.1:${port}`)return false;
   if(request.headers.origin&&request.headers.origin!==`http://127.0.0.1:${port}`)return false;
   if(request.headers['sec-fetch-site']==='cross-site')return false;
+  if(sessionToken){
+    let tokenQuery=null;
+    try{tokenQuery=new URL(request.url||'/',`http://127.0.0.1:${port}`).searchParams.get('token');}catch{}
+    const cookieHeader=request.headers.cookie||'';
+    const hasCookie=cookieHeader.split(';').some(c=>c.trim()===`llama_token=${sessionToken}`);
+    const authHeader=request.headers.authorization||'';
+    const hasAuth=authHeader===`Bearer ${sessionToken}`;
+    if(tokenQuery!==sessionToken&&!hasCookie&&!hasAuth) return false;
+  }
   return true;
 }
-function createProxy(targetHost,targetPort,key,localPort) {
+function createProxy(targetHost,targetPort,key,localPort,sessionToken=null) {
   if(!['LAN','Tailscale'].includes(scopeOf(targetHost)))throw Error('Destino remoto inválido.');
   const authority=`${targetHost}:${targetPort}`;
   const proxy=http.createServer((req,res)=>{
-    if(!allowLocalRequest(req,localPort)){res.writeHead(403);res.end();return;}
+    if(!allowLocalRequest(req,localPort,sessionToken)){
+      res.writeHead(403,{'content-type':'text/plain; charset=utf-8'});
+      res.end('Acesso negado: chave ou token de sessão local ausente ou inválido.');
+      return;
+    }
+    let setCookieHeader=null;
+    if(sessionToken){
+      try{
+        if(new URL(req.url||'/',`http://127.0.0.1:${localPort}`).searchParams.get('token')===sessionToken){
+          setCookieHeader=`llama_token=${sessionToken}; Path=/; HttpOnly; SameSite=Strict`;
+        }
+      }catch{}
+    }
     const headers={...req.headers,host:authority,authorization:`Bearer ${key}`};delete headers.connection;
     const upstream=http.request({hostname:targetHost,port:targetPort,method:req.method,path:req.url,headers},incoming=>{
-      const outgoing={...incoming.headers};delete outgoing['access-control-allow-origin'];delete outgoing['access-control-allow-credentials'];res.writeHead(incoming.statusCode||502,outgoing);incoming.pipe(res);
+      const outgoing={...incoming.headers};delete outgoing['access-control-allow-origin'];delete outgoing['access-control-allow-credentials'];
+      if(setCookieHeader) outgoing['set-cookie']=setCookieHeader;
+      res.writeHead(incoming.statusCode||502,outgoing);incoming.pipe(res);
     });
     upstream.on('error',()=>{if(!res.headersSent)res.writeHead(502);res.end();});req.on('aborted',()=>upstream.destroy());req.pipe(upstream);
   });
   proxy.on('upgrade',(req,client,head)=>{
-    if(!allowLocalRequest(req,localPort)){client.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');return;}
+    if(!allowLocalRequest(req,localPort,sessionToken)){client.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');return;}
     const upstream=net.connect(targetPort,targetHost,()=>{
       upstream.write(`${req.method} ${req.url} HTTP/1.1\r\n`);
       for(const [name,value] of Object.entries(req.headers))if(!['host','authorization','connection'].includes(name))upstream.write(`${name}: ${value}\r\n`);

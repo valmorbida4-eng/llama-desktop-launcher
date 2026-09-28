@@ -1,9 +1,9 @@
 {
   "package.json": {
-    "mtime": 1790562550.9617052,
-    "seen": 1790563037.4090197,
-    "ast_hash": "32373a9c7c60ef9f09d0a13dc294df1d",
-    "semantic_hash": "32373a9c7c60ef9f09d0a13dc294df1d"
+    "mtime": 1790563869.9372165,
+    "seen": 1790563972.7678187,
+    "ast_hash": "ec5209846e1398c722559f55140ca134",
+    "semantic_hash": ""
   },
   "scripts/build.js": {
     "mtime": 1790554823.8923962,
@@ -72,10 +72,10 @@
     "semantic_hash": "09573bbc16ad084b9c078d4346d31b7a"
   },
   "scripts/smoke-network.js": {
-    "mtime": 1790552687.5943205,
-    "seen": 1790563037.4105282,
-    "ast_hash": "0f4b295f61fd8e0a6e6526f6f5b061de",
-    "semantic_hash": "0f4b295f61fd8e0a6e6526f6f5b061de"
+    "mtime": 1790563841.9948933,
+    "seen": 1790563972.7678187,
+    "ast_hash": "a640d3c042922ab23c67e1ddadc06085",
+    "semantic_hash": ""
   },
   "scripts/smoke-ui.js": {
     "mtime": 1790554502.2851653,
@@ -132,16 +132,16 @@
     "semantic_hash": "19190cb8cdef64d457e91a73c33cd9d4"
   },
   "src/main.ts": {
-    "mtime": 1790562427.880257,
-    "seen": 1790563037.4105282,
-    "ast_hash": "677bc0b36b4baa2dd29bc74e57bebbc2",
-    "semantic_hash": "677bc0b36b4baa2dd29bc74e57bebbc2"
+    "mtime": 1790563804.6395936,
+    "seen": 1790563972.7678187,
+    "ast_hash": "e9072173b774893893dd37e0834585ba",
+    "semantic_hash": ""
   },
   "src/network.ts": {
-    "mtime": 1790551697.5678847,
-    "seen": 1790563037.4105282,
-    "ast_hash": "06bde7c12f93973640c299999ab473f5",
-    "semantic_hash": "06bde7c12f93973640c299999ab473f5"
+    "mtime": 1790563571.2504513,
+    "seen": 1790563972.7678187,
+    "ast_hash": "b4a529576009e6db1a85cbc7105a748d",
+    "semantic_hash": ""
   },
   "src/preload.ts": {
     "mtime": 1790547827.1713097,
@@ -168,10 +168,10 @@
     "semantic_hash": "ee5838589907a97a656f75dbff326d83"
   },
   "tests/core.test.js": {
-    "mtime": 1790551256.8032024,
-    "seen": 1790563037.4105282,
-    "ast_hash": "62c29b4cad48a774614587a5f48bfa86",
-    "semantic_hash": "62c29b4cad48a774614587a5f48bfa86"
+    "mtime": 1790563853.2977936,
+    "seen": 1790563972.7678187,
+    "ast_hash": "e8cb031f00dc960d0cfe95ea7d2e6627",
+    "semantic_hash": ""
   },
   "tests/engine.test.js": {
     "mtime": 1790551256.8081412,
@@ -226,5 +226,191 @@
     "seen": 1790563037.4105282,
     "ast_hash": "90b804237cb74c9b8a820688034f799e",
     "semantic_hash": "90b804237cb74c9b8a820688034f799e"
+  },
+  "docs/security-audit/gerar_relatorio.py": {
+    "mtime": 1790562903.1383593,
+    "seen": 1790563972.7678187,
+    "ast_hash": "4e158efaceccc41d3225480b3dddfeca",
+    "semantic_hash": ""
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1790563013.4954586,
+    "seen": 1790563972.7678187,
+    "ast_hash": "a0e4d192b9e2e17256124dbfc8e24e6a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ai-memory-durable-pages/SKILL.md": {
+    "mtime": 1789934964.4914794,
+    "seen": 1790563972.7678187,
+    "ast_hash": "1e795b991e276207b1ec48a6e7f57bea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ai-memory-handoff/SKILL.md": {
+    "mtime": 1789934964.492989,
+    "seen": 1790563972.7678187,
+    "ast_hash": "2db8c3143531e0ee35a5f03c86050241",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ai-memory-learning-maintenance/SKILL.md": {
+    "mtime": 1789934964.494952,
+    "seen": 1790563972.7678187,
+    "ast_hash": "0da7c4abd801b0c4ff515061334cced4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ai-memory-messaging/SKILL.md": {
+    "mtime": 1789934964.4959292,
+    "seen": 1790563972.7678187,
+    "ast_hash": "a35c57e3169c9f09da8d165ece81a6b7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ai-memory-retrieval/SKILL.md": {
+    "mtime": 1789934964.4969046,
+    "seen": 1790563972.7678187,
+    "ast_hash": "ab5a6cdc3bb7f1cdf496da5daf0768d6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ai-memory-routing-install/SKILL.md": {
+    "mtime": 1789934964.4978807,
+    "seen": 1790563972.7678187,
+    "ast_hash": "c120e9977f61cbd2efcd5cd2da250efe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/SKILL.md": {
+    "mtime": 1790204538.292826,
+    "seen": 1790563972.7678187,
+    "ast_hash": "5171688c9780663d054bdf34917c3036",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/add-watch.md": {
+    "mtime": 1790204538.2938395,
+    "seen": 1790563972.7678187,
+    "ast_hash": "58c888b5ec0689a886543dd765c1acc9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/exports.md": {
+    "mtime": 1790204538.29483,
+    "seen": 1790563972.7678187,
+    "ast_hash": "ecc0c36852fee4ba6280cdf2b9149039",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/extraction-spec.md": {
+    "mtime": 1790204538.2958024,
+    "seen": 1790563972.7678187,
+    "ast_hash": "024c6f2a3c146b03c72cc871dc56ed3c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/github-and-merge.md": {
+    "mtime": 1790204538.2967813,
+    "seen": 1790563972.7678187,
+    "ast_hash": "aa0e7ef186392cad062e60483ca7dbbf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/hooks.md": {
+    "mtime": 1790204538.2977536,
+    "seen": 1790563972.7678187,
+    "ast_hash": "94a1d96efdc6c6d21b4287dc950a9c17",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/query.md": {
+    "mtime": 1790204538.2987325,
+    "seen": 1790563972.7678187,
+    "ast_hash": "852ef14334d60a75ae666ea103d4c4f0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/transcribe.md": {
+    "mtime": 1790204538.2997112,
+    "seen": 1790563972.7678187,
+    "ast_hash": "5c6a9af05d12b5797b2fa8b9493dcc37",
+    "semantic_hash": ""
+  },
+  ".agents/skills/graphify/references/update.md": {
+    "mtime": 1790204538.3006868,
+    "seen": 1790563972.7678187,
+    "ast_hash": "07bf4293ea21b4e00a9655dd4e7f0af5",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1790563013.4974093,
+    "seen": 1790563972.7678187,
+    "ast_hash": "a831cf3669f1e6ab85d8a80ebe655f99",
+    "semantic_hash": ""
+  },
+  ".github/workflows/build-macos-preview.yml": {
+    "mtime": 1790554902.4049175,
+    "seen": 1790563972.7678187,
+    "ast_hash": "25ffeadbee179df80beedb7515a19358",
+    "semantic_hash": ""
+  },
+  ".github/workflows/build.yml": {
+    "mtime": 1790562519.2258863,
+    "seen": 1790563972.7678187,
+    "ast_hash": "6c970997436f090fae1a4fccc1d40963",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1790563166.9890182,
+    "seen": 1790563972.7678187,
+    "ast_hash": "064a1c2eea966854e366481cf4021bc9",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1790563175.1828244,
+    "seen": 1790563972.7678187,
+    "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
+    "semantic_hash": ""
+  },
+  "PLAN.md": {
+    "mtime": 1790545356.8266087,
+    "seen": 1790563972.7678187,
+    "ast_hash": "f61a694b3f2f1a1f02c4d70965c4d606",
+    "semantic_hash": ""
+  },
+  "PLANO-UI-v2.md": {
+    "mtime": 1790544260.853763,
+    "seen": 1790563972.7678187,
+    "ast_hash": "6ddcad794dd86d749e61a51088c07858",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1790563894.4734137,
+    "seen": 1790563972.7678187,
+    "ast_hash": "1bfa5e7e96fffc56ef84f66658e3ea53",
+    "semantic_hash": ""
+  },
+  "docs/MANUAL-en.md": {
+    "mtime": 1790563929.8822186,
+    "seen": 1790563972.7678187,
+    "ast_hash": "e39092cef69359fdd25dc379da2007fc",
+    "semantic_hash": ""
+  },
+  "docs/MANUAL-pt-BR.md": {
+    "mtime": 1790563911.4719906,
+    "seen": 1790563972.7678187,
+    "ast_hash": "6f7dee711b0513d7e486089eff508e18",
+    "semantic_hash": ""
+  },
+  "src/index.html": {
+    "mtime": 1790562369.505192,
+    "seen": 1790563972.7678187,
+    "ast_hash": "a5bc480a661e1fa9f0dc7b8a0ff67099",
+    "semantic_hash": ""
+  },
+  "docs/MANUAL-en.pdf": {
+    "mtime": 1790563947.5821977,
+    "seen": 1790563972.7678187,
+    "ast_hash": "529e5ca114c634cefc55c6268a9e3450",
+    "semantic_hash": ""
+  },
+  "docs/MANUAL-pt-BR.pdf": {
+    "mtime": 1790563947.4797015,
+    "seen": 1790563972.7678187,
+    "ast_hash": "49c452159962843c2e561027cf5b6692",
+    "semantic_hash": ""
+  },
+  "docs/security-audit/relatorio-auditoria-seguranca.pdf": {
+    "mtime": 1790563955.4330473,
+    "seen": 1790563972.7678187,
+    "ast_hash": "ebf3f5c52d7962893ddf768ad9b013ec",
+    "semantic_hash": ""
   }
 }

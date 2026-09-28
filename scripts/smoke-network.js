@@ -31,10 +31,13 @@ async function main(){
     if(!ready)throw Error(`Timeout autenticado: ${tail}`);
     const denied=await check(access.host,port,null,'/v1/models');
     if(denied===200)throw Error('Servidor aceitou health sem chave.');
-    proxy=await network.createProxy(access.host,port,key,localPort);
-    const throughProxy=await check('127.0.0.1',localPort,null,'/v1/models');
+    const sessionToken=crypto.randomBytes(24).toString('hex');
+    proxy=await network.createProxy(access.host,port,key,localPort,sessionToken);
+    const unauthProxy=await check('127.0.0.1',localPort,null,'/v1/models');
+    if(unauthProxy!==403)throw Error(`Proxy deveria negar pedido sem token, respondeu ${unauthProxy}`);
+    const throughProxy=await check('127.0.0.1',localPort,null,`/v1/models?token=${sessionToken}`);
     if(throughProxy!==200)throw Error(`Proxy respondeu ${throughProxy}`);
-    process.stdout.write(`OK rede ${access.scope}: autenticado=200, sem chave=${denied}, ponte local=200\n`);
+    process.stdout.write(`OK rede ${access.scope}: autenticado=200, sem chave=${denied}, proxy sem token=${unauthProxy}, ponte local=200\n`);
   }finally{proxy?.close();child?.kill();fs.rmSync(temp,{recursive:true,force:true});}
 }
 main().catch(error=>{process.stderr.write(`${error.message}\n`);process.exitCode=1;});
