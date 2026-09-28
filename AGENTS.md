@@ -144,5 +144,6 @@ This project strictly follows [Semantic Versioning 2.0.0](https://semver.org/):
 Enforcement:
 - `package.json` and `package-lock.json` must always have identical, valid SemVer numbers.
 - `npm run version:check` verifies strict SemVer regex compliance and lockfile parity.
-- `test/version.test.js` runs automated unit tests covering valid, prerelease, and malformed version rejection.
+- `tests/semver.test.js` covers valid versions, mismatches, and release tags.
+- Tag builds run `npm run version:check` and reject tags that differ from the package version.
 - Git releases use annotated tags `vX.Y.Z`, triggering multi-platform CI builds in GitHub Actions.

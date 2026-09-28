@@ -27,13 +27,24 @@ function checkVersions(packageJson = manifest, packageLock = lock) {
   return packageJson.version;
 }
 
+function checkReleaseRef(ref, packageJson = manifest, packageLock = lock) {
+  const version = checkVersions(packageJson, packageLock);
+  if (ref?.startsWith('refs/tags/')) {
+    const tag = ref.slice('refs/tags/'.length);
+    if (tag !== `v${version}`) {
+      throw new Error(`Release tag ${tag} must match package version v${version}.`);
+    }
+  }
+  return version;
+}
+
 if (require.main === module) {
   try {
-    console.log(`SemVer valid: ${checkVersions()}`);
+    console.log(`SemVer valid: ${checkReleaseRef(process.env.GITHUB_REF)}`);
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;
   }
 }
 
-module.exports = { isSemVer, checkVersions };
+module.exports = { isSemVer, checkVersions, checkReleaseRef };

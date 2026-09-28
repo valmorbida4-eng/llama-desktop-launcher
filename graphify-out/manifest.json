@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1790563869.9372165,
-    "seen": 1790563972.7678187,
-    "ast_hash": "ec5209846e1398c722559f55140ca134",
+    "mtime": 1790565286.7688954,
+    "seen": 1790565605.279938,
+    "ast_hash": "50812982347dfedaa47fdb6726ca2ca8",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -18,10 +18,10 @@
     "semantic_hash": "36e87a996269d708381a4724ed86f034"
   },
   "scripts/check-version.js": {
-    "mtime": 1790544260.858645,
-    "seen": 1790563037.4090197,
-    "ast_hash": "c8c455a8c3ae7826a7808136708946b9",
-    "semantic_hash": "c8c455a8c3ae7826a7808136708946b9"
+    "mtime": 1790565539.2353323,
+    "seen": 1790565605.279938,
+    "ast_hash": "7289c7949368e4431be61c8194afac8b",
+    "semantic_hash": ""
   },
   "scripts/fix-linux-tar.py": {
     "mtime": 1790525944.0172968,
@@ -204,10 +204,10 @@
     "semantic_hash": "93b168d0e221b7859e5a720b8d678304"
   },
   "tests/semver.test.js": {
-    "mtime": 1790551256.8356013,
-    "seen": 1790563037.4105282,
-    "ast_hash": "c30248b65742d0fe736bd7818ebbb6ba",
-    "semantic_hash": "c30248b65742d0fe736bd7818ebbb6ba"
+    "mtime": 1790565545.0799935,
+    "seen": 1790565605.279938,
+    "ast_hash": "511c7b5a08dd936bea801cf4145939ac",
+    "semantic_hash": ""
   },
   "tests/terminal_cli.test.js": {
     "mtime": 1790551256.8410282,
@@ -228,9 +228,9 @@
     "semantic_hash": "90b804237cb74c9b8a820688034f799e"
   },
   "docs/security-audit/gerar_relatorio.py": {
-    "mtime": 1790562903.1383593,
-    "seen": 1790563972.7678187,
-    "ast_hash": "4e158efaceccc41d3225480b3dddfeca",
+    "mtime": 1790565461.1307218,
+    "seen": 1790565605.279938,
+    "ast_hash": "8f5c8df182d787076ec516c40de35499",
     "semantic_hash": ""
   },
   ".agents/rules/graphify.md": {
@@ -342,15 +342,15 @@
     "semantic_hash": ""
   },
   ".github/workflows/build.yml": {
-    "mtime": 1790562519.2258863,
-    "seen": 1790563972.7678187,
-    "ast_hash": "6c970997436f090fae1a4fccc1d40963",
+    "mtime": 1790565549.7005134,
+    "seen": 1790565605.279938,
+    "ast_hash": "6e291e84986c66e3e1800c6c77b181c3",
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1790563166.9890182,
-    "seen": 1790563972.7678187,
-    "ast_hash": "064a1c2eea966854e366481cf4021bc9",
+    "mtime": 1790565554.4690046,
+    "seen": 1790565605.279938,
+    "ast_hash": "94e0137ee98a62fe915fffc8e11fd5b1",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -372,21 +372,21 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1790563894.4734137,
-    "seen": 1790563972.7678187,
-    "ast_hash": "1bfa5e7e96fffc56ef84f66658e3ea53",
+    "mtime": 1790565319.2764988,
+    "seen": 1790565605.279938,
+    "ast_hash": "b1d4b6c599d21ce295fae8f1773a14e0",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
-    "mtime": 1790563929.8822186,
-    "seen": 1790563972.7678187,
-    "ast_hash": "e39092cef69359fdd25dc379da2007fc",
+    "mtime": 1790565350.2217543,
+    "seen": 1790565605.279938,
+    "ast_hash": "8918ebc399caf320142a07259628c1d0",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.md": {
-    "mtime": 1790563911.4719906,
-    "seen": 1790563972.7678187,
-    "ast_hash": "6f7dee711b0513d7e486089eff508e18",
+    "mtime": 1790565334.8050277,
+    "seen": 1790565605.279938,
+    "ast_hash": "e1294e2bc22140c20a526ee344e6bc72",
     "semantic_hash": ""
   },
   "src/index.html": {
@@ -396,21 +396,21 @@
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {
-    "mtime": 1790563947.5821977,
-    "seen": 1790563972.7678187,
-    "ast_hash": "529e5ca114c634cefc55c6268a9e3450",
+    "mtime": 1790565360.9815445,
+    "seen": 1790565605.279938,
+    "ast_hash": "961f2fb21f9f32de87593d115bc655e0",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.pdf": {
-    "mtime": 1790563947.4797015,
-    "seen": 1790563972.7678187,
-    "ast_hash": "49c452159962843c2e561027cf5b6692",
+    "mtime": 1790565360.8812327,
+    "seen": 1790565605.279938,
+    "ast_hash": "4bfcfa7b5018de409ec0a2b7e136e853",
     "semantic_hash": ""
   },
   "docs/security-audit/relatorio-auditoria-seguranca.pdf": {
-    "mtime": 1790563955.4330473,
-    "seen": 1790563972.7678187,
-    "ast_hash": "ebf3f5c52d7962893ddf768ad9b013ec",
+    "mtime": 1790565475.9966717,
+    "seen": 1790565605.279938,
+    "ast_hash": "a36d806b11053d5eef3e27aabddc3100",
     "semantic_hash": ""
   }
 }
