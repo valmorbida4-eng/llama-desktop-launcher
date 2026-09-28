@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "license": "MIT",
-  "author": "Célio",
+  "author": "Célio <valmorbida4@gmail.com>",
   "description": "Instalador e launcher multiplataforma para llama.cpp",
   "main": "build/app/main.js",
   "scripts": {
@@ -64,6 +64,7 @@
       "include": "build/installer.nsh"
     },
     "linux": {
+      "maintainer": "Célio <valmorbida4@gmail.com>",
       "target": [
         "AppImage",
         "deb",
