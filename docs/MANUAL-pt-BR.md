@@ -105,6 +105,15 @@ Para conectar o OpenCode em outro computador ou VM, selecione um endereço LAN o
 
 Use **Copiar comando Bash** (Linux/macOS) ou **Copiar comando PowerShell** (Windows) ao lado do endpoint. Cole no terminal, na pasta do projeto. O comando configura o provedor e modelo para aquela execução via `OPENCODE_CONFIG_CONTENT`, sem editar seu arquivo de configuração. Em acesso LAN/Tailscale, ele solicita a chave com entrada oculta; a chave não é incluída no comando copiado. O OpenCode precisa estar instalado. Copie novamente se mudar o endpoint, contexto ou sessões simultâneas. As demais configurações do OpenCode continuam aplicadas, salvo valores de provedor/modelo sobrescritos pela configuração temporária.
 
+
+### Compartilhar acesso na rede interna ou Tailscale
+
+Com o servidor ativo em LAN/Tailscale, use **Copiar link com acesso** para abrir a interface no navegador de outro computador sem digitar uma chave. Use **Copiar Bash com acesso** ou **Copiar PowerShell com acesso** para abrir o OpenCode na pasta do projeto sem pedir a chave. Esses comandos incluem uma credencial temporária de compartilhamento; quem recebê-los poderá usar o modelo.
+
+O link e os comandos compartilhados valem somente para a execução atual. **Revogar acesso compartilhado** invalida todos os anteriores e interrompe conexões compartilhadas existentes; copie novos para conceder acesso novamente. Parar o servidor ou fechar o launcher encerra esse acesso; reiniciar gera uma nova credencial. Isso não revoga a chave permanente da API nem clientes que a usam diretamente. No navegador, o token sai da barra de endereço após a autenticação e fica em cookie HttpOnly.
+
+O compartilhamento usa uma porta adicional de 8181 a 8280; a API original usa 8080 a 8180. No Windows, o botão de firewall libera ambas as portas, limitadas ao executável correspondente e à faixa informada. Linux/macOS exigem liberar as duas portas conforme o firewall local. O OpenCode deve estar instalado no cliente. Prefira Tailscale; uma LAN com HTTP não cifra o conteúdo. Se mudar o modelo, contexto, endereço ou sessões, copie os comandos novamente. Acesso compartilhado autoriza uso do modelo, não acesso automático aos arquivos do servidor.
+
 ## 7. Parâmetros avançados
 
 ### Acesso, link e sessões simultâneas

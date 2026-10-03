@@ -105,6 +105,15 @@ For OpenCode on another computer or VM, select a LAN or Tailscale address before
 
 Use **Copiar comando Bash** (Linux/macOS) or **Copiar comando PowerShell** (Windows) next to the endpoint. Paste into a terminal in the project folder. The command supplies the provider and model for that run through `OPENCODE_CONFIG_CONTENT`, without editing your configuration file. LAN/Tailscale access prompts for the API key with hidden input; the copied command contains no key. OpenCode must be installed. Copy again if the endpoint, context or parallel sessions change. Other OpenCode settings remain effective, except provider/model values overridden by the temporary configuration.
 
+
+### Share access over LAN or Tailscale
+
+With a LAN/Tailscale server running, **Copiar link com acesso** copies an authenticated browser link. **Copiar Bash com acesso** and **Copiar PowerShell com acesso** start OpenCode in the client's project folder without prompting for a key. These commands include a temporary sharing credential; recipients can use the model.
+
+Links and shared commands last only for the current server run. **Revogar acesso compartilhado** invalidates previous links and commands and disconnects shared clients; copy new ones to grant access again. Stopping the server or closing the launcher ends shared access. Restarting generates a new credential. This does not revoke the permanent API key or clients using it directly. The browser removes the token from the address bar after authentication and stores it in an HttpOnly cookie.
+
+Sharing uses an additional port in 8181–8280; the original API uses 8080–8180. The Windows firewall button allows both active ports, limited to the corresponding executables and selected client range. On Linux/macOS, allow both ports in your firewall. OpenCode must be installed on the client. Prefer Tailscale; plain HTTP on LAN does not encrypt content. Copy commands again after changing the model, context, address or parallel sessions. Shared access grants model usage, not automatic access to server files.
+
 ## 7. Advanced settings
 
 ### Network links and simultaneous sessions

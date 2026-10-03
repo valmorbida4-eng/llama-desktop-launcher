@@ -13,6 +13,8 @@ const benchmark=require('./benchmark');
 const network=require('./network');
 const cli=require('./cli');
 const clientCommands=require('./client_commands');
+const sharing=require('./share_proxy');
+let shareProxy:any=null;
 const terminalCli=require('./terminal_cli');
 const guidance=require('./guidance');
 const hardware=require('./hardware');
@@ -48,7 +50,7 @@ function createWindow() {
 }
 app.whenReady().then(()=>{load();createWindow();app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin') app.quit();});
-app.on('before-quit',()=>{tuneAbort?.abort();proxy?.close();conversation?.stop();if(server)server.kill();});
+app.on('before-quit',()=>{tuneAbort?.abort();shareProxy?.close();shareProxy=null;proxy?.close();conversation?.stop();if(server)server.kill();});
 
 ipcMain.handle('state',e=>{validateSender(e);return state();});
 ipcMain.handle('select-model',(e,modelPath)=>{validateSender(e);selectedModel(modelPath);configuration.selectedModelPath=modelPath;save();return state();});
@@ -105,7 +107,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
   const child=spawn(executable,args,{cwd:configuration.engineDir,windowsHide:true,stdio:['ignore','pipe','pipe']});server=child;
   child.stdout.on('data',d=>send('log',String(d).slice(-3000)));
   child.stderr.on('data',d=>send('log',String(d).slice(-3000)));
-  const cleanupServer=(code: any)=>{if(server===child){server=null;proxy?.close();proxy=null;active=null;send('stopped',code);}};
+  const cleanupServer=(code: any)=>{if(server===child){server=null;shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;active=null;send('stopped',code);}};
   child.on('exit',cleanupServer);
   child.on('error',err=>{send('log',`\n[erro ao iniciar llama-server: ${err.message}]\n`);cleanupServer(err);});
   try {
@@ -117,12 +119,13 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
       proxy=await network.createProxy(access.host,port,key,localPort,sessionToken);
       browserUrl=`http://127.0.0.1:${localPort}/?token=${sessionToken}`;
     }
-    active={context:Number(settings.context),modelId:core.apiModelId,host:access.host,scope:access.scope,port,parallel,executable,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}/`};
+    if(key){const sharePort=await freePort(access.host,8181,8280);shareProxy=await sharing.createShareProxy(access.host,port,key,sharePort);}
+    active={sharingEndpoint:shareProxy?.endpoint||null,context:Number(settings.context),modelId:core.apiModelId,host:access.host,scope:access.scope,port,parallel,executable,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}/`};
     if(options.openBrowser!==false)await shell.openExternal(browserUrl);
     return active;
-  }catch(e){proxy?.close();proxy=null;cleanupServer(null);try{child.kill();}catch{}throw e;}
+  }catch(e){shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;cleanupServer(null);try{child.kill();}catch{}throw e;}
 });
-ipcMain.handle('stop',e=>{validateSender(e);proxy?.close();proxy=null;server?.kill();return true;});
+ipcMain.handle('stop',e=>{validateSender(e);shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;server?.kill();return true;});
 ipcMain.handle('start-chat',(e,modelPath,settings)=>{
   validateSender(e);
   if(server||conversation)throw Error('Pare a execução atual antes de iniciar outra.');
@@ -149,13 +152,16 @@ ipcMain.handle('copy-key',e=>{validateSender(e);clipboard.writeText(network.ensu
 ipcMain.handle('rotate-key',e=>{validateSender(e);if(server)throw Error('Pare o servidor antes de gerar outra chave.');return network.rotateKey(apiKeyPath());});
 ipcMain.handle('copy-endpoint',e=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');clipboard.writeText(active.endpoint);return active.endpoint;});
 ipcMain.handle('copy-opencode-command',async(e,platform)=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');const command=clientCommands.openCodeCommand(active,platform);await clipboard.writeText(command);return true;});
+ipcMain.handle('copy-shared-link',async(e)=>{validateSender(e);if(!shareProxy)throw Error('Inicie o servidor em LAN ou Tailscale.');await clipboard.writeText(shareProxy.link());return true;});
+ipcMain.handle('revoke-shared-access',e=>{validateSender(e);if(!shareProxy)throw Error('Nenhum acesso compartilhado ativo.');shareProxy.revoke();return true;});
+ipcMain.handle('copy-shared-command',async(e,platform)=>{validateSender(e);if(!shareProxy||!active)throw Error('Inicie o servidor em LAN ou Tailscale.');const command=clientCommands.openCodeCommand({...active,endpoint:shareProxy.endpoint},platform,shareProxy.accessKey());await clipboard.writeText(command);return true;});
 ipcMain.handle('copy-browser-link',e=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');clipboard.writeText(active.remoteUrl);return active.remoteUrl;});
 ipcMain.handle('create-firewall-rule',async(e,remoteAddress)=>{
   validateSender(e);
   if(process.platform!=='win32'||!active||active.scope==='Local')throw Error('Inicie um servidor LAN ou Tailscale no Windows primeiro.');
   const range=firewall.validateRemoteAddress(remoteAddress);
   if(network.scopeOf(range.split('/')[0])!==active.scope||!addressInRange(active.host,range))throw Error('A faixa de clientes precisa conter o endereço da rede selecionada.');
-  return firewall.createRule({program:active.executable,port:active.port,remoteAddress:range});
+  const rules=[{program:active.executable,port:active.port,remoteAddress:range}];if(shareProxy)rules.push({program:process.execPath,port:shareProxy.port,remoteAddress:range,sharing:true} as any);return firewall.createRules(rules);
 });
 ipcMain.handle('open-hf',async(e,kind)=>{validateSender(e);const url=guidance.links[kind];if(!url)throw Error('Filtro inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('open-model-example',async(e,url)=>{validateSender(e);if(typeof url!=='string'||!/^https:\/\/huggingface\.co\/Qwen\/Qwen2\.5-(?:0\.5|1\.5|3|7|14)B-Instruct-GGUF$/.test(url))throw Error('Link de modelo inválido.');await shell.openExternal(url);return url;});

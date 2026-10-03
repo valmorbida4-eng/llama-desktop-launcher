@@ -52,10 +52,11 @@ function validateRuleOptions(options) {
   if (!options || typeof options !== 'object') throw Error('Configuração da regra de firewall inválida.');
   if (typeof options.program !== 'string' || !path.win32.isAbsolute(options.program)) throw Error('O caminho do llama-server precisa ser absoluto.');
   const program = path.win32.normalize(options.program);
-  if (path.win32.basename(program).toLowerCase() !== 'llama-server.exe') throw Error('A regra só pode liberar llama-server.exe.');
+  const sharing=options.sharing===true;
+  if (sharing?!['llama desktop launcher.exe','electron.exe'].includes(path.win32.basename(program).toLowerCase()):path.win32.basename(program).toLowerCase() !== 'llama-server.exe') throw Error('A regra só pode liberar llama-server.exe.');
   const port = Number(options.port);
-  if (!Number.isInteger(port) || port < PORT_MIN || port > PORT_MAX) throw Error(`A porta deve estar entre ${PORT_MIN} e ${PORT_MAX}.`);
-  return { program, port, remoteAddress: validateRemoteAddress(options.remoteAddress) };
+  if (!Number.isInteger(port) || port < (sharing?8181:PORT_MIN) || port > (sharing?8280:PORT_MAX)) throw Error(`A porta deve estar entre ${PORT_MIN} e ${PORT_MAX}.`);
+  return { program, port, remoteAddress: validateRemoteAddress(options.remoteAddress),...(sharing?{sharing:true}:{}) };
 }
 
 function psQuote(value) {
@@ -83,7 +84,7 @@ function buildFirewallScript(input) {
       `-Program ${psQuote(config.program)}`,
       `-RemoteAddress ${psQuote(config.remoteAddress)}`,
       "-Profile Any",
-      "-Description 'Created on user request by Llama Desktop Launcher; limited to llama-server.exe, one port, and one private network range.'",
+      "-Description 'Created on user request by Llama Desktop Launcher; limited to the selected executable, one port, and one private network range.'",
     ].join(' '),
     'if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }',
   ].join('\n');
@@ -110,4 +111,11 @@ async function createRule(options, { platform = process.platform, run = promisif
   return { ...validateRuleOptions(options), name: ruleName(validateRuleOptions(options)) };
 }
 
-module.exports = { PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule };
+async function createRules(options, { platform=process.platform, run=promisify(execFile) }={}){
+  if(platform!=='win32')throw Error('A regra do Windows Firewall só está disponível no Windows.');
+  const configs=options.map(validateRuleOptions);
+  const script=elevatedPowerShellScript(options.map(buildFirewallScript).join('\n'));
+  await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-EncodedCommand',encodePowerShell(script)],{windowsHide:true});
+  return configs;
+}
+module.exports = { PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule, createRules };

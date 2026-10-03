@@ -20,3 +20,13 @@ test('contexto por sessão é respeitado e acesso local não pede chave',()=>{
  assert.throws(()=>openCodeCommand({...connection,endpoint:'file:///tmp/v1'},'bash'),/Endpoint/);
  assert.throws(()=>openCodeCommand(connection,'cmd'),/Bash/);
 });
+
+test('comandos compartilhados levam somente a credencial temporária e não solicitam chave',()=>{
+ const token='x'.repeat(43);
+ for(const platform of ['bash','powershell']){
+  const command=openCodeCommand({...connection,endpoint:'http://192.168.1.5:8181/v1'},platform,token);
+  assert.ok(command.includes(token));assert.ok(command.includes('http://192.168.1.5:8181/v1'));
+  assert.doesNotMatch(command,/read -rsp|Read-Host/);
+ }
+ assert.throws(()=>openCodeCommand(connection,'bash',"invalid';command"),/compartilhamento/);
+});

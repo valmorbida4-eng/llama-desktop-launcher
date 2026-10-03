@@ -2,7 +2,8 @@
 const {apiModelId}=require('./core');
 const bashQuote=value=>"'"+String(value).replace(/'/g,"'\\''")+"'";
 const psQuote=value=>"'"+String(value).replace(/'/g,"''")+"'";
-function openCodeCommand(connection, platform){
+function openCodeCommand(connection, platform, accessKey: string|null=null){
+  if(accessKey!==null&&!/^[A-Za-z0-9_-]{32,128}$/.test(accessKey))throw Error('Chave de compartilhamento inválida.');
   if(!['bash','powershell'].includes(platform))throw Error('Escolha Bash ou PowerShell.');
   const url=new URL(connection.endpoint);
   if(!['http:','https:'].includes(url.protocol)||url.username||url.password||url.pathname!=='/v1'||url.search||url.hash)throw Error('Endpoint API inválido.');
@@ -13,7 +14,7 @@ function openCodeCommand(connection, platform){
   if(platform==='bash')return `# Execute na pasta do projeto. Requer OpenCode instalado.
 (
   export OPENCODE_CONFIG_CONTENT=${bashQuote(configuration)}
-${remote?"  read -rsp 'Chave da API: ' LLAMA_API_KEY || exit 1\n  printf '\\n'\n  export LLAMA_API_KEY":"  export LLAMA_API_KEY='local'"}
+${accessKey?"  export LLAMA_API_KEY="+bashQuote(accessKey):remote?"  read -rsp 'Chave da API: ' LLAMA_API_KEY || exit 1\n  printf '\\n'\n  export LLAMA_API_KEY":"  export LLAMA_API_KEY='local'"}
   opencode --model 'llama-local/${apiModelId}'
 )
 `;
@@ -23,7 +24,7 @@ ${remote?"  read -rsp 'Chave da API: ' LLAMA_API_KEY || exit 1\n  printf '\\n'\n
   $previousKey = $env:LLAMA_API_KEY
   try {
     $env:OPENCODE_CONFIG_CONTENT = ${psQuote(configuration)}
-${remote?"    $secureKey = Read-Host 'Chave da API' -AsSecureString\n    $env:LLAMA_API_KEY = [System.Net.NetworkCredential]::new('', $secureKey).Password":"    $env:LLAMA_API_KEY = 'local'"}
+${accessKey?"    $env:LLAMA_API_KEY = "+psQuote(accessKey):remote?"    $secureKey = Read-Host 'Chave da API' -AsSecureString\n    $env:LLAMA_API_KEY = [System.Net.NetworkCredential]::new('', $secureKey).Password":"    $env:LLAMA_API_KEY = 'local'"}
     opencode --model 'llama-local/${apiModelId}'
   } finally {
     $env:OPENCODE_CONFIG_CONTENT = $previousConfig
