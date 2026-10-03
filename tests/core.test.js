@@ -91,3 +91,13 @@ test('localizações protegidas não confundem caminhos irmãos',()=>{
   assert.equal(isWithin(base,path.join(base,'models')),true);
   assert.equal(isWithin(base,path.join(os.tmpdir(),'llama-app-backup','models')),false);
 });
+
+test('alias API permanece estável ao trocar GGUF e não altera a CLI',()=>{
+  for(const modelPath of ['C:/models/qwen.gguf','/models/another.gguf']) {
+    const model={path:modelPath};
+    const args=argsForModel(model,defaults,'server',8080);
+    assert.equal(args[args.indexOf('--alias')+1],'modelo-local');
+    assert.equal(args[args.indexOf('-m')+1],modelPath);
+    assert.equal(cli.argsForConversation(model,defaults).includes('--alias'),false);
+  }
+});

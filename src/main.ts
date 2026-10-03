@@ -12,6 +12,7 @@ const engine=require('./engine');
 const benchmark=require('./benchmark');
 const network=require('./network');
 const cli=require('./cli');
+const clientCommands=require('./client_commands');
 const terminalCli=require('./terminal_cli');
 const guidance=require('./guidance');
 const hardware=require('./hardware');
@@ -116,7 +117,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
       proxy=await network.createProxy(access.host,port,key,localPort,sessionToken);
       browserUrl=`http://127.0.0.1:${localPort}/?token=${sessionToken}`;
     }
-    active={host:access.host,scope:access.scope,port,parallel,executable,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}/`};
+    active={context:Number(settings.context),modelId:core.apiModelId,host:access.host,scope:access.scope,port,parallel,executable,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}/`};
     if(options.openBrowser!==false)await shell.openExternal(browserUrl);
     return active;
   }catch(e){proxy?.close();proxy=null;cleanupServer(null);try{child.kill();}catch{}throw e;}
@@ -147,6 +148,7 @@ ipcMain.handle('get-key',e=>{validateSender(e);return network.ensureKey(apiKeyPa
 ipcMain.handle('copy-key',e=>{validateSender(e);clipboard.writeText(network.ensureKey(apiKeyPath()));return true;});
 ipcMain.handle('rotate-key',e=>{validateSender(e);if(server)throw Error('Pare o servidor antes de gerar outra chave.');return network.rotateKey(apiKeyPath());});
 ipcMain.handle('copy-endpoint',e=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');clipboard.writeText(active.endpoint);return active.endpoint;});
+ipcMain.handle('copy-opencode-command',async(e,platform)=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');const command=clientCommands.openCodeCommand(active,platform);await clipboard.writeText(command);return true;});
 ipcMain.handle('copy-browser-link',e=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');clipboard.writeText(active.remoteUrl);return active.remoteUrl;});
 ipcMain.handle('create-firewall-rule',async(e,remoteAddress)=>{
   validateSender(e);

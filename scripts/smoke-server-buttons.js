@@ -15,6 +15,7 @@ shell.openExternal=async()=>{opens++;};
 const processes=require('node:child_process'),realSpawn=processes.spawn;
 processes.spawn=(file,...args)=>{
  if(file!==executable)return realSpawn(file,...args);
+ assert.equal(args[0][args[0].indexOf('--alias')+1],'modelo-local');
  starts++;const child=new EventEmitter();child.stdout=new EventEmitter();child.stderr=new EventEmitter();child.exitCode=null;
  child.kill=()=>{child.exitCode=0;child.emit('exit',0);};return child;
 };
@@ -35,7 +36,9 @@ async function main(){
  })()`);
  assert.equal(starts,1);assert.equal(opens,0);
  const state=await win.webContents.executeJavaScript(`({endpoint:document.getElementById('endpoint').textContent,hidden:document.getElementById('connection').hidden,startDisabled:document.getElementById('start-server').disabled,browserDisabled:document.getElementById('launch').disabled})`);
- assert.match(state.endpoint,/\/v1/);assert.equal(state.hidden,false);assert.equal(state.startDisabled,true);assert.equal(state.browserDisabled,false);
+ assert.match(state.endpoint,/\/v1/);assert.match(state.endpoint,/Modelo API: modelo-local/);
+ await win.webContents.executeJavaScript(`document.getElementById('copy-opencode-bash').click()`);
+ await new Promise(r=>setTimeout(r,100));assert.match(await require('electron').clipboard.readText(),/llama-local\/modelo-local/);assert.equal(state.hidden,false);assert.equal(state.startDisabled,true);assert.equal(state.browserDisabled,false);
  if(process.env.LLAMA_TEST_SCREENSHOT)fs.writeFileSync(process.env.LLAMA_TEST_SCREENSHOT,(await win.webContents.capturePage()).toPNG());
  await win.webContents.executeJavaScript(`document.getElementById('launch').click()`);
  for(let i=0;i<50&&opens===0;i++)await new Promise(r=>setTimeout(r,100));

@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.3.0 · English
+Version 0.4.0 · English
 
 ## 1. What the application does
 
@@ -14,25 +14,25 @@ The interface has three screens: **Llama** for chat and starting the server, **M
 
 | Platform / Distribution | Architecture | Official package / Direct download | GPU backend |
 | --- | --- | --- | --- |
-| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.3.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher.Setup.0.3.0.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
-| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.3.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher_0.3.0_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.3.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher_0.3.0_arm64.deb) | Vulkan or CPU |
-| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.3.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher-0.3.0.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.3.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher-0.3.0.aarch64.rpm) | Vulkan or CPU |
-| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.3.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.3.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0-arm64.AppImage) | Vulkan or CPU |
-| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.3.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0-arm64.dmg) | Metal |
-| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.3.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0.dmg) | Metal |
+| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher.Setup.0.4.0.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
+| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher_0.4.0_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher_0.4.0_arm64.deb) | Vulkan or CPU |
+| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher-0.4.0.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher-0.4.0.aarch64.rpm) | Vulkan or CPU |
+| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.4.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.4.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0-arm64.AppImage) | Vulkan or CPU |
+| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0-arm64.dmg) | Metal |
+| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.4.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0.dmg) | Metal |
 
 Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. GitHub Actions compiles native official packages for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon.
 
 ## 3. Install the application
 
-The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.3.0 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
+The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.4.0 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
 
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.3.0.exe`.
+1. Open `Llama Desktop Launcher Setup 0.4.0.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.
@@ -100,7 +100,10 @@ Large models may take several minutes to load. Expand the engine log near the bo
 
 Click **Iniciar servidor** (Start server) to load the model and display the API endpoint without opening a browser. Once ready, **Abrir no navegador** (Open in browser) opens the existing server interface without reloading the model. Use **Parar servidor** (Stop server) to stop it. Stop integrated chat or external CLI before starting a server.
 
-For OpenCode on another computer or VM, select a LAN or Tailscale address before starting. Copy the API link ending in `/v1` and the API key; clients must send the key as a Bearer token. From the client, query `/v1/models` and use the exact returned model ID. In OpenCode, configure an OpenAI-compatible provider with that endpoint and select the model. Project files are edited on the machine running OpenCode, while inference runs on the server. The CLI conversation alone does not provide file-editing tools. On Windows, the external CLI opens in a separate visible PowerShell window.
+For OpenCode on another computer or VM, select a LAN or Tailscale address before starting. Copy the API link ending in `/v1` and the API key; clients must send the key as a Bearer token. From the client, query `/v1/models`: the model ID is always `modelo-local`, regardless of the selected GGUF. Configure this ID once in OpenCode, then set `model` to `llama-local/modelo-local` to make it the default. Stop the server, select another GGUF and start it again to switch models; existing conversations are not reset automatically. Endpoint and API key must still match the running server. Context limits and tool support depend on the selected model and server settings. In OpenCode, configure an OpenAI-compatible provider with that endpoint and select the model. Project files are edited on the machine running OpenCode, while inference runs on the server. The CLI conversation alone does not provide file-editing tools. On Windows, the external CLI opens in a separate visible PowerShell window.
+
+
+Use **Copiar comando Bash** (Linux/macOS) or **Copiar comando PowerShell** (Windows) next to the endpoint. Paste into a terminal in the project folder. The command supplies the provider and model for that run through `OPENCODE_CONFIG_CONTENT`, without editing your configuration file. LAN/Tailscale access prompts for the API key with hidden input; the copied command contains no key. OpenCode must be installed. Copy again if the endpoint, context or parallel sessions change. Other OpenCode settings remain effective, except provider/model values overridden by the temporary configuration.
 
 ## 7. Advanced settings
 
