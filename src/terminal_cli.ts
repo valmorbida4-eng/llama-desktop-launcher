@@ -50,7 +50,11 @@ function onPath(name, env = process.env) {
 }
 
 function terminalCommand(platform, scriptPath, env = process.env) {
-  if (platform === 'win32') return { file: 'powershell.exe', args: ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', scriptPath] };
+  if (platform === 'win32') {
+    const args = ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', '"' + scriptPath + '"'];
+    const bootstrap = "Start-Process -FilePath 'powershell.exe' -ArgumentList @(" + args.map(psQuote).join(', ') + ") -WindowStyle Normal -ErrorAction Stop";
+    return { file: 'powershell.exe', args: ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-EncodedCommand', Buffer.from(bootstrap, 'utf16le').toString('base64')], waitForExit: true };
+  }
   if (platform === 'darwin') return { file: 'open', args: ['-a', 'Terminal', scriptPath] };
   const candidates = [
     ['x-terminal-emulator', ['-e', scriptPath]],
@@ -77,10 +81,17 @@ function openExternalCli({ engineDir, model, settings, platform = process.platfo
   catch (error) { fs.rmSync(directory, { recursive: true, force: true }); throw error; }
   return new Promise<void>((resolve, reject) => {
     let child;
-    try { child = spawnProcess(command.file, command.args, { detached: true, stdio: 'ignore', windowsHide: false, shell: false }); }
+    try { child = spawnProcess(command.file, command.args, { detached: !command.waitForExit, stdio: command.waitForExit ? ['ignore', 'ignore', 'pipe'] : 'ignore', windowsHide: !!command.waitForExit, shell: false }); }
     catch (error) { fs.rmSync(directory, { recursive: true, force: true }); reject(error); return; }
     child.once('error', error => { fs.rmSync(directory, { recursive: true, force: true }); reject(error); });
-    child.once('spawn', () => { child.unref(); resolve(); });
+    if (command.waitForExit) {
+      let stderr = '';
+      child.stderr?.on('data', data => { stderr += data; });
+      child.once('close', code => {
+        if (code === 0) resolve();
+        else { fs.rmSync(directory, { recursive: true, force: true }); reject(Error(stderr.trim() || 'Não foi possível abrir o terminal (código ' + code + ').')); }
+      });
+    } else child.once('spawn', () => { child.unref(); resolve(); });
   });
 }
 
