@@ -87,8 +87,9 @@ ipcMain.handle('analyze-with-model',async(e,modelPath,settings)=>{
   return {prompt};
 });
 ipcMain.handle('tune',async(e,modelPath,settings)=>{validateSender(e);if(server||conversation)throw Error('Pare o servidor ou a conversa antes do teste.');if(tuneAbort)throw Error('Já existe um teste em execução.');const model=selectedModel(modelPath);if(!configuration.engineDir)throw Error('Instale o motor primeiro.');const controller=new AbortController();tuneAbort=controller;try{return await benchmark.tune(configuration.engineDir,model,settings,text=>send('tune-progress',text),controller.signal);}finally{tuneAbort=null;}});
-ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; parallel?: number}={})=>{
+ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; parallel?: number; openBrowser?: boolean}={})=>{
   validateSender(e);
+  if(server&&active){if(options.openBrowser!==false)await shell.openExternal(active.browserUrl);return active;}
   if(server||conversation||tuneAbort)throw Error('Pare a execução atual antes de iniciar outra.');
   const model=selectedModel(modelPath);core.validateSettings(settings);
   const access=network.accessOptions().find(item=>item.host===options.host);
@@ -116,7 +117,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
       browserUrl=`http://127.0.0.1:${localPort}/?token=${sessionToken}`;
     }
     active={host:access.host,scope:access.scope,port,parallel,executable,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}/`};
-    await shell.openExternal(browserUrl);
+    if(options.openBrowser!==false)await shell.openExternal(browserUrl);
     return active;
   }catch(e){proxy?.close();proxy=null;cleanupServer(null);try{child.kill();}catch{}throw e;}
 });

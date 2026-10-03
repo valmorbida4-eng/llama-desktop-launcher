@@ -22,12 +22,12 @@
       <div class="model-select"><label for="model">Modelo GGUF</label><select id="model"></select><small id="model-detail">Escolha um modelo nas pastas configuradas.</small></div>
       <div id="setup-hint" class="hint" hidden>Para executar, configure o motor e uma pasta GGUF. <button id="open-settings" class="secondary small">Abrir configurações</button><button id="open-models" class="ghost small">Ver sugestões de modelos</button></div>
       <div class="access-panel">
-        <div class="section-head"><div><h3>Acesso e sessões</h3><p>Escolha quem pode acessar o servidor iniciado pelo navegador.</p></div></div>
+        <div class="section-head"><div><h3>Acesso e sessões</h3><p>Escolha quem pode acessar o servidor.</p></div></div>
         <div class="fields access-fields"><label>Endereço de acesso<select id="access-host"></select></label><label>Sessões simultâneas <span>--parallel</span><input id="parallel" type="number" min="1" max="8" value="1"></label></div>
         <div id="network-controls" hidden><div class="actions"><button id="show-key" class="secondary small">Mostrar chave</button><button id="copy-key" class="secondary small">Copiar chave</button><button id="rotate-key" class="secondary small">Nova chave</button></div><div id="key-value" class="path" hidden></div><small>Compartilhe a chave apenas com pessoas autorizadas. A rede usa HTTP; prefira uma rede confiável ou Tailscale.</small></div>
         <div id="connection" hidden><div class="path" id="endpoint"></div><div class="actions"><button id="copy-endpoint" class="secondary small">Copiar link da API</button><button id="copy-browser-link" class="secondary small">Copiar link da interface</button></div></div>
       </div>
-      <div class="footer-actions"><button id="save" class="secondary" hidden>Salvar ajustes</button><button id="stop" class="danger" hidden>Parar servidor</button><button id="launch" class="primary">Abrir no navegador ↗</button></div>
+      <div class="footer-actions"><button id="save" class="secondary" hidden>Salvar ajustes</button><button id="stop" class="danger" hidden>Parar servidor</button><button id="start-server" class="primary">Iniciar servidor</button><button id="launch" class="secondary">Abrir no navegador ↗</button></div>
       <div id="message" role="status" class="message"></div>
       <details id="tuning-accordion" class="tuning-accordion"><summary>Ajustes avançados deste modelo</summary><div id="tuning-content"></div></details>
       <details class="log-accordion"><summary>Registro do motor</summary><pre id="log">Nenhum registro ainda. O registro do llama-server aparecerá aqui quando você clicar em "Abrir no navegador".</pre></details>
