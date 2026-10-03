@@ -29,7 +29,7 @@ interface RendererApi {
   copyGuidancePrompt(): Promise<string>;
   analyzeWithModel(modelPath: string, settings: ModelSettings): Promise<{ prompt: string }>;
   tune(modelPath: string, settings: ModelSettings): Promise<any>;
-  launch(modelPath: string, settings: ModelSettings, options: { host: string; parallel: number }): Promise<any>;
+  launch(modelPath: string, settings: ModelSettings, options: { host: string; parallel: number; openBrowser?: boolean }): Promise<any>;
   stop(): Promise<boolean>;
   startChat(modelPath: string, settings: ModelSettings): Promise<boolean>;
   openCliTerminal(modelPath: string, settings: ModelSettings): Promise<boolean>;
