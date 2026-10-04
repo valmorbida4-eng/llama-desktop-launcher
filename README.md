@@ -25,16 +25,16 @@ O código-fonte está no [repositório do projeto](https://github.com/valmorbida
 
 | Plataforma / Distribuição | Arquitetura | Pacote / Download direto | Descrição |
 | --- | --- | --- | --- |
-| **Windows** (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.3.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher.Setup.0.3.0.exe) | Instalador oficial NSIS com atalho opcional na área de trabalho. |
-| **Linux** (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.3.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher_0.3.0_amd64.deb) | Pacote nativo `.deb` para instalação via `apt` / `dpkg`. |
-| **Linux** (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.3.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher_0.3.0_arm64.deb) | Pacote nativo `.deb` para placas e servidores ARM64. |
-| **Linux** (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.3.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher-0.3.0.x86_64.rpm) | Pacote nativo `.rpm` para instalação via `dnf` / `rpm`. |
-| **Linux** (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.3.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher-0.3.0.aarch64.rpm) | Pacote nativo `.rpm` para distribuições RPM em ARM64. |
-| **Linux** (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.3.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0.AppImage) | Executável portátil sem necessidade de instalação root. |
-| **Linux** (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.3.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0-arm64.AppImage) | Executável portátil para sistemas ARM64. |
-| **macOS** (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.3.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0-arm64.dmg) | Imagem de disco DMG nativa com aceleração Metal. |
-| **macOS** (Intel) | x64 | [`Llama Desktop Launcher-0.3.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0.dmg) | Imagem de disco DMG para Macs com processador Intel. |
-| **Verificação de Integridade** | Todas | [`SHA256SUMS.txt`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/SHA256SUMS.txt) | Checksums SHA-256 de todos os arquivos da versão 0.3.0. |
+| **Windows** (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher.Setup.0.4.0.exe) | Instalador oficial NSIS com atalho opcional na área de trabalho. |
+| **Linux** (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher_0.4.0_amd64.deb) | Pacote nativo `.deb` para instalação via `apt` / `dpkg`. |
+| **Linux** (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher_0.4.0_arm64.deb) | Pacote nativo `.deb` para placas e servidores ARM64. |
+| **Linux** (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher-0.4.0.x86_64.rpm) | Pacote nativo `.rpm` para instalação via `dnf` / `rpm`. |
+| **Linux** (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher-0.4.0.aarch64.rpm) | Pacote nativo `.rpm` para distribuições RPM em ARM64. |
+| **Linux** (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.4.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0.AppImage) | Executável portátil sem necessidade de instalação root. |
+| **Linux** (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.4.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0-arm64.AppImage) | Executável portátil para sistemas ARM64. |
+| **macOS** (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0-arm64.dmg) | Imagem de disco DMG nativa com aceleração Metal. |
+| **macOS** (Intel) | x64 | [`Llama Desktop Launcher-0.4.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0.dmg) | Imagem de disco DMG para Macs com processador Intel. |
+| **Verificação de Integridade** | Todas | [`SHA256SUMS.txt`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/SHA256SUMS.txt) | Checksums SHA-256 de todos os arquivos da versão 0.4.0. |
 
 Quando houver uma Release com o pacote do seu sistema, baixe o instalador por ela e siga o [manual em português](docs/MANUAL-pt-BR.md) ou [em inglês](docs/MANUAL-en.md). Se houver apenas o código-fonte, será preciso gerar o pacote na plataforma correspondente pelas instruções abaixo. O instalador não inclui modelos GGUF; o motor llama.cpp pode ser baixado pelo aplicativo na primeira execução.
 
@@ -54,7 +54,7 @@ Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux`
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-O instalador atual é identificado pela versão `0.3.0`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
+O instalador atual é identificado pela versão `0.4.0`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
 
 Para verificações pontuais de macOS sem executar a matriz completa de plataformas, o workflow `.github/workflows/build-macos-preview.yml` pode ser acionado manualmente para testar e validar os pacotes Intel e Apple Silicon.
 
@@ -83,4 +83,33 @@ Os créditos não implicam participação ou endosso dos autores do llama.cpp ne
 
 Clique em **Iniciar servidor** para carregar o modelo e mostrar o endpoint da API sem abrir o navegador. Após o carregamento, **Abrir no navegador** abre a interface do servidor existente sem recarregar o modelo. Use **Parar servidor** para encerrá-lo. Encerre a conversa integrada ou a CLI externa antes de iniciar um servidor.
 
-Para conectar o OpenCode em outro computador ou VM, selecione um endereço LAN ou Tailscale antes de iniciar. Copie o link da API terminado em `/v1` e a chave; o cliente deve enviar a chave como Bearer token. No cliente, consulte `/v1/models` e use o identificador exato retornado. No OpenCode, configure um provedor compatível com OpenAI com esse endpoint e selecione o modelo. Os arquivos do projeto são editados na máquina que executa o OpenCode; a inferência ocorre no servidor. A conversa da CLI sozinha não oferece ferramentas para editar arquivos. No Windows, a CLI externa abre em uma janela visível do PowerShell.
+Para conectar o OpenCode em outro computador ou VM, selecione um endereço LAN ou Tailscale antes de iniciar. Copie o link da API terminado em `/v1` e a chave; o cliente deve enviar a chave como Bearer token. No cliente, consulte `/v1/models`: o identificador será sempre `modelo-local`, independentemente do GGUF selecionado. Configure esse identificador uma vez no OpenCode e defina `model` como `llama-local/modelo-local` para torná-lo padrão. Para trocar de modelo, pare o servidor, selecione outro GGUF e inicie novamente; conversas existentes não são reiniciadas automaticamente. O endpoint e a chave precisam continuar correspondendo ao servidor ativo. Limites de contexto e suporte a ferramentas dependem do modelo escolhido e dos ajustes do servidor. No OpenCode, configure um provedor compatível com OpenAI com esse endpoint e selecione o modelo. Os arquivos do projeto são editados na máquina que executa o OpenCode; a inferência ocorre no servidor. A conversa da CLI sozinha não oferece ferramentas para editar arquivos. No Windows, a CLI externa abre em uma janela visível do PowerShell.
+
+
+Use **Copiar comando Bash** (Linux/macOS) ou **Copiar comando PowerShell** (Windows) ao lado do endpoint. Cole no terminal, na pasta do projeto. O comando configura o provedor e modelo para aquela execução via `OPENCODE_CONFIG_CONTENT`, sem editar seu arquivo de configuração. Em acesso LAN/Tailscale, ele solicita a chave com entrada oculta; a chave não é incluída no comando copiado. O OpenCode precisa estar instalado. Copie novamente se mudar o endpoint, contexto ou sessões simultâneas. As demais configurações do OpenCode continuam aplicadas, salvo valores de provedor/modelo sobrescritos pela configuração temporária.
+
+
+### Compartilhar acesso na rede interna ou Tailscale
+
+Com o servidor ativo em LAN/Tailscale, use **Copiar link com acesso** para abrir a interface no navegador de outro computador sem digitar uma chave. Use **Copiar Bash com acesso** ou **Copiar PowerShell com acesso** para abrir o OpenCode na pasta do projeto sem pedir a chave. Esses comandos incluem uma credencial temporária de compartilhamento; quem recebê-los poderá usar o modelo.
+
+O link e os comandos compartilhados valem somente para a execução atual. **Revogar acesso compartilhado** invalida todos os anteriores e interrompe conexões compartilhadas existentes; copie novos para conceder acesso novamente. Parar o servidor ou fechar o launcher encerra esse acesso; reiniciar gera uma nova credencial. Isso não revoga a chave permanente da API nem clientes que a usam diretamente. No navegador, o token sai da barra de endereço após a autenticação e fica em cookie HttpOnly.
+
+O compartilhamento usa uma porta adicional de 8181 a 8280; a API original usa 8080 a 8180. No Windows, o botão de firewall libera ambas as portas, limitadas ao executável correspondente e à faixa informada. Linux/macOS exigem liberar as duas portas conforme o firewall local. O OpenCode deve estar instalado no cliente. Prefira Tailscale; uma LAN com HTTP não cifra o conteúdo. Se mudar o modelo, contexto, endereço ou sessões, copie os comandos novamente. Acesso compartilhado autoriza uso do modelo, não acesso automático aos arquivos do servidor.
+
+
+### Conectar outros aplicativos
+
+Em **Conectar aplicativo**, selecione OpenCode, Pi, Hermes, Aider, Continue, Cline, Codex ou Genérico. OpenCode e Aider oferecem comandos Bash/PowerShell: execute na pasta do projeto, com o cliente já instalado. Os demais oferecem **Copiar configuração** e instruções de onde mesclar os dados. O launcher não sobrescreve configurações nem instala clientes.
+
+Para Pi, mescle em `~/.pi/agent/models.json` e selecione `llama-local/modelo-local` em `/model`. No Hermes, mescle o bloco `model` em `config.yaml` e execute `hermes chat`. A documentação atual exige ao menos 64000 tokens por sessão para ferramentas; a configuração exporta o contexto real, sem aumentá-lo artificialmente. No Continue, mescle o bloco `models` na configuração YAML existente. No Cline, escolha OpenAI Compatible e preencha Base URL, API Key e Model ID. Genérico fornece esses campos para outros clientes compatíveis.
+
+**Copiar configuração com acesso** inclui a credencial temporária revogável e o endpoint compartilhado. A configuração direta em rede contém `SUBSTITUA_PELA_CHAVE_DA_API`: preencha com a chave permanente antes de usar. Preserve os providers, modelos e demais ajustes já existentes. Configurações compartilhadas salvas precisam ser atualizadas após revogar ou reiniciar o servidor.
+
+Codex aparece como experimental: a configuração exige Responses API no servidor ou em um adaptador e ainda não foi validada com este motor. Compatibilidade OpenAI não garante suporte a todos os protocolos. Ferramentas, contexto e qualidade de execução dependem do modelo GGUF; suporte a visão não é presumido. O aplicativo trabalha nos arquivos do cliente onde roda.
+
+### APIs de aplicativos
+
+Selecione **Genérico - OpenAI Compatible**. Para acesso temporário, use **Copiar configuração com acesso** e o endpoint compartilhado. Para integração persistente, use **Copiar configuração**, a API direta e a chave de **Copiar chave** no lugar de `SUBSTITUA_PELA_CHAVE_DA_API`. A chave direta permanece entre reinícios até ser trocada; o servidor precisa estar iniciado e o IP/porta podem mudar. Não misture credenciais entre as duas modalidades.
+
+Use Base URL terminada em `/v1`, modelo `modelo-local` e autenticação Bearer. Consulte `/models` antes de chamar `/chat/completions`. Os [manuais](docs/MANUAL-pt-BR.md) incluem passo a passo, exemplos Bash/curl, PowerShell e Python, streaming, limites de contexto e diagnóstico de erros.

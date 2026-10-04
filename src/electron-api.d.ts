@@ -38,7 +38,12 @@ interface RendererApi {
   getKey(): Promise<string>;
   copyKey(): Promise<boolean>;
   rotateKey(): Promise<string>;
+  copyClientSetup(application: string, format: 'bash' | 'powershell' | 'config', shared: boolean): Promise<boolean>;
+  copySharedLink(): Promise<boolean>;
+  revokeSharedAccess(): Promise<boolean>;
+  copySharedCommand(platform: 'bash' | 'powershell'): Promise<boolean>;
   copyEndpoint(): Promise<string>;
+  copyOpenCodeCommand(platform: 'bash' | 'powershell'): Promise<boolean>;
   copyBrowserLink(): Promise<string>;
   createFirewallRule(address: string): Promise<any>;
   openHF(kind: 'all' | 'quantized' | 'moe' | 'dense' | 'full' | string): Promise<string>;

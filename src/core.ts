@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 
+const apiModelId = 'modelo-local';
 const defaults = Object.freeze({gpuLayers:'auto', context:4096, cacheK:'f16', cacheV:'f16', cpuMoe:'', flash:'auto', threads:'', batch:512, ubatch:256, device:''});
 const caches = new Set(['f32','f16','bf16','q8_0','q4_0','q4_1','q5_0','q5_1','iq4_nl']);
 function validInt(value: unknown, allowEmpty=false, zero=false) {
@@ -27,6 +28,7 @@ function argsForModel(model: any, settings: any, mode: string, port=0, serverOpt
   if (model.projector) a.push('--mmproj',model.projector);
   for (const [key,flag] of [['cpuMoe','-ncmoe'],['threads','-t'],['batch','-b'],['ubatch','-ub'],['device','-dev']]) if (String(settings[key]) !== '') a.push(flag,String(settings[key]));
   if (mode === 'server') {
+    a.push('--alias',apiModelId);
     const host=serverOptions.host||'127.0.0.1';
     const parallel=Number(serverOptions.parallel||1);
     if(require('./network').scopeOf(host)===null||!Number.isInteger(parallel)||parallel<1||parallel>8)throw Error('Configuração de rede inválida.');
@@ -76,4 +78,4 @@ function scanModels(roots: string[]) {
   }
   return found.sort((a,b)=>a.name.localeCompare(b.name));
 }
-module.exports={defaults,validateSettings,argsForModel,recommend,detectHardware,isWithin,scanModels};
+module.exports={apiModelId,defaults,validateSettings,argsForModel,recommend,detectHardware,isWithin,scanModels};

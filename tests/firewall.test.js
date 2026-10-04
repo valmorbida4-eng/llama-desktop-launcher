@@ -50,3 +50,14 @@ test('createRule só despacha PowerShell no Windows e permite execução simulad
   assert.ok(call[1].includes('-EncodedCommand'));
   await assert.rejects(createRule(valid, { platform: 'linux', run: async () => assert.fail('runner não deve executar') }), /só está disponível no Windows/);
 });
+
+test('compartilhamento libera somente launcher na porta adicional e agrega uma solicitação elevada',async()=>{
+ const {createRules}=require('../build/app/firewall');
+ const sharing={program:'C:/Apps/Llama Desktop Launcher.exe',port:8181,remoteAddress:'100.64.0.0/10',sharing:true};
+ assert.equal(validateRuleOptions(sharing).port,8181);
+ assert.throws(()=>validateRuleOptions({...sharing,program:'C:/Apps/other.exe'}));
+ assert.throws(()=>validateRuleOptions({...sharing,port:8080}));
+ let calls=0,script;
+ await createRules([valid,sharing],{platform:'win32',run:async(_file,args)=>{calls++;script=Buffer.from(args.at(-1),'base64').toString('utf16le');}});
+ assert.equal(calls,1);assert.match(script,/-Verb RunAs/);
+});

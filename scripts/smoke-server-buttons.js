@@ -10,11 +10,14 @@ fs.mkdirSync(modelDir);fs.mkdirSync(engineDir);
 const modelPath=path.join(modelDir,'sample.gguf');fs.writeFileSync(modelPath,Buffer.alloc(1024));
 const executable=path.join(engineDir,process.platform==='win32'?'llama-server.exe':'llama-server');fs.writeFileSync(executable,'');
 fs.writeFileSync(path.join(temporary,'settings.json'),JSON.stringify({modelDirs:[modelDir,''],engineDir,profiles:{},selectedModelPath:modelPath,firstRun:false,accessHost:'127.0.0.1',parallel:1}));
+const sharingTest=process.argv.includes('--with-sharing');
+if(sharingTest){const host=require('../build/app/network').accessOptions().find(x=>x.scope!=='Local')?.host;if(!host)throw Error('Rede LAN/Tailscale indisponível para teste.');const file=path.join(temporary,'settings.json'),config=JSON.parse(fs.readFileSync(file));config.accessHost=host;fs.writeFileSync(file,JSON.stringify(config));}
 let starts=0,opens=0;
 shell.openExternal=async()=>{opens++;};
 const processes=require('node:child_process'),realSpawn=processes.spawn;
 processes.spawn=(file,...args)=>{
  if(file!==executable)return realSpawn(file,...args);
+ assert.equal(args[0][args[0].indexOf('--alias')+1],'modelo-local');
  starts++;const child=new EventEmitter();child.stdout=new EventEmitter();child.stderr=new EventEmitter();child.exitCode=null;
  child.kill=()=>{child.exitCode=0;child.emit('exit',0);};return child;
 };
@@ -34,8 +37,22 @@ async function main(){
   await new Promise(r=>setTimeout(r,300));
  })()`);
  assert.equal(starts,1);assert.equal(opens,0);
+ if(sharingTest){
+  await win.webContents.executeJavaScript(`document.getElementById('copy-shared-link').click()`);await new Promise(r=>setTimeout(r,100));const link=await require('electron').clipboard.readText();assert.match(link,/#token=/);
+  await win.webContents.executeJavaScript(`document.getElementById('copy-shared-bash').click()`);await new Promise(r=>setTimeout(r,100));const command=await require('electron').clipboard.readText();assert.ok(command.includes(new URL(link).hash.slice(7)));assert.doesNotMatch(command,/read -rsp/);
+  await win.webContents.executeJavaScript(`document.getElementById('revoke-shared-access').click()`);await new Promise(r=>setTimeout(r,100));
+  await win.webContents.executeJavaScript(`document.getElementById('copy-shared-link').click()`);await new Promise(r=>setTimeout(r,100));assert.notEqual(await require('electron').clipboard.readText(),link);
+ }
+ await win.webContents.executeJavaScript(`document.getElementById('client-application').value='pi';document.getElementById('client-application').dispatchEvent(new Event('change'));document.getElementById('copy-client-config').click()`);
+ await new Promise(r=>setTimeout(r,100));assert.ok(JSON.parse(await require('electron').clipboard.readText()).providers['llama-local']);
+ assert.equal(await win.webContents.executeJavaScript(`document.getElementById('copy-opencode-bash').hidden`),true);
+ await win.webContents.executeJavaScript(`document.getElementById('client-application').value='aider';document.getElementById('client-application').dispatchEvent(new Event('change'));document.getElementById('copy-opencode-powershell').click()`);
+ await new Promise(r=>setTimeout(r,100));assert.match(await require('electron').clipboard.readText(),/aider --model/);
+ await win.webContents.executeJavaScript(`document.getElementById('client-application').value='opencode';document.getElementById('client-application').dispatchEvent(new Event('change'))`);
  const state=await win.webContents.executeJavaScript(`({endpoint:document.getElementById('endpoint').textContent,hidden:document.getElementById('connection').hidden,startDisabled:document.getElementById('start-server').disabled,browserDisabled:document.getElementById('launch').disabled})`);
- assert.match(state.endpoint,/\/v1/);assert.equal(state.hidden,false);assert.equal(state.startDisabled,true);assert.equal(state.browserDisabled,false);
+ assert.match(state.endpoint,/\/v1/);assert.match(state.endpoint,/Modelo API: modelo-local/);
+ await win.webContents.executeJavaScript(`document.getElementById('copy-opencode-bash').click()`);
+ await new Promise(r=>setTimeout(r,100));assert.match(await require('electron').clipboard.readText(),/llama-local\/modelo-local/);assert.equal(state.hidden,false);assert.equal(state.startDisabled,true);assert.equal(state.browserDisabled,false);
  if(process.env.LLAMA_TEST_SCREENSHOT)fs.writeFileSync(process.env.LLAMA_TEST_SCREENSHOT,(await win.webContents.capturePage()).toPNG());
  await win.webContents.executeJavaScript(`document.getElementById('launch').click()`);
  for(let i=0;i<50&&opens===0;i++)await new Promise(r=>setTimeout(r,100));

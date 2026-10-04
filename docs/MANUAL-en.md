@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.3.0 · English
+Version 0.4.0 · English
 
 ## 1. What the application does
 
@@ -14,25 +14,25 @@ The interface has three screens: **Llama** for chat and starting the server, **M
 
 | Platform / Distribution | Architecture | Official package / Direct download | GPU backend |
 | --- | --- | --- | --- |
-| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.3.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher.Setup.0.3.0.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
-| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.3.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher_0.3.0_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.3.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher_0.3.0_arm64.deb) | Vulkan or CPU |
-| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.3.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher-0.3.0.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.3.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/llama-desktop-launcher-0.3.0.aarch64.rpm) | Vulkan or CPU |
-| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.3.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.3.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0-arm64.AppImage) | Vulkan or CPU |
-| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.3.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0-arm64.dmg) | Metal |
-| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.3.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.3.0/Llama.Desktop.Launcher-0.3.0.dmg) | Metal |
+| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher.Setup.0.4.0.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
+| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher_0.4.0_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher_0.4.0_arm64.deb) | Vulkan or CPU |
+| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher-0.4.0.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/llama-desktop-launcher-0.4.0.aarch64.rpm) | Vulkan or CPU |
+| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.4.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.4.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0-arm64.AppImage) | Vulkan or CPU |
+| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0-arm64.dmg) | Metal |
+| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.4.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.0/Llama.Desktop.Launcher-0.4.0.dmg) | Metal |
 
 Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. GitHub Actions compiles native official packages for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon.
 
 ## 3. Install the application
 
-The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.3.0 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
+The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.4.0 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
 
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.3.0.exe`.
+1. Open `Llama Desktop Launcher Setup 0.4.0.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.
@@ -100,7 +100,150 @@ Large models may take several minutes to load. Expand the engine log near the bo
 
 Click **Iniciar servidor** (Start server) to load the model and display the API endpoint without opening a browser. Once ready, **Abrir no navegador** (Open in browser) opens the existing server interface without reloading the model. Use **Parar servidor** (Stop server) to stop it. Stop integrated chat or external CLI before starting a server.
 
-For OpenCode on another computer or VM, select a LAN or Tailscale address before starting. Copy the API link ending in `/v1` and the API key; clients must send the key as a Bearer token. From the client, query `/v1/models` and use the exact returned model ID. In OpenCode, configure an OpenAI-compatible provider with that endpoint and select the model. Project files are edited on the machine running OpenCode, while inference runs on the server. The CLI conversation alone does not provide file-editing tools. On Windows, the external CLI opens in a separate visible PowerShell window.
+For OpenCode on another computer or VM, select a LAN or Tailscale address before starting. Copy the API link ending in `/v1` and the API key; clients must send the key as a Bearer token. From the client, query `/v1/models`: the model ID is always `modelo-local`, regardless of the selected GGUF. Configure this ID once in OpenCode, then set `model` to `llama-local/modelo-local` to make it the default. Stop the server, select another GGUF and start it again to switch models; existing conversations are not reset automatically. Endpoint and API key must still match the running server. Context limits and tool support depend on the selected model and server settings. In OpenCode, configure an OpenAI-compatible provider with that endpoint and select the model. Project files are edited on the machine running OpenCode, while inference runs on the server. The CLI conversation alone does not provide file-editing tools. On Windows, the external CLI opens in a separate visible PowerShell window.
+
+
+Use **Copiar comando Bash** (Linux/macOS) or **Copiar comando PowerShell** (Windows) next to the endpoint. Paste into a terminal in the project folder. The command supplies the provider and model for that run through `OPENCODE_CONFIG_CONTENT`, without editing your configuration file. LAN/Tailscale access prompts for the API key with hidden input; the copied command contains no key. OpenCode must be installed. Copy again if the endpoint, context or parallel sessions change. Other OpenCode settings remain effective, except provider/model values overridden by the temporary configuration.
+
+
+### Share access over LAN or Tailscale
+
+With a LAN/Tailscale server running, **Copiar link com acesso** copies an authenticated browser link. **Copiar Bash com acesso** and **Copiar PowerShell com acesso** start OpenCode in the client's project folder without prompting for a key. These commands include a temporary sharing credential; recipients can use the model.
+
+Links and shared commands last only for the current server run. **Revogar acesso compartilhado** invalidates previous links and commands and disconnects shared clients; copy new ones to grant access again. Stopping the server or closing the launcher ends shared access. Restarting generates a new credential. This does not revoke the permanent API key or clients using it directly. The browser removes the token from the address bar after authentication and stores it in an HttpOnly cookie.
+
+Sharing uses an additional port in 8181–8280; the original API uses 8080–8180. The Windows firewall button allows both active ports, limited to the corresponding executables and selected client range. On Linux/macOS, allow both ports in your firewall. OpenCode must be installed on the client. Prefer Tailscale; plain HTTP on LAN does not encrypt content. Copy commands again after changing the model, context, address or parallel sessions. Shared access grants model usage, not automatic access to server files.
+
+
+### Connect other applications
+
+Under **Conectar aplicativo**, choose OpenCode, Pi, Hermes, Aider, Continue, Cline, Codex or Generic. OpenCode and Aider provide Bash/PowerShell commands to run in your project directory, with the client already installed. Other applications provide **Copiar configuração** and instructions for manually merging it. The launcher does not overwrite client configuration or install clients.
+
+Pi: merge into `~/.pi/agent/models.json`, then select `llama-local/modelo-local` in `/model`. Hermes: merge the `model` block into `config.yaml`, then run `hermes chat`. Current documentation requires at least 64000 tokens per session for tools; the export uses the real context without artificially increasing it. Continue: merge the `models` block into the existing YAML configuration. Cline: select OpenAI Compatible and fill Base URL, API Key and Model ID. Generic exports these fields for other compatible clients.
+
+**Copiar configuração com acesso** includes the revocable session credential and sharing endpoint. Direct network configuration contains `SUBSTITUA_PELA_CHAVE_DA_API`: replace this with the permanent API key before use. Preserve existing providers, models and settings. Saved shared configurations must be refreshed after revocation or server restart.
+
+Codex is experimental: its configuration requires Responses API on the server or an adapter and has not been validated with this engine. OpenAI compatibility does not guarantee every protocol. Tool support, context and execution quality depend on the GGUF model; vision support is not assumed. The client works on files where it runs.
+
+
+### Integrate application APIs: step by step
+
+Choose **Genérico - OpenAI Compatible** under **Conectar aplicativo** for your own application, service, automation or client supporting OpenAI Chat Completions. The launcher provides the base URL, credential, model ID and limits; it does not expose a public internet API.
+
+1. Choose **Somente este computador** for a client on the server PC, LAN for clients on the same network, or Tailscale for authorized tailnet devices. On a different PC, `127.0.0.1` points to that client itself.
+2. Click **Iniciar servidor** and wait for the endpoint. Allow LAN/Tailscale access through your firewall; the Windows button creates rules for the direct API and sharing port in the selected range.
+3. Select Generic and choose a mode below. Use the displayed active endpoint: 8080 and 8181 are examples, not fixed ports. Direct API uses 8080-8180; sharing uses 8181-8280.
+4. Set Base URL ending in `/v1`, API Key to the matching credential, and Model ID to `modelo-local`. Do not append `/chat/completions` to Base URL if the client already appends it.
+5. Test `GET /v1/models`, then `POST /v1/chat/completions` with JSON and `Authorization: Bearer KEY`. The examples already include `/v1` in their base URL, so only append `/models` or `/chat/completions`.
+
+### Temporary access or persistent credential
+
+| Mode | Where to obtain it | Credential lifetime |
+| --- | --- | --- |
+| Shared | **Copiar configuração com acesso**; sharing endpoint and session token | Until revocation, server stop or launcher exit. Copy a fresh configuration after restarting. |
+| Direct over network | **Copiar configuração**, replacing `SUBSTITUA_PELA_CHAVE_DA_API` with **Copiar chave**; direct API | Preserved across restarts until **Nova chave** rotates it. |
+| Direct local | **Somente este computador**, direct endpoint and dummy key `local` for clients requiring a key field | The local API does not require authentication; this address cannot serve other PCs. |
+
+For a persistent integration, use the **direct API** and permanent key. Never mix a permanent key with the sharing port or a temporary token with the direct port. Store the key in the client's secret storage or process environment, outside source code and repositories. Copying direct configuration does not automatically copy the key.
+
+A persistent key does not keep the server running: the launcher and server must remain active. After a PC restart, open the launcher and start the server again. Check the current IP and port and update Base URL if they change. To rotate the key, stop the server, choose **Nova chave**, restart and update direct clients. **Revogar acesso compartilhado** does not revoke the permanent key.
+
+### Test on Linux/macOS with Bash and curl
+
+Paste the Base URL and matching credential. The key prompt hides input; for direct local access, enter `local`.
+```bash
+(
+  read -rp 'Base URL (terminada em /v1): ' LLAMA_BASE_URL
+  read -rsp 'API Key: ' LLAMA_API_KEY
+  printf '\n'
+  curl --fail-with-body -sS \
+    -H "Authorization: Bearer $LLAMA_API_KEY" \
+    "${LLAMA_BASE_URL%/}/models"
+  printf '\n'
+  curl --fail-with-body -sS \
+    -H "Authorization: Bearer $LLAMA_API_KEY" \
+    -H 'Content-Type: application/json' \
+    "${LLAMA_BASE_URL%/}/chat/completions" \
+    --data '{"model":"modelo-local","messages":[{"role":"user",
+    "content":"Responda apenas: conectado"}],"max_tokens":64,
+    "stream":false}'
+)
+```
+
+
+The first response should list `modelo-local`. The second answer is in `choices[0].message.content`. These examples request a complete response without streaming. Clients using `stream: true` must process Server-Sent Events (SSE).
+
+### Test on Windows with PowerShell
+
+No SDK installation is required. Paste the Base URL and enter the matching key when prompted.
+
+```powershell
+& {
+  $baseUrl = (Read-Host 'Base URL (terminada em /v1)').TrimEnd('/')
+  $secureKey = Read-Host 'API Key' -AsSecureString
+  $apiKey = [System.Net.NetworkCredential]::new('', $secureKey).Password
+  $headers = @{ Authorization = "Bearer $apiKey" }
+  Invoke-RestMethod -Uri "$baseUrl/models" -Headers $headers
+  $body = @{
+    model = 'modelo-local'
+    messages = @(@{ role = 'user'; content = 'Responda: conectado' })
+    max_tokens = 64
+    stream = $false
+  } | ConvertTo-Json -Depth 5
+  $response = Invoke-RestMethod -Method Post `
+    -Uri "$baseUrl/chat/completions" -Headers $headers `
+    -ContentType 'application/json; charset=utf-8' `
+    -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
+  $response.choices[0].message.content
+}
+```
+
+
+### Python example for your application
+
+Requires Python 3 and uses only its standard library. Set `LLAMA_BASE_URL` and `LLAMA_API_KEY` in the process environment using the chosen URL and credential before running. Do not put the key in URL parameters.
+
+```python
+import json
+import os
+from urllib.request import Request, urlopen
+
+base_url = os.environ['LLAMA_BASE_URL'].rstrip('/')
+api_key = os.environ['LLAMA_API_KEY']
+payload = {
+    'model': 'modelo-local',
+    'messages': [{'role': 'user', 'content': 'Responda: conectado'}],
+    'max_tokens': 64,
+    'stream': False,
+}
+request = Request(
+    base_url + '/chat/completions',
+    data=json.dumps(payload).encode('utf-8'),
+    headers={
+        'Authorization': 'Bearer ' + api_key,
+        'Content-Type': 'application/json',
+    },
+    method='POST',
+)
+with urlopen(request, timeout=120) as response:
+    result = json.load(response)
+print(result['choices'][0]['message']['content'])
+```
+
+
+The 120-second timeout is an example; larger models may need more time. Available context is the configured server context divided by parallel sessions. Prompt, history, tool definitions and response must all fit; the training context is not the session limit. API responses do not execute code or edit files by themselves: the client application handles those actions.
+
+### Troubleshoot application APIs
+
+| Result | What to check |
+| --- | --- |
+| Connection refused or timeout | Server started, model loaded, current IP/port, same network or active Tailscale, and firewall. |
+| 401 or 403 | Bearer header, credential matching the selected mode, and a sharing token that is still valid. |
+| 404 | Base URL ends in `/v1`, with no duplicate `/v1/v1`, and the client uses Chat Completions. Responses API has not been validated with this engine. |
+| 400 or context error | Valid JSON, model ID `modelo-local`, accepted request fields and per-session context limit. |
+| Client does not recognize a model change | Start the new GGUF, check `/models`, start a new conversation and refresh limits, endpoint or credential as needed. |
+
+Tool calling requires a compatible GGUF and chat template; some engines/models require a suitable Jinja template. Do not enable vision, tools or other protocols merely because the endpoint advertises OpenAI compatibility.
 
 ## 7. Advanced settings
 
@@ -110,7 +253,7 @@ Under **Acesso e sessões / Access and sessions**, select **Somente este computa
 
 For LAN/Tailscale, use **Mostrar chave / Show key**, **Copiar chave / Copy key**, or **Nova chave / New key**. Stop the server before rotating the key. The app opens the local browser interface through an authenticated proxy. **Copiar link da API / Copy API link** gives you the `/v1` endpoint. **Copiar link da interface / Copy interface link** gives you the network web address. Remote API clients must send `Authorization: Bearer YOUR_KEY`; the link alone does not grant access. A remote web client must also support this authentication. Never add the key to the URL or publish it in an open message.
 
-The app does not change firewall rules when starting the server. On Windows, while a LAN/Tailscale server is running, enter the **allowed client address or CIDR range** in **Firewall do Windows / Windows Firewall** and click **Criar regra para a porta ativa / Create rule for active port**. Confirm the Windows administrator prompt. The rule is limited to `llama-server.exe`, the active port, and the entered client range. Check the range before confirming; if the port changes, create another rule. On Linux/macOS, use your distribution's firewall controls. The server selects a free port from 8080 to 8180. Prefer Tailscale or a trusted LAN; direct HTTP on a LAN does not encrypt traffic.
+The app does not change firewall rules when starting the server. On Windows, while a LAN/Tailscale server is running, enter the **allowed client address or CIDR range** in **Firewall do Windows / Windows Firewall** and click **Criar regra para a porta ativa / Create rule for active port**. Confirm the Windows administrator prompt. Each rule is limited to the matching executable (`llama-server.exe` for the direct API and the launcher for sharing), its active port and the entered client range. Check the range before confirming; if the port changes, create another rule. On Linux/macOS, use your distribution's firewall controls. The server selects a free port from 8080 to 8180. Prefer Tailscale or a trusted LAN; direct HTTP on a LAN does not encrypt traffic.
 
 ### Integrated chat and external CLI
 

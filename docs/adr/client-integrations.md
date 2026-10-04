@@ -1,0 +1,3 @@
+# Integrações de clientes
+
+Manter o endpoint OpenAI Compatible e o alias modelo-local como contrato comum. Gerar comandos somente onde a configuração por execução é documentada (OpenCode e Aider). Pi, Hermes, Continue, Cline e clientes genéricos recebem configuração para mesclar manualmente; não sobrescrever arquivos ou instalar clientes. Codex é experimental porque requer Responses API, ainda não validada com o motor. Exportações compartilhadas usam o token revogável; exportações diretas não revelam a chave permanente e exibem marcador para preenchimento. Não assumir visão nem suporte completo a ferramentas do GGUF.

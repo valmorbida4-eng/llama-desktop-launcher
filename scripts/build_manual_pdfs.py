@@ -12,7 +12,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import HRFlowable, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import HRFlowable, Paragraph, Preformatted, SimpleDocTemplate, Spacer, Table, TableStyle
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,6 +91,16 @@ def blocks(markdown: str, width: float) -> list:
         if not line:
             i += 1
             continue
+        if line.startswith("```"):
+            i += 1
+            code = []
+            while i < len(lines) and not lines[i].strip().startswith("```"):
+                code.append(lines[i]); i += 1
+            i += 1
+            code_style = ParagraphStyle("code", fontName="Courier", fontSize=7.5,
+                                        leading=10.5, textColor=NAVY, spaceAfter=10)
+            story.append(Preformatted("\n".join(code), code_style))
+            continue
         if line.startswith("|"):
             group = []
             while i < len(lines) and lines[i].strip().startswith("|"):
@@ -113,7 +123,7 @@ def blocks(markdown: str, width: float) -> list:
             continue
         paragraph = [line]
         i += 1
-        while i < len(lines) and lines[i].strip() and not re.match(r"^(?:#|\||\d+\.\s|-\s)", lines[i].strip()):
+        while i < len(lines) and lines[i].strip() and not re.match(r"^(?:```|#|\||\d+\.\s|-\s)", lines[i].strip()):
             paragraph.append(lines[i].strip()); i += 1
         story.append(Paragraph(inline(" ".join(paragraph)), STYLES["body"]))
     return story
