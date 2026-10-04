@@ -10,7 +10,7 @@ A configuração Git da v0.2.5 usa extraResources com a pasta docs inteira, comp
 
 ## Ações concluídas
 
-Foram excluídos 20 artefatos de instaladores do GitHub Actions vinculados às quatro execuções da v0.2.5 listadas abaixo. Nenhuma outra versão foi excluída. Tags e commits foram preservados. A nota da release recebeu o aviso de retirada pretendida.
+Foram excluídos inicialmente 20 artefatos do GitHub Actions vinculados às quatro execuções da v0.2.5 listadas abaixo. Com autorização adicional do usuário para retirar publicações antigas, foram excluídos os 58 artefatos restantes do inventário: 78 ao todo, sem artefatos remanescentes na conferência final. Para os demais artefatos, a justificativa é retirar downloads obsoletos; não foi confirmada exposição de credenciais. IDs, nomes e execuções estão em [inventário das exclusões](retired-releases/actions-artifacts-removed-2026-10-04.json). Tags e commits foram preservados.
 
 | Execução | Artefatos excluídos |
 | --- | --- |
@@ -19,9 +19,11 @@ Foram excluídos 20 artefatos de instaladores do GitHub Actions vinculados às q
 | 36372955255 | installer-macos-arm64 (ID 10950435241), installer-linux-x64 (ID 10950216937), installer-windows-x64 (ID 10949992533), installer-macos-x64 (ID 10949693138), installer-linux-arm64 (ID 10949424471) |
 | 36375656484 | installer-linux-arm64 (ID 10951036318), installer-macos-arm64 (ID 10950986492), installer-windows-x64 (ID 10950927124), installer-linux-x64 (ID 10950084804), installer-macos-x64 (ID 10949849901) |
 
-## Situação da release — pendente
+## Situação da release — retirada concluída
 
-Os 17 assets de instaladores, blockmaps e metadados de atualização NÃO foram excluídos. A release v0.2.5 é imutável e o GitHub rejeita a exclusão individual dos assets (HTTP 422). A exclusão da publicação inteira, necessária para retirar esses arquivos, foi bloqueada pela revisão automática de aprovação por exigir autorização específica para uma ação irreversível. A release e os 18 assets, incluindo SHA256SUMS.txt, continuam disponíveis até essa decisão.
+O usuário autorizou explicitamente a retirada definitiva da publicação v0.2.5 em 2026-10-04. A release era imutável: o GitHub rejeitou a exclusão individual de seus assets (HTTP 422), por isso a publicação inteira (ID 397920687) e seus 18 assets foram excluídos. A tag v0.2.5 permaneceu com o mesmo objeto Git; os commits não foram alterados. A publicação não deve ser recriada, e links de download dessa release deixam de funcionar.
+
+A retirada reduz a disponibilidade pública do relatório interno, mas não revoga cópias já baixadas. Não foi confirmada credencial nesse material. As demais releases foram mantidas nesta etapa; a seleção de outras publicações a retirar aguarda definição do usuário.
 
 Os checksums e metadados originais estão em [docs/retired-releases/v0.2.5](retired-releases/v0.2.5/SHA256SUMS.txt) para preservar evidências e permitir comparação futura. Esses hashes são registros históricos, não uma recomendação para instalar a versão retirada.
 
