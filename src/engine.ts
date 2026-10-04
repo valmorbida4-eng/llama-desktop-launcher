@@ -6,6 +6,8 @@ const os=require('node:os');
 const https=require('node:https');
 const crypto=require('node:crypto');
 const {spawn}=require('node:child_process');
+const {Transform}=require('node:stream');
+const {pipeline}=require('node:stream/promises');
 
 function request(url, redirects=0) {
   if (redirects>5 || !url.startsWith('https://')) return Promise.reject(Error('Redirecionamento inválido.'));
@@ -71,30 +73,24 @@ function assetsFor(release,backend,platform=process.platform,arch=process.arch) 
 function assetFor(release,platform=process.platform,arch=process.arch,backend) {
   return assetsFor(release,backend||backendOptions(platform,arch)[0]?.id,platform,arch).main;
 }
-async function download(asset,file,onProgress) {
-  const stream=await request(asset.browser_download_url);
-  const out=fs.createWriteStream(file,{flags:'wx'});
-  let writeError: Error|null=null;
-  out.on('error',(err: Error)=>{writeError=err;});
-  const hash=crypto.createHash('sha256'); let bytes=0;
-  try {
-    for await(const chunk of stream as AsyncIterable<Buffer>) {
-      if(writeError) throw writeError;
-      bytes+=chunk.length;
-      if(bytes>1.5e9) throw Error('Arquivo maior que o limite permitido.');
-      hash.update(chunk);
-      if(!out.write(chunk)) await new Promise<void>((resolve,reject)=>{out.once('drain',resolve);out.once('error',reject);});
-      onProgress?.(Math.round(bytes/(asset.size||bytes)*100));
-    }
-    if(writeError) throw writeError;
-  }
-  finally {
-    out.end();
-    await new Promise<void>((resolve,reject)=>{out.once('close',()=>{if(writeError) reject(writeError); else resolve();});out.once('error',reject);});
-  }
+async function saveDownload(stream,asset,file,onProgress) {
+  const hash=crypto.createHash('sha256');let bytes=0;
+  const meter=new Transform({transform(chunk,_encoding,callback){
+    bytes+=chunk.length;
+    if(bytes>1.5e9){callback(Error('Arquivo maior que o limite permitido.'));return;}
+    hash.update(chunk);
+    try{onProgress?.(Math.round(bytes/(asset.size||bytes)*100));}
+    catch(error){callback(error);return;}
+    callback(null,chunk);
+  }});
+  await pipeline(stream,meter,fs.createWriteStream(file,{flags:'wx'}));
   const digest=hash.digest('hex');
   if(asset.digest && asset.digest.startsWith('sha256:') && digest!==asset.digest.slice(7)) throw Error('Checksum SHA-256 do llama.cpp não confere.');
   return digest;
+}
+async function download(asset,file,onProgress) {
+  const stream=await request(asset.browser_download_url);
+  return saveDownload(stream,asset,file,onProgress);
 }
 function run(file,args,cwd): Promise<void> {return new Promise<void>((resolve,reject)=>{const p=spawn(file,args,{cwd,windowsHide:true});let err='';p.stderr.on('data',d=>err+=d.toString().slice(0,1000));p.on('error',reject);p.on('exit',c=>c===0?resolve():reject(Error(`${file} falhou (${c}): ${err.slice(-500)}`)));});}
 async function findExecutable(root,name='llama-server') {
@@ -121,7 +117,11 @@ async function installEngine(destination,backend,onProgress) {
   if(typeof backend==='function'){onProgress=backend;backend=backendOptions()[0]?.id;}
   const release=await releaseInfo();
   const {main,runtime}=assetsFor(release,backend);
-  const temp=await fsp.mkdtemp(path.join(os.tmpdir(),'llama-desktop-'));
+  const parent=path.dirname(destination);
+  await fsp.mkdir(parent,{recursive:true});
+  if(fs.existsSync(destination))throw Error('Já existe uma pasta de runtime nesse destino.');
+  // Stage beside the final directory so rename never crosses /tmp and /home mounts.
+  const temp=await fsp.mkdtemp(path.join(parent,'.llama-desktop-'));
   const archive=path.join(temp,main.name),unpack=path.join(temp,'unpack');
   const total=main.size+(runtime?.size||0);
   try {
@@ -145,4 +145,4 @@ async function installEngine(destination,backend,onProgress) {
     return {path:destination,release:release.tag_name,asset:main.name,backend};
   } finally {await fsp.rm(temp,{recursive:true,force:true}).catch(()=>{});}
 }
-module.exports={assetFor,assetsFor,backendOptions,installEngine,findExecutable};
+module.exports={assetFor,assetsFor,backendOptions,installEngine,findExecutable,saveDownload};

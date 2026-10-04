@@ -1,0 +1,3 @@
+# Área temporária de instalação do motor
+
+A instalação da v0.4.0 falhava com EXDEV ao renomear o motor extraído em /tmp para os dados do usuário em outra montagem. Criar a área temporária no diretório pai do destino mantém extração e publicação no mesmo sistema de arquivos. Preserva a publicação por rename e permissões/symlinks do pacote; a limpeza em finally continua limitada à pasta temporária criada por mkdtemp. O perfil só é atualizado após sucesso. pipeline gerencia backpressure, erros e fechamento do download sem acumular listeners de error em cada drain. Não mudar o TMPDIR global nem copiar silenciosamente instalações parciais.
