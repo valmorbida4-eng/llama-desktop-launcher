@@ -43,6 +43,12 @@ async function main(){
   await win.webContents.executeJavaScript(`document.getElementById('revoke-shared-access').click()`);await new Promise(r=>setTimeout(r,100));
   await win.webContents.executeJavaScript(`document.getElementById('copy-shared-link').click()`);await new Promise(r=>setTimeout(r,100));assert.notEqual(await require('electron').clipboard.readText(),link);
  }
+ await win.webContents.executeJavaScript(`document.getElementById('client-application').value='pi';document.getElementById('client-application').dispatchEvent(new Event('change'));document.getElementById('copy-client-config').click()`);
+ await new Promise(r=>setTimeout(r,100));assert.ok(JSON.parse(await require('electron').clipboard.readText()).providers['llama-local']);
+ assert.equal(await win.webContents.executeJavaScript(`document.getElementById('copy-opencode-bash').hidden`),true);
+ await win.webContents.executeJavaScript(`document.getElementById('client-application').value='aider';document.getElementById('client-application').dispatchEvent(new Event('change'));document.getElementById('copy-opencode-powershell').click()`);
+ await new Promise(r=>setTimeout(r,100));assert.match(await require('electron').clipboard.readText(),/aider --model/);
+ await win.webContents.executeJavaScript(`document.getElementById('client-application').value='opencode';document.getElementById('client-application').dispatchEvent(new Event('change'))`);
  const state=await win.webContents.executeJavaScript(`({endpoint:document.getElementById('endpoint').textContent,hidden:document.getElementById('connection').hidden,startDisabled:document.getElementById('start-server').disabled,browserDisabled:document.getElementById('launch').disabled})`);
  assert.match(state.endpoint,/\/v1/);assert.match(state.endpoint,/Modelo API: modelo-local/);
  await win.webContents.executeJavaScript(`document.getElementById('copy-opencode-bash').click()`);

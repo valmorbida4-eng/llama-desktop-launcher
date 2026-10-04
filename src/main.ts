@@ -152,6 +152,15 @@ ipcMain.handle('copy-key',e=>{validateSender(e);clipboard.writeText(network.ensu
 ipcMain.handle('rotate-key',e=>{validateSender(e);if(server)throw Error('Pare o servidor antes de gerar outra chave.');return network.rotateKey(apiKeyPath());});
 ipcMain.handle('copy-endpoint',e=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');clipboard.writeText(active.endpoint);return active.endpoint;});
 ipcMain.handle('copy-opencode-command',async(e,platform)=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');const command=clientCommands.openCodeCommand(active,platform);await clipboard.writeText(command);return true;});
+ipcMain.handle('copy-client-setup',async(e,application,format,shared)=>{
+ validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');
+ if(typeof shared!=='boolean'||!['bash','powershell','config'].includes(format))throw Error('Formato inválido.');
+ if(shared&&!shareProxy)throw Error('Inicie o servidor em LAN ou Tailscale para compartilhar.');
+ const connection=shared?{...active,endpoint:shareProxy.endpoint}:active;
+ const key=shared?shareProxy.accessKey():null;
+ const output=format==='config'?clientCommands.clientConfiguration(connection,application,key):clientCommands.clientCommand(connection,application,format,key);
+ await clipboard.writeText(output);return true;
+});
 ipcMain.handle('copy-shared-link',async(e)=>{validateSender(e);if(!shareProxy)throw Error('Inicie o servidor em LAN ou Tailscale.');await clipboard.writeText(shareProxy.link());return true;});
 ipcMain.handle('revoke-shared-access',e=>{validateSender(e);if(!shareProxy)throw Error('Nenhum acesso compartilhado ativo.');shareProxy.revoke();return true;});
 ipcMain.handle('copy-shared-command',async(e,platform)=>{validateSender(e);if(!shareProxy||!active)throw Error('Inicie o servidor em LAN ou Tailscale.');const command=clientCommands.openCodeCommand({...active,endpoint:shareProxy.endpoint},platform,shareProxy.accessKey());await clipboard.writeText(command);return true;});

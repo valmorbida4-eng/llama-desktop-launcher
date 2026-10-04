@@ -114,6 +114,17 @@ O link e os comandos compartilhados valem somente para a execução atual. **Rev
 
 O compartilhamento usa uma porta adicional de 8181 a 8280; a API original usa 8080 a 8180. No Windows, o botão de firewall libera ambas as portas, limitadas ao executável correspondente e à faixa informada. Linux/macOS exigem liberar as duas portas conforme o firewall local. O OpenCode deve estar instalado no cliente. Prefira Tailscale; uma LAN com HTTP não cifra o conteúdo. Se mudar o modelo, contexto, endereço ou sessões, copie os comandos novamente. Acesso compartilhado autoriza uso do modelo, não acesso automático aos arquivos do servidor.
 
+
+### Conectar outros aplicativos
+
+Em **Conectar aplicativo**, selecione OpenCode, Pi, Hermes, Aider, Continue, Cline, Codex ou Genérico. OpenCode e Aider oferecem comandos Bash/PowerShell: execute na pasta do projeto, com o cliente já instalado. Os demais oferecem **Copiar configuração** e instruções de onde mesclar os dados. O launcher não sobrescreve configurações nem instala clientes.
+
+Para Pi, mescle em `~/.pi/agent/models.json` e selecione `llama-local/modelo-local` em `/model`. No Hermes, mescle o bloco `model` em `config.yaml` e execute `hermes chat`. A documentação atual exige ao menos 64000 tokens por sessão para ferramentas; a configuração exporta o contexto real, sem aumentá-lo artificialmente. No Continue, mescle o bloco `models` na configuração YAML existente. No Cline, escolha OpenAI Compatible e preencha Base URL, API Key e Model ID. Genérico fornece esses campos para outros clientes compatíveis.
+
+**Copiar configuração com acesso** inclui a credencial temporária revogável e o endpoint compartilhado. A configuração direta em rede contém `SUBSTITUA_PELA_CHAVE_DA_API`: preencha com a chave permanente antes de usar. Preserve os providers, modelos e demais ajustes já existentes. Configurações compartilhadas salvas precisam ser atualizadas após revogar ou reiniciar o servidor.
+
+Codex aparece como experimental: a configuração exige Responses API no servidor ou em um adaptador e ainda não foi validada com este motor. Compatibilidade OpenAI não garante suporte a todos os protocolos. Ferramentas, contexto e qualidade de execução dependem do modelo GGUF; suporte a visão não é presumido. O aplicativo trabalha nos arquivos do cliente onde roda.
+
 ## 7. Parâmetros avançados
 
 ### Acesso, link e sessões simultâneas

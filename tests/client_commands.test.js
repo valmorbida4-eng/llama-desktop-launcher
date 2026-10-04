@@ -30,3 +30,22 @@ test('comandos compartilhados levam somente a credencial temporária e não soli
  }
  assert.throws(()=>openCodeCommand(connection,'bash',"invalid';command"),/compartilhamento/);
 });
+
+test('exportações de clientes preservam contexto e usam somente a credencial selecionada',()=>{
+ const {clientConfiguration}=require('../build/app/client_commands'),token='t'.repeat(43),c={...connection,parallel:2};
+ for(const name of ['opencode','pi','hermes','aider','continue','cline','codex','generic']){
+  const output=clientConfiguration(c,name,token);assert.ok(output.includes(c.endpoint));assert.ok(output.includes('modelo-local'));assert.ok(output.includes(token));assert.ok(output.includes('2048')||name==='hermes');
+  assert.ok(clientConfiguration(c,name).includes('SUBSTITUA_PELA_CHAVE_DA_API'));
+ }
+ const pi=JSON.parse(clientConfiguration(c,'pi',token));assert.equal(pi.providers['llama-local'].api,'openai-completions');assert.equal(pi.providers['llama-local'].models[0].maxTokens,1024);
+ assert.match(clientConfiguration(c,'codex',token),/EXPERIMENTAL.*Responses API/);
+ assert.throws(()=>clientConfiguration(c,'__proto__',token),/Aplicativo/);
+});
+test('Aider usa suas variáveis e restaura ambiente no PowerShell',()=>{
+ const {clientCommand}=require('../build/app/client_commands');
+ for(const platform of ['bash','powershell']){
+  const output=clientCommand(connection,'aider',platform,'t'.repeat(43));assert.match(output,/aider --model 'openai\/modelo-local'/);assert.match(output,/OPENAI_API_BASE/);assert.match(output,/OPENAI_API_KEY/);assert.doesNotMatch(output,/OPENCODE_CONFIG_CONTENT|LLAMA_API_KEY|opencode --model/);
+ }
+ assert.match(clientCommand(connection,'aider','powershell'),/finally/);
+ assert.throws(()=>clientCommand(connection,'pi','bash'),/configuração/);
+});

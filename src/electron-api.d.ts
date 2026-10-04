@@ -38,6 +38,7 @@ interface RendererApi {
   getKey(): Promise<string>;
   copyKey(): Promise<boolean>;
   rotateKey(): Promise<string>;
+  copyClientSetup(application: string, format: 'bash' | 'powershell' | 'config', shared: boolean): Promise<boolean>;
   copySharedLink(): Promise<boolean>;
   revokeSharedAccess(): Promise<boolean>;
   copySharedCommand(platform: 'bash' | 'powershell'): Promise<boolean>;

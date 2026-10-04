@@ -114,6 +114,17 @@ Links and shared commands last only for the current server run. **Revogar acesso
 
 Sharing uses an additional port in 8181–8280; the original API uses 8080–8180. The Windows firewall button allows both active ports, limited to the corresponding executables and selected client range. On Linux/macOS, allow both ports in your firewall. OpenCode must be installed on the client. Prefer Tailscale; plain HTTP on LAN does not encrypt content. Copy commands again after changing the model, context, address or parallel sessions. Shared access grants model usage, not automatic access to server files.
 
+
+### Connect other applications
+
+Under **Conectar aplicativo**, choose OpenCode, Pi, Hermes, Aider, Continue, Cline, Codex or Generic. OpenCode and Aider provide Bash/PowerShell commands to run in your project directory, with the client already installed. Other applications provide **Copiar configuração** and instructions for manually merging it. The launcher does not overwrite client configuration or install clients.
+
+Pi: merge into `~/.pi/agent/models.json`, then select `llama-local/modelo-local` in `/model`. Hermes: merge the `model` block into `config.yaml`, then run `hermes chat`. Current documentation requires at least 64000 tokens per session for tools; the export uses the real context without artificially increasing it. Continue: merge the `models` block into the existing YAML configuration. Cline: select OpenAI Compatible and fill Base URL, API Key and Model ID. Generic exports these fields for other compatible clients.
+
+**Copiar configuração com acesso** includes the revocable session credential and sharing endpoint. Direct network configuration contains `SUBSTITUA_PELA_CHAVE_DA_API`: replace this with the permanent API key before use. Preserve existing providers, models and settings. Saved shared configurations must be refreshed after revocation or server restart.
+
+Codex is experimental: its configuration requires Responses API on the server or an adapter and has not been validated with this engine. OpenAI compatibility does not guarantee every protocol. Tool support, context and execution quality depend on the GGUF model; vision support is not assumed. The client works on files where it runs.
+
 ## 7. Advanced settings
 
 ### Network links and simultaneous sessions
