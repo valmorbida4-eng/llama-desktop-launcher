@@ -12,4 +12,4 @@ Preservar a lista explícita de manuais e licença em extraResources. Um teste i
 
 ## Consequências
 
-A atualização afeta ferramentas de build, não modelos GGUF ou o motor llama.cpp. A versão instalada é mostrada automaticamente no cabeçalho. A retirada concluída dos artefatos antigos, a retirada pendente da release imutável e seus motivos ficam em docs/security-release-retirements.md, preservando tags e histórico Git.
+A atualização afeta ferramentas de build, não modelos GGUF ou o motor llama.cpp. A versão instalada é mostrada automaticamente no cabeçalho. A retirada concluída dos artefatos antigos e da publicação imutável v0.2.5, com seus motivos, fica em docs/security-release-retirements.md, preservando tags e histórico Git.

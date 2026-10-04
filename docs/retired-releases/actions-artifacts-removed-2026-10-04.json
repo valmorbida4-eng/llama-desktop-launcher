@@ -1,0 +1,475 @@
+{
+  "date": "2026-10-04",
+  "reason": "User-authorized retirement of obsolete build downloads; v0.2.5 may contain internal audit material, other artifacts retired as obsolete publications without confirmed secret exposure.",
+  "count": 78,
+  "artifacts": [
+    {
+      "id": 10951036318,
+      "name": "installer-linux-arm64",
+      "run_id": 36375656484,
+      "status": "removed"
+    },
+    {
+      "id": 10950986492,
+      "name": "installer-macos-arm64",
+      "run_id": 36375656484,
+      "status": "removed"
+    },
+    {
+      "id": 10950927124,
+      "name": "installer-windows-x64",
+      "run_id": 36375656484,
+      "status": "removed"
+    },
+    {
+      "id": 10950435241,
+      "name": "installer-macos-arm64",
+      "run_id": 36372955255,
+      "status": "removed"
+    },
+    {
+      "id": 10950415613,
+      "name": "installer-linux-arm64",
+      "run_id": 36372860625,
+      "status": "removed"
+    },
+    {
+      "id": 10950216937,
+      "name": "installer-linux-x64",
+      "run_id": 36372955255,
+      "status": "removed"
+    },
+    {
+      "id": 10950084804,
+      "name": "installer-linux-x64",
+      "run_id": 36375656484,
+      "status": "removed"
+    },
+    {
+      "id": 10949992533,
+      "name": "installer-windows-x64",
+      "run_id": 36372955255,
+      "status": "removed"
+    },
+    {
+      "id": 10949972496,
+      "name": "installer-linux-x64",
+      "run_id": 36372860625,
+      "status": "removed"
+    },
+    {
+      "id": 10949926555,
+      "name": "installer-windows-x64",
+      "run_id": 36372860625,
+      "status": "removed"
+    },
+    {
+      "id": 10949849901,
+      "name": "installer-macos-x64",
+      "run_id": 36375656484,
+      "status": "removed"
+    },
+    {
+      "id": 10949811043,
+      "name": "installer-linux-x64",
+      "run_id": 36371673643,
+      "status": "removed"
+    },
+    {
+      "id": 10949710441,
+      "name": "installer-macos-arm64",
+      "run_id": 36371673643,
+      "status": "removed"
+    },
+    {
+      "id": 10949693138,
+      "name": "installer-macos-x64",
+      "run_id": 36372955255,
+      "status": "removed"
+    },
+    {
+      "id": 10949528695,
+      "name": "installer-macos-x64",
+      "run_id": 36372860625,
+      "status": "removed"
+    },
+    {
+      "id": 10949493581,
+      "name": "installer-macos-arm64",
+      "run_id": 36372860625,
+      "status": "removed"
+    },
+    {
+      "id": 10949424471,
+      "name": "installer-linux-arm64",
+      "run_id": 36372955255,
+      "status": "removed"
+    },
+    {
+      "id": 10949301769,
+      "name": "installer-windows-x64",
+      "run_id": 36371673643,
+      "status": "removed"
+    },
+    {
+      "id": 10948829343,
+      "name": "installer-linux-arm64",
+      "run_id": 36371673643,
+      "status": "removed"
+    },
+    {
+      "id": 10948529861,
+      "name": "installer-macos-x64",
+      "run_id": 36371673643,
+      "status": "removed"
+    },
+    {
+      "id": 10951275281,
+      "name": "installer-macos-x64",
+      "run_id": 36375656728,
+      "status": "removed"
+    },
+    {
+      "id": 10951056032,
+      "name": "installer-windows-x64",
+      "run_id": 36375656728,
+      "status": "removed"
+    },
+    {
+      "id": 10951001452,
+      "name": "installer-macos-arm64",
+      "run_id": 36375656551,
+      "status": "removed"
+    },
+    {
+      "id": 10950882641,
+      "name": "installer-linux-x64",
+      "run_id": 36375656728,
+      "status": "removed"
+    },
+    {
+      "id": 10950738512,
+      "name": "installer-linux-x64",
+      "run_id": 36375656551,
+      "status": "removed"
+    },
+    {
+      "id": 10950529449,
+      "name": "installer-linux-arm64",
+      "run_id": 36375656728,
+      "status": "removed"
+    },
+    {
+      "id": 10950461235,
+      "name": "installer-linux-arm64",
+      "run_id": 36373428079,
+      "status": "removed"
+    },
+    {
+      "id": 10950449969,
+      "name": "installer-linux-arm64",
+      "run_id": 36375656551,
+      "status": "removed"
+    },
+    {
+      "id": 10950283961,
+      "name": "installer-windows-x64",
+      "run_id": 36375656551,
+      "status": "removed"
+    },
+    {
+      "id": 10949908684,
+      "name": "installer-linux-x64",
+      "run_id": 36373428079,
+      "status": "removed"
+    },
+    {
+      "id": 10949829817,
+      "name": "installer-macos-arm64",
+      "run_id": 36375656728,
+      "status": "removed"
+    },
+    {
+      "id": 10949819865,
+      "name": "installer-macos-x64",
+      "run_id": 36375656551,
+      "status": "removed"
+    },
+    {
+      "id": 10949787365,
+      "name": "installer-macos-x64",
+      "run_id": 36373428079,
+      "status": "removed"
+    },
+    {
+      "id": 10949579526,
+      "name": "installer-windows-x64",
+      "run_id": 36373428079,
+      "status": "removed"
+    },
+    {
+      "id": 10949469619,
+      "name": "installer-macos-arm64",
+      "run_id": 36373428079,
+      "status": "removed"
+    },
+    {
+      "id": 10949275817,
+      "name": "installer-linux-x64",
+      "run_id": 36370231550,
+      "status": "removed"
+    },
+    {
+      "id": 10949146569,
+      "name": "installer-linux-arm64",
+      "run_id": 36370231550,
+      "status": "removed"
+    },
+    {
+      "id": 10949090036,
+      "name": "installer-macos-x64",
+      "run_id": 36369140675,
+      "status": "removed"
+    },
+    {
+      "id": 10948952990,
+      "name": "installer-macos-arm64",
+      "run_id": 36370231550,
+      "status": "removed"
+    },
+    {
+      "id": 10948931799,
+      "name": "installer-linux-x64",
+      "run_id": 36369140675,
+      "status": "removed"
+    },
+    {
+      "id": 10948690077,
+      "name": "installer-macos-x64",
+      "run_id": 36367531707,
+      "status": "removed"
+    },
+    {
+      "id": 10948508046,
+      "name": "installer-windows-x64",
+      "run_id": 36370231550,
+      "status": "removed"
+    },
+    {
+      "id": 10948322145,
+      "name": "installer-windows-x64",
+      "run_id": 36369140675,
+      "status": "removed"
+    },
+    {
+      "id": 10948130995,
+      "name": "installer-windows-x64",
+      "run_id": 36367531707,
+      "status": "removed"
+    },
+    {
+      "id": 10948125702,
+      "name": "installer-linux-x64",
+      "run_id": 36367531707,
+      "status": "removed"
+    },
+    {
+      "id": 10948117560,
+      "name": "installer-windows-x64",
+      "run_id": 36368387037,
+      "status": "removed"
+    },
+    {
+      "id": 10948093942,
+      "name": "installer-macos-x64",
+      "run_id": 36370231550,
+      "status": "removed"
+    },
+    {
+      "id": 10948055035,
+      "name": "installer-macos-x64",
+      "run_id": 36366998926,
+      "status": "removed"
+    },
+    {
+      "id": 10947999397,
+      "name": "installer-linux-arm64",
+      "run_id": 36369140675,
+      "status": "removed"
+    },
+    {
+      "id": 10947980667,
+      "name": "installer-macos-arm64",
+      "run_id": 36366998926,
+      "status": "removed"
+    },
+    {
+      "id": 10947958180,
+      "name": "installer-macos-x64",
+      "run_id": 36368387037,
+      "status": "removed"
+    },
+    {
+      "id": 10947954208,
+      "name": "installer-macos-arm64",
+      "run_id": 36369140675,
+      "status": "removed"
+    },
+    {
+      "id": 10947952063,
+      "name": "installer-linux-arm64",
+      "run_id": 36367531707,
+      "status": "removed"
+    },
+    {
+      "id": 10947854105,
+      "name": "installer-linux-arm64",
+      "run_id": 36368387037,
+      "status": "removed"
+    },
+    {
+      "id": 10947849378,
+      "name": "installer-linux-x64",
+      "run_id": 36368387037,
+      "status": "removed"
+    },
+    {
+      "id": 10947829349,
+      "name": "installer-macos-arm64",
+      "run_id": 36368387037,
+      "status": "removed"
+    },
+    {
+      "id": 10947693269,
+      "name": "installer-windows-x64",
+      "run_id": 36366998926,
+      "status": "removed"
+    },
+    {
+      "id": 10947564401,
+      "name": "installer-linux-arm64",
+      "run_id": 36366998926,
+      "status": "removed"
+    },
+    {
+      "id": 10947240177,
+      "name": "installer-windows-x64",
+      "run_id": 36363759010,
+      "status": "removed"
+    },
+    {
+      "id": 10947124297,
+      "name": "installer-linux-x64",
+      "run_id": 36366998926,
+      "status": "removed"
+    },
+    {
+      "id": 10947009773,
+      "name": "installer-macos-arm64",
+      "run_id": 36367531707,
+      "status": "removed"
+    },
+    {
+      "id": 10946900532,
+      "name": "installer-macos-arm64",
+      "run_id": 36363759010,
+      "status": "removed"
+    },
+    {
+      "id": 10946701028,
+      "name": "installer-macos-x64",
+      "run_id": 36363759010,
+      "status": "removed"
+    },
+    {
+      "id": 10946595390,
+      "name": "installer-macos-x64",
+      "run_id": 36362774286,
+      "status": "removed"
+    },
+    {
+      "id": 10946411554,
+      "name": "installer-macos-x64",
+      "run_id": 36362608090,
+      "status": "removed"
+    },
+    {
+      "id": 10946401605,
+      "name": "installer-macos-arm64",
+      "run_id": 36362608090,
+      "status": "removed"
+    },
+    {
+      "id": 10946294194,
+      "name": "installer-linux-arm64",
+      "run_id": 36363759010,
+      "status": "removed"
+    },
+    {
+      "id": 10946279168,
+      "name": "installer-linux-x64",
+      "run_id": 36363759010,
+      "status": "removed"
+    },
+    {
+      "id": 10946262616,
+      "name": "installer-linux-x64",
+      "run_id": 36362774286,
+      "status": "removed"
+    },
+    {
+      "id": 10946143345,
+      "name": "installer-linux-arm64",
+      "run_id": 36362774286,
+      "status": "removed"
+    },
+    {
+      "id": 10946137325,
+      "name": "installer-windows-x64",
+      "run_id": 36362269490,
+      "status": "removed"
+    },
+    {
+      "id": 10946038722,
+      "name": "installer-linux-x64",
+      "run_id": 36362608090,
+      "status": "removed"
+    },
+    {
+      "id": 10945983550,
+      "name": "installer-linux-x64",
+      "run_id": 36362269490,
+      "status": "removed"
+    },
+    {
+      "id": 10945964118,
+      "name": "installer-macos-arm64",
+      "run_id": 36362774286,
+      "status": "removed"
+    },
+    {
+      "id": 10945948505,
+      "name": "installer-macos-x64",
+      "run_id": 36362269490,
+      "status": "removed"
+    },
+    {
+      "id": 10945723742,
+      "name": "installer-windows-x64",
+      "run_id": 36362608090,
+      "status": "removed"
+    },
+    {
+      "id": 10945589348,
+      "name": "installer-windows-x64",
+      "run_id": 36362774286,
+      "status": "removed"
+    },
+    {
+      "id": 10945583551,
+      "name": "installer-macos-arm64",
+      "run_id": 36362269490,
+      "status": "removed"
+    }
+  ]
+}
