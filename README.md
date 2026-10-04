@@ -107,3 +107,9 @@ Para Pi, mescle em `~/.pi/agent/models.json` e selecione `llama-local/modelo-loc
 **Copiar configuração com acesso** inclui a credencial temporária revogável e o endpoint compartilhado. A configuração direta em rede contém `SUBSTITUA_PELA_CHAVE_DA_API`: preencha com a chave permanente antes de usar. Preserve os providers, modelos e demais ajustes já existentes. Configurações compartilhadas salvas precisam ser atualizadas após revogar ou reiniciar o servidor.
 
 Codex aparece como experimental: a configuração exige Responses API no servidor ou em um adaptador e ainda não foi validada com este motor. Compatibilidade OpenAI não garante suporte a todos os protocolos. Ferramentas, contexto e qualidade de execução dependem do modelo GGUF; suporte a visão não é presumido. O aplicativo trabalha nos arquivos do cliente onde roda.
+
+### APIs de aplicativos
+
+Selecione **Genérico - OpenAI Compatible**. Para acesso temporário, use **Copiar configuração com acesso** e o endpoint compartilhado. Para integração persistente, use **Copiar configuração**, a API direta e a chave de **Copiar chave** no lugar de `SUBSTITUA_PELA_CHAVE_DA_API`. A chave direta permanece entre reinícios até ser trocada; o servidor precisa estar iniciado e o IP/porta podem mudar. Não misture credenciais entre as duas modalidades.
+
+Use Base URL terminada em `/v1`, modelo `modelo-local` e autenticação Bearer. Consulte `/models` antes de chamar `/chat/completions`. Os [manuais](docs/MANUAL-pt-BR.md) incluem passo a passo, exemplos Bash/curl, PowerShell e Python, streaming, limites de contexto e diagnóstico de erros.

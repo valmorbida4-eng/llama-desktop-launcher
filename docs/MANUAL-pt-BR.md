@@ -125,6 +125,124 @@ Para Pi, mescle em `~/.pi/agent/models.json` e selecione `llama-local/modelo-loc
 
 Codex aparece como experimental: a configuração exige Responses API no servidor ou em um adaptador e ainda não foi validada com este motor. Compatibilidade OpenAI não garante suporte a todos os protocolos. Ferramentas, contexto e qualidade de execução dependem do modelo GGUF; suporte a visão não é presumido. O aplicativo trabalha nos arquivos do cliente onde roda.
 
+
+### Integrar APIs de aplicativos: passo a passo
+
+Use **Genérico - OpenAI Compatible** em **Conectar aplicativo** para um aplicativo próprio, serviço, automação ou cliente que aceite OpenAI Chat Completions. O launcher fornece a URL base, chave, ID do modelo e limites; não cria uma API pública na internet.
+
+1. Escolha o endereço antes de iniciar: **Somente este computador** para um cliente no PC servidor; **LAN** para aparelhos na mesma rede; **Tailscale** para aparelhos autorizados na tailnet. Em outro PC, `127.0.0.1` aponta para o próprio cliente, não para o servidor.
+2. Clique em **Iniciar servidor** e aguarde aparecer o endpoint. Para LAN/Tailscale, permita a conexão no firewall; o botão do Windows cria as regras para a API direta e o compartilhamento na faixa escolhida.
+3. Selecione **Genérico - OpenAI Compatible** e escolha uma das duas modalidades abaixo. Copie a URL mostrada pelo servidor ativo: 8080 e 8181 são exemplos, não portas fixas. A API direta seleciona 8080-8180; a compartilhada seleciona 8181-8280.
+4. Configure Base URL com o endereço terminado em `/v1`, API Key com a credencial correspondente e Model ID com `modelo-local`. Se o cliente já acrescenta `/chat/completions`, não acrescente esse caminho à Base URL.
+5. Confira primeiro `GET /v1/models`. Depois faça `POST /v1/chat/completions` com JSON e o cabeçalho `Authorization: Bearer CHAVE`. Nos exemplos, a variável de URL já termina em `/v1`; por isso acrescentamos apenas `/models` ou `/chat/completions`.
+
+### Acesso temporário ou credencial persistente
+
+| Modalidade | Como obter | Validade da credencial |
+| --- | --- | --- |
+| Compartilhada | **Copiar configuração com acesso**; usa o endpoint compartilhado e o token da sessão | Até revogar, parar o servidor ou fechar o launcher. Reiniciar exige copiar uma nova configuração. |
+| Direta em rede | **Copiar configuração** e substituir `SUBSTITUA_PELA_CHAVE_DA_API` pela chave de **Copiar chave**; usa a API direta | A chave é preservada entre reinícios até clicar em **Nova chave**. |
+| Direta local | **Somente este computador**, endpoint direto e chave fictícia `local` para clientes que exigem preencher o campo | A API local não exige autenticação; esse endereço não atende outros PCs. |
+
+Para uma integração persistente, mantenha o aplicativo cliente apontando para a **API direta**, com a chave permanente. Não misture a chave permanente com a porta compartilhada nem o token temporário com a porta direta. Guarde a chave no mecanismo de segredos do aplicativo ou no ambiente, fora do código e do repositório. Copiar configuração direta não copia automaticamente essa chave.
+
+Persistência da chave não significa servidor sempre disponível: o launcher e o servidor precisam estar em execução. Depois de reiniciar o PC, abra o launcher e inicie o servidor novamente. Confira se o IP e a porta continuam iguais; atualize a Base URL se mudarem. Para trocar a chave, pare o servidor, clique em **Nova chave**, reinicie e atualize os clientes que usam acesso direto. **Revogar acesso compartilhado** não revoga a chave permanente.
+
+### Testar no Linux/macOS com Bash e curl
+
+Cole a Base URL e a chave correspondentes à modalidade escolhida. A chave é solicitada sem exibição. Para acesso direto local, informe `local`.
+
+```bash
+(
+  read -rp 'Base URL (terminada em /v1): ' LLAMA_BASE_URL
+  read -rsp 'API Key: ' LLAMA_API_KEY
+  printf '\n'
+  curl --fail-with-body -sS \
+    -H "Authorization: Bearer $LLAMA_API_KEY" \
+    "${LLAMA_BASE_URL%/}/models"
+  printf '\n'
+  curl --fail-with-body -sS \
+    -H "Authorization: Bearer $LLAMA_API_KEY" \
+    -H 'Content-Type: application/json' \
+    "${LLAMA_BASE_URL%/}/chat/completions" \
+    --data '{"model":"modelo-local","messages":[{"role":"user",
+    "content":"Responda apenas: conectado"}],"max_tokens":64,
+    "stream":false}'
+)
+```
+
+O primeiro resultado deve listar `modelo-local`. No segundo, a resposta está em `choices[0].message.content`. Os exemplos usam resposta completa, sem streaming. Clientes com `stream: true` precisam processar Server-Sent Events (SSE).
+
+### Testar no Windows com PowerShell
+
+Este exemplo usa o PowerShell e não exige instalar um SDK. Cole a Base URL e informe a chave quando solicitado.
+
+```powershell
+& {
+  $baseUrl = (Read-Host 'Base URL (terminada em /v1)').TrimEnd('/')
+  $secureKey = Read-Host 'API Key' -AsSecureString
+  $apiKey = [System.Net.NetworkCredential]::new('', $secureKey).Password
+  $headers = @{ Authorization = "Bearer $apiKey" }
+  Invoke-RestMethod -Uri "$baseUrl/models" -Headers $headers
+  $body = @{
+    model = 'modelo-local'
+    messages = @(@{ role = 'user'; content = 'Responda: conectado' })
+    max_tokens = 64
+    stream = $false
+  } | ConvertTo-Json -Depth 5
+  $response = Invoke-RestMethod -Method Post `
+    -Uri "$baseUrl/chat/completions" -Headers $headers `
+    -ContentType 'application/json; charset=utf-8' `
+    -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
+  $response.choices[0].message.content
+}
+```
+
+### Exemplo em Python para seu aplicativo
+
+Requer Python 3. O exemplo usa somente a biblioteca padrão. Antes de executar, defina `LLAMA_BASE_URL` e `LLAMA_API_KEY` no ambiente do processo usando a Base URL e a credencial escolhidas. Não use a chave em parâmetros de URL.
+
+```python
+import json
+import os
+from urllib.request import Request, urlopen
+
+base_url = os.environ['LLAMA_BASE_URL'].rstrip('/')
+api_key = os.environ['LLAMA_API_KEY']
+payload = {
+    'model': 'modelo-local',
+    'messages': [{'role': 'user', 'content': 'Responda: conectado'}],
+    'max_tokens': 64,
+    'stream': False,
+}
+request = Request(
+    base_url + '/chat/completions',
+    data=json.dumps(payload).encode('utf-8'),
+    headers={
+        'Authorization': 'Bearer ' + api_key,
+        'Content-Type': 'application/json',
+    },
+    method='POST',
+)
+with urlopen(request, timeout=120) as response:
+    result = json.load(response)
+print(result['choices'][0]['message']['content'])
+```
+
+O timeout de 120 segundos é um exemplo; modelos grandes podem precisar de mais tempo. A janela de contexto é a configuração do servidor dividida pelas sessões simultâneas. Prompt, histórico, ferramentas e resposta precisam caber nela; não use o contexto de treinamento como limite da sessão. A resposta da API não executa código nem edita arquivos sozinha: essas ações são responsabilidade do aplicativo cliente.
+
+### Diagnosticar a integração por API
+
+| Resultado | O que conferir |
+| --- | --- |
+| Conexão recusada ou timeout | Servidor iniciado, modelo carregado, IP/porta atual, mesma rede ou Tailscale ativo e firewall. |
+| 401 ou 403 | Cabeçalho Bearer presente, chave correta para a modalidade e token compartilhado ainda válido. |
+| 404 | Base URL termina em `/v1`; não há `/v1/v1`; o cliente usa Chat Completions. Responses API não foi validada com este motor. |
+| 400 ou erro de contexto | JSON válido, ID `modelo-local`, campos aceitos pelo servidor e limite de contexto por sessão. |
+| Modelo troca mas cliente não reconhece | Inicie o novo GGUF e confira `/models`; reinicie a conversa e atualize limites, endpoint ou credencial quando necessário. |
+
+Para ferramentas, o GGUF e seu template precisam ser compatíveis com tool calling; alguns motores/modelos exigem um template Jinja adequado. Não habilite visão, ferramentas ou outros protocolos só por o endpoint se declarar OpenAI Compatible.
+
 ## 7. Parâmetros avançados
 
 ### Acesso, link e sessões simultâneas
@@ -133,7 +251,7 @@ Na seção **Acesso e sessões**, escolha **Somente este computador** ou um ende
 
 Ao iniciar em LAN/Tailscale, use **Mostrar chave**, **Copiar chave** ou **Nova chave**. Para trocar a chave, pare o servidor primeiro. O app abre a interface local por uma ponte autenticada. Use **Copiar link da API** para obter o endereço terminado em `/v1`, e **Copiar link da interface** para obter o endereço web na rede. Clientes remotos devem enviar `Authorization: Bearer SUA_CHAVE`; o link por si só não concede acesso. Uma interface remota também precisa oferecer suporte a essa autenticação. Não coloque a chave no URL nem publique a chave em mensagens abertas.
 
-O aplicativo não altera o firewall ao iniciar o servidor. No Windows, com o servidor LAN/Tailscale ativo, informe a **faixa de clientes permitidos** na seção **Firewall do Windows** e clique em **Criar regra para a porta ativa**. Confirme a solicitação de administrador do Windows. A regra limita o acesso ao executável `llama-server.exe`, à porta ativa e à faixa indicada. Confira a faixa antes de confirmar; se mudar de porta, crie outra regra. No Linux/macOS, siga as regras do firewall da distribuição. O servidor usa uma porta livre de 8080 a 8180. Prefira Tailscale ou uma LAN confiável, pois o HTTP direto na LAN não cifra o tráfego.
+O aplicativo não altera o firewall ao iniciar o servidor. No Windows, com o servidor LAN/Tailscale ativo, informe a **faixa de clientes permitidos** na seção **Firewall do Windows** e clique em **Criar regra para a porta ativa**. Confirme a solicitação de administrador do Windows. As regras limitam cada porta ao executável correspondente (`llama-server.exe` para a API direta e o launcher para compartilhamento) e à faixa indicada. Confira a faixa antes de confirmar; se mudar de porta, crie outra regra. No Linux/macOS, siga as regras do firewall da distribuição. O servidor usa uma porta livre de 8080 a 8180. Prefira Tailscale ou uma LAN confiável, pois o HTTP direto na LAN não cifra o tráfego.
 
 ### Conversa integrada e CLI externa
 
