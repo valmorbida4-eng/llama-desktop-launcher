@@ -1,0 +1,119 @@
+{
+  "id": 397920687,
+  "tag_name": "v0.2.5",
+  "name": "v0.2.5",
+  "created_at": "2026-09-28T03:14:33Z",
+  "published_at": "2026-09-28T03:19:37Z",
+  "html_url": "https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/tag/v0.2.5",
+  "immutable": true,
+  "assets": [
+    {
+      "id": 594374431,
+      "name": "builder-debug.yml",
+      "size": 909,
+      "digest": "sha256:3ed2cd6603178359b5ff20b5c9cebe78520c60f24e668bdfaa2ac8801cbdf3b6"
+    },
+    {
+      "id": 594374444,
+      "name": "latest-linux-arm64.yml",
+      "size": 746,
+      "digest": "sha256:16f41438c7ee37bb964bcba6965caafee63e082716e0219b3531d367bb5863e0"
+    },
+    {
+      "id": 594374439,
+      "name": "latest-linux.yml",
+      "size": 733,
+      "digest": "sha256:afdc80303cff630514ce3d6403b3eb9c7a001b1193c9b85b80f13121ebd60c06"
+    },
+    {
+      "id": 594374433,
+      "name": "latest-mac.yml",
+      "size": 361,
+      "digest": "sha256:52020fc55738cdc19770b9b6fa6c81a6a7045850895c0dbe1cc51def28265907"
+    },
+    {
+      "id": 594374432,
+      "name": "latest.yml",
+      "size": 372,
+      "digest": "sha256:be2a74b3e5291fac1a431feba193d82cf41c42839a997115b2177737c1b7e91f"
+    },
+    {
+      "id": 594374442,
+      "name": "llama-desktop-launcher-0.2.5.aarch64.rpm",
+      "size": 75695513,
+      "digest": "sha256:64f9ff5b0dc5b252ca8a52cc15b7d44c77280a36666f4a047967208691d09cc0"
+    },
+    {
+      "id": 594374450,
+      "name": "llama-desktop-launcher-0.2.5.x86_64.rpm",
+      "size": 80863425,
+      "digest": "sha256:0518526c9209471a8a5c21f5a2f9a703a88868b51d26b35430bdfcef2a1d7a48"
+    },
+    {
+      "id": 594374438,
+      "name": "llama-desktop-launcher_0.2.5_amd64.deb",
+      "size": 80502366,
+      "digest": "sha256:8e3a54286e332099ec01580ea63d6a78a9aa85568498011860bdca45eab088f4"
+    },
+    {
+      "id": 594374428,
+      "name": "llama-desktop-launcher_0.2.5_arm64.deb",
+      "size": 86044664,
+      "digest": "sha256:197371ffa0fc1ac5fab1d0744f1c361b823e55990ac8b5216a33e9bd68d28e5a"
+    },
+    {
+      "id": 594374447,
+      "name": "Llama.Desktop.Launcher-0.2.5-arm64.AppImage",
+      "size": 117080977,
+      "digest": "sha256:b280fa837c56c040289ae255c96c1021e704630b08d5787ed6dadfa0c6661c86"
+    },
+    {
+      "id": 594374435,
+      "name": "Llama.Desktop.Launcher-0.2.5-arm64.dmg",
+      "size": 109480381,
+      "digest": "sha256:6b5621de549b56e95a97625fe3b89bb3511cdc8e84604db3352a296b09b3ce1e"
+    },
+    {
+      "id": 594374437,
+      "name": "Llama.Desktop.Launcher-0.2.5-arm64.dmg.blockmap",
+      "size": 115435,
+      "digest": "sha256:612a052e8adf83d2e96a5fd1ffa5d7b1094ae2127c65297b62665c758f77514a"
+    },
+    {
+      "id": 594374446,
+      "name": "Llama.Desktop.Launcher-0.2.5.AppImage",
+      "size": 116854595,
+      "digest": "sha256:f8d61fa03934f0edb0272b4d57c3424ade994c300c2a4f117f4ff0339a5c33e2"
+    },
+    {
+      "id": 594374436,
+      "name": "Llama.Desktop.Launcher-0.2.5.dmg",
+      "size": 114458448,
+      "digest": "sha256:0764d99531629e1c949fb8702ab60411cef0f3eaee3cb3356b38fc699d8f18fe"
+    },
+    {
+      "id": 594374449,
+      "name": "Llama.Desktop.Launcher-0.2.5.dmg.blockmap",
+      "size": 120731,
+      "digest": "sha256:ba6b16f719a7f13868d76268ff7f7001429cb86df28540d1610ae558c8fe56b7"
+    },
+    {
+      "id": 594374445,
+      "name": "Llama.Desktop.Launcher.Setup.0.2.5.exe",
+      "size": 95217445,
+      "digest": "sha256:a5d588e2f225a7ec89674b703673f531ff46b84d164ff3149e1160f8079171c7"
+    },
+    {
+      "id": 594374434,
+      "name": "Llama.Desktop.Launcher.Setup.0.2.5.exe.blockmap",
+      "size": 100772,
+      "digest": "sha256:ce20e251391ea7a068de36f4904cff7dd6f1ef2243198688a730295d132e7a30"
+    },
+    {
+      "id": 594374440,
+      "name": "SHA256SUMS.txt",
+      "size": 1696,
+      "digest": "sha256:8d1a7198956e066e4fc87f71317913683a45e8daea3d91510837767d83dca3b2"
+    }
+  ]
+}

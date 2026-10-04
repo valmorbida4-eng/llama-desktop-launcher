@@ -1,9 +1,9 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": true,
   "license": "MIT",
-  "author": "CÃ©lio <valmorbida4@gmail.com>",
+  "author": "Célio <valmorbida4@gmail.com>",
   "description": "Instalador e launcher multiplataforma para llama.cpp",
   "main": "build/app/main.js",
   "scripts": {
@@ -69,7 +69,7 @@
       "include": "build/installer.nsh"
     },
     "linux": {
-      "maintainer": "CÃ©lio <valmorbida4@gmail.com>",
+      "maintainer": "Célio <valmorbida4@gmail.com>",
       "target": [
         "AppImage",
         "deb",
