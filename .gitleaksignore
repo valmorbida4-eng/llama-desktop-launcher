@@ -1,0 +1,2 @@
+# False positive: public RFC 6455 Sec-WebSocket-Key sample nonce in a handshake test.
+b567ff942d4f133b0fd673582ee853247a5fb2f4:tests/network.test.js:generic-api-key:82
