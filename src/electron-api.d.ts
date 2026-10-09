@@ -14,9 +14,16 @@ interface ModelSettings {
 interface ProgressUpdate { percent: number; label: string }
 interface ChatOutput { stream: 'stdout' | 'stderr'; text: string }
 interface ProcessExit { code: number | null; signal: string | null }
+interface UpdateInfo { currentVersion: string; version: string; available: boolean; notes: string; url: string; publishedAt: string | null; asset: { name: string; size: number } | null }
+interface UpdateResult { action: 'installer' | 'opened' | 'appimage' | 'package' | 'cancelled'; file: string; command?: string | null }
 interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
 interface RendererApi {
   state(): Promise<any>;
+  checkUpdate(): Promise<UpdateInfo>;
+  installUpdate(): Promise<UpdateResult>;
+  setUpdateCheck(enabled: boolean): Promise<any>;
+  onUpdateAvailable(callback: (value: UpdateInfo) => void): void;
+  onUpdateProgress(callback: (value: ProgressUpdate) => void): void;
   selectModel(modelPath: string): Promise<any>;
   completeSetup(): Promise<any>;
   chooseDir(kind: 'engine' | 'models', index?: number): Promise<any>;

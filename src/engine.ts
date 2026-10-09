@@ -88,7 +88,7 @@ async function saveDownload(stream,asset,file,onProgress) {
   }});
   await pipeline(stream,meter,fs.createWriteStream(file,{flags:'wx'}));
   const digest=hash.digest('hex');
-  if(asset.digest && asset.digest.startsWith('sha256:') && digest!==asset.digest.slice(7)) throw Error('Checksum SHA-256 do llama.cpp não confere.');
+  if(asset.digest && asset.digest.startsWith('sha256:') && digest!==asset.digest.slice(7)) throw Error('Checksum SHA-256 do download não confere.');
   return digest;
 }
 async function download(asset,file,onProgress) {
@@ -148,4 +148,4 @@ async function installEngine(destination,backend,onProgress) {
     return {path:destination,release:release.tag_name,asset:main.name,backend};
   } finally {await fsp.rm(temp,{recursive:true,force:true}).catch(()=>{});}
 }
-module.exports={ENGINE_TAG,assetFor,assetsFor,backendOptions,installEngine,findExecutable,saveDownload};
+module.exports={ENGINE_TAG,request,assetFor,assetsFor,backendOptions,installEngine,findExecutable,saveDownload};

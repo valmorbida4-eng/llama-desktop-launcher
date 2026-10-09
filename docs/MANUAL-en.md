@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.4.3 · English
+Version 0.5.0 · English
 
 ## 1. What the application does
 
@@ -16,25 +16,25 @@ The installed version appears in the header next to “llama.cpp no seu computad
 
 | Platform / Distribution | Architecture | Official package / Direct download | GPU backend |
 | --- | --- | --- | --- |
-| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.3.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher.Setup.0.4.3.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
-| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.3_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher_0.4.3_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.3_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher_0.4.3_arm64.deb) | Vulkan or CPU |
-| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.3.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher-0.4.3.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.3.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher-0.4.3.aarch64.rpm) | Vulkan or CPU |
-| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.4.3.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.4.3-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3-arm64.AppImage) | Vulkan or CPU |
-| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.3-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3-arm64.dmg) | Metal |
-| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.4.3.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3.dmg) | Metal |
+| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.5.0.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/Llama.Desktop.Launcher.Setup.0.5.0.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
+| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.5.0_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/llama-desktop-launcher_0.5.0_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.5.0_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/llama-desktop-launcher_0.5.0_arm64.deb) | Vulkan or CPU |
+| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.5.0.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/llama-desktop-launcher-0.5.0.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.5.0.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/llama-desktop-launcher-0.5.0.aarch64.rpm) | Vulkan or CPU |
+| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.5.0.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/Llama.Desktop.Launcher-0.5.0.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.5.0-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/Llama.Desktop.Launcher-0.5.0-arm64.AppImage) | Vulkan or CPU |
+| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.5.0-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/Llama.Desktop.Launcher-0.5.0-arm64.dmg) | Metal |
+| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.5.0.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.0/Llama.Desktop.Launcher-0.5.0.dmg) | Metal |
 
 Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. GitHub Actions compiles native official packages for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon.
 
 ## 3. Install the application
 
-The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.4.3 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
+The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.5.0 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
 
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.4.3.exe`.
+1. Open `Llama Desktop Launcher Setup 0.5.0.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.
@@ -311,6 +311,19 @@ The benchmark may load the model more than once and can take several minutes. It
 ## 10. Data, updates, and safe uninstalling
 
 Preferences and profiles are stored as `settings.json` in the app's user data folder. The downloaded engine is stored under `engines/` in the same area. Model files stay in the folders you chose. The app does not allow a model folder inside the application installation or its internal user data directory.
+
+### Update the application
+
+At startup and once a day, the app checks the project's latest GitHub release. When a new version exists, the header shows **vX.Y.Z disponível** ("available"). Click it or open **Configurações > 05 · Atualizações** (Settings > Updates) to read the release notes. The check only requests the releases page from GitHub; clear **Verificar atualizações ao iniciar** ("Check for updates at startup") to turn it off and use **Verificar agora** ("Check now") whenever you want.
+
+**Baixar e instalar / Baixar atualização** ("Download and install" / "Download update") downloads the package for your system and verifies it against the release's `SHA256SUMS.txt` before using it. A package that does not match is deleted.
+
+- **Windows:** if the server or chat is running, the app asks before stopping them. It then opens the installer and quits; follow the installer as usual.
+- **macOS:** the disk image opens. Drag the app to **Applications**, replace the current version, and open it again.
+- **Linux AppImage:** the new AppImage is saved next to the current one, already executable. Close the app and open the new one; delete the old file afterwards.
+- **Linux DEB/RPM:** the verified package is shown in the update download folder, with the install command (`sudo apt install` or `sudo dnf install`). Close the app before installing.
+
+Engine, models, profiles, and API key are preserved. Installers are not code-signed yet: verification protects against a corrupted download, not against a tampered release in the repository.
 
 Before uninstalling, click **Parar servidor / Stop server** if needed, then close the app normally. On Windows, the uninstaller checks whether the app is still open and asks you to close it; click **Retry** after closing. It does not force the app to quit. Use **Installed apps** in Windows Settings. By default, it removes the app and shortcuts while **preserving models, profiles, and the downloaded engine**. Do not use advanced app-data removal options without inspecting the data folder first.
 
