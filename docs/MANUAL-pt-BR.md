@@ -6,7 +6,7 @@ Versão 0.4.2 · Português (Brasil)
 
 O Llama Desktop Launcher instala ou localiza o motor [llama.cpp](https://github.com/ggml-org/llama.cpp), encontra modelos locais em formato GGUF e abre a interface do `llama-server` no navegador. Você pode escolher acesso somente local, LAN ou Tailscale. Ao escolher a rede, a API exige uma chave. Os dados trocados com outros computadores trafegam pela rede escolhida.
 
-O instalador do aplicativo **não inclui modelos**. O motor oficial também é baixado na primeira execução, ou você pode indicar uma instalação já existente. A versão do motor testada é `b11193`.
+O instalador do aplicativo **não inclui modelos**. O motor oficial também é baixado na primeira execução, ou você pode indicar uma instalação já existente. A versão do motor testada é `b11514`.
 
 A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **Modelos**, para encontrar GGUF e consultar recomendações; e **Configurações**, para preparar o motor, as pastas e os perfis. A navegação para Configurações permanece disponível em todas as telas.
 
@@ -65,7 +65,7 @@ No primeiro início, a tela **Configurações** abre automaticamente quando o mo
 
 Na seção **Motor llama.cpp**, escolha uma das opções:
 
-1. **Baixar motor oficial:** escolha o **Backend do pacote oficial** antes de clicar no botão. O aplicativo acessa a release `b11193` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote da plataforma e do backend escolhidos. No Windows/Linux, as opções exibidas dependem da arquitetura e incluem Vulkan, NVIDIA CUDA, CPU e, em x64, AMD ROCm e Intel SYCL. No macOS, usa Metal. CUDA baixa também as bibliotecas oficiais correspondentes. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
+1. **Baixar motor oficial:** escolha o **Backend do pacote oficial** antes de clicar no botão. O aplicativo acessa a release `b11514` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote da plataforma e do backend escolhidos. No Windows/Linux, as opções exibidas dependem da arquitetura e incluem Vulkan, NVIDIA CUDA, CPU e, em x64, AMD ROCm e Intel SYCL. No macOS, usa Metal. CUDA baixa também as bibliotecas oficiais correspondentes. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
 2. **Escolher pasta existente:** a pasta selecionada precisa conter `llama-server` (ou `llama-server.exe`). Use esta opção para aproveitar uma instalação já preparada, como a pasta `b11193-vulkan` do launcher Windows anterior.
 
 O download requer internet. Escolha pelo tipo de GPU, independentemente da marca da CPU: Vulkan funciona com GPUs compatíveis de AMD, Intel ou NVIDIA; CUDA é para NVIDIA, ROCm para AMD e SYCL para Intel. Para uma RTX 4060 no Windows x64, comece por **NVIDIA CUDA 12.4** e mantenha o driver NVIDIA atualizado. ROCm e SYCL podem exigir runtimes e drivers adicionais. Se a release não tiver pacote para a arquitetura detectada, selecione um runtime compilado por você. O aplicativo verifica o SHA-256 quando a API da release fornece o digest. Se você já escolheu um motor e quiser substituí-lo, use **Escolher pasta existente** ou baixe novamente o pacote oficial na mesma tela.
@@ -304,7 +304,7 @@ O teste pode carregar o modelo mais de uma vez e levar vários minutos. Ele não
 | O servidor encerra ao abrir | Consulte **Registro do motor**; reduza contexto/batch, experimente `-ngl auto` ou menos camadas de GPU. |
 | GPU não é usada | Confira o backend escolhido, a compatibilidade da GPU e seus drivers; no macOS, confirme o pacote Metal. Verifique mensagens do motor. |
 | Benchmark falha | Confirme que a pasta do runtime inclui `llama-bench`; tente parâmetros mais conservadores. |
-| Modelo não carrega | Verifique todos os shards, compatibilidade com `b11193`, licença/instruções do repositório e memória disponível. |
+| Modelo não carrega | Verifique todos os shards, compatibilidade com `b11514`, licença/instruções do repositório e memória disponível. |
 
 ## 10. Dados, atualização e desinstalação segura
 

@@ -2,7 +2,7 @@
 
 1. **Auditar o launcher existente — concluído.** Preservar perfis por modelo, argumentos de GPU, cache, Flash Attention, batch, microbatch e MoE. A interface anterior é WinForms e depende de um runtime Windows externo.
 2. **Criar aplicativo multiplataforma — implementado.** Electron com processo principal isolado, interface em português, telas separadas para modelos e configurações, dados em pasta do usuário, até dois locais de GGUF e escolha de runtime existente. Primeiro uso pode ser concluído sem motor/modelo.
-3. **Instalar o motor — implementado.** Download sob demanda da release oficial `b11193`, com seleção de pacote por sistema e arquitetura; Windows/Linux Vulkan, macOS Metal. Validar digest SHA-256 quando a API do GitHub o fornecer.
+3. **Instalar o motor — implementado.** Download sob demanda da release oficial `b11514` (antes `b11193`), com seleção de pacote por sistema e arquitetura; Windows/Linux Vulkan, macOS Metal. Validar digest SHA-256 quando a API do GitHub o fornecer.
 4. **Ajustar o hardware — implementado parcialmente.** Preset inicial por RAM, CPU e tamanho/nome do modelo. Com GGUF disponível, `llama-bench` testa dois microbatches e apresenta a opção mais rápida. Leitura automática da VRAM e varredura mais ampla de parâmetros permanecem para próxima versão.
 5. **Instaladores — configuração implementada.** Windows NSIS com escolha da pasta do app e atalho opcional; Linux AppImage/DEB/RPM; macOS DMG. Compilação por matriz de GitHub Actions. Os modelos são configurados na primeira execução, pois instaladores de sistema não devem armazenar pesos no diretório do app.
 6. **Manuais — concluído.** Instruções detalhadas em português do Brasil e inglês, acessíveis pelo aplicativo e incluídas no instalador.

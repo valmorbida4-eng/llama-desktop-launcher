@@ -6,7 +6,7 @@ Version 0.4.2 · English
 
 Llama Desktop Launcher installs or locates the [llama.cpp](https://github.com/ggml-org/llama.cpp) engine, finds local GGUF models, and opens the `llama-server` interface in your browser. You can select local-only, LAN, or Tailscale access. Network access requires an API key. Traffic to other computers travels over the selected network.
 
-The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b11193`.
+The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b11514`.
 
 The interface has three screens: **Llama** for chat and starting the server, **Models** for finding GGUF files and viewing recommendations, and **Settings** for preparing the engine, folders, and profiles. Settings remains available in the navigation on every screen.
 
@@ -65,7 +65,7 @@ On first launch, **Settings** opens automatically if the engine is not ready, th
 
 In **Motor llama.cpp**, choose one of these options:
 
-1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b11193` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
+1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b11514` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
 2. **Escolher pasta existente / Choose existing folder:** select a folder containing `llama-server` (or `llama-server.exe`). This lets you reuse an existing installation, including the `b11193-vulkan` directory used by the earlier Windows launcher.
 
 Downloading requires internet access. Choose according to your GPU, independent of CPU brand: Vulkan supports compatible AMD, Intel, and NVIDIA GPUs; CUDA is for NVIDIA, ROCm for AMD, and SYCL for Intel. For an RTX 4060 on Windows x64, start with **NVIDIA CUDA 12.4** and keep the NVIDIA driver current. ROCm and SYCL may require additional runtimes and drivers. If the release has no package for your CPU architecture, select a compatible engine you built or installed yourself. The app checks SHA-256 when the GitHub release API provides a digest. You can replace a selected engine later by choosing a different existing folder or downloading the official package again.
@@ -306,7 +306,7 @@ The benchmark may load the model more than once and can take several minutes. It
 | Server exits during startup | Read the engine log; lower context/batch, try `-ngl auto`, or reduce GPU layers. |
 | GPU not used | Check the selected backend, GPU compatibility, and drivers; on macOS check that you installed a Metal build. Read the engine log. |
 | Benchmark fails | Ensure the runtime folder contains `llama-bench`; try more conservative settings. |
-| Model fails to load | Check all shards, `b11193` compatibility, model repository instructions, and available memory. |
+| Model fails to load | Check all shards, `b11514` compatibility, model repository instructions, and available memory. |
 
 ## 10. Data, updates, and safe uninstalling
 

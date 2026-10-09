@@ -81,7 +81,7 @@ test('descoberta de GGUF ignora projetor e shards posteriores',()=>{
   finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
 test('release oficial é selecionada por plataforma',()=>{
-  const release={tag_name:'b11193',assets:[{name:'llama-b11193-bin-win-vulkan-x64.zip'},{name:'llama-b11193-bin-ubuntu-vulkan-x64.tar.gz'},{name:'llama-b11193-bin-macos-arm64.tar.gz'}]};
+  const release={tag_name:'b11514',assets:[{name:'llama-b11514-bin-win-vulkan-x64.zip'},{name:'llama-b11514-bin-ubuntu-vulkan-x64.tar.gz'},{name:'llama-b11514-bin-macos-arm64.tar.gz'}]};
   assert.match(assetFor(release,'win32','x64').name,/win-vulkan/);
   assert.match(assetFor(release,'linux','x64').name,/ubuntu-vulkan/);
   assert.match(assetFor(release,'darwin','arm64').name,/macos/);
