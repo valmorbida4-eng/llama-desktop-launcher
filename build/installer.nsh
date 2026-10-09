@@ -50,12 +50,17 @@ FunctionEnd
     ${EndIf}
   ${EndIf}
   ${If} $CreateDesktopShortcut == ${BST_CHECKED}
-    CreateShortcut "$DESKTOP\Llama Desktop Launcher.lnk" "$INSTDIR\${APP_EXECUTABLE_FILENAME}"
+    # Same shortcut as electron-builder's: an explicit icon avoids the blank icon Explorer caches while an update replaces the executable.
+    CreateShortcut "$DESKTOP\Llama Desktop Launcher.lnk" "$INSTDIR\${APP_EXECUTABLE_FILENAME}" "" "$INSTDIR\${APP_EXECUTABLE_FILENAME}" 0 "" "" "${APP_DESCRIPTION}"
+    ClearErrors
+    WinShell::SetLnkAUMI "$DESKTOP\Llama Desktop Launcher.lnk" "${APP_ID}"
     WriteRegStr SHELL_CONTEXT "${INSTALL_REGISTRY_KEY}" DesktopShortcut "true"
   ${Else}
+    WinShell::UninstShortcut "$DESKTOP\Llama Desktop Launcher.lnk"
     Delete "$DESKTOP\Llama Desktop Launcher.lnk"
     WriteRegStr SHELL_CONTEXT "${INSTALL_REGISTRY_KEY}" DesktopShortcut "false"
   ${EndIf}
+  System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 !macroend
 
 !macro customUnInstallCheck
@@ -164,6 +169,7 @@ FunctionEnd
 !macro customUnInstall
   ${IfNot} ${isKeepShortcuts}
   ${AndIfNot} ${isUpdated}
+    WinShell::UninstShortcut "$DESKTOP\Llama Desktop Launcher.lnk"
     Delete "$DESKTOP\Llama Desktop Launcher.lnk"
   ${EndIf}
 !macroend
