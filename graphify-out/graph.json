@@ -10156,6 +10156,18 @@
       "type": "external"
     },
     {
+      "id": "build_app_updater",
+      "label": "build_app_updater",
+      "_origin": "semantic",
+      "community": 138,
+      "community_name": "updater.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_updater",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_https",
       "label": "ref_node_https",
       "_origin": "semantic",
@@ -11304,17 +11316,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_updater",
-      "label": "build_app_updater",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_updater",
       "source_file": "",
       "type": "external"
     }
@@ -23613,7 +23614,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L125",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -24492,5 +24493,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "baaee39e99444adaef7f713d5a0dc21bbe287999"
+  "built_at_commit": "2300a40332c995c84cd0a20104783ec837e29426"
 }

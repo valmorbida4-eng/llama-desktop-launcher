@@ -25,16 +25,16 @@ O código-fonte está no [repositório do projeto](https://github.com/valmorbida
 
 | Plataforma / Distribuição | Arquitetura | Pacote / Download direto | Descrição |
 | --- | --- | --- | --- |
-| **Windows** (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.2.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher.Setup.0.4.2.exe) | Instalador oficial NSIS com atalho opcional na área de trabalho. |
-| **Linux** (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.2_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher_0.4.2_amd64.deb) | Pacote nativo `.deb` para instalação via `apt` / `dpkg`. |
-| **Linux** (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.2_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher_0.4.2_arm64.deb) | Pacote nativo `.deb` para placas e servidores ARM64. |
-| **Linux** (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.2.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher-0.4.2.x86_64.rpm) | Pacote nativo `.rpm` para instalação via `dnf` / `rpm`. |
-| **Linux** (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.2.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher-0.4.2.aarch64.rpm) | Pacote nativo `.rpm` para distribuições RPM em ARM64. |
-| **Linux** (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.4.2.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2.AppImage) | Executável portátil sem necessidade de instalação root. |
-| **Linux** (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.4.2-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2-arm64.AppImage) | Executável portátil para sistemas ARM64. |
-| **macOS** (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.2-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2-arm64.dmg) | Imagem de disco DMG nativa com aceleração Metal. |
-| **macOS** (Intel) | x64 | [`Llama Desktop Launcher-0.4.2.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2.dmg) | Imagem de disco DMG para Macs com processador Intel. |
-| **Verificação de Integridade** | Todas | [`SHA256SUMS.txt`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/SHA256SUMS.txt) | Checksums SHA-256 de todos os arquivos da versão 0.4.2. |
+| **Windows** (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.5.1.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/Llama.Desktop.Launcher.Setup.0.5.1.exe) | Instalador oficial NSIS com atalho opcional na área de trabalho. |
+| **Linux** (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.5.1_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/llama-desktop-launcher_0.5.1_amd64.deb) | Pacote nativo `.deb` para instalação via `apt` / `dpkg`. |
+| **Linux** (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.5.1_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/llama-desktop-launcher_0.5.1_arm64.deb) | Pacote nativo `.deb` para placas e servidores ARM64. |
+| **Linux** (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.5.1.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/llama-desktop-launcher-0.5.1.x86_64.rpm) | Pacote nativo `.rpm` para instalação via `dnf` / `rpm`. |
+| **Linux** (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.5.1.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/llama-desktop-launcher-0.5.1.aarch64.rpm) | Pacote nativo `.rpm` para distribuições RPM em ARM64. |
+| **Linux** (Portátil / Todas as distros) | x64 | [`Llama Desktop Launcher-0.5.1.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/Llama.Desktop.Launcher-0.5.1.AppImage) | Executável portátil sem necessidade de instalação root. |
+| **Linux** (Portátil / Todas as distros) | ARM64 | [`Llama Desktop Launcher-0.5.1-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/Llama.Desktop.Launcher-0.5.1-arm64.AppImage) | Executável portátil para sistemas ARM64. |
+| **macOS** (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.5.1-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/Llama.Desktop.Launcher-0.5.1-arm64.dmg) | Imagem de disco DMG nativa com aceleração Metal. |
+| **macOS** (Intel) | x64 | [`Llama Desktop Launcher-0.5.1.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/Llama.Desktop.Launcher-0.5.1.dmg) | Imagem de disco DMG para Macs com processador Intel. |
+| **Verificação de Integridade** | Todas | [`SHA256SUMS.txt`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.5.1/SHA256SUMS.txt) | Checksums SHA-256 de todos os arquivos da versão 0.5.1. |
 
 Quando houver uma Release com o pacote do seu sistema, baixe o instalador por ela e siga o [manual em português](docs/MANUAL-pt-BR.md) ou [em inglês](docs/MANUAL-en.md). Se houver apenas o código-fonte, será preciso gerar o pacote na plataforma correspondente pelas instruções abaixo. O instalador não inclui modelos GGUF; o motor llama.cpp pode ser baixado pelo aplicativo na primeira execução.
 
@@ -54,7 +54,7 @@ Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux`
 
 O projeto usa [Semantic Versioning](https://semver.org/) a partir de `0.1.0`. `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
-O instalador atual é identificado pela versão `0.4.2`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
+O instalador atual é identificado pela versão `0.5.1`. Pacotes e arquivos antigos podem continuar em `dist/`, mas não incluem as correções e recursos desta versão.
 
 Para verificações pontuais de macOS sem executar a matriz completa de plataformas, o workflow `.github/workflows/build-macos-preview.yml` pode ser acionado manualmente para testar e validar os pacotes Intel e Apple Silicon.
 
@@ -121,5 +121,7 @@ Na v0.4.2, o cabeçalho mostra automaticamente a versão instalada em todas as t
 Na v0.4.3, o motor passa para a release `b11514` do llama.cpp. Os nomes dos pacotes e backends oferecidos não mudaram; a versão fica fixada em `ENGINE_TAG` em `src/engine.ts`, e o workflow semanal **Engine update** propõe novas releases por PR.
 
 Na v0.5.0, o aplicativo avisa quando há uma versão nova do launcher. Ao iniciar e uma vez por dia (opção desligável), consulta a release mais recente no GitHub; em **Configurações > 05 · Atualizações** baixa o pacote do sistema, confere com o `SHA256SUMS.txt` e abre o instalador no Windows ou entrega o `.dmg`, a AppImage ou o DEB/RPM verificado para instalação manual. Veja [o ADR](docs/adr/app-update-check.md).
+
+Na v0.5.1, o instalador do Windows guarda a escolha do atalho da área de trabalho. Instalações silenciosas (`/S`) e atualizações mantêm essa escolha; sem escolha anterior, criam o atalho, como a opção marcada do instalador. Antes, a atualização silenciosa removia o atalho.
 
 A revisão dos arquivos publicados e a situação da v0.2.5 estão registradas em [Retirada de versões anteriores](docs/security-release-retirements.md).
