@@ -17,4 +17,7 @@ test('instalador Windows mantém a escolha do atalho em instalações silenciosa
  assert.match(macro('customInstall'),/\$\{If\} \$\{Silent\}[\s\S]*\$PreviousDesktopShortcut == "false"/);
  assert.match(macro('customInstall'),/WriteRegStr SHELL_CONTEXT "\$\{INSTALL_REGISTRY_KEY\}" DesktopShortcut "true"/);
  assert.match(macro('customUnInstall'),/\$\{AndIfNot\} \$\{isUpdated\}/);
+ // Without an explicit icon Explorer may cache a blank icon while an update replaces the executable.
+ assert.match(macro('customInstall'),/CreateShortcut "\$DESKTOP\\Llama Desktop Launcher\.lnk" "\$INSTDIR\\\$\{APP_EXECUTABLE_FILENAME\}" "" "\$INSTDIR\\\$\{APP_EXECUTABLE_FILENAME\}" 0/);
+ assert.match(macro('customInstall'),/WinShell::SetLnkAUMI "\$DESKTOP\\Llama Desktop Launcher\.lnk" "\$\{APP_ID\}"/);
 });
