@@ -120,4 +120,6 @@ Na v0.4.2, o cabeçalho mostra automaticamente a versão instalada em todas as t
 
 Na v0.4.3, o motor passa para a release `b11514` do llama.cpp. Os nomes dos pacotes e backends oferecidos não mudaram; a versão fica fixada em `ENGINE_TAG` em `src/engine.ts`, e o workflow semanal **Engine update** propõe novas releases por PR.
 
+Na v0.5.0, o aplicativo avisa quando há uma versão nova do launcher. Ao iniciar e uma vez por dia (opção desligável), consulta a release mais recente no GitHub; em **Configurações > 05 · Atualizações** baixa o pacote do sistema, confere com o `SHA256SUMS.txt` e abre o instalador no Windows ou entrega o `.dmg`, a AppImage ou o DEB/RPM verificado para instalação manual. Veja [o ADR](docs/adr/app-update-check.md).
+
 A revisão dos arquivos publicados e a situação da v0.2.5 estão registradas em [Retirada de versões anteriores](docs/security-release-retirements.md).

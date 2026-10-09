@@ -29,6 +29,7 @@ async function main(){
     await new Promise(r=>setTimeout(r,250));
     const versionVisible=document.getElementById('app-version').textContent==='· v'+state.appVersion && state.appVersion===${JSON.stringify(app.getVersion())};
     const settingsVisible=!document.getElementById('settings-view').hidden;
+    const updateCard=!!document.getElementById('update-card')&&document.getElementById('update-check').checked&&document.getElementById('update-badge').textContent==='v'+state.appVersion;
     const llamaInitiallyVisible=!document.getElementById('llama-view').hidden;
     const importButton=!!document.getElementById('import-profiles');
     const serverButton=!!document.getElementById('start-server');
@@ -49,7 +50,7 @@ async function main(){
     const saveInAccordion=!document.getElementById('save-settings-profile').hidden;
     document.getElementById('nav-settings').click();
     const tuningInSettings=document.getElementById('tuning-settings-content').contains(document.getElementById('tuning-panel'));
-    return {versionVisible,firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,serverButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
+    return {versionVisible,updateCard,firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,serverButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
   })()`);
   const expected=withModel?{firstRun:false,settingsVisible:false,llamaInitiallyVisible:true,selectedModel:true}:{firstRun:true,settingsVisible:true,llamaInitiallyVisible:false,selectedModel:true};
   if(Object.entries(result).some(([key,value])=>value!==(key in expected?expected[key]:true)))throw Error(`Estado da interface inesperado: ${JSON.stringify(result)}`);

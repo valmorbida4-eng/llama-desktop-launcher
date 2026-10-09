@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1791506093.446024,
-    "seen": 1791506420.1420333,
-    "ast_hash": "3d67ef3bd883b54012d609d171144a9d",
+    "mtime": 1791507984.3555734,
+    "seen": 1791508011.586678,
+    "ast_hash": "717e16f23bd5e5e83ad85e3a2b742691",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "scripts/smoke-ui.js": {
-    "mtime": 1791506093.4483633,
-    "seen": 1791506420.1420333,
-    "ast_hash": "76af3c518b0f39b6dcf457c704e2bef1",
+    "mtime": 1791507882.1651783,
+    "seen": 1791508011.586678,
+    "ast_hash": "deae58c9d7e4af371b439ed0b782c3d5",
     "semantic_hash": ""
   },
   "src/benchmark.ts": {
@@ -102,15 +102,15 @@
     "semantic_hash": ""
   },
   "src/electron-api.d.ts": {
-    "mtime": 1791149153.1533523,
-    "seen": 1791506420.1420333,
-    "ast_hash": "f6bb9583497f965f9c81cd7f568a04d2",
+    "mtime": 1791507779.1357186,
+    "seen": 1791508011.586678,
+    "ast_hash": "ac4bb6e0185d484f76fd4648dbf41f29",
     "semantic_hash": ""
   },
   "src/engine.ts": {
-    "mtime": 1791506140.2894628,
-    "seen": 1791506420.1420333,
-    "ast_hash": "b09f85552b73ea088afe7c777e95afa9",
+    "mtime": 1791507719.2632763,
+    "seen": 1791508011.586678,
+    "ast_hash": "0fcce292252cffd2f7ea4c41dfe05deb",
     "semantic_hash": ""
   },
   "src/firewall.ts": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1791506093.4494407,
-    "seen": 1791506420.1430492,
-    "ast_hash": "b626f48a10fce36b1dcc574ed30b2306",
+    "mtime": 1791507779.1333997,
+    "seen": 1791508011.586678,
+    "ast_hash": "3cdc7427cddf20faa624b1e6f38ccd3c",
     "semantic_hash": ""
   },
   "src/network.ts": {
@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "src/preload.ts": {
-    "mtime": 1791149153.1613972,
-    "seen": 1791506420.1430492,
-    "ast_hash": "e3bcd15b99b4d3b9a43675468d103b52",
+    "mtime": 1791507779.1347115,
+    "seen": 1791508011.586678,
+    "ast_hash": "3697975a2d1fec9d68307f8326122d61",
     "semantic_hash": ""
   },
   "src/profile_import.ts": {
@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1791506093.4494407,
-    "seen": 1791506420.1430492,
-    "ast_hash": "14841fed19b963d7096f512a88281bc9",
+    "mtime": 1791507813.9016838,
+    "seen": 1791508011.586678,
+    "ast_hash": "58583cfb1c022f79ae4bd14b458eeb90",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -168,14 +168,14 @@
     "semantic_hash": ""
   },
   "tests/core.test.js": {
-    "mtime": 1791506140.291464,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.692137,
+    "seen": 1791508011.586678,
     "ast_hash": "949038aa4ad4cfde4156c40fd7c260ac",
     "semantic_hash": ""
   },
   "tests/engine.test.js": {
-    "mtime": 1791506356.690818,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6956494,
+    "seen": 1791508011.586678,
     "ast_hash": "d9666fb4570ad31aa29c2bb396d2f2fd",
     "semantic_hash": ""
   },
@@ -354,8 +354,8 @@
     "semantic_hash": ""
   },
   "PLAN.md": {
-    "mtime": 1791506140.2808344,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.632874,
+    "seen": 1791508011.5876772,
     "ast_hash": "2d2671ff228fb1b266760b36694204fc",
     "semantic_hash": ""
   },
@@ -366,39 +366,39 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1791506140.2834668,
-    "seen": 1791506420.1430492,
-    "ast_hash": "5d071e27dd4093c82907e51b3eac631e",
+    "mtime": 1791507983.3074594,
+    "seen": 1791508011.5876772,
+    "ast_hash": "bd5a2f23eb443eb03c80cd0aa39342cd",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
-    "mtime": 1791506140.2864683,
-    "seen": 1791506420.1430492,
-    "ast_hash": "256776c35c44bac4058dc8e2541fea31",
+    "mtime": 1791507984.4236681,
+    "seen": 1791508011.5876772,
+    "ast_hash": "fd01e9e5f7fef7243e903aa9c1789d82",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.md": {
-    "mtime": 1791506140.2884698,
-    "seen": 1791506420.1430492,
-    "ast_hash": "1f700fe09b9936400c15bad94995158e",
+    "mtime": 1791507984.428701,
+    "seen": 1791508011.5876772,
+    "ast_hash": "9a382b776d43c57147a8c8c6afd4c765",
     "semantic_hash": ""
   },
   "src/index.html": {
-    "mtime": 1791506093.4494407,
-    "seen": 1791506420.1430492,
-    "ast_hash": "1b451916b4bb72f9d40746e34efa38d9",
+    "mtime": 1791507813.8985426,
+    "seen": 1791508011.5876772,
+    "ast_hash": "5c1e268bac939b98dabafba61e765f4f",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {
-    "mtime": 1791506093.4184723,
-    "seen": 1791506420.1430492,
-    "ast_hash": "88e49cdf5245c3fc9403a46e554e416b",
+    "mtime": 1791507995.38121,
+    "seen": 1791508011.5876772,
+    "ast_hash": "05fa147b59b3a245c248d03c71262146",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.pdf": {
-    "mtime": 1791506093.4184723,
-    "seen": 1791506420.1430492,
-    "ast_hash": "6ace7221766e996cb430154227593a7d",
+    "mtime": 1791507995.2283888,
+    "seen": 1791508011.5876772,
+    "ast_hash": "3d2a10a9fbf88902d1dc45d26a572bba",
     "semantic_hash": ""
   },
   "tests/network.test.js": {
@@ -432,8 +432,8 @@
     "semantic_hash": ""
   },
   "tests/engine-install.test.js": {
-    "mtime": 1791506356.690818,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6931267,
+    "seen": 1791508011.586678,
     "ast_hash": "9b22a070882a0d5b1db0937b103c745b",
     "semantic_hash": ""
   },
@@ -468,8 +468,8 @@
     "semantic_hash": ""
   },
   "docs/adr/0010-electron-download-security.md": {
-    "mtime": 1791506093.4184723,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6488452,
+    "seen": 1791508011.5876772,
     "ast_hash": "9a497385fd7fe6b481006024fef09942",
     "semantic_hash": ""
   },
@@ -510,51 +510,69 @@
     "semantic_hash": ""
   },
   "docs/retired-releases/v0.2.5/release-metadata.json": {
-    "mtime": 1791506093.4293137,
-    "seen": 1791506420.1420333,
+    "mtime": 1791507059.6553574,
+    "seen": 1791508011.586678,
     "ast_hash": "0d1e0492d07feacbd9aa0902c20e2930",
     "semantic_hash": ""
   },
   "tests/package-resources.test.js": {
-    "mtime": 1791506093.4494407,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6966476,
+    "seen": 1791508011.586678,
     "ast_hash": "673686b434953f8155b6ac5a58fde0de",
     "semantic_hash": ""
   },
   "docs/retired-releases/v0.2.5/SHA256SUMS.txt": {
-    "mtime": 1791506093.4184723,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6538389,
+    "seen": 1791508011.5876772,
     "ast_hash": "c50c468ad2eca53239073036a2847273",
     "semantic_hash": ""
   },
   "docs/security-release-retirements.md": {
-    "mtime": 1791506093.4293137,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.657372,
+    "seen": 1791508011.5876772,
     "ast_hash": "00a1a667dd513a87db1092db42fad15a",
     "semantic_hash": ""
   },
   "docs/retired-releases/actions-artifacts-removed-2026-10-04.json": {
-    "mtime": 1791506093.4184723,
-    "seen": 1791506420.1420333,
+    "mtime": 1791507059.6518433,
+    "seen": 1791508011.586678,
     "ast_hash": "709346f2b501cbdf4be69366b7d6730d",
     "semantic_hash": ""
   },
   "scripts/check-engine-release.js": {
-    "mtime": 1791506381.5006444,
-    "seen": 1791506420.1420333,
+    "mtime": 1791507059.6799202,
+    "seen": 1791508011.586678,
     "ast_hash": "6696d43ab76f10caa0f527cfe68f8f89",
     "semantic_hash": ""
   },
   ".github/workflows/engine-update.yml": {
-    "mtime": 1791506381.617041,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6288624,
+    "seen": 1791508011.5876772,
     "ast_hash": "6c14d31bd62d3f2e0b5e767cb75eb191",
     "semantic_hash": ""
   },
   "docs/adr/engine-version-pin.md": {
-    "mtime": 1791506392.4150546,
-    "seen": 1791506420.1430492,
+    "mtime": 1791507059.6498475,
+    "seen": 1791508011.5876772,
     "ast_hash": "5ea96893058669ddbb635d9734409146",
+    "semantic_hash": ""
+  },
+  "src/updater.ts": {
+    "mtime": 1791507737.4180229,
+    "seen": 1791508011.586678,
+    "ast_hash": "ae9caee2cb2e664852fc8a8dc0cd01ce",
+    "semantic_hash": ""
+  },
+  "tests/updater.test.js": {
+    "mtime": 1791507853.0480888,
+    "seen": 1791508011.586678,
+    "ast_hash": "24e2c1872fc0dd19390783623fab18e8",
+    "semantic_hash": ""
+  },
+  "docs/adr/app-update-check.md": {
+    "mtime": 1791507983.359578,
+    "seen": 1791508011.5876772,
+    "ast_hash": "1eef48acb5060eff3c2917cf91c9a7c6",
     "semantic_hash": ""
   }
 }

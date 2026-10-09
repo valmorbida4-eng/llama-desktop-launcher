@@ -19,9 +19,11 @@ const terminalCli=require('./terminal_cli');
 const guidance=require('./guidance');
 const hardware=require('./hardware');
 const firewall=require('./firewall');
+const updater=require('./updater');
 const {parseLegacyProfiles}=require('./profile_import');
 let win: import('electron').BrowserWindow | null,server: any=null,proxy: any=null,active: any=null,conversation: any=null,tuneAbort: AbortController | null=null,configuration: any,configPath: string;
 let gpuProbe;
+let updateInfo: any=null,updateBusy=false;
 
 function validateSender(event: any) {
   if(!win||win.isDestroyed()||!event?.senderFrame||event.senderFrame!==win.webContents.mainFrame) {
@@ -29,11 +31,11 @@ function validateSender(event: any) {
   }
 }
 
-function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',profiles:{},selectedModelPath:'',firstRun:true,accessHost:'127.0.0.1',parallel:1};}
+function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',profiles:{},selectedModelPath:'',firstRun:true,accessHost:'127.0.0.1',parallel:1,updateCheck:true};}
 function save() {fs.mkdirSync(path.dirname(configPath),{recursive:true});fs.writeFileSync(configPath,JSON.stringify(configuration,null,2));}
 function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}}
 function send(channel,data) {if(win&&!win.isDestroyed()) win.webContents.send(channel,data);}
-function state() {return {appVersion:app.getVersion(),config:configuration,models:core.scanModels(configuration.modelDirs),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:!!(configuration.engineDir&&fs.existsSync(path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server'))),running:!!server,chatRunning:!!conversation,accessOptions:network.accessOptions(),active};}
+function state() {return {appVersion:app.getVersion(),config:configuration,models:core.scanModels(configuration.modelDirs),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:!!(configuration.engineDir&&fs.existsSync(path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server'))),running:!!server,chatRunning:!!conversation,accessOptions:network.accessOptions(),active,update:updateInfo};}
 function freePort(host: string='127.0.0.1',first=0,last=0): Promise<number> {return new Promise<number>((resolve,reject)=>{let port=first;const tryNext=()=>{const s=net.createServer();s.once('error',e=>{if(e.code==='EADDRINUSE'&&port<last){port++;tryNext();}else reject(e);});s.listen(port,host,()=>{const found=s.address().port;s.close(()=>resolve(found));});};tryNext();});}
 function waitReady(host: string,port: number,child: any,key: string | null): Promise<void> {return new Promise<void>((resolve,reject)=>{let count=0,done=false;const finish=(error?: Error)=>{if(done)return;done=true;clearInterval(timer);error?reject(error):resolve();};child.once('error',(e: Error)=>finish(e));const timer=setInterval(()=>{if(child.exitCode!==null){finish(Error('llama-server encerrou antes de ficar pronto.'));return;}http.get({hostname:host,port,path:'/health',headers:key?{Authorization:`Bearer ${key}`}:{},timeout:3000},r=>{r.resume();if(r.statusCode===200)finish();}).on('error',()=>{});if(++count>300)finish(Error('Tempo esgotado ao carregar o modelo.'));},1000);});}
 function apiKeyPath(){return path.join(app.getPath('userData'),'server-api-key.txt');}
@@ -47,12 +49,48 @@ function createWindow() {
   win.loadFile(path.join(__dirname,'index.html'));
   win.webContents.setWindowOpenHandler(({url})=>{if(url.startsWith('https://')||url.startsWith('http://')) shell.openExternal(url);return {action:'deny'};});
   win.webContents.on('will-navigate',(event,url)=>{event.preventDefault();if(url.startsWith('https://')||url.startsWith('http://')) shell.openExternal(url);});
+  win.webContents.once('did-finish-load',()=>{const automatic=()=>{if(configuration.updateCheck!==false)checkUpdates().catch(()=>{});};automatic();setInterval(automatic,updater.CHECK_INTERVAL_MS);});
+}
+async function checkUpdates() {
+  const info=await updater.checkForUpdate(app.getVersion());
+  updateInfo=info;configuration.lastUpdateCheck=Date.now();save();
+  if(info.available) send('update-available',info);
+  return info;
+}
+// Downloads the verified package; Windows runs the installer and quits, other systems hand the file to the user.
+async function installUpdate() {
+  if(!updateInfo?.available)throw Error('Nenhuma atualização disponível.');
+  if(updateBusy)throw Error('A atualização já está em andamento.');
+  if(tuneAbort)throw Error('Aguarde o fim do teste de desempenho.');
+  updateBusy=true;
+  try {
+    const file=await updater.downloadUpdate(updateInfo,path.join(app.getPath('userData'),'updates'),percent=>send('update-progress',{percent,label:`Baixando v${updateInfo.version}`}));
+    if(process.platform==='win32') {
+      if(server||conversation){const answer=await dialog.showMessageBox(win,{type:'question',buttons:['Encerrar e atualizar','Cancelar'],defaultId:0,cancelId:1,message:'O servidor e a conversa ativos serão encerrados para instalar a atualização.'});if(answer.response!==0)return {action:'cancelled',file};}
+      spawn(file,[],{detached:true,stdio:'ignore'}).unref();
+      setTimeout(()=>app.quit(),500);
+      return {action:'installer',file};
+    }
+    if(process.platform==='darwin'){const error=await shell.openPath(file);if(error)throw Error(error);return {action:'opened',file};}
+    if(file.endsWith('.AppImage')) {
+      let target=file;
+      const current=process.env.APPIMAGE;
+      if(current){const beside=path.join(path.dirname(current),path.basename(file));try{if(!fs.existsSync(beside))fs.copyFileSync(file,beside);target=beside;}catch{}}
+      fs.chmodSync(target,0o755);shell.showItemInFolder(target);
+      return {action:'appimage',file:target};
+    }
+    shell.showItemInFolder(file);
+    return {action:'package',file,command:updater.installHint(file)};
+  } finally {updateBusy=false;}
 }
 app.whenReady().then(()=>{load();createWindow();app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin') app.quit();});
 app.on('before-quit',()=>{tuneAbort?.abort();shareProxy?.close();shareProxy=null;proxy?.close();conversation?.stop();if(server)server.kill();});
 
 ipcMain.handle('state',e=>{validateSender(e);return state();});
+ipcMain.handle('check-update',e=>{validateSender(e);return checkUpdates();});
+ipcMain.handle('install-update',e=>{validateSender(e);return installUpdate();});
+ipcMain.handle('set-update-check',(e,enabled)=>{validateSender(e);if(typeof enabled!=='boolean')throw Error('Valor inválido.');configuration.updateCheck=enabled;save();return state();});
 ipcMain.handle('select-model',(e,modelPath)=>{validateSender(e);selectedModel(modelPath);configuration.selectedModelPath=modelPath;save();return state();});
 ipcMain.handle('complete-setup',e=>{validateSender(e);configuration.firstRun=false;save();return state();});
 ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(server||conversation||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:kind==='engine'?'Pasta dos binários llama.cpp':'Pasta de modelos GGUF'});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});

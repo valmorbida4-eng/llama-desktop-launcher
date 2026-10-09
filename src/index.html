@@ -12,6 +12,7 @@
     <button id="nav-models" class="nav-button">Modelos</button>
     <button id="nav-settings" class="nav-button">Configurações</button>
   </nav>
+  <button id="update-available" class="update-pill small" hidden></button>
   <div id="platform" class="pill"></div>
 </header>
 <main>
@@ -66,6 +67,7 @@
       </div><div id="tuning-message" class="message" role="status"></div><div class="footer-actions"><button id="save-settings-profile" class="primary">Salvar ajustes deste modelo</button></div>
     </div></div><div id="settings-message" role="status" class="message"></div></section>
     <section class="card model-card"><div class="section-head"><div><div class="eyebrow">04 · IMPORTAÇÃO</div><h2>Perfis anteriores</h2></div><button id="import-profiles" class="secondary">Importar perfis TSV</button></div><p>Importe launcher-profiles.tsv. Perfis existentes no aplicativo serão preservados.</p></section>
+    <section id="update-card" class="card model-card"><div class="section-head"><div><span class="eyebrow">05 · ATUALIZAÇÕES</span><h2>Versão do launcher</h2></div><span id="update-badge" class="badge">—</span></div><p id="update-status">Nenhuma verificação nesta sessão.</p><label class="check"><input id="update-check" type="checkbox"> Verificar atualizações ao iniciar e uma vez por dia (consulta as releases do projeto no GitHub)</label><pre id="update-notes" hidden></pre><div id="update-progress" class="progress-wrap" hidden><div class="progress"><i id="update-progress-bar"></i></div><small id="update-progress-text"></small></div><div class="actions"><button id="check-update" class="secondary small">Verificar agora</button><button id="install-update" class="primary small" hidden>Baixar e instalar</button><a id="update-release" class="release-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Notas da versão ↗</a></div><small>O pacote é conferido com o SHA256SUMS.txt da release antes de ser aberto. Motor, modelos e configurações são mantidos.</small><div id="update-message" class="message" role="status"></div></section>
     <div class="setup-actions"><button id="finish-setup" class="secondary">Concluir e ir para Llama →</button></div>
   </section>
   <footer><span>Projeto independente · baseado no launcher criado para Célio</span><div><button id="manual-pt" class="link-button">Manual PT-BR</button><button id="manual-en" class="link-button">Manual EN</button><a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreferrer">llama.cpp e seus criadores ↗</a></div></footer>
