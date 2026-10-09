@@ -834,7 +834,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "benchargs()",
       "source_file": "src/benchmark.ts",
@@ -846,7 +846,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "execute()",
       "source_file": "src/benchmark.ts",
@@ -858,11 +858,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "tune()",
       "source_file": "src/benchmark.ts",
       "source_location": "L8"
+    },
+    {
+      "id": "src_core_detecthardware",
+      "label": "detectHardware()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "modelGuidance",
+      "file_type": "code",
+      "norm_label": "detecthardware()",
+      "source_file": "src/core.ts",
+      "source_location": "L53"
+    },
+    {
+      "id": "src_core_scanmodels",
+      "label": "scanModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "modelGuidance",
+      "file_type": "code",
+      "norm_label": "scanmodels()",
+      "source_file": "src/core.ts",
+      "source_location": "L60"
     },
     {
       "id": "src_guidance_buildguidance",
@@ -923,6 +947,30 @@
       "norm_label": "modelguidance()",
       "source_file": "src/main.ts",
       "source_location": "L44"
+    },
+    {
+      "id": "src_main_selectedmodel",
+      "label": "selectedModel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "modelGuidance",
+      "file_type": "code",
+      "norm_label": "selectedmodel()",
+      "source_file": "src/main.ts",
+      "source_location": "L41"
+    },
+    {
+      "id": "src_main_state",
+      "label": "state()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "modelGuidance",
+      "file_type": "code",
+      "norm_label": "state()",
+      "source_file": "src/main.ts",
+      "source_location": "L36"
     },
     {
       "id": "src_share_proxy_createshareproxy",
@@ -994,7 +1042,7 @@
       "file_type": "code",
       "norm_label": "assetfor()",
       "source_file": "src/engine.ts",
-      "source_location": "L73"
+      "source_location": "L76"
     },
     {
       "id": "src_engine_assetsfor",
@@ -1006,7 +1054,7 @@
       "file_type": "code",
       "norm_label": "assetsfor()",
       "source_file": "src/engine.ts",
-      "source_location": "L64"
+      "source_location": "L67"
     },
     {
       "id": "src_engine_backendoptions",
@@ -1018,7 +1066,7 @@
       "file_type": "code",
       "norm_label": "backendoptions()",
       "source_file": "src/engine.ts",
-      "source_location": "L25"
+      "source_location": "L28"
     },
     {
       "id": "src_engine_copyruntimelibraries",
@@ -1030,7 +1078,7 @@
       "file_type": "code",
       "norm_label": "copyruntimelibraries()",
       "source_file": "src/engine.ts",
-      "source_location": "L101"
+      "source_location": "L104"
     },
     {
       "id": "src_engine_download",
@@ -1042,7 +1090,7 @@
       "file_type": "code",
       "norm_label": "download()",
       "source_file": "src/engine.ts",
-      "source_location": "L91"
+      "source_location": "L94"
     },
     {
       "id": "src_engine_findexecutable",
@@ -1054,7 +1102,7 @@
       "file_type": "code",
       "norm_label": "findexecutable()",
       "source_file": "src/engine.ts",
-      "source_location": "L96"
+      "source_location": "L99"
     },
     {
       "id": "src_engine_installengine",
@@ -1066,7 +1114,7 @@
       "file_type": "code",
       "norm_label": "installengine()",
       "source_file": "src/engine.ts",
-      "source_location": "L116"
+      "source_location": "L119"
     },
     {
       "id": "src_engine_releaseinfo",
@@ -1078,7 +1126,7 @@
       "file_type": "code",
       "norm_label": "releaseinfo()",
       "source_file": "src/engine.ts",
-      "source_location": "L20"
+      "source_location": "L23"
     },
     {
       "id": "src_engine_request",
@@ -1090,7 +1138,7 @@
       "file_type": "code",
       "norm_label": "request()",
       "source_file": "src/engine.ts",
-      "source_location": "L12"
+      "source_location": "L15"
     },
     {
       "id": "src_engine_run",
@@ -1102,7 +1150,7 @@
       "file_type": "code",
       "norm_label": "run()",
       "source_file": "src/engine.ts",
-      "source_location": "L95"
+      "source_location": "L98"
     },
     {
       "id": "src_engine_savedownload",
@@ -1114,7 +1162,7 @@
       "file_type": "code",
       "norm_label": "savedownload()",
       "source_file": "src/engine.ts",
-      "source_location": "L76"
+      "source_location": "L79"
     },
     {
       "id": "src_firewall_buildfirewallscript",
@@ -1249,64 +1297,16 @@
       "source_location": "L51"
     },
     {
-      "id": "scripts_smoke_bench_main",
-      "label": "main()",
+      "id": "src_network_accessoptions",
+      "label": "accessOptions()",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
+      "community": 15,
+      "community_name": "network.ts",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_cli_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_engine_check",
-      "label": "check()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "check()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_engine_freeport",
-      "label": "freePort()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "freeport()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L10"
-    },
-    {
-      "id": "scripts_smoke_engine_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L12"
+      "norm_label": "accessoptions()",
+      "source_file": "src/network.ts",
+      "source_location": "L16"
     },
     {
       "id": "src_network_allowlocalrequest",
@@ -1693,64 +1693,40 @@
       "source_location": "L5"
     },
     {
-      "id": "src_client_commands_bashquote",
-      "label": "bashQuote()",
+      "id": "scripts_smoke_engine_check",
+      "label": "check()",
       "_callable": true,
       "_origin": "ast",
       "community": 21,
-      "community_name": "client_commands.ts",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "bashquote()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L3"
+      "norm_label": "check()",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L11"
     },
     {
-      "id": "src_client_commands_clientcommand",
-      "label": "clientCommand()",
+      "id": "scripts_smoke_engine_freeport",
+      "label": "freePort()",
       "_callable": true,
       "_origin": "ast",
       "community": 21,
-      "community_name": "client_commands.ts",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "clientcommand()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L61"
+      "norm_label": "freeport()",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L10"
     },
     {
-      "id": "src_client_commands_clientconfiguration",
-      "label": "clientConfiguration()",
+      "id": "scripts_smoke_engine_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 21,
-      "community_name": "client_commands.ts",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "clientconfiguration()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "src_client_commands_opencodecommand",
-      "label": "openCodeCommand()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "client_commands.ts",
-      "file_type": "code",
-      "norm_label": "opencodecommand()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_client_commands_psquote",
-      "label": "psQuote()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "client_commands.ts",
-      "file_type": "code",
-      "norm_label": "psquote()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L4"
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L12"
     },
     {
       "id": "tests_engine_install_test_workspace",
@@ -1789,18 +1765,6 @@
       "source_location": "L27"
     },
     {
-      "id": "src_preload_invoke",
-      "label": "invoke()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "invoke()",
-      "source_file": "src/preload.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "scripts_smoke_external_cli_win_main",
       "label": "main()",
       "_callable": true,
@@ -1825,6 +1789,42 @@
       "source_location": "L10"
     },
     {
+      "id": "scripts_check_engine_release_fetchrelease",
+      "label": "fetchRelease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "fetchrelease()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "scripts_check_engine_release_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L29"
+    },
+    {
+      "id": "scripts_check_engine_release_missingassets",
+      "label": "missingAssets()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "missingassets()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L18"
+    },
+    {
       "id": "tests_hardware_test_runnerfor",
       "label": "runnerFor()",
       "_callable": true,
@@ -1842,7 +1842,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "row()",
       "source_file": "tests/profile_import.test.js",
@@ -1861,12 +1861,36 @@
       "source_location": "L10"
     },
     {
+      "id": "scripts_smoke_ui_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L20"
+    },
+    {
+      "id": "src_preload_invoke",
+      "label": "invoke()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "invoke()",
+      "source_file": "src/preload.ts",
+      "source_location": "L3"
+    },
+    {
       "id": "scripts_check_version_checkreleaseref",
       "label": "checkReleaseRef()",
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "checkreleaseref()",
       "source_file": "scripts/check-version.js",
@@ -1878,7 +1902,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "checkversions()",
       "source_file": "scripts/check-version.js",
@@ -1890,23 +1914,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "issemver()",
       "source_file": "scripts/check-version.js",
       "source_location": "L10"
     },
     {
-      "id": "src_core_detecthardware",
-      "label": "detectHardware()",
+      "id": "src_client_commands_bashquote",
+      "label": "bashQuote()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
       "community_name": "core.ts",
       "file_type": "code",
-      "norm_label": "detecthardware()",
-      "source_file": "src/core.ts",
-      "source_location": "L53"
+      "norm_label": "bashquote()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_client_commands_clientcommand",
+      "label": "clientCommand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "clientcommand()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L61"
+    },
+    {
+      "id": "src_client_commands_clientconfiguration",
+      "label": "clientConfiguration()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "clientconfiguration()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "src_client_commands_opencodecommand",
+      "label": "openCodeCommand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "opencodecommand()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_client_commands_psquote",
+      "label": "psQuote()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "psquote()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L4"
     },
     {
       "id": "src_core_iswithin",
@@ -1933,18 +2005,6 @@
       "source_location": "L40"
     },
     {
-      "id": "src_core_scanmodels",
-      "label": "scanModels()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "scanmodels()",
-      "source_file": "src/core.ts",
-      "source_location": "L60"
-    },
-    {
       "id": "src_core_validatesettings",
       "label": "validateSettings()",
       "_callable": true,
@@ -1969,40 +2029,28 @@
       "source_location": "L9"
     },
     {
-      "id": "src_main_selectedmodel",
-      "label": "selectedModel()",
+      "id": "src_profile_import_decodeprofilepath",
+      "label": "decodeProfilePath()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
       "community_name": "core.ts",
       "file_type": "code",
-      "norm_label": "selectedmodel()",
-      "source_file": "src/main.ts",
-      "source_location": "L41"
+      "norm_label": "decodeprofilepath()",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L22"
     },
     {
-      "id": "src_main_state",
-      "label": "state()",
+      "id": "src_profile_import_parselegacyprofiles",
+      "label": "parseLegacyProfiles()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
       "community_name": "core.ts",
       "file_type": "code",
-      "norm_label": "state()",
-      "source_file": "src/main.ts",
-      "source_location": "L36"
-    },
-    {
-      "id": "src_network_accessoptions",
-      "label": "accessOptions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "accessoptions()",
-      "source_file": "src/network.ts",
-      "source_location": "L16"
+      "norm_label": "parselegacyprofiles()",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L48"
     },
     {
       "id": "src_cli_argsforconversation",
@@ -2173,6 +2221,30 @@
       "source_location": "L52"
     },
     {
+      "id": "scripts_smoke_bench_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_cli_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "smoke-cli.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L7"
+    },
+    {
       "id": "scripts_build_manual_pdfs_blocks",
       "label": "blocks()",
       "_callable": true,
@@ -2243,42 +2315,6 @@
       "norm_label": "main()",
       "source_file": "scripts/fix-linux-tar.py",
       "source_location": "L12"
-    },
-    {
-      "id": "src_profile_import_decodeprofilepath",
-      "label": "decodeProfilePath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "decodeprofilepath()",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "src_profile_import_parselegacyprofiles",
-      "label": "parseLegacyProfiles()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "parselegacyprofiles()",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L48"
-    },
-    {
-      "id": "scripts_smoke_ui_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L20"
     },
     {
       "id": "tests_firewall_test",
@@ -2362,7 +2398,7 @@
       "label": "benchmark.ts",
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "benchmark.ts",
       "source_file": "src/benchmark.ts",
@@ -2373,7 +2409,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "src/benchmark.ts",
@@ -2384,7 +2420,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "src/benchmark.ts",
@@ -2395,7 +2431,7 @@
       "label": "{spawn}",
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{spawn}",
       "source_file": "src/benchmark.ts",
@@ -2406,7 +2442,7 @@
       "label": "{validateSettings}",
       "_origin": "ast",
       "community": 100,
-      "community_name": "benchmark.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{validatesettings}",
       "source_file": "src/benchmark.ts",
@@ -2439,7 +2475,7 @@
       "label": "package-resources.test.js",
       "_origin": "ast",
       "community": 102,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "package-resources.test.js",
       "source_file": "tests/package-resources.test.js",
@@ -2450,7 +2486,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 102,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/package-resources.test.js",
@@ -2461,7 +2497,7 @@
       "label": "pkg",
       "_origin": "ast",
       "community": 102,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "pkg",
       "source_file": "tests/package-resources.test.js",
@@ -2472,7 +2508,7 @@
       "label": "test",
       "_origin": "ast",
       "community": 102,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/package-resources.test.js",
@@ -2950,171 +2986,6 @@
       "norm_label": "include",
       "source_file": "tsconfig.json",
       "source_location": "L16"
-    },
-    {
-      "id": "scripts_smoke_bench",
-      "label": "smoke-bench.js",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "smoke-bench.js",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_bench_defaults",
-      "label": "{defaults}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{defaults}",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_bench_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_bench_tune",
-      "label": "{tune}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{tune}",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_cli",
-      "label": "smoke-cli.js",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "smoke-cli.js",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_cli_cli",
-      "label": "cli",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "cli",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_cli_defaults",
-      "label": "{defaults}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{defaults}",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_cli_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_engine",
-      "label": "smoke-engine.js",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "smoke-engine.js",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_engine_defaults_argsformodel",
-      "label": "{defaults,argsForModel}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{defaults,argsformodel}",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_engine_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_engine_http",
-      "label": "http",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "http",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_engine_net",
-      "label": "net",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "net",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_engine_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_engine_spawn",
-      "label": "{spawn}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{spawn}",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L7"
     },
     {
       "id": "tests_core_test",
@@ -3986,37 +3857,81 @@
       "source_location": "L2"
     },
     {
-      "id": "src_client_commands",
-      "label": "client_commands.ts",
+      "id": "scripts_smoke_engine",
+      "label": "smoke-engine.js",
       "_origin": "ast",
       "community": 21,
-      "community_name": "client_commands.ts",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "client_commands.ts",
-      "source_file": "src/client_commands.ts",
+      "norm_label": "smoke-engine.js",
+      "source_file": "scripts/smoke-engine.js",
       "source_location": "L1"
     },
     {
-      "id": "src_client_commands_apimodelid",
-      "label": "{apiModelId}",
+      "id": "scripts_smoke_engine_defaults_argsformodel",
+      "label": "{defaults,argsForModel}",
       "_origin": "ast",
       "community": 21,
-      "community_name": "client_commands.ts",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "{apimodelid}",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L2"
+      "norm_label": "{defaults,argsformodel}",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L8"
     },
     {
-      "id": "src_client_commands_applications",
-      "label": "applications",
+      "id": "scripts_smoke_engine_fs",
+      "label": "fs",
       "_origin": "ast",
       "community": 21,
-      "community_name": "client_commands.ts",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "applications",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L37"
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_engine_http",
+      "label": "http",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engine.js",
+      "file_type": "code",
+      "norm_label": "http",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_engine_net",
+      "label": "net",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engine.js",
+      "file_type": "code",
+      "norm_label": "net",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_engine_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engine.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_engine_spawn",
+      "label": "{spawn}",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engine.js",
+      "file_type": "code",
+      "norm_label": "{spawn}",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L7"
     },
     {
       "id": "docs_manual_pt_br_10_dados_atualiza\u00e7\u00e3o_e_desinstala\u00e7\u00e3o_segura",
@@ -5396,39 +5311,6 @@
       "source_location": "L6"
     },
     {
-      "id": "src_preload",
-      "label": "preload.ts",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "preload.ts",
-      "source_file": "src/preload.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_preload_contextbridge_ipcrenderer",
-      "label": "{contextBridge,ipcRenderer}",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "{contextbridge,ipcrenderer}",
-      "source_file": "src/preload.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "ref_electron",
-      "label": "electron",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "concept",
-      "norm_label": "electron",
-      "source_file": "package.json",
-      "source_location": "L29"
-    },
-    {
       "id": "tests_terminal_cli_test",
       "label": "terminal_cli.test.js",
       "_origin": "ast",
@@ -6087,11 +5969,55 @@
       "source_location": "L11"
     },
     {
+      "id": "scripts_check_engine_release",
+      "label": "check-engine-release.js",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "check-engine-release.js",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_check_engine_release_arches",
+      "label": "ARCHES",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "arches",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_check_engine_release_engine",
+      "label": "engine",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "engine",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_check_engine_release_platforms",
+      "label": "PLATFORMS",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "platforms",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L7"
+    },
+    {
       "id": "tests_engine_test",
       "label": "engine.test.js",
       "_origin": "ast",
       "community": 33,
-      "community_name": "ref_node_test",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
       "norm_label": "engine.test.js",
       "source_file": "tests/engine.test.js",
@@ -6102,7 +6028,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 33,
-      "community_name": "ref_node_test",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/engine.test.js",
@@ -6113,7 +6039,7 @@
       "label": "engine",
       "_origin": "ast",
       "community": 33,
-      "community_name": "ref_node_test",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
       "norm_label": "engine",
       "source_file": "tests/engine.test.js",
@@ -6124,18 +6050,18 @@
       "label": "release",
       "_origin": "ast",
       "community": 33,
-      "community_name": "ref_node_test",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
       "norm_label": "release",
       "source_file": "tests/engine.test.js",
-      "source_location": "L6"
+      "source_location": "L7"
     },
     {
       "id": "tests_engine_test_test",
       "label": "test",
       "_origin": "ast",
       "community": 33,
-      "community_name": "ref_node_test",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/engine.test.js",
@@ -6234,7 +6160,7 @@
       "label": "profile_import.test.js",
       "_origin": "ast",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "profile_import.test.js",
       "source_file": "tests/profile_import.test.js",
@@ -6245,7 +6171,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/profile_import.test.js",
@@ -6256,7 +6182,7 @@
       "label": "{ parseLegacyProfiles }",
       "_origin": "ast",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "{ parselegacyprofiles }",
       "source_file": "tests/profile_import.test.js",
@@ -6267,7 +6193,7 @@
       "label": "test",
       "_origin": "ast",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/profile_import.test.js",
@@ -6831,6 +6757,116 @@
       "source_location": "L3"
     },
     {
+      "id": "scripts_smoke_ui",
+      "label": "smoke-ui.js",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "smoke-ui.js",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_ui_app_browserwindow",
+      "label": "{app,BrowserWindow}",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "{app,browserwindow}",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_ui_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_ui_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_ui_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_ui_temporary",
+      "label": "temporary",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_ui_withmodel",
+      "label": "withModel",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "withmodel",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_preload",
+      "label": "preload.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "preload.ts",
+      "source_file": "src/preload.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_preload_contextbridge_ipcrenderer",
+      "label": "{contextBridge,ipcRenderer}",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "{contextbridge,ipcrenderer}",
+      "source_file": "src/preload.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "ref_electron",
+      "label": "electron",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "scripts",
+      "file_type": "concept",
+      "norm_label": "electron",
+      "source_file": "package.json",
+      "source_location": "L29"
+    },
+    {
       "id": "ref_electron_builder",
       "label": "electron-builder",
       "_origin": "ast",
@@ -6940,7 +6976,7 @@
       "label": "check-version.js",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "check-version.js",
       "source_file": "scripts/check-version.js",
@@ -6951,7 +6987,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/check-version.js",
@@ -6962,7 +6998,7 @@
       "label": "lock",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "lock",
       "source_file": "scripts/check-version.js",
@@ -6973,7 +7009,7 @@
       "label": "manifest",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "manifest",
       "source_file": "scripts/check-version.js",
@@ -6984,7 +7020,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/check-version.js",
@@ -6995,7 +7031,7 @@
       "label": "root",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "root",
       "source_file": "scripts/check-version.js",
@@ -7006,7 +7042,7 @@
       "label": "semver.test.js",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "semver.test.js",
       "source_file": "tests/semver.test.js",
@@ -7017,7 +7053,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/semver.test.js",
@@ -7028,7 +7064,7 @@
       "label": "{ isSemVer, checkVersions, checkReleaseRef }",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "{ issemver, checkversions, checkreleaseref }",
       "source_file": "tests/semver.test.js",
@@ -7039,7 +7075,7 @@
       "label": "test",
       "_origin": "ast",
       "community": 41,
-      "community_name": "ref_node_path",
+      "community_name": "check-version.js",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/semver.test.js",
@@ -7775,7 +7811,7 @@
       "node_kind": "heading",
       "norm_label": "prevencao e limites",
       "source_file": "docs/security-release-retirements.md",
-      "source_location": "L28"
+      "source_location": "L30"
     },
     {
       "id": "docs_security_release_retirements_revis\u00e3o_e_retirada_de_arquivos_de_vers\u00f5es_anteriores",
@@ -7790,14 +7826,14 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_security_release_retirements_situa\u00e7\u00e3o_da_release_pendente",
-      "label": "Situa\u00e7\u00e3o da release \u2014 pendente",
+      "id": "docs_security_release_retirements_situa\u00e7\u00e3o_da_release_retirada_conclu\u00edda",
+      "label": "Situa\u00e7\u00e3o da release \u2014 retirada conclu\u00edda",
       "_origin": "ast",
       "community": 5,
       "community_name": "User manual \u2014 Llama Desktop Launcher",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "situacao da release \u2014 pendente",
+      "norm_label": "situacao da release \u2014 retirada concluida",
       "source_file": "docs/security-release-retirements.md",
       "source_location": "L22"
     },
@@ -8290,6 +8326,39 @@
       "source_location": "L1"
     },
     {
+      "id": "src_client_commands",
+      "label": "client_commands.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "client_commands.ts",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_client_commands_apimodelid",
+      "label": "{apiModelId}",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "{apimodelid}",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "src_client_commands_applications",
+      "label": "applications",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "applications",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L37"
+    },
+    {
       "id": "src_core",
       "label": "core.ts",
       "_origin": "ast",
@@ -8354,6 +8423,61 @@
       "norm_label": "path",
       "source_file": "src/core.ts",
       "source_location": "L3"
+    },
+    {
+      "id": "src_profile_import",
+      "label": "profile_import.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "profile_import.ts",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_profile_import_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_profile_import_settings_fields",
+      "label": "SETTINGS_FIELDS",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "settings_fields",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_profile_import_textdecoder",
+      "label": "{ TextDecoder }",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "{ textdecoder }",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_profile_import_validatesettings",
+      "label": "{ validateSettings }",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "{ validatesettings }",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L5"
     },
     {
       "id": "docs_adr_session_sharing",
@@ -8824,6 +8948,94 @@
       "source_location": "L6"
     },
     {
+      "id": "scripts_smoke_bench",
+      "label": "smoke-bench.js",
+      "_origin": "ast",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "file_type": "code",
+      "norm_label": "smoke-bench.js",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_bench_defaults",
+      "label": "{defaults}",
+      "_origin": "ast",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "file_type": "code",
+      "norm_label": "{defaults}",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_bench_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_bench_tune",
+      "label": "{tune}",
+      "_origin": "ast",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "file_type": "code",
+      "norm_label": "{tune}",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_cli",
+      "label": "smoke-cli.js",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "smoke-cli.js",
+      "file_type": "code",
+      "norm_label": "smoke-cli.js",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_cli_cli",
+      "label": "cli",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "smoke-cli.js",
+      "file_type": "code",
+      "norm_label": "cli",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_cli_defaults",
+      "label": "{defaults}",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "smoke-cli.js",
+      "file_type": "code",
+      "norm_label": "{defaults}",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_cli_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "smoke-cli.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L3"
+    },
+    {
       "id": "scripts_build_manual_pdfs",
       "label": "build_manual_pdfs.py",
       "_origin": "ast",
@@ -8890,242 +9102,134 @@
       "source_location": "L1"
     },
     {
-      "id": "src_profile_import",
-      "label": "profile_import.ts",
+      "id": "docs_adr_engine_version_pin",
+      "label": "engine-version-pin.md",
       "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "profile_import.ts",
-      "source_file": "src/profile_import.ts",
+      "community": 90,
+      "community_name": "engine-version-pin.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "engine-version-pin.md",
+      "source_file": "docs/adr/engine-version-pin.md",
       "source_location": "L1"
     },
     {
-      "id": "src_profile_import_path",
-      "label": "path",
+      "id": "docs_adr_engine_version_pin_adr_vers\u00e3o_fixa_do_motor_llama_cpp",
+      "label": "ADR: vers\u00e3o fixa do motor llama.cpp",
       "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_profile_import_settings_fields",
-      "label": "SETTINGS_FIELDS",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "settings_fields",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_profile_import_textdecoder",
-      "label": "{ TextDecoder }",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "{ textdecoder }",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_profile_import_validatesettings",
-      "label": "{ validateSettings }",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "profile_import.ts",
-      "file_type": "code",
-      "norm_label": "{ validatesettings }",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_ui",
-      "label": "smoke-ui.js",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "smoke-ui.js",
-      "source_file": "scripts/smoke-ui.js",
+      "community": 90,
+      "community_name": "engine-version-pin.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr: versao fixa do motor llama.cpp",
+      "source_file": "docs/adr/engine-version-pin.md",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_ui_app_browserwindow",
-      "label": "{app,BrowserWindow}",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "{app,browserwindow}",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_ui_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_ui_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_ui_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_ui_temporary",
-      "label": "temporary",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_ui_withmodel",
-      "label": "withModel",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "withmodel",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "id": "build_app_firewall",
+      "label": "build_app_firewall",
       "_origin": "semantic",
       "community": 0,
       "community_name": "firewall.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "norm_label": "build_app_firewall",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "id": "ref_node_path",
+      "label": "ref_node_path",
       "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
+      "community": 100,
+      "community_name": "ref_node_path",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "norm_label": "ref_node_path",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_assert",
-      "label": "ref_node_assert",
+      "id": "ref_node_test",
+      "label": "ref_node_test",
       "_origin": "semantic",
       "community": 102,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_assert",
+      "norm_label": "ref_node_test",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "_origin": "semantic",
+      "community": 104,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
+      "_origin": "semantic",
+      "community": 105,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
+      "_origin": "semantic",
+      "community": 106,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
+      "_origin": "semantic",
+      "community": 107,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
+      "_origin": "semantic",
+      "community": 108,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "_origin": "semantic",
+      "community": 109,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
       "source_file": "",
       "type": "external"
     },
@@ -9154,131 +9258,11 @@
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine_assetfor",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine_assetfor",
       "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
+      "community": 110,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine_assetfor",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine_assetfor",
@@ -9286,11 +9270,167 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "_origin": "semantic",
+      "community": 111,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "_origin": "semantic",
+      "community": 112,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
+      "_origin": "semantic",
+      "community": 113,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
+      "_origin": "semantic",
+      "community": 114,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
+      "_origin": "semantic",
+      "community": 115,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
+      "_origin": "semantic",
+      "community": 116,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "_origin": "semantic",
+      "community": 117,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "_origin": "semantic",
+      "community": 118,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "_origin": "semantic",
+      "community": 119,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "_origin": "semantic",
+      "community": 120,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
+      "_origin": "semantic",
+      "community": 121,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "_origin": "semantic",
+      "community": 122,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "_origin": "semantic",
+      "community": 123,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
       "_origin": "semantic",
-      "community": 18,
-      "community_name": "network.test.js",
+      "community": 124,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
@@ -9301,8 +9441,8 @@
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_createproxy",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_createproxy",
       "_origin": "semantic",
-      "community": 18,
-      "community_name": "network.test.js",
+      "community": 125,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_createproxy",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_createproxy",
@@ -9313,8 +9453,8 @@
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
       "_origin": "semantic",
-      "community": 18,
-      "community_name": "network.test.js",
+      "community": 126,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
@@ -9322,11 +9462,35 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "_origin": "semantic",
+      "community": 127,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "_origin": "semantic",
+      "community": 128,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy",
       "_origin": "semantic",
-      "community": 20,
-      "community_name": "share_proxy.test.js",
+      "community": 129,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy",
@@ -9337,8 +9501,8 @@
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "_origin": "semantic",
-      "community": 20,
-      "community_name": "share_proxy.test.js",
+      "community": 130,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
@@ -9346,14 +9510,26 @@
       "type": "external"
     },
     {
-      "id": "src_core_apimodelid",
-      "label": "src_core_apimodelid",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
       "_origin": "semantic",
-      "community": 21,
-      "community_name": "client_commands.ts",
+      "community": 131,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
       "external": true,
       "file_type": "concept",
-      "norm_label": "src_core_apimodelid",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "_origin": "semantic",
+      "community": 132,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
       "source_file": "",
       "type": "external"
     },
@@ -9361,8 +9537,8 @@
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
       "_origin": "semantic",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
+      "community": 133,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
@@ -9370,11 +9546,23 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "_origin": "semantic",
+      "community": 134,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
       "_origin": "semantic",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
+      "community": 135,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
@@ -9382,14 +9570,50 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "_origin": "semantic",
+      "community": 136,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
       "_origin": "semantic",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
+      "community": 137,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_os",
+      "label": "ref_node_os",
+      "_origin": "semantic",
+      "community": 15,
+      "community_name": "network.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_os",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_network",
+      "label": "build_app_network",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_network",
       "source_file": "",
       "type": "external"
     },
@@ -9406,26 +9630,14 @@
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
+      "id": "build_app_terminal_cli",
+      "label": "build_app_terminal_cli",
       "_origin": "semantic",
       "community": 28,
       "community_name": "smoke-external-cli-win.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
-      "_origin": "semantic",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "norm_label": "build_app_terminal_cli",
       "source_file": "",
       "type": "external"
     },
@@ -9466,182 +9678,62 @@
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
-      "_origin": "semantic",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
-      "_origin": "semantic",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
-      "_origin": "semantic",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
-      "_origin": "semantic",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
-      "_origin": "semantic",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
-      "_origin": "semantic",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "id": "build_app_engine",
+      "label": "build_app_engine",
       "_origin": "semantic",
       "community": 33,
-      "community_name": "ref_node_test",
+      "community_name": "check-engine-release.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "norm_label": "build_app_engine",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "ref_node_test",
-      "label": "ref_node_test",
-      "_origin": "semantic",
-      "community": 33,
-      "community_name": "ref_node_test",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_test",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "id": "build_app_guidance",
+      "label": "build_app_guidance",
       "_origin": "semantic",
       "community": 34,
       "community_name": "guidance.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "norm_label": "build_app_guidance",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
-      "_origin": "semantic",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
-      "_origin": "semantic",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "id": "build_app_hardware",
+      "label": "build_app_hardware",
       "_origin": "semantic",
       "community": 35,
       "community_name": "hardware.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "norm_label": "build_app_hardware",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
-      "_origin": "semantic",
-      "community": 35,
-      "community_name": "hardware.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "id": "build_app_profile_import",
+      "label": "build_app_profile_import",
       "_origin": "semantic",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "norm_label": "build_app_profile_import",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "id": "ref_node_assert",
+      "label": "ref_node_assert",
       "_origin": "semantic",
       "community": 36,
-      "community_name": "profile_import.test.js",
+      "community_name": "ref_node_assert",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "norm_label": "ref_node_assert",
       "source_file": "",
       "type": "external"
     },
@@ -9670,18 +9762,6 @@
       "type": "external"
     },
     {
-      "id": "ref_node_path",
-      "label": "ref_node_path",
-      "_origin": "semantic",
-      "community": 41,
-      "community_name": "ref_node_path",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_path",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "app_build_app_network_upstreamrequestdetails",
       "label": "app_build_app_network_upstreamrequestdetails",
       "_origin": "semantic",
@@ -9694,14 +9774,26 @@
       "type": "external"
     },
     {
-      "id": "ref_node_os",
-      "label": "ref_node_os",
+      "id": "ref_node_util",
+      "label": "ref_node_util",
       "_origin": "semantic",
       "community": 6,
       "community_name": "core.ts",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_os",
+      "norm_label": "ref_node_util",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "src_core_apimodelid",
+      "label": "src_core_apimodelid",
+      "_origin": "semantic",
+      "community": 6,
+      "community_name": "core.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "src_core_apimodelid",
       "source_file": "",
       "type": "external"
     },
@@ -10022,7 +10114,7 @@
       "label": "build_app_benchmark",
       "_origin": "semantic",
       "community": 88,
-      "community_name": "build_app_benchmark",
+      "community_name": "smoke-bench.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_benchmark",
@@ -10034,10 +10126,22 @@
       "label": "build_app_cli",
       "_origin": "semantic",
       "community": 89,
-      "community_name": "build_app_cli",
+      "community_name": "smoke-cli.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_cli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_core",
+      "label": "build_app_core",
+      "_origin": "semantic",
+      "community": 89,
+      "community_name": "smoke-cli.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_core",
       "source_file": "",
       "type": "external"
     },
@@ -10186,110 +10290,473 @@
       "type": "external"
     },
     {
-      "id": "build_app_core",
-      "label": "build_app_core",
-      "_origin": "semantic",
-      "community": 90,
-      "community_name": "build_app_core",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_core",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_engine",
-      "label": "build_app_engine",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
       "_origin": "semantic",
       "community": 91,
-      "community_name": "build_app_engine",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_engine",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "build_app_firewall",
-      "label": "build_app_firewall",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
       "_origin": "semantic",
       "community": 92,
-      "community_name": "build_app_firewall",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_firewall",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "build_app_guidance",
-      "label": "build_app_guidance",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
       "_origin": "semantic",
       "community": 93,
-      "community_name": "build_app_guidance",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_guidance",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "build_app_hardware",
-      "label": "build_app_hardware",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
       "_origin": "semantic",
       "community": 94,
-      "community_name": "build_app_hardware",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_hardware",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "build_app_network",
-      "label": "build_app_network",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
       "_origin": "semantic",
       "community": 95,
-      "community_name": "build_app_network",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_network",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "build_app_profile_import",
-      "label": "build_app_profile_import",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
       "_origin": "semantic",
       "community": 96,
-      "community_name": "build_app_profile_import",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_profile_import",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "build_app_terminal_cli",
-      "label": "build_app_terminal_cli",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
       "_origin": "semantic",
       "community": 97,
-      "community_name": "build_app_terminal_cli",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_terminal_cli",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "ref_node_util",
-      "label": "ref_node_util",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
       "_origin": "semantic",
       "community": 98,
-      "community_name": "profile_import.ts",
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_util",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "_origin": "semantic",
+      "community": 99,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrule",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrule",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrule",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrules",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrules",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrules",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_max",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_max",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_max",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_min",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_min",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_min",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_iswithin",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_iswithin",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_iswithin",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_recommend",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_recommend",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_recommend",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_scanmodels",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_scanmodels",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_scanmodels",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_validatesettings",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_validatesettings",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_validatesettings",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_engine_assetfor",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_engine_assetfor",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_engine_assetfor",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_createproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_createproxy",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_createproxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_share_proxy",
+      "label": "build_app_share_proxy",
+      "community": 20,
+      "community_name": "share_proxy.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_share_proxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
+      "community": 20,
+      "community_name": "share_proxy.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_argsformodel",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_argsformodel",
+      "community": 21,
+      "community_name": "smoke-engine.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_argsformodel",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_posixscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_posixscript",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_posixscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_psquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_psquote",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_psquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "community": 28,
+      "community_name": "smoke-external-cli-win.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_client_commands",
+      "label": "build_app_client_commands",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_client_commands",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientcommand",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_opencodecommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_opencodecommand",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_opencodecommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_links",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_links",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_links",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "community": 35,
+      "community_name": "hardware.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "community": 36,
+      "community_name": "ref_node_assert",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_benchmark_tune",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_benchmark_tune",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_benchmark_tune",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
+      "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
+      "community": 88,
+      "community_name": "smoke-bench.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "source_file": "",
       "type": "external"
     }
@@ -10353,6 +10820,30 @@
       "context": "call",
       "source_file": "scripts/build_manual_pdfs.py",
       "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release_main",
+      "target": "scripts_check_engine_release_fetchrelease",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release_main",
+      "target": "scripts_check_engine_release_missingassets",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -10628,7 +11119,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L74",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -10640,7 +11131,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L74",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -10652,7 +11143,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L65",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -10664,7 +11155,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L92",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -10676,7 +11167,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L93",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -10688,7 +11179,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L117",
+      "source_location": "L120",
       "weight": 1.0
     },
     {
@@ -10700,7 +11191,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L118",
+      "source_location": "L121",
       "weight": 1.0
     },
     {
@@ -10712,7 +11203,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L119",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -10724,7 +11215,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L129",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -10736,7 +11227,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L130",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -10748,7 +11239,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L131",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -10760,7 +11251,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L139",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -10772,7 +11263,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L21",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -10784,7 +11275,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engine.ts",
-      "source_location": "L15",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -12206,7 +12697,7 @@
     },
     {
       "source": "scripts_smoke_bench",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12218,7 +12709,7 @@
     },
     {
       "source": "scripts_smoke_bench",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_benchmark_tune",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12230,7 +12721,7 @@
     },
     {
       "source": "scripts_smoke_cli",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12242,7 +12733,7 @@
     },
     {
       "source": "scripts_smoke_engine",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_argsformodel",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12254,7 +12745,7 @@
     },
     {
       "source": "scripts_smoke_engine",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12266,7 +12757,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_linux",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12278,7 +12769,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_linux",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_shquote",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12290,7 +12781,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_linux",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12302,7 +12793,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_win",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12314,7 +12805,7 @@
     },
     {
       "source": "scripts_smoke_network",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_argsformodel",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12326,7 +12817,7 @@
     },
     {
       "source": "scripts_smoke_network",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12386,7 +12877,7 @@
     },
     {
       "source": "tests_client_commands_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_opencodecommand",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_opencodecommand",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12398,7 +12889,7 @@
     },
     {
       "source": "tests_client_commands_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientconfiguration",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12410,7 +12901,7 @@
     },
     {
       "source": "tests_client_commands_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands_clientcommand",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_client_commands_clientcommand",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12422,7 +12913,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_argsformodel",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12434,7 +12925,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_defaults",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_defaults",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12446,7 +12937,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_iswithin",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_iswithin",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12458,7 +12949,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_recommend",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_recommend",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12470,7 +12961,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_scanmodels",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_scanmodels",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12482,7 +12973,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_validatesettings",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_core_validatesettings",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12494,7 +12985,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine_assetfor",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_engine_assetfor",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12506,7 +12997,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_buildfirewallscript",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12518,7 +13009,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrule",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrule",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12530,7 +13021,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_max",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_max",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12542,7 +13033,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_port_min",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_port_min",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12554,7 +13045,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12566,7 +13057,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateruleoptions",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_validateruleoptions",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12578,7 +13069,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_createrules",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrules",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12590,7 +13081,7 @@
     },
     {
       "source": "tests_guidance_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_buildguidance",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12602,7 +13093,7 @@
     },
     {
       "source": "tests_guidance_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_guidance_links",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12614,7 +13105,7 @@
     },
     {
       "source": "tests_hardware_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_hardware_detectgpu",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12626,7 +13117,7 @@
     },
     {
       "source": "tests_network_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_createproxy",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_createproxy",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12638,7 +13129,7 @@
     },
     {
       "source": "tests_network_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_network_upstreamrequestdetails",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12650,7 +13141,7 @@
     },
     {
       "source": "tests_profile_import_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12698,7 +13189,7 @@
     },
     {
       "source": "tests_share_proxy_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12710,7 +13201,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_posixscript",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12722,7 +13213,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12734,7 +13225,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_psquote",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12746,7 +13237,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_shquote",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12758,7 +13249,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_terminalcommand",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12770,7 +13261,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "target": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12913,6 +13404,18 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_check_engine_release",
+      "target": "build_app_engine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_check_version",
       "target": "ref_node_fs",
       "relation": "imports_from",
@@ -12986,7 +13489,7 @@
     },
     {
       "source": "scripts_smoke_bench",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "target": "build_app_core",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12998,7 +13501,7 @@
     },
     {
       "source": "scripts_smoke_bench",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark",
+      "target": "build_app_benchmark",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13022,7 +13525,7 @@
     },
     {
       "source": "scripts_smoke_cli",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "target": "build_app_core",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13034,7 +13537,7 @@
     },
     {
       "source": "scripts_smoke_cli",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
+      "target": "build_app_cli",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13106,7 +13609,7 @@
     },
     {
       "source": "scripts_smoke_engine",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "target": "build_app_core",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13166,7 +13669,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_linux",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
+      "target": "build_app_terminal_cli",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13178,7 +13681,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_linux",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "target": "build_app_core",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13250,7 +13753,7 @@
     },
     {
       "source": "scripts_smoke_external_cli_win",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
+      "target": "build_app_terminal_cli",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13310,7 +13813,7 @@
     },
     {
       "source": "scripts_smoke_network",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "target": "build_app_core",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13322,7 +13825,7 @@
     },
     {
       "source": "scripts_smoke_network",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
+      "target": "build_app_network",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14342,7 +14845,7 @@
     },
     {
       "source": "tests_client_commands_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands",
+      "target": "build_app_client_commands",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14354,7 +14857,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli",
+      "target": "build_app_cli",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14426,7 +14929,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "target": "build_app_core",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14438,7 +14941,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "target": "build_app_engine",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14450,7 +14953,7 @@
     },
     {
       "source": "tests_core_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
+      "target": "build_app_network",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14582,7 +15085,7 @@
     },
     {
       "source": "tests_engine_install_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "target": "build_app_engine",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14618,7 +15121,7 @@
     },
     {
       "source": "tests_engine_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "target": "build_app_engine",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14654,7 +15157,7 @@
     },
     {
       "source": "tests_firewall_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall",
+      "target": "build_app_firewall",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14690,7 +15193,7 @@
     },
     {
       "source": "tests_guidance_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "target": "build_app_guidance",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14726,7 +15229,7 @@
     },
     {
       "source": "tests_hardware_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware",
+      "target": "build_app_hardware",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14774,7 +15277,7 @@
     },
     {
       "source": "tests_network_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
+      "target": "build_app_network",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14846,7 +15349,7 @@
     },
     {
       "source": "tests_profile_import_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import",
+      "target": "build_app_profile_import",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14942,7 +15445,7 @@
     },
     {
       "source": "tests_share_proxy_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_network",
+      "target": "build_app_network",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14954,7 +15457,7 @@
     },
     {
       "source": "tests_share_proxy_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_share_proxy",
+      "target": "build_app_share_proxy",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14966,7 +15469,7 @@
     },
     {
       "source": "tests_terminal_cli_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli",
+      "target": "build_app_terminal_cli",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -16326,6 +16829,17 @@
       "weight": 1.0
     },
     {
+      "source": "docs_adr_engine_version_pin",
+      "target": "docs_adr_engine_version_pin_adr_vers\u00e3o_fixa_do_motor_llama_cpp",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/adr/engine-version-pin.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "docs_adr_server_without_browser",
       "target": "docs_adr_server_without_browser_adr_iniciar_servidor_sem_abrir_navegador",
       "relation": "contains",
@@ -16965,7 +17479,7 @@
     },
     {
       "source": "docs_security_release_retirements_revis\u00e3o_e_retirada_de_arquivos_de_vers\u00f5es_anteriores",
-      "target": "docs_security_release_retirements_situa\u00e7\u00e3o_da_release_pendente",
+      "target": "docs_security_release_retirements_situa\u00e7\u00e3o_da_release_retirada_conclu\u00edda",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -16982,7 +17496,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/security-release-retirements.md",
-      "source_location": "L28",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -17951,6 +18465,61 @@
       "confidence_score": 1.0,
       "source_file": "scripts/build_manual_pdfs.py",
       "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release",
+      "target": "scripts_check_engine_release_fetchrelease",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release",
+      "target": "scripts_check_engine_release_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release",
+      "target": "scripts_check_engine_release_engine",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release",
+      "target": "scripts_check_engine_release_platforms",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release",
+      "target": "scripts_check_engine_release_arches",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -19248,7 +19817,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/engine.ts",
-      "source_location": "L101",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -19259,7 +19828,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/engine.ts",
-      "source_location": "L12",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -19281,7 +19850,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/engine.ts",
-      "source_location": "L20",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -19358,7 +19927,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/engine.ts",
-      "source_location": "L91",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -19369,7 +19938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/engine.ts",
-      "source_location": "L95",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -20480,7 +21049,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/engine.test.js",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -21708,7 +22277,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L121",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -21803,6 +22372,18 @@
       "context": "argument",
       "source_file": "src/terminal_cli.ts",
       "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_check_engine_release",
+      "target": "scripts_check_engine_release_missingassets",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -22054,7 +22635,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -22066,7 +22647,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -22078,7 +22659,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -22090,7 +22671,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -22102,7 +22683,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -22114,7 +22695,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engine.ts",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -22551,5 +23132,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "dcd45cffb40944343ceb778f2f576dfbdc60cfe3"
+  "built_at_commit": "1739416e4f7c165dea137beb1c5cad09e0c345e8"
 }
