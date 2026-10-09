@@ -17,13 +17,16 @@
 !ifndef BUILD_UNINSTALLER
 Var DesktopShortcutCheckbox
 Var CreateDesktopShortcut
+Var PreviousDesktopShortcut
 
 Function DesktopShortcutPage
   nsDialogs::Create 1018
   Pop $0
   ${NSD_CreateCheckbox} 0 10u 100% 12u "Criar atalho na area de trabalho"
   Pop $DesktopShortcutCheckbox
-  ${NSD_Check} $DesktopShortcutCheckbox
+  ${If} $PreviousDesktopShortcut != "false"
+    ${NSD_Check} $DesktopShortcutCheckbox
+  ${EndIf}
   nsDialogs::Show
 FunctionEnd
 
@@ -32,9 +35,26 @@ Function DesktopShortcutPageLeave
 FunctionEnd
 !endif
 
+# Read before the previous uninstaller runs, because it deletes the install registry key.
+!macro customInit
+  ReadRegStr $PreviousDesktopShortcut SHELL_CONTEXT "${INSTALL_REGISTRY_KEY}" DesktopShortcut
+!macroend
+
+# Silent installs skip the shortcut page: keep the stored choice, defaulting to a shortcut like the page does.
 !macro customInstall
+  ${If} ${Silent}
+    ${If} $PreviousDesktopShortcut == "false"
+      StrCpy $CreateDesktopShortcut ${BST_UNCHECKED}
+    ${Else}
+      StrCpy $CreateDesktopShortcut ${BST_CHECKED}
+    ${EndIf}
+  ${EndIf}
   ${If} $CreateDesktopShortcut == ${BST_CHECKED}
-    CreateShortcut "$DESKTOP\\Llama Desktop Launcher.lnk" "$INSTDIR\\Llama Desktop Launcher.exe"
+    CreateShortcut "$DESKTOP\Llama Desktop Launcher.lnk" "$INSTDIR\${APP_EXECUTABLE_FILENAME}"
+    WriteRegStr SHELL_CONTEXT "${INSTALL_REGISTRY_KEY}" DesktopShortcut "true"
+  ${Else}
+    Delete "$DESKTOP\Llama Desktop Launcher.lnk"
+    WriteRegStr SHELL_CONTEXT "${INSTALL_REGISTRY_KEY}" DesktopShortcut "false"
   ${EndIf}
 !macroend
 
@@ -140,8 +160,10 @@ FunctionEnd
   RMDir "$INSTDIR"
 !macroend
 
+# During an update the new installer decides whether the shortcut stays.
 !macro customUnInstall
   ${IfNot} ${isKeepShortcuts}
+  ${AndIfNot} ${isUpdated}
     Delete "$DESKTOP\Llama Desktop Launcher.lnk"
   ${EndIf}
 !macroend
