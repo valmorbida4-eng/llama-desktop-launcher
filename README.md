@@ -118,6 +118,6 @@ Na v0.4.1, o download do motor usa uma pasta temporária junto ao destino final,
 
 Na v0.4.2, o cabeçalho mostra automaticamente a versão instalada em todas as telas. A dependência indireta de build `http-cache-semantics` foi atualizada para 4.3.0, fora da faixa afetada por GHSA-ch52-4w7c-c8xp; o mock HTTPS do teste valida o hostname exato. O motor continua na versão testada `b11193`.
 
-O motor passa para a release `b11514` do llama.cpp. Os nomes dos pacotes e backends oferecidos não mudaram; a versão fica fixada em `ENGINE_TAG` em `src/engine.ts`.
+Na v0.4.3, o motor passa para a release `b11514` do llama.cpp. Os nomes dos pacotes e backends oferecidos não mudaram; a versão fica fixada em `ENGINE_TAG` em `src/engine.ts`, e o workflow semanal **Engine update** propõe novas releases por PR.
 
 A revisão dos arquivos publicados e a situação da v0.2.5 estão registradas em [Retirada de versões anteriores](docs/security-release-retirements.md).
