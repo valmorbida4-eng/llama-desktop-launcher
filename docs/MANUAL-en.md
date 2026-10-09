@@ -1,12 +1,12 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.4.2 · English
+Version 0.4.3 · English
 
 ## 1. What the application does
 
 Llama Desktop Launcher installs or locates the [llama.cpp](https://github.com/ggml-org/llama.cpp) engine, finds local GGUF models, and opens the `llama-server` interface in your browser. You can select local-only, LAN, or Tailscale access. Network access requires an API key. Traffic to other computers travels over the selected network.
 
-The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b11193`.
+The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b11514`.
 
 The interface has three screens: **Llama** for chat and starting the server, **Models** for finding GGUF files and viewing recommendations, and **Settings** for preparing the engine, folders, and profiles. Settings remains available in the navigation on every screen.
 
@@ -16,25 +16,25 @@ The installed version appears in the header next to “llama.cpp no seu computad
 
 | Platform / Distribution | Architecture | Official package / Direct download | GPU backend |
 | --- | --- | --- | --- |
-| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.2.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher.Setup.0.4.2.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
-| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.2_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher_0.4.2_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.2_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher_0.4.2_arm64.deb) | Vulkan or CPU |
-| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.2.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher-0.4.2.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.2.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/llama-desktop-launcher-0.4.2.aarch64.rpm) | Vulkan or CPU |
-| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.4.2.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
-| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.4.2-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2-arm64.AppImage) | Vulkan or CPU |
-| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.2-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2-arm64.dmg) | Metal |
-| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.4.2.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.2/Llama.Desktop.Launcher-0.4.2.dmg) | Metal |
+| Windows (10 / 11) | x64 | [`Llama Desktop Launcher Setup 0.4.3.exe`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher.Setup.0.4.3.exe) | Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL, or CPU |
+| Linux (Debian, Ubuntu, Mint, Pop!_OS) | x64 (amd64) | [`llama-desktop-launcher_0.4.3_amd64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher_0.4.3_amd64.deb) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Debian, Ubuntu) | ARM64 (aarch64) | [`llama-desktop-launcher_0.4.3_arm64.deb`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher_0.4.3_arm64.deb) | Vulkan or CPU |
+| Linux (Fedora, RHEL, openSUSE) | x64 (x86_64) | [`llama-desktop-launcher-0.4.3.x86_64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher-0.4.3.x86_64.rpm) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Fedora, RHEL, openSUSE) | ARM64 (aarch64) | [`llama-desktop-launcher-0.4.3.aarch64.rpm`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/llama-desktop-launcher-0.4.3.aarch64.rpm) | Vulkan or CPU |
+| Linux (Portable / All distros) | x64 | [`Llama Desktop Launcher-0.4.3.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3.AppImage) | Vulkan, CUDA, or CPU; ROCm/SYCL on x64 |
+| Linux (Portable / All distros) | ARM64 | [`Llama Desktop Launcher-0.4.3-arm64.AppImage`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3-arm64.AppImage) | Vulkan or CPU |
+| macOS (Apple Silicon M1/M2/M3/M4) | ARM64 | [`Llama Desktop Launcher-0.4.3-arm64.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3-arm64.dmg) | Metal |
+| macOS (Intel) | x64 | [`Llama Desktop Launcher-0.4.3.dmg`](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases/download/v0.4.3/Llama.Desktop.Launcher-0.4.3.dmg) | Metal |
 
 Required disk space depends on the model. Allow room for the GGUF, cache, and engine. Large models can require substantially more RAM or VRAM than the file size alone suggests. Without a compatible GPU, inference may run on the CPU and be slow. The official Linux engine package is built on Ubuntu; other distributions may require compatible system libraries. GitHub Actions compiles native official packages for Windows x64, Linux x64/arm64, and macOS Intel/Apple Silicon.
 
 ## 3. Install the application
 
-The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.4.2 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
+The source code is in the [project repository](https://github.com/valmorbida4-eng/llama-desktop-launcher). The direct links for version 0.4.3 in the table above will work only after the installers and integrity checksums (`SHA256SUMS.txt`) are published to the corresponding [GitHub Release](https://github.com/valmorbida4-eng/llama-desktop-launcher/releases). To install, download the package matching your platform from the Releases page or build it from source following the instructions in the README.
 
 ### Windows
 
-1. Open `Llama Desktop Launcher Setup 0.4.2.exe`.
+1. Open `Llama Desktop Launcher Setup 0.4.3.exe`.
 2. Choose the application installation folder. This is a per-user installer and does not require using `Program Files`.
 3. Select whether to create a desktop shortcut.
 4. Finish installation and open the app from the Start menu or desktop shortcut.
@@ -65,7 +65,7 @@ On first launch, **Settings** opens automatically if the engine is not ready, th
 
 In **Motor llama.cpp**, choose one of these options:
 
-1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b11193` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
+1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b11514` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
 2. **Escolher pasta existente / Choose existing folder:** select a folder containing `llama-server` (or `llama-server.exe`). This lets you reuse an existing installation, including the `b11193-vulkan` directory used by the earlier Windows launcher.
 
 Downloading requires internet access. Choose according to your GPU, independent of CPU brand: Vulkan supports compatible AMD, Intel, and NVIDIA GPUs; CUDA is for NVIDIA, ROCm for AMD, and SYCL for Intel. For an RTX 4060 on Windows x64, start with **NVIDIA CUDA 12.4** and keep the NVIDIA driver current. ROCm and SYCL may require additional runtimes and drivers. If the release has no package for your CPU architecture, select a compatible engine you built or installed yourself. The app checks SHA-256 when the GitHub release API provides a digest. You can replace a selected engine later by choosing a different existing folder or downloading the official package again.
@@ -306,7 +306,7 @@ The benchmark may load the model more than once and can take several minutes. It
 | Server exits during startup | Read the engine log; lower context/batch, try `-ngl auto`, or reduce GPU layers. |
 | GPU not used | Check the selected backend, GPU compatibility, and drivers; on macOS check that you installed a Metal build. Read the engine log. |
 | Benchmark fails | Ensure the runtime folder contains `llama-bench`; try more conservative settings. |
-| Model fails to load | Check all shards, `b11193` compatibility, model repository instructions, and available memory. |
+| Model fails to load | Check all shards, `b11514` compatibility, model repository instructions, and available memory. |
 
 ## 10. Data, updates, and safe uninstalling
 

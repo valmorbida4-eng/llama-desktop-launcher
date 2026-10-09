@@ -22,8 +22,8 @@ test('instala motor ao lado do destino sem mover entre sistemas de arquivos',asy
  await fsp.writeFile(path.join(payload,executable),'engine',{mode:0o755});await fsp.writeFile(path.join(payload,'runtime.so'),'library');
  if(process.platform!=='win32')await fsp.symlink('runtime.so',path.join(payload,'runtime.so.1'));
  const archive=path.join(root,'fixture.tar.gz');execFileSync('tar',['-czf',archive,'-C',payload,'.']);const data=await fsp.readFile(archive);
- const assetName='llama-b11193-bin-'+engine.backendOptions().find(x=>x.id==='cpu'||x.id==='metal').asset;
- const release={tag_name:'b11193',assets:[{name:assetName,size:data.length,browser_download_url:'https://fixture.test/engine',digest:'sha256:'+crypto.createHash('sha256').update(data).digest('hex')}]};
+ const assetName=`llama-${engine.ENGINE_TAG}-bin-`+engine.backendOptions().find(x=>x.id==='cpu'||x.id==='metal').asset;
+ const release={tag_name:engine.ENGINE_TAG,assets:[{name:assetName,size:data.length,browser_download_url:'https://fixture.test/engine',digest:'sha256:'+crypto.createHash('sha256').update(data).digest('hex')}]};
  t.mock.method(https,'get',(url,_options,callback)=>{const req=new EventEmitter();process.nextTick(()=>{const response=Readable.from([new URL(url).hostname==='api.github.com'?Buffer.from(JSON.stringify(release)):data]);response.statusCode=200;callback(response);});return req;});
  const originalRename=fsp.rename.bind(fsp);t.mock.method(fsp,'rename',async(source,target)=>{
   // Reproduce a /tmp -> /home EXDEV boundary without privileged mounts.

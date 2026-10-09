@@ -9,6 +9,9 @@ const {spawn}=require('node:child_process');
 const {Transform}=require('node:stream');
 const {pipeline}=require('node:stream/promises');
 
+// Versão do llama.cpp testada com o launcher; atualizar exige repetir a validação manual do motor.
+const ENGINE_TAG='b11514';
+
 function request(url, redirects=0) {
   if (redirects>5 || !url.startsWith('https://')) return Promise.reject(Error('Redirecionamento inválido.'));
   return new Promise((resolve,reject)=>https.get(url,{headers:{'User-Agent':'Llama-Desktop-Launcher','Accept':'application/vnd.github+json'}},r=>{
@@ -18,7 +21,7 @@ function request(url, redirects=0) {
   }).on('error',reject));
 }
 async function releaseInfo() {
-  const stream=await request('https://api.github.com/repos/ggml-org/llama.cpp/releases/tags/b11193');
+  const stream=await request(`https://api.github.com/repos/ggml-org/llama.cpp/releases/tags/${ENGINE_TAG}`);
   let body=''; for await (const chunk of stream as AsyncIterable<Buffer>) {body+=chunk;if(body.length>5e6) throw Error('Resposta de release grande demais.');}
   return JSON.parse(body);
 }
@@ -41,8 +44,8 @@ function backendOptions(platform=process.platform,arch=process.arch) {
     linux:{
       x64:[
         {id:'vulkan',label:'Vulkan',asset:'ubuntu-vulkan-x64.tar.gz'},
-        {id:'cuda-12.8',label:'NVIDIA CUDA 12.8',asset:'ubuntu-cuda-12.8-x64.tar.gz',runtime:'cudart-llama-b11193-bin-ubuntu-cuda-12.8-x64.tar.gz'},
-        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'ubuntu-cuda-13.4-x64.tar.gz',runtime:'cudart-llama-b11193-bin-ubuntu-cuda-13.4-x64.tar.gz'},
+        {id:'cuda-12.8',label:'NVIDIA CUDA 12.8',asset:'ubuntu-cuda-12.8-x64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-12.8-x64.tar.gz`},
+        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'ubuntu-cuda-13.4-x64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-13.4-x64.tar.gz`},
         {id:'rocm-10.0',label:'AMD ROCm 10.0',asset:'ubuntu-rocm-10.0-x64.tar.gz'},
         {id:'sycl-fp16',label:'Intel SYCL FP16',asset:'ubuntu-sycl-fp16-x64.tar.gz'},
         {id:'sycl-fp32',label:'Intel SYCL FP32',asset:'ubuntu-sycl-fp32-x64.tar.gz'},
@@ -50,7 +53,7 @@ function backendOptions(platform=process.platform,arch=process.arch) {
       ],
       arm64:[
         {id:'vulkan',label:'Vulkan',asset:'ubuntu-vulkan-arm64.tar.gz'},
-        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'ubuntu-cuda-13.4-arm64.tar.gz',runtime:'cudart-llama-b11193-bin-ubuntu-cuda-13.4-arm64.tar.gz'},
+        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'ubuntu-cuda-13.4-arm64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-13.4-arm64.tar.gz`},
         {id:'cpu',label:'Somente CPU',asset:'ubuntu-arm64.tar.gz'}
       ]
     },
@@ -145,4 +148,4 @@ async function installEngine(destination,backend,onProgress) {
     return {path:destination,release:release.tag_name,asset:main.name,backend};
   } finally {await fsp.rm(temp,{recursive:true,force:true}).catch(()=>{});}
 }
-module.exports={assetFor,assetsFor,backendOptions,installEngine,findExecutable,saveDownload};
+module.exports={ENGINE_TAG,assetFor,assetsFor,backendOptions,installEngine,findExecutable,saveDownload};
