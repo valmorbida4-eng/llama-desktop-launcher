@@ -1,4 +1,4 @@
-"""Gera os manuais PDF distribuídos com o aplicativo a partir dos Markdown."""
+"""Gera os guias PDF distribuídos com o aplicativo (uso, integração e diagnóstico) a partir dos Markdown."""
 
 from __future__ import annotations
 
@@ -61,7 +61,8 @@ def inline(text: str) -> str:
 def table_block(lines: list[str], width: float) -> Table:
     rows = []
     for line in lines:
-        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        # Como no GitHub, "\|" dentro de uma célula é uma barra literal, não um separador.
+        cells = [cell.strip().replace("\\|", "|") for cell in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
         if all(re.fullmatch(r":?-{2,}:?", cell) for cell in cells):
             continue
         style = STYLES["small"]
@@ -129,7 +130,15 @@ def blocks(markdown: str, width: float) -> list:
     return story
 
 
-def page_frame(canvas, doc, language: str):
+DOCUMENTS = ("MANUAL", "INTEGRATION", "DIAGNOSTICS")
+HEADERS = {
+    "MANUAL": {"pt-BR": "Manual de uso", "en": "User manual"},
+    "INTEGRATION": {"pt-BR": "Guia de integração", "en": "Integration guide"},
+    "DIAGNOSTICS": {"pt-BR": "Guia de diagnóstico", "en": "Diagnostics guide"},
+}
+
+
+def page_frame(canvas, doc, language: str, document: str = "MANUAL"):
     canvas.saveState()
     w, h = A4
     canvas.setStrokeColor(LINE)
@@ -139,26 +148,27 @@ def page_frame(canvas, doc, language: str):
     canvas.drawString(42, h - 34, "LLAMA DESKTOP LAUNCHER")
     canvas.setFont("ArialManual", 8)
     canvas.setFillColor(MUTED)
-    canvas.drawRightString(w - 42, h - 34, "Manual de uso" if language == "pt-BR" else "User manual")
+    canvas.drawRightString(w - 42, h - 34, HEADERS[document][language])
     canvas.line(42, 39, w - 42, 39)
     canvas.drawString(42, 27, "Português (Brasil)" if language == "pt-BR" else "English")
     canvas.drawRightString(w - 42, 27, str(doc.page))
     canvas.restoreState()
 
 
-def build(language: str):
-    source = DOCS / f"MANUAL-{language}.md"
-    target = DOCS / f"MANUAL-{language}.pdf"
+def build(language: str, document: str = "MANUAL"):
+    source = DOCS / f"{document}-{language}.md"
+    target = DOCS / f"{document}-{language}.pdf"
     width = A4[0] - 84
     doc = SimpleDocTemplate(str(target), pagesize=A4, rightMargin=42, leftMargin=42, topMargin=60, bottomMargin=54,
-                            title=f"Llama Desktop Launcher - {language}", author="Llama Desktop Launcher")
+                            title=f"Llama Desktop Launcher - {HEADERS[document][language]}", author="Llama Desktop Launcher")
     markdown = source.read_text(encoding="utf-8").replace("—", "-").replace("–", "-").replace("‑", "-")
     doc.build(blocks(markdown, width),
-              onFirstPage=lambda canvas, document: page_frame(canvas, document, language),
-              onLaterPages=lambda canvas, document: page_frame(canvas, document, language))
+              onFirstPage=lambda canvas, pdf: page_frame(canvas, pdf, language, document),
+              onLaterPages=lambda canvas, pdf: page_frame(canvas, pdf, language, document))
     print(target)
 
 
 if __name__ == "__main__":
-    for locale in ("pt-BR", "en"):
-        build(locale)
+    for name in DOCUMENTS:
+        for locale in ("pt-BR", "en"):
+            build(locale, name)

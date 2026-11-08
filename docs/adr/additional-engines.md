@@ -9,3 +9,4 @@ O launcher passou a executar modelos que o llama.cpp não atende: pastas Hugging
 - A chave de API vai por variável de ambiente (`VLLM_API_KEY`, `STRATA_API_KEY`), nunca na linha de comando. Acesso fora de `127.0.0.1` continua exigindo chave, e a ponte local autenticada vale para todos os motores.
 - Benchmark, sugestão de ajustes, análise pelo modelo, conversa integrada e CLI dependem de `llama-bench`/`llama-cli` e ficam só no llama.cpp.
 - Não validado em hardware real nesta versão: instalação do vLLM por pip, a imagem Docker com GPU e um servidor Strata/PolyStrata carregando um modelo. Os testes cobrem detecção, descoberta de modelos e os comandos gerados, e `npm run smoke:engines` cobre a interface com instalações simuladas.
+- Na v0.7.0, a validação da regra de firewall passou a aceitar o `python.exe` base além do `llama-server.exe`. Antes ela recusava o Python, e o botão de firewall sempre falhava com Strata/PolyStrata.

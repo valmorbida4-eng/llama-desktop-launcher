@@ -1,6 +1,6 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "private": true,
   "license": "MIT",
   "author": "Célio <valmorbida4@gmail.com>",
@@ -51,6 +51,22 @@
       {
         "from": "docs/MANUAL-en.pdf",
         "to": "docs/MANUAL-en.pdf"
+      },
+      {
+        "from": "docs/INTEGRATION-pt-BR.pdf",
+        "to": "docs/INTEGRATION-pt-BR.pdf"
+      },
+      {
+        "from": "docs/INTEGRATION-en.pdf",
+        "to": "docs/INTEGRATION-en.pdf"
+      },
+      {
+        "from": "docs/DIAGNOSTICS-pt-BR.pdf",
+        "to": "docs/DIAGNOSTICS-pt-BR.pdf"
+      },
+      {
+        "from": "docs/DIAGNOSTICS-en.pdf",
+        "to": "docs/DIAGNOSTICS-en.pdf"
       },
       {
         "from": "LICENSE",

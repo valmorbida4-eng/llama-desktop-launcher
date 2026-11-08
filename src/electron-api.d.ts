@@ -60,7 +60,8 @@ interface RendererApi {
   openHF(kind: 'all' | 'quantized' | 'moe' | 'dense' | 'full' | string): Promise<string>;
   openModelExample(url: string): Promise<string>;
   openModelDir(index: number): Promise<boolean>;
-  openManual(lang: 'pt-BR' | 'en'): Promise<boolean>;
+  openManual(lang: 'pt-BR' | 'en', doc?: 'MANUAL' | 'INTEGRATION' | 'DIAGNOSTICS'): Promise<boolean>;
+  copyDiagnosticReport(): Promise<string>;
   onProgress(callback: (value: ProgressUpdate) => void): void;
   onTuneProgress(callback: (value: string) => void): void;
   onLog(callback: (value: string) => void): void;
