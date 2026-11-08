@@ -1,6 +1,6 @@
 # Guia de diagnóstico — Llama Desktop Launcher
 
-Versão 0.7.0 · Português (Brasil)
+Versão 0.8.0 · Português (Brasil)
 
 Este guia ajuda a descobrir por que algo não funcionou: onde olhar, o que significam as mensagens do aplicativo, problemas comuns de cada motor e plataforma, e como montar um relatório para pedir ajuda. Para o uso normal, veja o **Manual de uso** (`MANUAL-pt-BR`); para clientes e API, o **Guia de integração** (`INTEGRATION-pt-BR`).
 
@@ -130,8 +130,9 @@ O vLLM pode levar vários minutos na primeira carga. O launcher espera até 30 m
 | 401 na porta direta | Chave errada ou trocada com **Nova chave**. Copie a chave atual. |
 | “A faixa de clientes precisa conter o endereço da rede selecionada.” | Use uma faixa que inclua o IP do servidor, como `192.168.1.0/24` para `192.168.1.5`. |
 | “O endereço remoto deve ficar dentro de uma rede LAN privada ou Tailscale.” | A regra só aceita `10/8`, `172.16/12`, `192.168/16` ou `100.64/10`. |
+| “As regras não foram removidas: a autorização de administrador foi negada…” | O pedido de administrador foi negado ou fechado. Clique de novo em **Remover regras do launcher** e confirme. |
 | A regra de firewall não é criada | O pedido de administrador foi negado ou fechado. Clique de novo e confirme. |
-| Regras antigas continuam liberadas | As regras `LlamaDesktopLauncher-…` ficam no Windows depois que o servidor para. No Strata/PolyStrata elas liberam o `python.exe` do sistema, usado por qualquer programa Python. Remova pelo `wf.msc` ou, em um PowerShell como administrador, com `Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' \| Remove-NetFirewallRule`. |
+| Regras antigas continuam liberadas | As regras `LlamaDesktopLauncher-…` ficam no Windows depois que o servidor para. No Strata/PolyStrata elas liberam o `python.exe` do sistema, usado por qualquer programa Python. Use **Configurações > 07 · Firewall do Windows > Remover regras do launcher**, o `wf.msc` ou, em um PowerShell como administrador, `Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' \| Remove-NetFirewallRule`. |
 | “ID de modelo inválido.” ao copiar | O `model_name` do Strata está vazio, tem mais de 128 caracteres, começa com `-` ou contém quebra de linha ou outro caractere de controle. Espaços e símbolos são aceitos. Corrija o nome na configuração `strata-*.json`. |
 
 ## 9. Atualizações

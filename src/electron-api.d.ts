@@ -57,6 +57,8 @@ interface RendererApi {
   copyOpenCodeCommand(platform: 'bash' | 'powershell'): Promise<boolean>;
   copyBrowserLink(): Promise<string>;
   createFirewallRule(address: string): Promise<any>;
+  listFirewallRules(): Promise<{ name: string; displayName: string }[]>;
+  removeFirewallRules(): Promise<{ removed: number; remaining: number }>;
   openHF(kind: 'all' | 'quantized' | 'moe' | 'dense' | 'full' | string): Promise<string>;
   openModelExample(url: string): Promise<string>;
   openModelDir(index: number): Promise<boolean>;

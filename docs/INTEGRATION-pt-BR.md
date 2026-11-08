@@ -1,6 +1,6 @@
 # Guia de integração — Llama Desktop Launcher
 
-Versão 0.7.0 · Português (Brasil)
+Versão 0.8.0 · Português (Brasil)
 
 Este guia explica como conectar clientes e aplicativos ao servidor iniciado pelo launcher: endpoint, ID do modelo, chaves, configurações prontas para OpenCode e outros clientes, exemplos de código, rede e firewall. Para instalar e usar o aplicativo, veja o **Manual de uso** (`MANUAL-pt-BR`). Para resolver problemas, veja o **Guia de diagnóstico** (`DIAGNOSTICS-pt-BR`).
 
@@ -211,9 +211,9 @@ O launcher não mexe no firewall ao iniciar o servidor. Com o servidor ativo em 
 
 A porta compartilhada é liberada para o executável do launcher. Se a porta mudar, crie outra regra.
 
-**As regras continuam no Windows depois que o servidor para.** O launcher não as remove, porque isso exigiria outra autorização de administrador a cada parada. No llama.cpp, a regra vale só para o `llama-server.exe` daquela pasta. No **Strata/PolyStrata**, porém, o executável é o `python.exe` base instalado no sistema, que todos os programas Python desta máquina usam. Enquanto a regra existir, qualquer script Python que escute naquela porta fica acessível para a faixa indicada. Remova as regras quando não precisar mais delas.
+**As regras continuam no Windows depois que o servidor para.** O launcher não as remove sozinho, porque isso exigiria outra autorização de administrador a cada parada. No llama.cpp, a regra vale só para o `llama-server.exe` daquela pasta. No **Strata/PolyStrata**, porém, o executável é o `python.exe` base instalado no sistema, que todos os programas Python desta máquina usam. Enquanto a regra existir, qualquer script Python que escute naquela porta fica acessível para a faixa indicada. Remova as regras quando não precisar mais delas.
 
-As regras se chamam `LlamaDesktopLauncher-…` e aparecem no **Windows Defender Firewall com Segurança Avançada** (`wf.msc`), onde você pode apagá-las. Para remover todas de uma vez, use um PowerShell como administrador:
+Para removê-las, abra **Configurações > 07 · Firewall do Windows**. **Verificar regras** lista as regras do launcher, e **Remover regras do launcher** apaga todas de uma vez: o Windows pede autorização de administrador só se houver alguma, e regras de outros programas não são tocadas. As regras se chamam `LlamaDesktopLauncher-…` e também aparecem no **Windows Defender Firewall com Segurança Avançada** (`wf.msc`). Para fazer o mesmo pelo terminal, use um PowerShell como administrador:
 
 ```powershell
 Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' | Remove-NetFirewallRule

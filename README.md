@@ -23,7 +23,7 @@ Aplicativo instalável para executar modelos de linguagem locais no Windows, Lin
 - Conversa integrada com `llama-cli` na janela ou em um terminal separado (só GGUF).
 - Servidor compatível com OpenAI em `127.0.0.1`, LAN ou Tailscale; na rede, exige chave de API. Compartilhamento revogável por link ou comando, com credencial temporária.
 - Configurações prontas para OpenCode, Aider, Pi, Hermes, Continue, Cline, Codex (experimental) e clientes OpenAI Compatible genéricos.
-- No Windows, regra de firewall opcional limitada ao executável do motor, à porta ativa e à faixa privada informada.
+- No Windows, regra de firewall opcional limitada ao executável do motor, à porta ativa e à faixa privada informada, e botão para remover todas as regras criadas pelo launcher.
 - Verificação de atualizações com conferência do `SHA256SUMS.txt`.
 - **Relatório de diagnóstico** copiável, com versões, motores, pastas, servidor ativo e o fim do registro do motor, sem chaves nem tokens.
 
@@ -70,6 +70,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.8.0:** **Configurações > 07 · Firewall do Windows** lista e remove as regras de entrada criadas pelo launcher (`LlamaDesktopLauncher-…`), com uma única autorização de administrador e só quando há regras. Elas continuam depois que o servidor para, e no Strata/PolyStrata liberam o `python.exe` do sistema.
 - **v0.7.0:** guias separados de uso, integração e diagnóstico (PT-BR e EN), com PDFs abertos pelo rodapé; botão **Copiar relatório de diagnóstico** em **Configurações > 06 · Diagnóstico**; o registro do motor passa a guardar também as falhas de instalação e de início. Correções: a regra de firewall do Windows funciona com Strata/PolyStrata (Python base do `.venv`), e as configurações copiadas para os clientes usam o ID do modelo do Strata em vez de `modelo-local`. Veja [o ADR do relatório](docs/adr/diagnostic-report.md).
 - **v0.6.1:** VRAM acima de 4 GB no Windows lida do registro do driver (o WMI para em 4 GB); links para os modelos do Strata, do PolyStrata e do vLLM na tela **Modelos**.
 - **v0.6.0:** motores vLLM e Strata/PolyStrata ao lado do llama.cpp, que passa a `b12110`; correção do workflow **Engine update**. Veja [o ADR dos motores](docs/adr/additional-engines.md).

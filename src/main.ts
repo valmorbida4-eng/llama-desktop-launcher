@@ -291,6 +291,9 @@ ipcMain.handle('copy-shared-link',async(e)=>{validateSender(e);if(!shareProxy)th
 ipcMain.handle('revoke-shared-access',e=>{validateSender(e);if(!shareProxy)throw Error('Nenhum acesso compartilhado ativo.');shareProxy.revoke();return true;});
 ipcMain.handle('copy-shared-command',async(e,platform)=>{validateSender(e);if(!shareProxy||!active)throw Error('Inicie o servidor em LAN ou Tailscale.');const command=clientCommands.openCodeCommand({...active,endpoint:shareProxy.endpoint},platform,shareProxy.accessKey());await clipboard.writeText(command);return true;});
 ipcMain.handle('copy-browser-link',e=>{validateSender(e);if(!active)throw Error('Inicie o servidor primeiro.');clipboard.writeText(active.remoteUrl);return active.remoteUrl;});
+ipcMain.handle('list-firewall-rules',async e=>{validateSender(e);return firewall.listRules();});
+// Remove todas as regras LlamaDesktopLauncher-…; o Windows pede autorização de administrador só se houver alguma.
+ipcMain.handle('remove-firewall-rules',async e=>{validateSender(e);return firewall.removeRules();});
 ipcMain.handle('create-firewall-rule',async(e,remoteAddress)=>{
   validateSender(e);
   if(process.platform!=='win32'||!active||active.scope==='Local')throw Error('Inicie um servidor LAN ou Tailscale no Windows primeiro.');

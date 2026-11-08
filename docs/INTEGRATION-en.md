@@ -1,6 +1,6 @@
 # Integration guide — Llama Desktop Launcher
 
-Version 0.7.0 · English
+Version 0.8.0 · English
 
 This guide explains how to connect clients and applications to the server started by the launcher: endpoint, model ID, keys, ready-made setups for OpenCode and other clients, code examples, network and firewall. To install and use the app, see the **User manual** (`MANUAL-en`). To solve problems, see the **Diagnostics guide** (`DIAGNOSTICS-en`).
 
@@ -213,9 +213,9 @@ The launcher does not touch the firewall when it starts the server. With the ser
 
 The shared port is allowed for the launcher executable. If the port changes, create another rule.
 
-**Rules stay in Windows after the server stops.** The launcher does not remove them, because that would need another administrator prompt on every stop. For llama.cpp, the rule only covers the `llama-server.exe` in that folder. For **Strata/PolyStrata**, however, the executable is the system-wide base `python.exe`, shared by every Python program on this machine. While the rule exists, any Python script listening on that port is reachable from the given range. Remove the rules when you no longer need them.
+**Rules stay in Windows after the server stops.** The launcher does not remove them by itself, because that would need another administrator prompt on every stop. For llama.cpp, the rule only covers the `llama-server.exe` in that folder. For **Strata/PolyStrata**, however, the executable is the system-wide base `python.exe`, shared by every Python program on this machine. While the rule exists, any Python script listening on that port is reachable from the given range. Remove the rules when you no longer need them.
 
-Rules are named `LlamaDesktopLauncher-…` and appear in **Windows Defender Firewall with Advanced Security** (`wf.msc`), where you can delete them. To remove all of them at once, use an administrator PowerShell:
+To remove them, open **Settings > 07 · Firewall do Windows**. **Verificar regras** (Check rules) lists the launcher's rules, and **Remover regras do launcher** (Remove launcher rules) deletes all of them at once: Windows asks for administrator approval only if there is at least one, and other programs' rules are not touched. Rules are named `LlamaDesktopLauncher-…` and also appear in **Windows Defender Firewall with Advanced Security** (`wf.msc`). To do the same from a terminal, use an administrator PowerShell:
 
 ```powershell
 Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' | Remove-NetFirewallRule

@@ -81,9 +81,68 @@ test('o risco do python.exe compartilhado e a remoção das regras estão avisad
   assert.match(card, /python\.exe instalado no sistema/);
   assert.match(card, /continua no Windows depois que o servidor para/);
   assert.match(read('src/renderer.ts'), /libera o python\.exe do sistema/);
+  const rulesCard = read('src/index.html').match(/<section id="firewall-rules-card"[\s\S]*?<\/section>/)?.[0] || '';
+  assert.match(rulesCard, /id="list-firewall-rules"/);
+  assert.match(rulesCard, /id="remove-firewall-rules"/);
+  assert.match(rulesCard, /python\.exe do sistema/);
   for (const guide of ['INTEGRATION-pt-BR', 'INTEGRATION-en', 'DIAGNOSTICS-pt-BR', 'DIAGNOSTICS-en']) {
     const text = read(`docs/${guide}.md`);
     assert.match(text, /Get-NetFirewallRule -Name 'LlamaDesktopLauncher-\*' \\?\| Remove-NetFirewallRule/, guide);
     assert.match(text, /python\.exe/, guide);
   }
+});
+
+const firewall = require('../build/app/firewall');
+const nameA = 'LlamaDesktopLauncher-0123456789abcdef', nameB = 'LlamaDesktopLauncher-fedcba9876543210';
+const decode = args => Buffer.from(args[args.length - 1], 'base64').toString('utf16le');
+// Simula o powershell.exe: as listagens devolvem as regras atuais, e a remoção elevada as apaga.
+function fakePowerShell(initial, { failRemoval = false } = {}) {
+  let rules = [...initial];
+  const calls = [];
+  const run = async (file, args) => {
+    assert.equal(file, 'powershell.exe');
+    const script = decode(args);
+    calls.push(script);
+    if (script.includes('Start-Process')) {
+      if (failRemoval) throw Error('The operation was canceled by the user.');
+      rules = [];
+      return { stdout: '' };
+    }
+    return { stdout: rules.map(name => `${name}\tLlama Desktop Launcher (8080)`).join('\r\n') };
+  };
+  return { run, calls };
+}
+
+test('listagem só reconhece regras com o nome gerado pelo launcher', () => {
+  assert.match(firewall.buildListRulesScript(), /Get-NetFirewallRule -Name 'LlamaDesktopLauncher-\*' -ErrorAction SilentlyContinue/);
+  assert.doesNotMatch(firewall.buildListRulesScript(), /Remove-|RunAs/);
+  const parsed = firewall.parseRuleList(`${nameA}\tLlama Desktop Launcher (8080)\r\nLlamaDesktopLauncher-outra\tX\nCoreNet-DHCP-In\tY\n\n${nameB}`);
+  assert.deepEqual(parsed, [{ name: nameA, displayName: 'Llama Desktop Launcher (8080)' }, { name: nameB, displayName: '' }]);
+});
+
+test('script de remoção cita só nomes exatos de regras do launcher', () => {
+  assert.equal(firewall.buildRemoveRulesScript([nameA, nameB]).split('\n')[1], `Remove-NetFirewallRule -Name @('${nameA}','${nameB}')`);
+  for (const bad of [[], ['CoreNet-DHCP-In'], ["LlamaDesktopLauncher-0123456789abcdef'; Remove-NetFirewallRule -All; '"], 'x'])
+    assert.throws(() => firewall.buildRemoveRulesScript(bad), /Lista de regras inválida/);
+});
+
+test('sem regras do launcher, nada é elevado; com regras, uma única elevação apaga e confere', async () => {
+  const empty = fakePowerShell([]);
+  assert.deepEqual(await firewall.removeRules({ platform: 'win32', run: empty.run }), { removed: 0, remaining: 0 });
+  assert.equal(empty.calls.length, 1);
+  assert.ok(!empty.calls.some(script => script.includes('RunAs')));
+
+  const some = fakePowerShell([nameA, nameB]);
+  assert.deepEqual(await firewall.removeRules({ platform: 'win32', run: some.run }), { removed: 2, remaining: 0 });
+  assert.equal(some.calls.length, 3);
+  const elevated = some.calls[1];
+  assert.match(elevated, /Start-Process -FilePath 'powershell\.exe' -Verb RunAs/);
+  const inner = Buffer.from(elevated.match(/'-EncodedCommand','([^']+)'/)[1], 'base64').toString('utf16le');
+  assert.match(inner, new RegExp(`Remove-NetFirewallRule -Name @\\('${nameA}','${nameB}'\\)`));
+});
+
+test('UAC negado vira mensagem clara, e fora do Windows não há remoção', async () => {
+  const denied = fakePowerShell([nameA], { failRemoval: true });
+  await assert.rejects(firewall.removeRules({ platform: 'win32', run: denied.run }), /autorização de administrador foi negada/);
+  await assert.rejects(firewall.removeRules({ platform: 'linux', run: async () => ({ stdout: '' }) }), /só existem no Windows/);
 });
