@@ -1083,18 +1083,6 @@
       "source_location": "L141"
     },
     {
-      "id": "src_engines_dockerstatus",
-      "label": "dockerStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "engines.ts",
-      "file_type": "code",
-      "norm_label": "dockerstatus()",
-      "source_file": "src/engines.ts",
-      "source_location": "L90"
-    },
-    {
       "id": "src_engines_installvllm",
       "label": "installVllm()",
       "_callable": true,
@@ -1105,18 +1093,6 @@
       "norm_label": "installvllm()",
       "source_file": "src/engines.ts",
       "source_location": "L62"
-    },
-    {
-      "id": "src_engines_probe",
-      "label": "probe()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "engines.ts",
-      "file_type": "code",
-      "norm_label": "probe()",
-      "source_file": "src/engines.ts",
-      "source_location": "L81"
     },
     {
       "id": "src_engines_pullvllmimage",
@@ -1153,6 +1129,18 @@
       "norm_label": "servercommand()",
       "source_file": "src/engines.ts",
       "source_location": "L165"
+    },
+    {
+      "id": "src_engines_stopcommand",
+      "label": "stopCommand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "stopcommand()",
+      "source_file": "src/engines.ts",
+      "source_location": "L203"
     },
     {
       "id": "src_engines_venvbaseexecutable",
@@ -1203,16 +1191,16 @@
       "source_location": "L42"
     },
     {
-      "id": "src_main_refreshdocker",
-      "label": "refreshDocker()",
+      "id": "src_main_stopcontainer",
+      "label": "stopContainer()",
       "_callable": true,
       "_origin": "ast",
       "community": 100,
       "community_name": "engines.ts",
       "file_type": "code",
-      "norm_label": "refreshdocker()",
+      "norm_label": "stopcontainer()",
       "source_file": "src/main.ts",
-      "source_location": "L67"
+      "source_location": "L250"
     },
     {
       "id": "src_guidance_buildguidance",
@@ -1263,6 +1251,42 @@
       "source_location": "L12"
     },
     {
+      "id": "src_main_availablemodeldiskbytes",
+      "label": "availableModelDiskBytes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "guidance.ts",
+      "file_type": "code",
+      "norm_label": "availablemodeldiskbytes()",
+      "source_file": "src/main.ts",
+      "source_location": "L75"
+    },
+    {
+      "id": "src_main_gpudetails",
+      "label": "gpuDetails()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "guidance.ts",
+      "file_type": "code",
+      "norm_label": "gpudetails()",
+      "source_file": "src/main.ts",
+      "source_location": "L76"
+    },
+    {
+      "id": "src_main_modelguidance",
+      "label": "modelGuidance()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "guidance.ts",
+      "file_type": "code",
+      "norm_label": "modelguidance()",
+      "source_file": "src/main.ts",
+      "source_location": "L77"
+    },
+    {
       "id": "scripts_smoke_engines_ui_main",
       "label": "main()",
       "_callable": true,
@@ -1285,6 +1309,30 @@
       "norm_label": "write()",
       "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L12"
+    },
+    {
+      "id": "scripts_smoke_ui_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L20"
+    },
+    {
+      "id": "src_preload_invoke",
+      "label": "invoke()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "invoke()",
+      "source_file": "src/preload.ts",
+      "source_location": "L3"
     },
     {
       "id": "src_engine_assetfor",
@@ -1719,18 +1767,6 @@
       "source_location": "L6"
     },
     {
-      "id": "src_network_accessoptions",
-      "label": "accessOptions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "network.ts",
-      "file_type": "code",
-      "norm_label": "accessoptions()",
-      "source_file": "src/network.ts",
-      "source_location": "L16"
-    },
-    {
       "id": "src_network_allowlocalrequest",
       "label": "allowLocalRequest()",
       "_callable": true,
@@ -1777,18 +1813,6 @@
       "norm_label": "rotatekey()",
       "source_file": "src/network.ts",
       "source_location": "L31"
-    },
-    {
-      "id": "src_network_scopeof",
-      "label": "scopeOf()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "network.ts",
-      "file_type": "code",
-      "norm_label": "scopeof()",
-      "source_file": "src/network.ts",
-      "source_location": "L8"
     },
     {
       "id": "src_network_upstreamrequestdetails",
@@ -1959,6 +1983,18 @@
       "source_location": "L53"
     },
     {
+      "id": "src_core_detecthardware",
+      "label": "detectHardware()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "state",
+      "file_type": "code",
+      "norm_label": "detecthardware()",
+      "source_file": "src/core.ts",
+      "source_location": "L53"
+    },
+    {
       "id": "src_engines_contextfromargs",
       "label": "contextFromArgs()",
       "_callable": true,
@@ -2031,18 +2067,6 @@
       "source_location": "L99"
     },
     {
-      "id": "src_engines_vllmmode",
-      "label": "vllmMode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "state",
-      "file_type": "code",
-      "norm_label": "vllmmode()",
-      "source_file": "src/engines.ts",
-      "source_location": "L23"
-    },
-    {
       "id": "src_main_allmodels",
       "label": "allModels()",
       "_callable": true,
@@ -2053,30 +2077,6 @@
       "norm_label": "allmodels()",
       "source_file": "src/main.ts",
       "source_location": "L59"
-    },
-    {
-      "id": "src_main_apikeypath",
-      "label": "apiKeyPath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "state",
-      "file_type": "code",
-      "norm_label": "apikeypath()",
-      "source_file": "src/main.ts",
-      "source_location": "L72"
-    },
-    {
-      "id": "src_main_diagnosticdata",
-      "label": "diagnosticData()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "state",
-      "file_type": "code",
-      "norm_label": "diagnosticdata()",
-      "source_file": "src/main.ts",
-      "source_location": "L305"
     },
     {
       "id": "src_main_engineready",
@@ -2139,30 +2139,6 @@
       "source_location": "L69"
     },
     {
-      "id": "scripts_smoke_ui_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L20"
-    },
-    {
-      "id": "src_preload_invoke",
-      "label": "invoke()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "invoke()",
-      "source_file": "src/preload.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "tests_network_test_sendrawrequest",
       "label": "sendRawRequest()",
       "_callable": true,
@@ -2192,7 +2168,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "run()",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -2208,7 +2184,7 @@
       "file_type": "code",
       "norm_label": "buildreport()",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L44"
+      "source_location": "L46"
     },
     {
       "id": "src_diagnostics_createlogbuffer",
@@ -2244,7 +2220,7 @@
       "file_type": "code",
       "norm_label": "gib()",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L40"
+      "source_location": "L42"
     },
     {
       "id": "src_diagnostics_redact",
@@ -2268,7 +2244,7 @@
       "file_type": "code",
       "norm_label": "yes()",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L41"
+      "source_location": "L43"
     },
     {
       "id": "src_hardware_detectgpu",
@@ -2437,54 +2413,6 @@
       "norm_label": "trusted()",
       "source_file": "src/share_proxy.ts",
       "source_location": "L11"
-    },
-    {
-      "id": "src_core_detecthardware",
-      "label": "detectHardware()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 191,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "detecthardware()",
-      "source_file": "src/core.ts",
-      "source_location": "L53"
-    },
-    {
-      "id": "src_main_availablemodeldiskbytes",
-      "label": "availableModelDiskBytes()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 191,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "availablemodeldiskbytes()",
-      "source_file": "src/main.ts",
-      "source_location": "L75"
-    },
-    {
-      "id": "src_main_gpudetails",
-      "label": "gpuDetails()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 191,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "gpudetails()",
-      "source_file": "src/main.ts",
-      "source_location": "L76"
-    },
-    {
-      "id": "src_main_modelguidance",
-      "label": "modelGuidance()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 191,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "modelguidance()",
-      "source_file": "src/main.ts",
-      "source_location": "L77"
     },
     {
       "id": "src_main_addressinrange",
@@ -2679,28 +2607,100 @@
       "source_location": "L10"
     },
     {
-      "id": "src_engines_stopcommand",
-      "label": "stopCommand()",
+      "id": "src_engines_dockerstatus",
+      "label": "dockerStatus()",
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "stopCommand",
+      "community_name": "ref_node_os",
       "file_type": "code",
-      "norm_label": "stopcommand()",
+      "norm_label": "dockerstatus()",
       "source_file": "src/engines.ts",
-      "source_location": "L203"
+      "source_location": "L90"
     },
     {
-      "id": "src_main_stopcontainer",
-      "label": "stopContainer()",
+      "id": "src_engines_probe",
+      "label": "probe()",
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "stopCommand",
+      "community_name": "ref_node_os",
       "file_type": "code",
-      "norm_label": "stopcontainer()",
+      "norm_label": "probe()",
+      "source_file": "src/engines.ts",
+      "source_location": "L81"
+    },
+    {
+      "id": "src_engines_vllmmode",
+      "label": "vllmMode()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "file_type": "code",
+      "norm_label": "vllmmode()",
+      "source_file": "src/engines.ts",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_main_apikeypath",
+      "label": "apiKeyPath()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "file_type": "code",
+      "norm_label": "apikeypath()",
       "source_file": "src/main.ts",
-      "source_location": "L248"
+      "source_location": "L72"
+    },
+    {
+      "id": "src_main_diagnosticdata",
+      "label": "diagnosticData()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "file_type": "code",
+      "norm_label": "diagnosticdata()",
+      "source_file": "src/main.ts",
+      "source_location": "L307"
+    },
+    {
+      "id": "src_main_refreshdocker",
+      "label": "refreshDocker()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "file_type": "code",
+      "norm_label": "refreshdocker()",
+      "source_file": "src/main.ts",
+      "source_location": "L67"
+    },
+    {
+      "id": "src_network_accessoptions",
+      "label": "accessOptions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "file_type": "code",
+      "norm_label": "accessoptions()",
+      "source_file": "src/network.ts",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_network_scopeof",
+      "label": "scopeOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "file_type": "code",
+      "norm_label": "scopeof()",
+      "source_file": "src/network.ts",
+      "source_location": "L8"
     },
     {
       "id": "scripts_smoke_external_cli_linux_main",
@@ -2713,6 +2713,30 @@
       "norm_label": "main()",
       "source_file": "scripts/smoke-external-cli-linux.js",
       "source_location": "L10"
+    },
+    {
+      "id": "tests_client_commands_test_checkinert",
+      "label": "checkInert()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "file_type": "code",
+      "norm_label": "checkinert()",
+      "source_file": "tests/client_commands.test.js",
+      "source_location": "L86"
+    },
+    {
+      "id": "tests_client_commands_test_runshell",
+      "label": "runShell()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "file_type": "code",
+      "norm_label": "runshell()",
+      "source_file": "tests/client_commands.test.js",
+      "source_location": "L80"
     },
     {
       "id": "tests_hardware_test_runnerfor",
@@ -2756,7 +2780,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "checkreleaseref()",
       "source_file": "scripts/check-version.js",
@@ -2768,7 +2792,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "checkversions()",
       "source_file": "scripts/check-version.js",
@@ -2780,7 +2804,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "issemver()",
       "source_file": "scripts/check-version.js",
@@ -2844,7 +2868,7 @@
       "file_type": "code",
       "norm_label": "clientcommand()",
       "source_file": "src/client_commands.ts",
-      "source_location": "L70"
+      "source_location": "L72"
     },
     {
       "id": "src_client_commands_clientconfiguration",
@@ -2856,7 +2880,7 @@
       "file_type": "code",
       "norm_label": "clientconfiguration()",
       "source_file": "src/client_commands.ts",
-      "source_location": "L55"
+      "source_location": "L57"
     },
     {
       "id": "src_client_commands_modelidof",
@@ -2868,7 +2892,7 @@
       "file_type": "code",
       "norm_label": "modelidof()",
       "source_file": "src/client_commands.ts",
-      "source_location": "L7"
+      "source_location": "L9"
     },
     {
       "id": "src_client_commands_opencodecommand",
@@ -2880,7 +2904,7 @@
       "file_type": "code",
       "norm_label": "opencodecommand()",
       "source_file": "src/client_commands.ts",
-      "source_location": "L12"
+      "source_location": "L14"
     },
     {
       "id": "src_client_commands_psquote",
@@ -2892,7 +2916,7 @@
       "file_type": "code",
       "norm_label": "psquote()",
       "source_file": "src/client_commands.ts",
-      "source_location": "L4"
+      "source_location": "L5"
     },
     {
       "id": "src_core_hfdisplayname",
@@ -3216,7 +3240,7 @@
       "file_type": "code",
       "norm_label": "blocks()",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L85"
+      "source_location": "L86"
     },
     {
       "id": "scripts_build_manual_pdfs_build",
@@ -3228,7 +3252,7 @@
       "file_type": "code",
       "norm_label": "build()",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L157"
+      "source_location": "L158"
     },
     {
       "id": "scripts_build_manual_pdfs_inline",
@@ -3252,7 +3276,7 @@
       "file_type": "code",
       "norm_label": "page_frame()",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L140"
+      "source_location": "L141"
     },
     {
       "id": "scripts_build_manual_pdfs_table_block",
@@ -3574,6 +3598,116 @@
       "norm_label": "temporary",
       "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L9"
+    },
+    {
+      "id": "scripts_smoke_ui",
+      "label": "smoke-ui.js",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "smoke-ui.js",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_ui_app_browserwindow",
+      "label": "{app,BrowserWindow}",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "{app,browserwindow}",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_ui_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_ui_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_ui_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_ui_temporary",
+      "label": "temporary",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_ui_withmodel",
+      "label": "withModel",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "withmodel",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_preload",
+      "label": "preload.ts",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "preload.ts",
+      "source_file": "src/preload.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_preload_contextbridge_ipcrenderer",
+      "label": "{contextBridge,ipcRenderer}",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "{contextbridge,ipcrenderer}",
+      "source_file": "src/preload.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "ref_electron",
+      "label": "electron",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "concept",
+      "norm_label": "electron",
+      "source_file": "package.json",
+      "source_location": "L30"
     },
     {
       "id": "src_engine",
@@ -5230,7 +5364,7 @@
       "node_kind": "heading",
       "norm_label": "10. app messages",
       "source_file": "docs/DIAGNOSTICS-en.md",
-      "source_location": "L147"
+      "source_location": "L148"
     },
     {
       "id": "docs_diagnostics_en_11_before_opening_an_issue",
@@ -5242,7 +5376,7 @@
       "node_kind": "heading",
       "norm_label": "11. before opening an issue",
       "source_file": "docs/DIAGNOSTICS-en.md",
-      "source_location": "L164"
+      "source_location": "L165"
     },
     {
       "id": "docs_diagnostics_en_1_where_to_start",
@@ -5338,7 +5472,7 @@
       "node_kind": "heading",
       "norm_label": "9. updates",
       "source_file": "docs/DIAGNOSTICS-en.md",
-      "source_location": "L138"
+      "source_location": "L139"
     },
     {
       "id": "docs_diagnostics_en_diagnostics_guide_llama_desktop_launcher",
@@ -5582,121 +5716,11 @@
       "source_location": "L30"
     },
     {
-      "id": "scripts_smoke_ui",
-      "label": "smoke-ui.js",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "smoke-ui.js",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_ui_app_browserwindow",
-      "label": "{app,BrowserWindow}",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "{app,browserwindow}",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_ui_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_ui_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_ui_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_ui_temporary",
-      "label": "temporary",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_ui_withmodel",
-      "label": "withModel",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "withmodel",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_preload",
-      "label": "preload.ts",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "preload.ts",
-      "source_file": "src/preload.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_preload_contextbridge_ipcrenderer",
-      "label": "{contextBridge,ipcRenderer}",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "{contextbridge,ipcrenderer}",
-      "source_file": "src/preload.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "ref_electron",
-      "label": "electron",
-      "_origin": "ast",
-      "community": 153,
-      "community_name": "smoke-ui.js",
-      "file_type": "concept",
-      "norm_label": "electron",
-      "source_file": "package.json",
-      "source_location": "L30"
-    },
-    {
       "id": "scripts_build",
       "label": "build.js",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "build.js",
       "source_file": "scripts/build.js",
@@ -5707,7 +5731,7 @@
       "label": "compiler",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "compiler",
       "source_file": "scripts/build.js",
@@ -5718,7 +5742,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/build.js",
@@ -5729,7 +5753,7 @@
       "label": "output",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "output",
       "source_file": "scripts/build.js",
@@ -5740,7 +5764,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/build.js",
@@ -5751,7 +5775,7 @@
       "label": "renderer",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "renderer",
       "source_file": "scripts/build.js",
@@ -5762,7 +5786,7 @@
       "label": "result",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "result",
       "source_file": "scripts/build.js",
@@ -5773,7 +5797,7 @@
       "label": "root",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "root",
       "source_file": "scripts/build.js",
@@ -5784,7 +5808,7 @@
       "label": "{ spawnSync }",
       "_origin": "ast",
       "community": 154,
-      "community_name": "ref_node_child_process",
+      "community_name": "build.js",
       "file_type": "code",
       "norm_label": "{ spawnsync }",
       "source_file": "scripts/build.js",
@@ -6202,7 +6226,7 @@
       "label": "smoke-macos-dmg.js",
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "smoke-macos-dmg.js",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -6213,7 +6237,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -6224,7 +6248,7 @@
       "label": "mountpoint",
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "mountpoint",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -6235,7 +6259,7 @@
       "label": "os",
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "os",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -6246,7 +6270,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -6257,7 +6281,7 @@
       "label": "{ spawnSync }",
       "_origin": "ast",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "{ spawnsync }",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -7686,7 +7710,7 @@
       "node_kind": "heading",
       "norm_label": "10. quick check",
       "source_file": "docs/INTEGRATION-en.md",
-      "source_location": "L238"
+      "source_location": "L246"
     },
     {
       "id": "docs_integration_en_1_overview",
@@ -7818,7 +7842,7 @@
       "node_kind": "heading",
       "norm_label": "linux",
       "source_file": "docs/INTEGRATION-en.md",
-      "source_location": "L223"
+      "source_location": "L231"
     },
     {
       "id": "docs_integration_en_linux_macos_with_bash_and_curl",
@@ -7842,7 +7866,7 @@
       "node_kind": "heading",
       "norm_label": "macos",
       "source_file": "docs/INTEGRATION-en.md",
-      "source_location": "L234"
+      "source_location": "L242"
     },
     {
       "id": "docs_integration_en_permanent_api_key",
@@ -8442,7 +8466,7 @@
       "node_kind": "heading",
       "norm_label": "10. verificacao rapida",
       "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L236"
+      "source_location": "L244"
     },
     {
       "id": "docs_integration_pt_br_1_vis\u00e3o_geral",
@@ -8598,7 +8622,7 @@
       "node_kind": "heading",
       "norm_label": "linux",
       "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L221"
+      "source_location": "L229"
     },
     {
       "id": "docs_integration_pt_br_linux_macos_com_bash_e_curl",
@@ -8622,7 +8646,7 @@
       "node_kind": "heading",
       "norm_label": "macos",
       "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L232"
+      "source_location": "L240"
     },
     {
       "id": "docs_integration_pt_br_python_biblioteca_padr\u00e3o",
@@ -8898,7 +8922,7 @@
       "node_kind": "heading",
       "norm_label": "10. mensagens do aplicativo",
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L145"
+      "source_location": "L146"
     },
     {
       "id": "docs_diagnostics_pt_br_11_antes_de_abrir_uma_issue",
@@ -8910,7 +8934,7 @@
       "node_kind": "heading",
       "norm_label": "11. antes de abrir uma issue",
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L162"
+      "source_location": "L163"
     },
     {
       "id": "docs_diagnostics_pt_br_1_por_onde_come\u00e7ar",
@@ -9018,7 +9042,7 @@
       "node_kind": "heading",
       "norm_label": "9. atualizacoes",
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L136"
+      "source_location": "L137"
     },
     {
       "id": "docs_diagnostics_pt_br_guia_de_diagn\u00f3stico_llama_desktop_launcher",
@@ -9662,7 +9686,7 @@
       "label": "check-version.js",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "check-version.js",
       "source_file": "scripts/check-version.js",
@@ -9673,7 +9697,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/check-version.js",
@@ -9684,7 +9708,7 @@
       "label": "lock",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "lock",
       "source_file": "scripts/check-version.js",
@@ -9695,7 +9719,7 @@
       "label": "manifest",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "manifest",
       "source_file": "scripts/check-version.js",
@@ -9706,7 +9730,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/check-version.js",
@@ -9717,7 +9741,7 @@
       "label": "root",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "root",
       "source_file": "scripts/check-version.js",
@@ -9728,7 +9752,7 @@
       "label": "semver.test.js",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "semver.test.js",
       "source_file": "tests/semver.test.js",
@@ -9739,7 +9763,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/semver.test.js",
@@ -9750,7 +9774,7 @@
       "label": "{ isSemVer, checkVersions, checkReleaseRef }",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{ issemver, checkversions, checkreleaseref }",
       "source_file": "tests/semver.test.js",
@@ -9761,7 +9785,7 @@
       "label": "test",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/semver.test.js",
@@ -10845,7 +10869,7 @@
       "file_type": "code",
       "norm_label": "applications",
       "source_file": "src/client_commands.ts",
-      "source_location": "L45"
+      "source_location": "L47"
     },
     {
       "id": "src_core",
@@ -11650,6 +11674,90 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_buildfirewallscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_buildfirewallscript",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_buildfirewallscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrule",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrule",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrule",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrules",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrules",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrules",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_max",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_max",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_max",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_min",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_min",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_min",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateremoteaddress",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateremoteaddress",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateremoteaddress",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateruleoptions",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateruleoptions",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateruleoptions",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
       "_origin": "semantic",
@@ -12130,6 +12238,162 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_benchmark_tune",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_benchmark_tune",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_benchmark_tune",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_defaults",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_defaults",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_defaults",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_recommend",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_recommend",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_recommend",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_scanmodels",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_scanmodels",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_scanmodels",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_validatesettings",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_validatesettings",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_validatesettings",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_engine_assetfor",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_engine_assetfor",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_engine_assetfor",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_diagnostics",
+      "label": "build_app_diagnostics",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_diagnostics",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_buildreport",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_buildreport",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_buildreport",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_createlogbuffer",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_createlogbuffer",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_createlogbuffer",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redact",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redact",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redact",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redacted",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redacted",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redacted",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_assert",
       "label": "ref_node_assert",
       "_origin": "semantic",
@@ -12150,30 +12414,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_test",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_os",
-      "label": "ref_node_os",
-      "_origin": "semantic",
-      "community": 15,
-      "community_name": "network.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_os",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_child_process",
-      "label": "ref_node_child_process",
-      "_origin": "semantic",
-      "community": 154,
-      "community_name": "ref_node_child_process",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_child_process",
       "source_file": "",
       "type": "external"
     },
@@ -12514,6 +12754,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_createproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_createproxy",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_createproxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_upstreamrequestdetails",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_upstreamrequestdetails",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_upstreamrequestdetails",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "_origin": "semantic",
@@ -12598,14 +12862,14 @@
       "type": "external"
     },
     {
-      "id": "ref_node_path",
-      "label": "ref_node_path",
+      "id": "ref_node_child_process",
+      "label": "ref_node_child_process",
       "_origin": "semantic",
       "community": 187,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_child_process",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_path",
+      "norm_label": "ref_node_child_process",
       "source_file": "",
       "type": "external"
     },
@@ -12714,6 +12978,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_share_proxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_share_proxy_createshareproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_share_proxy_createshareproxy",
+      "_origin": "semantic",
+      "community": 20,
+      "community_name": "share_proxy.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_share_proxy_createshareproxy",
       "source_file": "",
       "type": "external"
     },
@@ -13018,6 +13294,42 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_posixscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_posixscript",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_posixscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_terminal_cli",
       "label": "build_app_terminal_cli",
       "_origin": "semantic",
@@ -13026,6 +13338,30 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_terminal_cli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_powershellscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_powershellscript",
+      "_origin": "semantic",
+      "community": 28,
+      "community_name": "smoke-external-cli-win.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_powershellscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_os",
+      "label": "ref_node_os",
+      "_origin": "semantic",
+      "community": 29,
+      "community_name": "ref_node_os",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_os",
       "source_file": "",
       "type": "external"
     },
@@ -13042,6 +13378,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_openexternalcli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_openexternalcli",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_openexternalcli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_client_commands",
       "label": "build_app_client_commands",
       "_origin": "semantic",
@@ -13050,6 +13410,42 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_client_commands",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientconfiguration",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientconfiguration",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientconfiguration",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
       "source_file": "",
       "type": "external"
     },
@@ -13066,6 +13462,66 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_buildguidance",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_buildguidance",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_buildguidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_engineadvice",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_engineadvice",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_engineadvice",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_enginelinks",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_enginelinks",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_enginelinks",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_gpuvendor",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_gpuvendor",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_gpuvendor",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_hardware",
       "label": "build_app_hardware",
       "_origin": "semantic",
@@ -13078,6 +13534,18 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_hardware_detectgpu",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_hardware_detectgpu",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "hardware.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_hardware_detectgpu",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_profile_import",
       "label": "build_app_profile_import",
       "_origin": "semantic",
@@ -13086,6 +13554,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_profile_import",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_profile_import_parselegacyprofiles",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_profile_import_parselegacyprofiles",
+      "_origin": "semantic",
+      "community": 36,
+      "community_name": "profile_import.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_profile_import_parselegacyprofiles",
       "source_file": "",
       "type": "external"
     },
@@ -13110,6 +13590,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_stream",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_path",
+      "label": "ref_node_path",
+      "_origin": "semantic",
+      "community": 41,
+      "community_name": "ref_node_path",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_path",
       "source_file": "",
       "type": "external"
     },
@@ -13748,435 +14240,6 @@
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
       "source_file": "",
       "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_buildfirewallscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_buildfirewallscript",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_buildfirewallscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrule",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrule",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrule",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrules",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrules",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_createrules",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_max",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_max",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_max",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_min",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_min",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_port_min",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateremoteaddress",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateremoteaddress",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateremoteaddress",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateruleoptions",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateruleoptions",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_firewall_validateruleoptions",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_benchmark_tune",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_benchmark_tune",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_benchmark_tune",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_defaults",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_defaults",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_defaults",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_recommend",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_recommend",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_recommend",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_scanmodels",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_scanmodels",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_scanmodels",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_validatesettings",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_validatesettings",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_validatesettings",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_engine_assetfor",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_engine_assetfor",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_engine_assetfor",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_diagnostics",
-      "label": "build_app_diagnostics",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_diagnostics",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_buildreport",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_buildreport",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_buildreport",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_createlogbuffer",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_createlogbuffer",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_createlogbuffer",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redact",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redact",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redact",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redacted",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redacted",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_diagnostics_redacted",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_createproxy",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_createproxy",
-      "community": 18,
-      "community_name": "network.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_createproxy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_upstreamrequestdetails",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_upstreamrequestdetails",
-      "community": 18,
-      "community_name": "network.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_network_upstreamrequestdetails",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_share_proxy_createshareproxy",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_share_proxy_createshareproxy",
-      "community": 20,
-      "community_name": "share_proxy.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_share_proxy_createshareproxy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_posixscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_posixscript",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_posixscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_powershellscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_powershellscript",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_powershellscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_openexternalcli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_openexternalcli",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_openexternalcli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientconfiguration",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientconfiguration",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientconfiguration",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_buildguidance",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_buildguidance",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_buildguidance",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_engineadvice",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_engineadvice",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_engineadvice",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_enginelinks",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_enginelinks",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_enginelinks",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_gpuvendor",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_gpuvendor",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_gpuvendor",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_hardware_detectgpu",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_hardware_detectgpu",
-      "community": 35,
-      "community_name": "hardware.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_hardware_detectgpu",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_profile_import_parselegacyprofiles",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_profile_import_parselegacyprofiles",
-      "community": 36,
-      "community_name": "profile_import.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_profile_import_parselegacyprofiles",
-      "source_file": "",
-      "type": "external"
     }
   ],
   "links": [
@@ -14189,7 +14252,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L108",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -14201,7 +14264,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L113",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -14213,7 +14276,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L164",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -14225,7 +14288,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L165",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -14237,7 +14300,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L68",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -14453,24 +14516,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L72",
-      "weight": 1.0
-    },
-    {
-      "source": "src_client_commands_clientcommand",
-      "target": "src_client_commands_modelidof",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/client_commands.ts",
       "source_location": "L74",
       "weight": 1.0
     },
     {
       "source": "src_client_commands_clientcommand",
-      "target": "src_client_commands_bashquote",
+      "target": "src_client_commands_modelidof",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -14482,6 +14533,18 @@
     },
     {
       "source": "src_client_commands_clientcommand",
+      "target": "src_client_commands_bashquote",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "src_client_commands_clientcommand",
       "target": "src_client_commands_psquote",
       "relation": "calls",
       "_origin": "ast",
@@ -14489,7 +14552,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L79",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -14501,7 +14564,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L58",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -14513,7 +14576,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L61",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -14525,7 +14588,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L19",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -14537,7 +14600,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -14549,7 +14612,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/client_commands.ts",
-      "source_location": "L34",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -14609,7 +14672,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L101",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -14621,7 +14684,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L55",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -14633,7 +14696,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L66",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -14645,7 +14708,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L35",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -15437,7 +15500,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L306",
+      "source_location": "L308",
       "weight": 1.0
     },
     {
@@ -15449,7 +15512,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L308",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -15461,7 +15524,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L314",
+      "source_location": "L316",
       "weight": 1.0
     },
     {
@@ -15473,7 +15536,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L317",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -15485,7 +15548,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L320",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -15845,7 +15908,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L250",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -16589,7 +16652,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L248",
+      "source_location": "L250",
       "weight": 1.0
     },
     {
@@ -16601,7 +16664,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L305",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -17070,6 +17133,30 @@
       "context": "call",
       "source_file": "src/share_proxy.ts",
       "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_client_commands_test",
+      "target": "tests_client_commands_test_runshell",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/client_commands.test.js",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_client_commands_test",
+      "target": "tests_client_commands_test_checkinert",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/client_commands.test.js",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -17555,6 +17642,18 @@
     },
     {
       "source": "tests_client_commands_test",
+      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/client_commands.test.js",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_client_commands_test",
       "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_opencodecommand",
       "relation": "imports",
       "_origin": "ast",
@@ -17563,18 +17662,6 @@
       "context": "import",
       "source_file": "tests/client_commands.test.js",
       "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "tests_client_commands_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_client_commands_clientcommand",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "tests/client_commands.test.js",
-      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -19751,6 +19838,18 @@
     },
     {
       "source": "tests_client_commands_test",
+      "target": "build_app_client_commands",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/client_commands.test.js",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_client_commands_test",
       "target": "ref_node_assert",
       "relation": "imports_from",
       "_origin": "ast",
@@ -19771,18 +19870,6 @@
       "context": "import",
       "source_file": "tests/client_commands.test.js",
       "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "tests_client_commands_test",
-      "target": "build_app_client_commands",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "tests/client_commands.test.js",
-      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -20227,6 +20314,30 @@
       "context": "import",
       "source_file": "tests/firewall.test.js",
       "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_firewall_test",
+      "target": "ref_node_fs",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/firewall.test.js",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_firewall_test",
+      "target": "ref_node_path",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/firewall.test.js",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -22207,7 +22318,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/DIAGNOSTICS-en.md",
-      "source_location": "L138",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -22218,7 +22329,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/DIAGNOSTICS-en.md",
-      "source_location": "L147",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -22229,7 +22340,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/DIAGNOSTICS-en.md",
-      "source_location": "L164",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -22372,7 +22483,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L136",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -22383,7 +22494,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L145",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -22405,7 +22516,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L162",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -22559,7 +22670,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/INTEGRATION-en.md",
-      "source_location": "L223",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -22570,7 +22681,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/INTEGRATION-en.md",
-      "source_location": "L234",
+      "source_location": "L242",
       "weight": 1.0
     },
     {
@@ -22625,7 +22736,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/INTEGRATION-en.md",
-      "source_location": "L238",
+      "source_location": "L246",
       "weight": 1.0
     },
     {
@@ -22779,7 +22890,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L221",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
@@ -22790,7 +22901,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L232",
+      "source_location": "L240",
       "weight": 1.0
     },
     {
@@ -22845,7 +22956,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L236",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -24396,7 +24507,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L140",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -24407,7 +24518,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L157",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -24440,7 +24551,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/build_manual_pdfs.py",
-      "source_location": "L85",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -25732,24 +25843,24 @@
     },
     {
       "source": "src_client_commands",
-      "target": "src_client_commands_psquote",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/client_commands.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_client_commands",
       "target": "src_client_commands_applications",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/client_commands.ts",
-      "source_location": "L45",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_client_commands",
+      "target": "src_client_commands_psquote",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/client_commands.ts",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -25837,7 +25948,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/diagnostics.ts",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -25848,7 +25959,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/diagnostics.ts",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -29416,7 +29527,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/client_commands.ts",
-      "source_location": "L84",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -29428,7 +29539,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/client_commands.ts",
-      "source_location": "L84",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -29440,7 +29551,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/client_commands.ts",
-      "source_location": "L84",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -29452,7 +29563,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/client_commands.ts",
-      "source_location": "L84",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -29560,7 +29671,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L104",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -29572,7 +29683,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L104",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -29584,7 +29695,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/diagnostics.ts",
-      "source_location": "L104",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -30369,5 +30480,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "066964e505ded46fea6f9f73c94271ec60bf0365"
+  "built_at_commit": "4ca1f801ee81b19474ef1526af4814414acbfba3"
 }

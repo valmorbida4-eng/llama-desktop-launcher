@@ -211,7 +211,15 @@ The launcher does not touch the firewall when it starts the server. With the ser
 | Strata / PolyStrata | The base `python.exe` of the `.venv` environment (read from `pyvenv.cfg`) |
 | vLLM (Docker) | None: Docker Desktop publishes the port, and the rule must be created manually |
 
-The shared port is allowed for the launcher executable. If the port changes, create another rule. Rules are named `LlamaDesktopLauncher-…` and appear in **Windows Defender Firewall with Advanced Security**, where you can delete them.
+The shared port is allowed for the launcher executable. If the port changes, create another rule.
+
+**Rules stay in Windows after the server stops.** The launcher does not remove them, because that would need another administrator prompt on every stop. For llama.cpp, the rule only covers the `llama-server.exe` in that folder. For **Strata/PolyStrata**, however, the executable is the system-wide base `python.exe`, shared by every Python program on this machine. While the rule exists, any Python script listening on that port is reachable from the given range. Remove the rules when you no longer need them.
+
+Rules are named `LlamaDesktopLauncher-…` and appear in **Windows Defender Firewall with Advanced Security** (`wf.msc`), where you can delete them. To remove all of them at once, use an administrator PowerShell:
+
+```powershell
+Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' | Remove-NetFirewallRule
+```
 
 For vLLM in Docker, Docker Desktop usually creates its own inbound rule during installation. If clients cannot connect, create a rule for the displayed port, limited to the range, in an administrator PowerShell:
 

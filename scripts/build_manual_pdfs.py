@@ -61,7 +61,8 @@ def inline(text: str) -> str:
 def table_block(lines: list[str], width: float) -> Table:
     rows = []
     for line in lines:
-        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        # Como no GitHub, "\|" dentro de uma célula é uma barra literal, não um separador.
+        cells = [cell.strip().replace("\\|", "|") for cell in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
         if all(re.fullmatch(r":?-{2,}:?", cell) for cell in cells):
             continue
         style = STYLES["small"]

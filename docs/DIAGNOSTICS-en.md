@@ -133,7 +133,8 @@ vLLM can take several minutes on the first load. The launcher waits up to 30 min
 | “A faixa de clientes precisa conter o endereço da rede selecionada.” | Use a range that includes the server IP, such as `192.168.1.0/24` for `192.168.1.5`. |
 | “O endereço remoto deve ficar dentro de uma rede LAN privada ou Tailscale.” | The rule only accepts `10/8`, `172.16/12`, `192.168/16` or `100.64/10`. |
 | The firewall rule is not created | The administrator prompt was denied or closed. Click again and accept. |
-| “ID de modelo inválido.” when copying | The Strata `model_name` has spaces or symbols. Use a name with letters, digits, `.`, `-`, `_`, `:` or `/`. |
+| Old rules are still open | `LlamaDesktopLauncher-…` rules stay in Windows after the server stops. For Strata/PolyStrata they allow the system-wide `python.exe`, used by every Python program. Remove them in `wf.msc` or, in an administrator PowerShell, with `Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' \| Remove-NetFirewallRule`. |
+| “ID de modelo inválido.” when copying | The Strata `model_name` is empty, longer than 128 characters, starts with `-` or contains a line break or another control character. Spaces and symbols are accepted. Fix the name in the `strata-*.json` config. |
 
 ## 9. Updates
 

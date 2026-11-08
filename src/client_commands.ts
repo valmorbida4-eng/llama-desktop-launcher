@@ -1,12 +1,14 @@
 'use strict';
 const {apiModelId}=require('./core');
 const bashQuote=value=>"'"+String(value).replace(/'/g,"'\\''")+"'";
-const psQuote=value=>"'"+String(value).replace(/'/g,"''")+"'";
+// O PowerShell também trata as aspas curvas ‘ ’ ‚ ‛ como aspas simples; todas são dobradas.
+const psQuote=value=>"'"+String(value).replace(/['‘’‚‛]/g,match=>match+match)+"'";
 // O ID publicado depende do motor: llama.cpp e vLLM usam o alias fixo; Strata/PolyStrata usam o
-// model_name da configuração. Ele entra em comandos de shell, então só aceitamos caracteres seguros.
+// model_name da configuração. Todo uso em shell passa por bashQuote/psQuote e toda configuração por
+// JSON/YAML com aspas; aqui só recusamos o que nenhuma citação resolve: controle, vazio, longo ou "-".
 function modelIdOf(connection){
   const id=connection?.modelId===undefined||connection?.modelId===null||connection?.modelId===''?apiModelId:connection.modelId;
-  if(typeof id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9._:\/-]{0,127}$/.test(id))throw Error('ID de modelo inválido.');
+  if(typeof id!=='string'||!id.length||id.length>128||/[\u0000-\u001f\u007f]/.test(id)||id.startsWith('-'))throw Error('ID de modelo inválido.');
   return id;
 }
 function openCodeCommand(connection, platform, accessKey: string|null=null){

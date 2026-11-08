@@ -31,8 +31,10 @@ function redact(input,{secrets=[],home=''}: {secrets?: (string|null|undefined)[]
     .replace(/(llama_(?:token|share)=)[^\s;]+/g,`$1${REDACTED}`);
   if(home&&home.length>3) {
     // Troca a pasta pessoal por ~ nas duas grafias de barra; no Windows o caminho não diferencia maiúsculas.
-    const variants=new Set([home,home.replace(/\\/g,'/'),home.replace(/\//g,'\\')]);
-    for(const variant of variants) text=text.replace(new RegExp(escapeRegExp(variant),'gi'),'~');
+    // Só quando o nome termina ali: com home /home/ana, /home/anabela fica como está.
+    const base=home.replace(/[\\/]+$/,'');
+    const variants=new Set([base,base.replace(/\\/g,'/'),base.replace(/\//g,'\\')]);
+    for(const variant of variants) text=text.replace(new RegExp(escapeRegExp(variant)+'(?=[\\\\/]|$|[\\s"\'`,;:)\\]}])','gim'),'~');
   }
   return text;
 }

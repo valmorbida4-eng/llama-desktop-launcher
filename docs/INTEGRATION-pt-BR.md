@@ -209,7 +209,15 @@ O launcher não mexe no firewall ao iniciar o servidor. Com o servidor ativo em 
 | Strata / PolyStrata | O `python.exe` base do ambiente `.venv` (lido de `pyvenv.cfg`) |
 | vLLM (Docker) | Nenhum: a porta é publicada pelo Docker Desktop, e a regra precisa ser manual |
 
-A porta compartilhada é liberada para o executável do launcher. Se a porta mudar, crie outra regra. As regras se chamam `LlamaDesktopLauncher-…` e aparecem no **Windows Defender Firewall com Segurança Avançada**, onde você pode apagá-las.
+A porta compartilhada é liberada para o executável do launcher. Se a porta mudar, crie outra regra.
+
+**As regras continuam no Windows depois que o servidor para.** O launcher não as remove, porque isso exigiria outra autorização de administrador a cada parada. No llama.cpp, a regra vale só para o `llama-server.exe` daquela pasta. No **Strata/PolyStrata**, porém, o executável é o `python.exe` base instalado no sistema, que todos os programas Python desta máquina usam. Enquanto a regra existir, qualquer script Python que escute naquela porta fica acessível para a faixa indicada. Remova as regras quando não precisar mais delas.
+
+As regras se chamam `LlamaDesktopLauncher-…` e aparecem no **Windows Defender Firewall com Segurança Avançada** (`wf.msc`), onde você pode apagá-las. Para remover todas de uma vez, use um PowerShell como administrador:
+
+```powershell
+Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' | Remove-NetFirewallRule
+```
 
 Para o vLLM no Docker, o Docker Desktop costuma criar a própria regra de entrada na instalação. Se os clientes não conectarem, crie uma regra para a porta mostrada, limitada à faixa, em um PowerShell como administrador:
 

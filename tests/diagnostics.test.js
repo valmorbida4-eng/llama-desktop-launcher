@@ -50,3 +50,11 @@ test('redact troca a pasta pessoal nas duas grafias e ignora segredos curtos',()
  assert.equal(redact('C:/Users/Celio/a e C:\\Users\\Celio\\b',{home:'C:\\Users\\Celio'}),'~/a e ~\\b');
  assert.equal(redact('abc',{secrets:['abc']}),'abc');
 });
+
+test('redact só troca a pasta pessoal inteira, não um prefixo de outro nome',()=>{
+ const home='/home/ana';
+ assert.equal(redact('/home/anabela/models e /home/ana/models',{home}),'/home/anabela/models e ~/models');
+ assert.equal(redact('pasta: /home/ana\nfim /home/ana',{home}),'pasta: ~\nfim ~');
+ assert.equal(redact('"/home/ana" (/home/ana) /home/ana, /home/ana;',{home}),'"~" (~) ~, ~;');
+ assert.equal(redact('C:\\Users\\Ana\\x e C:\\Users\\Anabela\\x',{home:'C:\\Users\\ana\\'}),'~\\x e C:\\Users\\Anabela\\x');
+});

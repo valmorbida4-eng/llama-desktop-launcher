@@ -213,6 +213,8 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
   }
   const child=spawn(command.file,command.args,{cwd:command.cwd,env:{...process.env,...command.env},windowsHide:true,stdio:['ignore','pipe','pipe']});server=child;
   const containerName=command.containerName||null;serverContainer=containerName;
+  // Cada início começa um registro novo: o relatório não mistura a saída de execuções anteriores.
+  engineLog.clear();
   log(`
 [launcher] Iniciando ${info.label} · ${model.name} · ${access.scope} ${access.host}:${port} · sessões ${parallel}
 `);

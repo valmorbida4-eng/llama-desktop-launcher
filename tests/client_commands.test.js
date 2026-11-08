@@ -67,7 +67,47 @@ test('Strata/PolyStrata: comandos e configurações usam o ID publicado pelo mot
  // Sem modelId, continua o alias fixo do llama.cpp e do vLLM.
  assert.match(openCodeCommand({...connection,modelId:null},'bash'),/llama-local\/modelo-local/);
 });
-test('ID de modelo com caracteres de shell é recusado',()=>{
- for(const modelId of ["x'; rm -rf ~","a b","$(id)",'-flag','x'.repeat(200)])
+test('ID de modelo: recusa só controle, vazio, longo demais ou começo com hífen',()=>{
+ for(const modelId of ['-flag','x'.repeat(129),'a\nb','a\u0000b','tab\there','del\u007f'])
   assert.throws(()=>openCodeCommand({...connection,modelId},'bash'),/ID de modelo/);
+ for(const modelId of ['Qwen 3.6 Flash',"it's","$(id)",'x'.repeat(128)])
+  assert.doesNotThrow(()=>openCodeCommand({...connection,modelId},'bash'));
+});
+
+// Roda o comando gerado num shell real com um opencode falso que só devolve a configuração e o
+// argumento --model. Se o ID escapasse das aspas, a saída mudaria ou o shell executaria $(id).
+const hostile="Qwen 3.6 ‘Flash’ it's $(id) `whoami` ; rm -rf ~ \"x\"";
+function runShell(file,args){
+ const result=require('node:child_process').spawnSync(file,args,{encoding:'utf8',timeout:30000,windowsHide:true});
+ if(result.error&&result.error.code==='ENOENT')return null;
+ assert.equal(result.status,0,result.stderr);
+ return result.stdout;
+}
+function checkInert(output){
+ const [config,model]=Buffer.from(output.trim(),'base64').toString('utf8').split('\n');
+ assert.equal(model,'llama-local/'+hostile);
+ const parsed=JSON.parse(config);
+ assert.equal(parsed.model,'llama-local/'+hostile);
+ assert.ok(Object.hasOwn(parsed.provider['llama-local'].models,hostile));
+}
+test('ID com aspas, $(id) e espaços fica inerte no Bash',t=>{
+ const command=openCodeCommand({...connection,scope:'Local',modelId:hostile},'bash');
+ const fake=`opencode(){ printf '%s\\n%s' "$OPENCODE_CONFIG_CONTENT" "$2" | base64 | tr -d '\\n'; }\n`;
+ const output=runShell('bash',['-c',fake+command]);
+ if(output===null){t.skip('bash indisponível');return;}
+ checkInert(output);
+});
+test('ID com aspas, $(id) e espaços fica inerte no PowerShell',t=>{
+ const command=openCodeCommand({...connection,scope:'Local',modelId:hostile},'powershell');
+ const fake="function opencode { [Console]::Out.Write([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($env:OPENCODE_CONFIG_CONTENT + \"`n\" + $args[1]))) }\n";
+ const encoded=Buffer.from(fake+command,'utf16le').toString('base64');
+ let output=null;
+ for(const shell of ['pwsh','powershell.exe']){output=runShell(shell,['-NoProfile','-NonInteractive','-EncodedCommand',encoded]);if(output!==null)break;}
+ if(output===null){t.skip('PowerShell indisponível');return;}
+ checkInert(output);
+});
+test('Aider também cita o ID nos dois shells',()=>{
+ const {clientCommand}=require('../build/app/client_commands');
+ assert.ok(clientCommand({...connection,modelId:"a b'c"},'aider','bash','t'.repeat(43)).includes("aider --model 'openai/a b'\\''c'"));
+ assert.ok(clientCommand({...connection,modelId:"a b'c"},'aider','powershell','t'.repeat(43)).includes("aider --model 'openai/a b''c'"));
 });

@@ -71,3 +71,19 @@ test('Strata/PolyStrata no Windows: aceita o python.exe base e mantém os demais
   // O compartilhamento continua restrito ao executável do launcher.
   assert.throws(() => validateRuleOptions({ ...python, port: 8200, sharing: true }), /compartilhamento só pode liberar o launcher/);
 });
+
+test('o risco do python.exe compartilhado e a remoção das regras estão avisados no app e nos guias', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const root = path.join(__dirname, '..');
+  const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+  const card = read('src/index.html').match(/<section id="firewall-controls"[\s\S]*?<\/section>/)?.[0] || '';
+  assert.match(card, /python\.exe instalado no sistema/);
+  assert.match(card, /continua no Windows depois que o servidor para/);
+  assert.match(read('src/renderer.ts'), /libera o python\.exe do sistema/);
+  for (const guide of ['INTEGRATION-pt-BR', 'INTEGRATION-en', 'DIAGNOSTICS-pt-BR', 'DIAGNOSTICS-en']) {
+    const text = read(`docs/${guide}.md`);
+    assert.match(text, /Get-NetFirewallRule -Name 'LlamaDesktopLauncher-\*' \\?\| Remove-NetFirewallRule/, guide);
+    assert.match(text, /python\.exe/, guide);
+  }
+});
