@@ -6,7 +6,7 @@ Versão 0.5.2 · Português (Brasil)
 
 O Llama Desktop Launcher instala ou localiza o motor [llama.cpp](https://github.com/ggml-org/llama.cpp), encontra modelos locais em formato GGUF e abre a interface do `llama-server` no navegador. Você pode escolher acesso somente local, LAN ou Tailscale. Ao escolher a rede, a API exige uma chave. Os dados trocados com outros computadores trafegam pela rede escolhida.
 
-O instalador do aplicativo **não inclui modelos**. O motor oficial também é baixado na primeira execução, ou você pode indicar uma instalação já existente. A versão do motor testada é `b11514`.
+O instalador do aplicativo **não inclui modelos**. O motor oficial também é baixado na primeira execução, ou você pode indicar uma instalação já existente. A versão do motor testada é `b12110`.
 
 A interface tem três telas: **Llama**, para conversar e iniciar o servidor; **Modelos**, para encontrar GGUF e consultar recomendações; e **Configurações**, para preparar o motor, as pastas e os perfis. A navegação para Configurações permanece disponível em todas as telas.
 
@@ -65,12 +65,23 @@ No primeiro início, a tela **Configurações** abre automaticamente quando o mo
 
 Na seção **Motor llama.cpp**, escolha uma das opções:
 
-1. **Baixar motor oficial:** escolha o **Backend do pacote oficial** antes de clicar no botão. O aplicativo acessa a release `b11514` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote da plataforma e do backend escolhidos. No Windows/Linux, as opções exibidas dependem da arquitetura e incluem Vulkan, NVIDIA CUDA, CPU e, em x64, AMD ROCm e Intel SYCL. No macOS, usa Metal. CUDA baixa também as bibliotecas oficiais correspondentes. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
+1. **Baixar motor oficial:** escolha o **Backend do pacote oficial** antes de clicar no botão. O aplicativo acessa a release `b12110` do projeto `ggml-org/llama.cpp` no GitHub e baixa o pacote da plataforma e do backend escolhidos. No Windows/Linux, as opções exibidas dependem da arquitetura e incluem Vulkan, NVIDIA CUDA, CPU e, em x64, AMD ROCm e Intel SYCL. No macOS, usa Metal. CUDA baixa também as bibliotecas oficiais correspondentes. O motor é guardado na pasta de dados do seu usuário, fora da instalação do aplicativo.
 2. **Escolher pasta existente:** a pasta selecionada precisa conter `llama-server` (ou `llama-server.exe`). Use esta opção para aproveitar uma instalação já preparada, como a pasta `b11193-vulkan` do launcher Windows anterior.
 
 O download requer internet. Escolha pelo tipo de GPU, independentemente da marca da CPU: Vulkan funciona com GPUs compatíveis de AMD, Intel ou NVIDIA; CUDA é para NVIDIA, ROCm para AMD e SYCL para Intel. Para uma RTX 4060 no Windows x64, comece por **NVIDIA CUDA 12.4** e mantenha o driver NVIDIA atualizado. ROCm e SYCL podem exigir runtimes e drivers adicionais. Se a release não tiver pacote para a arquitetura detectada, selecione um runtime compilado por você. O aplicativo verifica o SHA-256 quando a API da release fornece o digest. Se você já escolheu um motor e quiser substituí-lo, use **Escolher pasta existente** ou baixe novamente o pacote oficial na mesma tela.
 
 Se você usa o launcher Windows anterior, selecione primeiro a pasta que contém seus GGUF. Em **Configurações > Perfis do launcher anterior**, clique em **Importar perfis TSV** e escolha `launcher-profiles.tsv` da pasta do launcher antigo. A importação associa perfis pelo caminho completo do modelo; se você moveu os GGUF, selecione a pasta antiga ou ajuste os perfis manualmente. Perfis já salvos no aplicativo não são sobrescritos. O resultado mostra quantos perfis foram importados, não localizados, já existentes ou inválidos.
+
+### Outros motores: vLLM, Strata e PolyStrata
+
+A partir da versão 0.6.0, o cartão **Outros motores** em **Configurações** prepara dois motores além do llama.cpp. Cada modelo da lista usa o motor do seu formato, e o perfil salvo guarda esse motor. Benchmark, sugestão de ajustes, conversa integrada e CLI no terminal continuam só para GGUF no llama.cpp.
+
+- **vLLM 0.32.0:** usa pastas Hugging Face com `config.json` e pesos `.safetensors` (incluindo AWQ e GPTQ) colocadas nas pastas de modelos. Elas aparecem na lista com o sufixo `· vLLM`. Pastas do cache do Hugging Face (`models--org--nome/snapshots/<hash>`, com pesos em links simbólicos) também são reconhecidas; no Docker, o launcher monta a raiz `models--org--nome` para os links continuarem válidos.
+  - **Linux** (GPU NVIDIA com CUDA): **Instalar vLLM** cria um ambiente Python na pasta de dados do aplicativo e roda `pip install vllm==0.32.0`. São necessários `python3` e `python3-venv` (Python 3.10 a 3.13) e alguns GB de download. **Usar ambiente existente** aceita uma pasta que já contenha `bin/vllm`. O pacote do pip não traz suporte a AMD ROCm; para AMD, instale o vLLM pela [documentação oficial](https://docs.vllm.ai/en/latest/getting_started/installation/gpu.html) e aponte esse ambiente.
+  - **Windows:** o vLLM roda pelo **Docker Desktop** com backend WSL2 e GPU NVIDIA. **Baixar imagem do vLLM** baixa `vllm/vllm-openai:v0.32.0` (cerca de 10 GB). O modelo é montado só para leitura no contêiner, e o contêiner é parado com o servidor. A regra automática de firewall não se aplica ao Docker; libere a porta manualmente se for usar a rede.
+  - **macOS:** não é oferecido.
+  - O vLLM usa do perfil apenas o **Contexto** (`--max-model-len`) e as **Sessões simultâneas** (`--max-num-seqs`). O primeiro início pode levar vários minutos. **Abrir no navegador** abre a documentação da API (`/docs`), porque o vLLM não tem interface de conversa.
+- **Strata e PolyStrata** (Windows e Linux): instale pelo instalador oficial de cada projeto ([Strata](https://github.com/Niko1221/Strata) ou [PolyStrata](https://github.com/simplexai-labs/PolyStrata), com `START-HERE.bat` ou `setup.sh`) e configure ao menos um modelo. Depois, em **Escolher pasta instalada**, selecione a pasta que contém `serve/server.py` e `.venv`. Cada `strata-<modelo>.json` vira um item da lista. Contexto, quantização e GPU vêm dessa configuração; o launcher define o endereço, a porta, a chave de API e, só no Strata, as sessões simultâneas (`--parallel`); o PolyStrata usa o valor da própria configuração. O launcher não baixa nem executa o instalador desses projetos.
 
 ## 5. Pastas e modelos GGUF
 
@@ -304,7 +315,7 @@ O teste pode carregar o modelo mais de uma vez e levar vários minutos. Ele não
 | O servidor encerra ao abrir | Consulte **Registro do motor**; reduza contexto/batch, experimente `-ngl auto` ou menos camadas de GPU. |
 | GPU não é usada | Confira o backend escolhido, a compatibilidade da GPU e seus drivers; no macOS, confirme o pacote Metal. Verifique mensagens do motor. |
 | Benchmark falha | Confirme que a pasta do runtime inclui `llama-bench`; tente parâmetros mais conservadores. |
-| Modelo não carrega | Verifique todos os shards, compatibilidade com `b11514`, licença/instruções do repositório e memória disponível. |
+| Modelo não carrega | Verifique todos os shards, compatibilidade com `b12110`, licença/instruções do repositório e memória disponível. |
 
 ## 10. Dados, atualização e desinstalação segura
 
@@ -329,4 +340,4 @@ No Linux, use o gerenciador de pacotes para remover DEB/RPM, ou apague o arquivo
 
 ## 11. Créditos
 
-O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. Os instaladores exigem publicação separada na Release correspondente para download direto. Os autores do llama.cpp não participam nem endossam este aplicativo. Cada modelo tem licença própria.
+O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. Os instaladores exigem publicação separada na Release correspondente para download direto. O [vLLM](https://github.com/vllm-project/vllm) é do projeto vllm-project, sob [licença Apache 2.0](https://github.com/vllm-project/vllm/blob/main/LICENSE). O [Strata](https://github.com/Niko1221/Strata) foi criado por Niko1221 e colaboradores, sob [licença MIT](https://github.com/Niko1221/Strata/blob/main/LICENSE). O [PolyStrata](https://github.com/simplexai-labs/PolyStrata) foi criado por VecSzn e colaboradores, baseado no Strata, sob [licença MIT](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE). O launcher não redistribui esses motores: instala o pacote ou a imagem oficial do vLLM e só inicia instalações do Strata e do PolyStrata feitas pelos instaladores oficiais. Os autores do llama.cpp, do vLLM, do Strata e do PolyStrata não participam nem endossam este aplicativo. Cada modelo tem licença própria.

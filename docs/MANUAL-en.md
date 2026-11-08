@@ -6,7 +6,7 @@ Version 0.5.2 · English
 
 Llama Desktop Launcher installs or locates the [llama.cpp](https://github.com/ggml-org/llama.cpp) engine, finds local GGUF models, and opens the `llama-server` interface in your browser. You can select local-only, LAN, or Tailscale access. Network access requires an API key. Traffic to other computers travels over the selected network.
 
-The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b11514`.
+The app installer **does not include models**. The official engine is downloaded on first use, or you can point the app to an existing installation. The tested engine version is `b12110`.
 
 The interface has three screens: **Llama** for chat and starting the server, **Models** for finding GGUF files and viewing recommendations, and **Settings** for preparing the engine, folders, and profiles. Settings remains available in the navigation on every screen.
 
@@ -65,12 +65,23 @@ On first launch, **Settings** opens automatically if the engine is not ready, th
 
 In **Motor llama.cpp**, choose one of these options:
 
-1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b11514` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
+1. **Baixar motor oficial / Download official engine:** choose **Backend do pacote oficial / Official package backend** before clicking the download button. The app downloads release `b12110` directly from `ggml-org/llama.cpp` on GitHub for the selected platform and backend. On Windows/Linux, the choices depend on the architecture and include Vulkan, NVIDIA CUDA, CPU, and on x64 AMD ROCm and Intel SYCL. macOS uses Metal. CUDA also downloads its matching official runtime libraries. The engine is stored in your user data folder, outside the app installation folder.
 2. **Escolher pasta existente / Choose existing folder:** select a folder containing `llama-server` (or `llama-server.exe`). This lets you reuse an existing installation, including the `b11193-vulkan` directory used by the earlier Windows launcher.
 
 Downloading requires internet access. Choose according to your GPU, independent of CPU brand: Vulkan supports compatible AMD, Intel, and NVIDIA GPUs; CUDA is for NVIDIA, ROCm for AMD, and SYCL for Intel. For an RTX 4060 on Windows x64, start with **NVIDIA CUDA 12.4** and keep the NVIDIA driver current. ROCm and SYCL may require additional runtimes and drivers. If the release has no package for your CPU architecture, select a compatible engine you built or installed yourself. The app checks SHA-256 when the GitHub release API provides a digest. You can replace a selected engine later by choosing a different existing folder or downloading the official package again.
 
 If you used the previous Windows launcher, first select the folder containing your GGUF files. Under **Configurações > Perfis do launcher anterior / Settings > Previous launcher profiles**, click **Importar perfis TSV / Import TSV profiles** and select `launcher-profiles.tsv` from the old launcher folder. Import matches the model's full path; if you moved the GGUF files, select the original folder or adjust profiles manually. Existing profiles in this app are preserved. The result reports imported, missing, already existing, and invalid profiles.
+
+### Other engines: vLLM, Strata and PolyStrata
+
+From version 0.6.0, the **Other engines** card in **Settings** prepares two engines besides llama.cpp. Each model in the list uses the engine for its format, and the saved profile records that engine. Benchmark, suggested settings, built-in chat and the terminal CLI remain GGUF/llama.cpp only.
+
+- **vLLM 0.32.0:** uses Hugging Face folders with `config.json` and `.safetensors` weights (including AWQ and GPTQ) placed in the model folders. They appear in the list with a `· vLLM` suffix. Hugging Face cache folders (`models--org--name/snapshots/<hash>`, with symlinked weights) are also recognized; with Docker, the launcher mounts the `models--org--name` root so the links stay valid.
+  - **Linux** (NVIDIA GPU with CUDA): **Install vLLM** creates a Python environment in the app data folder and runs `pip install vllm==0.32.0`. It needs `python3` and `python3-venv` (Python 3.10 to 3.13) and a download of a few GB. **Use existing environment** accepts a folder that already contains `bin/vllm`. The pip package does not include AMD ROCm support; for AMD, install vLLM following the [official documentation](https://docs.vllm.ai/en/latest/getting_started/installation/gpu.html) and point to that environment.
+  - **Windows:** vLLM runs through **Docker Desktop** with the WSL2 backend and an NVIDIA GPU. **Download vLLM image** pulls `vllm/vllm-openai:v0.32.0` (about 10 GB). The model is mounted read-only in the container, and the container stops with the server. The automatic firewall rule does not apply to Docker; open the port manually if you use the network.
+  - **macOS:** not offered.
+  - vLLM uses only the profile's **Context** (`--max-model-len`) and **Concurrent sessions** (`--max-num-seqs`). The first start can take several minutes. **Open in browser** opens the API documentation (`/docs`), because vLLM has no chat interface.
+- **Strata and PolyStrata** (Windows and Linux): install with each project's official installer ([Strata](https://github.com/Niko1221/Strata) or [PolyStrata](https://github.com/simplexai-labs/PolyStrata), using `START-HERE.bat` or `setup.sh`) and set up at least one model. Then, in **Choose installed folder**, select the folder that contains `serve/server.py` and `.venv`. Each `strata-<model>.json` becomes a list item. Context, quantization and GPU come from that configuration; the launcher sets the address, port, API key and, for Strata only, the concurrent sessions (`--parallel`); PolyStrata uses the value from its own configuration. The launcher does not download or run these projects' installers.
 
 ## 5. Model folders and GGUF files
 
@@ -306,7 +317,7 @@ The benchmark may load the model more than once and can take several minutes. It
 | Server exits during startup | Read the engine log; lower context/batch, try `-ngl auto`, or reduce GPU layers. |
 | GPU not used | Check the selected backend, GPU compatibility, and drivers; on macOS check that you installed a Metal build. Read the engine log. |
 | Benchmark fails | Ensure the runtime folder contains `llama-bench`; try more conservative settings. |
-| Model fails to load | Check all shards, `b11514` compatibility, model repository instructions, and available memory. |
+| Model fails to load | Check all shards, `b12110` compatibility, model repository instructions, and available memory. |
 
 ## 10. Data, updates, and safe uninstalling
 
@@ -331,4 +342,4 @@ On Linux, remove DEB/RPM with your package manager, or delete the AppImage file.
 
 ## 11. Credits
 
-[llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). This independent launcher was developed for Célio with Codex, based on the earlier WinForms launcher, and is released under the [MIT license](../LICENSE), with copyright held by Célio. Installer assets must be published separately to the corresponding Release before direct downloads work. The llama.cpp authors do not participate in or endorse this app. Each model has its own license.
+[llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). This independent launcher was developed for Célio with Codex, based on the earlier WinForms launcher, and is released under the [MIT license](../LICENSE), with copyright held by Célio. Installer assets must be published separately to the corresponding Release before direct downloads work. [vLLM](https://github.com/vllm-project/vllm) belongs to the vllm-project under the [Apache 2.0 license](https://github.com/vllm-project/vllm/blob/main/LICENSE). [Strata](https://github.com/Niko1221/Strata) was created by Niko1221 and contributors under the [MIT license](https://github.com/Niko1221/Strata/blob/main/LICENSE). [PolyStrata](https://github.com/simplexai-labs/PolyStrata) was created by VecSzn and contributors, based on Strata, under the [MIT license](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE). The launcher does not redistribute these engines: it installs the official vLLM package or image and only starts Strata and PolyStrata installations made by their official installers. The authors of llama.cpp, vLLM, Strata and PolyStrata do not participate in or endorse this app. Each model has its own license.

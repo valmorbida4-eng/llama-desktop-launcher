@@ -26,9 +26,13 @@ interface RendererApi {
   onUpdateProgress(callback: (value: ProgressUpdate) => void): void;
   selectModel(modelPath: string): Promise<any>;
   completeSetup(): Promise<any>;
-  chooseDir(kind: 'engine' | 'models', index?: number): Promise<any>;
+  chooseDir(kind: 'engine' | 'models' | 'strata' | 'vllm', index?: number): Promise<any>;
   clearDir(index: number): Promise<any>;
   installEngine(backend: string): Promise<any>;
+  installVllm(): Promise<any>;
+  refreshEngines(): Promise<any>;
+  openEngineLink(kind: 'vllm' | 'docker' | 'strata' | 'polystrata'): Promise<string>;
+  onEnginesChanged(callback: () => void): void;
   saveProfile(modelPath: string, settings: ModelSettings): Promise<any>;
   importLegacyProfiles(): Promise<ImportedProfiles | null>;
   recommend(modelPath: string): Promise<ModelSettings>;
