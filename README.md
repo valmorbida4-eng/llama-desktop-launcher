@@ -6,7 +6,7 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 
 ## Funcionalidades
 
-- Permite escolher e baixar um pacote oficial do llama.cpp na primeira execução ou depois, ou usar uma pasta de runtime já existente. A versão do motor usada é `b11514`.
+- Permite escolher e baixar um pacote oficial do llama.cpp na primeira execução ou depois, ou usar uma pasta de runtime já existente. A versão do motor usada é `b12110`.
 - No Windows/Linux, oferece Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL e CPU conforme a arquitetura e os pacotes disponíveis; no macOS, Metal. A escolha depende da GPU, não da marca do processador. Para aceleração, drivers e bibliotecas compatíveis precisam estar instalados no sistema.
 - Configura até duas pastas de modelos GGUF, independentes da pasta do aplicativo. Detecta `mmproj` no mesmo diretório do modelo.
 - Mantém perfis por modelo com GPU layers, dispositivo, contexto, cache K/V, camadas MoE na CPU, Flash Attention, threads, batch e microbatch.
@@ -72,7 +72,7 @@ As versões oficiais de Linux usadas aqui são construídas em Ubuntu; a compati
 
 ## Criadores e créditos
 
-- **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b11514); consulte a licença no repositório original.
+- **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b12110); consulte a licença no repositório original.
 - **Launcher original para Célio:** interface WinForms, ponte local e auxiliar de firewall criados com Codex para Célio; serviram como base funcional para os ajustes avançados deste aplicativo.
 - **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. Os links diretos dependem da publicação dos instaladores como assets da Release correspondente. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
 
@@ -118,7 +118,7 @@ Na v0.4.1, o download do motor usa uma pasta temporária junto ao destino final,
 
 Na v0.4.2, o cabeçalho mostra automaticamente a versão instalada em todas as telas. A dependência indireta de build `http-cache-semantics` foi atualizada para 4.3.0, fora da faixa afetada por GHSA-ch52-4w7c-c8xp; o mock HTTPS do teste valida o hostname exato. O motor continua na versão testada `b11193`.
 
-Na v0.4.3, o motor passa para a release `b11514` do llama.cpp. Os nomes dos pacotes e backends oferecidos não mudaram; a versão fica fixada em `ENGINE_TAG` em `src/engine.ts`, e o workflow semanal **Engine update** propõe novas releases por PR.
+Na v0.4.3, o motor passa para a release `b12110` do llama.cpp. Os nomes dos pacotes e backends oferecidos não mudaram; a versão fica fixada em `ENGINE_TAG` em `src/engine.ts`, e o workflow semanal **Engine update** propõe novas releases por PR.
 
 Na v0.5.0, o aplicativo avisa quando há uma versão nova do launcher. Ao iniciar e uma vez por dia (opção desligável), consulta a release mais recente no GitHub; em **Configurações > 05 · Atualizações** baixa o pacote do sistema, confere com o `SHA256SUMS.txt` e abre o instalador no Windows ou entrega o `.dmg`, a AppImage ou o DEB/RPM verificado para instalação manual. Veja [o ADR](docs/adr/app-update-check.md).
 

@@ -10,7 +10,7 @@ const {Transform}=require('node:stream');
 const {pipeline}=require('node:stream/promises');
 
 // Versão do llama.cpp testada com o launcher; atualizar exige repetir a validação manual do motor.
-const ENGINE_TAG='b11514';
+const ENGINE_TAG='b12110';
 
 function request(url, redirects=0) {
   if (redirects>5 || !url.startsWith('https://')) return Promise.reject(Error('Redirecionamento inválido.'));
