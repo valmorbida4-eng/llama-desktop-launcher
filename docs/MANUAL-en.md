@@ -1,6 +1,6 @@
 # User manual — Llama Desktop Launcher
 
-Version 0.7.0 · English
+Version 0.8.0 · English
 
 This is the first of three guides. The **Integration guide** (`INTEGRATION-en`) explains how to connect OpenCode, other clients and your own applications to the API. The **Diagnostics guide** (`DIAGNOSTICS-en`) covers common problems, the app's messages and the support report. All three are linked in the app footer and live in the repository's `docs/` folder.
 
@@ -20,7 +20,7 @@ The interface has three screens, reachable from the top navigation:
 
 - **Llama:** choose the model, start the server, chat and copy client setups.
 - **Models:** recommendations for your hardware and links to find models for each engine.
-- **Settings:** engines, model folders, profiles, import, updates and diagnostics.
+- **Settings:** engines, model folders, profiles, import, updates, diagnostics and, on Windows, the firewall rules created by the launcher.
 
 The launcher version appears in the header, next to “llama.cpp no seu computador”. Each engine has its own version.
 
@@ -220,7 +220,7 @@ On the network, use **Mostrar chave** (Show key), **Copiar chave** (Copy key) or
 - **Copiar Bash/PowerShell com acesso** and **Copiar configuração com acesso:** carry a temporary credential.
 - **Revogar acesso compartilhado:** invalidates everything shared and drops open connections. Stopping the server or closing the launcher also ends sharing.
 
-Whoever receives a link or command with access can use the model, but cannot reach the files on your computer. On Windows, the **Firewall do Windows** section creates the inbound rule for the active port. Ports, keys, clients and firewall details are in the **Integration guide**.
+Whoever receives a link or command with access can use the model, but cannot reach the files on your computer. On Windows, the **Firewall do Windows** section creates the inbound rule for the active port. The rule stays after the server stops; remove it in **Settings > 07 · Firewall do Windows**. Ports, keys, clients and firewall details are in the **Integration guide**.
 
 ## 12. Data, updates and uninstalling
 

@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.7.0 · Português (Brasil)
+Versão 0.8.0 · Português (Brasil)
 
 Este é o primeiro de três guias. O **Guia de integração** (`INTEGRATION-pt-BR`) explica como conectar OpenCode, outros clientes e seus próprios aplicativos à API. O **Guia de diagnóstico** (`DIAGNOSTICS-pt-BR`) reúne problemas comuns, mensagens do aplicativo e o relatório para suporte. Os três estão no rodapé do aplicativo e na pasta `docs/` do repositório.
 
@@ -20,7 +20,7 @@ A interface tem três telas, acessíveis pela navegação no topo:
 
 - **Llama:** escolher o modelo, iniciar o servidor, conversar e copiar as configurações dos clientes.
 - **Modelos:** recomendações pelo seu hardware e links para encontrar modelos de cada motor.
-- **Configurações:** motores, pastas de modelos, perfis, importação, atualizações e diagnóstico.
+- **Configurações:** motores, pastas de modelos, perfis, importação, atualizações, diagnóstico e, no Windows, as regras de firewall criadas pelo launcher.
 
 A versão do launcher aparece no cabeçalho, ao lado de “llama.cpp no seu computador”. A versão de cada motor é independente.
 
@@ -220,7 +220,7 @@ Na rede, use **Mostrar chave**, **Copiar chave** ou **Nova chave** (pare o servi
 - **Copiar Bash/PowerShell com acesso** e **Copiar configuração com acesso:** levam uma credencial temporária.
 - **Revogar acesso compartilhado:** invalida tudo o que foi compartilhado e derruba as conexões abertas. Parar o servidor ou fechar o launcher também encerra o compartilhamento.
 
-Quem recebe um link ou comando com acesso pode usar o modelo, mas não acessa os arquivos do seu computador. No Windows, a seção **Firewall do Windows** cria a regra de entrada para a porta ativa. Detalhes de portas, chaves, clientes e firewall estão no **Guia de integração**.
+Quem recebe um link ou comando com acesso pode usar o modelo, mas não acessa os arquivos do seu computador. No Windows, a seção **Firewall do Windows** cria a regra de entrada para a porta ativa. A regra continua depois que o servidor para; remova-a em **Configurações > 07 · Firewall do Windows**. Detalhes de portas, chaves, clientes e firewall estão no **Guia de integração**.
 
 ## 12. Dados, atualização e desinstalação
 

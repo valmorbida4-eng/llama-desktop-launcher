@@ -123,4 +123,55 @@ async function createRules(options, { platform=process.platform, run=promisify(e
   await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-EncodedCommand',encodePowerShell(script)],{windowsHide:true});
   return configs;
 }
-module.exports = { SERVER_PROGRAMS, PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule, createRules };
+// Remoção das regras criadas pelo launcher. Todas usam o nome LlamaDesktopLauncher-<16 hex> (ruleName),
+// então o filtro não alcança regras de outros programas. Listar não exige administrador: o launcher só
+// pede a elevação (UAC) quando há alguma regra para apagar.
+const RULE_PREFIX = 'LlamaDesktopLauncher-';
+const RULE_NAME = /^LlamaDesktopLauncher-[0-9a-f]{16}$/;
+const POWERSHELL_ARGS = ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-EncodedCommand'];
+
+function buildListRulesScript() {
+  return [
+    "$ErrorActionPreference = 'Stop'",
+    `Get-NetFirewallRule -Name ${psQuote(RULE_PREFIX + '*')} -ErrorAction SilentlyContinue | ForEach-Object { $_.Name + [char]9 + $_.DisplayName }`,
+  ].join('\n');
+}
+
+function parseRuleList(stdout) {
+  const rules = [];
+  for (const line of String(stdout || '').split(/\r?\n/)) {
+    const [name, displayName = ''] = line.trim().split('\t');
+    if (RULE_NAME.test(name || '')) rules.push({ name, displayName });
+  }
+  return rules;
+}
+
+function buildRemoveRulesScript(names) {
+  if (!Array.isArray(names) || !names.length || !names.every(name => RULE_NAME.test(name))) throw Error('Lista de regras inválida.');
+  return [
+    "$ErrorActionPreference = 'Stop'",
+    `Remove-NetFirewallRule -Name @(${names.map(psQuote).join(',')})`,
+  ].join('\n');
+}
+
+async function listRules({ platform = process.platform, run = promisify(execFile) } = {}) {
+  if (platform !== 'win32') throw Error('As regras do Windows Firewall só existem no Windows.');
+  const { stdout } = await run('powershell.exe', [...POWERSHELL_ARGS, encodePowerShell(buildListRulesScript())], { windowsHide: true });
+  return parseRuleList(stdout);
+}
+
+async function removeRules({ platform = process.platform, run = promisify(execFile) } = {}) {
+  const before = await listRules({ platform, run });
+  if (!before.length) return { removed: 0, remaining: 0 };
+  const script = elevatedPowerShellScript(buildRemoveRulesScript(before.map(rule => rule.name)));
+  try {
+    await run('powershell.exe', [...POWERSHELL_ARGS, encodePowerShell(script)], { windowsHide: true });
+  } catch {
+    throw Error('As regras não foram removidas: a autorização de administrador foi negada ou a remoção falhou.');
+  }
+  const after = await listRules({ platform, run });
+  return { removed: before.length - after.length, remaining: after.length };
+}
+
+module.exports = { SERVER_PROGRAMS, PORT_MIN, PORT_MAX, RULE_PREFIX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule, createRules,
+  buildListRulesScript, parseRuleList, buildRemoveRulesScript, listRules, removeRules };
