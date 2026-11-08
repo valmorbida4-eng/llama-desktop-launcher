@@ -8,7 +8,7 @@ This is the first of three guides. The **Integration guide** (`INTEGRATION-en`) 
 
 Llama Desktop Launcher prepares and starts a language model server on your computer and exposes it as an OpenAI-compatible API. It works with three engines:
 
-- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12110`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
+- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12211`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
 - **[vLLM](https://github.com/vllm-project/vllm)** `0.32.0` for **Hugging Face folders** (`config.json` and `.safetensors` weights, including AWQ and GPTQ). It runs on Linux through a launcher-managed Python environment and on Windows through Docker Desktop.
 - **[Strata](https://github.com/Niko1221/Strata) and [PolyStrata](https://github.com/simplexai-labs/PolyStrata)** for the models those projects install. You install them with their official installer; the launcher only starts the server.
 
@@ -80,7 +80,7 @@ Suggested route:
 
 In **Settings > 01 · Motor**, choose one option:
 
-1. **Download official engine:** choose the **official package backend** and click the button. The app downloads the `ggml-org/llama.cpp` `b12110` release from GitHub for your platform and checks the SHA-256 when the release provides the digest. The engine is stored under `engines/` in the app data folder, outside the installation.
+1. **Download official engine:** choose the **official package backend** and click the button. The app downloads the `ggml-org/llama.cpp` `b12211` release from GitHub for your platform and checks the SHA-256 when the release provides the digest. The engine is stored under `engines/` in the app data folder, outside the installation.
 2. **Choose existing folder:** pick a folder that already contains `llama-server` (or `llama-server.exe`), such as the `b11193-vulkan` folder of the previous Windows launcher.
 
 Choose the backend by GPU, not by CPU brand:
@@ -150,7 +150,7 @@ For GGUF:
 - If the model uses a multimodal projector, keep a single `mmproj*.gguf` in the same folder; it is attached automatically.
 - Keep all shards of a split model together.
 
-GGUF describes the format, but does not guarantee compatibility with `b12110`; some models need a newer engine. The app does not accept model folders inside the installation or inside its internal data folder.
+GGUF describes the format, but does not guarantee compatibility with `b12211`; some models need a newer engine. The app does not accept model folders inside the installation or inside its internal data folder.
 
 The **Models** screen estimates use RAM, CPU, detectable GPU/VRAM and free space. They are conservative starting points, not guarantees. For MoE models, consider the total weight size, not just the active parameters.
 

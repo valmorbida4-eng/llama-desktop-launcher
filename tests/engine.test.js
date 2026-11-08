@@ -17,7 +17,7 @@ const release={tag_name:tag,assets:[
 ].map(name=>({name,size:1}))};
 
 test('backend choices follow the operating system and architecture, independent of CPU vendor',()=>{
-  assert.deepEqual(engine.backendOptions('win32','x64').map(x=>x.id),['vulkan','cuda-12.4','cuda-13.4','rocm-10.0','sycl','cpu']);
+  assert.deepEqual(engine.backendOptions('win32','x64').map(x=>x.id),['vulkan','cuda-12.4','cuda-13.5','rocm-10.0','sycl','cpu']);
   assert.ok(engine.backendOptions('linux','x64').some(x=>x.id==='cuda-12.8'));
   assert.deepEqual(engine.backendOptions('darwin','arm64').map(x=>x.id),['metal']);
   assert.deepEqual(engine.backendOptions('win32','s390x'),[]);
