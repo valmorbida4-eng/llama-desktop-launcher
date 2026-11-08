@@ -96,10 +96,12 @@ test('cache do Hugging Face: pesos em links simbólicos são encontrados e o Doc
 });
 
 test('montagem do Docker usa a raiz do repositório só no layout do cache do Hugging Face',()=>{
-  const cache=path.resolve('/hf/hub/models--org--nome/snapshots/f00');
-  assert.deepEqual(engines.dockerModelMount(cache),{source:path.resolve('/hf/hub/models--org--nome'),target:'/model',model:'/model/snapshots/f00'});
-  assert.deepEqual(engines.dockerModelMount('/modelos/qwen'),{source:path.resolve('/modelos/qwen'),target:'/model',model:'/model'});
-  assert.deepEqual(engines.dockerModelMount('/x/snapshots/f00'),{source:path.resolve('/x/snapshots/f00'),target:'/model',model:'/model'});
+  const cache='/hf/hub/models--org--nome/snapshots/f00';
+  assert.deepEqual(engines.dockerModelMount(cache,'linux'),{source:'/hf/hub/models--org--nome',target:'/model',model:'/model/snapshots/f00'});
+  assert.deepEqual(engines.dockerModelMount('C:\\hf\\models--org--nome\\snapshots\\f00\\','win32'),{source:'C:\\hf\\models--org--nome',target:'/model',model:'/model/snapshots/f00'});
+  assert.deepEqual(engines.dockerModelMount('/modelos/qwen','linux'),{source:'/modelos/qwen',target:'/model',model:'/model'});
+  assert.deepEqual(engines.dockerModelMount('C:\\Modelos\\Qwen3 8B AWQ','win32'),{source:'C:\\Modelos\\Qwen3 8B AWQ',target:'/model',model:'/model'});
+  assert.deepEqual(engines.dockerModelMount('/x/snapshots/f00','linux'),{source:'/x/snapshots/f00',target:'/model',model:'/model'});
   assert.equal(core.hfDisplayName(cache),'org/nome');assert.equal(core.hfDisplayName('/modelos/qwen'),'qwen');
 });
 

@@ -138,11 +138,15 @@ function scanStrataConfigs(dir,platform=process.platform) {
 function scanHfModels(roots) {return walkModels(roots,{hf:true}).hf;}
 // No cache do Hugging Face (models--org--nome/snapshots/<hash>) os pesos são links relativos para
 // ../../blobs. Montar só o snapshot no Docker quebraria esses links; montamos a raiz do repositório.
-function dockerModelMount(modelPath) {
-  const resolved=path.resolve(modelPath),snapshots=path.dirname(resolved),repo=path.dirname(snapshots);
-  if(path.basename(snapshots)==='snapshots'&&/^models--/.test(path.basename(repo)))
-    return {source:repo,target:'/model',model:`/model/snapshots/${path.basename(resolved)}`};
-  return {source:resolved,target:'/model',model:'/model'};
+function dockerModelMount(modelPath,platform=process.platform) {
+  // Transformação só de texto para o sistema do Docker host: usa as regras de caminho dessa plataforma,
+  // não as de onde o código roda (os testes do Windows rodam no CI Linux).
+  const p=platform==='win32'?path.win32:path.posix;
+  const source=String(modelPath).replace(/[\\/]+$/,'')||String(modelPath);
+  const snapshots=p.dirname(source),repo=p.dirname(snapshots);
+  if(p.basename(snapshots)==='snapshots'&&/^models--/.test(p.basename(repo)))
+    return {source:repo,target:'/model',model:`/model/snapshots/${p.basename(source)}`};
+  return {source,target:'/model',model:'/model'};
 }
 // No Windows, .venv\Scripts\python.exe é um lançador que inicia o Python base como processo filho; é
 // esse filho que abre a porta. A regra de firewall precisa do executável real, lido de pyvenv.cfg.
@@ -173,7 +177,7 @@ function serverCommand(model,settings,{host,port,parallel=1,key=null,platform=pr
     }
     if(mode==='docker') {
       if(!/^[a-z0-9][a-z0-9_.-]{0,62}$/.test(containerName)) throw Error('Nome de contêiner inválido.');
-      const mount=dockerModelMount(model.path);
+      const mount=dockerModelMount(model.path,platform);
       if(model.symlinkedWeights&&mount.model==='/model') throw Error('Os pesos deste modelo são links simbólicos para fora da pasta e não ficam visíveis no contêiner. Use uma pasta com os arquivos reais ou o layout do cache do Hugging Face (models--org--nome/snapshots/<hash>).');
       if(/,/.test(mount.source)) throw Error('O caminho do modelo não pode conter vírgulas para uso no Docker.');
       const args=['run','--rm','--name',containerName,'--gpus','all','--ipc=host','-p',`${host}:${port}:8000`,
