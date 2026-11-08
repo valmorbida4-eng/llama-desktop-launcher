@@ -72,6 +72,17 @@ O download requer internet. Escolha pelo tipo de GPU, independentemente da marca
 
 Se você usa o launcher Windows anterior, selecione primeiro a pasta que contém seus GGUF. Em **Configurações > Perfis do launcher anterior**, clique em **Importar perfis TSV** e escolha `launcher-profiles.tsv` da pasta do launcher antigo. A importação associa perfis pelo caminho completo do modelo; se você moveu os GGUF, selecione a pasta antiga ou ajuste os perfis manualmente. Perfis já salvos no aplicativo não são sobrescritos. O resultado mostra quantos perfis foram importados, não localizados, já existentes ou inválidos.
 
+### Outros motores: vLLM, Strata e PolyStrata
+
+A partir da versão 0.6.0, o cartão **Outros motores** em **Configurações** prepara dois motores além do llama.cpp. Cada modelo da lista usa o motor do seu formato, e o perfil salvo guarda esse motor. Benchmark, sugestão de ajustes, conversa integrada e CLI no terminal continuam só para GGUF no llama.cpp.
+
+- **vLLM 0.32.0:** usa pastas Hugging Face com `config.json` e pesos `.safetensors` (incluindo AWQ e GPTQ) colocadas nas pastas de modelos. Elas aparecem na lista com o sufixo `· vLLM`.
+  - **Linux** (GPU NVIDIA com CUDA ou AMD com ROCm): **Instalar vLLM** cria um ambiente Python na pasta de dados do aplicativo e roda `pip install vllm==0.32.0`. São necessários `python3` e `python3-venv` (Python 3.10 a 3.13) e alguns GB de download. **Usar ambiente existente** aceita uma pasta que já contenha `bin/vllm`.
+  - **Windows:** o vLLM roda pelo **Docker Desktop** com backend WSL2 e GPU NVIDIA. **Baixar imagem do vLLM** baixa `vllm/vllm-openai:v0.32.0` (cerca de 10 GB). O modelo é montado só para leitura no contêiner, e o contêiner é parado com o servidor. A regra automática de firewall não se aplica ao Docker; libere a porta manualmente se for usar a rede.
+  - **macOS:** não é oferecido.
+  - O vLLM usa do perfil apenas o **Contexto** (`--max-model-len`) e as **Sessões simultâneas** (`--max-num-seqs`). O primeiro início pode levar vários minutos. **Abrir no navegador** abre a documentação da API (`/docs`), porque o vLLM não tem interface de conversa.
+- **Strata e PolyStrata** (Windows e Linux): instale pelo instalador oficial de cada projeto ([Strata](https://github.com/Niko1221/Strata) ou [PolyStrata](https://github.com/simplexai-labs/PolyStrata), com `START-HERE.bat` ou `setup.sh`) e configure ao menos um modelo. Depois, em **Escolher pasta instalada**, selecione a pasta que contém `serve/server.py` e `.venv`. Cada `strata-<modelo>.json` vira um item da lista. Contexto, quantização e GPU vêm dessa configuração; o launcher define só o endereço, a porta e a chave de API. O launcher não baixa nem executa o instalador desses projetos.
+
 ## 5. Pastas e modelos GGUF
 
 O aplicativo aceita **duas localizações** de modelos na tela **Configurações**. A primeira começa sugerida em `~/Models/GGUF`; clique em **Alterar** para escolher outro disco ou pasta. A segunda é opcional e pode ser adicionada ou removida. Você pode mudar as duas pastas depois. A tela **Modelos** procura arquivos `.gguf` dentro das subpastas. Nela, escolha o modelo que deseja usar; o aplicativo guarda a seleção e os ajustes associados ao caminho daquele arquivo.

@@ -17,6 +17,10 @@ Aplicativo instalável para executar modelos GGUF com [llama.cpp](https://github
 - Inicia `llama-server` localmente ou em um endereço disponível de LAN/Tailscale. O acesso pela rede exige chave de API; a interface local usa uma ponte autenticada.
 - Permite 1 a 8 sessões simultâneas (`--parallel`) e copia os links da API e da interface para conexão.
 - Permite conversar via `llama-cli` na janela do aplicativo ou abri-lo em um terminal separado, usando o perfil do modelo selecionado.
+- **Outros motores (0.6.0):** cada modelo usa o motor que aceita o seu formato, e o perfil guarda esse motor.
+  - **vLLM `0.32.0`** para pastas Hugging Face (`config.json` + `.safetensors`, incluindo AWQ e GPTQ) nas mesmas pastas de modelos. No Linux, o launcher cria um ambiente Python próprio e instala o vLLM com `pip` (ou usa um ambiente existente com `bin/vllm`). No Windows, roda a imagem oficial `vllm/vllm-openai:v0.32.0` pelo Docker Desktop com WSL2 e GPU NVIDIA. Não é oferecido no macOS.
+  - **[Strata](https://github.com/Niko1221/Strata) e [PolyStrata](https://github.com/simplexai-labs/PolyStrata)** no Windows e no Linux: instale pelo instalador oficial deles e escolha a pasta instalada; as configurações `strata-*.json` aparecem como modelos. O launcher não roda o instalador deles.
+  - Benchmark, sugestão de ajustes, conversa integrada e CLI ficam só no llama.cpp. O vLLM usa o contexto (`--max-model-len`) e as sessões simultâneas (`--max-num-seqs`) do perfil; no Strata, contexto, quantização e GPU vêm da configuração dele.
 - No Windows, oferece criação opcional de regra de firewall limitada ao executável, à porta ativa e à faixa privada informada; o Windows solicita autorização de administrador.
 
 ## Obter o aplicativo sem o código-fonte

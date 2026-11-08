@@ -1,10 +1,10 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "private": true,
   "license": "MIT",
   "author": "Célio <valmorbida4@gmail.com>",
-  "description": "Instalador e launcher multiplataforma para llama.cpp",
+  "description": "Instalador e launcher multiplataforma para llama.cpp, vLLM e Strata",
   "main": "build/app/main.js",
   "scripts": {
     "start": "npm run build && electron .",
@@ -22,7 +22,8 @@
     "smoke:network": "npm run build && node scripts/smoke-network.js",
     "smoke:external:win": "npm run build && node scripts/smoke-external-cli-win.js",
     "smoke:external:linux": "npm run build && node scripts/smoke-external-cli-linux.js",
-    "smoke:server": "npm run build && electron scripts/smoke-server-buttons.js"
+    "smoke:server": "npm run build && electron scripts/smoke-server-buttons.js",
+    "smoke:engines": "npm run build && electron scripts/smoke-engines-ui.js"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
