@@ -35,3 +35,30 @@ test('inclui hardware conhecido e ajustes atuais sem afirmar que o modelo foi te
   assert.equal(result.suggestions[2].title, 'Modelos Densos (sem quantização)');
   assert.ok(result.suggestions.every(s => !!s.buttonText && !!s.kind));
 });
+
+test('orientação por motor considera a GPU detectada e oferece os links de modelos', () => {
+  const { engineAdvice, engineLinks, gpuVendor } = require('../build/app/guidance');
+  const GB = 1024 ** 3;
+  assert.equal(gpuVendor('AMD Radeon RX 6600'), 'amd');
+  assert.equal(gpuVendor('NVIDIA GeForce RTX 4060'), 'nvidia');
+  assert.equal(gpuVendor('Intel(R) Arc(TM) A770'), 'intel');
+  assert.equal(gpuVendor('Microsoft Basic Render Driver'), null);
+
+  const amd = Object.fromEntries(engineAdvice({ gpu: { name: 'AMD Radeon RX 6600', memoryBytes: 8 * GB }, platform: 'win32' }).map(item => [item.id, item]));
+  assert.match(amd.vllm.detail, /precisa de GPU NVIDIA/);
+  assert.match(amd.strata.detail, /12 GB ou mais.*fica abaixo/);
+  assert.match(amd.polystrata.detail, /AMD são beta/);
+  assert.ok(amd.polystrata.links.some(link => link.kind === 'polystrataAmd'));
+  assert.ok(amd.strata.links.some(link => link.kind === 'strataModels'));
+
+  const nvidia = Object.fromEntries(engineAdvice({ gpu: { name: 'NVIDIA GeForce RTX 4090', memoryBytes: 24 * GB }, platform: 'linux' }).map(item => [item.id, item]));
+  assert.match(nvidia.vllm.detail, /Compatível.*até cerca de 16 GB/);
+  assert.doesNotMatch(nvidia.strata.detail, /fica abaixo/);
+  assert.ok(!nvidia.polystrata.links.some(link => link.kind === 'polystrataAmd'));
+  assert.match(engineAdvice({ gpu: {}, platform: 'darwin' })[2].detail, /macOS/);
+
+  for (const item of [...Object.values(amd), ...Object.values(nvidia)]) for (const link of item.links) {
+    const url = engineLinks[link.kind] || require('../build/app/engines').links[link.kind];
+    assert.match(url, /^https:\/\//, link.kind);
+  }
+});

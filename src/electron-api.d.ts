@@ -31,7 +31,7 @@ interface RendererApi {
   installEngine(backend: string): Promise<any>;
   installVllm(): Promise<any>;
   refreshEngines(): Promise<any>;
-  openEngineLink(kind: 'vllm' | 'docker' | 'strata' | 'polystrata'): Promise<string>;
+  openEngineLink(kind: string): Promise<string>;
   onEnginesChanged(callback: () => void): void;
   saveProfile(modelPath: string, settings: ModelSettings): Promise<any>;
   importLegacyProfiles(): Promise<ImportedProfiles | null>;

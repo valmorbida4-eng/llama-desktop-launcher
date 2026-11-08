@@ -64,20 +64,33 @@ function parseLspci(output) {
   return result(name, null, 'lspci');
 }
 
+// Win32_VideoController.AdapterRAM is a 32-bit field: GPUs with 4 GB or more report
+// about 4 GB (0xFFF00000) or the overflow value. The display driver keeps the real
+// size as a 64-bit HardwareInformation.qwMemorySize in the registry (readable without
+// elevation), so the script returns both and the parser prefers the registry value.
+const ADAPTER_RAM_CAP = 0xfff00000;
 function parsePowerShell(output) {
-  let devices;
-  try { devices = JSON.parse(String(output).trim()); } catch { return null; }
-  if (!Array.isArray(devices)) devices = devices ? [devices] : [];
-  for (const device of devices) {
+  let data;
+  try { data = JSON.parse(String(output).trim()); } catch { return null; }
+  const list = value => Array.isArray(value) ? value : value ? [value] : [];
+  const video = Array.isArray(data) || !data?.Video ? list(data) : list(data.Video);
+  const registry = list(data?.Registry).filter(item => item && typeof item === 'object');
+  const registrySize = name => {
+    const sizes = registry.filter(item => typeof item.Name === 'string' && item.Name.trim() === name)
+      .map(item => Number(item.MemorySize)).filter(value => Number.isSafeInteger(value) && value > 0);
+    return sizes.length ? Math.max(...sizes) : null;
+  };
+  let best = null;
+  for (const device of video) {
     if (!device || typeof device !== 'object') continue;
+    const name = typeof device.Name === 'string' ? device.Name.trim() : '';
     const rawMemory = Number(device.AdapterRAM);
-    // Win32_VideoController.AdapterRAM is a 32-bit field; the max value signals
-    // overflow on many GPUs, so do not present it as a real capacity.
-    const memoryBytes = Number.isSafeInteger(rawMemory) && rawMemory > 0 && rawMemory < 0xffffffff ? rawMemory : null;
-    const found = result(device.Name, memoryBytes, 'powershell-cim');
-    if (found) return found;
+    const adapterRam = Number.isSafeInteger(rawMemory) && rawMemory > 0 && rawMemory < ADAPTER_RAM_CAP ? rawMemory : null;
+    const found = result(name, (name && registrySize(name)) ?? adapterRam, 'powershell-cim');
+    // With an integrated and a discrete GPU, report the one with the most memory.
+    if (found && (!best || (found.memoryBytes ?? -1) > (best.memoryBytes ?? -1))) best = found;
   }
-  return null;
+  return best;
 }
 
 function parseSystemProfiler(output) {
@@ -104,7 +117,10 @@ function parseSystemProfiler(output) {
 }
 
 function psScript() {
-  return "Get-CimInstance Win32_VideoController | Select-Object Name,AdapterRAM | ConvertTo-Json -Compress";
+  return "$k='HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e968-e325-11ce-bfc1-08002be10318}';"
+    + "$r=@(Get-ChildItem $k -ErrorAction SilentlyContinue | ForEach-Object { $p=Get-ItemProperty $_.PSPath -ErrorAction SilentlyContinue; if($p.DriverDesc){ [pscustomobject]@{Name=$p.DriverDesc;MemorySize=$p.'HardwareInformation.qwMemorySize'} } });"
+    + "$v=@(Get-CimInstance Win32_VideoController | Select-Object Name,AdapterRAM);"
+    + "[pscustomobject]@{Video=$v;Registry=$r} | ConvertTo-Json -Compress -Depth 4";
 }
 
 /**

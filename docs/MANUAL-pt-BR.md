@@ -82,6 +82,7 @@ A partir da versão 0.6.0, o cartão **Outros motores** em **Configurações** p
   - **macOS:** não é oferecido.
   - O vLLM usa do perfil apenas o **Contexto** (`--max-model-len`) e as **Sessões simultâneas** (`--max-num-seqs`). O primeiro início pode levar vários minutos. **Abrir no navegador** abre a documentação da API (`/docs`), porque o vLLM não tem interface de conversa.
 - **Strata e PolyStrata** (Windows e Linux): instale pelo instalador oficial de cada projeto ([Strata](https://github.com/Niko1221/Strata) ou [PolyStrata](https://github.com/simplexai-labs/PolyStrata), com `START-HERE.bat` ou `setup.sh`) e configure ao menos um modelo. Depois, em **Escolher pasta instalada**, selecione a pasta que contém `serve/server.py` e `.venv`. Cada `strata-<modelo>.json` vira um item da lista. Contexto, quantização e GPU vêm dessa configuração; o launcher define o endereço, a porta, a chave de API e, só no Strata, as sessões simultâneas (`--parallel`); o PolyStrata usa o valor da própria configuração. O launcher não baixa nem executa o instalador desses projetos.
+- **Onde achar os modelos:** na tela **Modelos**, o cartão **Outros motores** tem links para a lista de modelos do Strata, do PolyStrata e do vLLM, e diz se a GPU detectada atende aos requisitos de cada um. Em **Configurações**, **Ver modelos** leva ao mesmo cartão.
 
 ## 5. Pastas e modelos GGUF
 

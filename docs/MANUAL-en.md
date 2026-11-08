@@ -82,6 +82,7 @@ From version 0.6.0, the **Other engines** card in **Settings** prepares two engi
   - **macOS:** not offered.
   - vLLM uses only the profile's **Context** (`--max-model-len`) and **Concurrent sessions** (`--max-num-seqs`). The first start can take several minutes. **Open in browser** opens the API documentation (`/docs`), because vLLM has no chat interface.
 - **Strata and PolyStrata** (Windows and Linux): install with each project's official installer ([Strata](https://github.com/Niko1221/Strata) or [PolyStrata](https://github.com/simplexai-labs/PolyStrata), using `START-HERE.bat` or `setup.sh`) and set up at least one model. Then, in **Choose installed folder**, select the folder that contains `serve/server.py` and `.venv`. Each `strata-<model>.json` becomes a list item. Context, quantization and GPU come from that configuration; the launcher sets the address, port, API key and, for Strata only, the concurrent sessions (`--parallel`); PolyStrata uses the value from its own configuration. The launcher does not download or run these projects' installers.
+- **Where to find models:** in the **Models** screen, the **Other engines** card links to the model lists of Strata, PolyStrata and vLLM, and says whether the detected GPU meets each one's requirements. In **Settings**, **See models** goes to the same card.
 
 ## 5. Model folders and GGUF files
 
