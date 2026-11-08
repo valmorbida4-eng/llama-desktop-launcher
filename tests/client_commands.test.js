@@ -49,3 +49,25 @@ test('Aider usa suas variáveis e restaura ambiente no PowerShell',()=>{
  assert.match(clientCommand(connection,'aider','powershell'),/finally/);
  assert.throws(()=>clientCommand(connection,'pi','bash'),/configuração/);
 });
+
+test('Strata/PolyStrata: comandos e configurações usam o ID publicado pelo motor ativo',()=>{
+ const {clientConfiguration,clientCommand}=require('../build/app/client_commands');
+ const strata={...connection,modelId:'Qwen3.6-35B-A3B'},token='t'.repeat(43);
+ for(const platform of ['bash','powershell']){
+  const command=openCodeCommand(strata,platform);
+  assert.match(command,/opencode --model 'llama-local\/Qwen3\.6-35B-A3B'/);
+  assert.match(command,/"model":"llama-local\/Qwen3\.6-35B-A3B"/);
+  assert.doesNotMatch(command,/modelo-local/);
+  assert.match(clientCommand(strata,'aider',platform,token),/aider --model 'openai\/Qwen3\.6-35B-A3B'/);
+ }
+ for(const name of ['opencode','pi','hermes','continue','cline','codex','generic']){
+  const output=clientConfiguration(strata,name,token);
+  assert.ok(output.includes('Qwen3.6-35B-A3B'),name);assert.doesNotMatch(output,/modelo-local/,name);
+ }
+ // Sem modelId, continua o alias fixo do llama.cpp e do vLLM.
+ assert.match(openCodeCommand({...connection,modelId:null},'bash'),/llama-local\/modelo-local/);
+});
+test('ID de modelo com caracteres de shell é recusado',()=>{
+ for(const modelId of ["x'; rm -rf ~","a b","$(id)",'-flag','x'.repeat(200)])
+  assert.throws(()=>openCodeCommand({...connection,modelId},'bash'),/ID de modelo/);
+});

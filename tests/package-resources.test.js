@@ -2,10 +2,14 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const pkg=require('../package.json');
-test('pacote público inclui somente manuais e licença como recursos extras',()=>{
+test('pacote público inclui somente os guias PDF e a licença como recursos extras',()=>{
  assert.deepEqual(pkg.build.extraResources,[
   {from:'docs/MANUAL-pt-BR.pdf',to:'docs/MANUAL-pt-BR.pdf'},
   {from:'docs/MANUAL-en.pdf',to:'docs/MANUAL-en.pdf'},
+  {from:'docs/INTEGRATION-pt-BR.pdf',to:'docs/INTEGRATION-pt-BR.pdf'},
+  {from:'docs/INTEGRATION-en.pdf',to:'docs/INTEGRATION-en.pdf'},
+  {from:'docs/DIAGNOSTICS-pt-BR.pdf',to:'docs/DIAGNOSTICS-pt-BR.pdf'},
+  {from:'docs/DIAGNOSTICS-en.pdf',to:'docs/DIAGNOSTICS-en.pdf'},
   {from:'LICENSE',to:'LICENSE'}
  ]);
 });
@@ -20,4 +24,10 @@ test('instalador Windows mantém a escolha do atalho em instalações silenciosa
  // Without an explicit icon Explorer may cache a blank icon while an update replaces the executable.
  assert.match(macro('customInstall'),/CreateShortcut "\$DESKTOP\\Llama Desktop Launcher\.lnk" "\$INSTDIR\\\$\{APP_EXECUTABLE_FILENAME\}" "" "\$INSTDIR\\\$\{APP_EXECUTABLE_FILENAME\}" 0/);
  assert.match(macro('customInstall'),/WinShell::SetLnkAUMI "\$DESKTOP\\Llama Desktop Launcher\.lnk" "\$\{APP_ID\}"/);
+});
+test('cada guia PDF empacotado existe nos dois idiomas, com o Markdown de origem',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ for(const doc of ['MANUAL','INTEGRATION','DIAGNOSTICS'])for(const lang of ['pt-BR','en']){
+  for(const ext of ['md','pdf'])assert.ok(fs.existsSync(path.join(__dirname,'..','docs',`${doc}-${lang}.${ext}`)),`${doc}-${lang}.${ext}`);
+ }
 });

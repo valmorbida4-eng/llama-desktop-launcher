@@ -7,6 +7,10 @@ const crypto = require('node:crypto');
 
 const PORT_MIN = 8080;
 const PORT_MAX = 8180;
+// Executáveis que abrem a porta da API: o llama.cpp e, no Strata/PolyStrata, o Python base lido de
+// .venv/pyvenv.cfg (o .venv\Scripts\python.exe é só um lançador). O vLLM no Docker não usa regra por programa.
+const SERVER_PROGRAMS = ['llama-server.exe', 'python.exe'];
+const SHARING_PROGRAMS = ['llama desktop launcher.exe', 'electron.exe'];
 const ALLOWED_RANGES = [
   { address: '10.0.0.0', prefix: 8 },
   { address: '172.16.0.0', prefix: 12 },
@@ -50,10 +54,11 @@ function validateRemoteAddress(input) {
 
 function validateRuleOptions(options) {
   if (!options || typeof options !== 'object') throw Error('Configuração da regra de firewall inválida.');
-  if (typeof options.program !== 'string' || !path.win32.isAbsolute(options.program)) throw Error('O caminho do llama-server precisa ser absoluto.');
+  if (typeof options.program !== 'string' || !path.win32.isAbsolute(options.program)) throw Error('O caminho do executável precisa ser absoluto.');
   const program = path.win32.normalize(options.program);
   const sharing=options.sharing===true;
-  if (sharing?!['llama desktop launcher.exe','electron.exe'].includes(path.win32.basename(program).toLowerCase()):path.win32.basename(program).toLowerCase() !== 'llama-server.exe') throw Error('A regra só pode liberar llama-server.exe.');
+  const name=path.win32.basename(program).toLowerCase();
+  if (sharing?!SHARING_PROGRAMS.includes(name):!SERVER_PROGRAMS.includes(name)) throw Error(sharing?'A regra de compartilhamento só pode liberar o launcher.':'A regra só pode liberar llama-server.exe ou o python.exe base do Strata/PolyStrata.');
   const port = Number(options.port);
   if (!Number.isInteger(port) || port < (sharing?8181:PORT_MIN) || port > (sharing?8280:PORT_MAX)) throw Error(`A porta deve estar entre ${PORT_MIN} e ${PORT_MAX}.`);
   return { program, port, remoteAddress: validateRemoteAddress(options.remoteAddress),...(sharing?{sharing:true}:{}) };
@@ -118,4 +123,4 @@ async function createRules(options, { platform=process.platform, run=promisify(e
   await run('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-EncodedCommand',encodePowerShell(script)],{windowsHide:true});
   return configs;
 }
-module.exports = { PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule, createRules };
+module.exports = { SERVER_PROGRAMS, PORT_MIN, PORT_MAX, validateRemoteAddress, validateRuleOptions, buildFirewallScript, createRule, createRules };

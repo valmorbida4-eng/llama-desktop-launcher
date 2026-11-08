@@ -61,3 +61,13 @@ test('compartilhamento libera somente launcher na porta adicional e agrega uma s
  await createRules([valid,sharing],{platform:'win32',run:async(_file,args)=>{calls++;script=Buffer.from(args.at(-1),'base64').toString('utf16le');}});
  assert.equal(calls,1);assert.match(script,/-Verb RunAs/);
 });
+
+test('Strata/PolyStrata no Windows: aceita o python.exe base e mantém os demais limites', () => {
+  const python = { program: 'C:\\Python312\\python.exe', port: 8081, remoteAddress: '100.64.0.0/10' };
+  assert.deepEqual(validateRuleOptions(python), python);
+  assert.match(buildFirewallScript(python), /-Program 'C:\\Python312\\python\.exe'/);
+  assert.throws(() => validateRuleOptions({ ...python, program: 'C:\\Python312\\pythonw.exe' }), /llama-server.exe ou o python.exe/);
+  assert.throws(() => validateRuleOptions({ ...python, port: 8181 }), /8080 e 8180/);
+  // O compartilhamento continua restrito ao executável do launcher.
+  assert.throws(() => validateRuleOptions({ ...python, port: 8200, sharing: true }), /compartilhamento só pode liberar o launcher/);
+});
