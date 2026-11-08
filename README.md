@@ -77,10 +77,13 @@ As versões oficiais de Linux usadas aqui são construídas em Ubuntu; a compati
 ## Criadores e créditos
 
 - **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b12110); consulte a licença no repositório original.
+- **vLLM:** desenvolvido pelo projeto [vllm-project/vllm](https://github.com/vllm-project/vllm) e seus colaboradores, sob [licença Apache 2.0](https://github.com/vllm-project/vllm/blob/main/LICENSE). O launcher instala o pacote oficial `vllm` do PyPI no Linux ou usa a imagem oficial [`vllm/vllm-openai`](https://hub.docker.com/r/vllm/vllm-openai) no Windows; não redistribui código do vLLM.
+- **Strata:** criado por [Niko1221](https://github.com/Niko1221) e pelos colaboradores do [Strata](https://github.com/Niko1221/Strata), sob [licença MIT](https://github.com/Niko1221/Strata/blob/main/LICENSE). O launcher apenas inicia uma instalação feita pelo instalador oficial do projeto.
+- **PolyStrata:** criado por [VecSzn](https://github.com/VecSzn) e pelos colaboradores do [PolyStrata](https://github.com/simplexai-labs/PolyStrata), baseado no Strata, sob [licença MIT](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE) (copyright de Niko1221 e dos colaboradores do Strata, e de VecSzn e dos colaboradores do PolyStrata). O launcher apenas inicia uma instalação feita pelo instalador oficial do projeto.
 - **Launcher original para Célio:** interface WinForms, ponte local e auxiliar de firewall criados com Codex para Célio; serviram como base funcional para os ajustes avançados deste aplicativo.
-- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. Os links diretos dependem da publicação dos instaladores como assets da Release correspondente. A licença do launcher não altera as licenças do llama.cpp nem dos modelos GGUF.
+- **Este aplicativo:** desenvolvido para Célio com Codex e disponibilizado sob a [licença MIT](LICENSE), com copyright de Célio. Os links diretos dependem da publicação dos instaladores como assets da Release correspondente. A licença do launcher não altera as licenças do llama.cpp, do vLLM, do Strata, do PolyStrata nem dos modelos.
 
-Os créditos não implicam participação ou endosso dos autores do llama.cpp neste launcher.
+Os créditos não implicam participação ou endosso dos autores do llama.cpp, do vLLM, do Strata ou do PolyStrata neste launcher. A licença do launcher não altera as licenças desses projetos nem as dos modelos.
 
 
 ### Iniciar o servidor sem abrir o navegador
