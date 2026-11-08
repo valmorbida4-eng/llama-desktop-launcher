@@ -62,6 +62,28 @@ test('Windows falls back to CIM and ignores the overflowing 32-bit AdapterRAM va
   assert.match(script, /Win32_VideoController/);
 });
 
+test('Windows reads VRAM above 4 GB from the driver registry and prefers the discrete GPU', async () => {
+  // AMD Radeon RX 6600 (8 GB): AdapterRAM stops at 0xFFF00000 (~4 GB); qwMemorySize has the real size.
+  const output = JSON.stringify({
+    Video: [{ Name: 'AMD Radeon RX 6600', AdapterRAM: 4293918720 }, { Name: 'AMD Radeon(TM) Graphics', AdapterRAM: 536870912 }],
+    Registry: [{ Name: 'AMD Radeon(TM) Graphics', MemorySize: 536870912 }, { Name: 'AMD Radeon RX 6600', MemorySize: 8573157376 }],
+  });
+  let script = '';
+  const result = await detectGpu({
+    platform: 'win32',
+    run: runnerFor({ 'nvidia-smi': new Error('not installed'), 'powershell.exe': (args) => { script = args.join(' '); return output; } }),
+  });
+  assert.deepEqual(result, { name: 'AMD Radeon RX 6600', memoryBytes: 8573157376, source: 'powershell-cim' });
+  assert.match(script, /HardwareInformation\.qwMemorySize/);
+  assert.match(script, /HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\\{4d36e968-e325-11ce-bfc1-08002be10318\}/);
+
+  const capped = await detectGpu({
+    platform: 'win32',
+    run: runnerFor({ 'nvidia-smi': new Error('not installed'), 'powershell.exe': JSON.stringify({ Video: { Name: 'AMD Radeon RX 6600', AdapterRAM: 4293918720 }, Registry: [] }) }),
+  });
+  assert.equal(capped.memoryBytes, null, 'the ~4 GB cap is not reported as real capacity');
+});
+
 test('macOS parses system_profiler JSON and explicit VRAM', async () => {
   const result = await detectGpu({
     platform: 'darwin',

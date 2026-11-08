@@ -43,6 +43,8 @@ async function main(){
     const modelsVisible=!document.getElementById('models-view').hidden;
     const hardwareSuggestions=!!document.getElementById('guidance-summary').textContent;
     const modelFilters=['hf-moe','hf-dense','hf-full'].every(id=>!!document.getElementById(id));
+    for(let i=0;i<50&&!document.querySelectorAll('#engine-advice article').length;i++)await new Promise(r=>setTimeout(r,100));
+    const engineAdvice=document.querySelectorAll('#engine-advice article').length===3&&document.querySelectorAll('#engine-advice button').length>=6;
     document.getElementById('nav-llama').click();
     const llamaVisible=!document.getElementById('llama-view').hidden;
     const tuningInAccordion=document.getElementById('tuning-content').contains(document.getElementById('tuning-panel'));
@@ -50,7 +52,7 @@ async function main(){
     const saveInAccordion=!document.getElementById('save-settings-profile').hidden;
     document.getElementById('nav-settings').click();
     const tuningInSettings=document.getElementById('tuning-settings-content').contains(document.getElementById('tuning-panel'));
-    return {versionVisible,updateCard,firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,serverButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
+    return {versionVisible,updateCard,firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,serverButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,engineAdvice,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
   })()`);
   const expected=withModel?{firstRun:false,settingsVisible:false,llamaInitiallyVisible:true,selectedModel:true}:{firstRun:true,settingsVisible:true,llamaInitiallyVisible:false,selectedModel:true};
   if(Object.entries(result).some(([key,value])=>value!==(key in expected?expected[key]:true)))throw Error(`Estado da interface inesperado: ${JSON.stringify(result)}`);

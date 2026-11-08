@@ -38,7 +38,49 @@ function buildGuidance({ hardware, gpu = {}, availableDiskBytes = null, model = 
 Hardware: ${summary}. Sistema: ${hardware.platform || 'desconhecido'} (${hardware.arch || 'arquitetura desconhecida'}). ${current} ${currentSettings}
 
 Responda em português do Brasil com: (1) valores sugeridos para contexto, threads, batch, microbatch, camadas GPU, cache K/V, Flash Attention e camadas MoE na CPU, explicando o que depende da VRAM não medida; (2) até três modelos ou famílias GGUF compatíveis, separando modelo quantizado (Q4_K_M/Q5/Q8), MoE e denso sem quantização (F16/BF16); (3) tamanho estimado de arquivo e RAM para cada faixa; (4) riscos e medições que devo fazer. Se citar nomes específicos, peça para verificar repositório, licença e compatibilidade antes do download. Não invente URLs. Trate tudo como estimativa e não afirme que testou o hardware.`;
-  return { hardware: { ...hardware, gpuName: gpu.name || null, gpuMemoryBytes: gpu.memoryBytes || null }, availableDiskBytes, summary, suggestions, caution, prompt, links };
+  return { hardware: { ...hardware, gpuName: gpu.name || null, gpuMemoryBytes: gpu.memoryBytes || null }, availableDiskBytes, summary, suggestions, caution, prompt, links, engines: engineAdvice({ gpu, platform: hardware.platform }) };
 }
 
-module.exports = { links, tier, buildGuidance };
+// Orientação para os motores além do llama.cpp, a partir da GPU detectada. Os requisitos vêm da
+// documentação de cada projeto (Strata: README e docs/MODELS.md; PolyStrata: README e docs/AMD_HIP.md).
+const engineLinks = Object.freeze({
+  strataModels: 'https://github.com/Niko1221/Strata/blob/main/docs/MODELS.md',
+  polystrataModels: 'https://github.com/simplexai-labs/PolyStrata/tree/main/docs/models',
+  polystrataAmd: 'https://github.com/simplexai-labs/PolyStrata/blob/main/docs/AMD_HIP.md',
+  vllmModels: 'https://docs.vllm.ai/en/latest/models/supported_models.html',
+  vllmHf: 'https://huggingface.co/models?library=safetensors&apps=vllm&sort=trending',
+});
+function gpuVendor(name) {
+  const text = String(name || '');
+  if (/nvidia|geforce|rtx|quadro|tesla/i.test(text)) return 'nvidia';
+  if (/\bamd\b|radeon/i.test(text)) return 'amd';
+  if (/intel|\barc\b/i.test(text)) return 'intel';
+  return null;
+}
+function engineAdvice({ gpu = {}, platform = process.platform }: any = {}) {
+  const vendor = gpuVendor(gpu.name);
+  const vram = Number.isFinite(gpu.memoryBytes) && gpu.memoryBytes > 0 ? gpu.memoryBytes / GIB : null;
+  const card = gpu.name ? `${gpu.name}${vram ? ` (${vram.toFixed(0)} GB)` : ''}` : 'GPU não identificada';
+  let vllm;
+  if (platform === 'darwin') vllm = 'Não disponível no macOS.';
+  else if (vendor === 'nvidia') vllm = `Compatível com ${card}. Prefira modelos AWQ ou GPTQ${vram ? ` com pesos de até cerca de ${Math.max(1, Math.floor(vram * 0.7))} GB, para sobrar VRAM para o contexto` : ''}.`;
+  else if (platform === 'win32') vllm = `No Windows o vLLM roda pelo Docker Desktop e precisa de GPU NVIDIA; ${card} não é compatível.`;
+  else if (vendor === 'amd') vllm = `${card}: o pacote do pip é só CUDA. Para AMD, instale o build ROCm pela documentação do vLLM e use "Usar ambiente existente".`;
+  else vllm = 'Requer GPU NVIDIA (CUDA). Confira a GPU antes de instalar.';
+  let strata;
+  if (platform === 'darwin') strata = 'O launcher não oferece Strata no macOS.';
+  else if (vram !== null && vram < 12) strata = `Pede GPU NVIDIA (RTX 20 a 50) ou AMD (RX 6800 ou superior) com 12 GB ou mais e 32 GB de RAM; ${card} fica abaixo disso.`;
+  else strata = `Pede GPU NVIDIA (RTX 20 a 50) ou AMD (RX 6800 ou superior) com 12 GB ou mais, 32 GB de RAM e cerca de 80 GB de disco. Sua GPU: ${card}.`;
+  let polystrata;
+  if (platform === 'darwin') polystrata = 'O launcher não oferece PolyStrata no macOS.';
+  else if (vendor === 'amd') polystrata = `Placas AMD são beta e o suporte depende do modelo da placa. ${card}: veja o guia AMD do PolyStrata antes de instalar; algumas placas, como a RX 6600, já rodaram no Linux por relato da comunidade, mas o motor pronto do Windows pode não incluir o código delas.`;
+  else if (vram !== null && vram < 8) polystrata = `Os modelos pedem GPU NVIDIA RTX 20 ou superior com 8 GB ou mais; ${card} fica abaixo disso.`;
+  else polystrata = `Onze modelos extras (GLM 5.3 Flash, DeepSeek V4 Flash, LFM2.5, Qwen3.6, Gemma 4 e outros) para GPU NVIDIA RTX 20 ou superior com 8 GB ou mais. Sua GPU: ${card}.`;
+  return [
+    { id: 'strata', title: 'Strata', detail: strata, links: [{ kind: 'strataModels', label: 'Modelos do Strata ↗' }, { kind: 'strata', label: 'Instalar ↗' }] },
+    { id: 'polystrata', title: 'PolyStrata', detail: polystrata, links: [{ kind: 'polystrataModels', label: 'Modelos do PolyStrata ↗' }, ...(vendor === 'amd' ? [{ kind: 'polystrataAmd', label: 'Guia AMD ↗' }] : []), { kind: 'polystrata', label: 'Instalar ↗' }] },
+    { id: 'vllm', title: 'vLLM', detail: vllm, links: [{ kind: 'vllmHf', label: 'Modelos para vLLM no HF ↗' }, { kind: 'vllmModels', label: 'Arquiteturas suportadas ↗' }] },
+  ];
+}
+
+module.exports = { links, engineLinks, tier, buildGuidance, engineAdvice, gpuVendor };

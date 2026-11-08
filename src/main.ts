@@ -147,7 +147,7 @@ ipcMain.handle('install-vllm',async e=>{
     return state();
   } finally {engineBusy=false;}
 });
-ipcMain.handle('open-engine-link',async(e,kind)=>{validateSender(e);const url=engines.links[kind];if(!url)throw Error('Link inválido.');await shell.openExternal(url);return url;});
+ipcMain.handle('open-engine-link',async(e,kind)=>{validateSender(e);const url=Object.hasOwn(engines.links,kind)?engines.links[kind]:Object.hasOwn(guidance.engineLinks,kind)?guidance.engineLinks[kind]:null;if(!url)throw Error('Link inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('save-profile',(e,modelPath,settings)=>{validateSender(e);selectedModel(modelPath);core.validateSettings(settings);configuration.profiles[modelPath]=settings;save();return state();});
 ipcMain.handle('import-legacy-profiles',async(e)=>{
   validateSender(e);

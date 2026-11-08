@@ -804,7 +804,7 @@
       "file_type": "code",
       "norm_label": "fillbackends()",
       "source_file": "src/renderer.ts",
-      "source_location": "L64"
+      "source_location": "L65"
     },
     {
       "id": "src_renderer_fillengines",
@@ -816,7 +816,7 @@
       "file_type": "code",
       "norm_label": "fillengines()",
       "source_file": "src/renderer.ts",
-      "source_location": "L65"
+      "source_location": "L66"
     },
     {
       "id": "src_renderer_fillmodelselectors",
@@ -840,7 +840,7 @@
       "file_type": "code",
       "norm_label": "launchserver()",
       "source_file": "src/renderer.ts",
-      "source_location": "L130"
+      "source_location": "L131"
     },
     {
       "id": "src_renderer_loadguidance",
@@ -852,7 +852,7 @@
       "file_type": "code",
       "norm_label": "loadguidance()",
       "source_file": "src/renderer.ts",
-      "source_location": "L61"
+      "source_location": "L62"
     },
     {
       "id": "src_renderer_message",
@@ -888,7 +888,7 @@
       "file_type": "code",
       "norm_label": "refresh()",
       "source_file": "src/renderer.ts",
-      "source_location": "L76"
+      "source_location": "L77"
     },
     {
       "id": "src_renderer_renderguidance",
@@ -948,7 +948,7 @@
       "file_type": "code",
       "norm_label": "showconnection()",
       "source_file": "src/renderer.ts",
-      "source_location": "L75"
+      "source_location": "L76"
     },
     {
       "id": "src_renderer_showupdate",
@@ -960,7 +960,7 @@
       "file_type": "code",
       "norm_label": "showupdate()",
       "source_file": "src/renderer.ts",
-      "source_location": "L51"
+      "source_location": "L52"
     },
     {
       "id": "src_renderer_showview",
@@ -984,7 +984,7 @@
       "file_type": "code",
       "norm_label": "updateaction()",
       "source_file": "src/renderer.ts",
-      "source_location": "L60"
+      "source_location": "L61"
     },
     {
       "id": "src_renderer_updatebackendhint",
@@ -996,7 +996,7 @@
       "file_type": "code",
       "norm_label": "updatebackendhint()",
       "source_file": "src/renderer.ts",
-      "source_location": "L63"
+      "source_location": "L64"
     },
     {
       "id": "src_renderer_updateclient",
@@ -1008,7 +1008,7 @@
       "file_type": "code",
       "norm_label": "updateclient()",
       "source_file": "src/renderer.ts",
-      "source_location": "L122"
+      "source_location": "L123"
     },
     {
       "id": "src_renderer_updateenginecontrols",
@@ -1044,7 +1044,7 @@
       "file_type": "code",
       "norm_label": "updatenetwork()",
       "source_file": "src/renderer.ts",
-      "source_location": "L62"
+      "source_location": "L63"
     },
     {
       "id": "src_core_iswithin",
@@ -1057,6 +1057,30 @@
       "norm_label": "iswithin()",
       "source_file": "src/core.ts",
       "source_location": "L54"
+    },
+    {
+      "id": "src_engines_contextfromargs",
+      "label": "contextFromArgs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "contextfromargs()",
+      "source_file": "src/engines.ts",
+      "source_location": "L109"
+    },
+    {
+      "id": "src_engines_detectstrata",
+      "label": "detectStrata()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "detectstrata()",
+      "source_file": "src/engines.ts",
+      "source_location": "L102"
     },
     {
       "id": "src_engines_dockermodelmount",
@@ -1081,30 +1105,6 @@
       "norm_label": "dockerstatus()",
       "source_file": "src/engines.ts",
       "source_location": "L90"
-    },
-    {
-      "id": "src_engines_enginecatalog",
-      "label": "engineCatalog()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "engines.ts",
-      "file_type": "code",
-      "norm_label": "enginecatalog()",
-      "source_file": "src/engines.ts",
-      "source_location": "L24"
-    },
-    {
-      "id": "src_engines_engineinfo",
-      "label": "engineInfo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "engines.ts",
-      "file_type": "code",
-      "norm_label": "engineinfo()",
-      "source_file": "src/engines.ts",
-      "source_location": "L34"
     },
     {
       "id": "src_engines_installvllm",
@@ -1155,6 +1155,18 @@
       "source_location": "L52"
     },
     {
+      "id": "src_engines_scanstrataconfigs",
+      "label": "scanStrataConfigs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "scanstrataconfigs()",
+      "source_file": "src/engines.ts",
+      "source_location": "L118"
+    },
+    {
       "id": "src_engines_servercommand",
       "label": "serverCommand()",
       "_callable": true,
@@ -1164,19 +1176,19 @@
       "file_type": "code",
       "norm_label": "servercommand()",
       "source_file": "src/engines.ts",
-      "source_location": "L161"
+      "source_location": "L165"
     },
     {
-      "id": "src_engines_stopcommand",
-      "label": "stopCommand()",
+      "id": "src_engines_stratapython",
+      "label": "strataPython()",
       "_callable": true,
       "_origin": "ast",
       "community": 100,
       "community_name": "engines.ts",
       "file_type": "code",
-      "norm_label": "stopcommand()",
+      "norm_label": "stratapython()",
       "source_file": "src/engines.ts",
-      "source_location": "L199"
+      "source_location": "L99"
     },
     {
       "id": "src_engines_venvbaseexecutable",
@@ -1188,7 +1200,7 @@
       "file_type": "code",
       "norm_label": "venvbaseexecutable()",
       "source_file": "src/engines.ts",
-      "source_location": "L149"
+      "source_location": "L153"
     },
     {
       "id": "src_engines_vllmexecutable",
@@ -1251,28 +1263,40 @@
       "source_location": "L63"
     },
     {
-      "id": "src_main_stopcontainer",
-      "label": "stopContainer()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "engines.ts",
-      "file_type": "code",
-      "norm_label": "stopcontainer()",
-      "source_file": "src/main.ts",
-      "source_location": "L235"
-    },
-    {
       "id": "src_guidance_buildguidance",
       "label": "buildGuidance()",
       "_callable": true,
       "_origin": "ast",
       "community": 101,
-      "community_name": "modelGuidance",
+      "community_name": "guidance.ts",
       "file_type": "code",
       "norm_label": "buildguidance()",
       "source_file": "src/guidance.ts",
       "source_location": "L20"
+    },
+    {
+      "id": "src_guidance_engineadvice",
+      "label": "engineAdvice()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "guidance.ts",
+      "file_type": "code",
+      "norm_label": "engineadvice()",
+      "source_file": "src/guidance.ts",
+      "source_location": "L60"
+    },
+    {
+      "id": "src_guidance_gpuvendor",
+      "label": "gpuVendor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "guidance.ts",
+      "file_type": "code",
+      "norm_label": "gpuvendor()",
+      "source_file": "src/guidance.ts",
+      "source_location": "L53"
     },
     {
       "id": "src_guidance_tier",
@@ -1280,107 +1304,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 101,
-      "community_name": "modelGuidance",
+      "community_name": "guidance.ts",
       "file_type": "code",
       "norm_label": "tier()",
       "source_file": "src/guidance.ts",
       "source_location": "L12"
-    },
-    {
-      "id": "src_main_availablemodeldiskbytes",
-      "label": "availableModelDiskBytes()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "availablemodeldiskbytes()",
-      "source_file": "src/main.ts",
-      "source_location": "L71"
-    },
-    {
-      "id": "src_main_gpudetails",
-      "label": "gpuDetails()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "gpudetails()",
-      "source_file": "src/main.ts",
-      "source_location": "L72"
-    },
-    {
-      "id": "src_main_modelguidance",
-      "label": "modelGuidance()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "modelGuidance",
-      "file_type": "code",
-      "norm_label": "modelguidance()",
-      "source_file": "src/main.ts",
-      "source_location": "L73"
-    },
-    {
-      "id": "src_share_proxy_createshareproxy",
-      "label": "createShareProxy()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "createShareProxy",
-      "file_type": "code",
-      "norm_label": "createshareproxy()",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_share_proxy_createshareproxy_authorized",
-      "label": "authorized()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "createShareProxy",
-      "file_type": "code",
-      "norm_label": "authorized()",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L12"
-    },
-    {
-      "id": "src_share_proxy_createshareproxy_deny",
-      "label": "deny()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "createShareProxy",
-      "file_type": "code",
-      "norm_label": "deny()",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_share_proxy_createshareproxy_details",
-      "label": "details()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "createShareProxy",
-      "file_type": "code",
-      "norm_label": "details()",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L18"
-    },
-    {
-      "id": "src_share_proxy_createshareproxy_trusted",
-      "label": "trusted()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "createShareProxy",
-      "file_type": "code",
-      "norm_label": "trusted()",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L11"
     },
     {
       "id": "src_engine_assetfor",
@@ -1623,6 +1551,18 @@
       "source_location": "L53"
     },
     {
+      "id": "tests_engine_install_test_workspace",
+      "label": "workspace()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "workspace()",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L8"
+    },
+    {
       "id": "src_firewall_buildfirewallscript",
       "label": "buildFirewallScript()",
       "_callable": true,
@@ -1755,52 +1695,40 @@
       "source_location": "L51"
     },
     {
-      "id": "scripts_check_engine_release_fetchrelease",
-      "label": "fetchRelease()",
+      "id": "tests_engines_test_stratainstall",
+      "label": "strataInstall()",
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
-      "norm_label": "fetchrelease()",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L10"
+      "norm_label": "stratainstall()",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L14"
     },
     {
-      "id": "scripts_check_engine_release_main",
-      "label": "main()",
+      "id": "tests_engines_test_temp",
+      "label": "temp()",
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L29"
+      "norm_label": "temp()",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L12"
     },
     {
-      "id": "scripts_check_engine_release_missingassets",
-      "label": "missingAssets()",
+      "id": "tests_engines_test_write",
+      "label": "write()",
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
-      "norm_label": "missingassets()",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L18"
-    },
-    {
-      "id": "tests_engine_install_test_workspace",
-      "label": "workspace()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "workspace()",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L8"
+      "norm_label": "write()",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L13"
     },
     {
       "id": "tests_updater_test_release",
@@ -1808,7 +1736,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "release()",
       "source_file": "tests/updater.test.js",
@@ -1820,7 +1748,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "serve()",
       "source_file": "tests/updater.test.js",
@@ -1832,7 +1760,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "workspace()",
       "source_file": "tests/updater.test.js",
@@ -1844,7 +1772,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/smoke-bench.js",
@@ -1856,47 +1784,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/smoke-cli.js",
       "source_location": "L7"
     },
     {
-      "id": "scripts_smoke_engine_check",
+      "id": "scripts_smoke_network_check",
       "label": "check()",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
+      "community": 15,
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "check()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L11"
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L13"
     },
     {
-      "id": "scripts_smoke_engine_freeport",
+      "id": "scripts_smoke_network_freeport",
       "label": "freePort()",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
+      "community": 15,
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "freeport()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L10"
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L12"
     },
     {
-      "id": "scripts_smoke_engine_main",
+      "id": "scripts_smoke_network_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
+      "community": 15,
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "main()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L12"
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L14"
     },
     {
       "id": "src_network_accessoptions",
@@ -1904,7 +1832,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "accessoptions()",
       "source_file": "src/network.ts",
@@ -1916,7 +1844,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "allowlocalrequest()",
       "source_file": "src/network.ts",
@@ -1928,7 +1856,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "createproxy()",
       "source_file": "src/network.ts",
@@ -1940,7 +1868,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "ensurekey()",
       "source_file": "src/network.ts",
@@ -1952,7 +1880,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "rotatekey()",
       "source_file": "src/network.ts",
@@ -1964,7 +1892,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "scopeof()",
       "source_file": "src/network.ts",
@@ -1976,7 +1904,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "upstreamrequestdetails()",
       "source_file": "src/network.ts",
@@ -1988,11 +1916,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "validateparallel()",
       "source_file": "src/network.ts",
       "source_location": "L26"
+    },
+    {
+      "id": "src_share_proxy_createshareproxy",
+      "label": "createShareProxy()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "createshareproxy()",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_share_proxy_createshareproxy_authorized",
+      "label": "authorized()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "authorized()",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_share_proxy_createshareproxy_deny",
+      "label": "deny()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "deny()",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_share_proxy_createshareproxy_details",
+      "label": "details()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "details()",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_share_proxy_createshareproxy_trusted",
+      "label": "trusted()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "trusted()",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L11"
     },
     {
       "id": "src_main_installupdate",
@@ -2043,52 +2031,28 @@
       "source_location": "L53"
     },
     {
-      "id": "src_engines_contextfromargs",
-      "label": "contextFromArgs()",
+      "id": "src_engines_enginecatalog",
+      "label": "engineCatalog()",
       "_callable": true,
       "_origin": "ast",
       "community": 151,
       "community_name": "engineReady",
       "file_type": "code",
-      "norm_label": "contextfromargs()",
+      "norm_label": "enginecatalog()",
       "source_file": "src/engines.ts",
-      "source_location": "L109"
+      "source_location": "L24"
     },
     {
-      "id": "src_engines_detectstrata",
-      "label": "detectStrata()",
+      "id": "src_engines_engineinfo",
+      "label": "engineInfo()",
       "_callable": true,
       "_origin": "ast",
       "community": 151,
       "community_name": "engineReady",
       "file_type": "code",
-      "norm_label": "detectstrata()",
+      "norm_label": "engineinfo()",
       "source_file": "src/engines.ts",
-      "source_location": "L102"
-    },
-    {
-      "id": "src_engines_scanstrataconfigs",
-      "label": "scanStrataConfigs()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "engineReady",
-      "file_type": "code",
-      "norm_label": "scanstrataconfigs()",
-      "source_file": "src/engines.ts",
-      "source_location": "L118"
-    },
-    {
-      "id": "src_engines_stratapython",
-      "label": "strataPython()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "engineReady",
-      "file_type": "code",
-      "norm_label": "stratapython()",
-      "source_file": "src/engines.ts",
-      "source_location": "L99"
+      "source_location": "L34"
     },
     {
       "id": "src_main_allmodels",
@@ -2101,6 +2065,18 @@
       "norm_label": "allmodels()",
       "source_file": "src/main.ts",
       "source_location": "L55"
+    },
+    {
+      "id": "src_main_availablemodeldiskbytes",
+      "label": "availableModelDiskBytes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "availablemodeldiskbytes()",
+      "source_file": "src/main.ts",
+      "source_location": "L71"
     },
     {
       "id": "src_main_engineready",
@@ -2127,6 +2103,18 @@
       "source_location": "L47"
     },
     {
+      "id": "src_main_gpudetails",
+      "label": "gpuDetails()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "gpudetails()",
+      "source_file": "src/main.ts",
+      "source_location": "L72"
+    },
+    {
       "id": "src_main_llamaready",
       "label": "llamaReady()",
       "_callable": true,
@@ -2137,6 +2125,18 @@
       "norm_label": "llamaready()",
       "source_file": "src/main.ts",
       "source_location": "L40"
+    },
+    {
+      "id": "src_main_modelguidance",
+      "label": "modelGuidance()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "modelguidance()",
+      "source_file": "src/main.ts",
+      "source_location": "L73"
     },
     {
       "id": "src_main_selectedmodel",
@@ -2163,40 +2163,40 @@
       "source_location": "L65"
     },
     {
-      "id": "scripts_smoke_network_check",
+      "id": "scripts_smoke_engine_check",
       "label": "check()",
       "_callable": true,
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "check()",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L13"
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L11"
     },
     {
-      "id": "scripts_smoke_network_freeport",
+      "id": "scripts_smoke_engine_freeport",
       "label": "freePort()",
       "_callable": true,
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "freeport()",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L12"
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L10"
     },
     {
-      "id": "scripts_smoke_network_main",
+      "id": "scripts_smoke_engine_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "main()",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L14"
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L12"
     },
     {
       "id": "tests_network_test_sendrawrequest",
@@ -2232,7 +2232,7 @@
       "file_type": "code",
       "norm_label": "detectgpu()",
       "source_file": "src/hardware.ts",
-      "source_location": "L118"
+      "source_location": "L134"
     },
     {
       "id": "src_hardware_parselspci",
@@ -2268,7 +2268,7 @@
       "file_type": "code",
       "norm_label": "parsepowershell()",
       "source_file": "src/hardware.ts",
-      "source_location": "L67"
+      "source_location": "L72"
     },
     {
       "id": "src_hardware_parsesystemprofiler",
@@ -2280,7 +2280,7 @@
       "file_type": "code",
       "norm_label": "parsesystemprofiler()",
       "source_file": "src/hardware.ts",
-      "source_location": "L83"
+      "source_location": "L96"
     },
     {
       "id": "src_hardware_parsevulkan",
@@ -2304,7 +2304,7 @@
       "file_type": "code",
       "norm_label": "psscript()",
       "source_file": "src/hardware.ts",
-      "source_location": "L106"
+      "source_location": "L119"
     },
     {
       "id": "src_hardware_result",
@@ -2480,7 +2480,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -2492,30 +2492,18 @@
       "_callable": true,
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "write()",
       "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L12"
     },
     {
-      "id": "src_preload_invoke",
-      "label": "invoke()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "smoke-engines-ui.js",
-      "file_type": "code",
-      "norm_label": "invoke()",
-      "source_file": "src/preload.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "scripts_smoke_server_buttons_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 25,
+      "community": 21,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "main()",
@@ -2527,7 +2515,7 @@
       "label": "resume()",
       "_callable": true,
       "_origin": "ast",
-      "community": 25,
+      "community": 21,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "resume()",
@@ -2535,40 +2523,64 @@
       "source_location": "L27"
     },
     {
-      "id": "tests_engines_test_stratainstall",
-      "label": "strataInstall()",
+      "id": "scripts_smoke_ui_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 25,
+      "community": 21,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "stratainstall()",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L14"
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L20"
     },
     {
-      "id": "tests_engines_test_temp",
-      "label": "temp()",
+      "id": "src_preload_invoke",
+      "label": "invoke()",
       "_callable": true,
       "_origin": "ast",
-      "community": 25,
+      "community": 21,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "temp()",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L12"
+      "norm_label": "invoke()",
+      "source_file": "src/preload.ts",
+      "source_location": "L3"
     },
     {
-      "id": "tests_engines_test_write",
-      "label": "write()",
+      "id": "scripts_check_engine_release_fetchrelease",
+      "label": "fetchRelease()",
       "_callable": true,
       "_origin": "ast",
       "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
-      "norm_label": "write()",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L13"
+      "norm_label": "fetchrelease()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "scripts_check_engine_release_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L29"
+    },
+    {
+      "id": "scripts_check_engine_release_missingassets",
+      "label": "missingAssets()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "missingassets()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L18"
     },
     {
       "id": "scripts_smoke_external_cli_win_main",
@@ -2583,6 +2595,30 @@
       "source_location": "L10"
     },
     {
+      "id": "src_engines_stopcommand",
+      "label": "stopCommand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "stopCommand",
+      "file_type": "code",
+      "norm_label": "stopcommand()",
+      "source_file": "src/engines.ts",
+      "source_location": "L203"
+    },
+    {
+      "id": "src_main_stopcontainer",
+      "label": "stopContainer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "stopCommand",
+      "file_type": "code",
+      "norm_label": "stopcontainer()",
+      "source_file": "src/main.ts",
+      "source_location": "L235"
+    },
+    {
       "id": "scripts_smoke_external_cli_linux_main",
       "label": "main()",
       "_callable": true,
@@ -2593,18 +2629,6 @@
       "norm_label": "main()",
       "source_file": "scripts/smoke-external-cli-linux.js",
       "source_location": "L10"
-    },
-    {
-      "id": "scripts_smoke_ui_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L20"
     },
     {
       "id": "tests_hardware_test_runnerfor",
@@ -2629,18 +2653,6 @@
       "norm_label": "row()",
       "source_file": "tests/profile_import.test.js",
       "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg_run",
-      "label": "run()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "run()",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L10"
     },
     {
       "id": "scripts_check_version_checkreleaseref",
@@ -2775,6 +2787,18 @@
       "source_location": "L4"
     },
     {
+      "id": "src_core_argsformodel",
+      "label": "argsForModel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "argsformodel()",
+      "source_file": "src/core.ts",
+      "source_location": "L25"
+    },
+    {
       "id": "src_core_hfdisplayname",
       "label": "hfDisplayName()",
       "_callable": true,
@@ -2883,12 +2907,24 @@
       "source_location": "L48"
     },
     {
+      "id": "scripts_smoke_macos_dmg_run",
+      "label": "run()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "run()",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L10"
+    },
+    {
       "id": "src_cli_argsforconversation",
       "label": "argsForConversation()",
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "argsforconversation()",
       "source_file": "src/cli.ts",
@@ -2900,7 +2936,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "createsession()",
       "source_file": "src/cli.ts",
@@ -2912,7 +2948,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "send()",
       "source_file": "src/cli.ts",
@@ -2924,7 +2960,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "stop()",
       "source_file": "src/cli.ts",
@@ -2936,7 +2972,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "executablename()",
       "source_file": "src/cli.ts",
@@ -2948,23 +2984,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "executablepath()",
       "source_file": "src/cli.ts",
       "source_location": "L13"
-    },
-    {
-      "id": "src_core_argsformodel",
-      "label": "argsForModel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "argsformodel()",
-      "source_file": "src/core.ts",
-      "source_location": "L25"
     },
     {
       "id": "src_terminal_cli_onpath",
@@ -2972,7 +2996,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "onpath()",
       "source_file": "src/terminal_cli.ts",
@@ -2984,7 +3008,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "openexternalcli()",
       "source_file": "src/terminal_cli.ts",
@@ -2996,7 +3020,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "posixscript()",
       "source_file": "src/terminal_cli.ts",
@@ -3008,7 +3032,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "powershellscript()",
       "source_file": "src/terminal_cli.ts",
@@ -3020,7 +3044,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "psquote()",
       "source_file": "src/terminal_cli.ts",
@@ -3032,7 +3056,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "shquote()",
       "source_file": "src/terminal_cli.ts",
@@ -3044,7 +3068,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "terminalcommand()",
       "source_file": "src/terminal_cli.ts",
@@ -3270,18 +3294,29 @@
       "label": "guidance.ts",
       "_origin": "ast",
       "community": 101,
-      "community_name": "modelGuidance",
+      "community_name": "guidance.ts",
       "file_type": "code",
       "norm_label": "guidance.ts",
       "source_file": "src/guidance.ts",
       "source_location": "L1"
     },
     {
+      "id": "src_guidance_enginelinks",
+      "label": "engineLinks",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "guidance.ts",
+      "file_type": "code",
+      "norm_label": "enginelinks",
+      "source_file": "src/guidance.ts",
+      "source_location": "L46"
+    },
+    {
       "id": "src_guidance_links",
       "label": "links",
       "_origin": "ast",
       "community": 101,
-      "community_name": "modelGuidance",
+      "community_name": "guidance.ts",
       "file_type": "code",
       "norm_label": "links",
       "source_file": "src/guidance.ts",
@@ -3429,6 +3464,138 @@
       "norm_label": "path",
       "source_file": "src/updater.ts",
       "source_location": "L4"
+    },
+    {
+      "id": "tests_engine_install_test",
+      "label": "engine-install.test.js",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "engine-install.test.js",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_engine_install_test_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "tests_engine_install_test_crypto",
+      "label": "crypto",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "crypto",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_engine_install_test_engine",
+      "label": "engine",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "engine",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_engine_install_test_eventemitter",
+      "label": "{EventEmitter}",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "{eventemitter}",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_engine_install_test_execfilesync",
+      "label": "{execFileSync}",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "{execfilesync}",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "tests_engine_install_test_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_engine_install_test_https",
+      "label": "https",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "https",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_engine_install_test_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_engine_install_test_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_engine_install_test_readable",
+      "label": "{Readable}",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "{readable}",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_engine_install_test_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "engine.ts",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L2"
     },
     {
       "id": "src_firewall",
@@ -3673,179 +3840,102 @@
       "source_location": "L16"
     },
     {
-      "id": "scripts_check_engine_release",
-      "label": "check-engine-release.js",
+      "id": "tests_engines_test",
+      "label": "engines.test.js",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
-      "norm_label": "check-engine-release.js",
-      "source_file": "scripts/check-engine-release.js",
+      "norm_label": "engines.test.js",
+      "source_file": "tests/engines.test.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_check_engine_release_arches",
-      "label": "ARCHES",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "arches",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_check_engine_release_engine",
-      "label": "engine",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "engine",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_check_engine_release_platforms",
-      "label": "PLATFORMS",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "platforms",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "tests_engine_install_test",
-      "label": "engine-install.test.js",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "engine-install.test.js",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_engine_install_test_assert",
+      "id": "tests_engines_test_assert",
       "label": "assert",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "assert",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L2"
+      "source_file": "tests/engines.test.js",
+      "source_location": "L3"
     },
     {
-      "id": "tests_engine_install_test_crypto",
-      "label": "crypto",
+      "id": "tests_engines_test_core",
+      "label": "core",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
-      "norm_label": "crypto",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L4"
+      "norm_label": "core",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L9"
     },
     {
-      "id": "tests_engine_install_test_engine",
-      "label": "engine",
+      "id": "tests_engines_test_engines",
+      "label": "engines",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
-      "norm_label": "engine",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L7"
+      "norm_label": "engines",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L8"
     },
     {
-      "id": "tests_engine_install_test_eventemitter",
+      "id": "tests_engines_test_eventemitter",
       "label": "{EventEmitter}",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "{eventemitter}",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L5"
+      "source_file": "tests/engines.test.js",
+      "source_location": "L7"
     },
     {
-      "id": "tests_engine_install_test_execfilesync",
-      "label": "{execFileSync}",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "{execfilesync}",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "tests_engine_install_test_fs",
+      "id": "tests_engines_test_fs",
       "label": "fs",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "fs",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_engine_install_test_https",
-      "label": "https",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "https",
-      "source_file": "tests/engine-install.test.js",
+      "source_file": "tests/engines.test.js",
       "source_location": "L4"
     },
     {
-      "id": "tests_engine_install_test_os",
+      "id": "tests_engines_test_os",
       "label": "os",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "os",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_engine_install_test_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_engine_install_test_readable",
-      "label": "{Readable}",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "file_type": "code",
-      "norm_label": "{readable}",
-      "source_file": "tests/engine-install.test.js",
+      "source_file": "tests/engines.test.js",
       "source_location": "L5"
     },
     {
-      "id": "tests_engine_install_test_test",
+      "id": "tests_engines_test_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "updater.test.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "tests_engines_test_test",
       "label": "test",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "test",
-      "source_file": "tests/engine-install.test.js",
+      "source_file": "tests/engines.test.js",
       "source_location": "L2"
     },
     {
@@ -3853,7 +3943,7 @@
       "label": "updater.test.js",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "updater.test.js",
       "source_file": "tests/updater.test.js",
@@ -3864,7 +3954,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/updater.test.js",
@@ -3875,7 +3965,7 @@
       "label": "crypto",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "crypto",
       "source_file": "tests/updater.test.js",
@@ -3886,7 +3976,7 @@
       "label": "{EventEmitter}",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "{eventemitter}",
       "source_file": "tests/updater.test.js",
@@ -3897,7 +3987,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "tests/updater.test.js",
@@ -3908,7 +3998,7 @@
       "label": "https",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "https",
       "source_file": "tests/updater.test.js",
@@ -3919,7 +4009,7 @@
       "label": "os",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "os",
       "source_file": "tests/updater.test.js",
@@ -3930,7 +4020,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "tests/updater.test.js",
@@ -3941,7 +4031,7 @@
       "label": "{Readable}",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "{readable}",
       "source_file": "tests/updater.test.js",
@@ -3952,7 +4042,7 @@
       "label": "test",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/updater.test.js",
@@ -3963,7 +4053,7 @@
       "label": "updater",
       "_origin": "ast",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "file_type": "code",
       "norm_label": "updater",
       "source_file": "tests/updater.test.js",
@@ -3974,7 +4064,7 @@
       "label": "smoke-bench.js",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "smoke-bench.js",
       "source_file": "scripts/smoke-bench.js",
@@ -3985,7 +4075,7 @@
       "label": "{defaults}",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "{defaults}",
       "source_file": "scripts/smoke-bench.js",
@@ -3996,7 +4086,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/smoke-bench.js",
@@ -4007,7 +4097,7 @@
       "label": "{tune}",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "{tune}",
       "source_file": "scripts/smoke-bench.js",
@@ -4018,7 +4108,7 @@
       "label": "smoke-cli.js",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "smoke-cli.js",
       "source_file": "scripts/smoke-cli.js",
@@ -4029,7 +4119,7 @@
       "label": "cli",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "cli",
       "source_file": "scripts/smoke-cli.js",
@@ -4040,7 +4130,7 @@
       "label": "{defaults}",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "{defaults}",
       "source_file": "scripts/smoke-cli.js",
@@ -4051,198 +4141,11 @@
       "label": "fs",
       "_origin": "ast",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/smoke-cli.js",
       "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_engine",
-      "label": "smoke-engine.js",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "smoke-engine.js",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_engine_defaults_argsformodel",
-      "label": "{defaults,argsForModel}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{defaults,argsformodel}",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_engine_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_engine_http",
-      "label": "http",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "http",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_engine_net",
-      "label": "net",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "net",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_engine_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_engine_spawn",
-      "label": "{spawn}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{spawn}",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "tests_core_test",
-      "label": "core.test.js",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "core.test.js",
-      "source_file": "tests/core.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_core_test_assert",
-      "label": "assert",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/core.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_core_test_assetfor",
-      "label": "{assetFor}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{assetfor}",
-      "source_file": "tests/core.test.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "tests_core_test_cli",
-      "label": "cli",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "cli",
-      "source_file": "tests/core.test.js",
-      "source_location": "L10"
-    },
-    {
-      "id": "tests_core_test_defaults_argsformodel_validatesettings_recommend_iswithin_scanmodels",
-      "label": "{defaults,argsForModel,validateSettings,recommend,isWithin,scanModels}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "{defaults,argsformodel,validatesettings,recommend,iswithin,scanmodels}",
-      "source_file": "tests/core.test.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "tests_core_test_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "tests/core.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_core_test_network",
-      "label": "network",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "network",
-      "source_file": "tests/core.test.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "tests_core_test_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "tests/core.test.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "tests_core_test_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "tests/core.test.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "tests_core_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "core.test.js",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/core.test.js",
-      "source_location": "L2"
     },
     {
       "id": "docs_adr_app_update_check",
@@ -4610,7 +4513,7 @@
       "node_kind": "heading",
       "norm_label": "6. llama screen: start a conversation",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L103"
+      "source_location": "L104"
     },
     {
       "id": "docs_manual_en_connect_other_applications",
@@ -4622,7 +4525,7 @@
       "node_kind": "heading",
       "norm_label": "connect other applications",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L133"
+      "source_location": "L134"
     },
     {
       "id": "docs_manual_en_integrate_application_apis_step_by_step",
@@ -4634,7 +4537,7 @@
       "node_kind": "heading",
       "norm_label": "integrate application apis: step by step",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L144"
+      "source_location": "L145"
     },
     {
       "id": "docs_manual_en_python_example_for_your_application",
@@ -4646,7 +4549,7 @@
       "node_kind": "heading",
       "norm_label": "python example for your application",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L217"
+      "source_location": "L218"
     },
     {
       "id": "docs_manual_en_share_access_over_lan_or_tailscale",
@@ -4658,7 +4561,7 @@
       "node_kind": "heading",
       "norm_label": "share access over lan or tailscale",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L124"
+      "source_location": "L125"
     },
     {
       "id": "docs_manual_en_start_the_server_without_opening_a_browser",
@@ -4670,7 +4573,7 @@
       "node_kind": "heading",
       "norm_label": "start the server without opening a browser",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L114"
+      "source_location": "L115"
     },
     {
       "id": "docs_manual_en_temporary_access_or_persistent_credential",
@@ -4682,7 +4585,7 @@
       "node_kind": "heading",
       "norm_label": "temporary access or persistent credential",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L154"
+      "source_location": "L155"
     },
     {
       "id": "docs_manual_en_test_on_linux_macos_with_bash_and_curl",
@@ -4694,7 +4597,7 @@
       "node_kind": "heading",
       "norm_label": "test on linux/macos with bash and curl",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L166"
+      "source_location": "L167"
     },
     {
       "id": "docs_manual_en_test_on_windows_with_powershell",
@@ -4706,7 +4609,7 @@
       "node_kind": "heading",
       "norm_label": "test on windows with powershell",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L191"
+      "source_location": "L192"
     },
     {
       "id": "docs_manual_en_troubleshoot_application_apis",
@@ -4718,7 +4621,7 @@
       "node_kind": "heading",
       "norm_label": "troubleshoot application apis",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L251"
+      "source_location": "L252"
     },
     {
       "id": "src_electron_api_d",
@@ -4996,7 +4899,7 @@
       "label": "engine.test.js",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "engine.test.js",
       "source_file": "tests/engine.test.js",
@@ -5007,7 +4910,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/engine.test.js",
@@ -5018,7 +4921,7 @@
       "label": "engine",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "engine",
       "source_file": "tests/engine.test.js",
@@ -5029,7 +4932,7 @@
       "label": "release",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "release",
       "source_file": "tests/engine.test.js",
@@ -5040,10 +4943,54 @@
       "label": "test",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "ref_node_assert",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/engine.test.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "tests_package_resources_test",
+      "label": "package-resources.test.js",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "package-resources.test.js",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_package_resources_test_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_package_resources_test_pkg",
+      "label": "pkg",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "pkg",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_package_resources_test_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "tests/package-resources.test.js",
       "source_location": "L2"
     },
     {
@@ -5051,18 +4998,128 @@
       "label": "node:os",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "confidence": "EXTRACTED",
       "file_type": "code",
       "norm_label": "node:os",
       "source_file": "node:os"
     },
     {
+      "id": "scripts_smoke_network",
+      "label": "smoke-network.js",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "smoke-network.js",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_network_crypto",
+      "label": "crypto",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "crypto",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_network_defaults_argsformodel",
+      "label": "{defaults,argsForModel}",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "{defaults,argsformodel}",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "scripts_smoke_network_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_network_http",
+      "label": "http",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "http",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_network_net",
+      "label": "net",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "net",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_network_network",
+      "label": "network",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "network",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "scripts_smoke_network_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_network_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_network_spawn",
+      "label": "{spawn}",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "{spawn}",
+      "source_file": "scripts/smoke-network.js",
+      "source_location": "L9"
+    },
+    {
       "id": "src_network",
       "label": "network.ts",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "network.ts",
       "source_file": "src/network.ts",
@@ -5073,7 +5130,7 @@
       "label": "crypto",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "crypto",
       "source_file": "src/network.ts",
@@ -5084,7 +5141,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "src/network.ts",
@@ -5095,7 +5152,7 @@
       "label": "http",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "http",
       "source_file": "src/network.ts",
@@ -5106,7 +5163,7 @@
       "label": "net",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "net",
       "source_file": "src/network.ts",
@@ -5117,11 +5174,66 @@
       "label": "os",
       "_origin": "ast",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "file_type": "code",
       "norm_label": "os",
       "source_file": "src/network.ts",
       "source_location": "L2"
+    },
+    {
+      "id": "src_share_proxy",
+      "label": "share_proxy.ts",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "share_proxy.ts",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_share_proxy_crypto",
+      "label": "crypto",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "crypto",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "src_share_proxy_http",
+      "label": "http",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "http",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "src_share_proxy_net",
+      "label": "net",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "net",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "src_share_proxy_network",
+      "label": "network",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "file_type": "code",
+      "norm_label": "network",
+      "source_file": "src/share_proxy.ts",
+      "source_location": "L3"
     },
     {
       "id": "readme_desinstala\u00e7\u00e3o_segura",
@@ -5133,7 +5245,7 @@
       "node_kind": "heading",
       "norm_label": "desinstalacao segura",
       "source_file": "README.md",
-      "source_location": "L67"
+      "source_location": "L68"
     },
     {
       "id": "readme_empacotamento_e_limites_atuais",
@@ -5145,7 +5257,7 @@
       "node_kind": "heading",
       "norm_label": "empacotamento e limites atuais",
       "source_file": "README.md",
-      "source_location": "L73"
+      "source_location": "L74"
     },
     {
       "id": "readme_funcionalidades",
@@ -5169,7 +5281,7 @@
       "node_kind": "heading",
       "norm_label": "instalacao e uso",
       "source_file": "README.md",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "readme_llama_desktop_launcher",
@@ -5193,7 +5305,7 @@
       "node_kind": "heading",
       "norm_label": "obter o aplicativo sem o codigo-fonte",
       "source_file": "README.md",
-      "source_location": "L26"
+      "source_location": "L27"
     },
     {
       "id": "readme_apis_de_aplicativos",
@@ -5205,7 +5317,7 @@
       "node_kind": "heading",
       "norm_label": "apis de aplicativos",
       "source_file": "README.md",
-      "source_location": "L118"
+      "source_location": "L119"
     },
     {
       "id": "readme_compartilhar_acesso_na_rede_interna_ou_tailscale",
@@ -5217,7 +5329,7 @@
       "node_kind": "heading",
       "norm_label": "compartilhar acesso na rede interna ou tailscale",
       "source_file": "README.md",
-      "source_location": "L99"
+      "source_location": "L100"
     },
     {
       "id": "readme_conectar_outros_aplicativos",
@@ -5229,7 +5341,7 @@
       "node_kind": "heading",
       "norm_label": "conectar outros aplicativos",
       "source_file": "README.md",
-      "source_location": "L108"
+      "source_location": "L109"
     },
     {
       "id": "readme_criadores_e_cr\u00e9ditos",
@@ -5241,7 +5353,7 @@
       "node_kind": "heading",
       "norm_label": "criadores e creditos",
       "source_file": "README.md",
-      "source_location": "L77"
+      "source_location": "L78"
     },
     {
       "id": "readme_iniciar_o_servidor_sem_abrir_o_navegador",
@@ -5253,7 +5365,7 @@
       "node_kind": "heading",
       "norm_label": "iniciar o servidor sem abrir o navegador",
       "source_file": "README.md",
-      "source_location": "L89"
+      "source_location": "L90"
     },
     {
       "id": "docs_manual_en_3_install_the_application",
@@ -5313,7 +5425,7 @@
       "node_kind": "heading",
       "norm_label": "7. advanced settings",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L263"
+      "source_location": "L264"
     },
     {
       "id": "docs_manual_en_integrated_chat_and_external_cli",
@@ -5325,7 +5437,7 @@
       "node_kind": "heading",
       "norm_label": "integrated chat and external cli",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L273"
+      "source_location": "L274"
     },
     {
       "id": "docs_manual_en_network_links_and_simultaneous_sessions",
@@ -5337,7 +5449,7 @@
       "node_kind": "heading",
       "norm_label": "network links and simultaneous sessions",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L265"
+      "source_location": "L266"
     },
     {
       "id": "docs_adr_additional_engines",
@@ -5529,114 +5641,81 @@
       "source_location": "L16"
     },
     {
-      "id": "scripts_smoke_network",
-      "label": "smoke-network.js",
+      "id": "scripts_smoke_engine",
+      "label": "smoke-engine.js",
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "smoke-network.js",
-      "source_file": "scripts/smoke-network.js",
+      "norm_label": "smoke-engine.js",
+      "source_file": "scripts/smoke-engine.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_network_crypto",
-      "label": "crypto",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "smoke-network.js",
-      "file_type": "code",
-      "norm_label": "crypto",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_network_defaults_argsformodel",
+      "id": "scripts_smoke_engine_defaults_argsformodel",
       "label": "{defaults,argsForModel}",
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "{defaults,argsformodel}",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L10"
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L8"
     },
     {
-      "id": "scripts_smoke_network_fs",
+      "id": "scripts_smoke_engine_fs",
       "label": "fs",
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "fs",
-      "source_file": "scripts/smoke-network.js",
+      "source_file": "scripts/smoke-engine.js",
       "source_location": "L3"
     },
     {
-      "id": "scripts_smoke_network_http",
+      "id": "scripts_smoke_engine_http",
       "label": "http",
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "http",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_network_net",
-      "label": "net",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "smoke-network.js",
-      "file_type": "code",
-      "norm_label": "net",
-      "source_file": "scripts/smoke-network.js",
+      "source_file": "scripts/smoke-engine.js",
       "source_location": "L6"
     },
     {
-      "id": "scripts_smoke_network_network",
-      "label": "network",
+      "id": "scripts_smoke_engine_net",
+      "label": "net",
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
-      "norm_label": "network",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_network_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "smoke-network.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_network_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "smoke-network.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-network.js",
+      "norm_label": "net",
+      "source_file": "scripts/smoke-engine.js",
       "source_location": "L5"
     },
     {
-      "id": "scripts_smoke_network_spawn",
+      "id": "scripts_smoke_engine_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "smoke-engine.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_engine_spawn",
       "label": "{spawn}",
       "_origin": "ast",
       "community": 17,
-      "community_name": "smoke-network.js",
+      "community_name": "smoke-engine.js",
       "file_type": "code",
       "norm_label": "{spawn}",
-      "source_file": "scripts/smoke-network.js",
-      "source_location": "L9"
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L7"
     },
     {
       "id": "tests_network_test",
@@ -6083,7 +6162,7 @@
       "label": "smoke-engines-ui.js",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "smoke-engines-ui.js",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6094,7 +6173,7 @@
       "label": "{app,BrowserWindow}",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "{app,browserwindow}",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6105,7 +6184,7 @@
       "label": "engineDir",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "enginedir",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6116,7 +6195,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6127,7 +6206,7 @@
       "label": "gguf",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "gguf",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6138,7 +6217,7 @@
       "label": "modelDir",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "modeldir",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6149,7 +6228,7 @@
       "label": "os",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "os",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6160,7 +6239,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6171,7 +6250,7 @@
       "label": "strataConfig",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "strataconfig",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6182,7 +6261,7 @@
       "label": "strataDir",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "stratadir",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -6193,10 +6272,252 @@
       "label": "temporary",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "temporary",
       "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "scripts_smoke_server_buttons",
+      "label": "smoke-server-buttons.js",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "smoke-server-buttons.js",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_app_browserwindow_shell",
+      "label": "{app,BrowserWindow,shell}",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "{app,browserwindow,shell}",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_enginedir",
+      "label": "engineDir",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "enginedir",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_eventemitter",
+      "label": "{EventEmitter}",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "{eventemitter}",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_executable",
+      "label": "executable",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "executable",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_http",
+      "label": "http",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "http",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L24"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_modeldir",
+      "label": "modelDir",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "modeldir",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_modelpath",
+      "label": "modelPath",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "modelpath",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_processes",
+      "label": "processes",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "processes",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L17"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_sharingtest",
+      "label": "sharingTest",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "sharingtest",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "scripts_smoke_server_buttons_temporary",
+      "label": "temporary",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-server-buttons.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_ui",
+      "label": "smoke-ui.js",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "smoke-ui.js",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_ui_app_browserwindow",
+      "label": "{app,BrowserWindow}",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "{app,browserwindow}",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_ui_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_ui_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_ui_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_ui_temporary",
+      "label": "temporary",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_ui_withmodel",
+      "label": "withModel",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "withmodel",
+      "source_file": "scripts/smoke-ui.js",
       "source_location": "L9"
     },
     {
@@ -6204,7 +6525,7 @@
       "label": "preload.ts",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "preload.ts",
       "source_file": "src/preload.ts",
@@ -6215,7 +6536,7 @@
       "label": "{contextBridge,ipcRenderer}",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "{contextbridge,ipcrenderer}",
       "source_file": "src/preload.ts",
@@ -6226,7 +6547,7 @@
       "label": "electron",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engines-ui.js",
+      "community_name": "smoke-server-buttons.js",
       "file_type": "concept",
       "norm_label": "electron",
       "source_file": "package.json",
@@ -6242,7 +6563,7 @@
       "node_kind": "heading",
       "norm_label": "10. dados, atualizacao e desinstalacao segura",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L320"
+      "source_location": "L321"
     },
     {
       "id": "docs_manual_pt_br_11_cr\u00e9ditos",
@@ -6254,7 +6575,7 @@
       "node_kind": "heading",
       "norm_label": "11. creditos",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L341"
+      "source_location": "L342"
     },
     {
       "id": "docs_manual_pt_br_1_o_que_o_aplicativo_faz",
@@ -6314,7 +6635,7 @@
       "node_kind": "heading",
       "norm_label": "5. pastas e modelos gguf",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L86"
+      "source_location": "L87"
     },
     {
       "id": "docs_manual_pt_br_6_tela_llama_iniciar_uma_conversa",
@@ -6326,7 +6647,7 @@
       "node_kind": "heading",
       "norm_label": "6. tela llama: iniciar uma conversa",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L103"
+      "source_location": "L104"
     },
     {
       "id": "docs_manual_pt_br_7_par\u00e2metros_avan\u00e7ados",
@@ -6338,7 +6659,7 @@
       "node_kind": "heading",
       "norm_label": "7. parametros avancados",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L261"
+      "source_location": "L262"
     },
     {
       "id": "docs_manual_pt_br_8_analisar_recomenda\u00e7\u00f5es_e_testar_o_desempenho",
@@ -6350,7 +6671,7 @@
       "node_kind": "heading",
       "norm_label": "8. analisar recomendacoes e testar o desempenho",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L293"
+      "source_location": "L294"
     },
     {
       "id": "docs_manual_pt_br_9_solu\u00e7\u00e3o_de_problemas",
@@ -6362,7 +6683,7 @@
       "node_kind": "heading",
       "norm_label": "9. solucao de problemas",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L308"
+      "source_location": "L309"
     },
     {
       "id": "docs_manual_pt_br_acesso_link_e_sess\u00f5es_simult\u00e2neas",
@@ -6374,7 +6695,7 @@
       "node_kind": "heading",
       "norm_label": "acesso, link e sessoes simultaneas",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L263"
+      "source_location": "L264"
     },
     {
       "id": "docs_manual_pt_br_acesso_tempor\u00e1rio_ou_credencial_persistente",
@@ -6386,7 +6707,7 @@
       "node_kind": "heading",
       "norm_label": "acesso temporario ou credencial persistente",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L154"
+      "source_location": "L155"
     },
     {
       "id": "docs_manual_pt_br_atualizar_o_aplicativo",
@@ -6398,7 +6719,7 @@
       "node_kind": "heading",
       "norm_label": "atualizar o aplicativo",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L324"
+      "source_location": "L325"
     },
     {
       "id": "docs_manual_pt_br_compartilhar_acesso_na_rede_interna_ou_tailscale",
@@ -6410,7 +6731,7 @@
       "node_kind": "heading",
       "norm_label": "compartilhar acesso na rede interna ou tailscale",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L124"
+      "source_location": "L125"
     },
     {
       "id": "docs_manual_pt_br_conectar_outros_aplicativos",
@@ -6422,7 +6743,7 @@
       "node_kind": "heading",
       "norm_label": "conectar outros aplicativos",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L133"
+      "source_location": "L134"
     },
     {
       "id": "docs_manual_pt_br_conversa_integrada_e_cli_externa",
@@ -6434,7 +6755,7 @@
       "node_kind": "heading",
       "norm_label": "conversa integrada e cli externa",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L271"
+      "source_location": "L272"
     },
     {
       "id": "docs_manual_pt_br_diagnosticar_a_integra\u00e7\u00e3o_por_api",
@@ -6446,7 +6767,7 @@
       "node_kind": "heading",
       "norm_label": "diagnosticar a integracao por api",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L249"
+      "source_location": "L250"
     },
     {
       "id": "docs_manual_pt_br_exemplo_em_python_para_seu_aplicativo",
@@ -6458,7 +6779,7 @@
       "node_kind": "heading",
       "norm_label": "exemplo em python para seu aplicativo",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L216"
+      "source_location": "L217"
     },
     {
       "id": "docs_manual_pt_br_iniciar_o_servidor_sem_abrir_o_navegador",
@@ -6470,7 +6791,7 @@
       "node_kind": "heading",
       "norm_label": "iniciar o servidor sem abrir o navegador",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L114"
+      "source_location": "L115"
     },
     {
       "id": "docs_manual_pt_br_integrar_apis_de_aplicativos_passo_a_passo",
@@ -6482,7 +6803,7 @@
       "node_kind": "heading",
       "norm_label": "integrar apis de aplicativos: passo a passo",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L144"
+      "source_location": "L145"
     },
     {
       "id": "docs_manual_pt_br_linux",
@@ -6542,7 +6863,7 @@
       "node_kind": "heading",
       "norm_label": "testar no linux/macos com bash e curl",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L166"
+      "source_location": "L167"
     },
     {
       "id": "docs_manual_pt_br_testar_no_windows_com_powershell",
@@ -6554,7 +6875,7 @@
       "node_kind": "heading",
       "norm_label": "testar no windows com powershell",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L191"
+      "source_location": "L192"
     },
     {
       "id": "docs_manual_pt_br_windows",
@@ -6985,268 +7306,48 @@
       "source_location": "L16"
     },
     {
-      "id": "scripts_smoke_server_buttons",
-      "label": "smoke-server-buttons.js",
+      "id": "scripts_check_engine_release",
+      "label": "check-engine-release.js",
       "_origin": "ast",
       "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
-      "norm_label": "smoke-server-buttons.js",
-      "source_file": "scripts/smoke-server-buttons.js",
+      "norm_label": "check-engine-release.js",
+      "source_file": "scripts/check-engine-release.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_server_buttons_app_browserwindow_shell",
-      "label": "{app,BrowserWindow,shell}",
+      "id": "scripts_check_engine_release_arches",
+      "label": "ARCHES",
       "_origin": "ast",
       "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
-      "norm_label": "{app,browserwindow,shell}",
-      "source_file": "scripts/smoke-server-buttons.js",
+      "norm_label": "arches",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_check_engine_release_engine",
+      "label": "engine",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "check-engine-release.js",
+      "file_type": "code",
+      "norm_label": "engine",
+      "source_file": "scripts/check-engine-release.js",
       "source_location": "L5"
     },
     {
-      "id": "scripts_smoke_server_buttons_assert",
-      "label": "assert",
+      "id": "scripts_check_engine_release_platforms",
+      "label": "PLATFORMS",
       "_origin": "ast",
       "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community_name": "check-engine-release.js",
       "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L2"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_enginedir",
-      "label": "engineDir",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "enginedir",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_eventemitter",
-      "label": "{EventEmitter}",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "{eventemitter}",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_executable",
-      "label": "executable",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "executable",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_http",
-      "label": "http",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "http",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L24"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_modeldir",
-      "label": "modelDir",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "modeldir",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_modelpath",
-      "label": "modelPath",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "modelpath",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L10"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_processes",
-      "label": "processes",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "processes",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L17"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_sharingtest",
-      "label": "sharingTest",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "sharingtest",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L13"
-    },
-    {
-      "id": "scripts_smoke_server_buttons_temporary",
-      "label": "temporary",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-server-buttons.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "tests_engines_test",
-      "label": "engines.test.js",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "engines.test.js",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_engines_test_assert",
-      "label": "assert",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_engines_test_core",
-      "label": "core",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "core",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "tests_engines_test_engines",
-      "label": "engines",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "engines",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "tests_engines_test_eventemitter",
-      "label": "{EventEmitter}",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "{eventemitter}",
-      "source_file": "tests/engines.test.js",
+      "norm_label": "platforms",
+      "source_file": "scripts/check-engine-release.js",
       "source_location": "L7"
-    },
-    {
-      "id": "tests_engines_test_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_engines_test_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "tests_engines_test_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "tests_engines_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L2"
     },
     {
       "id": "tests_terminal_cli_test",
@@ -7533,158 +7634,114 @@
       "source_location": "L7"
     },
     {
-      "id": "src_share_proxy",
-      "label": "share_proxy.ts",
+      "id": "tests_core_test",
+      "label": "core.test.js",
       "_origin": "ast",
-      "community": 29,
-      "community_name": "share_proxy.ts",
+      "community": 3,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "share_proxy.ts",
-      "source_file": "src/share_proxy.ts",
+      "norm_label": "core.test.js",
+      "source_file": "tests/core.test.js",
       "source_location": "L1"
     },
     {
-      "id": "src_share_proxy_crypto",
-      "label": "crypto",
+      "id": "tests_core_test_assert",
+      "label": "assert",
       "_origin": "ast",
-      "community": 29,
-      "community_name": "share_proxy.ts",
+      "community": 3,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "crypto",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "src_share_proxy_http",
-      "label": "http",
-      "_origin": "ast",
-      "community": 29,
-      "community_name": "share_proxy.ts",
-      "file_type": "code",
-      "norm_label": "http",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "src_share_proxy_net",
-      "label": "net",
-      "_origin": "ast",
-      "community": 29,
-      "community_name": "share_proxy.ts",
-      "file_type": "code",
-      "norm_label": "net",
-      "source_file": "src/share_proxy.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "src_share_proxy_network",
-      "label": "network",
-      "_origin": "ast",
-      "community": 29,
-      "community_name": "share_proxy.ts",
-      "file_type": "code",
-      "norm_label": "network",
-      "source_file": "src/share_proxy.ts",
+      "norm_label": "assert",
+      "source_file": "tests/core.test.js",
       "source_location": "L3"
     },
     {
-      "id": "scripts_build",
-      "label": "build.js",
+      "id": "tests_core_test_assetfor",
+      "label": "{assetFor}",
       "_origin": "ast",
       "community": 3,
-      "community_name": "ref_node_child_process",
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "build.js",
-      "source_file": "scripts/build.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_build_compiler",
-      "label": "compiler",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "ref_node_child_process",
-      "file_type": "code",
-      "norm_label": "compiler",
-      "source_file": "scripts/build.js",
+      "norm_label": "{assetfor}",
+      "source_file": "tests/core.test.js",
       "source_location": "L8"
     },
     {
-      "id": "scripts_build_fs",
-      "label": "fs",
+      "id": "tests_core_test_cli",
+      "label": "cli",
       "_origin": "ast",
       "community": 3,
-      "community_name": "ref_node_child_process",
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/build.js",
-      "source_location": "L2"
-    },
-    {
-      "id": "scripts_build_output",
-      "label": "output",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "ref_node_child_process",
-      "file_type": "code",
-      "norm_label": "output",
-      "source_file": "scripts/build.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_build_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "ref_node_child_process",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/build.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_build_renderer",
-      "label": "renderer",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "ref_node_child_process",
-      "file_type": "code",
-      "norm_label": "renderer",
-      "source_file": "scripts/build.js",
-      "source_location": "L13"
-    },
-    {
-      "id": "scripts_build_result",
-      "label": "result",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "ref_node_child_process",
-      "file_type": "code",
-      "norm_label": "result",
-      "source_file": "scripts/build.js",
+      "norm_label": "cli",
+      "source_file": "tests/core.test.js",
       "source_location": "L10"
     },
     {
-      "id": "scripts_build_root",
-      "label": "root",
+      "id": "tests_core_test_defaults_argsformodel_validatesettings_recommend_iswithin_scanmodels",
+      "label": "{defaults,argsForModel,validateSettings,recommend,isWithin,scanModels}",
       "_origin": "ast",
       "community": 3,
-      "community_name": "ref_node_child_process",
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "root",
-      "source_file": "scripts/build.js",
+      "norm_label": "{defaults,argsformodel,validatesettings,recommend,iswithin,scanmodels}",
+      "source_file": "tests/core.test.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_core_test_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "tests/core.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_core_test_network",
+      "label": "network",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "network",
+      "source_file": "tests/core.test.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "tests_core_test_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "tests/core.test.js",
       "source_location": "L5"
     },
     {
-      "id": "scripts_build_spawnsync",
-      "label": "{ spawnSync }",
+      "id": "tests_core_test_path",
+      "label": "path",
       "_origin": "ast",
       "community": 3,
-      "community_name": "ref_node_child_process",
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "{ spawnsync }",
-      "source_file": "scripts/build.js",
-      "source_location": "L4"
+      "norm_label": "path",
+      "source_file": "tests/core.test.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "tests_core_test_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "tests/core.test.js",
+      "source_location": "L2"
     },
     {
       "id": "scripts_smoke_external_cli_linux",
@@ -7907,83 +7964,6 @@
       "source_location": "L11"
     },
     {
-      "id": "scripts_smoke_ui",
-      "label": "smoke-ui.js",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "smoke-ui.js",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_ui_app_browserwindow",
-      "label": "{app,BrowserWindow}",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "{app,browserwindow}",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_ui_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_ui_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_ui_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_ui_temporary",
-      "label": "temporary",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_ui_withmodel",
-      "label": "withModel",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "withmodel",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L9"
-    },
-    {
       "id": "tests_guidance_test",
       "label": "guidance.test.js",
       "_origin": "ast",
@@ -8198,138 +8178,6 @@
       "norm_label": "plano simples da interface",
       "source_file": "PLANO-UI-v2.md",
       "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg",
-      "label": "smoke-macos-dmg.js",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "smoke-macos-dmg.js",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg_mountpoint",
-      "label": "mountpoint",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "mountpoint",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L24"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_macos_dmg_spawnsync",
-      "label": "{ spawnSync }",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "file_type": "code",
-      "norm_label": "{ spawnsync }",
-      "source_file": "scripts/smoke-macos-dmg.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_prepare_linux_test_metadata",
-      "label": "prepare-linux-test-metadata.js",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "prepare-linux-test-metadata.js",
-      "source_file": "scripts/prepare-linux-test-metadata.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_prepare_linux_test_metadata_cwd",
-      "label": "cwd",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "cwd",
-      "source_file": "scripts/prepare-linux-test-metadata.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_prepare_linux_test_metadata_file",
-      "label": "file",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "file",
-      "source_file": "scripts/prepare-linux-test-metadata.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_prepare_linux_test_metadata_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/prepare-linux-test-metadata.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_prepare_linux_test_metadata_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/prepare-linux-test-metadata.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_prepare_linux_test_metadata_pkg",
-      "label": "pkg",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "pkg",
-      "source_file": "scripts/prepare-linux-test-metadata.js",
-      "source_location": "L8"
     },
     {
       "id": "package",
@@ -9256,7 +9104,7 @@
       "node_kind": "heading",
       "norm_label": "10. data, updates, and safe uninstalling",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L322"
+      "source_location": "L323"
     },
     {
       "id": "docs_manual_en_11_credits",
@@ -9268,7 +9116,7 @@
       "node_kind": "heading",
       "norm_label": "11. credits",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L343"
+      "source_location": "L344"
     },
     {
       "id": "docs_manual_en_1_what_the_application_does",
@@ -9316,7 +9164,7 @@
       "node_kind": "heading",
       "norm_label": "5. model folders and gguf files",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L86"
+      "source_location": "L87"
     },
     {
       "id": "docs_manual_en_8_review_recommendations_and_benchmark_performance",
@@ -9328,7 +9176,7 @@
       "node_kind": "heading",
       "norm_label": "8. review recommendations and benchmark performance",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L295"
+      "source_location": "L296"
     },
     {
       "id": "docs_manual_en_9_troubleshooting",
@@ -9340,7 +9188,7 @@
       "node_kind": "heading",
       "norm_label": "9. troubleshooting",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L310"
+      "source_location": "L311"
     },
     {
       "id": "docs_manual_en_other_engines_vllm_strata_and_polystrata",
@@ -9364,7 +9212,7 @@
       "node_kind": "heading",
       "norm_label": "update the application",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L326"
+      "source_location": "L327"
     },
     {
       "id": "docs_manual_en_user_manual_llama_desktop_launcher",
@@ -10268,11 +10116,242 @@
       "source_location": "L61"
     },
     {
+      "id": "scripts_build",
+      "label": "build.js",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "build.js",
+      "source_file": "scripts/build.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_build_compiler",
+      "label": "compiler",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "compiler",
+      "source_file": "scripts/build.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_build_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/build.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "scripts_build_output",
+      "label": "output",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "output",
+      "source_file": "scripts/build.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_build_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/build.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_build_renderer",
+      "label": "renderer",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "renderer",
+      "source_file": "scripts/build.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "scripts_build_result",
+      "label": "result",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "result",
+      "source_file": "scripts/build.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "scripts_build_root",
+      "label": "root",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "root",
+      "source_file": "scripts/build.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_build_spawnsync",
+      "label": "{ spawnSync }",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "{ spawnsync }",
+      "source_file": "scripts/build.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_prepare_linux_test_metadata",
+      "label": "prepare-linux-test-metadata.js",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "prepare-linux-test-metadata.js",
+      "source_file": "scripts/prepare-linux-test-metadata.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_prepare_linux_test_metadata_cwd",
+      "label": "cwd",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "cwd",
+      "source_file": "scripts/prepare-linux-test-metadata.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_prepare_linux_test_metadata_file",
+      "label": "file",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "file",
+      "source_file": "scripts/prepare-linux-test-metadata.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_prepare_linux_test_metadata_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/prepare-linux-test-metadata.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_prepare_linux_test_metadata_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/prepare-linux-test-metadata.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_prepare_linux_test_metadata_pkg",
+      "label": "pkg",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "pkg",
+      "source_file": "scripts/prepare-linux-test-metadata.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_macos_dmg",
+      "label": "smoke-macos-dmg.js",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "smoke-macos-dmg.js",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_macos_dmg_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_macos_dmg_mountpoint",
+      "label": "mountpoint",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "mountpoint",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L24"
+    },
+    {
+      "id": "scripts_smoke_macos_dmg_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_macos_dmg_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_macos_dmg_spawnsync",
+      "label": "{ spawnSync }",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "file_type": "code",
+      "norm_label": "{ spawnsync }",
+      "source_file": "scripts/smoke-macos-dmg.js",
+      "source_location": "L8"
+    },
+    {
       "id": "src_cli",
       "label": "cli.ts",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "cli.ts",
       "source_file": "src/cli.ts",
@@ -10283,7 +10362,7 @@
       "label": "core",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "core",
       "source_file": "src/cli.ts",
@@ -10294,7 +10373,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "src/cli.ts",
@@ -10305,7 +10384,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "src/cli.ts",
@@ -10316,7 +10395,7 @@
       "label": "{ spawn }",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{ spawn }",
       "source_file": "src/cli.ts",
@@ -10327,7 +10406,7 @@
       "label": "{ StringDecoder }",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{ stringdecoder }",
       "source_file": "src/cli.ts",
@@ -10338,7 +10417,7 @@
       "label": "terminal_cli.ts",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "terminal_cli.ts",
       "source_file": "src/terminal_cli.ts",
@@ -10349,7 +10428,7 @@
       "label": "cli",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "cli",
       "source_file": "src/terminal_cli.ts",
@@ -10360,7 +10439,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "src/terminal_cli.ts",
@@ -10371,7 +10450,7 @@
       "label": "os",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "os",
       "source_file": "src/terminal_cli.ts",
@@ -10382,7 +10461,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "src/terminal_cli.ts",
@@ -10393,55 +10472,11 @@
       "label": "{ spawn }",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{ spawn }",
       "source_file": "src/terminal_cli.ts",
       "source_location": "L6"
-    },
-    {
-      "id": "tests_package_resources_test",
-      "label": "package-resources.test.js",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "package-resources.test.js",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_package_resources_test_assert",
-      "label": "assert",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_package_resources_test_pkg",
-      "label": "pkg",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "pkg",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_package_resources_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L2"
     },
     {
       "id": "scripts_build_manual_pdfs",
@@ -10722,6 +10757,30 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_https",
+      "label": "ref_node_https",
+      "_origin": "semantic",
+      "community": 11,
+      "community_name": "engine.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_https",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_stream",
+      "label": "ref_node_stream",
+      "_origin": "semantic",
+      "community": 11,
+      "community_name": "engine.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_stream",
       "source_file": "",
       "type": "external"
     },
@@ -11062,14 +11121,14 @@
       "type": "external"
     },
     {
-      "id": "build_app_engine",
-      "label": "build_app_engine",
+      "id": "build_app_engines",
+      "label": "build_app_engines",
       "_origin": "semantic",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_engine",
+      "norm_label": "build_app_engines",
       "source_file": "",
       "type": "external"
     },
@@ -11078,7 +11137,7 @@
       "label": "build_app_updater",
       "_origin": "semantic",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_updater",
@@ -11086,26 +11145,14 @@
       "type": "external"
     },
     {
-      "id": "ref_node_https",
-      "label": "ref_node_https",
+      "id": "ref_node_events",
+      "label": "ref_node_events",
       "_origin": "semantic",
       "community": 138,
-      "community_name": "engine-install.test.js",
+      "community_name": "updater.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_https",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_stream",
-      "label": "ref_node_stream",
-      "_origin": "semantic",
-      "community": 138,
-      "community_name": "engine-install.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_stream",
+      "norm_label": "ref_node_events",
       "source_file": "",
       "type": "external"
     },
@@ -11114,7 +11161,7 @@
       "label": "build_app_benchmark",
       "_origin": "semantic",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_benchmark",
@@ -11126,7 +11173,7 @@
       "label": "build_app_cli",
       "_origin": "semantic",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_cli",
@@ -11138,7 +11185,7 @@
       "label": "build_app_core",
       "_origin": "semantic",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_core",
@@ -11150,22 +11197,10 @@
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
       "_origin": "semantic",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
       "source_file": "",
       "type": "external"
     },
@@ -11174,7 +11209,7 @@
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
       "_origin": "semantic",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
@@ -11182,62 +11217,26 @@
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "id": "ref_node_fs",
+      "label": "ref_node_fs",
       "_origin": "semantic",
       "community": 14,
-      "community_name": "core.test.js",
+      "community_name": "ref_node_fs",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "norm_label": "ref_node_fs",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "id": "ref_node_assert",
+      "label": "ref_node_assert",
       "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
+      "community": 148,
+      "community_name": "ref_node_assert",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
+      "norm_label": "ref_node_assert",
       "source_file": "",
       "type": "external"
     },
@@ -11246,10 +11245,46 @@
       "label": "ref_node_test",
       "_origin": "semantic",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "ref_node_assert",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_test",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_crypto",
+      "label": "ref_node_crypto",
+      "_origin": "semantic",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_crypto",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_http",
+      "label": "ref_node_http",
+      "_origin": "semantic",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_http",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_net",
+      "label": "ref_node_net",
+      "_origin": "semantic",
+      "community": 15,
+      "community_name": "smoke-network.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_net",
       "source_file": "",
       "type": "external"
     },
@@ -11258,7 +11293,7 @@
       "label": "ref_node_os",
       "_origin": "semantic",
       "community": 15,
-      "community_name": "network.ts",
+      "community_name": "smoke-network.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_os",
@@ -11418,6 +11453,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_firewall_createrules",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
+      "_origin": "semantic",
+      "community": 17,
+      "community_name": "smoke-engine.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
       "source_file": "",
       "type": "external"
     },
@@ -11686,26 +11733,14 @@
       "type": "external"
     },
     {
-      "id": "build_app_engines",
-      "label": "build_app_engines",
+      "id": "build_app_engine",
+      "label": "build_app_engine",
       "_origin": "semantic",
       "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community_name": "check-engine-release.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_engines",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_events",
-      "label": "ref_node_events",
-      "_origin": "semantic",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_events",
+      "norm_label": "build_app_engine",
       "source_file": "",
       "type": "external"
     },
@@ -11770,50 +11805,62 @@
       "type": "external"
     },
     {
-      "id": "ref_node_crypto",
-      "label": "ref_node_crypto",
-      "_origin": "semantic",
-      "community": 29,
-      "community_name": "share_proxy.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_crypto",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_http",
-      "label": "ref_node_http",
-      "_origin": "semantic",
-      "community": 29,
-      "community_name": "share_proxy.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_http",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_net",
-      "label": "ref_node_net",
-      "_origin": "semantic",
-      "community": 29,
-      "community_name": "share_proxy.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_net",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_child_process",
-      "label": "ref_node_child_process",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
       "_origin": "semantic",
       "community": 3,
-      "community_name": "ref_node_child_process",
+      "community_name": "core.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_child_process",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
       "source_file": "",
       "type": "external"
     },
@@ -11970,30 +12017,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_path",
-      "label": "ref_node_path",
-      "_origin": "semantic",
-      "community": 38,
-      "community_name": "ref_node_path",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_path",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_fs",
-      "label": "ref_node_fs",
-      "_origin": "semantic",
-      "community": 39,
-      "community_name": "ref_node_fs",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_fs",
       "source_file": "",
       "type": "external"
     },
@@ -12238,11 +12261,35 @@
       "type": "external"
     },
     {
+      "id": "ref_node_child_process",
+      "label": "ref_node_child_process",
+      "_origin": "semantic",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_child_process",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_path",
+      "label": "ref_node_path",
+      "_origin": "semantic",
+      "community": 8,
+      "community_name": "ref_node_path",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_path",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_string_decoder",
       "label": "ref_node_string_decoder",
       "_origin": "semantic",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "ref_node_path",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_string_decoder",
@@ -12342,18 +12389,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "app_build_app_terminal_cli_terminalcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_assert",
-      "label": "ref_node_assert",
-      "_origin": "semantic",
-      "community": 88,
-      "community_name": "ref_node_assert",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_assert",
       "source_file": "",
       "type": "external"
     },
@@ -12618,6 +12653,39 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_engineadvice",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_engineadvice",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_engineadvice",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_enginelinks",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_enginelinks",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_enginelinks",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_gpuvendor",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_gpuvendor",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_gpuvendor",
       "source_file": "",
       "type": "external"
     }
@@ -13316,7 +13384,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L168",
+      "source_location": "L172",
       "weight": 1.0
     },
     {
@@ -13328,7 +13396,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L171",
+      "source_location": "L175",
       "weight": 1.0
     },
     {
@@ -13340,7 +13408,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L172",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -13352,7 +13420,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L176",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -13364,7 +13432,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L185",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -13376,7 +13444,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L188",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -13388,7 +13456,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L190",
+      "source_location": "L194",
       "weight": 1.0
     },
     {
@@ -13400,7 +13468,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L195",
+      "source_location": "L199",
       "weight": 1.0
     },
     {
@@ -13608,6 +13676,30 @@
       "weight": 1.0
     },
     {
+      "source": "src_guidance_buildguidance",
+      "target": "src_guidance_engineadvice",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/guidance.ts",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "src_guidance_engineadvice",
+      "target": "src_guidance_gpuvendor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/guidance.ts",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
       "source": "src_hardware_detectgpu",
       "target": "src_hardware_psscript",
       "relation": "calls",
@@ -13616,7 +13708,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/hardware.ts",
-      "source_location": "L128",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -13652,7 +13744,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/hardware.ts",
-      "source_location": "L77",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -13664,7 +13756,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/hardware.ts",
-      "source_location": "L100",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -14228,7 +14320,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -14240,7 +14332,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L131",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -14252,7 +14344,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L132",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -14264,7 +14356,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L135",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -14276,7 +14368,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L138",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -14288,7 +14380,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L140",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -14300,7 +14392,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -14324,7 +14416,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L76",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -14336,7 +14428,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -14348,7 +14440,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -14360,7 +14452,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L79",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -14372,7 +14464,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -14384,7 +14476,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -14396,7 +14488,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -14408,7 +14500,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L81",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -14420,7 +14512,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L82",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -14432,7 +14524,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L82",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -14444,7 +14536,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -15092,7 +15184,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L122",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -15104,7 +15196,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L130",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -15200,7 +15292,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -15212,7 +15304,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -15224,7 +15316,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -15236,7 +15328,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L75",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -15248,7 +15340,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L76",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -15982,6 +16074,42 @@
       "context": "import",
       "source_file": "tests/firewall.test.js",
       "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_guidance_test",
+      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_engineadvice",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/guidance.test.js",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_guidance_test",
+      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_enginelinks",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/guidance.test.js",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_guidance_test",
+      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_gpuvendor",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/guidance.test.js",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -18357,7 +18485,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "tests/guidance.test.js",
-      "source_location": "L5",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -20212,7 +20340,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L326",
+      "source_location": "L327",
       "weight": 1.0
     },
     {
@@ -20267,7 +20395,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L114",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -20278,7 +20406,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L124",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -20289,7 +20417,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L133",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -20300,7 +20428,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -20311,7 +20439,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L154",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -20322,7 +20450,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L166",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -20333,7 +20461,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L191",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -20344,7 +20472,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L217",
+      "source_location": "L218",
       "weight": 1.0
     },
     {
@@ -20355,7 +20483,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L251",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -20366,7 +20494,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L265",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
@@ -20377,7 +20505,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L273",
+      "source_location": "L274",
       "weight": 1.0
     },
     {
@@ -20388,7 +20516,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L103",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -20410,7 +20538,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L263",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -20421,7 +20549,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L295",
+      "source_location": "L296",
       "weight": 1.0
     },
     {
@@ -20443,7 +20571,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L310",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
@@ -20454,7 +20582,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L322",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
@@ -20465,7 +20593,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L343",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -20498,7 +20626,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -20520,7 +20648,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L324",
+      "source_location": "L325",
       "weight": 1.0
     },
     {
@@ -20575,7 +20703,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L114",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -20586,7 +20714,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L124",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -20597,7 +20725,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L133",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -20608,7 +20736,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -20619,7 +20747,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L154",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -20630,7 +20758,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L166",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -20641,7 +20769,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L191",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -20652,7 +20780,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L216",
+      "source_location": "L217",
       "weight": 1.0
     },
     {
@@ -20663,7 +20791,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L249",
+      "source_location": "L250",
       "weight": 1.0
     },
     {
@@ -20674,7 +20802,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L263",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -20685,7 +20813,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L271",
+      "source_location": "L272",
       "weight": 1.0
     },
     {
@@ -20696,7 +20824,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L103",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -20718,7 +20846,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L261",
+      "source_location": "L262",
       "weight": 1.0
     },
     {
@@ -20729,7 +20857,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L293",
+      "source_location": "L294",
       "weight": 1.0
     },
     {
@@ -20740,7 +20868,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L308",
+      "source_location": "L309",
       "weight": 1.0
     },
     {
@@ -20762,7 +20890,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L320",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -20773,7 +20901,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L341",
+      "source_location": "L342",
       "weight": 1.0
     },
     {
@@ -20806,7 +20934,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -21581,13 +21709,24 @@
     },
     {
       "source": "readme_criadores_e_cr\u00e9ditos",
+      "target": "readme_compartilhar_acesso_na_rede_interna_ou_tailscale",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_criadores_e_cr\u00e9ditos",
       "target": "readme_conectar_outros_aplicativos",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L108",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -21598,7 +21737,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -21609,18 +21748,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L89",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_criadores_e_cr\u00e9ditos",
-      "target": "readme_compartilhar_acesso_na_rede_interna_ou_tailscale",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L99",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -21631,7 +21759,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -21642,7 +21770,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -21653,7 +21781,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L67",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -21675,7 +21803,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L73",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -21686,7 +21814,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -23648,6 +23776,17 @@
       "weight": 1.0
     },
     {
+      "source": "src_guidance",
+      "target": "src_guidance_enginelinks",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/guidance.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
       "source": "src_hardware",
       "target": "src_hardware_psscript",
       "relation": "contains",
@@ -23655,7 +23794,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/hardware.ts",
-      "source_location": "L106",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -23732,7 +23871,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/hardware.ts",
-      "source_location": "L67",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -23754,7 +23893,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/hardware.ts",
-      "source_location": "L83",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -24293,7 +24432,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/renderer.ts",
-      "source_location": "L62",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -24304,7 +24443,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/renderer.ts",
-      "source_location": "L63",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -24315,7 +24454,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/renderer.ts",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -24326,7 +24465,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/renderer.ts",
-      "source_location": "L65",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -26324,7 +26463,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L130",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -26335,7 +26474,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L136",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -26801,7 +26940,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L205",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -26813,7 +26952,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L205",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -26825,7 +26964,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L205",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -26837,7 +26976,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L205",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -26849,7 +26988,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L205",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -26861,7 +27000,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L205",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -26873,7 +27012,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26885,7 +27024,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26897,7 +27036,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26909,7 +27048,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26921,7 +27060,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26933,7 +27072,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26945,7 +27084,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26957,7 +27096,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26969,7 +27108,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26981,7 +27120,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -26993,7 +27132,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -27005,7 +27144,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -27017,7 +27156,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -27089,7 +27228,31 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/guidance.ts",
-      "source_location": "L44",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_guidance",
+      "target": "src_guidance_engineadvice",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "src/guidance.ts",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_guidance",
+      "target": "src_guidance_gpuvendor",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "src/guidance.ts",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -27101,7 +27264,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/guidance.ts",
-      "source_location": "L44",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -27113,7 +27276,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/hardware.ts",
-      "source_location": "L151",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -27125,7 +27288,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/hardware.ts",
-      "source_location": "L123",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -27137,7 +27300,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/hardware.ts",
-      "source_location": "L126",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -27149,7 +27312,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/hardware.ts",
-      "source_location": "L126",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -27161,7 +27324,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/hardware.ts",
-      "source_location": "L128",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -27173,7 +27336,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/hardware.ts",
-      "source_location": "L130",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -27466,5 +27629,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d3efda96c76f718b4fabb744eb05e660ab885c3b"
+  "built_at_commit": "60cc8bd282c955f5920b7e8c837e82af92d692cf"
 }
