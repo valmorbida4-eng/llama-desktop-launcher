@@ -6,7 +6,8 @@ const os=require('node:os');
 const path=require('node:path');
 const {EventEmitter}=require('node:events');
 const engines=require('../build/app/engines');
-const {defaults,apiModelId}=require('../build/app/core');
+const core=require('../build/app/core');
+const {defaults,apiModelId}=core;
 
 function temp(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'engines-test-'));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return dir;}
 function write(file,content=''){fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,content);}
@@ -61,12 +62,45 @@ test('modelos do vLLM são pastas Hugging Face com config.json e safetensors',t=
   write(path.join(root,'Qwen3-8B-AWQ','sub','x.safetensors'),'1');
   write(path.join(root,'so-config','config.json'),'{}');
   write(path.join(root,'gguf','model.gguf'),'x');
-  write(path.join(root,'.cache','hub','config.json'),'{}');write(path.join(root,'.cache','hub','a.safetensors'),'1');
+  write(path.join(root,'Qwen3-8B-AWQ','extra.gguf'),'x');
   const found=engines.scanHfModels([root,'',path.join(root,'nao-existe')]);
   assert.equal(found.length,1);
   assert.equal(found[0].path,path.resolve(root,'Qwen3-8B-AWQ'));
   assert.equal(found[0].engine,'vllm');assert.equal(found[0].size,6);
-  assert.match(found[0].name,/Qwen3-8B-AWQ · vLLM/);
+  assert.match(found[0].name,/Qwen3-8B-AWQ · vLLM/);assert.equal(found[0].symlinkedWeights,false);
+  const both=core.walkModels([root],{hf:true});
+  assert.deepEqual(both.gguf.map(m=>m.name),['extra.gguf','model.gguf'],'GGUF dentro de pasta HF continua visível');
+  assert.equal(both.hf.length,1);
+  assert.deepEqual(core.walkModels([root]).hf,[],'sem hf=true não procura pastas HF');
+  assert.deepEqual(core.scanModels([root]).map(m=>m.name),['extra.gguf','model.gguf']);
+});
+
+test('cache do Hugging Face: pesos em links simbólicos são encontrados e o Docker monta a raiz do repositório',t=>{
+  const root=temp(t),repo=path.join(root,'hub','models--Qwen--Qwen3-8B-AWQ'),snapshot=path.join(repo,'snapshots','abc123');
+  write(path.join(repo,'blobs','cfg'),'{}');write(path.join(repo,'blobs','w1'),'123456');
+  fs.mkdirSync(snapshot,{recursive:true});
+  try {
+    fs.symlinkSync(path.join('..','..','blobs','cfg'),path.join(snapshot,'config.json'),'file');
+    fs.symlinkSync(path.join('..','..','blobs','w1'),path.join(snapshot,'model.safetensors'),'file');
+  } catch(error) { if(error.code==='EPERM'){t.skip('sem permissão para criar links simbólicos neste sistema');return;} throw error; }
+  try { fs.symlinkSync(root,path.join(snapshot,'loop'),'dir'); } catch {}
+  const found=engines.scanHfModels([root]);
+  assert.equal(found.length,1);
+  assert.equal(found[0].path,path.resolve(snapshot));
+  assert.equal(found[0].name,'Qwen/Qwen3-8B-AWQ · vLLM');
+  assert.equal(found[0].size,6);assert.equal(found[0].symlinkedWeights,true);
+  const command=engines.serverCommand(found[0],defaults,{host:'127.0.0.1',port:8080,platform:'win32',containerName:engines.VLLM_CONTAINER_PREFIX+'a1'});
+  assert.ok(command.args.includes(`type=bind,source=${path.resolve(repo)},target=/model,readonly`));
+  assert.ok(command.args.includes('/model/snapshots/abc123'));
+  assert.throws(()=>engines.serverCommand({...found[0],path:path.join(root,'outra')},defaults,{host:'127.0.0.1',port:8080,platform:'win32',containerName:engines.VLLM_CONTAINER_PREFIX+'a1'}),/links simbólicos/);
+});
+
+test('montagem do Docker usa a raiz do repositório só no layout do cache do Hugging Face',()=>{
+  const cache=path.resolve('/hf/hub/models--org--nome/snapshots/f00');
+  assert.deepEqual(engines.dockerModelMount(cache),{source:path.resolve('/hf/hub/models--org--nome'),target:'/model',model:'/model/snapshots/f00'});
+  assert.deepEqual(engines.dockerModelMount('/modelos/qwen'),{source:path.resolve('/modelos/qwen'),target:'/model',model:'/model'});
+  assert.deepEqual(engines.dockerModelMount('/x/snapshots/f00'),{source:path.resolve('/x/snapshots/f00'),target:'/model',model:'/model'});
+  assert.equal(core.hfDisplayName(cache),'org/nome');assert.equal(core.hfDisplayName('/modelos/qwen'),'qwen');
 });
 
 test('Strata e PolyStrata são reconhecidos pela pasta instalada e listam as configurações strata-*.json',t=>{
@@ -80,7 +114,7 @@ test('Strata e PolyStrata são reconhecidos pela pasta instalada e listam as con
     write(path.join(root,'polystrata.py'));
     assert.equal(engines.detectStrata(root,platform).distribution,'PolyStrata');
     write(path.join(root,'strata-qwen36-ud-q4_k_xl.json'),JSON.stringify({model_name:'Qwen3.6-35B-A3B',args:['--ctx','65536','--kv','int8']}));
-    write(path.join(root,'strata-glm.json'),JSON.stringify({args:['-c','32k']}));
+    write(path.join(root,'strata-glm.json'),JSON.stringify({args:['-c','32k'],parallel:3}));
     write(path.join(root,'strata-glm.shared-settings.json'),'{}');
     write(path.join(root,'strata-glm.json.bak'),'{}');
     write(path.join(root,'strata-broken.json'),'{nope');
@@ -88,7 +122,8 @@ test('Strata e PolyStrata são reconhecidos pela pasta instalada e listam as con
     const found=engines.scanStrataConfigs(root,platform);
     assert.deepEqual(found.map(m=>m.modelName),['glm','Qwen3.6-35B-A3B']);
     assert.ok(found.every(m=>m.engine==='strata'&&m.distribution==='PolyStrata'));
-    assert.deepEqual(found.map(m=>m.context),[32000,65536]);
+    assert.deepEqual(found.map(m=>m.context),[32768,65536]);
+    assert.deepEqual(found.map(m=>m.parallel),[3,1]);
   }
   assert.deepEqual(engines.scanStrataConfigs('',process.platform),[]);
 });
@@ -129,9 +164,13 @@ test('vLLM no Windows roda a imagem fixa no Docker com o modelo montado só para
 
 test('Strata sobe serve/server.py do próprio .venv com a configuração escolhida',t=>{
   for(const platform of ['win32','linux']) {
-    const root=temp(t);strataInstall(root,platform,{poly:true});
+    const root=temp(t);strataInstall(root,platform);
     const config=path.join(root,'strata-qwen36.json');write(config,'{}');
-    const command=engines.serverCommand({path:config,engine:'strata'},defaults,{host:'127.0.0.1',port:8090,platform,strataDir:root});
+    const strata=engines.serverCommand({path:config,engine:'strata'},defaults,{host:'127.0.0.1',port:8090,parallel:3,platform,strataDir:root});
+    assert.deepEqual(strata.args.slice(-2),['--parallel','3']);assert.equal(strata.parallel,3);
+    write(path.join(root,'polystrata.py'));
+    const command=engines.serverCommand({path:config,engine:'strata'},defaults,{host:'127.0.0.1',port:8090,parallel:3,platform,strataDir:root});
+    assert.equal(command.parallel,null,'PolyStrata não aceita --parallel');
     assert.equal(command.file,engines.strataPython(root,platform));
     assert.equal(command.cwd,root);
     assert.deepEqual(command.args,[path.join('serve','server.py'),'--engine','strata','--config',config,'--host','127.0.0.1','--port','8090']);
@@ -144,8 +183,27 @@ test('Strata sobe serve/server.py do próprio .venv com a configuração escolhi
   assert.throws(()=>engines.serverCommand({path:'/m.gguf',engine:'llamacpp'},defaults,{host:'127.0.0.1',port:8080}),/llama\.cpp/);
 });
 
+test('regra de firewall do Strata no Windows usa o Python base do pyvenv.cfg, não o lançador do .venv',t=>{
+  const root=temp(t),base=path.join(root,'Python313');strataInstall(root,'win32');
+  const python=engines.strataPython(root,'win32');
+  assert.equal(engines.venvBaseExecutable(python,'win32'),null,'sem pyvenv.cfg');
+  write(path.join(root,'.venv','pyvenv.cfg'),`home = ${base}
+include-system-site-packages = false
+version = 3.13.1
+`);
+  assert.equal(engines.venvBaseExecutable(python,'win32'),null,'home sem python.exe');
+  write(path.join(base,'python.exe'));
+  assert.equal(engines.venvBaseExecutable(python,'win32'),path.join(base,'python.exe'));
+  const config=path.join(root,'strata-a.json');write(config,'{}');
+  const command=engines.serverCommand({path:config,engine:'strata'},defaults,{host:'192.168.1.4',port:8090,key:'k',platform:'win32',strataDir:root});
+  assert.equal(command.file,python);assert.equal(command.firewallProgram,path.join(base,'python.exe'));
+  const linux=temp(t);strataInstall(linux,'linux');const linuxConfig=path.join(linux,'strata-a.json');write(linuxConfig,'{}');
+  assert.equal(engines.serverCommand({path:linuxConfig,engine:'strata'},defaults,{host:'127.0.0.1',port:8090,platform:'linux',strataDir:linux}).firewallProgram,engines.strataPython(linux,'linux'));
+});
+
 test('contexto do Strata é lido dos argumentos da configuração',()=>{
-  assert.equal(engines.contextFromArgs(['--ctx','128k']),128000);
+  assert.equal(engines.contextFromArgs(['--ctx','128k']),131072);
+  assert.equal(engines.contextFromArgs(['--ctx','32K']),32768);
   assert.equal(engines.contextFromArgs(['--context','4096']),4096);
   assert.equal(engines.contextFromArgs(['--ctx']),null);
   assert.equal(engines.contextFromArgs(['--ctx','abc']),null);

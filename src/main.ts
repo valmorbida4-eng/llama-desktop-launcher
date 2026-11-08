@@ -53,10 +53,10 @@ function engineStatus() {
   });
 }
 function allModels() {
-  const roots=configuration.modelDirs;
-  const gguf=core.scanModels(roots).map((m: any)=>({...m,engine:'llamacpp'}));
   const supported=new Set(engines.engineCatalog().filter((e: any)=>e.supported).map((e: any)=>e.id));
-  const hf=supported.has('vllm')?engines.scanHfModels(roots):[];
+  // Uma única varredura das pastas para GGUF e pastas Hugging Face.
+  const found=core.walkModels(configuration.modelDirs,{hf:supported.has('vllm')});
+  const gguf=found.gguf.map((m: any)=>({...m,engine:'llamacpp'})),hf=found.hf;
   const strata=supported.has('strata')&&configuration.strataDir?engines.scanStrataConfigs(configuration.strataDir):[];
   return [...gguf,...hf,...strata];
 }
@@ -148,7 +148,7 @@ ipcMain.handle('install-vllm',async e=>{
   } finally {engineBusy=false;}
 });
 ipcMain.handle('open-engine-link',async(e,kind)=>{validateSender(e);const url=engines.links[kind];if(!url)throw Error('Link inválido.');await shell.openExternal(url);return url;});
-ipcMain.handle('save-profile',(e,modelPath,settings)=>{validateSender(e);const model=selectedModel(modelPath);core.validateSettings(settings);configuration.profiles[modelPath]={...settings,engine:model.engine};save();return state();});
+ipcMain.handle('save-profile',(e,modelPath,settings)=>{validateSender(e);selectedModel(modelPath);core.validateSettings(settings);configuration.profiles[modelPath]=settings;save();return state();});
 ipcMain.handle('import-legacy-profiles',async(e)=>{
   validateSender(e);
   const result=await dialog.showOpenDialog(win,{title:'Importar perfis do launcher anterior',properties:['openFile'],filters:[{name:'Perfis do launcher (*.tsv)',extensions:['tsv']}]});
@@ -193,7 +193,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
   if(model.engine==='vllm'&&info.mode==='docker'&&!docker.image)await refreshDocker();
   if(!engineReady(model.engine))throw Error(model.engine==='llamacpp'?'Instale ou selecione o llama.cpp primeiro.':model.engine==='vllm'?'Prepare o vLLM em Configurações primeiro.':'Escolha a pasta do Strata ou do PolyStrata em Configurações primeiro.');
   const key=access.scope==='Local'?null:network.ensureKey(apiKeyPath());
-  configuration.profiles[modelPath]={...settings,engine:model.engine};configuration.firstRun=false;configuration.accessHost=access.host;configuration.parallel=parallel;save();
+  configuration.profiles[modelPath]=settings;configuration.firstRun=false;configuration.accessHost=access.host;configuration.parallel=parallel;save();
   const port=await freePort(access.host,8080,8180);
   let command: any;
   if(model.engine==='llamacpp') {
@@ -225,7 +225,9 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
     if(key){const sharePort=await freePort(access.host,8181,8280);shareProxy=await sharing.createShareProxy(access.host,port,key,sharePort);}
     const modelId=model.engine==='strata'?model.modelName:core.apiModelId;
     const context=model.engine==='strata'?(model.context||Number(settings.context)):Number(settings.context);
-    active={engine:model.engine,engineLabel:info.label,containerName,sharingEndpoint:shareProxy?.endpoint||null,context,modelId,host:access.host,scope:access.scope,port,parallel,executable:containerName?null:command.file,browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}${info.browserPath}`};
+    // PolyStrata não aceita --parallel: vale o número de sessões da configuração dele.
+    const effectiveParallel=command.parallel??(model.engine==='strata'?model.parallel||1:parallel);
+    active={engine:model.engine,engineLabel:info.label,containerName,sharingEndpoint:shareProxy?.endpoint||null,context,modelId,host:access.host,scope:access.scope,port,parallel:effectiveParallel,executable:containerName?null:command.file,firewallProgram:containerName?null:(command.firewallProgram===undefined?command.file:command.firewallProgram),browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}${info.browserPath}`};
     if(options.openBrowser!==false)await shell.openExternal(browserUrl);
     return active;
   }catch(e){shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;cleanupServer(null);stopContainer(containerName);try{child.kill();}catch{}throw e;}
@@ -277,10 +279,11 @@ ipcMain.handle('copy-browser-link',e=>{validateSender(e);if(!active)throw Error(
 ipcMain.handle('create-firewall-rule',async(e,remoteAddress)=>{
   validateSender(e);
   if(process.platform!=='win32'||!active||active.scope==='Local')throw Error('Inicie um servidor LAN ou Tailscale no Windows primeiro.');
-  if(!active.executable)throw Error('O vLLM no Docker escuta pelo Docker Desktop; libere a porta pelo firewall do Windows manualmente, apenas para a faixa de clientes necessária.');
+  if(active.containerName)throw Error('O vLLM no Docker escuta pelo Docker Desktop; libere a porta pelo firewall do Windows manualmente, apenas para a faixa de clientes necessária.');
+  if(!active.firewallProgram)throw Error(`Não foi possível localizar o Python base do ${active.engineLabel} (pyvenv.cfg). Libere a porta ${active.port} manualmente no firewall do Windows, apenas para a faixa de clientes necessária.`);
   const range=firewall.validateRemoteAddress(remoteAddress);
   if(network.scopeOf(range.split('/')[0])!==active.scope||!addressInRange(active.host,range))throw Error('A faixa de clientes precisa conter o endereço da rede selecionada.');
-  const rules=[{program:active.executable,port:active.port,remoteAddress:range}];if(shareProxy)rules.push({program:process.execPath,port:shareProxy.port,remoteAddress:range,sharing:true} as any);return firewall.createRules(rules);
+  const rules=[{program:active.firewallProgram,port:active.port,remoteAddress:range}];if(shareProxy)rules.push({program:process.execPath,port:shareProxy.port,remoteAddress:range,sharing:true} as any);return firewall.createRules(rules);
 });
 ipcMain.handle('open-hf',async(e,kind)=>{validateSender(e);const url=guidance.links[kind];if(!url)throw Error('Filtro inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('open-model-example',async(e,url)=>{validateSender(e);if(typeof url!=='string'||!/^https:\/\/huggingface\.co\/Qwen\/Qwen2\.5-(?:0\.5|1\.5|3|7|14)B-Instruct-GGUF$/.test(url))throw Error('Link de modelo inválido.');await shell.openExternal(url);return url;});

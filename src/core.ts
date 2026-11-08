@@ -57,25 +57,57 @@ function isWithin(parent: string,candidate: string) {
   const base=normalize(parent),target=normalize(candidate);
   return target===base||target.startsWith(base.endsWith(path.sep)?base:base+path.sep);
 }
-function scanModels(roots: string[]) {
-  const found=[]; const seen=new Set();
-  for (const root of roots.filter(Boolean)) {
+// Nome legível de uma pasta do cache do Hugging Face (models--org--nome/snapshots/<hash>).
+function hfDisplayName(dir: string) {
+  const parts=path.resolve(dir).split(/[\\/]/);
+  const at=parts.length-2;
+  if(at>0&&parts[at]==='snapshots'&&/^models--/.test(parts[at-1])) return parts[at-1].slice('models--'.length).split('--').join('/');
+  return path.basename(dir);
+}
+// Uma única varredura das pastas de modelos: arquivos GGUF (llama.cpp) e, com hf=true, pastas
+// Hugging Face com config.json e .safetensors (vLLM). Links simbólicos para arquivos são seguidos
+// (o cache do Hugging Face aponta os pesos para ../../blobs); links para pastas não, para evitar ciclos.
+// Dentro de uma pasta HF já reconhecida, subpastas não viram outro modelo HF (ex.: text_encoder/).
+function walkModels(roots: string[], {hf=false}: {hf?: boolean}={}) {
+  const gguf=[],hfModels=[]; const seen=new Set(),seenHf=new Set();
+  for (const root of (roots||[]).filter(Boolean)) {
     if (!fs.existsSync(root)) continue;
-    const todo=[root];
+    const todo: {dir: string; insideHf: boolean}[]=[{dir:root,insideHf:false}];
     while(todo.length) {
-      const dir=todo.pop();
+      const {dir,insideHf}=todo.pop();
       let entries=[]; try { entries=fs.readdirSync(dir,{withFileTypes:true}); } catch { continue; }
-      const projectors=entries.filter(e=>e.isFile() && /^mmproj.*\.gguf$/i.test(e.name));
+      const files=[],dirs=[];
       for (const e of entries) {
         const file=path.join(dir,e.name);
-        if (e.isDirectory()) { todo.push(file); continue; }
-        const shard=/-([0-9]{5})-of-[0-9]{5}\.gguf$/i.exec(e.name);
-        if (!e.isFile() || !/\.gguf$/i.test(e.name) || /^mmproj/i.test(e.name) || (shard && shard[1]!=='00001')) continue;
-        const resolved=path.resolve(file); if (seen.has(resolved)) continue; seen.add(resolved);
-        found.push({path:resolved,name:e.name,size:fs.statSync(file).size,projector:projectors.length===1?path.join(dir,projectors[0].name):null});
+        if (e.isDirectory()) { dirs.push(file); continue; }
+        if (e.isFile()) { files.push({name:e.name,file}); continue; }
+        if (e.isSymbolicLink()) { try { if (fs.statSync(file).isFile()) files.push({name:e.name,file}); } catch {} }
       }
+      const sizeOf=f=>{try{return fs.statSync(f).size;}catch{return 0;}};
+      const projectors=files.filter(f=>/^mmproj.*\.gguf$/i.test(f.name));
+      for (const f of files) {
+        const shard=/-([0-9]{5})-of-[0-9]{5}\.gguf$/i.exec(f.name);
+        if (!/\.gguf$/i.test(f.name) || /^mmproj/i.test(f.name) || (shard && shard[1]!=='00001')) continue;
+        const resolved=path.resolve(f.file); if (seen.has(resolved)) continue; seen.add(resolved);
+        gguf.push({path:resolved,name:f.name,size:sizeOf(f.file),projector:projectors.length===1?projectors[0].file:null});
+      }
+      let isHf=false;
+      if (hf && !insideHf) {
+        const weights=files.filter(f=>/\.safetensors$/i.test(f.name));
+        if (weights.length && files.some(f=>f.name==='config.json')) {
+          isHf=true;
+          const resolved=path.resolve(dir);
+          if (!seenHf.has(resolved)) {
+            seenHf.add(resolved);
+            hfModels.push({path:resolved,name:`${hfDisplayName(resolved)} · vLLM`,size:weights.reduce((total,w)=>total+sizeOf(w.file),0),projector:null,engine:'vllm',
+              symlinkedWeights:weights.some(w=>{try{return fs.lstatSync(w.file).isSymbolicLink();}catch{return false;}})});
+          }
+        }
+      }
+      for (const d of dirs) todo.push({dir:d,insideHf:insideHf||isHf});
     }
   }
-  return found.sort((a,b)=>a.name.localeCompare(b.name));
+  return {gguf:gguf.sort((a,b)=>a.name.localeCompare(b.name)),hf:hfModels.sort((a,b)=>a.name.localeCompare(b.name))};
 }
-module.exports={apiModelId,defaults,validateSettings,argsForModel,recommend,detectHardware,isWithin,scanModels};
+function scanModels(roots: string[]) { return walkModels(roots).gguf; }
+module.exports={apiModelId,defaults,validateSettings,argsForModel,recommend,detectHardware,isWithin,scanModels,walkModels,hfDisplayName};

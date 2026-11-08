@@ -1059,6 +1059,18 @@
       "source_location": "L54"
     },
     {
+      "id": "src_engines_dockermodelmount",
+      "label": "dockerModelMount()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "dockermodelmount()",
+      "source_file": "src/engines.ts",
+      "source_location": "L141"
+    },
+    {
       "id": "src_engines_dockerstatus",
       "label": "dockerStatus()",
       "_callable": true,
@@ -1068,7 +1080,7 @@
       "file_type": "code",
       "norm_label": "dockerstatus()",
       "source_file": "src/engines.ts",
-      "source_location": "L89"
+      "source_location": "L90"
     },
     {
       "id": "src_engines_enginecatalog",
@@ -1080,7 +1092,7 @@
       "file_type": "code",
       "norm_label": "enginecatalog()",
       "source_file": "src/engines.ts",
-      "source_location": "L23"
+      "source_location": "L24"
     },
     {
       "id": "src_engines_engineinfo",
@@ -1092,7 +1104,7 @@
       "file_type": "code",
       "norm_label": "engineinfo()",
       "source_file": "src/engines.ts",
-      "source_location": "L33"
+      "source_location": "L34"
     },
     {
       "id": "src_engines_installvllm",
@@ -1104,7 +1116,7 @@
       "file_type": "code",
       "norm_label": "installvllm()",
       "source_file": "src/engines.ts",
-      "source_location": "L61"
+      "source_location": "L62"
     },
     {
       "id": "src_engines_probe",
@@ -1116,7 +1128,7 @@
       "file_type": "code",
       "norm_label": "probe()",
       "source_file": "src/engines.ts",
-      "source_location": "L80"
+      "source_location": "L81"
     },
     {
       "id": "src_engines_pullvllmimage",
@@ -1128,7 +1140,7 @@
       "file_type": "code",
       "norm_label": "pullvllmimage()",
       "source_file": "src/engines.ts",
-      "source_location": "L94"
+      "source_location": "L95"
     },
     {
       "id": "src_engines_runstreaming",
@@ -1140,7 +1152,7 @@
       "file_type": "code",
       "norm_label": "runstreaming()",
       "source_file": "src/engines.ts",
-      "source_location": "L51"
+      "source_location": "L52"
     },
     {
       "id": "src_engines_servercommand",
@@ -1164,7 +1176,19 @@
       "file_type": "code",
       "norm_label": "stopcommand()",
       "source_file": "src/engines.ts",
-      "source_location": "L194"
+      "source_location": "L199"
+    },
+    {
+      "id": "src_engines_venvbaseexecutable",
+      "label": "venvBaseExecutable()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "venvbaseexecutable()",
+      "source_file": "src/engines.ts",
+      "source_location": "L149"
     },
     {
       "id": "src_engines_vllmexecutable",
@@ -1176,7 +1200,7 @@
       "file_type": "code",
       "norm_label": "vllmexecutable()",
       "source_file": "src/engines.ts",
-      "source_location": "L40"
+      "source_location": "L41"
     },
     {
       "id": "src_engines_vllminstallsteps",
@@ -1188,7 +1212,7 @@
       "file_type": "code",
       "norm_label": "vllminstallsteps()",
       "source_file": "src/engines.ts",
-      "source_location": "L42"
+      "source_location": "L43"
     },
     {
       "id": "src_engines_vllmmode",
@@ -1200,7 +1224,7 @@
       "file_type": "code",
       "norm_label": "vllmmode()",
       "source_file": "src/engines.ts",
-      "source_location": "L22"
+      "source_location": "L23"
     },
     {
       "id": "src_engines_vllmvenvready",
@@ -1212,7 +1236,7 @@
       "file_type": "code",
       "norm_label": "vllmvenvready()",
       "source_file": "src/engines.ts",
-      "source_location": "L41"
+      "source_location": "L42"
     },
     {
       "id": "src_main_refreshdocker",
@@ -1236,7 +1260,7 @@
       "file_type": "code",
       "norm_label": "stopcontainer()",
       "source_file": "src/main.ts",
-      "source_location": "L233"
+      "source_location": "L235"
     },
     {
       "id": "src_guidance_buildguidance",
@@ -1297,42 +1321,6 @@
       "norm_label": "modelguidance()",
       "source_file": "src/main.ts",
       "source_location": "L73"
-    },
-    {
-      "id": "tests_engines_test_stratainstall",
-      "label": "strataInstall()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "stratainstall()",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L13"
-    },
-    {
-      "id": "tests_engines_test_temp",
-      "label": "temp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "temp()",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "tests_engines_test_write",
-      "label": "write()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "write()",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L12"
     },
     {
       "id": "src_share_proxy_createshareproxy",
@@ -1767,12 +1755,60 @@
       "source_location": "L51"
     },
     {
+      "id": "scripts_check_engine_release_fetchrelease",
+      "label": "fetchRelease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "fetchrelease()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "scripts_check_engine_release_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L29"
+    },
+    {
+      "id": "scripts_check_engine_release_missingassets",
+      "label": "missingAssets()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "missingassets()",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L18"
+    },
+    {
+      "id": "tests_engine_install_test_workspace",
+      "label": "workspace()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "workspace()",
+      "source_file": "tests/engine-install.test.js",
+      "source_location": "L8"
+    },
+    {
       "id": "tests_updater_test_release",
       "label": "release()",
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "release()",
       "source_file": "tests/updater.test.js",
@@ -1784,7 +1820,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "serve()",
       "source_file": "tests/updater.test.js",
@@ -1796,95 +1832,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "workspace()",
       "source_file": "tests/updater.test.js",
       "source_location": "L8"
     },
     {
-      "id": "tests_engine_install_test_workspace",
-      "label": "workspace()",
+      "id": "scripts_smoke_bench_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 139,
-      "community_name": "engine-install.test.js",
+      "community": 14,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "workspace()",
-      "source_file": "tests/engine-install.test.js",
-      "source_location": "L8"
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L6"
     },
     {
-      "id": "src_core_scanmodels",
-      "label": "scanModels()",
+      "id": "scripts_smoke_cli_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 149,
-      "community_name": "allModels",
+      "community": 14,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "scanmodels()",
-      "source_file": "src/core.ts",
-      "source_location": "L60"
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L7"
     },
     {
-      "id": "src_engines_contextfromargs",
-      "label": "contextFromArgs()",
+      "id": "scripts_smoke_engine_check",
+      "label": "check()",
       "_callable": true,
       "_origin": "ast",
-      "community": 149,
-      "community_name": "allModels",
+      "community": 14,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "contextfromargs()",
-      "source_file": "src/engines.ts",
-      "source_location": "L108"
+      "norm_label": "check()",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L11"
     },
     {
-      "id": "src_engines_scanhfmodels",
-      "label": "scanHfModels()",
+      "id": "scripts_smoke_engine_freeport",
+      "label": "freePort()",
       "_callable": true,
       "_origin": "ast",
-      "community": 149,
-      "community_name": "allModels",
+      "community": 14,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "scanhfmodels()",
-      "source_file": "src/engines.ts",
-      "source_location": "L135"
+      "norm_label": "freeport()",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L10"
     },
     {
-      "id": "src_engines_scanstrataconfigs",
-      "label": "scanStrataConfigs()",
+      "id": "scripts_smoke_engine_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 149,
-      "community_name": "allModels",
+      "community": 14,
+      "community_name": "core.test.js",
       "file_type": "code",
-      "norm_label": "scanstrataconfigs()",
-      "source_file": "src/engines.ts",
-      "source_location": "L116"
-    },
-    {
-      "id": "src_main_allmodels",
-      "label": "allModels()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 149,
-      "community_name": "allModels",
-      "file_type": "code",
-      "norm_label": "allmodels()",
-      "source_file": "src/main.ts",
-      "source_location": "L55"
-    },
-    {
-      "id": "src_main_selectedmodel",
-      "label": "selectedModel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 149,
-      "community_name": "allModels",
-      "file_type": "code",
-      "norm_label": "selectedmodel()",
-      "source_file": "src/main.ts",
-      "source_location": "L70"
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L12"
     },
     {
       "id": "src_network_accessoptions",
@@ -2031,6 +2043,18 @@
       "source_location": "L53"
     },
     {
+      "id": "src_engines_contextfromargs",
+      "label": "contextFromArgs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "contextfromargs()",
+      "source_file": "src/engines.ts",
+      "source_location": "L109"
+    },
+    {
       "id": "src_engines_detectstrata",
       "label": "detectStrata()",
       "_callable": true,
@@ -2040,7 +2064,19 @@
       "file_type": "code",
       "norm_label": "detectstrata()",
       "source_file": "src/engines.ts",
-      "source_location": "L101"
+      "source_location": "L102"
+    },
+    {
+      "id": "src_engines_scanstrataconfigs",
+      "label": "scanStrataConfigs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "scanstrataconfigs()",
+      "source_file": "src/engines.ts",
+      "source_location": "L118"
     },
     {
       "id": "src_engines_stratapython",
@@ -2052,7 +2088,19 @@
       "file_type": "code",
       "norm_label": "stratapython()",
       "source_file": "src/engines.ts",
-      "source_location": "L98"
+      "source_location": "L99"
+    },
+    {
+      "id": "src_main_allmodels",
+      "label": "allModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "allmodels()",
+      "source_file": "src/main.ts",
+      "source_location": "L55"
     },
     {
       "id": "src_main_engineready",
@@ -2089,6 +2137,18 @@
       "norm_label": "llamaready()",
       "source_file": "src/main.ts",
       "source_location": "L40"
+    },
+    {
+      "id": "src_main_selectedmodel",
+      "label": "selectedModel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "engineReady",
+      "file_type": "code",
+      "norm_label": "selectedmodel()",
+      "source_file": "src/main.ts",
+      "source_location": "L70"
     },
     {
       "id": "src_main_state",
@@ -2415,48 +2475,12 @@
       "source_location": "L5"
     },
     {
-      "id": "scripts_smoke_engine_check",
-      "label": "check()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "smoke-engine.js",
-      "file_type": "code",
-      "norm_label": "check()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_engine_freeport",
-      "label": "freePort()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "smoke-engine.js",
-      "file_type": "code",
-      "norm_label": "freeport()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L10"
-    },
-    {
-      "id": "scripts_smoke_engine_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "smoke-engine.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L12"
-    },
-    {
       "id": "scripts_smoke_engines_ui_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/smoke-engines-ui.js",
@@ -2467,12 +2491,24 @@
       "label": "write()",
       "_callable": true,
       "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
       "norm_label": "write()",
       "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L12"
+    },
+    {
+      "id": "src_preload_invoke",
+      "label": "invoke()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "invoke()",
+      "source_file": "src/preload.ts",
+      "source_location": "L3"
     },
     {
       "id": "scripts_smoke_server_buttons_main",
@@ -2499,28 +2535,40 @@
       "source_location": "L27"
     },
     {
-      "id": "scripts_smoke_ui_main",
-      "label": "main()",
+      "id": "tests_engines_test_stratainstall",
+      "label": "strataInstall()",
       "_callable": true,
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L20"
+      "norm_label": "stratainstall()",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L14"
     },
     {
-      "id": "src_preload_invoke",
-      "label": "invoke()",
+      "id": "tests_engines_test_temp",
+      "label": "temp()",
       "_callable": true,
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "invoke()",
-      "source_file": "src/preload.ts",
-      "source_location": "L3"
+      "norm_label": "temp()",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L12"
+    },
+    {
+      "id": "tests_engines_test_write",
+      "label": "write()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "write()",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L13"
     },
     {
       "id": "scripts_smoke_external_cli_win_main",
@@ -2547,40 +2595,16 @@
       "source_location": "L10"
     },
     {
-      "id": "scripts_check_engine_release_fetchrelease",
-      "label": "fetchRelease()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "check-engine-release.js",
-      "file_type": "code",
-      "norm_label": "fetchrelease()",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L10"
-    },
-    {
-      "id": "scripts_check_engine_release_main",
+      "id": "scripts_smoke_ui_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 33,
-      "community_name": "check-engine-release.js",
+      "community_name": "smoke-ui.js",
       "file_type": "code",
       "norm_label": "main()",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L29"
-    },
-    {
-      "id": "scripts_check_engine_release_missingassets",
-      "label": "missingAssets()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "check-engine-release.js",
-      "file_type": "code",
-      "norm_label": "missingassets()",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L18"
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L20"
     },
     {
       "id": "tests_hardware_test_runnerfor",
@@ -2612,7 +2636,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "run()",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -2751,6 +2775,18 @@
       "source_location": "L4"
     },
     {
+      "id": "src_core_hfdisplayname",
+      "label": "hfDisplayName()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "hfdisplayname()",
+      "source_file": "src/core.ts",
+      "source_location": "L61"
+    },
+    {
       "id": "src_core_recommend",
       "label": "recommend()",
       "_callable": true,
@@ -2761,6 +2797,18 @@
       "norm_label": "recommend()",
       "source_file": "src/core.ts",
       "source_location": "L40"
+    },
+    {
+      "id": "src_core_scanmodels",
+      "label": "scanModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "scanmodels()",
+      "source_file": "src/core.ts",
+      "source_location": "L112"
     },
     {
       "id": "src_core_validatesettings",
@@ -2785,6 +2833,30 @@
       "norm_label": "validint()",
       "source_file": "src/core.ts",
       "source_location": "L9"
+    },
+    {
+      "id": "src_core_walkmodels",
+      "label": "walkModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "walkmodels()",
+      "source_file": "src/core.ts",
+      "source_location": "L71"
+    },
+    {
+      "id": "src_engines_scanhfmodels",
+      "label": "scanHfModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "core.ts",
+      "file_type": "code",
+      "norm_label": "scanhfmodels()",
+      "source_file": "src/engines.ts",
+      "source_location": "L138"
     },
     {
       "id": "src_profile_import_decodeprofilepath",
@@ -2979,30 +3051,6 @@
       "source_location": "L52"
     },
     {
-      "id": "scripts_smoke_bench_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_cli_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L7"
-    },
-    {
       "id": "scripts_build_manual_pdfs_blocks",
       "label": "blocks()",
       "_callable": true,
@@ -3152,13 +3200,13 @@
       "source_location": "L1"
     },
     {
-      "id": "src_engines_apimodelid_iswithin",
-      "label": "{apiModelId,isWithin}",
+      "id": "src_engines_apimodelid_iswithin_walkmodels",
+      "label": "{apiModelId,isWithin,walkModels}",
       "_origin": "ast",
       "community": 100,
       "community_name": "engines.ts",
       "file_type": "code",
-      "norm_label": "{apimodelid,iswithin}",
+      "norm_label": "{apimodelid,iswithin,walkmodels}",
       "source_file": "src/engines.ts",
       "source_location": "L8"
     },
@@ -3238,105 +3286,6 @@
       "norm_label": "links",
       "source_file": "src/guidance.ts",
       "source_location": "L4"
-    },
-    {
-      "id": "tests_engines_test",
-      "label": "engines.test.js",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "engines.test.js",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_engines_test_assert",
-      "label": "assert",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_engines_test_defaults_apimodelid",
-      "label": "{defaults,apiModelId}",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "{defaults,apimodelid}",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "tests_engines_test_engines",
-      "label": "engines",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "engines",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "tests_engines_test_eventemitter",
-      "label": "{EventEmitter}",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "{eventemitter}",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "tests_engines_test_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_engines_test_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "tests_engines_test_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "tests_engines_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L2"
     },
     {
       "id": "src_engine",
@@ -3724,131 +3673,54 @@
       "source_location": "L16"
     },
     {
-      "id": "tests_updater_test",
-      "label": "updater.test.js",
+      "id": "scripts_check_engine_release",
+      "label": "check-engine-release.js",
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
-      "norm_label": "updater.test.js",
-      "source_file": "tests/updater.test.js",
+      "norm_label": "check-engine-release.js",
+      "source_file": "scripts/check-engine-release.js",
       "source_location": "L1"
     },
     {
-      "id": "tests_updater_test_assert",
-      "label": "assert",
+      "id": "scripts_check_engine_release_arches",
+      "label": "ARCHES",
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L2"
+      "norm_label": "arches",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L8"
     },
     {
-      "id": "tests_updater_test_crypto",
-      "label": "crypto",
+      "id": "scripts_check_engine_release_engine",
+      "label": "engine",
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
-      "norm_label": "crypto",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_updater_test_eventemitter",
-      "label": "{EventEmitter}",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "{eventemitter}",
-      "source_file": "tests/updater.test.js",
+      "norm_label": "engine",
+      "source_file": "scripts/check-engine-release.js",
       "source_location": "L5"
     },
     {
-      "id": "tests_updater_test_fs",
-      "label": "fs",
+      "id": "scripts_check_engine_release_platforms",
+      "label": "PLATFORMS",
       "_origin": "ast",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_updater_test_https",
-      "label": "https",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "https",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_updater_test_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_updater_test_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_updater_test_readable",
-      "label": "{Readable}",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "{readable}",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "tests_updater_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L2"
-    },
-    {
-      "id": "tests_updater_test_updater",
-      "label": "updater",
-      "_origin": "ast",
-      "community": 138,
-      "community_name": "updater.test.js",
-      "file_type": "code",
-      "norm_label": "updater",
-      "source_file": "tests/updater.test.js",
-      "source_location": "L6"
+      "norm_label": "platforms",
+      "source_file": "scripts/check-engine-release.js",
+      "source_location": "L7"
     },
     {
       "id": "tests_engine_install_test",
       "label": "engine-install.test.js",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "engine-install.test.js",
@@ -3859,7 +3731,7 @@
       "id": "tests_engine_install_test_assert",
       "label": "assert",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "assert",
@@ -3870,7 +3742,7 @@
       "id": "tests_engine_install_test_crypto",
       "label": "crypto",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "crypto",
@@ -3881,7 +3753,7 @@
       "id": "tests_engine_install_test_engine",
       "label": "engine",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "engine",
@@ -3892,7 +3764,7 @@
       "id": "tests_engine_install_test_eventemitter",
       "label": "{EventEmitter}",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "{eventemitter}",
@@ -3903,7 +3775,7 @@
       "id": "tests_engine_install_test_execfilesync",
       "label": "{execFileSync}",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "{execfilesync}",
@@ -3914,7 +3786,7 @@
       "id": "tests_engine_install_test_fs",
       "label": "fs",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "fs",
@@ -3925,7 +3797,7 @@
       "id": "tests_engine_install_test_https",
       "label": "https",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "https",
@@ -3936,7 +3808,7 @@
       "id": "tests_engine_install_test_os",
       "label": "os",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "os",
@@ -3947,7 +3819,7 @@
       "id": "tests_engine_install_test_path",
       "label": "path",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "path",
@@ -3958,7 +3830,7 @@
       "id": "tests_engine_install_test_readable",
       "label": "{Readable}",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "{readable}",
@@ -3969,12 +3841,298 @@
       "id": "tests_engine_install_test_test",
       "label": "test",
       "_origin": "ast",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/engine-install.test.js",
       "source_location": "L2"
+    },
+    {
+      "id": "tests_updater_test",
+      "label": "updater.test.js",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "updater.test.js",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_updater_test_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "tests_updater_test_crypto",
+      "label": "crypto",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "crypto",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_updater_test_eventemitter",
+      "label": "{EventEmitter}",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "{eventemitter}",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_updater_test_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_updater_test_https",
+      "label": "https",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "https",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_updater_test_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_updater_test_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_updater_test_readable",
+      "label": "{Readable}",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "{readable}",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "tests_updater_test_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L2"
+    },
+    {
+      "id": "tests_updater_test_updater",
+      "label": "updater",
+      "_origin": "ast",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "file_type": "code",
+      "norm_label": "updater",
+      "source_file": "tests/updater.test.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_bench",
+      "label": "smoke-bench.js",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "smoke-bench.js",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_bench_defaults",
+      "label": "{defaults}",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "{defaults}",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_bench_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_bench_tune",
+      "label": "{tune}",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "{tune}",
+      "source_file": "scripts/smoke-bench.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_cli",
+      "label": "smoke-cli.js",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "smoke-cli.js",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_cli_cli",
+      "label": "cli",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "cli",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_cli_defaults",
+      "label": "{defaults}",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "{defaults}",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_cli_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_engine",
+      "label": "smoke-engine.js",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "smoke-engine.js",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_engine_defaults_argsformodel",
+      "label": "{defaults,argsForModel}",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "{defaults,argsformodel}",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_engine_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_engine_http",
+      "label": "http",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "http",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_engine_net",
+      "label": "net",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "net",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_engine_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_engine_spawn",
+      "label": "{spawn}",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "core.test.js",
+      "file_type": "code",
+      "norm_label": "{spawn}",
+      "source_file": "scripts/smoke-engine.js",
+      "source_location": "L7"
     },
     {
       "id": "tests_core_test",
@@ -4838,7 +4996,7 @@
       "label": "engine.test.js",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "engine.test.js",
       "source_file": "tests/engine.test.js",
@@ -4849,7 +5007,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/engine.test.js",
@@ -4860,7 +5018,7 @@
       "label": "engine",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "engine",
       "source_file": "tests/engine.test.js",
@@ -4871,7 +5029,7 @@
       "label": "release",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "release",
       "source_file": "tests/engine.test.js",
@@ -4882,54 +5040,10 @@
       "label": "test",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/engine.test.js",
-      "source_location": "L2"
-    },
-    {
-      "id": "tests_package_resources_test",
-      "label": "package-resources.test.js",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "package-resources.test.js",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_package_resources_test_assert",
-      "label": "assert",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_package_resources_test_pkg",
-      "label": "pkg",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "pkg",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_package_resources_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/package-resources.test.js",
       "source_location": "L2"
     },
     {
@@ -5091,7 +5205,7 @@
       "node_kind": "heading",
       "norm_label": "apis de aplicativos",
       "source_file": "README.md",
-      "source_location": "L115"
+      "source_location": "L118"
     },
     {
       "id": "readme_compartilhar_acesso_na_rede_interna_ou_tailscale",
@@ -5103,7 +5217,7 @@
       "node_kind": "heading",
       "norm_label": "compartilhar acesso na rede interna ou tailscale",
       "source_file": "README.md",
-      "source_location": "L96"
+      "source_location": "L99"
     },
     {
       "id": "readme_conectar_outros_aplicativos",
@@ -5115,7 +5229,7 @@
       "node_kind": "heading",
       "norm_label": "conectar outros aplicativos",
       "source_file": "README.md",
-      "source_location": "L105"
+      "source_location": "L108"
     },
     {
       "id": "readme_criadores_e_cr\u00e9ditos",
@@ -5139,7 +5253,7 @@
       "node_kind": "heading",
       "norm_label": "iniciar o servidor sem abrir o navegador",
       "source_file": "README.md",
-      "source_location": "L86"
+      "source_location": "L89"
     },
     {
       "id": "docs_manual_en_3_install_the_application",
@@ -5965,81 +6079,158 @@
       "source_location": "L2"
     },
     {
-      "id": "scripts_smoke_engine",
-      "label": "smoke-engine.js",
+      "id": "scripts_smoke_engines_ui",
+      "label": "smoke-engines-ui.js",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engine.js",
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
-      "norm_label": "smoke-engine.js",
-      "source_file": "scripts/smoke-engine.js",
+      "norm_label": "smoke-engines-ui.js",
+      "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_engine_defaults_argsformodel",
-      "label": "{defaults,argsForModel}",
+      "id": "scripts_smoke_engines_ui_app_browserwindow",
+      "label": "{app,BrowserWindow}",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engine.js",
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
-      "norm_label": "{defaults,argsformodel}",
-      "source_file": "scripts/smoke-engine.js",
+      "norm_label": "{app,browserwindow}",
+      "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L8"
     },
     {
-      "id": "scripts_smoke_engine_fs",
+      "id": "scripts_smoke_engines_ui_enginedir",
+      "label": "engineDir",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "enginedir",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "scripts_smoke_engines_ui_fs",
       "label": "fs",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engine.js",
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
       "norm_label": "fs",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_engine_http",
-      "label": "http",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "smoke-engine.js",
-      "file_type": "code",
-      "norm_label": "http",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_engine_net",
-      "label": "net",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "smoke-engine.js",
-      "file_type": "code",
-      "norm_label": "net",
-      "source_file": "scripts/smoke-engine.js",
+      "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L5"
     },
     {
-      "id": "scripts_smoke_engine_path",
+      "id": "scripts_smoke_engines_ui_gguf",
+      "label": "gguf",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "gguf",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "scripts_smoke_engines_ui_modeldir",
+      "label": "modelDir",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "modeldir",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "scripts_smoke_engines_ui_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_engines_ui_path",
       "label": "path",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engine.js",
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
       "norm_label": "path",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L4"
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L7"
     },
     {
-      "id": "scripts_smoke_engine_spawn",
-      "label": "{spawn}",
+      "id": "scripts_smoke_engines_ui_strataconfig",
+      "label": "strataConfig",
       "_origin": "ast",
       "community": 21,
-      "community_name": "smoke-engine.js",
+      "community_name": "smoke-engines-ui.js",
       "file_type": "code",
-      "norm_label": "{spawn}",
-      "source_file": "scripts/smoke-engine.js",
-      "source_location": "L7"
+      "norm_label": "strataconfig",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L19"
+    },
+    {
+      "id": "scripts_smoke_engines_ui_stratadir",
+      "label": "strataDir",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "stratadir",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "scripts_smoke_engines_ui_temporary",
+      "label": "temporary",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-engines-ui.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_preload",
+      "label": "preload.ts",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "preload.ts",
+      "source_file": "src/preload.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_preload_contextbridge_ipcrenderer",
+      "label": "{contextBridge,ipcRenderer}",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "{contextbridge,ipcrenderer}",
+      "source_file": "src/preload.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "ref_electron",
+      "label": "electron",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "concept",
+      "norm_label": "electron",
+      "source_file": "package.json",
+      "source_location": "L30"
     },
     {
       "id": "docs_manual_pt_br_10_dados_atualiza\u00e7\u00e3o_e_desinstala\u00e7\u00e3o_segura",
@@ -6794,127 +6985,6 @@
       "source_location": "L16"
     },
     {
-      "id": "scripts_smoke_engines_ui",
-      "label": "smoke-engines-ui.js",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "smoke-engines-ui.js",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_app_browserwindow",
-      "label": "{app,BrowserWindow}",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "{app,browserwindow}",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_enginedir",
-      "label": "engineDir",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "enginedir",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_gguf",
-      "label": "gguf",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "gguf",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L13"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_modeldir",
-      "label": "modelDir",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "modeldir",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_strataconfig",
-      "label": "strataConfig",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "strataconfig",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L19"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_stratadir",
-      "label": "strataDir",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "stratadir",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "scripts_smoke_engines_ui_temporary",
-      "label": "temporary",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-engines-ui.js",
-      "source_location": "L9"
-    },
-    {
       "id": "scripts_smoke_server_buttons",
       "label": "smoke-server-buttons.js",
       "_origin": "ast",
@@ -7080,114 +7150,103 @@
       "source_location": "L6"
     },
     {
-      "id": "scripts_smoke_ui",
-      "label": "smoke-ui.js",
+      "id": "tests_engines_test",
+      "label": "engines.test.js",
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "smoke-ui.js",
-      "source_file": "scripts/smoke-ui.js",
+      "norm_label": "engines.test.js",
+      "source_file": "tests/engines.test.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_ui_app_browserwindow",
-      "label": "{app,BrowserWindow}",
+      "id": "tests_engines_test_assert",
+      "label": "assert",
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "{app,browserwindow}",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L6"
+      "norm_label": "assert",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L3"
     },
     {
-      "id": "scripts_smoke_ui_fs",
+      "id": "tests_engines_test_core",
+      "label": "core",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "core",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "tests_engines_test_engines",
+      "label": "engines",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "engines",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "tests_engines_test_eventemitter",
+      "label": "{EventEmitter}",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "smoke-server-buttons.js",
+      "file_type": "code",
+      "norm_label": "{eventemitter}",
+      "source_file": "tests/engines.test.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_engines_test_fs",
       "label": "fs",
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "fs",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L3"
+      "source_file": "tests/engines.test.js",
+      "source_location": "L4"
     },
     {
-      "id": "scripts_smoke_ui_os",
+      "id": "tests_engines_test_os",
       "label": "os",
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "os",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L4"
+      "source_file": "tests/engines.test.js",
+      "source_location": "L5"
     },
     {
-      "id": "scripts_smoke_ui_path",
+      "id": "tests_engines_test_path",
       "label": "path",
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
       "norm_label": "path",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L5"
+      "source_file": "tests/engines.test.js",
+      "source_location": "L6"
     },
     {
-      "id": "scripts_smoke_ui_temporary",
-      "label": "temporary",
+      "id": "tests_engines_test_test",
+      "label": "test",
       "_origin": "ast",
       "community": 25,
       "community_name": "smoke-server-buttons.js",
       "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_ui_withmodel",
-      "label": "withModel",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "withmodel",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_preload",
-      "label": "preload.ts",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "preload.ts",
-      "source_file": "src/preload.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_preload_contextbridge_ipcrenderer",
-      "label": "{contextBridge,ipcRenderer}",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "code",
-      "norm_label": "{contextbridge,ipcrenderer}",
-      "source_file": "src/preload.ts",
+      "norm_label": "test",
+      "source_file": "tests/engines.test.js",
       "source_location": "L2"
-    },
-    {
-      "id": "ref_electron",
-      "label": "electron",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "smoke-server-buttons.js",
-      "file_type": "concept",
-      "norm_label": "electron",
-      "source_file": "package.json",
-      "source_location": "L30"
     },
     {
       "id": "tests_terminal_cli_test",
@@ -7848,48 +7907,81 @@
       "source_location": "L11"
     },
     {
-      "id": "scripts_check_engine_release",
-      "label": "check-engine-release.js",
+      "id": "scripts_smoke_ui",
+      "label": "smoke-ui.js",
       "_origin": "ast",
       "community": 33,
-      "community_name": "check-engine-release.js",
+      "community_name": "smoke-ui.js",
       "file_type": "code",
-      "norm_label": "check-engine-release.js",
-      "source_file": "scripts/check-engine-release.js",
+      "norm_label": "smoke-ui.js",
+      "source_file": "scripts/smoke-ui.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_check_engine_release_arches",
-      "label": "ARCHES",
+      "id": "scripts_smoke_ui_app_browserwindow",
+      "label": "{app,BrowserWindow}",
       "_origin": "ast",
       "community": 33,
-      "community_name": "check-engine-release.js",
+      "community_name": "smoke-ui.js",
       "file_type": "code",
-      "norm_label": "arches",
-      "source_file": "scripts/check-engine-release.js",
-      "source_location": "L8"
+      "norm_label": "{app,browserwindow}",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L6"
     },
     {
-      "id": "scripts_check_engine_release_engine",
-      "label": "engine",
+      "id": "scripts_smoke_ui_fs",
+      "label": "fs",
       "_origin": "ast",
       "community": 33,
-      "community_name": "check-engine-release.js",
+      "community_name": "smoke-ui.js",
       "file_type": "code",
-      "norm_label": "engine",
-      "source_file": "scripts/check-engine-release.js",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_ui_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "smoke-ui.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_ui_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "smoke-ui.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-ui.js",
       "source_location": "L5"
     },
     {
-      "id": "scripts_check_engine_release_platforms",
-      "label": "PLATFORMS",
+      "id": "scripts_smoke_ui_temporary",
+      "label": "temporary",
       "_origin": "ast",
       "community": 33,
-      "community_name": "check-engine-release.js",
+      "community_name": "smoke-ui.js",
       "file_type": "code",
-      "norm_label": "platforms",
-      "source_file": "scripts/check-engine-release.js",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-ui.js",
       "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_ui_withmodel",
+      "label": "withModel",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "smoke-ui.js",
+      "file_type": "code",
+      "norm_label": "withmodel",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L9"
     },
     {
       "id": "tests_guidance_test",
@@ -8112,7 +8204,7 @@
       "label": "smoke-macos-dmg.js",
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "smoke-macos-dmg.js",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -8123,7 +8215,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -8134,7 +8226,7 @@
       "label": "mountpoint",
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "mountpoint",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -8145,7 +8237,7 @@
       "label": "os",
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "os",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -8156,7 +8248,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -8167,7 +8259,7 @@
       "label": "{ spawnSync }",
       "_origin": "ast",
       "community": 38,
-      "community_name": "ref_node_fs",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{ spawnsync }",
       "source_file": "scripts/smoke-macos-dmg.js",
@@ -8178,7 +8270,7 @@
       "label": "prepare-linux-test-metadata.js",
       "_origin": "ast",
       "community": 39,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "prepare-linux-test-metadata.js",
       "source_file": "scripts/prepare-linux-test-metadata.js",
@@ -8189,7 +8281,7 @@
       "label": "cwd",
       "_origin": "ast",
       "community": 39,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "cwd",
       "source_file": "scripts/prepare-linux-test-metadata.js",
@@ -8200,7 +8292,7 @@
       "label": "file",
       "_origin": "ast",
       "community": 39,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "file",
       "source_file": "scripts/prepare-linux-test-metadata.js",
@@ -8211,7 +8303,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 39,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/prepare-linux-test-metadata.js",
@@ -8222,7 +8314,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 39,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/prepare-linux-test-metadata.js",
@@ -8233,7 +8325,7 @@
       "label": "pkg",
       "_origin": "ast",
       "community": 39,
-      "community_name": "ref_node_path",
+      "community_name": "ref_node_fs",
       "file_type": "code",
       "norm_label": "pkg",
       "source_file": "scripts/prepare-linux-test-metadata.js",
@@ -10308,92 +10400,48 @@
       "source_location": "L6"
     },
     {
-      "id": "scripts_smoke_bench",
-      "label": "smoke-bench.js",
+      "id": "tests_package_resources_test",
+      "label": "package-resources.test.js",
       "_origin": "ast",
       "community": 88,
-      "community_name": "smoke-bench.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
-      "norm_label": "smoke-bench.js",
-      "source_file": "scripts/smoke-bench.js",
+      "norm_label": "package-resources.test.js",
+      "source_file": "tests/package-resources.test.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_bench_defaults",
-      "label": "{defaults}",
+      "id": "tests_package_resources_test_assert",
+      "label": "assert",
       "_origin": "ast",
       "community": 88,
-      "community_name": "smoke-bench.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
-      "norm_label": "{defaults}",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_bench_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-bench.js",
+      "norm_label": "assert",
+      "source_file": "tests/package-resources.test.js",
       "source_location": "L3"
     },
     {
-      "id": "scripts_smoke_bench_tune",
-      "label": "{tune}",
+      "id": "tests_package_resources_test_pkg",
+      "label": "pkg",
       "_origin": "ast",
       "community": 88,
-      "community_name": "smoke-bench.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
-      "norm_label": "{tune}",
-      "source_file": "scripts/smoke-bench.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_cli",
-      "label": "smoke-cli.js",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "smoke-cli.js",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_cli_cli",
-      "label": "cli",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "cli",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_cli_defaults",
-      "label": "{defaults}",
-      "_origin": "ast",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "{defaults}",
-      "source_file": "scripts/smoke-cli.js",
+      "norm_label": "pkg",
+      "source_file": "tests/package-resources.test.js",
       "source_location": "L4"
     },
     {
-      "id": "scripts_smoke_cli_fs",
-      "label": "fs",
+      "id": "tests_package_resources_test_test",
+      "label": "test",
       "_origin": "ast",
       "community": 88,
-      "community_name": "smoke-bench.js",
+      "community_name": "ref_node_assert",
       "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L3"
+      "norm_label": "test",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L2"
     },
     {
       "id": "scripts_build_manual_pdfs",
@@ -10510,14 +10558,98 @@
       "type": "external"
     },
     {
-      "id": "ref_node_events",
-      "label": "ref_node_events",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_buildfirewallscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_buildfirewallscript",
       "_origin": "semantic",
-      "community": 102,
-      "community_name": "engines.test.js",
+      "community": 0,
+      "community_name": "firewall.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_events",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_buildfirewallscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrule",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrule",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrule",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrules",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrules",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrules",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_max",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_max",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_max",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_min",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_min",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_min",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateremoteaddress",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateremoteaddress",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateremoteaddress",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateruleoptions",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateruleoptions",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateruleoptions",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
+      "_origin": "semantic",
+      "community": 102,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
       "source_file": "",
       "type": "external"
     },
@@ -10590,18 +10722,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_https",
-      "label": "ref_node_https",
-      "_origin": "semantic",
-      "community": 11,
-      "community_name": "engine.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_https",
       "source_file": "",
       "type": "external"
     },
@@ -10942,11 +11062,23 @@
       "type": "external"
     },
     {
+      "id": "build_app_engine",
+      "label": "build_app_engine",
+      "_origin": "semantic",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_engine",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_updater",
       "label": "build_app_updater",
       "_origin": "semantic",
       "community": 138,
-      "community_name": "updater.test.js",
+      "community_name": "engine-install.test.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_updater",
@@ -10954,10 +11086,22 @@
       "type": "external"
     },
     {
+      "id": "ref_node_https",
+      "label": "ref_node_https",
+      "_origin": "semantic",
+      "community": 138,
+      "community_name": "engine-install.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_https",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_stream",
       "label": "ref_node_stream",
       "_origin": "semantic",
-      "community": 139,
+      "community": 138,
       "community_name": "engine-install.test.js",
       "external": true,
       "file_type": "concept",
@@ -10966,14 +11110,134 @@
       "type": "external"
     },
     {
-      "id": "ref_node_assert",
-      "label": "ref_node_assert",
+      "id": "build_app_benchmark",
+      "label": "build_app_benchmark",
       "_origin": "semantic",
-      "community": 148,
-      "community_name": "ref_node_assert",
+      "community": 14,
+      "community_name": "core.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_assert",
+      "norm_label": "build_app_benchmark",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_cli",
+      "label": "build_app_cli",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_cli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_core",
+      "label": "build_app_core",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_core",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "core.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
       "source_file": "",
       "type": "external"
     },
@@ -10982,7 +11246,7 @@
       "label": "ref_node_test",
       "_origin": "semantic",
       "community": 148,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_test",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_test",
@@ -11290,6 +11554,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_createproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_createproxy",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_createproxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_upstreamrequestdetails",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_upstreamrequestdetails",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_upstreamrequestdetails",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "label": "c_users_celio_onedrive_app_e_projetos_launcher_llama_cpp_llama_desktop_launcher_build_app_share_proxy_createshareproxy",
       "_origin": "semantic",
@@ -11386,14 +11674,74 @@
       "type": "external"
     },
     {
-      "id": "ref_node_net",
-      "label": "ref_node_net",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_share_proxy_createshareproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_share_proxy_createshareproxy",
       "_origin": "semantic",
       "community": 20,
       "community_name": "share_proxy.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_net",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_share_proxy_createshareproxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "build_app_engines",
+      "label": "build_app_engines",
+      "_origin": "semantic",
+      "community": 25,
+      "community_name": "smoke-server-buttons.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_engines",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_events",
+      "label": "ref_node_events",
+      "_origin": "semantic",
+      "community": 25,
+      "community_name": "smoke-server-buttons.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_events",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_posixscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_posixscript",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_posixscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_psquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_psquote",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_psquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_terminalcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_terminalcommand",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_terminalcommand",
       "source_file": "",
       "type": "external"
     },
@@ -11406,6 +11754,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_terminal_cli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_powershellscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_powershellscript",
+      "_origin": "semantic",
+      "community": 28,
+      "community_name": "smoke-external-cli-win.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_powershellscript",
       "source_file": "",
       "type": "external"
     },
@@ -11434,6 +11794,18 @@
       "type": "external"
     },
     {
+      "id": "ref_node_net",
+      "label": "ref_node_net",
+      "_origin": "semantic",
+      "community": 29,
+      "community_name": "share_proxy.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_net",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_child_process",
       "label": "ref_node_child_process",
       "_origin": "semantic",
@@ -11442,6 +11814,30 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_child_process",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_openexternalcli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_openexternalcli",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_openexternalcli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_shquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_shquote",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_shquote",
       "source_file": "",
       "type": "external"
     },
@@ -11458,14 +11854,38 @@
       "type": "external"
     },
     {
-      "id": "build_app_engine",
-      "label": "build_app_engine",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientcommand",
       "_origin": "semantic",
-      "community": 33,
-      "community_name": "check-engine-release.js",
+      "community": 31,
+      "community_name": "client_commands.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_engine",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientconfiguration",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientconfiguration",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientconfiguration",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_opencodecommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_opencodecommand",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_opencodecommand",
       "source_file": "",
       "type": "external"
     },
@@ -11482,6 +11902,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_buildguidance",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_buildguidance",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_buildguidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_links",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_links",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_links",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_hardware",
       "label": "build_app_hardware",
       "_origin": "semantic",
@@ -11490,6 +11934,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_hardware",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_hardware_detectgpu",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_hardware_detectgpu",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "hardware.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_hardware_detectgpu",
       "source_file": "",
       "type": "external"
     },
@@ -11506,14 +11962,14 @@
       "type": "external"
     },
     {
-      "id": "ref_node_fs",
-      "label": "ref_node_fs",
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
       "_origin": "semantic",
-      "community": 38,
-      "community_name": "ref_node_fs",
+      "community": 36,
+      "community_name": "profile_import.test.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_fs",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
       "source_file": "",
       "type": "external"
     },
@@ -11521,11 +11977,23 @@
       "id": "ref_node_path",
       "label": "ref_node_path",
       "_origin": "semantic",
-      "community": 39,
+      "community": 38,
       "community_name": "ref_node_path",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_path",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_fs",
+      "label": "ref_node_fs",
+      "_origin": "semantic",
+      "community": 39,
+      "community_name": "ref_node_fs",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_fs",
       "source_file": "",
       "type": "external"
     },
@@ -11878,38 +12346,14 @@
       "type": "external"
     },
     {
-      "id": "build_app_benchmark",
-      "label": "build_app_benchmark",
+      "id": "ref_node_assert",
+      "label": "ref_node_assert",
       "_origin": "semantic",
       "community": 88,
-      "community_name": "smoke-bench.js",
+      "community_name": "ref_node_assert",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_benchmark",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_cli",
-      "label": "build_app_cli",
-      "_origin": "semantic",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_cli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_core",
-      "label": "build_app_core",
-      "_origin": "semantic",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_core",
+      "norm_label": "ref_node_assert",
       "source_file": "",
       "type": "external"
     },
@@ -12174,369 +12618,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_buildfirewallscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_buildfirewallscript",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_buildfirewallscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrule",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrule",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrule",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrules",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrules",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_createrules",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_max",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_max",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_max",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_min",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_min",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_port_min",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateremoteaddress",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateremoteaddress",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateremoteaddress",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateruleoptions",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateruleoptions",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_firewall_validateruleoptions",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_engines",
-      "label": "build_app_engines",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_engines",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
-      "community": 102,
-      "community_name": "engines.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_recommend",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_scanmodels",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_validatesettings",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
-      "community": 14,
-      "community_name": "core.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_engine_assetfor",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_createproxy",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_createproxy",
-      "community": 18,
-      "community_name": "network.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_createproxy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_upstreamrequestdetails",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_upstreamrequestdetails",
-      "community": 18,
-      "community_name": "network.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_network_upstreamrequestdetails",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_share_proxy_createshareproxy",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_share_proxy_createshareproxy",
-      "community": 20,
-      "community_name": "share_proxy.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_share_proxy_createshareproxy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
-      "community": 21,
-      "community_name": "smoke-engine.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_argsformodel",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_posixscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_posixscript",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_posixscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_psquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_psquote",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_psquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_terminalcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_terminalcommand",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_terminalcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_powershellscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_powershellscript",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_powershellscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_openexternalcli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_openexternalcli",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_openexternalcli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_shquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_shquote",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_terminal_cli_shquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientcommand",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientconfiguration",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientconfiguration",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_clientconfiguration",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_opencodecommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_opencodecommand",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_client_commands_opencodecommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_buildguidance",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_buildguidance",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_buildguidance",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_links",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_links",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_guidance_links",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_hardware_detectgpu",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_hardware_detectgpu",
-      "community": 35,
-      "community_name": "hardware.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_hardware_detectgpu",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
-      "community": 36,
-      "community_name": "profile_import.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_profile_import_parselegacyprofiles",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_benchmark_tune",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
-      "community": 88,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
       "source_file": "",
       "type": "external"
     }
@@ -12891,6 +12972,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_core_scanmodels",
+      "target": "src_core_walkmodels",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/core.ts",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
       "source": "src_core_validatesettings",
       "target": "src_core_validint",
       "relation": "calls",
@@ -12900,6 +12993,18 @@
       "context": "call",
       "source_file": "src/core.ts",
       "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_core_walkmodels",
+      "target": "src_core_hfdisplayname",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/core.ts",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -13079,7 +13184,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L103",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -13091,7 +13196,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L90",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -13103,7 +13208,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -13115,7 +13220,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -13127,7 +13232,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L63",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -13139,7 +13244,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L67",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -13151,7 +13256,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -13163,7 +13268,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L94",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "src_engines_scanhfmodels",
+      "target": "src_core_walkmodels",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/engines.ts",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -13175,7 +13292,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L117",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -13187,7 +13304,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L129",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -13228,6 +13345,18 @@
     },
     {
       "source": "src_engines_servercommand",
+      "target": "src_engines_dockermodelmount",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/engines.ts",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "src_engines_servercommand",
       "target": "src_engines_engineinfo",
       "relation": "calls",
       "_origin": "ast",
@@ -13235,7 +13364,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L183",
+      "source_location": "L185",
       "weight": 1.0
     },
     {
@@ -13247,7 +13376,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L186",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -13259,7 +13388,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L188",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "src_engines_servercommand",
+      "target": "src_engines_venvbaseexecutable",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/engines.ts",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -13271,7 +13412,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/engines.ts",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -13540,18 +13681,6 @@
     },
     {
       "source": "src_main_allmodels",
-      "target": "src_core_scanmodels",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/main.ts",
-      "source_location": "L57",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main_allmodels",
       "target": "src_engines_enginecatalog",
       "relation": "calls",
       "_origin": "ast",
@@ -13559,19 +13688,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L58",
+      "source_location": "L56",
       "weight": 1.0
     },
     {
       "source": "src_main_allmodels",
-      "target": "src_engines_scanhfmodels",
+      "target": "src_core_walkmodels",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L59",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -13979,7 +14108,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L235",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
@@ -14699,7 +14828,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/engines.test.js",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -14723,7 +14852,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/main.ts",
-      "source_location": "L233",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -15203,7 +15332,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/engines.test.js",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -15215,7 +15344,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/engines.test.js",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -15227,7 +15356,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/engines.test.js",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -15616,6 +15745,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_engines",
+      "target": "src_core_walkmodels",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/engines.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "src_main",
       "target": "src_profile_import_parselegacyprofiles",
       "relation": "imports",
@@ -15757,30 +15898,6 @@
       "context": "import",
       "source_file": "tests/core.test.js",
       "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "tests_engines_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "tests_engines_test",
-      "target": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_defaults",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "tests/engines.test.js",
-      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -21470,7 +21587,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L105",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -21481,7 +21598,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L115",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -21492,7 +21609,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L86",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -21503,7 +21620,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L96",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -23378,7 +23495,7 @@
     },
     {
       "source": "src_engines",
-      "target": "src_engines_apimodelid_iswithin",
+      "target": "src_engines_apimodelid_iswithin_walkmodels",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -23395,7 +23512,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/engines.ts",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -24764,7 +24881,7 @@
     },
     {
       "source": "tests_engines_test",
-      "target": "tests_engines_test_defaults_apimodelid",
+      "target": "tests_engines_test_core",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -26207,7 +26324,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L127",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -26218,7 +26335,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L133",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -26504,7 +26621,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/core.ts",
-      "source_location": "L81",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -26516,7 +26633,19 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/core.ts",
-      "source_location": "L81",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "src_core",
+      "target": "src_core_hfdisplayname",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "src/core.ts",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -26528,7 +26657,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/core.ts",
-      "source_location": "L81",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -26540,7 +26669,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/core.ts",
-      "source_location": "L81",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -26552,7 +26681,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/core.ts",
-      "source_location": "L81",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -26564,7 +26693,19 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/core.ts",
-      "source_location": "L81",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "src_core",
+      "target": "src_core_walkmodels",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "src/core.ts",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -26660,7 +26801,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L200",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -26672,7 +26813,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L200",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -26684,7 +26825,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L200",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -26696,7 +26837,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L200",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -26708,7 +26849,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L200",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -26720,7 +26861,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L200",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -26732,7 +26873,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26744,7 +26885,19 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "src_engines",
+      "target": "src_engines_dockermodelmount",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "src/engines.ts",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26756,7 +26909,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26768,7 +26921,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26780,7 +26933,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26792,7 +26945,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26804,7 +26957,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26816,7 +26969,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26828,7 +26981,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26840,7 +26993,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -26852,7 +27005,19 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/engines.ts",
-      "source_location": "L201",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "src_engines",
+      "target": "src_engines_venvbaseexecutable",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "collection",
+      "source_file": "src/engines.ts",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -27301,5 +27466,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d27f22f72e7896db4fe8b87e8357b85532748eae"
+  "built_at_commit": "d3efda96c76f718b4fabb744eb05e660ab885c3b"
 }
