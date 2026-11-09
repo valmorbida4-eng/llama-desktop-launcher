@@ -1,6 +1,6 @@
 # Integration guide — Llama Desktop Launcher
 
-Version 0.8.0 · English
+Version 0.9.0 · English
 
 This guide explains how to connect clients and applications to the server started by the launcher: endpoint, model ID, keys, ready-made setups for OpenCode and other clients, code examples, network and firewall. To install and use the app, see the **User manual** (`MANUAL-en`). To solve problems, see the **Diagnostics guide** (`DIAGNOSTICS-en`).
 
@@ -25,6 +25,8 @@ Do not mix credentials: the permanent key only works on the direct port, and the
 Choose the **Endereço de acesso** (access address) before clicking **Iniciar servidor** (Start server). Once the model loads, the **Conectar aplicativo** (Connect application) panel shows a line like this:
 
 `API: http://192.168.1.5:8080/v1 · Modelo API: modelo-local · Interface: http://192.168.1.5:8080/`
+
+Right below it, the **Em uso** (In use) line shows the server's real values, such as `Em uso: contexto 32768 · camadas na GPU 25/25 · sessões 2`. With context on Auto, the engine picks the size; use the number from that line (divided by the simultaneous sessions) as the client's context limit. Speculative decoding and the other profile settings do not change the API.
 
 - **Direct API:** the first free port between **8080 and 8180** on the chosen address. **Copiar link da API** copies the address ending in `/v1`.
 - **Shared API:** with LAN or Tailscale, a second port between **8181 and 8280**, shown as **API compartilhada**.

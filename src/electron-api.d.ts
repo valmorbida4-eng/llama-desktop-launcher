@@ -1,21 +1,13 @@
-interface ModelSettings {
-  gpuLayers: string | number;
-  device: string;
-  context: string | number;
-  cpuMoe: string | number;
-  cacheK: string;
-  cacheV: string;
-  flash: string;
-  threads: string | number;
-  batch: string | number;
-  ubatch: string | number;
-}
+interface ModelSettings { [key: string]: string | number }
 
 interface ProgressUpdate { percent: number; label: string }
 interface ChatOutput { stream: 'stdout' | 'stderr'; text: string }
 interface ProcessExit { code: number | null; signal: string | null }
 interface UpdateInfo { currentVersion: string; version: string; available: boolean; notes: string; url: string; publishedAt: string | null; asset: { name: string; size: number } | null }
 interface UpdateResult { action: 'installer' | 'opened' | 'appimage' | 'package' | 'cancelled'; file: string; command?: string | null }
+interface ParameterField { key: string; group: string; label: string; flag: string; kind: 'int' | 'float' | 'select' | 'toggle' | 'text' | 'model' | 'info'; min?: number; max?: number; step?: number; options: string[] | null; hint: string | null; applicable: boolean; reason: string | null; auto: { value: string; source: string } | null; serverOnly: boolean }
+interface ParameterSchema { engine: string; version: number; fields: ParameterField[]; info: any; readOnly: { label: string; value: string }[] }
+interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced' }
 interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
 interface RendererApi {
   state(): Promise<any>;
@@ -39,7 +31,10 @@ interface RendererApi {
   modelGuidance(): Promise<any>;
   copyGuidancePrompt(): Promise<string>;
   analyzeWithModel(modelPath: string, settings: ModelSettings): Promise<{ prompt: string }>;
-  tune(modelPath: string, settings: ModelSettings): Promise<any>;
+  tune(modelPath: string, settings: ModelSettings, options?: TuneOptions): Promise<any>;
+  cancelTune(): Promise<boolean>;
+  parameterSchema(modelPath: string, settings: ModelSettings): Promise<ParameterSchema>;
+  fitValues(modelPath: string, settings: ModelSettings): Promise<ParameterSchema>;
   launch(modelPath: string, settings: ModelSettings, options: { host: string; parallel: number; openBrowser?: boolean }): Promise<any>;
   stop(): Promise<boolean>;
   startChat(modelPath: string, settings: ModelSettings): Promise<boolean>;
@@ -73,18 +68,10 @@ interface RendererApi {
 }
 
 declare global {
-  interface ModelSettings {
-    gpuLayers: string | number;
-    device: string;
-    context: string | number;
-    cpuMoe: string | number;
-    cacheK: string;
-    cacheV: string;
-    flash: string;
-    threads: string | number;
-    batch: string | number;
-    ubatch: string | number;
-  }
+  interface ModelSettings { [key: string]: string | number }
+  interface ParameterField { key: string; group: string; label: string; flag: string; kind: 'int' | 'float' | 'select' | 'toggle' | 'text' | 'model' | 'info'; min?: number; max?: number; step?: number; options: string[] | null; hint: string | null; applicable: boolean; reason: string | null; auto: { value: string; source: string } | null; serverOnly: boolean }
+  interface ParameterSchema { engine: string; version: number; fields: ParameterField[]; info: any; readOnly: { label: string; value: string }[] }
+  interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced' }
   interface Window { llama: RendererApi }
 }
 

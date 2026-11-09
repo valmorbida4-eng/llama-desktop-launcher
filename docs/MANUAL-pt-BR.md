@@ -1,6 +1,6 @@
 # Manual de uso — Llama Desktop Launcher
 
-Versão 0.8.0 · Português (Brasil)
+Versão 0.9.0 · Português (Brasil)
 
 Este é o primeiro de três guias. O **Guia de integração** (`INTEGRATION-pt-BR`) explica como conectar OpenCode, outros clientes e seus próprios aplicativos à API. O **Guia de diagnóstico** (`DIAGNOSTICS-pt-BR`) reúne problemas comuns, mensagens do aplicativo e o relatório para suporte. Os três estão no rodapé do aplicativo e na pasta `docs/` do repositório.
 
@@ -116,7 +116,7 @@ O pacote do pip só traz suporte a NVIDIA CUDA. Para AMD (ROCm), instale o vLLM 
 
 ### O que vale no vLLM
 
-- Do perfil, o vLLM usa só o **Contexto** (`--max-model-len`) e as **Sessões simultâneas** (`--max-num-seqs`). Os demais campos são do llama.cpp.
+- O perfil do vLLM tem campos próprios: uso de memória da GPU, tipo do cache KV, paralelismo de tensor, decodificação especulativa e outros (seção 10). As **Sessões simultâneas** viram `--max-num-seqs`.
 - A primeira carga pode levar vários minutos (compilação de grafos). O launcher espera até 30 minutos.
 - **Abrir no navegador** abre a documentação da API (`/docs`), porque o vLLM não tem interface de conversa.
 - No macOS o vLLM não é oferecido.
@@ -129,7 +129,7 @@ Strata e PolyStrata servem famílias de modelos específicas, com quantização 
 2. Em **01B · Outros motores**, clique em **Escolher pasta instalada** e selecione a pasta que contém `serve/server.py` e `.venv`.
 3. Cada arquivo `strata-<modelo>.json` dessa pasta vira um item da lista, com o sufixo `· Strata` ou `· PolyStrata`.
 
-O launcher não baixa nem executa o instalador desses projetos. Contexto, quantização e GPU vêm da configuração `strata-*.json`; o launcher define o endereço, a porta e a chave de API. As **Sessões simultâneas** do launcher valem só para o Strata; o PolyStrata usa o valor da própria configuração.
+O launcher não baixa nem executa o instalador desses projetos. Contexto, quantização e GPU vêm da configuração `strata-*.json`; o launcher define o endereço, a porta e a chave de API. Opções extras do servidor (GPU, fila, descarregar após ociosidade, VRAM mínima) aparecem no perfil quando a versão instalada as aceita (seção 10). As **Sessões simultâneas** do launcher valem só para o Strata; o PolyStrata usa o valor da própria configuração.
 
 Para descobrir modelos, use o cartão **Outros motores** na tela **Modelos**. Ele tem links para as listas do Strata, do PolyStrata e do vLLM e diz se a GPU detectada atende aos requisitos de cada um.
 
@@ -175,9 +175,10 @@ O **Registro do motor**, abaixo dos botões, mostra a saída do motor e as mensa
 | Recurso | llama.cpp | vLLM | Strata / PolyStrata |
 | --- | --- | --- | --- |
 | Conversa integrada e CLI | Sim | Não | Não |
-| Sugestão de ajustes e benchmark | Sim | Não | Não |
+| Sugestão inicial | Sim | Sim | Não |
+| Autotuning | `llama-bench` e `llama-server` curto | Opcional; recarrega o modelo a cada tentativa | Não |
 | Abrir no navegador | Interface web do `llama-server` | Documentação da API (`/docs`) | Página do servidor do Strata |
-| Ajustes do perfil usados | Todos | Contexto e sessões | Sessões (só Strata) |
+| Ajustes do perfil | Os do llama.cpp | Os do vLLM | Sessões (só Strata) e opções que o `server.py` instalado aceitar |
 | Espera máxima pela carga | 5 minutos | 30 minutos | 30 minutos |
 | ID do modelo na API | `modelo-local` | `modelo-local` | `model_name` da configuração |
 
@@ -187,24 +188,83 @@ Cada modelo tem um perfil próprio, salvo pelo caminho do arquivo ou da pasta. O
 
 Na tela **Llama**, os ajustes ficam no acordeão **Ajustes avançados deste modelo**, fechado no início. Em **Configurações > 03 · Perfil do modelo**, os mesmos campos aparecem abertos, com um seletor de modelo.
 
-| Campo | Argumento do llama.cpp | Como usar |
+### Como o painel funciona
+
+- **Só aparecem os parâmetros do motor do modelo escolhido.** Um GGUF mostra os do llama.cpp; uma pasta Hugging Face, os do vLLM; uma configuração `strata-*.json`, os do Strata.
+- **O que o modelo ou o hardware não suporta fica recolhido** em **Não se aplicam a este modelo (N)**, cada um com o motivo. Exemplos: "Modelo denso: não tem especialistas MoE", "Só com 2 ou mais GPUs", "O modelo não usa atenção com janela deslizante (SWA)".
+- **Cada campo tem a caixa Auto.** Marcada, o launcher não passa a opção e o motor decide. Abaixo do campo aparece o valor automático quando dá para saber, com a origem: `Automático: 25 · ajuste automático (fit)`.
+- As etiquetas no topo resumem o que o launcher leu do modelo: arquitetura, camadas, contexto de treino e tipo (denso, MoE, SWA, híbrido/recorrente, MTP).
+
+O launcher descobre o que o modelo suporta sem carregar os pesos: lê o cabeçalho do GGUF (especialistas, camadas MTP/NextN, janela deslizante, camadas recorrentes), o `config.json` da pasta Hugging Face (especialistas, MTP, quantização, contexto máximo, cabeças de atenção) e as GPUs (`llama-server --list-devices` no llama.cpp, `nvidia-smi` no vLLM e no Strata).
+
+### llama.cpp (GGUF)
+
+| Grupo | Campo | Argumento | Aparece quando |
+| --- | --- | --- | --- |
+| GPU e memória | Camadas na GPU | `-ngl` | Há GPU. Valor: número, ou `all`. |
+| | Contexto | `-c` | Sempre. Em Auto, o `-fit` escolhe o maior que cabe. |
+| | Contexto mínimo do ajuste automático | `-fitc` | Contexto em Auto. |
+| | Margem livre por GPU (MiB) | `-fitt` | Há GPU. |
+| | Dispositivo | `-dev` | Há GPU. Nomes do `--list-devices` (ex.: `CUDA0`, `Vulkan1`); vários separados por vírgula; `none` = só CPU. |
+| | Divisão entre GPUs / Proporção por GPU | `-sm` / `-ts` | 2 ou mais GPUs. |
+| | Cache KV fora da GPU | `-nkvo` | Há GPU. |
+| | Modo de carga | `-lm` | Sempre: `auto`, `none`, `mmap`, `mlock`, `mmap+mlock`, `dio`. |
+| Especialistas MoE | Camadas de especialistas na CPU | `-ncmoe` | Modelo MoE. |
+| | Cache de especialistas na GPU (MiB) | `--moe-cache-mib` | Modelo MoE com GPU. |
+| | Fração das faltas do cache feita na CPU | `--moe-cache-cpu-share` | Cache de especialistas maior que 0. |
+| Modelo denso | Camadas com FFN na CPU | `-ncffn` | Modelo sem especialistas, com GPU. |
+| CPU e lotes | Threads de geração / de prompt | `-t` / `-tb` | Sempre. |
+| | Batch / Microbatch | `-b` / `-ub` | Sempre. O microbatch não pode passar do batch. |
+| Cache KV e atenção | Cache K / V | `-ctk` / `-ctv` | Sempre. Cache V quantizado exige Flash Attention. |
+| | Flash Attention | `-fa` | Sempre. |
+| | Cache SWA completo | `--swa-full` | Modelo com janela deslizante. |
+| | Checkpoints de contexto por sessão | `-ctxcp` | Modelo SWA, híbrido ou recorrente. |
+| | Reuso de cache por deslocamento | `--cache-reuse` | Só no servidor. |
+| | Cache KV unificado entre sessões | `-kvu` | Servidor com 2 ou mais sessões simultâneas. |
+| Decodificação especulativa | Tipo | `--spec-type` | Sempre: `none`, `ngram-mod`, `ngram-simple`, `ngram-map-k`; `draft-mtp` só se o GGUF tiver camadas MTP; `draft-simple`/`draft-eagle3` com um modelo rascunho. |
+| | Modelo rascunho | `-md` | Tipos `draft-simple` e `draft-eagle3`. Lista os GGUF menores das pastas. |
+| | Tokens por rascunho | `--spec-draft-n-max` | Tipos `draft-*`. |
+
+O launcher sempre passa `-fit on`: com campos em Auto, o llama.cpp ajusta camadas, contexto e especialistas na CPU à memória livre. **Sessões simultâneas** (`--parallel`) dividem o contexto: com contexto 8192 e 2 sessões, cada cliente tem 4096 tokens.
+
+### vLLM (pasta Hugging Face)
+
+| Campo | Argumento | Aparece quando |
 | --- | --- | --- |
-| Camadas na GPU | `-ngl` | `auto` deixa o motor decidir; `all` tenta tudo na GPU; `0` usa só CPU. |
-| Dispositivo | `-dev` | Vazio escolhe sozinho. Use, por exemplo, `Vulkan0` quando houver mais de uma GPU. |
-| Contexto | `-c` | Tokens de contexto do servidor. Também vale no vLLM (`--max-model-len`). |
-| Camadas MoE na CPU | `-ncmoe` | Só para modelos MoE; mantém especialistas das primeiras camadas na RAM. |
-| Cache K / V | `-ctk` / `-ctv` | `f16` prioriza fidelidade; `q8_0` economiza memória. |
-| Flash Attention | `-fa` | `auto`, `on` ou `off`. |
-| Threads CPU | `-t` | Vazio usa o padrão do motor. |
-| Batch / Microbatch | `-b` / `-ub` | O microbatch não pode ser maior que o batch. |
+| Contexto | `--max-model-len` | Sempre. Em Auto, vale o `max_position_embeddings` do modelo. |
+| Uso de memória da GPU | `--gpu-memory-utilization` | Sempre (0,05 a 0,99; padrão 0,9). |
+| Tipo do cache KV | `--kv-cache-dtype` | Sempre: `auto`, `float16`, `bfloat16`, `fp8`, `fp8_e4m3`, `fp8_e5m2`. fp8 depende da GPU. |
+| Pesos na RAM / Cache KV na RAM (GiB) | `--cpu-offload-gb` / `--kv-offloading-size` | Sempre. |
+| Tokens por lote | `--max-num-batched-tokens` | Sempre. |
+| Cache de prefixo | `--enable-prefix-caching` / `--no-enable-prefix-caching` | Sempre. |
+| Sem CUDA graphs | `--enforce-eager` | Sempre. |
+| Precisão | `--dtype` | Só em modelo sem quantização. |
+| GPUs (paralelismo de tensor) | `--tensor-parallel-size` | 2 ou mais GPUs NVIDIA; o número precisa dividir as cabeças de atenção. |
+| Paralelismo de especialistas | `--enable-expert-parallel` | Modelo MoE com paralelismo de tensor maior que 1. |
+| Decodificação especulativa | `--speculative-config` | `ngram` sempre; `mtp` quando o `config.json` indica camadas MTP. O launcher monta o JSON. |
 
-O llama.cpp também recebe `-fit on` para adaptar a carga à memória. **Sessões simultâneas** (`--parallel`) dividem o contexto: com contexto 8192 e 2 sessões, cada cliente tem 4096 tokens. Comece com 1 ou 2 sessões em modelos grandes.
+### Strata e PolyStrata
 
-### Sugestão inicial, análise e benchmark (só GGUF)
+Contexto, quantização e GPU vêm da configuração `strata-*.json` e aparecem só para leitura. Os campos editáveis (**GPU(s)** `--gpu`, **Fila máxima** `--max-queue`, **Descarregar após ociosidade** `--idle-unload` e **VRAM livre mínima** `--min-free-vram-mib`) só ficam ativos se o `serve/server.py` instalado aceitar a opção; o launcher confere no próprio arquivo, porque esses projetos mudam rápido.
 
-- **Aplicar sugestão inicial** preenche os campos pela RAM, CPU, GPU/VRAM detectável e dados do GGUF. Revise e salve.
-- Na tela **Modelos**, **Copiar prompt** copia um pedido de análise do hardware e dos ajustes; **Analisar com modelo selecionado** envia esse pedido pela conversa integrada. A resposta é só uma recomendação e não altera nada sozinha.
-- **Comparar microbatch** roda o `llama-bench` com o valor atual e outro de até 128, e coloca no campo o mais rápido. Pode levar vários minutos e não salva o perfil sozinho.
+### Sugestão, valores automáticos e autotuning
+
+- **Aplicar sugestão inicial** preenche os campos pela RAM, CPU, GPU/VRAM e pelos dados do modelo. No GGUF, liga `draft-mtp` quando o modelo tem camadas MTP. No vLLM, calcula contexto, uso de memória e paralelismo de tensor pelo `config.json` e pela VRAM, e pergunta se você quer rodar o autotuning. Não existe no Strata.
+- **Calcular valores automáticos** (só GGUF) roda o `llama-fit-params`, que vem no pacote oficial, e mostra nos campos em Auto o que o `-fit` escolheria: camadas na GPU, contexto, proporção por GPU e quantas camadas de especialistas ficariam na CPU. Roda sozinho ao abrir o perfil de um GGUF e leva alguns segundos.
+- **Otimizar automaticamente** procura os valores mais rápidos dentro do **Tempo** escolhido (5, 10, 20 ou 30 minutos) e da **Prioridade**: **Geração** (padrão; tokens/s de geração), **Prompt longo** (tokens/s de prompt) ou **Equilíbrio**. **Cancelar** para o teste e aplica o melhor até ali. O resultado vai para os campos, mas o perfil só é salvo quando você clicar em **Salvar**. **Medições do autotuning** mostra cada tentativa, inclusive as que falharam e o motivo.
+  - **llama.cpp:** primeiro o `llama-fit-params` define o teto de memória. Depois o `llama-bench` testa, um de cada vez, especialistas na CPU (MoE), Flash Attention, cache K/V (`f16`, `q8_0`, `q4_0`), microbatch, threads (quando a CPU trabalha) e divisão entre GPUs. Se sobrar tempo, um `llama-server` curto mede o que o `llama-bench` não mede: decodificação especulativa (com a taxa de aceitação do rascunho), threads de prompt e cache de especialistas na GPU. O que não cabe na memória ou não é suportado (cache V quantizado sem Flash Attention, por exemplo) sai da lista. Um valor só troca o atual com ganho de pelo menos 2%.
+  - **vLLM:** cada tentativa sobe o servidor de novo (no Windows, um contêiner) e recarrega o modelo, então leva vários minutos por tentativa: prefira 20 ou 30 minutos. Testa uso de memória da GPU, tipo do cache KV, tokens por lote e decodificação especulativa.
+  - **Strata/PolyStrata:** não há autotuning.
+
+Depois que o servidor sobe, a linha **Em uso**, abaixo do endpoint, mostra os valores reais: contexto, camadas na GPU e sessões no llama.cpp (lidos do `/props` e do registro); tamanho do cache KV e concorrência máxima no vLLM.
+
+### Perfis salvos antes da versão 0.9.0
+
+Perfis antigos continuam funcionando com os mesmos valores. Na primeira abertura da 0.9.0 eles ganham `version: 2`; `-ngl auto` e `-fa auto` passam a aparecer como Auto, que tem o mesmo efeito. Os campos novos começam em Auto.
+
+### Análise pelo modelo
+
+Na tela **Modelos**, **Copiar prompt** copia um pedido de análise do hardware e dos ajustes; **Analisar com modelo selecionado** envia esse pedido pela conversa integrada. A resposta é só uma recomendação e não altera nada sozinha.
 
 ## 11. Acesso pela rede e compartilhamento
 

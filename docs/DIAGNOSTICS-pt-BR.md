@@ -1,6 +1,6 @@
 # Guia de diagnóstico — Llama Desktop Launcher
 
-Versão 0.8.0 · Português (Brasil)
+Versão 0.9.0 · Português (Brasil)
 
 Este guia ajuda a descobrir por que algo não funcionou: onde olhar, o que significam as mensagens do aplicativo, problemas comuns de cada motor e plataforma, e como montar um relatório para pedir ajuda. Para o uso normal, veja o **Manual de uso** (`MANUAL-pt-BR`); para clientes e API, o **Guia de integração** (`INTEGRATION-pt-BR`).
 
@@ -74,12 +74,20 @@ Monte o relatório à mão: sistema e versão, versão do launcher (nome do inst
 | “A versão … não contém todos os pacotes de …” | A release não tem esse backend para a sua plataforma. Escolha outro backend. |
 | “Checksum SHA-256 do download não confere” | Download corrompido ou interceptado. Tente de novo em outra rede. |
 | “O pacote CUDA não contém as bibliotecas esperadas” / “Pacote baixado sem llama-server” | O formato da release mudou. Escolha outro backend ou uma pasta existente e relate o problema. |
-| “O motor encerrou antes de ficar pronto.” | Veja o fim do Registro do motor. Em geral: memória insuficiente (reduza contexto, batch ou camadas na GPU, ou use cache `q8_0`), GGUF incompatível com `b12110`, shards faltando ou driver ausente. |
+| “O motor encerrou antes de ficar pronto.” | Veja o fim do Registro do motor. Em geral: memória insuficiente (reduza contexto, batch ou camadas na GPU, ou use cache `q8_0`), GGUF incompatível com `b12211`, shards faltando ou driver ausente. |
 | “Tempo esgotado ao carregar o modelo.” | O llama.cpp tem 5 minutos para carregar. Use um modelo menor, um disco mais rápido ou menos contexto. |
 | A GPU não é usada | Confira o backend (CUDA para NVIDIA, Vulkan para qualquer GPU), o driver e o campo **Camadas na GPU** (`auto` ou `all`). O registro mostra quantas camadas foram para a GPU. |
 | CUDA não carrega no Windows | Atualize o driver NVIDIA. Se continuar, teste o backend Vulkan. |
 | “Este pacote não inclui llama-bench.” / benchmark falha | Use um pacote oficial com `llama-bench` ou ajustes mais conservadores. O teste tem limite de 10 minutos. |
 | “Não encontrei um terminal gráfico.” (Linux) | Instale um terminal como `gnome-terminal` ou `xterm` para usar **Abrir CLI no terminal**. |
+| “Este pacote do llama.cpp não inclui llama-fit-params.” | Pacote antigo ou incompleto. Baixe o motor oficial de novo. Sem ele, os valores automáticos não aparecem, mas o servidor funciona. |
+| Autotuning: tentativa com “não coube na memória” ou “failed to allocate” | Normal: aquela combinação passa do limite da GPU e foi descartada. O resultado usa as que couberam. |
+| Autotuning: “Divisão entre GPUs: row” falha | O backend (Vulkan, por exemplo) não suporta `-sm row`. A tentativa é descartada. |
+| Autotuning muda pouco ou nada | Um valor só troca o atual com ganho de pelo menos 2%. Com orçamento curto, a busca para antes de testar tudo; a tabela **Medições do autotuning** mostra o que foi testado. |
+| “Este modelo não tem camadas MTP (draft-mtp).” | O GGUF não tem camadas NextN/MTP. Escolha outro tipo de decodificação especulativa ou deixe em Auto. |
+| “Cache V quantizado exige Flash Attention ligado ou automático.” | Ligue Flash Attention ou use cache V `f16`. |
+| “Escolha o modelo rascunho para a decodificação especulativa.” | Os tipos `draft-simple` e `draft-eagle3` precisam de um GGUF menor da mesma família nas pastas de modelos. |
+| Um campo aparece em “Não se aplicam a este modelo” | O motivo aparece embaixo dele. Se o launcher não consegue ler o cabeçalho do GGUF, nada é escondido. |
 
 ## 6. vLLM
 
@@ -105,6 +113,9 @@ Monte o relatório à mão: sistema e versão, versão do launcher (nome do inst
 | O modelo pede download ou falta arquivo | O contêiner roda sem internet (`HF_HUB_OFFLINE=1`). Baixe o repositório completo (inclusive tokenizer) antes. |
 | Ficou um contêiner rodando | Rode `docker ps --filter name=llama-desktop-vllm-` e `docker stop NOME`. |
 | Clientes da rede não conectam | A regra automática de firewall não vale para o Docker; crie a regra manual do Guia de integração. |
+| “O número de GPUs (N) precisa dividir as … cabeças de atenção do modelo.” | Escolha um paralelismo de tensor que divida o número de cabeças (1, 2, 4…). |
+| Autotuning do vLLM: a tentativa com `fp8` falha | A GPU não aceita cache KV fp8; a tentativa é descartada. |
+| Autotuning do vLLM demora muito | Cada tentativa recarrega o modelo e captura os CUDA graphs. Escolha 20 ou 30 minutos, ou ajuste à mão depois da sugestão inicial. |
 
 O vLLM pode levar vários minutos na primeira carga. O launcher espera até 30 minutos antes de mostrar “Tempo esgotado ao carregar o modelo.”.
 
@@ -118,6 +129,7 @@ O vLLM pode levar vários minutos na primeira carga. O launcher espera até 30 m
 | O servidor encerra ou não fica pronto | Veja o registro: em geral os pesos não foram baixados, a GPU não é suportada ou falta memória. Teste o servidor pelo próprio projeto para isolar o problema. |
 | “Não foi possível localizar o Python base do Strata / PolyStrata (pyvenv.cfg)…” | O `.venv` não aponta para um Python existente. Recrie o ambiente pelo instalador deles ou libere a porta manualmente no firewall. |
 | O cliente diz que o modelo não existe | Use o **Modelo API** do painel (o `model_name` da configuração), não `modelo-local`. Copie a configuração de novo. |
+| Campo do Strata desativado com “A versão instalada … não aceita --…” | O `serve/server.py` instalado não tem essa opção. Atualize pelo instalador do projeto. |
 
 ## 8. Rede, chaves e firewall
 
@@ -152,7 +164,9 @@ O vLLM pode levar vários minutos na primeira carga. O launcher espera até 30 m
 | “Instale ou selecione o llama.cpp primeiro.” | O modelo é GGUF e o llama.cpp não está pronto. |
 | “Prepare o vLLM em Configurações primeiro.” | Falta instalar o vLLM (Linux) ou baixar a imagem (Windows). |
 | “Escolha a pasta do Strata ou do PolyStrata em Configurações primeiro.” | O modelo é do Strata, mas a pasta não está configurada ou não é mais válida. |
-| “… está disponível só para modelos GGUF no llama.cpp.” | Benchmark, sugestão, análise, conversa e CLI não existem para vLLM e Strata. |
+| “… está disponível só para modelos GGUF no llama.cpp.” | Conversa integrada, CLI, análise e valores automáticos (`llama-fit-params`) existem só no llama.cpp. |
+| “O Strata e o PolyStrata não têm autotuning…” | Quantização, contexto e GPU vêm da configuração do instalador deles. |
+| “Já existe um teste em execução.” | Aguarde ou clique em **Cancelar** no autotuning. |
 | “Modelo não encontrado nas pastas configuradas.” | O arquivo foi movido ou a pasta mudou. Atualize a lista. |
 | “Escolha um endereço de rede disponível.” | O IP escolhido não existe mais (rede trocada). Escolha de novo. |
 | “Pare o servidor antes de gerar outra chave.” | A chave não pode mudar com o servidor ativo. |

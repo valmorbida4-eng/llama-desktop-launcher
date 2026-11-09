@@ -23,6 +23,8 @@ const firewall=require('./firewall');
 const updater=require('./updater');
 const diagnostics=require('./diagnostics');
 const {parseLegacyProfiles}=require('./profile_import');
+const params=require('./params');
+const modelInfo=require('./model_info');
 let win: import('electron').BrowserWindow | null,server: any=null,proxy: any=null,active: any=null,conversation: any=null,tuneAbort: AbortController | null=null,configuration: any,configPath: string;
 let gpuProbe;
 let docker: any={daemon:false,image:false,checked:false},engineBusy=false,serverContainer: string | null=null;
@@ -38,7 +40,13 @@ function validateSender(event: any) {
 
 function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',vllmDir:'',strataDir:'',profiles:{},selectedModelPath:'',firstRun:true,accessHost:'127.0.0.1',parallel:1,updateCheck:true};}
 function save() {fs.mkdirSync(path.dirname(configPath),{recursive:true});fs.writeFileSync(configPath,JSON.stringify(configuration,null,2));}
-function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}}
+function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}migrateProfiles();}
+// Perfis anteriores à v0.9.0 ganham version 2 sem mudar os valores salvos (ver params.migrateProfile).
+function migrateProfiles() {
+  let changed=false;const profiles=configuration.profiles&&typeof configuration.profiles==='object'?configuration.profiles:{};
+  for(const [key,profile] of Object.entries(profiles)){const next=params.migrateProfile(profile);if(next!==profile){profiles[key]=next;changed=true;}}
+  configuration.profiles=profiles;if(changed)save();
+}
 function send(channel,data) {if(win&&!win.isDestroyed()) win.webContents.send(channel,data);}
 function log(text: string) {engineLog.append(text);send('log',text);}
 function llamaReady() {return !!(configuration.engineDir&&fs.existsSync(path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server')));}
@@ -73,6 +81,30 @@ function apiKeyPath(){return path.join(app.getPath('userData'),'server-api-key.t
 function addressInRange(address: string,range: string){const [networkAddress,prefixText]=range.split('/');const prefix=prefixText===undefined?32:Number(prefixText);const toInt=(value: string)=>value.split('.').reduce((number,octet)=>(number*256+Number(octet))>>>0,0);const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;return (toInt(address)&mask)===(toInt(networkAddress)&mask);}
 function selectedModel(modelPath) {const model=allModels().find(m=>m.path===modelPath);if(!model) throw Error('Modelo não encontrado nas pastas configuradas.');return model;}
 function availableModelDiskBytes() {for(const configured of configuration.modelDirs){if(!configured)continue;let dir=configured;while(!fs.existsSync(dir)){const parent=path.dirname(dir);if(parent===dir)break;dir=parent;}try{const stat=fs.statfsSync(dir);return Number(stat.bavail)*Number(stat.bsize);}catch{}}return null;}
+let devicesProbe: {dir: string; promise: Promise<any>} | null=null,nvidiaProbe: Promise<any[]> | null=null;
+const fitCache=new Map<string, any>();
+function llamaDevices() {
+  if(!llamaReady())return Promise.resolve(null);
+  if(devicesProbe?.dir!==configuration.engineDir)devicesProbe={dir:configuration.engineDir,promise:benchmark.listDevices(configuration.engineDir).catch(()=>null)};
+  return devicesProbe.promise;
+}
+function nvidiaGpus() {nvidiaProbe ||= hardware.detectNvidiaGpus().catch(()=>[]);return nvidiaProbe;}
+function draftModelsFor(model: any) {return allModels().filter((m: any)=>m.engine==='llamacpp'&&m.path!==model.path&&(!model.size||m.size<model.size)).map((m: any)=>({path:m.path,name:m.name}));}
+async function paramContext(model: any,settings: any={}) {
+  const info=modelInfo.modelInfo(model,{strataDir:configuration.strataDir});
+  const base: any={engine:model.engine||'llamacpp',info,settings,parallel:Number(configuration.parallel)||1,hw:core.detectHardware()};
+  if(base.engine==='llamacpp'){base.devices=await llamaDevices();base.draftModels=draftModelsFor(model);}
+  if(base.engine==='vllm'){const gpus=await nvidiaGpus();base.gpuCount=gpus.length||null;}
+  if(base.engine==='strata'){base.distribution=model.distribution;base.strataOptions=info?.server?.options||[];}
+  return base;
+}
+// Valida os ajustes contra o motor, o modelo e o hardware antes de salvar ou iniciar.
+async function checkSettings(model: any,settings: any) {
+  const ctx=await paramContext(model,settings);
+  core.validateSettings(settings,ctx.engine,ctx);
+  return ctx;
+}
+function fitKey(model: any,settings: any) {return model.path+'|'+params.llamaArgs(settings,'fit').join(' ');}
 async function gpuDetails(){gpuProbe ||= hardware.detectGpu().catch(()=>({name:null,memoryBytes:null,source:null}));return gpuProbe;}
 async function modelGuidance(model=null,settings=null){return guidance.buildGuidance({hardware:core.detectHardware(),gpu:await gpuDetails(),availableDiskBytes:availableModelDiskBytes(),model,settings});}
 function createWindow() {
@@ -124,7 +156,7 @@ ipcMain.handle('install-update',e=>{validateSender(e);return installUpdate();});
 ipcMain.handle('set-update-check',(e,enabled)=>{validateSender(e);if(typeof enabled!=='boolean')throw Error('Valor inválido.');configuration.updateCheck=enabled;save();return state();});
 ipcMain.handle('select-model',(e,modelPath)=>{validateSender(e);selectedModel(modelPath);configuration.selectedModelPath=modelPath;save();return state();});
 ipcMain.handle('complete-setup',e=>{validateSender(e);configuration.firstRun=false;save();return state();});
-ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(server||conversation||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');if(!['engine','models','strata','vllm'].includes(kind))throw Error('Tipo de pasta inválido.');if((kind==='strata'||kind==='vllm')&&(server||engineBusy))throw Error('Pare o servidor antes de trocar o motor.');if(kind==='vllm'&&engines.vllmMode()!=='venv')throw Error('No Windows o vLLM roda pelo Docker Desktop; não há pasta para escolher.');if(kind==='strata'&&!engines.engineInfo('strata').supported)throw Error(engines.engineInfo('strata').unsupportedReason);const titles={engine:'Pasta dos binários llama.cpp',models:'Pasta de modelos (GGUF ou Hugging Face)',strata:'Pasta do Strata ou do PolyStrata',vllm:'Ambiente Python com vLLM (contém bin/vllm)'};const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:titles[kind]});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';}else if(kind==='strata'){if(!engines.detectStrata(dir))throw Error('A pasta precisa ser uma instalação do Strata ou do PolyStrata já configurada (serve/server.py e .venv). Rode o instalador deles primeiro.');configuration.strataDir=dir;}else if(kind==='vllm'){if(!engines.vllmVenvReady(dir))throw Error('A pasta precisa conter bin/vllm.');configuration.vllmDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
+ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(server||conversation||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');if(!['engine','models','strata','vllm'].includes(kind))throw Error('Tipo de pasta inválido.');if((kind==='strata'||kind==='vllm')&&(server||engineBusy))throw Error('Pare o servidor antes de trocar o motor.');if(kind==='vllm'&&engines.vllmMode()!=='venv')throw Error('No Windows o vLLM roda pelo Docker Desktop; não há pasta para escolher.');if(kind==='strata'&&!engines.engineInfo('strata').supported)throw Error(engines.engineInfo('strata').unsupportedReason);const titles={engine:'Pasta dos binários llama.cpp',models:'Pasta de modelos (GGUF ou Hugging Face)',strata:'Pasta do Strata ou do PolyStrata',vllm:'Ambiente Python com vLLM (contém bin/vllm)'};const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:titles[kind]});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';devicesProbe=null;fitCache.clear();}else if(kind==='strata'){if(!engines.detectStrata(dir))throw Error('A pasta precisa ser uma instalação do Strata ou do PolyStrata já configurada (serve/server.py e .venv). Rode o instalador deles primeiro.');configuration.strataDir=dir;}else if(kind==='vllm'){if(!engines.vllmVenvReady(dir))throw Error('A pasta precisa conter bin/vllm.');configuration.vllmDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
 ipcMain.handle('clear-dir',(e,index)=>{validateSender(e);if(index!==1)throw Error('A primeira localização é obrigatória.');configuration.modelDirs[1]='';save();return state();});
 ipcMain.handle('install-engine',async(e,backend)=>{validateSender(e);if(server||conversation||tuneAbort)throw Error('Pare a execução atual antes de trocar o motor.');if(!engine.backendOptions().some(item=>item.id===backend))throw Error('Backend inválido para este sistema.');const dir=path.join(app.getPath('userData'),'engines',Date.now().toString());let result;try{result=await engine.installEngine(dir,backend,(percent,label)=>send('progress',{percent,label}));}catch(error){log(`
 [launcher] Falha ao instalar o llama.cpp (${backend}): ${error.message}
@@ -156,7 +188,14 @@ ipcMain.handle('install-vllm',async e=>{
 `);throw error;} finally {engineBusy=false;}
 });
 ipcMain.handle('open-engine-link',async(e,kind)=>{validateSender(e);const url=Object.hasOwn(engines.links,kind)?engines.links[kind]:Object.hasOwn(guidance.engineLinks,kind)?guidance.engineLinks[kind]:null;if(!url)throw Error('Link inválido.');await shell.openExternal(url);return url;});
-ipcMain.handle('save-profile',(e,modelPath,settings)=>{validateSender(e);selectedModel(modelPath);core.validateSettings(settings);configuration.profiles[modelPath]=settings;save();return state();});
+ipcMain.handle('save-profile',async(e,modelPath,settings)=>{validateSender(e);const model=selectedModel(modelPath);await checkSettings(model,settings);configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};save();return state();});
+ipcMain.handle('parameter-schema',async(e,modelPath,settings)=>{validateSender(e);const model=selectedModel(modelPath);const ctx=await paramContext(model,settings||{});
+  const fit=ctx.engine==='llamacpp'?fitCache.get(fitKey(model,settings||{}))||null:null;return params.schemaFor(ctx,fit);});
+ipcMain.handle('fit-values',async(e,modelPath,settings)=>{validateSender(e);const model=selectedModel(modelPath);requireLlama(model,'O cálculo dos valores automáticos');
+  if(tuneAbort)throw Error('Aguarde o fim do teste de desempenho.');if(!llamaReady())throw Error('Instale o llama.cpp primeiro.');
+  const ctx=await checkSettings(model,settings);const fit=await benchmark.fitParams(configuration.engineDir,model,settings,{info:ctx.info});
+  fitCache.set(fitKey(model,settings),fit);if(fitCache.size>50)fitCache.delete(fitCache.keys().next().value);return params.schemaFor(ctx,fit);});
+ipcMain.handle('cancel-tune',e=>{validateSender(e);tuneAbort?.abort();return true;});
 ipcMain.handle('import-legacy-profiles',async(e)=>{
   validateSender(e);
   const result=await dialog.showOpenDialog(win,{title:'Importar perfis do launcher anterior',properties:['openFile'],filters:[{name:'Perfis do launcher (*.tsv)',extensions:['tsv']}]});
@@ -167,16 +206,19 @@ ipcMain.handle('import-legacy-profiles',async(e)=>{
   const normalize=(value: string)=>process.platform==='win32'?path.win32.normalize(value).toLowerCase():path.normalize(value);
   const byPath=new Map<string,string>(models.map((model: any)=>[normalize(model.path),model.path] as [string,string]));
   let imported=0,missing=0,existing=0;
-  for(const profile of parsed.profiles){const current=byPath.get(normalize(profile.path));if(!current){missing++;continue;}if(configuration.profiles[current]){existing++;continue;}configuration.profiles[current]=profile.settings;imported++;}
+  for(const profile of parsed.profiles){const current=byPath.get(normalize(profile.path));if(!current){missing++;continue;}if(configuration.profiles[current]){existing++;continue;}configuration.profiles[current]=params.migrateProfile(profile.settings);imported++;}
   if(imported)save();return {imported,missing,existing,invalid:parsed.ignored.length};
 });
-ipcMain.handle('recommend',async(e,modelPath)=>{validateSender(e);const model=selectedModel(modelPath);requireLlama(model,'A sugestão de ajustes');const gpu=await gpuDetails();return core.recommend(model,{...core.detectHardware(),gpuMemoryBytes:gpu.memoryBytes});});
+ipcMain.handle('recommend',async(e,modelPath)=>{validateSender(e);const model=selectedModel(modelPath);
+  const info=modelInfo.modelInfo(model,{strataDir:configuration.strataDir});
+  if(model.engine==='vllm')return core.recommendVllm(model,info,await nvidiaGpus());
+  requireLlama(model,'A sugestão de ajustes');const gpu=await gpuDetails();return core.recommend(model,{...core.detectHardware(),gpuMemoryBytes:gpu.memoryBytes},info);});
 ipcMain.handle('model-guidance',e=>{validateSender(e);return modelGuidance();});
 ipcMain.handle('copy-guidance-prompt',async(e)=>{validateSender(e);const result=await modelGuidance();clipboard.writeText(result.prompt);return result.prompt;});
 ipcMain.handle('analyze-with-model',async(e,modelPath,settings)=>{
   validateSender(e);
   if(server||conversation||tuneAbort)throw Error('Pare o servidor, a conversa ou o teste antes da análise.');
-  const model=selectedModel(modelPath);requireLlama(model,'A análise pelo modelo');core.validateSettings(settings);
+  const model=selectedModel(modelPath);requireLlama(model,'A análise pelo modelo');await checkSettings(model,settings);
   const {prompt}=await modelGuidance(model,settings);
   const session=cli.createSession({engineDir:configuration.engineDir,model,settings,
     onOutput:data=>send('chat-output',data),
@@ -184,15 +226,38 @@ ipcMain.handle('analyze-with-model',async(e,modelPath,settings)=>{
     onError:error=>send('chat-output',{stream:'stderr',text:`\n${error.message}\n`})});
   conversation=session;
   try{await session.send(prompt);}catch(error){session.stop();conversation=null;throw error;}
-  configuration.profiles[modelPath]=settings;configuration.firstRun=false;save();
+  configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};configuration.firstRun=false;save();
   return {prompt};
 });
-ipcMain.handle('tune',async(e,modelPath,settings)=>{validateSender(e);if(server||conversation)throw Error('Pare o servidor ou a conversa antes do teste.');if(tuneAbort)throw Error('Já existe um teste em execução.');const model=selectedModel(modelPath);requireLlama(model,'O teste de desempenho');if(!configuration.engineDir)throw Error('Instale o motor primeiro.');const controller=new AbortController();tuneAbort=controller;try{return await benchmark.tune(configuration.engineDir,model,settings,text=>send('tune-progress',text),controller.signal);}finally{tuneAbort=null;}});
+ipcMain.handle('tune',async(e,modelPath,settings,options: {budgetMinutes?: number; priority?: string}={})=>{
+  validateSender(e);if(server||conversation||engineBusy)throw Error('Pare o servidor ou a conversa antes do teste.');if(tuneAbort)throw Error('Já existe um teste em execução.');
+  const model=selectedModel(modelPath);
+  if(model.engine==='strata')throw Error('O Strata e o PolyStrata não têm autotuning: quantização, contexto e GPU vêm da configuração do instalador deles.');
+  const ctx=await checkSettings(model,settings);
+  const budgetMinutes=Number(options?.budgetMinutes)||10,priority=String(options?.priority||'generation');
+  const controller=new AbortController();tuneAbort=controller;
+  const progress=(text: string)=>send('tune-progress',text);
+  try{
+    if(model.engine==='vllm'){
+      if(engines.engineInfo('vllm').mode==='docker'&&!docker.image)await refreshDocker();
+      if(!engineReady('vllm'))throw Error('Prepare o vLLM em Configurações primeiro.');
+      const probe=async(candidate: any,timeoutMs: number)=>{
+        const port=await freePort('127.0.0.1',8300,8400);
+        const command=engines.serverCommand(model,candidate,{host:'127.0.0.1',port,parallel:1,key:null,vllmDir:configuration.vllmDir,strataDir:configuration.strataDir,
+          containerName:engines.VLLM_CONTAINER_PREFIX+crypto.randomBytes(6).toString('hex')});
+        return benchmark.probeServer({command,port,timeoutMs,signal:controller.signal,measure:(p: number)=>benchmark.measureOpenAi(p,controller.signal),stop:()=>stopContainer(command.containerName||null)});
+      };
+      return await benchmark.tuneVllm(model,settings,{probe,info:ctx.info,gpuCount:ctx.gpuCount,budgetMinutes,priority,onProgress:progress,signal:controller.signal});
+    }
+    if(!llamaReady())throw Error('Instale o motor primeiro.');
+    return await benchmark.tune(configuration.engineDir,model,settings,progress,controller.signal,{budgetMinutes,priority,info:ctx.info,devices:ctx.devices,hw:ctx.hw});
+  }finally{tuneAbort=null;}
+});
 ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; parallel?: number; openBrowser?: boolean}={})=>{
   validateSender(e);
   if(server&&active){if(options.openBrowser!==false)await shell.openExternal(active.browserUrl);return active;}
   if(server||conversation||tuneAbort||engineBusy)throw Error('Pare a execução atual antes de iniciar outra.');
-  const model=selectedModel(modelPath);core.validateSettings(settings);
+  const model=selectedModel(modelPath);await checkSettings(model,settings);
   const info=engines.engineInfo(model.engine);
   if(!info.supported)throw Error(info.unsupportedReason);
   const access=network.accessOptions().find(item=>item.host===options.host);
@@ -201,7 +266,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
   if(model.engine==='vllm'&&info.mode==='docker'&&!docker.image)await refreshDocker();
   if(!engineReady(model.engine))throw Error(model.engine==='llamacpp'?'Instale ou selecione o llama.cpp primeiro.':model.engine==='vllm'?'Prepare o vLLM em Configurações primeiro.':'Escolha a pasta do Strata ou do PolyStrata em Configurações primeiro.');
   const key=access.scope==='Local'?null:network.ensureKey(apiKeyPath());
-  configuration.profiles[modelPath]=settings;configuration.firstRun=false;configuration.accessHost=access.host;configuration.parallel=parallel;save();
+  configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};configuration.firstRun=false;configuration.accessHost=access.host;configuration.parallel=parallel;save();
   const port=await freePort(access.host,8080,8180);
   let command: any;
   if(model.engine==='llamacpp') {
@@ -237,10 +302,14 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
     }
     if(key){const sharePort=await freePort(access.host,8181,8280);shareProxy=await sharing.createShareProxy(access.host,port,key,sharePort);}
     const modelId=model.engine==='strata'?model.modelName:core.apiModelId;
-    const context=model.engine==='strata'?(model.context||Number(settings.context)):Number(settings.context);
+    // Valores em uso: registro do motor e, no llama.cpp, o /props (contexto real quando o -fit escolheu).
+    const runtime=params.parseRuntimeLog(model.engine,engineLog.text());
+    if(model.engine==='llamacpp'){try{const props=await new Promise<any>((resolve,reject)=>{http.get({hostname:access.host,port,path:'/props',headers:key?{Authorization:`Bearer ${key}`}:{},timeout:3000},r=>{let body='';r.on('data',d=>body+=d);r.on('end',()=>{try{resolve(JSON.parse(body));}catch(err){reject(err);}});}).on('error',reject);});
+      const n=props?.default_generation_settings?.n_ctx;if(Number.isSafeInteger(n))runtime.context=String(n);if(Number.isSafeInteger(props?.total_slots))runtime.slots=String(props.total_slots);}catch{}}
+    const context=model.engine==='strata'?(model.context||Number(settings.context)||null):Number(runtime.context||settings.context)||null;
     // PolyStrata não aceita --parallel: vale o número de sessões da configuração dele.
     const effectiveParallel=command.parallel??(model.engine==='strata'?model.parallel||1:parallel);
-    active={engine:model.engine,engineLabel:info.label,containerName,sharingEndpoint:shareProxy?.endpoint||null,context,modelId,host:access.host,scope:access.scope,port,parallel:effectiveParallel,executable:containerName?null:command.file,firewallProgram:containerName?null:(command.firewallProgram===undefined?command.file:command.firewallProgram),browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}${info.browserPath}`};
+    active={engine:model.engine,engineLabel:info.label,containerName,sharingEndpoint:shareProxy?.endpoint||null,context,modelId,host:access.host,scope:access.scope,port,parallel:effectiveParallel,runtime,executable:containerName?null:command.file,firewallProgram:containerName?null:(command.firewallProgram===undefined?command.file:command.firewallProgram),browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}${info.browserPath}`};
     if(options.openBrowser!==false)await shell.openExternal(browserUrl);
     return active;
   }catch(e){log(`
@@ -252,23 +321,23 @@ function stopContainer(name: string | null=serverContainer) {
   try{const command=engines.stopCommand({containerName:name});spawn(command.file,command.args,{windowsHide:true,stdio:'ignore'}).on('error',()=>{});}catch{}
 }
 ipcMain.handle('stop',e=>{validateSender(e);shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;stopContainer();server?.kill();return true;});
-ipcMain.handle('start-chat',(e,modelPath,settings)=>{
+ipcMain.handle('start-chat',async(e,modelPath,settings)=>{
   validateSender(e);
   if(server||conversation)throw Error('Pare a execução atual antes de iniciar outra.');
   if(tuneAbort)throw Error('Aguarde o fim do teste de desempenho.');
-  const model=selectedModel(modelPath);requireLlama(model,'A conversa integrada');core.validateSettings(settings);
+  const model=selectedModel(modelPath);requireLlama(model,'A conversa integrada');await checkSettings(model,settings);
   const session=cli.createSession({engineDir:configuration.engineDir,model,settings,
     onOutput:data=>send('chat-output',data),
     onExit:result=>{if(conversation===session){conversation=null;send('chat-stopped',result);}},
     onError:error=>send('chat-output',{stream:'stderr',text:`\n${error.message}\n`})});
-  conversation=session;configuration.profiles[modelPath]=settings;configuration.firstRun=false;save();return true;
+  conversation=session;configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};configuration.firstRun=false;save();return true;
 });
 ipcMain.handle('open-cli-terminal',async(e,modelPath,settings)=>{
   validateSender(e);
   if(server||conversation||tuneAbort)throw Error('Pare o servidor, a conversa ou o teste antes de abrir o terminal.');
-  const model=selectedModel(modelPath);requireLlama(model,'A CLI no terminal');core.validateSettings(settings);
+  const model=selectedModel(modelPath);requireLlama(model,'A CLI no terminal');await checkSettings(model,settings);
   await terminalCli.openExternalCli({engineDir:configuration.engineDir,model,settings});
-  configuration.profiles[modelPath]=settings;configuration.firstRun=false;save();
+  configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};configuration.firstRun=false;save();
   return true;
 });
 ipcMain.handle('send-chat',(e,value)=>{validateSender(e);if(!conversation)throw Error('Inicie uma conversa no terminal primeiro.');return conversation.send(value);});
