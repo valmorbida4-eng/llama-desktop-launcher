@@ -10,7 +10,7 @@ const {Transform}=require('node:stream');
 const {pipeline}=require('node:stream/promises');
 
 // Versão do llama.cpp testada com o launcher; atualizar exige repetir a validação manual do motor.
-const ENGINE_TAG='b12110';
+const ENGINE_TAG='b12211';
 
 function request(url, redirects=0) {
   if (redirects>5 || !url.startsWith('https://')) return Promise.reject(Error('Redirecionamento inválido.'));
@@ -31,13 +31,13 @@ function backendOptions(platform=process.platform,arch=process.arch) {
       x64:[
         {id:'vulkan',label:'Vulkan (AMD, Intel ou NVIDIA)',asset:'win-vulkan-x64.zip'},
         {id:'cuda-12.4',label:'NVIDIA CUDA 12.4 (recomendado para RTX)',asset:'win-cuda-12.4-x64.zip',runtime:'cudart-llama-bin-win-cuda-12.4-x64.zip'},
-        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4 (driver recente)',asset:'win-cuda-13.4-x64.zip',runtime:'cudart-llama-bin-win-cuda-13.4-x64.zip'},
+        {id:'cuda-13.5',label:'NVIDIA CUDA 13.5 (driver recente)',asset:'win-cuda-13.5-x64.zip',runtime:'cudart-llama-bin-win-cuda-13.5-x64.zip'},
         {id:'rocm-10.0',label:'AMD ROCm 10.0',asset:'win-rocm-10.0-x64.zip'},
         {id:'sycl',label:'Intel SYCL',asset:'win-sycl-x64.zip'},
         {id:'cpu',label:'Somente CPU',asset:'win-cpu-x64.zip'}
       ],
       arm64:[
-        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'win-cuda-13.4-arm64.zip',runtime:'cudart-llama-bin-win-cuda-13.4-arm64.zip'},
+        {id:'cuda-13.5',label:'NVIDIA CUDA 13.5',asset:'win-cuda-13.5-arm64.zip',runtime:'cudart-llama-bin-win-cuda-13.5-arm64.zip'},
         {id:'cpu',label:'Somente CPU',asset:'win-cpu-arm64.zip'}
       ]
     },
@@ -45,7 +45,7 @@ function backendOptions(platform=process.platform,arch=process.arch) {
       x64:[
         {id:'vulkan',label:'Vulkan',asset:'ubuntu-vulkan-x64.tar.gz'},
         {id:'cuda-12.8',label:'NVIDIA CUDA 12.8',asset:'ubuntu-cuda-12.8-x64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-12.8-x64.tar.gz`},
-        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'ubuntu-cuda-13.4-x64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-13.4-x64.tar.gz`},
+        {id:'cuda-13.5',label:'NVIDIA CUDA 13.5',asset:'ubuntu-cuda-13.5-x64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-13.5-x64.tar.gz`},
         {id:'rocm-10.0',label:'AMD ROCm 10.0',asset:'ubuntu-rocm-10.0-x64.tar.gz'},
         {id:'sycl-fp16',label:'Intel SYCL FP16',asset:'ubuntu-sycl-fp16-x64.tar.gz'},
         {id:'sycl-fp32',label:'Intel SYCL FP32',asset:'ubuntu-sycl-fp32-x64.tar.gz'},
@@ -53,7 +53,7 @@ function backendOptions(platform=process.platform,arch=process.arch) {
       ],
       arm64:[
         {id:'vulkan',label:'Vulkan',asset:'ubuntu-vulkan-arm64.tar.gz'},
-        {id:'cuda-13.4',label:'NVIDIA CUDA 13.4',asset:'ubuntu-cuda-13.4-arm64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-13.4-arm64.tar.gz`},
+        {id:'cuda-13.5',label:'NVIDIA CUDA 13.5',asset:'ubuntu-cuda-13.5-arm64.tar.gz',runtime:`cudart-llama-${ENGINE_TAG}-bin-ubuntu-cuda-13.5-arm64.tar.gz`},
         {id:'cpu',label:'Somente CPU',asset:'ubuntu-arm64.tar.gz'}
       ]
     },

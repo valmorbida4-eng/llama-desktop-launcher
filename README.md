@@ -14,7 +14,7 @@ Aplicativo instalável para executar modelos de linguagem locais no Windows, Lin
 
 ## Funcionalidades
 
-- **llama.cpp `b12110`:** baixa o pacote oficial na primeira execução (Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU no Windows/Linux; Metal no macOS) ou usa uma pasta existente. A escolha depende da GPU, não da marca do processador.
+- **llama.cpp `b12211`:** baixa o pacote oficial na primeira execução (Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU no Windows/Linux; Metal no macOS) ou usa uma pasta existente. A escolha depende da GPU, não da marca do processador.
 - **vLLM `0.32.0`** para pastas Hugging Face (`config.json` + `.safetensors`, incluindo AWQ e GPTQ). No Linux com GPU NVIDIA, cria um ambiente Python próprio e instala o vLLM com `pip` (ou usa um ambiente com `bin/vllm`). No Windows, roda a imagem oficial `vllm/vllm-openai:v0.32.0` pelo Docker Desktop com WSL2. Não é oferecido no macOS.
 - **Strata e PolyStrata** no Windows e no Linux: instale pelo instalador oficial deles e escolha a pasta; cada `strata-*.json` vira um modelo. O launcher não roda o instalador deles.
 - Até duas pastas de modelos, fora da pasta do aplicativo. Detecta `mmproj` junto do GGUF e pastas do cache do Hugging Face.
@@ -70,6 +70,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.8.1:** llama.cpp atualizado de `b12110` para `b12211` (build pre-release mais nova); os pacotes NVIDIA CUDA 13.4 passam a CUDA 13.5 no Windows e no Linux. Veja [o ADR da versão do motor](docs/adr/engine-version-pin.md).
 - **v0.8.0:** **Configurações > 07 · Firewall do Windows** lista e remove as regras de entrada criadas pelo launcher (`LlamaDesktopLauncher-…`), com uma única autorização de administrador e só quando há regras. Elas continuam depois que o servidor para, e no Strata/PolyStrata liberam o `python.exe` do sistema.
 - **v0.7.0:** guias separados de uso, integração e diagnóstico (PT-BR e EN), com PDFs abertos pelo rodapé; botão **Copiar relatório de diagnóstico** em **Configurações > 06 · Diagnóstico**; o registro do motor passa a guardar também as falhas de instalação e de início. Correções: a regra de firewall do Windows funciona com Strata/PolyStrata (Python base do `.venv`), e as configurações copiadas para os clientes usam o ID do modelo do Strata em vez de `modelo-local`. Veja [o ADR do relatório](docs/adr/diagnostic-report.md).
 - **v0.6.1:** VRAM acima de 4 GB no Windows lida do registro do driver (o WMI para em 4 GB); links para os modelos do Strata, do PolyStrata e do vLLM na tela **Modelos**.
@@ -85,7 +86,7 @@ A revisão dos arquivos publicados e a situação da v0.2.5 estão em [Retirada 
 
 ## Criadores e créditos
 
-- **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b12110).
+- **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b12211).
 - **vLLM:** desenvolvido pelo projeto [vllm-project/vllm](https://github.com/vllm-project/vllm) e seus colaboradores, sob [licença Apache 2.0](https://github.com/vllm-project/vllm/blob/main/LICENSE). O launcher instala o pacote oficial `vllm` do PyPI no Linux ou usa a imagem oficial [`vllm/vllm-openai`](https://hub.docker.com/r/vllm/vllm-openai) no Windows; não redistribui código do vLLM.
 - **Strata:** criado por [Niko1221](https://github.com/Niko1221) e pelos colaboradores do [Strata](https://github.com/Niko1221/Strata), sob [licença MIT](https://github.com/Niko1221/Strata/blob/main/LICENSE). O launcher apenas inicia uma instalação feita pelo instalador oficial do projeto.
 - **PolyStrata:** criado por [VecSzn](https://github.com/VecSzn) e pelos colaboradores do [PolyStrata](https://github.com/simplexai-labs/PolyStrata), baseado no Strata, sob [licença MIT](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE) (copyright de Niko1221 e dos colaboradores do Strata, e de VecSzn e dos colaboradores do PolyStrata). O launcher apenas inicia uma instalação feita pelo instalador oficial do projeto.
