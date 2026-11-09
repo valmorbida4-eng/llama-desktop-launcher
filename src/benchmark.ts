@@ -234,9 +234,17 @@ async function tune(engineDir: string,model: any,settings: any,onProgress?: (tex
   if(!first&&!search.stopped&&!search.results.some(r=>Number.isFinite(r.score)))
     throw Error(`A configuração atual não rodou no llama-bench: ${search.results.map(r=>r.error).filter(Boolean).join('; ')}`);
   if(moe&&gpu) {
-    const k=Number(base.cpuMoe||0),max=blocks||k+8;
-    const values=uniq([k,k-4,k-2,k+2,k+4].filter(v=>v>=0&&v<=max).map(String));
-    await benchStage(values.map(v=>({cpuMoe:v})),c=>`Especialistas na CPU: ${c.cpuMoe} camadas`);
+    // Subida de encosta de 2 em 2 camadas: o -fit não é sempre o mais rápido (ex.: com GPU integrada,
+    // tirar especialistas dela e pôr na CPU acelerou). Anda na direção que melhora até parar de ganhar.
+    const k=Number(base.cpuMoe||0),max=blocks||k+16,describe=(c: Record<string, string>)=>`Especialistas na CPU: ${c.cpuMoe} camadas`;
+    await benchStage(uniq([k,k-2,k+2].filter(v=>v>=0&&v<=max).map(String)).map(v=>({cpuMoe:v})),describe);
+    const step=Math.sign(Number(base.cpuMoe||0)-k)*2;
+    while(step&&!search.stopped) {
+      const current=String(base.cpuMoe||0),next=Number(current)+step;
+      if(next<0||next>max) break;
+      await benchStage([{cpuMoe:current},{cpuMoe:String(next)}],describe);
+      if(String(base.cpuMoe)===current) break;
+    }
   }
   await benchStage(uniq([base.flash||'','on','off']).map(v=>({flash:v})),c=>`Flash Attention: ${c.flash||'auto'}`);
   const caches=[['',''],['q8_0','q8_0'],['q4_0','q4_0']].filter(([,v])=>!(params.QUANTIZED_CACHE.has(v)&&base.flash==='off'));

@@ -4254,7 +4254,7 @@
       "file_type": "code",
       "norm_label": "tunevllm()",
       "source_file": "src/benchmark.ts",
-      "source_location": "L285"
+      "source_location": "L293"
     },
     {
       "id": "src_benchmark_uniq",
@@ -13706,6 +13706,102 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_buildfirewallscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_buildfirewallscript",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_buildfirewallscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrule",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrule",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrule",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrules",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrules",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrules",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_max",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_max",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_max",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_min",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_min",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_min",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateremoteaddress",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateremoteaddress",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateremoteaddress",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateruleoptions",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateruleoptions",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "firewall.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateruleoptions",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_argsformodel",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_argsformodel",
+      "_origin": "semantic",
+      "community": 101,
+      "community_name": "smoke-engine.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_argsformodel",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_apimodelid",
       "_origin": "semantic",
@@ -14186,6 +14282,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "smoke-bench.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_defaults",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_defaults",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "smoke-bench.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_defaults",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_diagnostics",
       "label": "build_app_diagnostics",
       "_origin": "semantic",
@@ -14194,6 +14314,54 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_diagnostics",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_buildreport",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_buildreport",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_buildreport",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_createlogbuffer",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_createlogbuffer",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_createlogbuffer",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redact",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redact",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redact",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redacted",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redacted",
+      "_origin": "semantic",
+      "community": 143,
+      "community_name": "diagnostics.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redacted",
       "source_file": "",
       "type": "external"
     },
@@ -14582,6 +14750,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_createproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_createproxy",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_createproxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_upstreamrequestdetails",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_upstreamrequestdetails",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "network.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_upstreamrequestdetails",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_net",
       "label": "ref_node_net",
       "_origin": "semantic",
@@ -14830,6 +15022,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_share_proxy",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_share_proxy_createshareproxy",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_share_proxy_createshareproxy",
+      "_origin": "semantic",
+      "community": 20,
+      "community_name": "share_proxy.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_share_proxy_createshareproxy",
       "source_file": "",
       "type": "external"
     },
@@ -15470,6 +15674,42 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_posixscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_posixscript",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_posixscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_psquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_psquote",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_psquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_firewall_validateremoteaddress",
       "_origin": "semantic",
@@ -15698,6 +15938,18 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_powershellscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_powershellscript",
+      "_origin": "semantic",
+      "community": 28,
+      "community_name": "smoke-external-cli-win.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_powershellscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_iswithin",
       "_origin": "semantic",
@@ -15722,6 +15974,30 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_openexternalcli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_openexternalcli",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_openexternalcli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "smoke-external-cli-linux.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_client_commands",
       "label": "build_app_client_commands",
       "_origin": "semantic",
@@ -15730,6 +16006,42 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_client_commands",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientconfiguration",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientconfiguration",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientconfiguration",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_opencodecommand",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_opencodecommand",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "client_commands.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_opencodecommand",
       "source_file": "",
       "type": "external"
     },
@@ -15746,6 +16058,66 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_buildguidance",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_buildguidance",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_buildguidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_engineadvice",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_engineadvice",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_engineadvice",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_enginelinks",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_enginelinks",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_enginelinks",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_gpuvendor",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_gpuvendor",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_gpuvendor",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_links",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_links",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "guidance.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_links",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_hardware",
       "label": "build_app_hardware",
       "_origin": "semantic",
@@ -15758,6 +16130,18 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_hardware_detectgpu",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_hardware_detectgpu",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "hardware.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_hardware_detectgpu",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_profile_import",
       "label": "build_app_profile_import",
       "_origin": "semantic",
@@ -15766,6 +16150,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "build_app_profile_import",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_profile_import_parselegacyprofiles",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_profile_import_parselegacyprofiles",
+      "_origin": "semantic",
+      "community": 36,
+      "community_name": "profile_import.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_profile_import_parselegacyprofiles",
       "source_file": "",
       "type": "external"
     },
@@ -16346,383 +16742,9 @@
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "_origin": "semantic",
-      "community": 98,
-      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_buildfirewallscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_buildfirewallscript",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_buildfirewallscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrule",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrule",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrule",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrules",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrules",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_createrules",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_max",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_max",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_max",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_min",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_min",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_port_min",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateremoteaddress",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateremoteaddress",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateremoteaddress",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateruleoptions",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateruleoptions",
-      "community": 0,
-      "community_name": "firewall.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_firewall_validateruleoptions",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_argsformodel",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_argsformodel",
-      "community": 101,
-      "community_name": "smoke-engine.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_argsformodel",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_defaults",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_defaults",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_defaults",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_buildreport",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_buildreport",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_buildreport",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_createlogbuffer",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_createlogbuffer",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_createlogbuffer",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redact",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redact",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redact",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redacted",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redacted",
-      "community": 143,
-      "community_name": "diagnostics.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_diagnostics_redacted",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_createproxy",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_createproxy",
-      "community": 18,
-      "community_name": "network.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_createproxy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_upstreamrequestdetails",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_upstreamrequestdetails",
-      "community": 18,
-      "community_name": "network.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_network_upstreamrequestdetails",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_share_proxy_createshareproxy",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_share_proxy_createshareproxy",
-      "community": 20,
-      "community_name": "share_proxy.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_share_proxy_createshareproxy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_posixscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_posixscript",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_posixscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_psquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_psquote",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_psquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand",
-      "community": 26,
-      "community_name": "terminal_cli.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_powershellscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_powershellscript",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_powershellscript",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_openexternalcli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_openexternalcli",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_openexternalcli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientconfiguration",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientconfiguration",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientconfiguration",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_opencodecommand",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_opencodecommand",
-      "community": 31,
-      "community_name": "client_commands.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_opencodecommand",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_buildguidance",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_buildguidance",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_buildguidance",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_engineadvice",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_engineadvice",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_engineadvice",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_enginelinks",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_enginelinks",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_enginelinks",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_gpuvendor",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_gpuvendor",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_gpuvendor",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_links",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_links",
-      "community": 34,
-      "community_name": "guidance.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_guidance_links",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_hardware_detectgpu",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_hardware_detectgpu",
-      "community": 35,
-      "community_name": "hardware.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_hardware_detectgpu",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_profile_import_parselegacyprofiles",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_profile_import_parselegacyprofiles",
-      "community": 36,
-      "community_name": "profile_import.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_profile_import_parselegacyprofiles",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "build_app_model_info",
       "label": "build_app_model_info",
+      "_origin": "semantic",
       "community": 96,
       "community_name": "params.test.js",
       "external": true,
@@ -16734,6 +16756,7 @@
     {
       "id": "build_app_params",
       "label": "build_app_params",
+      "_origin": "semantic",
       "community": 96,
       "community_name": "params.test.js",
       "external": true,
@@ -16745,6 +16768,7 @@
     {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_iswithin",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_iswithin",
+      "_origin": "semantic",
       "community": 97,
       "community_name": "core.test.js",
       "external": true,
@@ -16756,6 +16780,7 @@
     {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_recommend",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_recommend",
+      "_origin": "semantic",
       "community": 97,
       "community_name": "core.test.js",
       "external": true,
@@ -16767,6 +16792,7 @@
     {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_scanmodels",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_scanmodels",
+      "_origin": "semantic",
       "community": 97,
       "community_name": "core.test.js",
       "external": true,
@@ -16778,6 +16804,7 @@
     {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_validatesettings",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_core_validatesettings",
+      "_origin": "semantic",
       "community": 97,
       "community_name": "core.test.js",
       "external": true,
@@ -16789,11 +16816,24 @@
     {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_engine_assetfor",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_engine_assetfor",
+      "_origin": "semantic",
       "community": 97,
       "community_name": "core.test.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_engine_assetfor",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "_origin": "semantic",
+      "community": 98,
+      "community_name": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
       "source_file": "",
       "type": "external"
     }
@@ -17348,7 +17388,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/benchmark.ts",
-      "source_location": "L238",
+      "source_location": "L240",
       "weight": 1.0
     },
     {
@@ -17360,7 +17400,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/benchmark.ts",
-      "source_location": "L288",
+      "source_location": "L296",
       "weight": 1.0
     },
     {
@@ -17372,7 +17412,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/benchmark.ts",
-      "source_location": "L290",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -17384,7 +17424,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/benchmark.ts",
-      "source_location": "L296",
+      "source_location": "L304",
       "weight": 1.0
     },
     {
@@ -17396,7 +17436,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/benchmark.ts",
-      "source_location": "L302",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -35550,7 +35590,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35562,7 +35602,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35574,7 +35614,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35586,7 +35626,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35598,7 +35638,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35610,7 +35650,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35622,7 +35662,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35634,7 +35674,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35646,7 +35686,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35658,7 +35698,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35670,7 +35710,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35682,7 +35722,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35694,7 +35734,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -35706,7 +35746,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "src/benchmark.ts",
-      "source_location": "L312",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -37079,5 +37119,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6b9963843272a0d1c3d1eeaf52c483ff76f2eab3"
+  "built_at_commit": "813dbf7785a819a56867ec98d41405a195d4d0e0"
 }

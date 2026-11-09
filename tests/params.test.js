@@ -261,3 +261,12 @@ test('valores em uso lidos do registro do motor',()=>{
   const vllm=params.parseRuntimeLog('vllm','INFO GPU KV cache size: 123,456 tokens\nINFO Maximum concurrency for 32,768 tokens per request: 3.77x');
   assert.deepEqual(vllm,{kvTokens:'123456',context:'32768',concurrency:'3.77'});
 });
+
+test('autotuning: especialistas na CPU sobem de 2 em 2 enquanto a geração melhora',async()=>{
+  const seen=[];
+  const bench=async s=>{const k=Number(s.cpuMoe||0);seen.push(k);return {promptTps:100,generationTps:k<=14?10+k:24-(k-14)};};
+  const r=await benchmark.tune('/x',{path:'m.gguf'},{},()=>{},undefined,{budgetMinutes:5,info:{expertCount:32,blockCount:24},devices:[{name:'Vulkan0'}],hw:{physicalCores:4,logicalCores:8},
+    deps:{fit:async()=>({ngl:'25',ctx:4096,cpuMoe:8}),bench,server:null}});
+  assert.equal(r.settings.cpuMoe,'14');
+  assert.ok(seen.includes(16)&&!seen.includes(18),'para no primeiro passo sem ganho');
+});

@@ -1,7 +1,7 @@
 # Graph Report - dazzling-roentgen-50179e  (2026-11-08)
 
 ## Corpus Check
-- 103 files · ~71,946 words
+- 103 files · ~72,030 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 8 file(s) not represented in the graph (top: (none) 6, .toml 1, .css 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6b996384`
+- Built from commit: `813dbf77`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -672,7 +672,7 @@ Nodes (3): electron, {contextBridge,ipcRenderer}, invoke()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `settings()` connect `renderer.ts` to `main.ts`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+  _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **Why does `electron` connect `electron` to `main.ts`, `package.json`, `smoke-engines-ui.js`, `smoke-ui.js`, `smoke-server-buttons.js`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **Why does `build` connect `build` to `package.json`, `linux`, `nsis`?**
