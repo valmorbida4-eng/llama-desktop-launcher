@@ -14,14 +14,76 @@ function showView(view){
   if(view==='settings'){$('tuning-settings-content').append(tuning);$('tuning-settings-content').hidden=false;$('save-settings-profile').hidden=false;$('tuning-accordion').open=true;}
   else{$('tuning-content').append(tuning);$('tuning-settings-content').hidden=true;$('save-settings-profile').hidden=false;$('tuning-accordion').open=false;}
 }
-type SettingKey = keyof ModelSettings;
-const keys: SettingKey[]=['gpuLayers','device','context','cpuMoe','cacheK','cacheV','flash','threads','batch','ubatch'];
-const caches=['f16','q8_0','q4_0','q5_0','q4_1','q5_1','f32','bf16','iq4_nl'];
-for(const key of ['cacheK','cacheV'])$(key).innerHTML=caches.map(v=>`<option>${v}</option>`).join('');
 function message(text,error=false){const box=currentView==='settings'?$('settings-message'):$('message');box.textContent=text;box.classList.toggle('error',error);}
 async function action(fn){try{await fn();}catch(e){message(e.message||String(e),true);}}
-function settings(): ModelSettings {const v: ModelSettings={gpuLayers:"",device:"",context:"",cpuMoe:"",cacheK:"",cacheV:"",flash:"",threads:"",batch:"",ubatch:""};for(const key of keys)v[key]=$(key).value.trim();return v;}
-function applySettings(v){for(const key of keys)$(key).value=String(v?.[key]??'');}
+// Painel de parâmetros montado a partir do esquema do motor do modelo (params.ts no processo principal).
+// Valor '' = automático. Campos que não se aplicam ficam recolhidos, com o motivo, e vão vazios ao salvar.
+let schema: ParameterSchema | null=null,values: Record<string, string>={},schemaPath='',schemaSeq=0,fitRunning=false;
+const toggleText={on:'ligado',off:'desligado'};
+const defaultProfiles: Record<string, Record<string, string>>={llamacpp:{context:'4096'},vllm:{context:'4096'},strata:{}};
+function normalized(v: any){const out: Record<string, string>={};for(const [k,x] of Object.entries(v||{}))out[k]=x==null?'':String(x);if(out.gpuLayers==='auto')out.gpuLayers='';if(out.flash==='auto')out.flash='';return out;}
+function settings(): Record<string, string> {
+  const v: Record<string, string>={...values};
+  for(const f of schema?.fields||[]){if(!f.applicable){v[f.key]='';continue;}const auto=document.getElementById('a-'+f.key) as HTMLInputElement|null,control=document.getElementById('p-'+f.key) as HTMLInputElement|null;if(!auto||!control)continue;v[f.key]=auto.checked?'':control.value.trim();}
+  return v;
+}
+function applySettings(v: any){values={...values,...normalized(v)};if(schema)renderParams(schema);}
+function optionLabel(f: ParameterField,value: string){if(f.kind==='toggle')return toggleText[value]||value;if(f.kind==='model'){const m=snapshot?.models?.find(x=>x.path===value);return m?m.name:value.split(/[\\/]/).pop();}return value;}
+function autoText(f: ParameterField){if(!f.auto)return 'Automático: o motor decide.';const shown=f.kind==='toggle'?(toggleText[f.auto.value]||f.auto.value):f.auto.value;return `Automático: ${shown} · ${f.auto.source}`;}
+function buildControl(f: ParameterField,value: string,blank=false){
+  let control: HTMLInputElement|HTMLSelectElement;
+  const choices=f.kind==='toggle'?['on','off']:f.options&&['select','model'].includes(f.kind)?f.options:null;
+  if(choices){const select=document.createElement('select');if(blank){const none=document.createElement('option');none.value='';none.textContent='—';select.append(none);}select.append(...choices.map(o=>{const opt=document.createElement('option');opt.value=o;opt.textContent=optionLabel(f,o);return opt;}));control=select;}
+  else{const input=document.createElement('input');input.type=['int','float'].includes(f.kind)?'number':'text';if(f.min!=null)input.min=String(f.min);if(f.max!=null)input.max=String(f.max);if(f.step!=null)input.step=String(f.step);else if(f.kind==='float')input.step='any';
+    if(f.options?.length){const list=document.createElement('datalist');list.id='l-'+f.key;list.append(...f.options.map(o=>{const opt=document.createElement('option');opt.value=o;return opt;}));input.setAttribute('list',list.id);document.body.append(list);}control=input;}
+  control.id='p-'+f.key;
+  if(value!=='')control.value=value;
+  return control;
+}
+function renderParams(s: ParameterSchema){
+  document.querySelectorAll('datalist[id^="l-"]').forEach(x=>x.remove());
+  const groups=$('param-groups'),unavailable=$('param-unavailable-list');groups.replaceChildren();unavailable.replaceChildren();
+  const facts=$('model-facts');facts.replaceChildren(...(s.readOnly||[]).map(r=>{const chip=document.createElement('span');const b=document.createElement('b');b.textContent=r.label;chip.append(b,` ${r.value}`);return chip;}));facts.hidden=!s.readOnly?.length;
+  const byGroup=new Map<string, HTMLElement>();let missing=0;
+  for(const f of s.fields){
+    const value=values[f.key]??'',box=document.createElement('div');box.className='param';box.dataset.key=f.key;
+    const head=document.createElement('div');head.className='param-head';const label=document.createElement('label');label.htmlFor='p-'+f.key;label.textContent=f.label;const flag=document.createElement('span');flag.textContent=f.flag;label.append(' ',flag);head.append(label);
+    const note=document.createElement('small');note.className='param-note';
+    if(!f.applicable){box.classList.add('disabled');const control=buildControl(f,'',true);control.value='';control.disabled=true;note.textContent=f.reason||'Não se aplica.';box.append(head,control,note);unavailable.append(box);missing++;continue;}
+    const autoLabel=document.createElement('label');autoLabel.className='auto-toggle';const auto=document.createElement('input');auto.type='checkbox';auto.id='a-'+f.key;auto.checked=value==='';autoLabel.append(auto,' Auto');head.append(autoLabel);
+    const control=buildControl(f,value);
+    const sync=()=>{control.disabled=auto.checked;note.textContent=[autoText(f),f.hint,f.serverOnly?'Só no servidor.':''].filter(Boolean).map(t=>t.replace(/[.]?$/,'.')).join(' ');
+      if(auto.checked&&f.auto&&!(control instanceof HTMLSelectElement))(control as HTMLInputElement).placeholder=f.auto.value;
+      if(auto.checked&&control instanceof HTMLSelectElement){const match=[...control.options].find(o=>o.value===f.auto?.value);control.value=match?match.value:control.options[0]?.value||'';}};
+    auto.onchange=()=>{if(!auto.checked&&control instanceof HTMLInputElement&&!control.value&&f.auto&&/^[\d.]+$/.test(f.auto.value))control.value=f.auto.value;sync();paramsChanged();};
+    control.addEventListener('change',()=>paramsChanged());
+    sync();box.append(head,control,note);
+    let group=byGroup.get(f.group);if(!group){const set=document.createElement('fieldset');set.className='param-group';const legend=document.createElement('legend');legend.textContent=f.group;const grid=document.createElement('div');grid.className='fields';set.append(legend,grid);groups.append(set);byGroup.set(f.group,grid);group=grid;}
+    group.append(box);
+  }
+  $('param-unavailable').hidden=!missing;$('param-unavailable-title').textContent=`Não se aplicam a este modelo (${missing})`;
+}
+// Recalcula o esquema quando um valor muda (alguns campos dependem de outros, como -fitc do contexto).
+let changeTimer: any=null;
+function paramsChanged(){values=settings();clearTimeout(changeTimer);changeTimer=setTimeout(()=>loadSchema(false).catch(e=>message(e.message,true)),200);}
+async function loadSchema(withFit: boolean){
+  const m=selectedSettingsModel();if(!m){schema=null;$('param-groups').replaceChildren();$('param-unavailable').hidden=true;$('model-facts').hidden=true;return;}
+  const seq=++schemaSeq;const current=settings();
+  const next=await window.llama.parameterSchema(m.path,current);
+  if(seq!==schemaSeq||m.path!==selectedSettingsModel()?.path)return;
+  const before=JSON.stringify((schema?.fields||[]).map(f=>[f.key,f.applicable,f.auto?.value,(f.options||[]).join()]));
+  schema=next;values=current;
+  if(before!==JSON.stringify(next.fields.map(f=>[f.key,f.applicable,f.auto?.value,(f.options||[]).join()])))renderParams(next);
+  if(withFit&&next.engine==='llamacpp'&&snapshot?.engineReady)computeFit(false);
+}
+async function computeFit(explicit: boolean){
+  const m=selectedSettingsModel();if(!m||(m.engine||'llamacpp')!=='llamacpp'||fitRunning)return;
+  fitRunning=true;$('fit-values').disabled=true;if(explicit)$('tuning-message').textContent='Calculando os valores automáticos com llama-fit-params…';
+  try{const next=await window.llama.fitValues(m.path,settings());if(m.path===selectedSettingsModel()?.path){schema=next;renderParams(next);if(explicit)$('tuning-message').textContent='Valores automáticos atualizados: aparecem nos campos marcados como Auto.';}}
+  catch(e){if(explicit)throw e;}
+  finally{fitRunning=false;updateEngineControls();}
+}
+
 function selected(){return snapshot?.models?.find(m=>m.path===$('model').value);}
 function selectedSettingsModel(){return snapshot?.models?.find(m=>m.path===$('settings-model').value)||selected();}
 function engineOf(m){return snapshot?.engines?.find(e=>e.id===(m?.engine||'llamacpp'));}
@@ -31,13 +93,17 @@ function updateEngineControls(){
   const s=snapshot;if(!s)return;const m=selected(),busy=s.running||s.chatRunning,llama=!m||(m.engine||'llamacpp')==='llamacpp';
   $('start-server').disabled=!readyFor(m)||busy;$('launch').disabled=s.running?!s.active:!readyFor(m)||s.chatRunning;
   $('start-chat').disabled=!llama||!s.engineReady||!s.models.length||busy;$('open-cli-terminal').disabled=!llama||!s.engineReady||!s.models.length||busy;
-  const sm=selectedSettingsModel(),settingsLlama=!sm||(sm.engine||'llamacpp')==='llamacpp';$('recommend').disabled=!settingsLlama;$('tune').disabled=!settingsLlama;
+  const sm=selectedSettingsModel(),engineId=sm?.engine||'llamacpp',tuning=!$('cancel-tune').hidden;
+  $('recommend').disabled=!sm||engineId==='strata';$('tune').disabled=!sm||engineId==='strata'||tuning||busy||!readyFor(sm);$('fit-values').disabled=!sm||engineId!=='llamacpp'||!s.engineReady||fitRunning||tuning;
+  $('tune-description').textContent=engineId==='strata'?'O Strata e o PolyStrata não têm autotuning: quantização, contexto e GPU vêm da configuração do instalador deles.':engineId==='vllm'?'Sobe o vLLM várias vezes com valores diferentes e mede tokens/s. Cada tentativa recarrega o modelo: leva vários minutos.':'Mede com llama-bench e, se sobrar tempo, com um llama-server curto (especulativa, threads de prompt, cache MoE).';
+  $('fit-values-card').hidden=engineId!=='llamacpp';
 }
 function fillModelSelectors(models,preferred){for(const id of ['model','settings-model']){const select=$(id),previous=preferred||$('model').value;const empty=document.createElement('option');empty.value='';empty.textContent=models.length?'Selecione um modelo':'Nenhum modelo instalado';select.replaceChildren(empty,...models.map(m=>{const o=document.createElement('option');o.value=m.path;o.textContent=m.name;return o;}));if(models.some(m=>m.path===previous))select.value=previous;else select.value='';}}
-function updateModelDetail(){const m=selected();if(!m){const count=snapshot?.models?.length||0;const hint=count?`Escolha um dos ${count} modelos encontrados na lista acima.`:'Nenhum GGUF encontrado. Configure uma pasta ou veja as sugestões compatíveis.';$('model-detail').textContent=hint;$('settings-model-detail').textContent=hint;activePath='';applySettings({});updateEngineControls();return;}
+function updateModelDetail(){const m=selected();if(!m){const count=snapshot?.models?.length||0;const hint=count?`Escolha um dos ${count} modelos encontrados na lista acima.`:'Nenhum GGUF encontrado. Configure uma pasta ou veja as sugestões compatíveis.';$('model-detail').textContent=hint;$('settings-model-detail').textContent=hint;activePath='';schemaPath='';schema=null;values={};loadSchema(false).catch(()=>{});updateEngineControls();return;}
   const engine=engineOf(m),engineText=engine?` · ${engine.label}${engine.ready?'':' (motor pendente)'}`:'';
-  const note=m.engine==='strata'?` · contexto, quantização e GPU vêm da configuração do Strata${m.distribution==='PolyStrata'?`; Sessões simultâneas não se aplicam ao PolyStrata (a configuração dele usa ${m.parallel||1})`:''}`:m.engine==='vllm'?' · o vLLM usa contexto e sessões; os demais ajustes são do llama.cpp':'';
-  const detail=`${m.size?`${(m.size/1024**3).toFixed(2)} GB · `:''}${m.path}${m.projector?' · projetor multimodal':''}${engineText}${note}`;$('model-detail').textContent=detail;$('settings-model-detail').textContent=`${m.name} · ajustes salvos só para este modelo.`;updateEngineControls();activePath=m.path;const profile=snapshot.config.profiles[m.path]||{gpuLayers:'auto',device:'',context:4096,cpuMoe:'',cacheK:'f16',cacheV:'f16',flash:'auto',threads:'',batch:512,ubatch:256};applySettings(profile);}
+  const note=m.engine==='strata'?` · contexto, quantização e GPU vêm da configuração do Strata${m.distribution==='PolyStrata'?`; Sessões simultâneas não se aplicam ao PolyStrata (a configuração dele usa ${m.parallel||1})`:''}`:'';
+  const detail=`${m.size?`${(m.size/1024**3).toFixed(2)} GB · `:''}${m.path}${m.projector?' · projetor multimodal':''}${engineText}${note}`;$('model-detail').textContent=detail;$('settings-model-detail').textContent=`${m.name} · ajustes salvos só para este modelo.`;updateEngineControls();const changed=activePath!==m.path;activePath=m.path;
+  if(changed||schemaPath!==m.path){schemaPath=m.path;schema=null;values=normalized(snapshot.config.profiles[m.path]||defaultProfiles[m.engine||'llamacpp']||{});$('tune-results').hidden=true;loadSchema(true).catch(e=>message(e.message,true));}}
 function bytes(value){if(value==null||!Number.isFinite(Number(value)))return '—';const n=Number(value);if(n<=0)return '0 B';const units=['B','KB','MB','GB','TB'];let x=n,unit=0;while(x>=1024&&unit<units.length-1){x/=1024;unit++;}return `${x.toFixed(unit?1:0)} ${units[unit]}`;}
 function renderGuidance(data){guidance=data||null;if(!data){$('guidance-summary').textContent='Não foi possível carregar as recomendações agora.';$('suggestions').replaceChildren();return;}
   const h=data.hardware||{};$('models-memory').textContent=bytes(h.memoryBytes);$('models-cpu').textContent=`${h.logicalCores||'—'} threads`;$('disk-space').textContent=bytes(data.availableDiskBytes);$('guidance-summary').textContent=data.summary||`Sugestões com base em ${h.cpu||'este hardware'} (${h.platform||''} ${h.arch||''}).`;
@@ -73,7 +139,8 @@ function fillEngines(s){
   if(strata){$('strata-badge').textContent=!strata.supported?'Indisponível':strata.ready?'Pronto':'Pendente';$('strata-detail').textContent=strata.detail||'Nenhuma pasta selecionada';
     $('strata-hint').textContent=strata.supported?'Instale pelo instalador oficial (START-HERE.bat ou setup.sh), configure um modelo e depois escolha a pasta aqui.':strata.unsupportedReason;$('select-strata').hidden=!strata.supported;$('select-strata').disabled=busy;}
 }
-function showConnection(result){$('sharing-controls').hidden=!result?.sharingEndpoint;$('sharing-endpoint').textContent=result?.sharingEndpoint?'API compartilhada: '+result.sharingEndpoint:'';$('connection').hidden=!result;$('firewall-controls').hidden=snapshot?.platform!=='win32'||!result||result.scope==='Local';if(result){$('endpoint').textContent=`API: ${result.endpoint} · Modelo API: ${result.modelId} · Interface: ${result.remoteUrl}`;if(result.scope!=='Local')$('firewall-range').value=result.scope==='Tailscale'?'100.64.0.0/10':result.host.split('.').slice(0,3).join('.')+'.0/24';}}
+function showConnection(result){$('sharing-controls').hidden=!result?.sharingEndpoint;$('sharing-endpoint').textContent=result?.sharingEndpoint?'API compartilhada: '+result.sharingEndpoint:'';$('connection').hidden=!result;$('firewall-controls').hidden=snapshot?.platform!=='win32'||!result||result.scope==='Local';$('runtime-values').hidden=!result?.runtime||!Object.keys(result.runtime).length;if(result?.runtime){const r=result.runtime,parts=[r.context?`contexto ${r.context}`:'',r.gpuLayers?`camadas na GPU ${r.gpuLayers}`:'',r.slots?`sessões ${r.slots}`:'',r.ubatch?`microbatch ${r.ubatch}`:'',r.kvTokens?`cache KV ${r.kvTokens} tokens`:'',r.concurrency?`concorrência máxima ${r.concurrency}x`:''].filter(Boolean);$('runtime-values').textContent=parts.length?`Em uso: ${parts.join(' · ')}`:'';}
+  if(result){$('endpoint').textContent=`API: ${result.endpoint} · Modelo API: ${result.modelId} · Interface: ${result.remoteUrl}`;if(result.scope!=='Local')$('firewall-range').value=result.scope==='Tailscale'?'100.64.0.0/10':result.host.split('.').slice(0,3).join('.')+'.0/24';}}
 async function refresh(preferred?: string){snapshot=await window.llama.state();const s=snapshot;$('app-version').textContent='· v'+s.appVersion;$('update-check').checked=s.config.updateCheck!==false;showUpdate(s.update);const old=preferred||s.config.selectedModelPath||$('model').value;
   if(currentView===null)showView((!anyEngineReady(s)||!s.models.length||!s.config.selectedModelPath)?'settings':'llama');
   $('memory').textContent=bytes(s.hardware.memoryBytes);$('cpu').textContent=`${s.hardware.logicalCores} threads`;$('models-memory').textContent=bytes(s.hardware.memoryBytes);$('models-cpu').textContent=`${s.hardware.logicalCores} threads`;$('local-count').textContent=String(s.models.length);
@@ -117,9 +184,21 @@ async function firewallRulesAction(fn){const box=$('firewall-rules-message');box
 $('list-firewall-rules').onclick=()=>firewallRulesAction(async()=>{const rules=await window.llama.listFirewallRules();return rules.length?`${rules.length} regra(s) do launcher no Windows: ${rules.map(r=>r.displayName||r.name).join(', ')}.`:'Nenhuma regra do launcher no Windows Firewall.';});
 $('remove-firewall-rules').onclick=()=>firewallRulesAction(async()=>{$('firewall-rules-message').textContent='Procurando regras do launcher…';const result=await window.llama.removeFirewallRules();if(!result.removed&&!result.remaining)return 'Nenhuma regra do launcher para remover.';return result.remaining?`${result.removed} regra(s) removida(s); ${result.remaining} continuam no Windows. Tente de novo ou remova pelo wf.msc.`:`${result.removed} regra(s) do launcher removida(s).${snapshot?.active&&snapshot.active.scope!=='Local'?' Clientes de outros computadores deixam de conectar até você criar a regra de novo.':''}`;});
 $('copy-diagnostics').onclick=()=>action(async()=>{const box=$('diagnostics-message');box.classList.remove('error');$('copy-diagnostics').disabled=true;try{const report=await window.llama.copyDiagnosticReport();$('diagnostics-preview').textContent=report;$('diagnostics-preview').hidden=false;box.textContent='Relatório copiado. Confira o texto abaixo antes de colar em uma issue ou mensagem.';}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}finally{$('copy-diagnostics').disabled=false;}});
-$('recommend').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo GGUF para calcular os ajustes.');applySettings(await window.llama.recommend(m.path));$('tuning-message').textContent='Sugestão aplicada aos campos. Confira os valores e salve o perfil deste modelo.';});
-$('tune').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Instale ou selecione um modelo GGUF.');$('tune').disabled=true;$('tuning-message').textContent='Comparando microbatch com llama-bench. Isso pode levar alguns minutos.';try{const result=await window.llama.tune(m.path,settings());applySettings(result.settings);const best=result.results.find(r=>r.ubatch===result.settings.ubatch);$('tuning-message').textContent=`Microbatch ${best.ubatch} escolhido: geração ${best.generationTps.toFixed(1)} tokens/s. Confira e salve o perfil.`;}finally{$('tune').disabled=false;}});
-$('save-settings-profile').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Instale ou selecione um modelo GGUF para salvar os ajustes.');await window.llama.saveProfile(m.path,settings());$('settings-message').textContent='Ajustes salvos para este modelo.';$('message').textContent='Ajustes salvos para este modelo.';});
+$('recommend').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para calcular os ajustes.');applySettings(await window.llama.recommend(m.path));await loadSchema(false);
+  if((m.engine||'llamacpp')==='vllm'){$('tuning-message').textContent='Sugestão do vLLM aplicada aos campos (config.json e VRAM).';if(confirm('Sugestão aplicada. Quer rodar o autotuning do vLLM agora? Ele sobe o servidor várias vezes, recarregando o modelo a cada tentativa, e leva alguns minutos.'))$('tune').click();return;}
+  $('tuning-message').textContent='Sugestão aplicada aos campos. Confira os valores e salve o perfil deste modelo.';});
+$('fit-values').onclick=()=>action(()=>computeFit(true));
+function tuneRow(r){const tr=document.createElement('tr');const cells=[r.label,r.method,Number.isFinite(r.promptTps)?r.promptTps.toFixed(1):'—',Number.isFinite(r.generationTps)?r.generationTps.toFixed(1):'—',r.error?r.error:Number.isFinite(r.draftAcceptance)&&r.draftAcceptance!==null?`aceite ${Math.round(r.draftAcceptance*100)}%`:'ok'];for(const c of cells){const td=document.createElement('td');td.textContent=String(c);tr.append(td);}if(r.error)tr.className='failed';return tr;}
+$('tune').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo.');
+  const vllm=(m.engine||'llamacpp')==='vllm',options={budgetMinutes:Number($('tune-budget').value),priority:$('tune-priority').value as TuneOptions['priority']};
+  $('cancel-tune').hidden=false;updateEngineControls();$('tuning-message').textContent=vllm?'Otimizando o vLLM: cada tentativa recarrega o modelo.':'Otimizando: primeiro o teto de memória, depois o llama-bench.';
+  try{const result=await window.llama.tune(m.path,settings(),options);applySettings(result.settings);await loadSchema(false);
+    $('tune-results-body').replaceChildren(...result.results.map(tuneRow));$('tune-results').hidden=false;
+    const b=result.best,end=result.stopped==='budget'?' O tempo acabou antes de testar tudo.':result.stopped==='cancelled'?' Cancelado: aplicado o melhor até aqui.':'';
+    $('tuning-message').textContent=`Melhor: ${b.label} · geração ${b.generationTps.toFixed(1)} tokens/s · prompt ${b.promptTps.toFixed(1)} tokens/s.${end} Confira os campos e salve o perfil.`;}
+  finally{$('cancel-tune').hidden=true;updateEngineControls();}});
+$('cancel-tune').onclick=()=>action(async()=>{$('tuning-message').textContent='Cancelando o teste…';await window.llama.cancelTune();});
+$('save-settings-profile').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para salvar os ajustes.');await window.llama.saveProfile(m.path,settings());$('settings-message').textContent='Ajustes salvos para este modelo.';$('message').textContent='Ajustes salvos para este modelo.';});
 $('access-host').onchange=updateNetwork;
 $('show-key').onclick=()=>action(async()=>{if(!$('key-value').hidden){$('key-value').hidden=true;$('key-value').textContent='';return;}$('key-value').textContent=await window.llama.getKey();$('key-value').hidden=false;});
 $('copy-key').onclick=()=>action(async()=>{await window.llama.copyKey();message('Chave copiada. Evite colá-la em locais públicos.');});$('rotate-key').onclick=()=>action(async()=>{$('key-value').textContent=await window.llama.rotateKey();$('key-value').hidden=false;message('Nova chave criada. A anterior deixou de funcionar.');});

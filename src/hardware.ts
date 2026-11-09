@@ -164,4 +164,21 @@ async function detectGpu(options: any = {}) {
   return best || { ...NULL_GPU };
 }
 
-module.exports = { detectGpu };
+// Todas as GPUs NVIDIA (índice, nome, memória total e livre), para o vLLM e o Strata, que usam CUDA.
+function parseNvidiaGpus(output: string) {
+  const gpus = [];
+  for (const line of String(output || '').split(/\r?\n/)) {
+    const m = /^\s*(\d+)\s*,\s*(.+?)\s*,\s*(\d+)\s*,\s*(\d+)\s*$/.exec(line);
+    if (m) gpus.push({ index: Number(m[1]), name: m[2].replace(/^"|"$/g, ''), memoryBytes: Number(m[3]) * 1024 * 1024, freeBytes: Number(m[4]) * 1024 * 1024 });
+  }
+  return gpus;
+}
+async function detectNvidiaGpus(options: any = {}) {
+  const run = options.run || runCommand;
+  try {
+    const output = await run('nvidia-smi', ['--query-gpu=index,name,memory.total,memory.free', '--format=csv,noheader,nounits'], { timeoutMs: 5000 });
+    return parseNvidiaGpus(typeof output === 'string' ? output : output?.stdout || '');
+  } catch { return []; }
+}
+
+module.exports = { detectGpu, detectNvidiaGpus, parseNvidiaGpus };

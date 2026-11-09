@@ -5,28 +5,17 @@ const os = require('node:os');
 
 const apiModelId = 'modelo-local';
 const defaults = Object.freeze({gpuLayers:'auto', context:4096, cacheK:'f16', cacheV:'f16', cpuMoe:'', flash:'auto', threads:'', batch:512, ubatch:256, device:''});
-const caches = new Set(['f32','f16','bf16','q8_0','q4_0','q4_1','q5_0','q5_1','iq4_nl']);
-function validInt(value: unknown, allowEmpty=false, zero=false) {
-  if (allowEmpty && value === '') return true;
-  return Number.isSafeInteger(Number(value)) && String(value).trim() !== '' && Number(value) >= (zero ? 0 : 1);
-}
-function validateSettings(s: any) {
+const params = require('./params');
+// Valida os ajustes do perfil. engine e ctx (informações do modelo e do hardware) são opcionais: sem eles
+// valida só o formato dos campos do llama.cpp.
+function validateSettings(s: any, engine='llamacpp', ctx: any={}) {
   if (!s || typeof s !== 'object') throw Error('Ajustes ausentes.');
-  if (!['auto','all'].includes(String(s.gpuLayers)) && !validInt(s.gpuLayers,false,true)) throw Error('Camadas GPU inválidas.');
-  if (!validInt(s.context)) throw Error('Contexto inválido.');
-  if (!caches.has(s.cacheK) || !caches.has(s.cacheV)) throw Error('Formato de cache inválido.');
-  if (!validInt(s.cpuMoe,true,true)) throw Error('Camadas MoE inválidas.');
-  if (!['auto','on','off'].includes(s.flash)) throw Error('Flash Attention inválido.');
-  for (const k of ['threads','batch','ubatch']) if (!validInt(s[k],true)) throw Error(`${k} inválido.`);
-  if (s.device && !/^[A-Za-z][A-Za-z0-9:_-]{0,63}$/.test(s.device)) throw Error('Dispositivo inválido.');
-  if (s.batch !== '' && s.ubatch !== '' && Number(s.ubatch) > Number(s.batch)) throw Error('Microbatch não pode exceder batch.');
-  return true;
+  return params.validateParams(s,{...ctx,engine});
 }
 function argsForModel(model: any, settings: any, mode: string, port=0, serverOptions: {host?: string; parallel?: number; keyPath?: string}={}) {
   validateSettings(settings);
-  const a = ['-m',model.path,'-fit','on','-ngl',String(settings.gpuLayers),'-c',String(settings.context),'-ctk',settings.cacheK,'-ctv',settings.cacheV,'-fa',settings.flash];
+  const a = ['-m',model.path,'-fit','on',...params.llamaArgs(settings,mode)];
   if (model.projector) a.push('--mmproj',model.projector);
-  for (const [key,flag] of [['cpuMoe','-ncmoe'],['threads','-t'],['batch','-b'],['ubatch','-ub'],['device','-dev']]) if (String(settings[key]) !== '') a.push(flag,String(settings[key]));
   if (mode === 'server') {
     a.push('--alias',apiModelId);
     const host=serverOptions.host||'127.0.0.1';
@@ -37,17 +26,37 @@ function argsForModel(model: any, settings: any, mode: string, port=0, serverOpt
   }
   return a;
 }
-function recommend(model: any, hw: any) {
+// Sugestão inicial do llama.cpp. info = metadados do GGUF (model_info); sem eles, o nome do arquivo decide.
+function recommend(model: any, hw: any, info: any=null) {
   const name=path.basename(model.path).toLowerCase();
   const large=model.size >= 6*1024**3;
-  const moe=/(?:moe|a\d+b|e\d+b|expert)/i.test(name);
+  const known=info&&!info.error;
+  const moe=known?info.expertCount>0:/(?:moe|a\d+b|e\d+b|expert)/i.test(name);
   const threads=Math.max(1,Math.min(hw.physicalCores || Math.ceil(hw.logicalCores/2) || 4,16));
   const memoryGiB=hw.memoryBytes/1024**3;
-  const context=memoryGiB < 12 ? 2048 : large ? 4096 : 8192;
+  let context=memoryGiB < 12 ? 2048 : large ? 4096 : 8192;
+  if (known && info.contextLength) context=Math.min(context,info.contextLength);
   const result: Record<string, any>={...defaults,context,threads,ubatch:memoryGiB < 16 ? 128 : 256,batch:512};
   if (moe && large) result.cpuMoe=hw.gpuMemoryBytes && hw.gpuMemoryBytes < model.size ? 20 : '';
   if (name.includes('qwen3-coder-30b-a3b') || name.includes('qwen3-30b-a3b')) Object.assign(result,{context:4096,cpuMoe:hw.gpuMemoryBytes && hw.gpuMemoryBytes <= 10*1024**3 ? 34 : '',ubatch:256});
   if (memoryGiB >= 24) Object.assign(result,{cacheK:'q8_0',cacheV:'q8_0',flash:'on'});
+  if (known && info.nextnLayers>0) Object.assign(result,{specType:'draft-mtp',draftMax:3});
+  return result;
+}
+// Sugestão inicial do vLLM a partir do config.json e das GPUs (gpus = [{memoryBytes}] do nvidia-smi).
+function recommendVllm(model: any, info: any, gpus: any[]=[]) {
+  const known=info&&!info.error?info:{};
+  const sizes=gpus.map(g=>(g.memoryBytes||0)/1024**3).filter(x=>x>0);
+  const single=sizes.length?Math.min(...sizes):0;
+  const weights=(model.size||0)/1024**3;
+  let tp=1;
+  if (sizes.length>=2 && weights>single*0.7) for (let n=2;n<=sizes.length;n*=2) if (!known.attentionHeads||known.attentionHeads%n===0) tp=n;
+  const free=Math.max(0,single*tp*0.9-weights);
+  const byMemory=free>=24?32768:free>=8?16384:free>=3?8192:4096;
+  const context=known.contextLength?Math.min(known.contextLength,byMemory):byMemory;
+  const result: Record<string, any>={context,gpuMemoryUtilization:'0.9',tensorParallel:tp>1?String(tp):''};
+  if (tp>1 && known.expertCount>0) result.expertParallel='on';
+  if (known.nextnLayers>0) Object.assign(result,{vllmSpec:'mtp',vllmSpecTokens:String(Math.max(1,known.nextnLayers))});
   return result;
 }
 function detectHardware() { return {platform:process.platform,arch:process.arch,memoryBytes:os.totalmem(),logicalCores:os.cpus().length,physicalCores:Math.max(1,Math.floor(os.cpus().length/2)),cpu:os.cpus()[0]?.model || ''}; }
@@ -110,4 +119,4 @@ function walkModels(roots: string[], {hf=false}: {hf?: boolean}={}) {
   return {gguf:gguf.sort((a,b)=>a.name.localeCompare(b.name)),hf:hfModels.sort((a,b)=>a.name.localeCompare(b.name))};
 }
 function scanModels(roots: string[]) { return walkModels(roots).gguf; }
-module.exports={apiModelId,defaults,validateSettings,argsForModel,recommend,detectHardware,isWithin,scanModels,walkModels,hfDisplayName};
+module.exports={apiModelId,defaults,validateSettings,argsForModel,recommend,recommendVllm,detectHardware,isWithin,scanModels,walkModels,hfDisplayName};

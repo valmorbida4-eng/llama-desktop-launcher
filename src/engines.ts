@@ -6,6 +6,8 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {spawn}=require('node:child_process');
 const {apiModelId,isWithin,walkModels}=require('./core');
+const params=require('./params');
+const modelInfo=require('./model_info');
 
 // Versão do vLLM testada com o launcher (pip no Linux, imagem Docker no Windows).
 const VLLM_VERSION='0.32.0';
@@ -165,12 +167,14 @@ function venvBaseExecutable(python,platform=process.platform) {
 function serverCommand(model,settings,{host,port,parallel=1,key=null,platform=process.platform,vllmDir='',strataDir='',containerName=''}: any) {
   if(!host || !Number.isInteger(port) || port<1 || port>65535) throw Error('Endereço do servidor inválido.');
   if(host!=='127.0.0.1' && !key) throw Error('Chave de API obrigatória na rede.');
-  const context=Number(settings?.context);
-  if(!Number.isSafeInteger(context) || context<1) throw Error('Contexto inválido.');
+  // Contexto vazio = automático (o vLLM usa o max_position_embeddings do modelo; o Strata, a configuração dele).
+  const contextText=String(settings?.context??'').trim(),context=Number(contextText);
+  if(contextText!=='' && (!Number.isSafeInteger(context) || context<1)) throw Error('Contexto inválido.');
   if(!Number.isInteger(parallel) || parallel<1 || parallel>8) throw Error('Sessões simultâneas inválidas.');
   if(model.engine==='vllm') {
     const mode=vllmMode(platform);
-    const shared=['--served-model-name',apiModelId,'--max-model-len',String(context),'--max-num-seqs',String(parallel)];
+    params.validateParams(settings||{},{engine:'vllm'});
+    const shared=['--served-model-name',apiModelId,...(contextText===''?[]:['--max-model-len',String(context)]),'--max-num-seqs',String(parallel),...params.vllmArgs(settings)];
     if(mode==='venv') {
       if(!vllmVenvReady(vllmDir)) throw Error('Instale o vLLM ou escolha um ambiente que contenha bin/vllm.');
       return {file:vllmExecutable(vllmDir),args:['serve',model.path,'--host',host,'--port',String(port),...shared],env:key?{VLLM_API_KEY:key}:{},cwd:vllmDir,parallel};
@@ -195,6 +199,10 @@ function serverCommand(model,settings,{host,port,parallel=1,key=null,platform=pr
     // Só o servidor do Strata aceita --parallel; o do PolyStrata usa o valor da configuração dele.
     const args=[path.join('serve','server.py'),'--engine','strata','--config',model.path,'--host',host,'--port',String(port)];
     if(install.distribution==='Strata') args.push('--parallel',String(parallel));
+    // Opções extras só quando o serve/server.py instalado as declara (Strata e PolyStrata mudam rápido).
+    const options=modelInfo.strataServerOptions(strataDir).options||[];
+    params.validateParams(settings||{},{engine:'strata',strataOptions:options,distribution:install.distribution});
+    args.push(...params.strataArgs(settings,options));
     return {file:install.python,args,env:key?{STRATA_API_KEY:key}:{},cwd:strataDir,parallel:install.distribution==='Strata'?parallel:null,
       firewallProgram:platform==='win32'?venvBaseExecutable(install.python,platform):install.python};
   }
