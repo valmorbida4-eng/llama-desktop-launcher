@@ -1365,6 +1365,90 @@
       "source_location": "L137"
     },
     {
+      "id": "src_client_commands_bashquote",
+      "label": "bashQuote()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "bashquote()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_client_commands_clientcommand",
+      "label": "clientCommand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "clientcommand()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L72"
+    },
+    {
+      "id": "src_client_commands_clientconfiguration",
+      "label": "clientConfiguration()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "clientconfiguration()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L57"
+    },
+    {
+      "id": "src_client_commands_modelidof",
+      "label": "modelIdOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "modelidof()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_client_commands_opencodecommand",
+      "label": "openCodeCommand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "opencodecommand()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_client_commands_psquote",
+      "label": "psQuote()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "psquote()",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_core_hfdisplayname",
+      "label": "hfDisplayName()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "hfdisplayname()",
+      "source_file": "src/core.ts",
+      "source_location": "L70"
+    },
+    {
       "id": "src_core_iswithin",
       "label": "isWithin()",
       "_callable": true,
@@ -1375,6 +1459,54 @@
       "norm_label": "iswithin()",
       "source_file": "src/core.ts",
       "source_location": "L63"
+    },
+    {
+      "id": "src_core_recommend",
+      "label": "recommend()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "recommend()",
+      "source_file": "src/core.ts",
+      "source_location": "L30"
+    },
+    {
+      "id": "src_core_recommendvllm",
+      "label": "recommendVllm()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "recommendvllm()",
+      "source_file": "src/core.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "src_core_scanmodels",
+      "label": "scanModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "scanmodels()",
+      "source_file": "src/core.ts",
+      "source_location": "L121"
+    },
+    {
+      "id": "src_core_walkmodels",
+      "label": "walkModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "walkmodels()",
+      "source_file": "src/core.ts",
+      "source_location": "L80"
     },
     {
       "id": "src_engines_contextfromargs",
@@ -1495,6 +1627,18 @@
       "norm_label": "runstreaming()",
       "source_file": "src/engines.ts",
       "source_location": "L54"
+    },
+    {
+      "id": "src_engines_scanhfmodels",
+      "label": "scanHfModels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "scanhfmodels()",
+      "source_file": "src/engines.ts",
+      "source_location": "L140"
     },
     {
       "id": "src_engines_scanstrataconfigs",
@@ -1699,6 +1843,30 @@
       "norm_label": "write()",
       "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L12"
+    },
+    {
+      "id": "scripts_smoke_ui_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L20"
+    },
+    {
+      "id": "src_preload_invoke",
+      "label": "invoke()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "invoke()",
+      "source_file": "src/preload.ts",
+      "source_location": "L3"
     },
     {
       "id": "src_engine_build_capture",
@@ -2241,6 +2409,30 @@
       "source_location": "L55"
     },
     {
+      "id": "src_profile_import_decodeprofilepath",
+      "label": "decodeProfilePath()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "decodeprofilepath()",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "src_profile_import_parselegacyprofiles",
+      "label": "parseLegacyProfiles()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "parselegacyprofiles()",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L48"
+    },
+    {
       "id": "tests_updater_test_release",
       "label": "release()",
       "_callable": true,
@@ -2323,18 +2515,6 @@
       "norm_label": "main()",
       "source_file": "scripts/smoke-bench.js",
       "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_cli_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L7"
     },
     {
       "id": "tests_diagnostics_test_sample",
@@ -2479,18 +2659,6 @@
       "norm_label": "allmodels()",
       "source_file": "src/main.ts",
       "source_location": "L68"
-    },
-    {
-      "id": "src_main_checksettings",
-      "label": "checkSettings()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "state",
-      "file_type": "code",
-      "norm_label": "checksettings()",
-      "source_file": "src/main.ts",
-      "source_location": "L112"
     },
     {
       "id": "src_main_draftmodelsfor",
@@ -2865,42 +3033,6 @@
       "source_location": "L82"
     },
     {
-      "id": "src_main_checkupdates",
-      "label": "checkUpdates()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "main.ts",
-      "file_type": "code",
-      "norm_label": "checkupdates()",
-      "source_file": "src/main.ts",
-      "source_location": "L127"
-    },
-    {
-      "id": "src_main_createwindow",
-      "label": "createWindow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "main.ts",
-      "file_type": "code",
-      "norm_label": "createwindow()",
-      "source_file": "src/main.ts",
-      "source_location": "L120"
-    },
-    {
-      "id": "src_main_fitkey",
-      "label": "fitKey()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "main.ts",
-      "file_type": "code",
-      "norm_label": "fitkey()",
-      "source_file": "src/main.ts",
-      "source_location": "L117"
-    },
-    {
       "id": "src_main_freeport",
       "label": "freePort()",
       "_callable": true,
@@ -2913,18 +3045,6 @@
       "source_location": "L79"
     },
     {
-      "id": "src_main_log",
-      "label": "log()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "main.ts",
-      "file_type": "code",
-      "norm_label": "log()",
-      "source_file": "src/main.ts",
-      "source_location": "L52"
-    },
-    {
       "id": "src_main_requirellama",
       "label": "requireLlama()",
       "_callable": true,
@@ -2935,18 +3055,6 @@
       "norm_label": "requirellama()",
       "source_file": "src/main.ts",
       "source_location": "L77"
-    },
-    {
-      "id": "src_main_send",
-      "label": "send()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "main.ts",
-      "file_type": "code",
-      "norm_label": "send()",
-      "source_file": "src/main.ts",
-      "source_location": "L51"
     },
     {
       "id": "src_main_validatesender",
@@ -3019,18 +3127,6 @@
       "norm_label": "run()",
       "source_file": "scripts/smoke-macos-dmg.js",
       "source_location": "L10"
-    },
-    {
-      "id": "scripts_smoke_ui_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L20"
     },
     {
       "id": "src_engine_build_describebuild",
@@ -3189,16 +3285,64 @@
       "source_location": "L119"
     },
     {
+      "id": "scripts_smoke_external_cli_linux_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L10"
+    },
+    {
       "id": "scripts_smoke_external_cli_win_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "scripts/smoke-external-cli-win.js",
       "source_location": "L10"
+    },
+    {
+      "id": "scripts_smoke_cli_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "build_app_core",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_main_checkupdates",
+      "label": "checkUpdates()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 280,
+      "community_name": "send",
+      "file_type": "code",
+      "norm_label": "checkupdates()",
+      "source_file": "src/main.ts",
+      "source_location": "L127"
+    },
+    {
+      "id": "src_main_createwindow",
+      "label": "createWindow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 280,
+      "community_name": "send",
+      "file_type": "code",
+      "norm_label": "createwindow()",
+      "source_file": "src/main.ts",
+      "source_location": "L120"
     },
     {
       "id": "src_main_defaultconfig",
@@ -3206,7 +3350,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 280,
-      "community_name": "save",
+      "community_name": "send",
       "file_type": "code",
       "norm_label": "defaultconfig()",
       "source_file": "src/main.ts",
@@ -3218,11 +3362,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 280,
-      "community_name": "save",
+      "community_name": "send",
       "file_type": "code",
       "norm_label": "load()",
       "source_file": "src/main.ts",
       "source_location": "L44"
+    },
+    {
+      "id": "src_main_log",
+      "label": "log()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 280,
+      "community_name": "send",
+      "file_type": "code",
+      "norm_label": "log()",
+      "source_file": "src/main.ts",
+      "source_location": "L52"
     },
     {
       "id": "src_main_migrateprofiles",
@@ -3230,7 +3386,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 280,
-      "community_name": "save",
+      "community_name": "send",
       "file_type": "code",
       "norm_label": "migrateprofiles()",
       "source_file": "src/main.ts",
@@ -3242,11 +3398,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 280,
-      "community_name": "save",
+      "community_name": "send",
       "file_type": "code",
       "norm_label": "save()",
       "source_file": "src/main.ts",
       "source_location": "L43"
+    },
+    {
+      "id": "src_main_send",
+      "label": "send()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 280,
+      "community_name": "send",
+      "file_type": "code",
+      "norm_label": "send()",
+      "source_file": "src/main.ts",
+      "source_location": "L51"
     },
     {
       "id": "src_params_migrateprofile",
@@ -3254,7 +3422,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 280,
-      "community_name": "save",
+      "community_name": "send",
       "file_type": "code",
       "norm_label": "migrateprofile()",
       "source_file": "src/params.ts",
@@ -3381,30 +3549,6 @@
       "source_location": "L23"
     },
     {
-      "id": "src_preload_invoke",
-      "label": "invoke()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 284,
-      "community_name": "electron",
-      "file_type": "code",
-      "norm_label": "invoke()",
-      "source_file": "src/preload.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_external_cli_linux_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L10"
-    },
-    {
       "id": "tests_client_commands_test_checkinert",
       "label": "checkInert()",
       "_callable": true,
@@ -3470,7 +3614,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "checkreleaseref()",
       "source_file": "scripts/check-version.js",
@@ -3482,7 +3626,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "checkversions()",
       "source_file": "scripts/check-version.js",
@@ -3494,258 +3638,18 @@
       "_callable": true,
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "issemver()",
       "source_file": "scripts/check-version.js",
       "source_location": "L10"
     },
     {
-      "id": "src_client_commands_bashquote",
-      "label": "bashQuote()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "bashquote()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_client_commands_clientcommand",
-      "label": "clientCommand()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "clientcommand()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L72"
-    },
-    {
-      "id": "src_client_commands_clientconfiguration",
-      "label": "clientConfiguration()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "clientconfiguration()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L57"
-    },
-    {
-      "id": "src_client_commands_modelidof",
-      "label": "modelIdOf()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "modelidof()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_client_commands_opencodecommand",
-      "label": "openCodeCommand()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "opencodecommand()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_client_commands_psquote",
-      "label": "psQuote()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "psquote()",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_core_hfdisplayname",
-      "label": "hfDisplayName()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "hfdisplayname()",
-      "source_file": "src/core.ts",
-      "source_location": "L70"
-    },
-    {
-      "id": "src_core_recommend",
-      "label": "recommend()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "recommend()",
-      "source_file": "src/core.ts",
-      "source_location": "L30"
-    },
-    {
-      "id": "src_core_recommendvllm",
-      "label": "recommendVllm()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "recommendvllm()",
-      "source_file": "src/core.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "src_core_scanmodels",
-      "label": "scanModels()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "scanmodels()",
-      "source_file": "src/core.ts",
-      "source_location": "L121"
-    },
-    {
-      "id": "src_core_walkmodels",
-      "label": "walkModels()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "walkmodels()",
-      "source_file": "src/core.ts",
-      "source_location": "L80"
-    },
-    {
-      "id": "src_engines_scanhfmodels",
-      "label": "scanHfModels()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "scanhfmodels()",
-      "source_file": "src/engines.ts",
-      "source_location": "L140"
-    },
-    {
-      "id": "src_profile_import_decodeprofilepath",
-      "label": "decodeProfilePath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "decodeprofilepath()",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "src_profile_import_parselegacyprofiles",
-      "label": "parseLegacyProfiles()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "parselegacyprofiles()",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L48"
-    },
-    {
-      "id": "src_cli_argsforconversation",
-      "label": "argsForConversation()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "argsforconversation()",
-      "source_file": "src/cli.ts",
-      "source_location": "L18"
-    },
-    {
-      "id": "src_cli_createsession",
-      "label": "createSession()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "createsession()",
-      "source_file": "src/cli.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "src_cli_createsession_send",
-      "label": "send()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "send()",
-      "source_file": "src/cli.ts",
-      "source_location": "L56"
-    },
-    {
-      "id": "src_cli_createsession_stop",
-      "label": "stop()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "stop()",
-      "source_file": "src/cli.ts",
-      "source_location": "L70"
-    },
-    {
-      "id": "src_cli_executablename",
-      "label": "executableName()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "executablename()",
-      "source_file": "src/cli.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_cli_executablepath",
-      "label": "executablePath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "executablepath()",
-      "source_file": "src/cli.ts",
-      "source_location": "L13"
-    },
-    {
       "id": "src_terminal_cli_onpath",
       "label": "onPath()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 6,
       "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "onpath()",
@@ -3753,23 +3657,11 @@
       "source_location": "L44"
     },
     {
-      "id": "src_terminal_cli_openexternalcli",
-      "label": "openExternalCli()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "openexternalcli()",
-      "source_file": "src/terminal_cli.ts",
-      "source_location": "L71"
-    },
-    {
       "id": "src_terminal_cli_posixscript",
       "label": "posixScript()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 6,
       "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "posixscript()",
@@ -3781,7 +3673,7 @@
       "label": "powershellScript()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 6,
       "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "powershellscript()",
@@ -3793,7 +3685,7 @@
       "label": "psQuote()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 6,
       "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "psquote()",
@@ -3805,7 +3697,7 @@
       "label": "shQuote()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 6,
       "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "shquote()",
@@ -3817,12 +3709,96 @@
       "label": "terminalCommand()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 6,
       "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "terminalcommand()",
       "source_file": "src/terminal_cli.ts",
       "source_location": "L52"
+    },
+    {
+      "id": "src_cli_argsforconversation",
+      "label": "argsForConversation()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "argsforconversation()",
+      "source_file": "src/cli.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_cli_createsession",
+      "label": "createSession()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "createsession()",
+      "source_file": "src/cli.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "src_cli_createsession_send",
+      "label": "send()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "send()",
+      "source_file": "src/cli.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "src_cli_createsession_stop",
+      "label": "stop()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "stop()",
+      "source_file": "src/cli.ts",
+      "source_location": "L70"
+    },
+    {
+      "id": "src_cli_executablename",
+      "label": "executableName()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "executablename()",
+      "source_file": "src/cli.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_cli_executablepath",
+      "label": "executablePath()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "executablepath()",
+      "source_file": "src/cli.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_terminal_cli_openexternalcli",
+      "label": "openExternalCli()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "cli.ts",
+      "file_type": "code",
+      "norm_label": "openexternalcli()",
+      "source_file": "src/terminal_cli.ts",
+      "source_location": "L71"
     },
     {
       "id": "tests_engines_test_stratainstall",
@@ -4509,6 +4485,30 @@
       "source_location": "L11"
     },
     {
+      "id": "src_main_checksettings",
+      "label": "checkSettings()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "params.ts",
+      "file_type": "code",
+      "norm_label": "checksettings()",
+      "source_file": "src/main.ts",
+      "source_location": "L112"
+    },
+    {
+      "id": "src_main_fitkey",
+      "label": "fitKey()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "params.ts",
+      "file_type": "code",
+      "norm_label": "fitkey()",
+      "source_file": "src/main.ts",
+      "source_location": "L117"
+    },
+    {
       "id": "src_params_automoecpushare",
       "label": "autoMoeCpuShare()",
       "_callable": true,
@@ -4922,6 +4922,105 @@
       "source_location": "L1"
     },
     {
+      "id": "src_client_commands",
+      "label": "client_commands.ts",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "client_commands.ts",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_client_commands_apimodelid",
+      "label": "{apiModelId}",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "{apimodelid}",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "src_client_commands_applications",
+      "label": "applications",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "applications",
+      "source_file": "src/client_commands.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "src_core",
+      "label": "core.ts",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "core.ts",
+      "source_file": "src/core.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_core_defaults",
+      "label": "defaults",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "defaults",
+      "source_file": "src/core.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_core_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "src/core.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "src_core_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "src/core.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_core_params",
+      "label": "params",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "params",
+      "source_file": "src/core.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_core_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "engines.ts",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "src/core.ts",
+      "source_location": "L3"
+    },
+    {
       "id": "src_engines",
       "label": "engines.ts",
       "_origin": "ast",
@@ -5217,6 +5316,116 @@
       "norm_label": "temporary",
       "source_file": "scripts/smoke-engines-ui.js",
       "source_location": "L9"
+    },
+    {
+      "id": "scripts_smoke_ui",
+      "label": "smoke-ui.js",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "smoke-ui.js",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_ui_app_browserwindow",
+      "label": "{app,BrowserWindow}",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "{app,browserwindow}",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_ui_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_ui_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_ui_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_ui_temporary",
+      "label": "temporary",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "temporary",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_ui_withmodel",
+      "label": "withModel",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "withmodel",
+      "source_file": "scripts/smoke-ui.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_preload",
+      "label": "preload.ts",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "preload.ts",
+      "source_file": "src/preload.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_preload_contextbridge_ipcrenderer",
+      "label": "{contextBridge,ipcRenderer}",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "code",
+      "norm_label": "{contextbridge,ipcrenderer}",
+      "source_file": "src/preload.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "ref_electron",
+      "label": "electron",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "smoke-engines-ui.js",
+      "file_type": "concept",
+      "norm_label": "electron",
+      "source_file": "package.json",
+      "source_location": "L30"
     },
     {
       "id": "docs_adr_model_parameters_per_engine",
@@ -5657,6 +5866,61 @@
       "norm_label": "sharing_programs",
       "source_file": "src/firewall.ts",
       "source_location": "L13"
+    },
+    {
+      "id": "src_profile_import",
+      "label": "profile_import.ts",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "profile_import.ts",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_profile_import_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_profile_import_settings_fields",
+      "label": "SETTINGS_FIELDS",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "settings_fields",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_profile_import_textdecoder",
+      "label": "{ TextDecoder }",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "{ textdecoder }",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_profile_import_validatesettings",
+      "label": "{ validateSettings }",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "file_type": "code",
+      "norm_label": "{ validatesettings }",
+      "source_file": "src/profile_import.ts",
+      "source_location": "L5"
     },
     {
       "id": "tsconfig",
@@ -6108,50 +6372,6 @@
       "norm_label": "{tune}",
       "source_file": "scripts/smoke-bench.js",
       "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_cli",
-      "label": "smoke-cli.js",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "smoke-cli.js",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_cli_cli",
-      "label": "cli",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "cli",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_cli_defaults",
-      "label": "{defaults}",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "{defaults}",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_cli_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-cli.js",
-      "source_location": "L3"
     },
     {
       "id": "docs_security_release_retirements",
@@ -6787,59 +7007,48 @@
       "source_location": "L11"
     },
     {
-      "id": "tests_engine_test",
-      "label": "engine.test.js",
+      "id": "package_build_linux",
+      "label": "linux",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "linux",
       "file_type": "code",
-      "norm_label": "engine.test.js",
-      "source_file": "tests/engine.test.js",
-      "source_location": "L1"
+      "norm_label": "linux",
+      "source_file": "package.json",
+      "source_location": "L88"
     },
     {
-      "id": "tests_engine_test_assert",
-      "label": "assert",
+      "id": "package_linux_category",
+      "label": "category",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "linux",
       "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/engine.test.js",
-      "source_location": "L3"
+      "norm_label": "category",
+      "source_file": "package.json",
+      "source_location": "L95"
     },
     {
-      "id": "tests_engine_test_engine",
-      "label": "engine",
+      "id": "package_linux_maintainer",
+      "label": "maintainer",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "linux",
       "file_type": "code",
-      "norm_label": "engine",
-      "source_file": "tests/engine.test.js",
-      "source_location": "L4"
+      "norm_label": "maintainer",
+      "source_file": "package.json",
+      "source_location": "L89"
     },
     {
-      "id": "tests_engine_test_release",
-      "label": "release",
+      "id": "package_linux_target",
+      "label": "target",
       "_origin": "ast",
       "community": 148,
-      "community_name": "ref_node_test",
+      "community_name": "linux",
       "file_type": "code",
-      "norm_label": "release",
-      "source_file": "tests/engine.test.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "tests_engine_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "ref_node_test",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/engine.test.js",
-      "source_location": "L2"
+      "norm_label": "target",
+      "source_file": "package.json",
+      "source_location": "L90"
     },
     {
       "id": "docs_diagnostics_en_10_app_messages",
@@ -7131,7 +7340,7 @@
       "node_kind": "heading",
       "norm_label": "criadores e creditos",
       "source_file": "README.md",
-      "source_location": "L91"
+      "source_location": "L92"
     },
     {
       "id": "readme_desinstala\u00e7\u00e3o_segura",
@@ -7398,18 +7607,6 @@
       "node_kind": "page",
       "norm_label": "diagnostics-pt-br.md",
       "source_file": "docs/DIAGNOSTICS-pt-BR.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_integration_pt_br",
-      "label": "INTEGRATION-pt-BR.md",
-      "_origin": "ast",
-      "community": 156,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "integration-pt-br.md",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
       "source_location": "L1"
     },
     {
@@ -7733,50 +7930,6 @@
       "norm_label": "pkg",
       "source_file": "scripts/prepare-linux-test-metadata.js",
       "source_location": "L8"
-    },
-    {
-      "id": "tests_package_resources_test",
-      "label": "package-resources.test.js",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "package-resources.test.js",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_package_resources_test_assert",
-      "label": "assert",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "tests_package_resources_test_pkg",
-      "label": "pkg",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "pkg",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_package_resources_test_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "ref_node_fs",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "tests/package-resources.test.js",
-      "source_location": "L2"
     },
     {
       "id": "src_diagnostics",
@@ -8503,7 +8656,7 @@
       "node_kind": "heading",
       "norm_label": "10. perfis por modelo",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L194"
+      "source_location": "L216"
     },
     {
       "id": "docs_manual_pt_br_11_acesso_pela_rede_e_compartilhamento",
@@ -8515,7 +8668,7 @@
       "node_kind": "heading",
       "norm_label": "11. acesso pela rede e compartilhamento",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L280"
+      "source_location": "L302"
     },
     {
       "id": "docs_manual_pt_br_12_dados_atualiza\u00e7\u00e3o_e_desinstala\u00e7\u00e3o",
@@ -8527,7 +8680,7 @@
       "node_kind": "heading",
       "norm_label": "12. dados, atualizacao e desinstalacao",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L296"
+      "source_location": "L318"
     },
     {
       "id": "docs_manual_pt_br_13_cr\u00e9ditos",
@@ -8539,7 +8692,7 @@
       "node_kind": "heading",
       "norm_label": "13. creditos",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L317"
+      "source_location": "L339"
     },
     {
       "id": "docs_manual_pt_br_1_o_que_o_aplicativo_faz",
@@ -8611,7 +8764,7 @@
       "node_kind": "heading",
       "norm_label": "6. motor vllm",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L108"
+      "source_location": "L130"
     },
     {
       "id": "docs_manual_pt_br_7_strata_e_polystrata",
@@ -8623,7 +8776,7 @@
       "node_kind": "heading",
       "norm_label": "7. strata e polystrata",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L133"
+      "source_location": "L155"
     },
     {
       "id": "docs_manual_pt_br_8_pastas_e_modelos",
@@ -8635,7 +8788,7 @@
       "node_kind": "heading",
       "norm_label": "8. pastas e modelos",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L145"
+      "source_location": "L167"
     },
     {
       "id": "docs_manual_pt_br_9_tela_llama_conversar_e_iniciar_o_servidor",
@@ -8647,7 +8800,7 @@
       "node_kind": "heading",
       "norm_label": "9. tela llama: conversar e iniciar o servidor",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L166"
+      "source_location": "L188"
     },
     {
       "id": "docs_manual_pt_br_an\u00e1lise_pelo_modelo",
@@ -8659,7 +8812,7 @@
       "node_kind": "heading",
       "norm_label": "analise pelo modelo",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L276"
+      "source_location": "L298"
     },
     {
       "id": "docs_manual_pt_br_atualizar_o_aplicativo",
@@ -8671,7 +8824,7 @@
       "node_kind": "heading",
       "norm_label": "atualizar o aplicativo",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L300"
+      "source_location": "L322"
     },
     {
       "id": "docs_manual_pt_br_como_o_painel_funciona",
@@ -8683,7 +8836,19 @@
       "node_kind": "heading",
       "norm_label": "como o painel funciona",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L200"
+      "source_location": "L222"
+    },
+    {
+      "id": "docs_manual_pt_br_compilar_um_fork",
+      "label": "Compilar um fork",
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "Manual de uso \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "compilar um fork",
+      "source_file": "docs/MANUAL-pt-BR.md",
+      "source_location": "L107"
     },
     {
       "id": "docs_manual_pt_br_desinstalar",
@@ -8695,7 +8860,7 @@
       "node_kind": "heading",
       "norm_label": "desinstalar",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L313"
+      "source_location": "L335"
     },
     {
       "id": "docs_manual_pt_br_forks_compat\u00edveis_avalon_e_tandem_cpp",
@@ -8719,7 +8884,7 @@
       "node_kind": "heading",
       "norm_label": "importar perfis do launcher anterior",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L104"
+      "source_location": "L126"
     },
     {
       "id": "docs_manual_pt_br_linux",
@@ -8734,7 +8899,7 @@
       "source_location": "L58"
     },
     {
-      "id": "docs_manual_pt_br_linux_112",
+      "id": "docs_manual_pt_br_linux_134",
       "label": "Linux",
       "_origin": "ast",
       "community": 22,
@@ -8743,7 +8908,7 @@
       "node_kind": "heading",
       "norm_label": "linux",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L112"
+      "source_location": "L134"
     },
     {
       "id": "docs_manual_pt_br_llama_cpp_gguf",
@@ -8755,7 +8920,7 @@
       "node_kind": "heading",
       "norm_label": "llama.cpp (gguf)",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L209"
+      "source_location": "L231"
     },
     {
       "id": "docs_manual_pt_br_macos",
@@ -8791,7 +8956,7 @@
       "node_kind": "heading",
       "norm_label": "o que cada motor oferece",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L182"
+      "source_location": "L204"
     },
     {
       "id": "docs_manual_pt_br_o_que_vale_no_vllm",
@@ -8803,7 +8968,7 @@
       "node_kind": "heading",
       "norm_label": "o que vale no vllm",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L126"
+      "source_location": "L148"
     },
     {
       "id": "docs_manual_pt_br_perfis_salvos_antes_da_vers\u00e3o_0_9_0",
@@ -8815,7 +8980,7 @@
       "node_kind": "heading",
       "norm_label": "perfis salvos antes da versao 0.9.0",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L272"
+      "source_location": "L294"
     },
     {
       "id": "docs_manual_pt_br_strata_e_polystrata",
@@ -8827,7 +8992,7 @@
       "node_kind": "heading",
       "norm_label": "strata e polystrata",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L257"
+      "source_location": "L279"
     },
     {
       "id": "docs_manual_pt_br_sugest\u00e3o_valores_autom\u00e1ticos_e_autotuning",
@@ -8839,7 +9004,7 @@
       "node_kind": "heading",
       "norm_label": "sugestao, valores automaticos e autotuning",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L261"
+      "source_location": "L283"
     },
     {
       "id": "docs_manual_pt_br_vllm_pasta_hugging_face",
@@ -8851,7 +9016,7 @@
       "node_kind": "heading",
       "norm_label": "vllm (pasta hugging face)",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L241"
+      "source_location": "L263"
     },
     {
       "id": "docs_manual_pt_br_windows",
@@ -8866,7 +9031,7 @@
       "source_location": "L51"
     },
     {
-      "id": "docs_manual_pt_br_windows_120",
+      "id": "docs_manual_pt_br_windows_142",
       "label": "Windows",
       "_origin": "ast",
       "community": 22,
@@ -8875,7 +9040,7 @@
       "node_kind": "heading",
       "norm_label": "windows",
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L120"
+      "source_location": "L142"
     },
     {
       "id": "agents_skills_graphify_skill",
@@ -9323,83 +9488,6 @@
       "norm_label": "{ spawnsync }",
       "source_file": "scripts/smoke-macos-dmg.js",
       "source_location": "L8"
-    },
-    {
-      "id": "scripts_smoke_ui",
-      "label": "smoke-ui.js",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "smoke-ui.js",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_smoke_ui_app_browserwindow",
-      "label": "{app,BrowserWindow}",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "{app,browserwindow}",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_smoke_ui_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_ui_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_ui_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_ui_temporary",
-      "label": "temporary",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "temporary",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "scripts_smoke_ui_withmodel",
-      "label": "withModel",
-      "_origin": "ast",
-      "community": 235,
-      "community_name": "smoke-ui.js",
-      "file_type": "code",
-      "norm_label": "withmodel",
-      "source_file": "scripts/smoke-ui.js",
-      "source_location": "L9"
     },
     {
       "id": "package_devdependencies",
@@ -9914,6 +10002,160 @@
       "source_location": "L134"
     },
     {
+      "id": "scripts_smoke_external_cli_linux",
+      "label": "smoke-external-cli-linux.js",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "smoke-external-cli-linux.js",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_external_cli_linux_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_external_cli_linux_defaults",
+      "label": "{ defaults }",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "{ defaults }",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_external_cli_linux_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_external_cli_linux_openexternalcli_shquote",
+      "label": "{ openExternalCli, shQuote }",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "{ openexternalcli, shquote }",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "scripts_smoke_external_cli_linux_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_external_cli_linux_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-external-cli-linux.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win",
+      "label": "smoke-external-cli-win.js",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "smoke-external-cli-win.js",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win_os",
+      "label": "os",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "os",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win_path",
+      "label": "path",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win_powershellscript",
+      "label": "{ powershellScript }",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "{ powershellscript }",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "scripts_smoke_external_cli_win_spawn",
+      "label": "{ spawn }",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "file_type": "code",
+      "norm_label": "{ spawn }",
+      "source_file": "scripts/smoke-external-cli-win.js",
+      "source_location": "L7"
+    },
+    {
       "id": "tests_terminal_cli_test",
       "label": "terminal_cli.test.js",
       "_origin": "ast",
@@ -10181,299 +10423,125 @@
       "source_location": "L14"
     },
     {
-      "id": "docs_integration_pt_br_7_exemplos",
-      "label": "7. Exemplos",
-      "_origin": "ast",
-      "community": 279,
-      "community_name": "7. Exemplos",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "7. exemplos",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L103"
-    },
-    {
-      "id": "docs_integration_pt_br_linux_macos_com_bash_e_curl",
-      "label": "Linux/macOS com Bash e curl",
-      "_origin": "ast",
-      "community": 279,
-      "community_name": "7. Exemplos",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "linux/macos com bash e curl",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L107"
-    },
-    {
-      "id": "docs_integration_pt_br_python_biblioteca_padr\u00e3o",
-      "label": "Python (biblioteca padr\u00e3o)",
-      "_origin": "ast",
-      "community": 279,
-      "community_name": "7. Exemplos",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "python (biblioteca padrao)",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L155"
-    },
-    {
-      "id": "docs_integration_pt_br_streaming",
-      "label": "Streaming",
-      "_origin": "ast",
-      "community": 279,
-      "community_name": "7. Exemplos",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "streaming",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L188"
-    },
-    {
-      "id": "docs_integration_pt_br_windows_com_powershell",
-      "label": "Windows com PowerShell",
-      "_origin": "ast",
-      "community": 279,
-      "community_name": "7. Exemplos",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "windows com powershell",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L132"
-    },
-    {
-      "id": "scripts_smoke_external_cli_win",
-      "label": "smoke-external-cli-win.js",
+      "id": "scripts_smoke_cli",
+      "label": "smoke-cli.js",
       "_origin": "ast",
       "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community_name": "build_app_core",
       "file_type": "code",
-      "norm_label": "smoke-external-cli-win.js",
-      "source_file": "scripts/smoke-external-cli-win.js",
+      "norm_label": "smoke-cli.js",
+      "source_file": "scripts/smoke-cli.js",
       "source_location": "L1"
     },
     {
-      "id": "scripts_smoke_external_cli_win_assert",
-      "label": "assert",
+      "id": "scripts_smoke_cli_cli",
+      "label": "cli",
       "_origin": "ast",
       "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community_name": "build_app_core",
       "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "scripts/smoke-external-cli-win.js",
-      "source_location": "L3"
-    },
-    {
-      "id": "scripts_smoke_external_cli_win_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-external-cli-win.js",
-      "source_location": "L4"
-    },
-    {
-      "id": "scripts_smoke_external_cli_win_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-external-cli-win.js",
+      "norm_label": "cli",
+      "source_file": "scripts/smoke-cli.js",
       "source_location": "L5"
     },
     {
-      "id": "scripts_smoke_external_cli_win_path",
-      "label": "path",
+      "id": "scripts_smoke_cli_defaults",
+      "label": "{defaults}",
       "_origin": "ast",
       "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community_name": "build_app_core",
       "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-external-cli-win.js",
-      "source_location": "L6"
+      "norm_label": "{defaults}",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L4"
     },
     {
-      "id": "scripts_smoke_external_cli_win_powershellscript",
-      "label": "{ powershellScript }",
+      "id": "scripts_smoke_cli_fs",
+      "label": "fs",
       "_origin": "ast",
       "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community_name": "build_app_core",
       "file_type": "code",
-      "norm_label": "{ powershellscript }",
-      "source_file": "scripts/smoke-external-cli-win.js",
-      "source_location": "L8"
+      "norm_label": "fs",
+      "source_file": "scripts/smoke-cli.js",
+      "source_location": "L3"
     },
     {
-      "id": "scripts_smoke_external_cli_win_spawn",
-      "label": "{ spawn }",
+      "id": "package_build_nsis",
+      "label": "nsis",
       "_origin": "ast",
-      "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community": 30,
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "{ spawn }",
-      "source_file": "scripts/smoke-external-cli-win.js",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_integration_pt_br_9_firewall",
-      "label": "9. Firewall",
-      "_origin": "ast",
-      "community": 283,
-      "community_name": "9. Firewall",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "9. firewall",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L198"
-    },
-    {
-      "id": "docs_integration_pt_br_linux",
-      "label": "Linux",
-      "_origin": "ast",
-      "community": 283,
-      "community_name": "9. Firewall",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "linux",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L231"
-    },
-    {
-      "id": "docs_integration_pt_br_macos",
-      "label": "macOS",
-      "_origin": "ast",
-      "community": 283,
-      "community_name": "9. Firewall",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "macos",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L242"
-    },
-    {
-      "id": "docs_integration_pt_br_windows",
-      "label": "Windows",
-      "_origin": "ast",
-      "community": 283,
-      "community_name": "9. Firewall",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "windows",
-      "source_file": "docs/INTEGRATION-pt-BR.md",
-      "source_location": "L200"
-    },
-    {
-      "id": "src_preload",
-      "label": "preload.ts",
-      "_origin": "ast",
-      "community": 284,
-      "community_name": "electron",
-      "file_type": "code",
-      "norm_label": "preload.ts",
-      "source_file": "src/preload.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_preload_contextbridge_ipcrenderer",
-      "label": "{contextBridge,ipcRenderer}",
-      "_origin": "ast",
-      "community": 284,
-      "community_name": "electron",
-      "file_type": "code",
-      "norm_label": "{contextbridge,ipcrenderer}",
-      "source_file": "src/preload.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "ref_electron",
-      "label": "electron",
-      "_origin": "ast",
-      "community": 284,
-      "community_name": "electron",
-      "file_type": "concept",
-      "norm_label": "electron",
+      "norm_label": "nsis",
       "source_file": "package.json",
-      "source_location": "L30"
+      "source_location": "L80"
     },
     {
-      "id": "scripts_smoke_external_cli_linux",
-      "label": "smoke-external-cli-linux.js",
+      "id": "package_nsis_allowtochangeinstallationdirectory",
+      "label": "allowToChangeInstallationDirectory",
       "_origin": "ast",
       "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "smoke-external-cli-linux.js",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L1"
+      "norm_label": "allowtochangeinstallationdirectory",
+      "source_file": "package.json",
+      "source_location": "L83"
     },
     {
-      "id": "scripts_smoke_external_cli_linux_assert",
-      "label": "assert",
+      "id": "package_nsis_createdesktopshortcut",
+      "label": "createDesktopShortcut",
       "_origin": "ast",
       "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "assert",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L3"
+      "norm_label": "createdesktopshortcut",
+      "source_file": "package.json",
+      "source_location": "L84"
     },
     {
-      "id": "scripts_smoke_external_cli_linux_defaults",
-      "label": "{ defaults }",
+      "id": "package_nsis_deleteappdataonuninstall",
+      "label": "deleteAppDataOnUninstall",
       "_origin": "ast",
       "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "{ defaults }",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L8"
+      "norm_label": "deleteappdataonuninstall",
+      "source_file": "package.json",
+      "source_location": "L85"
     },
     {
-      "id": "scripts_smoke_external_cli_linux_fs",
-      "label": "fs",
+      "id": "package_nsis_include",
+      "label": "include",
       "_origin": "ast",
       "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L4"
+      "norm_label": "include",
+      "source_file": "package.json",
+      "source_location": "L86"
     },
     {
-      "id": "scripts_smoke_external_cli_linux_openexternalcli_shquote",
-      "label": "{ openExternalCli, shQuote }",
+      "id": "package_nsis_oneclick",
+      "label": "oneClick",
       "_origin": "ast",
       "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "{ openexternalcli, shquote }",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L7"
+      "norm_label": "oneclick",
+      "source_file": "package.json",
+      "source_location": "L81"
     },
     {
-      "id": "scripts_smoke_external_cli_linux_os",
-      "label": "os",
+      "id": "package_nsis_permachine",
+      "label": "perMachine",
       "_origin": "ast",
       "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
+      "community_name": "nsis",
       "file_type": "code",
-      "norm_label": "os",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "scripts_smoke_external_cli_linux_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "scripts/smoke-external-cli-linux.js",
-      "source_location": "L6"
+      "norm_label": "permachine",
+      "source_file": "package.json",
+      "source_location": "L82"
     },
     {
       "id": "tests_client_commands_test",
@@ -10619,6 +10687,18 @@
       "source_location": "L11"
     },
     {
+      "id": "docs_integration_pt_br",
+      "label": "INTEGRATION-pt-BR.md",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "integration-pt-br.md",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_integration_pt_br_10_verifica\u00e7\u00e3o_r\u00e1pida",
       "label": "10. Verifica\u00e7\u00e3o r\u00e1pida",
       "_origin": "ast",
@@ -10703,6 +10783,18 @@
       "source_location": "L91"
     },
     {
+      "id": "docs_integration_pt_br_7_exemplos",
+      "label": "7. Exemplos",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "7. exemplos",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L103"
+    },
+    {
       "id": "docs_integration_pt_br_8_rede_lan_ou_tailscale",
       "label": "8. Rede: LAN ou Tailscale",
       "_origin": "ast",
@@ -10713,6 +10805,18 @@
       "norm_label": "8. rede: lan ou tailscale",
       "source_file": "docs/INTEGRATION-pt-BR.md",
       "source_location": "L192"
+    },
+    {
+      "id": "docs_integration_pt_br_9_firewall",
+      "label": "9. Firewall",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "9. firewall",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L198"
     },
     {
       "id": "docs_integration_pt_br_chave_permanente_da_api",
@@ -10749,6 +10853,90 @@
       "norm_label": "guia de integracao \u2014 llama desktop launcher",
       "source_file": "docs/INTEGRATION-pt-BR.md",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_integration_pt_br_linux",
+      "label": "Linux",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "linux",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L231"
+    },
+    {
+      "id": "docs_integration_pt_br_linux_macos_com_bash_e_curl",
+      "label": "Linux/macOS com Bash e curl",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "linux/macos com bash e curl",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L107"
+    },
+    {
+      "id": "docs_integration_pt_br_macos",
+      "label": "macOS",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "macos",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L242"
+    },
+    {
+      "id": "docs_integration_pt_br_python_biblioteca_padr\u00e3o",
+      "label": "Python (biblioteca padr\u00e3o)",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "python (biblioteca padrao)",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L155"
+    },
+    {
+      "id": "docs_integration_pt_br_streaming",
+      "label": "Streaming",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "streaming",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L188"
+    },
+    {
+      "id": "docs_integration_pt_br_windows",
+      "label": "Windows",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "windows",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L200"
+    },
+    {
+      "id": "docs_integration_pt_br_windows_com_powershell",
+      "label": "Windows com PowerShell",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "Guia de integra\u00e7\u00e3o \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "windows com powershell",
+      "source_file": "docs/INTEGRATION-pt-BR.md",
+      "source_location": "L132"
     },
     {
       "id": "tests_guidance_test",
@@ -10795,6 +10983,61 @@
       "source_location": "L3"
     },
     {
+      "id": "tests_engine_test",
+      "label": "engine.test.js",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "engine.test.js",
+      "source_file": "tests/engine.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_engine_test_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "tests/engine.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_engine_test_engine",
+      "label": "engine",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "engine",
+      "source_file": "tests/engine.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_engine_test_release",
+      "label": "release",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "release",
+      "source_file": "tests/engine.test.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "tests_engine_test_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "tests/engine.test.js",
+      "source_location": "L2"
+    },
+    {
       "id": "tests_hardware_test",
       "label": "hardware.test.js",
       "_origin": "ast",
@@ -10837,6 +11080,50 @@
       "norm_label": "test",
       "source_file": "tests/hardware.test.js",
       "source_location": "L3"
+    },
+    {
+      "id": "tests_package_resources_test",
+      "label": "package-resources.test.js",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "package-resources.test.js",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_package_resources_test_assert",
+      "label": "assert",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "assert",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tests_package_resources_test_pkg",
+      "label": "pkg",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "pkg",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "tests_package_resources_test_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "tests/package-resources.test.js",
+      "source_location": "L2"
     },
     {
       "id": "tests_profile_import_test",
@@ -11553,7 +11840,7 @@
       "label": "check-version.js",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "check-version.js",
       "source_file": "scripts/check-version.js",
@@ -11564,7 +11851,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "scripts/check-version.js",
@@ -11575,7 +11862,7 @@
       "label": "lock",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "lock",
       "source_file": "scripts/check-version.js",
@@ -11586,7 +11873,7 @@
       "label": "manifest",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "manifest",
       "source_file": "scripts/check-version.js",
@@ -11597,7 +11884,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "scripts/check-version.js",
@@ -11608,7 +11895,7 @@
       "label": "root",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "root",
       "source_file": "scripts/check-version.js",
@@ -11619,7 +11906,7 @@
       "label": "semver.test.js",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "semver.test.js",
       "source_file": "tests/semver.test.js",
@@ -11630,7 +11917,7 @@
       "label": "assert",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "assert",
       "source_file": "tests/semver.test.js",
@@ -11641,7 +11928,7 @@
       "label": "{ isSemVer, checkVersions, checkReleaseRef }",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "{ issemver, checkversions, checkreleaseref }",
       "source_file": "tests/semver.test.js",
@@ -11652,7 +11939,7 @@
       "label": "test",
       "_origin": "ast",
       "community": 41,
-      "community_name": "check-version.js",
+      "community_name": "ref_node_path",
       "file_type": "code",
       "norm_label": "test",
       "source_file": "tests/semver.test.js",
@@ -12016,7 +12303,7 @@
       "node_kind": "heading",
       "norm_label": "10. per-model profiles",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L194"
+      "source_location": "L216"
     },
     {
       "id": "docs_manual_en_11_network_access_and_sharing",
@@ -12028,7 +12315,7 @@
       "node_kind": "heading",
       "norm_label": "11. network access and sharing",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L280"
+      "source_location": "L302"
     },
     {
       "id": "docs_manual_en_12_data_updates_and_uninstalling",
@@ -12040,7 +12327,7 @@
       "node_kind": "heading",
       "norm_label": "12. data, updates and uninstalling",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L296"
+      "source_location": "L318"
     },
     {
       "id": "docs_manual_en_13_credits",
@@ -12052,7 +12339,7 @@
       "node_kind": "heading",
       "norm_label": "13. credits",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L317"
+      "source_location": "L339"
     },
     {
       "id": "docs_manual_en_1_what_the_application_does",
@@ -12124,7 +12411,7 @@
       "node_kind": "heading",
       "norm_label": "6. vllm engine",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L108"
+      "source_location": "L130"
     },
     {
       "id": "docs_manual_en_7_strata_and_polystrata",
@@ -12136,7 +12423,7 @@
       "node_kind": "heading",
       "norm_label": "7. strata and polystrata",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L133"
+      "source_location": "L155"
     },
     {
       "id": "docs_manual_en_8_folders_and_models",
@@ -12148,7 +12435,7 @@
       "node_kind": "heading",
       "norm_label": "8. folders and models",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L145"
+      "source_location": "L167"
     },
     {
       "id": "docs_manual_en_9_llama_screen_chat_and_start_the_server",
@@ -12160,7 +12447,7 @@
       "node_kind": "heading",
       "norm_label": "9. llama screen: chat and start the server",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L166"
+      "source_location": "L188"
     },
     {
       "id": "docs_manual_en_analysis_by_the_model",
@@ -12172,7 +12459,19 @@
       "node_kind": "heading",
       "norm_label": "analysis by the model",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L276"
+      "source_location": "L298"
+    },
+    {
+      "id": "docs_manual_en_build_a_fork",
+      "label": "Build a fork",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "User manual \u2014 Llama Desktop Launcher",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "build a fork",
+      "source_file": "docs/MANUAL-en.md",
+      "source_location": "L107"
     },
     {
       "id": "docs_manual_en_compatible_forks_avalon_and_tandem_cpp",
@@ -12196,7 +12495,7 @@
       "node_kind": "heading",
       "norm_label": "how the panel works",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L200"
+      "source_location": "L222"
     },
     {
       "id": "docs_manual_en_import_profiles_from_the_previous_launcher",
@@ -12208,7 +12507,7 @@
       "node_kind": "heading",
       "norm_label": "import profiles from the previous launcher",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L104"
+      "source_location": "L126"
     },
     {
       "id": "docs_manual_en_linux",
@@ -12223,7 +12522,7 @@
       "source_location": "L58"
     },
     {
-      "id": "docs_manual_en_linux_112",
+      "id": "docs_manual_en_linux_134",
       "label": "Linux",
       "_origin": "ast",
       "community": 5,
@@ -12232,7 +12531,7 @@
       "node_kind": "heading",
       "norm_label": "linux",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L112"
+      "source_location": "L134"
     },
     {
       "id": "docs_manual_en_llama_cpp_gguf",
@@ -12244,7 +12543,7 @@
       "node_kind": "heading",
       "norm_label": "llama.cpp (gguf)",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L209"
+      "source_location": "L231"
     },
     {
       "id": "docs_manual_en_macos",
@@ -12268,7 +12567,7 @@
       "node_kind": "heading",
       "norm_label": "profiles saved before version 0.9.0",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L272"
+      "source_location": "L294"
     },
     {
       "id": "docs_manual_en_strata_and_polystrata",
@@ -12280,7 +12579,7 @@
       "node_kind": "heading",
       "norm_label": "strata and polystrata",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L257"
+      "source_location": "L279"
     },
     {
       "id": "docs_manual_en_suggestion_automatic_values_and_autotuning",
@@ -12292,7 +12591,7 @@
       "node_kind": "heading",
       "norm_label": "suggestion, automatic values and autotuning",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L261"
+      "source_location": "L283"
     },
     {
       "id": "docs_manual_en_uninstall",
@@ -12304,7 +12603,7 @@
       "node_kind": "heading",
       "norm_label": "uninstall",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L313"
+      "source_location": "L335"
     },
     {
       "id": "docs_manual_en_update_the_application",
@@ -12316,7 +12615,7 @@
       "node_kind": "heading",
       "norm_label": "update the application",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L300"
+      "source_location": "L322"
     },
     {
       "id": "docs_manual_en_user_manual_llama_desktop_launcher",
@@ -12340,7 +12639,7 @@
       "node_kind": "heading",
       "norm_label": "vllm (hugging face folder)",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L241"
+      "source_location": "L263"
     },
     {
       "id": "docs_manual_en_what_each_engine_offers",
@@ -12352,7 +12651,7 @@
       "node_kind": "heading",
       "norm_label": "what each engine offers",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L182"
+      "source_location": "L204"
     },
     {
       "id": "docs_manual_en_what_vllm_uses",
@@ -12364,7 +12663,7 @@
       "node_kind": "heading",
       "norm_label": "what vllm uses",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L126"
+      "source_location": "L148"
     },
     {
       "id": "docs_manual_en_windows",
@@ -12379,7 +12678,7 @@
       "source_location": "L51"
     },
     {
-      "id": "docs_manual_en_windows_120",
+      "id": "docs_manual_en_windows_142",
       "label": "Windows",
       "_origin": "ast",
       "community": 5,
@@ -12388,7 +12687,7 @@
       "node_kind": "heading",
       "norm_label": "windows",
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L120"
+      "source_location": "L142"
     },
     {
       "id": "agents_rules_graphify",
@@ -12735,158 +13034,70 @@
       "source_location": "L1"
     },
     {
-      "id": "src_client_commands",
-      "label": "client_commands.ts",
+      "id": "src_terminal_cli",
+      "label": "terminal_cli.ts",
       "_origin": "ast",
       "community": 6,
-      "community_name": "core.ts",
+      "community_name": "terminal_cli.ts",
       "file_type": "code",
-      "norm_label": "client_commands.ts",
-      "source_file": "src/client_commands.ts",
+      "norm_label": "terminal_cli.ts",
+      "source_file": "src/terminal_cli.ts",
       "source_location": "L1"
     },
     {
-      "id": "src_client_commands_apimodelid",
-      "label": "{apiModelId}",
+      "id": "src_terminal_cli_cli",
+      "label": "cli",
       "_origin": "ast",
       "community": 6,
-      "community_name": "core.ts",
+      "community_name": "terminal_cli.ts",
       "file_type": "code",
-      "norm_label": "{apimodelid}",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "src_client_commands_applications",
-      "label": "applications",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "applications",
-      "source_file": "src/client_commands.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "src_core",
-      "label": "core.ts",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "core.ts",
-      "source_file": "src/core.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_core_defaults",
-      "label": "defaults",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "defaults",
-      "source_file": "src/core.ts",
+      "norm_label": "cli",
+      "source_file": "src/terminal_cli.ts",
       "source_location": "L7"
     },
     {
-      "id": "src_core_fs",
+      "id": "src_terminal_cli_fs",
       "label": "fs",
       "_origin": "ast",
       "community": 6,
-      "community_name": "core.ts",
+      "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "fs",
-      "source_file": "src/core.ts",
-      "source_location": "L2"
+      "source_file": "src/terminal_cli.ts",
+      "source_location": "L3"
     },
     {
-      "id": "src_core_os",
+      "id": "src_terminal_cli_os",
       "label": "os",
       "_origin": "ast",
       "community": 6,
-      "community_name": "core.ts",
+      "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "os",
-      "source_file": "src/core.ts",
+      "source_file": "src/terminal_cli.ts",
       "source_location": "L4"
     },
     {
-      "id": "src_core_params",
-      "label": "params",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "params",
-      "source_file": "src/core.ts",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_core_path",
+      "id": "src_terminal_cli_path",
       "label": "path",
       "_origin": "ast",
       "community": 6,
-      "community_name": "core.ts",
+      "community_name": "terminal_cli.ts",
       "file_type": "code",
       "norm_label": "path",
-      "source_file": "src/core.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_profile_import",
-      "label": "profile_import.ts",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "profile_import.ts",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_profile_import_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_profile_import_settings_fields",
-      "label": "SETTINGS_FIELDS",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "settings_fields",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_profile_import_textdecoder",
-      "label": "{ TextDecoder }",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "{ textdecoder }",
-      "source_file": "src/profile_import.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_profile_import_validatesettings",
-      "label": "{ validateSettings }",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "core.ts",
-      "file_type": "code",
-      "norm_label": "{ validatesettings }",
-      "source_file": "src/profile_import.ts",
+      "source_file": "src/terminal_cli.ts",
       "source_location": "L5"
+    },
+    {
+      "id": "src_terminal_cli_spawn",
+      "label": "{ spawn }",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "terminal_cli.ts",
+      "file_type": "code",
+      "norm_label": "{ spawn }",
+      "source_file": "src/terminal_cli.ts",
+      "source_location": "L6"
     },
     {
       "id": "docs_adr_session_sharing",
@@ -13016,17 +13227,6 @@
       "source_location": "L40"
     },
     {
-      "id": "package_build_linux",
-      "label": "linux",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "linux",
-      "source_file": "package.json",
-      "source_location": "L88"
-    },
-    {
       "id": "package_build_mac",
       "label": "mac",
       "_origin": "ast",
@@ -13036,17 +13236,6 @@
       "norm_label": "mac",
       "source_file": "package.json",
       "source_location": "L97"
-    },
-    {
-      "id": "package_build_nsis",
-      "label": "nsis",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "nsis",
-      "source_file": "package.json",
-      "source_location": "L80"
     },
     {
       "id": "package_build_productname",
@@ -13082,39 +13271,6 @@
       "source_location": "L38"
     },
     {
-      "id": "package_linux_category",
-      "label": "category",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "category",
-      "source_file": "package.json",
-      "source_location": "L95"
-    },
-    {
-      "id": "package_linux_maintainer",
-      "label": "maintainer",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "maintainer",
-      "source_file": "package.json",
-      "source_location": "L89"
-    },
-    {
-      "id": "package_linux_target",
-      "label": "target",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "target",
-      "source_file": "package.json",
-      "source_location": "L90"
-    },
-    {
       "id": "package_mac_category",
       "label": "category",
       "_origin": "ast",
@@ -13135,72 +13291,6 @@
       "norm_label": "target",
       "source_file": "package.json",
       "source_location": "L98"
-    },
-    {
-      "id": "package_nsis_allowtochangeinstallationdirectory",
-      "label": "allowToChangeInstallationDirectory",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "allowtochangeinstallationdirectory",
-      "source_file": "package.json",
-      "source_location": "L83"
-    },
-    {
-      "id": "package_nsis_createdesktopshortcut",
-      "label": "createDesktopShortcut",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "createdesktopshortcut",
-      "source_file": "package.json",
-      "source_location": "L84"
-    },
-    {
-      "id": "package_nsis_deleteappdataonuninstall",
-      "label": "deleteAppDataOnUninstall",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "deleteappdataonuninstall",
-      "source_file": "package.json",
-      "source_location": "L85"
-    },
-    {
-      "id": "package_nsis_include",
-      "label": "include",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "include",
-      "source_file": "package.json",
-      "source_location": "L86"
-    },
-    {
-      "id": "package_nsis_oneclick",
-      "label": "oneClick",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "oneclick",
-      "source_file": "package.json",
-      "source_location": "L81"
-    },
-    {
-      "id": "package_nsis_permachine",
-      "label": "perMachine",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "permachine",
-      "source_file": "package.json",
-      "source_location": "L82"
     },
     {
       "id": "package_win_signandeditexecutable",
@@ -13229,7 +13319,7 @@
       "label": "cli.ts",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "file_type": "code",
       "norm_label": "cli.ts",
       "source_file": "src/cli.ts",
@@ -13240,7 +13330,7 @@
       "label": "core",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "file_type": "code",
       "norm_label": "core",
       "source_file": "src/cli.ts",
@@ -13251,7 +13341,7 @@
       "label": "fs",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "file_type": "code",
       "norm_label": "fs",
       "source_file": "src/cli.ts",
@@ -13262,7 +13352,7 @@
       "label": "path",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "src/cli.ts",
@@ -13273,7 +13363,7 @@
       "label": "{ spawn }",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "file_type": "code",
       "norm_label": "{ spawn }",
       "source_file": "src/cli.ts",
@@ -13284,76 +13374,10 @@
       "label": "{ StringDecoder }",
       "_origin": "ast",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "file_type": "code",
       "norm_label": "{ stringdecoder }",
       "source_file": "src/cli.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_terminal_cli",
-      "label": "terminal_cli.ts",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "terminal_cli.ts",
-      "source_file": "src/terminal_cli.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_terminal_cli_cli",
-      "label": "cli",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "cli",
-      "source_file": "src/terminal_cli.ts",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_terminal_cli_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "src/terminal_cli.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_terminal_cli_os",
-      "label": "os",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "os",
-      "source_file": "src/terminal_cli.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_terminal_cli_path",
-      "label": "path",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "src/terminal_cli.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_terminal_cli_spawn",
-      "label": "{ spawn }",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "terminal_cli.ts",
-      "file_type": "code",
-      "norm_label": "{ spawn }",
-      "source_file": "src/terminal_cli.ts",
       "source_location": "L6"
     },
     {
@@ -14377,6 +14401,18 @@
       "type": "external"
     },
     {
+      "id": "src_core_apimodelid",
+      "label": "src_core_apimodelid",
+      "_origin": "semantic",
+      "community": 100,
+      "community_name": "engines.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "src_core_apimodelid",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel",
       "_origin": "semantic",
@@ -14445,18 +14481,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_engine",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_https",
-      "label": "ref_node_https",
-      "_origin": "semantic",
-      "community": 11,
-      "community_name": "engine.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_https",
       "source_file": "",
       "type": "external"
     },
@@ -14577,6 +14601,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_util",
+      "label": "ref_node_util",
+      "_origin": "semantic",
+      "community": 12,
+      "community_name": "firewall.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_util",
       "source_file": "",
       "type": "external"
     },
@@ -14821,30 +14857,6 @@
       "type": "external"
     },
     {
-      "id": "build_app_cli",
-      "label": "build_app_cli",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_cli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_core",
-      "label": "build_app_core",
-      "_origin": "semantic",
-      "community": 14,
-      "community_name": "smoke-bench.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_core",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_benchmark_tune",
       "_origin": "semantic",
@@ -14925,18 +14937,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_diagnostics_redacted",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_test",
-      "label": "ref_node_test",
-      "_origin": "semantic",
-      "community": 148,
-      "community_name": "ref_node_test",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_test",
       "source_file": "",
       "type": "external"
     },
@@ -15441,18 +15441,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_fs",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_path",
-      "label": "ref_node_path",
-      "_origin": "semantic",
-      "community": 188,
-      "community_name": "ref_node_fs",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_path",
       "source_file": "",
       "type": "external"
     },
@@ -16009,6 +15997,18 @@
       "type": "external"
     },
     {
+      "id": "build_app_engine_build",
+      "label": "build_app_engine_build",
+      "_origin": "semantic",
+      "community": 233,
+      "community_name": "engine_build.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_engine_build",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_child_process",
       "label": "ref_node_child_process",
       "_origin": "semantic",
@@ -16261,6 +16261,30 @@
       "type": "external"
     },
     {
+      "id": "build_app_terminal_cli",
+      "label": "build_app_terminal_cli",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "build_app_terminal_cli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript",
       "_origin": "semantic",
@@ -16273,6 +16297,18 @@
       "type": "external"
     },
     {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
       "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
       "_origin": "semantic",
@@ -16281,6 +16317,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "terminal_cli.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
       "source_file": "",
       "type": "external"
     },
@@ -16513,26 +16561,26 @@
       "type": "external"
     },
     {
-      "id": "build_app_terminal_cli",
-      "label": "build_app_terminal_cli",
+      "id": "build_app_cli",
+      "label": "build_app_cli",
       "_origin": "semantic",
       "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community_name": "build_app_core",
       "external": true,
       "file_type": "concept",
-      "norm_label": "build_app_terminal_cli",
+      "norm_label": "build_app_cli",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "id": "build_app_core",
+      "label": "build_app_core",
       "_origin": "semantic",
       "community": 28,
-      "community_name": "smoke-external-cli-win.js",
+      "community_name": "build_app_core",
       "external": true,
       "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_powershellscript",
+      "norm_label": "build_app_core",
       "source_file": "",
       "type": "external"
     },
@@ -16557,30 +16605,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
-      "_origin": "semantic",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
-      "label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
-      "_origin": "semantic",
-      "community": 30,
-      "community_name": "smoke-external-cli-linux.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote",
       "source_file": "",
       "type": "external"
     },
@@ -16741,6 +16765,18 @@
       "type": "external"
     },
     {
+      "id": "ref_node_test",
+      "label": "ref_node_test",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "ref_node_assert",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_test",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "build_app_profile_import",
       "label": "build_app_profile_import",
       "_origin": "semantic",
@@ -16765,6 +16801,18 @@
       "type": "external"
     },
     {
+      "id": "ref_node_https",
+      "label": "ref_node_https",
+      "_origin": "semantic",
+      "community": 39,
+      "community_name": "engine-install.test.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_https",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_stream",
       "label": "ref_node_stream",
       "_origin": "semantic",
@@ -16777,6 +16825,18 @@
       "type": "external"
     },
     {
+      "id": "ref_node_path",
+      "label": "ref_node_path",
+      "_origin": "semantic",
+      "community": 41,
+      "community_name": "ref_node_path",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_path",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "app_build_app_network_upstreamrequestdetails",
       "label": "app_build_app_network_upstreamrequestdetails",
       "_origin": "semantic",
@@ -16785,30 +16845,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "app_build_app_network_upstreamrequestdetails",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_util",
-      "label": "ref_node_util",
-      "_origin": "semantic",
-      "community": 6,
-      "community_name": "core.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_util",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "src_core_apimodelid",
-      "label": "src_core_apimodelid",
-      "_origin": "semantic",
-      "community": 6,
-      "community_name": "core.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "src_core_apimodelid",
       "source_file": "",
       "type": "external"
     },
@@ -17021,7 +17057,7 @@
       "label": "ref_node_string_decoder",
       "_origin": "semantic",
       "community": 8,
-      "community_name": "terminal_cli.ts",
+      "community_name": "cli.ts",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_string_decoder",
@@ -17421,17 +17457,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "build_app_engine_build",
-      "label": "build_app_engine_build",
-      "community": 233,
-      "community_name": "engine_build.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "build_app_engine_build",
       "source_file": "",
       "type": "external"
     }
@@ -29307,7 +29332,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L200",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -29318,7 +29343,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L209",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -29329,7 +29354,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L241",
+      "source_location": "L263",
       "weight": 1.0
     },
     {
@@ -29340,7 +29365,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L257",
+      "source_location": "L279",
       "weight": 1.0
     },
     {
@@ -29351,7 +29376,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L261",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -29362,7 +29387,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L272",
+      "source_location": "L294",
       "weight": 1.0
     },
     {
@@ -29373,7 +29398,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L276",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -29384,7 +29409,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L300",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -29395,7 +29420,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L313",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -29439,7 +29464,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L104",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -29455,24 +29480,24 @@
     },
     {
       "source": "docs_manual_en_6_vllm_engine",
-      "target": "docs_manual_en_linux_112",
+      "target": "docs_manual_en_linux_134",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L112",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
       "source": "docs_manual_en_6_vllm_engine",
-      "target": "docs_manual_en_windows_120",
+      "target": "docs_manual_en_windows_142",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L120",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -29483,7 +29508,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L126",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -29494,7 +29519,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L182",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_manual_en_compatible_forks_avalon_and_tandem_cpp",
+      "target": "docs_manual_en_build_a_fork",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/MANUAL-en.md",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -29505,7 +29541,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L108",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -29516,7 +29552,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L133",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -29527,7 +29563,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L145",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -29538,7 +29574,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L166",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -29549,7 +29585,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L194",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -29571,7 +29607,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L280",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -29582,7 +29618,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L296",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -29593,7 +29629,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-en.md",
-      "source_location": "L317",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
@@ -29659,7 +29695,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L200",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -29670,7 +29706,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L209",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -29681,7 +29717,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L241",
+      "source_location": "L263",
       "weight": 1.0
     },
     {
@@ -29692,7 +29728,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L257",
+      "source_location": "L279",
       "weight": 1.0
     },
     {
@@ -29703,7 +29739,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L261",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -29714,7 +29750,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L272",
+      "source_location": "L294",
       "weight": 1.0
     },
     {
@@ -29725,7 +29761,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L276",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -29736,7 +29772,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L300",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -29747,7 +29783,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L313",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -29791,7 +29827,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L104",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -29807,24 +29843,24 @@
     },
     {
       "source": "docs_manual_pt_br_6_motor_vllm",
-      "target": "docs_manual_pt_br_linux_112",
+      "target": "docs_manual_pt_br_linux_134",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L112",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
       "source": "docs_manual_pt_br_6_motor_vllm",
-      "target": "docs_manual_pt_br_windows_120",
+      "target": "docs_manual_pt_br_windows_142",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L120",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -29835,7 +29871,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L126",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -29846,7 +29882,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L182",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_manual_pt_br_forks_compat\u00edveis_avalon_e_tandem_cpp",
+      "target": "docs_manual_pt_br_compilar_um_fork",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/MANUAL-pt-BR.md",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -29857,7 +29904,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L108",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -29868,7 +29915,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L133",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -29879,7 +29926,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L145",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
@@ -29890,7 +29937,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L166",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -29901,7 +29948,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L194",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -29923,7 +29970,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L280",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -29934,7 +29981,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L296",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -29945,7 +29992,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/MANUAL-pt-BR.md",
-      "source_location": "L317",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
@@ -30836,7 +30883,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -36838,7 +36885,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L76",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -36849,18 +36896,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L77",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_adr_diagnostic_report",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -36887,13 +36923,24 @@
     },
     {
       "source": "readme",
+      "target": "docs_adr_diagnostic_report",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
       "target": "docs_adr_additional_engines",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L81",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -36904,18 +36951,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L84",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_security_release_retirements",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L89",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -36938,6 +36974,17 @@
       "confidence_score": 1.0,
       "source_file": "README.md",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_security_release_retirements",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -38766,5 +38813,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "78b3f92522c383d22de820927bb43fcc8d22a591"
+  "built_at_commit": "feae640ae90e19dde61a047d4f8f55b1b58618a4"
 }

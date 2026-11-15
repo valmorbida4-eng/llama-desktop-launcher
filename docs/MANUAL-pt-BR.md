@@ -94,12 +94,34 @@ O download é extraído em uma pasta temporária ao lado do destino final; se fa
 
 ### Forks compatíveis: Avalon e tandem.cpp
 
-O [Avalon](https://github.com/freriadoc/Avalon) (feito para o Qwen3.8-Flash-Next) e o [tandem.cpp](https://github.com/ewhacc/tandem.cpp) (qualquer modelo MoE que não cabe na VRAM) são forks do llama.cpp com o mesmo `llama-server`. Não têm pacotes prontos: compile pelo README deles (Linux com ROCm ou CUDA; no Windows, o Avalon tem a [adaptação do ppkrol](https://github.com/ppkrol/Avalon_windows)) e escolha a pasta em **Escolher pasta existente**.
+O [Avalon](https://github.com/freriadoc/Avalon) (feito para o Qwen3.8-Flash-Next) e o [tandem.cpp](https://github.com/ewhacc/tandem.cpp) (qualquer modelo MoE que não cabe na VRAM) são forks do llama.cpp com o mesmo `llama-server`. **Nenhum dos dois publica programas prontos**, então o launcher não tem o que baixar: os links do cartão do motor levam ao código. Compile o `llama-server` e escolha a pasta em **Escolher pasta existente**.
 
-- O cartão do motor mostra o build identificado (`--version` e uma opção exclusiva do `--help`) e avisa quando falta o `llama-bench`.
-- Com o Qwen3.8-Flash-Next selecionado, **Perfis por modelo** mostra **Aplicar receita**, com os ajustes do README do fork; a cabeça MTP precisa estar nas pastas de modelos (arquivo com `mtp` no nome). Use 1 sessão simultânea.
+| | Avalon | tandem.cpp |
+|---|---|---|
+| Para quê | Qwen3.8-Flash-Next, no GGUF próprio do Avalon (~89 GiB) | Qualquer modelo MoE maior que a VRAM |
+| Sistema testado pelo autor | Linux (o autor não testou no Windows) | Linux (Ubuntu 22.04/24.04) |
+| GPU | AMD RDNA3/RDNA4 com ROCm 7.x; CUDA compila, mas só foi medido numa RTX 4090 | NVIDIA com CUDA 13; AMD com ROCm (menos ajustado) |
+| Memória | 16 GB de RAM ou mais | Depende do modelo; com menos RAM que o modelo, use o modo de carga automático |
+| Ferramentas | git, CMake, compilador C++ e o SDK do ROCm ou do CUDA | git, CMake, compilador C++ e o SDK do CUDA ou do ROCm |
+
+#### Compilar um fork
+
+1. Instale git, CMake, um compilador C++ e o SDK da sua GPU (CUDA Toolkit para NVIDIA; ROCm para AMD).
+2. Baixe o código: `git clone https://github.com/freriadoc/Avalon` ou `git clone https://github.com/ewhacc/tandem.cpp`.
+3. Compile só o `llama-server`, seguindo o README do projeto:
+   - **Avalon com AMD:** `cmake -B build -DGGML_HIP=ON -DAMDGPU_TARGETS=gfx1100 -DCMAKE_BUILD_TYPE=Release` e `cmake --build build -j --target llama-server` (troque `gfx1100` pela sua placa). O `install.sh` dele também compila e baixa o modelo de ~89 GiB; só use se quiser o modelo junto.
+   - **Avalon com NVIDIA:** `cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=89 -DCMAKE_BUILD_TYPE=Release` (troque `89` pela arquitetura da sua placa) e o mesmo `cmake --build`.
+   - **tandem.cpp:** `bash build.sh` baixa o llama.cpp na versão certa, aplica o patch e compila.
+4. No launcher, em **Configurações > 01 · Motor**, clique em **Escolher pasta existente** e escolha a pasta que contém o `llama-server` (em geral `build/bin`).
+5. O cartão do motor mostra o fork e o build. Com o Qwen3.8-Flash-Next selecionado, **Perfis por modelo** oferece **Aplicar receita**: ela usa a cabeça MTP se houver um arquivo com `mtp` no nome nas pastas de modelos. Use 1 sessão simultânea.
+
+No Windows existe uma [adaptação do Avalon feita por terceiros](https://github.com/ppkrol/Avalon_windows), também sem programas prontos. Compilar no Windows exige o Visual Studio Build Tools e o CUDA Toolkit ou o HIP SDK, e o resultado não foi testado pelo autor do Avalon.
+
+O que o launcher faz com a pasta de um fork:
+
 - Sem `llama-bench`, o autotuning mede pelo `llama-server`: cada medição recarrega o modelo, então reserve mais tempo.
 - Opções exclusivas do fork vão em **Argumentos extras do llama-server**; variáveis como `GGML_CUDA_MOE_TAIL_SKIP=0` em **Variáveis de ambiente** (grupo Avançado).
+- O launcher não baixa, não compila e não redistribui os forks, e não roda os scripts deles.
 
 ### Importar perfis do launcher anterior
 

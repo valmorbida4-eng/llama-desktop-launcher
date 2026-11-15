@@ -42,3 +42,11 @@ test('receitas: Avalon e tandem.cpp só para o Qwen3.8-Flash-Next, com a cabeça
   assert.equal(build.recipeFor({flavor:'llamacpp'},model,[head]),null,'llama.cpp oficial não tem receita');
   assert.equal(build.recipeFor({flavor:'avalon'},{path:'gpt-oss-120b.gguf'},[]),null,'só o modelo do fork');
 });
+
+test('a tela explica que os forks não têm download e só usa links conhecidos',()=>{
+  const html=fs.readFileSync(path.join(__dirname,'..','src','index.html'),'utf8');
+  assert.match(html,/class="fork-info"/);assert.match(html,/não têm download, é preciso compilar/);
+  const used=[...html.matchAll(/data-engine-link="([^"]+)"/g)].map(m=>m[1]);
+  assert.ok(used.length>=3);for(const key of used) assert.ok(Object.hasOwn(build.links,key),key);
+  for(const doc of ['MANUAL-pt-BR.md','MANUAL-en.md']) assert.match(fs.readFileSync(path.join(__dirname,'..','docs',doc),'utf8'),/#### (Compilar um fork|Build a fork)/,doc);
+});
