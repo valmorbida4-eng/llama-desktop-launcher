@@ -1,7 +1,7 @@
 'use strict';
 // Esquema dos parâmetros de cada motor: quais existem, quando se aplicam ao modelo e ao hardware, como
 // validar e como viram argumentos. Valor '' = automático (o launcher não passa a opção e o motor decide).
-// Conferido em common/arg.cpp do llama.cpp b12211, vllm/engine/arg_utils.py do vLLM 0.32.0 e no
+// Conferido em common/arg.cpp do llama.cpp b12359 (v1.0.0), vllm/engine/arg_utils.py do vLLM 0.32.0 e no
 // serve/server.py do Strata e do PolyStrata. Ver docs/adr/model-parameters-per-engine.md.
 
 const PROFILE_VERSION=2;
@@ -51,8 +51,10 @@ const FIELDS: Field[]=[
   {key:'cpuMoe',engine:'llamacpp',group:'Especialistas MoE',label:'Camadas de especialistas na CPU',flag:'-ncmoe',kind:'int',min:0,max:4096,
     when:c=>isMoe(c)===false?'Modelo denso: não tem especialistas MoE.':null},
   {key:'moeCacheMib',engine:'llamacpp',group:'Especialistas MoE',label:'Cache de especialistas na GPU (MiB)',flag:'--moe-cache-mib',kind:'int',min:0,max:1048576,
+    hint:'Só ajuda com especialistas na CPU. Um cache pequeno com fração de CPU 0 pode ficar mais lento que sem cache: prefira o autotuning. Deixe VRAM livre para o projetor de visão (mmproj).',
     when:c=>isMoe(c)===false?'Modelo denso: não tem especialistas MoE.':!hasGpu(c)?noGpu:null},
   {key:'moeCacheCpuShare',engine:'llamacpp',group:'Especialistas MoE',label:'Fração das faltas do cache feita na CPU',flag:'--moe-cache-cpu-share',kind:'float',min:0,max:1,step:0.05,
+    hint:'Automático: 0,95 com os especialistas em mmap (padrão de carga) e 0 com eles fixados na memória (-lm none, mlock ou dio). O melhor valor depende da máquina; o autotuning mede.',
     when:c=>isMoe(c)===false?'Modelo denso: não tem especialistas MoE.':!hasGpu(c)?noGpu:Number(val(c,'moeCacheMib'))>0?null:'Só com o cache de especialistas ligado (MiB > 0).'},
   // llama.cpp · modelo denso
   {key:'cpuFfn',engine:'llamacpp',group:'Modelo denso',label:'Camadas com FFN na CPU',flag:'-ncffn',kind:'int',min:0,max:4096,
@@ -176,8 +178,17 @@ function llamaArgs(settings: any,mode='server') {
     if(field.key==='specType'&&text==='none') continue;
     a.push(field.flag,text);
   }
+  // Fração de CPU automática do cache MoE: o padrão do llama.cpp é 0, mas com os especialistas em mmap
+  // (não fixados) a CPU costuma calcular as faltas mais rápido do que o PCIe as envia.
+  if(mode!=='fit'&&Number(settings?.moeCacheMib)>0) {
+    const shareField=fieldsFor('llamacpp').find(f=>f.key==='moeCacheCpuShare');
+    if(isAuto(shareField,settings?.moeCacheCpuShare)) a.push('--moe-cache-cpu-share',autoMoeCpuShare(settings));
+  }
   return a;
 }
+// Especialistas fixados na memória (-lm none, mlock, dio): a GPU os envia na velocidade total do PCIe.
+const PINNED_LOAD_MODES=new Set(['none','mlock','dio']);
+function autoMoeCpuShare(settings: any) {return PINNED_LOAD_MODES.has(String(settings?.loadMode||'').trim())?'0':'0.95';}
 function vllmArgs(settings: any) {
   const a: string[]=[];
   for(const field of fieldsFor('vllm')) {
@@ -221,7 +232,8 @@ function autoValues(c: Ctx,fit: any=null) {
     put('splitMode','layer','padrão do llama.cpp');put('tensorSplit',fit?.ts||'proporcional à memória livre',fit?.ts?'ajuste automático (fit)':'padrão do llama.cpp');
     put('noKvOffload','off','padrão do llama.cpp');put('loadMode','auto (mmap)','padrão do llama.cpp');
     if(info.expertCount>0)put('cpuMoe',fit?fit.cpuMoe??0:null,'ajuste automático (fit)');
-    put('moeCacheMib',0,'desligado');put('moeCacheCpuShare','0','padrão do llama.cpp');put('cpuFfn',0,'padrão do llama.cpp');
+    put('moeCacheMib',0,'desligado');
+    put('moeCacheCpuShare',autoMoeCpuShare(c.settings),PINNED_LOAD_MODES.has(String(c.settings?.loadMode||'').trim())?'especialistas fixados na memória':'especialistas em mmap (escolha do launcher)');put('cpuFfn',0,'padrão do llama.cpp');
     put('threads',physical,'núcleos físicos');put('threadsBatch',c.settings?.threads||physical,'igual às threads de geração');
     put('batch',2048,'padrão do llama.cpp');put('ubatch',512,'padrão do llama.cpp');
     put('cacheK','f16','padrão do llama.cpp');put('cacheV','f16','padrão do llama.cpp');put('flash','auto','o llama.cpp liga quando o backend suporta');
@@ -322,5 +334,5 @@ function parseRuntimeLog(engine: string,text: string) {
   }
   return out;
 }
-module.exports={parseRuntimeLog,PROFILE_VERSION,CACHE_TYPES,QUANTIZED_CACHE,SPEC_TYPES,VLLM_KV_DTYPES,FIELDS,fieldsFor,isAuto,migrateProfile,validateParams,llamaArgs,vllmArgs,strataArgs,
+module.exports={autoMoeCpuShare,PINNED_LOAD_MODES,parseRuntimeLog,PROFILE_VERSION,CACHE_TYPES,QUANTIZED_CACHE,SPEC_TYPES,VLLM_KV_DTYPES,FIELDS,fieldsFor,isAuto,migrateProfile,validateParams,llamaArgs,vllmArgs,strataArgs,
   autoValues,schemaFor,parseFitOutput,parseDevices};

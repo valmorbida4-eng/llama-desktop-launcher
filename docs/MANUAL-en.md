@@ -8,7 +8,7 @@ This is the first of three guides. The **Integration guide** (`INTEGRATION-en`) 
 
 Llama Desktop Launcher prepares and starts a language model server on your computer and exposes it as an OpenAI-compatible API. It works with three engines:
 
-- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12211`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
+- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12359`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
 - **[vLLM](https://github.com/vllm-project/vllm)** `0.32.0` for **Hugging Face folders** (`config.json` and `.safetensors` weights, including AWQ and GPTQ). It runs on Linux through a launcher-managed Python environment and on Windows through Docker Desktop.
 - **[Strata](https://github.com/Niko1221/Strata) and [PolyStrata](https://github.com/simplexai-labs/PolyStrata)** for the models those projects install. You install them with their official installer; the launcher only starts the server.
 
@@ -80,7 +80,7 @@ Suggested route:
 
 In **Settings > 01 · Motor**, choose one option:
 
-1. **Download official engine:** choose the **official package backend** and click the button. The app downloads the `ggml-org/llama.cpp` `b12211` release from GitHub for your platform and checks the SHA-256 when the release provides the digest. The engine is stored under `engines/` in the app data folder, outside the installation.
+1. **Download official engine:** choose the **official package backend** and click the button. The app downloads the `ggml-org/llama.cpp` `b12359` release from GitHub for your platform and checks the SHA-256 when the release provides the digest. The engine is stored under `engines/` in the app data folder, outside the installation.
 2. **Choose existing folder:** pick a folder that already contains `llama-server` (or `llama-server.exe`), such as the `b11193-vulkan` folder of the previous Windows launcher.
 
 Choose the backend by GPU, not by CPU brand:
@@ -150,7 +150,7 @@ For GGUF:
 - If the model uses a multimodal projector, keep a single `mmproj*.gguf` in the same folder; it is attached automatically.
 - Keep all shards of a split model together.
 
-GGUF describes the format, but does not guarantee compatibility with `b12211`; some models need a newer engine. The app does not accept model folders inside the installation or inside its internal data folder.
+GGUF describes the format, but does not guarantee compatibility with `b12359`; some models need a newer engine. The app does not accept model folders inside the installation or inside its internal data folder.
 
 The **Models** screen estimates use RAM, CPU, detectable GPU/VRAM and free space. They are conservative starting points, not guarantees. For MoE models, consider the total weight size, not just the active parameters.
 
@@ -211,7 +211,7 @@ The launcher finds out what the model supports without loading the weights: it r
 | | Load mode | `-lm` | Always: `auto`, `none`, `mmap`, `mlock`, `mmap+mlock`, `dio`. |
 | MoE experts | Expert layers on CPU | `-ncmoe` | MoE model. |
 | | Expert cache on GPU (MiB) | `--moe-cache-mib` | MoE model with a GPU. |
-| | Share of cache misses computed on CPU | `--moe-cache-cpu-share` | Expert cache above 0. |
+| | Share of cache misses computed on CPU | `--moe-cache-cpu-share` | Expert cache above 0. Auto: 0.95 with experts in mmap (default load mode), 0 when pinned (`-lm none`, `mlock`, `dio`). |
 | Dense model | Layers with FFN on CPU | `-ncffn` | Model without experts, with a GPU. |
 | CPU and batches | Generation / prompt threads | `-t` / `-tb` | Always. |
 | | Batch / Microbatch | `-b` / `-ub` | Always. The microbatch cannot exceed the batch. |
@@ -252,7 +252,7 @@ Context, quantization and GPU come from the `strata-*.json` configuration and ar
 - **Aplicar sugestão inicial** (Apply initial suggestion) fills the fields from RAM, CPU, GPU/VRAM and the model data. For a GGUF, it turns on `draft-mtp` when the model has MTP layers. For vLLM, it computes context, memory utilization and tensor parallelism from `config.json` and the VRAM, then asks whether you want to run autotuning. Not available for Strata.
 - **Calcular valores automáticos** (Compute automatic values, GGUF only) runs `llama-fit-params`, which ships with the official package, and shows in the Auto fields what `-fit` would choose: GPU layers, context, share per GPU and how many expert layers would stay on the CPU. It runs by itself when you open a GGUF profile and takes a few seconds.
 - **Otimizar automaticamente** (Optimize automatically) searches for the fastest values within the chosen **Tempo** (time: 5, 10, 20 or 30 minutes) and **Prioridade** (priority): **Geração** (generation, the default; generation tokens/s), **Prompt longo** (long prompt; prompt tokens/s) or **Equilíbrio** (balance). **Cancelar** stops the test and applies the best so far. The result goes into the fields, but the profile is saved only when you click **Save**. **Medições do autotuning** lists every attempt, including failures and their reasons.
-  - **llama.cpp:** first `llama-fit-params` sets the memory ceiling. Then `llama-bench` tests, one at a time, experts on CPU (MoE), Flash Attention, K/V cache (`f16`, `q8_0`, `q4_0`), microbatch, threads (when the CPU does work) and GPU split. If time is left, a short `llama-server` run measures what `llama-bench` cannot: speculative decoding (with the draft acceptance rate), prompt threads and the expert cache on the GPU. What does not fit in memory or is not supported (a quantized V cache without Flash Attention, for example) is dropped. A value replaces the current one only with a gain of at least 2%.
+  - **llama.cpp:** first `llama-fit-params` sets the memory ceiling. Then `llama-bench` tests, one at a time, experts on CPU (MoE), Flash Attention, K/V cache (`f16`, `q8_0`, `q4_0`), microbatch, threads (when the CPU does work) and GPU split. If time is left, a short `llama-server` run measures what `llama-bench` cannot: speculative decoding (with the draft acceptance rate) and prompt threads. For MoE models with experts on the CPU, it then measures the expert cache the same way as llama.cpp's `moe-cache-tune.py`: no cache, two sizes × CPU shares 0, 0.5 and 0.95 (1024 generated tokens each, so the cache fills), then the `dio` load mode with the winning size. It keeps the lowest share within 5% of the fastest run, because a small cache with share 0 can be slower than no cache and the best share depends on the machine. What does not fit in memory or is not supported (a quantized V cache without Flash Attention, for example) is dropped. A value replaces the current one only with a gain of at least 2%.
   - **vLLM:** each attempt starts the server again (on Windows, a container) and reloads the model, so each attempt takes several minutes: prefer 20 or 30 minutes. It tests GPU memory utilization, KV cache type, tokens per batch and speculative decoding.
   - **Strata/PolyStrata:** there is no autotuning.
 

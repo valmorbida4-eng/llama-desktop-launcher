@@ -14,7 +14,7 @@ Aplicativo instalável para executar modelos de linguagem locais no Windows, Lin
 
 ## Funcionalidades
 
-- **llama.cpp `b12211`:** baixa o pacote oficial na primeira execução (Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU no Windows/Linux; Metal no macOS) ou usa uma pasta existente. A escolha depende da GPU, não da marca do processador.
+- **llama.cpp `b12359` (llama.cpp v1.0.0):** baixa o pacote oficial na primeira execução (Vulkan, NVIDIA CUDA, AMD ROCm, Intel SYCL ou CPU no Windows/Linux; Metal no macOS) ou usa uma pasta existente. A escolha depende da GPU, não da marca do processador.
 - **vLLM `0.32.0`** para pastas Hugging Face (`config.json` + `.safetensors`, incluindo AWQ e GPTQ). No Linux com GPU NVIDIA, cria um ambiente Python próprio e instala o vLLM com `pip` (ou usa um ambiente com `bin/vllm`). No Windows, roda a imagem oficial `vllm/vllm-openai:v0.32.0` pelo Docker Desktop com WSL2. Não é oferecido no macOS.
 - **Strata e PolyStrata** no Windows e no Linux: instale pelo instalador oficial deles e escolha a pasta; cada `strata-*.json` vira um modelo. O launcher não roda o instalador deles.
 - Até duas pastas de modelos, fora da pasta do aplicativo. Detecta `mmproj` junto do GGUF e pastas do cache do Hugging Face.
@@ -71,6 +71,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.10.0:** llama.cpp **v1.0.0** (`b12359`, de novo no canal estável). O autotuning mede o cache de especialistas MoE como o `moe-cache-tune.py` do llama.cpp: sem cache, dois tamanhos × frações de CPU 0, 0,5 e 0,95, e depois o modo de carga `dio`; fica a menor fração a até 5% da mais rápida. Com o cache ligado e a fração em Auto, o launcher usa 0,95 com os especialistas em mmap e 0 com eles fixados na memória.
 - **v0.9.0:** parâmetros por motor e por modelo, com estado Auto e valores automáticos do `llama-fit-params`; detecção de MoE, MTP, SWA e modelos híbridos pelo cabeçalho GGUF e pelo `config.json`; opções do vLLM 0.32.0 e do Strata; autotuning do llama.cpp em etapas (`llama-bench` e `llama-server`) e do vLLM; linha **Em uso** com os valores reais do servidor. Perfis antigos são migrados sem mudar o comportamento. Veja [o ADR](docs/adr/model-parameters-per-engine.md).
 - **v0.8.1:** llama.cpp atualizado de `b12110` para `b12211` (build pre-release mais nova); os pacotes NVIDIA CUDA 13.4 passam a CUDA 13.5 no Windows e no Linux. Veja [o ADR da versão do motor](docs/adr/engine-version-pin.md).
 - **v0.8.0:** **Configurações > 07 · Firewall do Windows** lista e remove as regras de entrada criadas pelo launcher (`LlamaDesktopLauncher-…`), com uma única autorização de administrador e só quando há regras. Elas continuam depois que o servidor para, e no Strata/PolyStrata liberam o `python.exe` do sistema.
@@ -88,7 +89,7 @@ A revisão dos arquivos publicados e a situação da v0.2.5 estão em [Retirada 
 
 ## Criadores e créditos
 
-- **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b12211).
+- **llama.cpp:** iniciado por [Georgi Gerganov](https://github.com/ggerganov) e desenvolvido pelos [colaboradores do projeto ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS). Código original sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). Os binários são baixados diretamente das [releases oficiais](https://github.com/ggml-org/llama.cpp/releases/tag/b12359).
 - **vLLM:** desenvolvido pelo projeto [vllm-project/vllm](https://github.com/vllm-project/vllm) e seus colaboradores, sob [licença Apache 2.0](https://github.com/vllm-project/vllm/blob/main/LICENSE). O launcher instala o pacote oficial `vllm` do PyPI no Linux ou usa a imagem oficial [`vllm/vllm-openai`](https://hub.docker.com/r/vllm/vllm-openai) no Windows; não redistribui código do vLLM.
 - **Strata:** criado por [Niko1221](https://github.com/Niko1221) e pelos colaboradores do [Strata](https://github.com/Niko1221/Strata), sob [licença MIT](https://github.com/Niko1221/Strata/blob/main/LICENSE). O launcher apenas inicia uma instalação feita pelo instalador oficial do projeto.
 - **PolyStrata:** criado por [VecSzn](https://github.com/VecSzn) e pelos colaboradores do [PolyStrata](https://github.com/simplexai-labs/PolyStrata), baseado no Strata, sob [licença MIT](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE) (copyright de Niko1221 e dos colaboradores do Strata, e de VecSzn e dos colaboradores do PolyStrata). O launcher apenas inicia uma instalação feita pelo instalador oficial do projeto.

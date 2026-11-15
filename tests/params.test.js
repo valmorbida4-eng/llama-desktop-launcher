@@ -270,3 +270,39 @@ test('autotuning: especialistas na CPU sobem de 2 em 2 enquanto a geração melh
   assert.equal(r.settings.cpuMoe,'14');
   assert.ok(seen.includes(16)&&!seen.includes(18),'para no primeiro passo sem ganho');
 });
+
+test('cache MoE: menor fração de CPU a até 5% da mais rápida; sem cache conta como fração 0',()=>{
+  const row=(mib,share,score,loadMode)=>({score,settings:{moeCacheMib:mib,moeCacheCpuShare:share,loadMode}});
+  // RTX 2080 Ti do vídeo: cache pequeno com fração 0 fica pior que sem cache; 0,95 vence.
+  assert.equal(benchmark.pickMoeCache([row('',  '',42.1),row('2700','0',23.5),row('2700','0.95',51.9)]).score,51.9);
+  // Empate dentro de 5%: fica a menor fração.
+  assert.equal(benchmark.pickMoeCache([row('4096','0',50),row('4096','0.5',51),row('4096','0.95',52)]).settings.moeCacheCpuShare,'0');
+  assert.equal(benchmark.pickMoeCache([{score:NaN}]),null);
+});
+
+test('cache MoE: fração automática é 0,95 com mmap e 0 com especialistas fixados na memória',()=>{
+  const pair=(a,f)=>a[a.indexOf(f)+1];
+  assert.equal(pair(params.llamaArgs({moeCacheMib:'4096'}),'--moe-cache-cpu-share'),'0.95');
+  assert.equal(pair(params.llamaArgs({moeCacheMib:'4096',loadMode:'mmap'}),'--moe-cache-cpu-share'),'0.95');
+  for(const loadMode of ['dio','mlock','none']) assert.equal(pair(params.llamaArgs({moeCacheMib:'4096',loadMode}),'--moe-cache-cpu-share'),'0',loadMode);
+  assert.equal(pair(params.llamaArgs({moeCacheMib:'4096',moeCacheCpuShare:'0.3'}),'--moe-cache-cpu-share'),'0.3','valor explícito não muda');
+  assert.ok(!params.llamaArgs({moeCacheMib:''}).includes('--moe-cache-cpu-share'),'sem cache, sem fração');
+  assert.ok(!params.llamaArgs({moeCacheMib:'4096'},'fit').includes('--moe-cache-cpu-share'),'o fit não recebe a fração');
+});
+
+test('autotuning do cache MoE: tamanhos × frações, depois dio com o vencedor (números da RTX 3090 do vídeo)',async()=>{
+  const runs=[];
+  // mmap: 19,5 / 26,6 / 31,8 em 0 / 0,5 / 0,95; dio: 32,1 / 35,9 / 33,4. Sem cache: 18.
+  const speed=s=>{
+    if(!(Number(s.moeCacheMib)>0)) return 18;
+    const share=String(s.moeCacheCpuShare||'0');
+    return s.loadMode==='dio'?{'0':32.1,'0.5':35.9,'0.95':33.4}[share]:{'0':19.5,'0.5':26.6,'0.95':31.8}[share];
+  };
+  const result=await benchmark.tune('/x',{path:'m.gguf'},{context:'8192'},()=>{},undefined,{budgetMinutes:30,priority:'generation',
+    info:{expertCount:64,blockCount:48},devices:[{name:'CUDA0'}],hw:{physicalCores:8,logicalCores:16},
+    deps:{fit:async()=>({ngl:'49',ctx:8192,cpuMoe:20}),bench:async()=>({promptTps:500,generationTps:10}),
+      server:async(s,t,o={})=>{runs.push({s,o});return {promptTps:500,generationTps:o.generate===benchmark.MOE_GENERATE_TOKENS?speed(s):10};}}});
+  const moeRuns=runs.filter(r=>r.o.generate===benchmark.MOE_GENERATE_TOKENS);
+  assert.equal(moeRuns.length,1+2*3+3,'sem cache, 2 tamanhos × 3 frações e 3 frações com dio');
+  assert.equal(result.settings.moeCacheMib,'2048');assert.equal(result.settings.moeCacheCpuShare,'0.5');assert.equal(result.settings.loadMode,'dio');
+});
