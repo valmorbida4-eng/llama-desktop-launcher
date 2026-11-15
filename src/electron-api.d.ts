@@ -24,6 +24,7 @@ interface RendererApi {
   installVllm(): Promise<any>;
   refreshEngines(): Promise<any>;
   openEngineLink(kind: string): Promise<string>;
+  engineRecipe(modelPath: string): Promise<{title: string; note: string; settings: Record<string, string>} | null>;
   onEnginesChanged(callback: () => void): void;
   saveProfile(modelPath: string, settings: ModelSettings): Promise<any>;
   importLegacyProfiles(): Promise<ImportedProfiles | null>;

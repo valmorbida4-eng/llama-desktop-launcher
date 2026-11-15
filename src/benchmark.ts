@@ -13,10 +13,10 @@ const params=require('./params');
 
 const exe=(dir: string,name: string)=>path.join(dir,process.platform==='win32'?`${name}.exe`:name);
 type RunResult = {stdout: string; stderr: string};
-function execute(file: string,args: string[],{timeoutMs=600000,signal,cwd}: {timeoutMs?: number; signal?: AbortSignal; cwd?: string}={}): Promise<RunResult> {
+function execute(file: string,args: string[],{timeoutMs=600000,signal,cwd,env}: {timeoutMs?: number; signal?: AbortSignal; cwd?: string; env?: Record<string, string>}={}): Promise<RunResult> {
   return new Promise((resolve,reject)=>{
     if(signal?.aborted){reject(Error('Teste cancelado.'));return;}
-    const p=spawn(file,args,{cwd:cwd||path.dirname(file),windowsHide:true});
+    const p=spawn(file,args,{cwd:cwd||path.dirname(file),env:env?{...process.env,...env}:process.env,windowsHide:true});
     let stdout='',stderr='',done=false;
     const finish=(error: Error | null)=>{if(done)return;done=true;clearTimeout(timer);signal?.removeEventListener('abort',onAbort);error?reject(error):resolve({stdout,stderr});};
     const onAbort=()=>{try{p.kill();}catch{}finish(Error('Teste cancelado.'));};
@@ -41,7 +41,7 @@ async function fitParams(engineDir: string,model: any,settings: any,{info=null,r
   const file=exe(engineDir,'llama-fit-params');
   if(!fs.existsSync(file)) throw Error('Este pacote do llama.cpp não inclui llama-fit-params.');
   core.validateSettings(settings);
-  const out=await run(file,['-m',model.path,...params.llamaArgs(settings,'fit')],{timeoutMs:180000,signal});
+  const out=await run(file,['-m',model.path,...params.llamaArgs(settings,'fit')],{timeoutMs:180000,signal,env:params.llamaEnv(settings)});
   const fit=params.parseFitOutput(out.stdout,info?.blockCount||null);
   if(!fit) throw Error(`llama-fit-params não informou os valores: ${(out.stderr||out.stdout).slice(-400)}`);
   return fit;
@@ -75,7 +75,7 @@ function parseBench(stdout: string) {
 }
 async function runBench(engineDir: string,model: any,settings: any,{signal,timeoutMs=600000,run=execute}: any={}) {
   const file=exe(engineDir,'llama-bench');
-  return parseBench((await run(file,benchArgs(model,settings),{timeoutMs,signal})).stdout);
+  return parseBench((await run(file,benchArgs(model,settings),{timeoutMs,signal,env:params.llamaEnv(settings)})).stdout);
 }
 
 // Servidor curto: sobe, espera /health, mede e encerra (esperando o processo sair para liberar a VRAM).
@@ -148,7 +148,7 @@ async function measureOpenAi(port: number,signal?: AbortSignal,model=core.apiMod
 async function probeLlamaServer(engineDir: string,model: any,settings: any,{signal,timeoutMs=600000,spawnProcess,generate=160}: any={}) {
   const port=await freePort();
   const args=core.argsForModel(model,settings,'server',port,{host:'127.0.0.1',parallel:1});
-  return probeServer({command:{file:exe(engineDir,'llama-server'),args,cwd:engineDir},port,timeoutMs,signal,spawnProcess,measure:(p: number)=>measureLlamaServer(p,signal,{generate})});
+  return probeServer({command:{file:exe(engineDir,'llama-server'),args,cwd:engineDir,env:params.llamaEnv(settings)},port,timeoutMs,signal,spawnProcess,measure:(p: number)=>measureLlamaServer(p,signal,{generate})});
 }
 
 // Cache de especialistas MoE: mesmo critério do scripts/moe-cache-tune.py do llama.cpp 1.0. Entre as
@@ -219,10 +219,14 @@ async function tune(engineDir: string,model: any,settings: any,onProgress?: (tex
   const {budgetMinutes=10,priority='generation',info=null,devices=null,hw=core.detectHardware(),deps={}}=options;
   if(!PRIORITIES.includes(priority)) throw Error('Prioridade inválida.');
   if(!(Number(budgetMinutes)>=1&&Number(budgetMinutes)<=120)) throw Error('Orçamento de tempo inválido.');
-  const bench=deps.bench||((s: any,t: number)=>runBench(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000)}));
-  if(!deps.bench&&!fs.existsSync(exe(engineDir,'llama-bench'))) throw Error('Este pacote não inclui llama-bench.');
   const server=deps.server||(fs.existsSync(exe(engineDir,'llama-server'))?(s: any,t: number,o: any={})=>probeLlamaServer(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000),generate:o.generate}):null);
   const fitRun=deps.fit||((s: any)=>fitParams(engineDir,model,s,{info,signal}));
+  // Forks como Avalon e tandem.cpp compilam só o llama-server: sem llama-bench, as etapas do llama-bench
+  // medem com um llama-server curto (mais lento: cada medição recarrega o modelo).
+  const hasBench=!!deps.bench||fs.existsSync(exe(engineDir,'llama-bench'));
+  if(!hasBench&&!server) throw Error('Esta pasta do motor não tem llama-bench nem llama-server.');
+  if(!hasBench) onProgress?.('Este motor não inclui llama-bench: as medições usam o llama-server (cada uma recarrega o modelo).');
+  const bench=deps.bench||(hasBench?((s: any,t: number)=>runBench(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000)})):server);
   const deadline=Date.now()+Number(budgetMinutes)*60000;
   const search=createSearch({priority,deadline,signal,onProgress});
   const known=info&&!info.error?info:{};

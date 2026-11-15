@@ -25,6 +25,7 @@ function createSession({ engineDir, model, settings, onOutput = () => {}, onExit
   const args = argsForConversation(model, settings);
   const child = spawnProcess(executable, args, {
     cwd: engineDir,
+    env: { ...process.env, ...require('./params').llamaEnv(settings) },
     windowsHide: true,
     stdio: ['pipe', 'pipe', 'pipe'],
   });

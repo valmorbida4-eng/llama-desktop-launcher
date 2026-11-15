@@ -92,6 +92,15 @@ Escolha o backend pela GPU, não pela marca do processador:
 
 O download é extraído em uma pasta temporária ao lado do destino final; se falhar, a pasta é removida e o motor anterior continua configurado. Para trocar de motor, baixe outro backend ou escolha outra pasta; pare o servidor e a conversa antes.
 
+### Forks compatíveis: Avalon e tandem.cpp
+
+O [Avalon](https://github.com/freriadoc/Avalon) (feito para o Qwen3.8-Flash-Next) e o [tandem.cpp](https://github.com/ewhacc/tandem.cpp) (qualquer modelo MoE que não cabe na VRAM) são forks do llama.cpp com o mesmo `llama-server`. Não têm pacotes prontos: compile pelo README deles (Linux com ROCm ou CUDA; no Windows, o Avalon tem a [adaptação do ppkrol](https://github.com/ppkrol/Avalon_windows)) e escolha a pasta em **Escolher pasta existente**.
+
+- O cartão do motor mostra o build identificado (`--version` e uma opção exclusiva do `--help`) e avisa quando falta o `llama-bench`.
+- Com o Qwen3.8-Flash-Next selecionado, **Perfis por modelo** mostra **Aplicar receita**, com os ajustes do README do fork; a cabeça MTP precisa estar nas pastas de modelos (arquivo com `mtp` no nome). Use 1 sessão simultânea.
+- Sem `llama-bench`, o autotuning mede pelo `llama-server`: cada medição recarrega o modelo, então reserve mais tempo.
+- Opções exclusivas do fork vão em **Argumentos extras do llama-server**; variáveis como `GGML_CUDA_MOE_TAIL_SKIP=0` em **Variáveis de ambiente** (grupo Avançado).
+
 ### Importar perfis do launcher anterior
 
 Se você usava o launcher WinForms, configure primeiro a pasta dos seus GGUF. Depois, em **Configurações > 04 · Importação**, clique em **Importar perfis TSV** e escolha `launcher-profiles.tsv`. Os perfis são associados pelo caminho completo do modelo; perfis já salvos não são sobrescritos. O resultado mostra quantos foram importados, não localizados, já existentes ou inválidos.
@@ -222,8 +231,10 @@ O launcher descobre o que o modelo suporta sem carregar os pesos: lê o cabeçal
 | | Reuso de cache por deslocamento | `--cache-reuse` | Só no servidor. |
 | | Cache KV unificado entre sessões | `-kvu` | Servidor com 2 ou mais sessões simultâneas. |
 | Decodificação especulativa | Tipo | `--spec-type` | Sempre: `none`, `ngram-mod`, `ngram-simple`, `ngram-map-k`; `draft-mtp` só se o GGUF tiver camadas MTP; `draft-simple`/`draft-eagle3` com um modelo rascunho. |
-| | Modelo rascunho | `-md` | Tipos `draft-simple` e `draft-eagle3`. Lista os GGUF menores das pastas. |
+| | Modelo rascunho | `-md` | Tipos `draft-simple`, `draft-eagle3` e `draft-mtp` com cabeça MTP separada. Lista os GGUF menores das pastas. |
 | | Tokens por rascunho | `--spec-draft-n-max` | Tipos `draft-*`. |
+| | Argumentos extras do llama-server | (extra) | Grupo Avançado. Separados por espaço, no fim do comando. Rede, porta, chave, modelo, sessões, ferramentas e CORS ficam com o launcher. |
+| | Variáveis de ambiente | (env) | `NOME=valor` separados por `;`, só com prefixo `GGML_`, `LLAMA_`, `AVALON_`, `TANDEM_`, `CUDA_`, `HIP_`, `HSA_` ou `ROCR_`. Valem para servidor, conversa, fit e autotuning. |
 
 O launcher sempre passa `-fit on`: com campos em Auto, o llama.cpp ajusta camadas, contexto e especialistas na CPU à memória livre. **Sessões simultâneas** (`--parallel`) dividem o contexto: com contexto 8192 e 2 sessões, cada cliente tem 4096 tokens.
 
@@ -306,5 +317,7 @@ Pare o servidor e feche o aplicativo antes. No Windows, use **Configurações > 
 ## 13. Créditos
 
 O [llama.cpp](https://github.com/ggml-org/llama.cpp) foi iniciado por [Georgi Gerganov](https://github.com/ggerganov) e é mantido pelos [colaboradores da ggml-org](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS), sob [licença MIT](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). O [vLLM](https://github.com/vllm-project/vllm) é do projeto vllm-project, sob [licença Apache 2.0](https://github.com/vllm-project/vllm/blob/main/LICENSE). O [Strata](https://github.com/Niko1221/Strata) foi criado por Niko1221 e colaboradores, sob [licença MIT](https://github.com/Niko1221/Strata/blob/main/LICENSE). O [PolyStrata](https://github.com/simplexai-labs/PolyStrata) foi criado por VecSzn e colaboradores, baseado no Strata, sob [licença MIT](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE).
+
+O [Avalon](https://github.com/freriadoc/Avalon) é de freriadoc e colaboradores, sob licença MIT; o [tandem.cpp](https://github.com/ewhacc/tandem.cpp) é de ewhacc e não declara licença. O launcher só usa uma pasta compilada pelo usuário e não redistribui nenhum dos dois.
 
 Este launcher independente foi desenvolvido para Célio com Codex, com base no launcher WinForms anterior, e está sob [licença MIT](../LICENSE), com copyright de Célio. Ele não redistribui esses motores: baixa o pacote oficial do llama.cpp, instala o pacote ou a imagem oficial do vLLM e só inicia instalações do Strata e do PolyStrata feitas pelos instaladores oficiais. Os autores desses projetos não participam nem endossam este aplicativo. Cada modelo tem licença própria.

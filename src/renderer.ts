@@ -66,10 +66,18 @@ function renderParams(s: ParameterSchema){
 // Recalcula o esquema quando um valor muda (alguns campos dependem de outros, como -fitc do contexto).
 let changeTimer: any=null;
 function paramsChanged(){values=settings();clearTimeout(changeTimer);changeTimer=setTimeout(()=>loadSchema(false).catch(e=>message(e.message,true)),200);}
+// Receita do fork (Avalon, tandem.cpp) para o modelo escolhido: preenche os campos; o usuário salva.
+let recipe: {title: string; note: string; settings: Record<string, string>} | null=null;
+async function loadRecipe(m: any){
+  recipe=typeof window.llama.engineRecipe==='function'&&(m.engine||'llamacpp')==='llamacpp'?await window.llama.engineRecipe(m.path):null;
+  if(m.path!==selectedSettingsModel()?.path)return;
+  $('recipe-card').hidden=!recipe;if(recipe){$('recipe-title').textContent=recipe.title;$('recipe-note').textContent=recipe.note;}
+}
 async function loadSchema(withFit: boolean){
   const m=selectedSettingsModel();if(!m){schema=null;$('param-groups').replaceChildren();$('param-unavailable').hidden=true;$('model-facts').hidden=true;return;}
   const seq=++schemaSeq;const current=settings();
   const next=await window.llama.parameterSchema(m.path,current);
+  loadRecipe(m).catch(()=>{});
   if(seq!==schemaSeq||m.path!==selectedSettingsModel()?.path)return;
   const before=JSON.stringify((schema?.fields||[]).map(f=>[f.key,f.applicable,f.auto?.value,(f.options||[]).join()]));
   schema=next;values=current;
@@ -144,7 +152,7 @@ function showConnection(result){$('sharing-controls').hidden=!result?.sharingEnd
 async function refresh(preferred?: string){snapshot=await window.llama.state();const s=snapshot;$('app-version').textContent='· v'+s.appVersion;$('update-check').checked=s.config.updateCheck!==false;showUpdate(s.update);const old=preferred||s.config.selectedModelPath||$('model').value;
   if(currentView===null)showView((!anyEngineReady(s)||!s.models.length||!s.config.selectedModelPath)?'settings':'llama');
   $('memory').textContent=bytes(s.hardware.memoryBytes);$('cpu').textContent=`${s.hardware.logicalCores} threads`;$('models-memory').textContent=bytes(s.hardware.memoryBytes);$('models-cpu').textContent=`${s.hardware.logicalCores} threads`;$('local-count').textContent=String(s.models.length);
-  $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';fillBackends(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
+  $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor nesta pasta: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
   fillModelSelectors(s.models,old);$('setup-hint').hidden=anyEngineReady(s)&&s.models.length>0;updateModelDetail();fillEngines(s);
   $('stop').hidden=!s.running;updateEngineControls();$('save-settings-profile').disabled=!s.models.length;$('stop-chat').hidden=!s.chatRunning;$('send-chat').disabled=!s.chatRunning;
   $('access-host').replaceChildren(...s.accessOptions.map(item=>{const o=document.createElement('option');o.value=item.host;o.textContent=item.name;return o;}));$('access-host').value=s.accessOptions.some(x=>x.host===s.config.accessHost)?s.config.accessHost:'127.0.0.1';$('parallel').value=s.config.parallel||1;$('access-host').disabled=s.running;$('parallel').disabled=s.running;$('rotate-key').disabled=s.running;updateNetwork();showConnection(s.active);
@@ -178,6 +186,8 @@ $('install-update').onclick=()=>updateAction(async()=>{
   try{const result=await window.llama.installUpdate();$('update-message').textContent=outcome[result.action](result);}
   finally{$('install-update').disabled=false;$('check-update').disabled=false;$('update-progress').hidden=true;}
 });
+$('apply-recipe').onclick=()=>action(async()=>{if(!recipe)return;applySettings(recipe.settings);$('tuning-message').textContent='Receita aplicada aos campos. Confira e salve o perfil deste modelo.';});
+document.querySelectorAll<HTMLElement>('[data-engine-link]').forEach(b=>b.onclick=()=>action(()=>window.llama.openEngineLink(b.dataset.engineLink as string)));
 document.querySelectorAll<HTMLElement>('[data-doc]').forEach(b=>b.onclick=()=>action(()=>window.llama.openManual(b.dataset.lang as 'pt-BR'|'en',b.dataset.doc as 'MANUAL'|'INTEGRATION'|'DIAGNOSTICS')));
 $('guide-integration').onclick=()=>action(()=>window.llama.openManual('pt-BR','INTEGRATION'));$('guide-diagnostics').onclick=()=>action(()=>window.llama.openManual('pt-BR','DIAGNOSTICS'));
 async function firewallRulesAction(fn){const box=$('firewall-rules-message');box.classList.remove('error');for(const id of ['list-firewall-rules','remove-firewall-rules'])$(id).disabled=true;try{box.textContent=await fn();}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}finally{for(const id of ['list-firewall-rules','remove-firewall-rules'])$(id).disabled=false;}}

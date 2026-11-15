@@ -65,6 +65,7 @@ function buildReport(data: any) {
     if(!engine.supported&&engine.unsupportedReason) add(`  - ${engine.unsupportedReason}`);
   }
   if(data.llama) add(`- llama.cpp configurado: backend ${data.llama.backend||'—'} · release ${data.llama.release||'—'} · versão testada ${data.llama.pinned}`);
+  if(data.llama?.build) add(`- llama-server da pasta do motor: ${data.llama.build}`);
   if(data.docker) add(`- Docker: verificado ${yes(data.docker.checked)} · serviço ativo ${yes(data.docker.daemon)} · imagem do vLLM ${yes(data.docker.image)}`);
   add();
   add('## Pastas');
