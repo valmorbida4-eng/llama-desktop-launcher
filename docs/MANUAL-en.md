@@ -8,7 +8,7 @@ This is the first of three guides. The **Integration guide** (`INTEGRATION-en`) 
 
 Llama Desktop Launcher prepares and starts a language model server on your computer and exposes it as an OpenAI-compatible API. It works with three engines:
 
-- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12211`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
+- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12359`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
 - **[vLLM](https://github.com/vllm-project/vllm)** `0.32.0` for **Hugging Face folders** (`config.json` and `.safetensors` weights, including AWQ and GPTQ). It runs on Linux through a launcher-managed Python environment and on Windows through Docker Desktop.
 - **[Strata](https://github.com/Niko1221/Strata) and [PolyStrata](https://github.com/simplexai-labs/PolyStrata)** for the models those projects install. You install them with their official installer; the launcher only starts the server.
 
@@ -80,7 +80,7 @@ Suggested route:
 
 In **Settings > 01 · Motor**, choose one option:
 
-1. **Download official engine:** choose the **official package backend** and click the button. The app downloads the `ggml-org/llama.cpp` `b12211` release from GitHub for your platform and checks the SHA-256 when the release provides the digest. The engine is stored under `engines/` in the app data folder, outside the installation.
+1. **Download official engine:** choose the **official package backend** and click the button. The app downloads the `ggml-org/llama.cpp` `b12359` release from GitHub for your platform and checks the SHA-256 when the release provides the digest. The engine is stored under `engines/` in the app data folder, outside the installation.
 2. **Choose existing folder:** pick a folder that already contains `llama-server` (or `llama-server.exe`), such as the `b11193-vulkan` folder of the previous Windows launcher.
 
 Choose the backend by GPU, not by CPU brand:
@@ -91,6 +91,15 @@ Choose the backend by GPU, not by CPU brand:
 - **CPU:** no acceleration. **Metal:** macOS.
 
 The download is extracted into a temporary folder next to its final destination; if it fails, the folder is removed and the previous engine stays configured. To change engines, download another backend or choose another folder; stop the server and the chat first.
+
+### Compatible forks: Avalon and tandem.cpp
+
+[Avalon](https://github.com/freriadoc/Avalon) (built for Qwen3.8-Flash-Next) and [tandem.cpp](https://github.com/ewhacc/tandem.cpp) (any MoE model that does not fit in VRAM) are llama.cpp forks with the same `llama-server`. They have no ready-made packages: build them from their README (Linux with ROCm or CUDA; on Windows, Avalon has [ppkrol's port](https://github.com/ppkrol/Avalon_windows)) and pick the folder with **Choose existing folder**.
+
+- The engine card shows the identified build (`--version` and a fork-only `--help` option) and warns when `llama-bench` is missing.
+- With Qwen3.8-Flash-Next selected, **Model profiles** shows **Apply recipe**, with the settings from the fork's README; the MTP head must be in your model folders (a file with `mtp` in its name). Use 1 concurrent session.
+- Without `llama-bench`, autotuning measures with `llama-server`: each run reloads the model, so allow more time.
+- Fork-only options go in **Extra llama-server arguments**; variables such as `GGML_CUDA_MOE_TAIL_SKIP=0` in **Environment variables** (Advanced group).
 
 ### Import profiles from the previous launcher
 
@@ -150,7 +159,7 @@ For GGUF:
 - If the model uses a multimodal projector, keep a single `mmproj*.gguf` in the same folder; it is attached automatically.
 - Keep all shards of a split model together.
 
-GGUF describes the format, but does not guarantee compatibility with `b12211`; some models need a newer engine. The app does not accept model folders inside the installation or inside its internal data folder.
+GGUF describes the format, but does not guarantee compatibility with `b12359`; some models need a newer engine. The app does not accept model folders inside the installation or inside its internal data folder.
 
 The **Models** screen estimates use RAM, CPU, detectable GPU/VRAM and free space. They are conservative starting points, not guarantees. For MoE models, consider the total weight size, not just the active parameters.
 
@@ -211,7 +220,7 @@ The launcher finds out what the model supports without loading the weights: it r
 | | Load mode | `-lm` | Always: `auto`, `none`, `mmap`, `mlock`, `mmap+mlock`, `dio`. |
 | MoE experts | Expert layers on CPU | `-ncmoe` | MoE model. |
 | | Expert cache on GPU (MiB) | `--moe-cache-mib` | MoE model with a GPU. |
-| | Share of cache misses computed on CPU | `--moe-cache-cpu-share` | Expert cache above 0. |
+| | Share of cache misses computed on CPU | `--moe-cache-cpu-share` | Expert cache above 0. Auto: 0.95 with experts in mmap (default load mode), 0 when pinned (`-lm none`, `mlock`, `dio`). |
 | Dense model | Layers with FFN on CPU | `-ncffn` | Model without experts, with a GPU. |
 | CPU and batches | Generation / prompt threads | `-t` / `-tb` | Always. |
 | | Batch / Microbatch | `-b` / `-ub` | Always. The microbatch cannot exceed the batch. |
@@ -222,8 +231,10 @@ The launcher finds out what the model supports without loading the weights: it r
 | | Cache reuse by shifting | `--cache-reuse` | Server only. |
 | | Unified KV cache across sessions | `-kvu` | Server with 2 or more simultaneous sessions. |
 | Speculative decoding | Type | `--spec-type` | Always: `none`, `ngram-mod`, `ngram-simple`, `ngram-map-k`; `draft-mtp` only if the GGUF has MTP layers; `draft-simple`/`draft-eagle3` with a draft model. |
-| | Draft model | `-md` | Types `draft-simple` and `draft-eagle3`. Lists the smaller GGUFs in your folders. |
+| | Draft model | `-md` | Types `draft-simple`, `draft-eagle3`, and `draft-mtp` with a separate MTP head. Lists the smaller GGUFs in your folders. |
 | | Tokens per draft | `--spec-draft-n-max` | `draft-*` types. |
+| | Extra llama-server arguments | (extra) | Advanced group. Space-separated, at the end of the command. Network, port, key, model, sessions, tools and CORS stay with the launcher. |
+| | Environment variables | (env) | `NAME=value` separated by `;`, only with the `GGML_`, `LLAMA_`, `AVALON_`, `TANDEM_`, `CUDA_`, `HIP_`, `HSA_` or `ROCR_` prefix. Used by the server, chat, fit and autotuning. |
 
 The launcher always passes `-fit on`: with fields on Auto, llama.cpp fits layers, context and experts on CPU to the free memory. **Simultaneous sessions** (`--parallel`) split the context: with context 8192 and 2 sessions, each client gets 4096 tokens.
 
@@ -252,7 +263,7 @@ Context, quantization and GPU come from the `strata-*.json` configuration and ar
 - **Aplicar sugestão inicial** (Apply initial suggestion) fills the fields from RAM, CPU, GPU/VRAM and the model data. For a GGUF, it turns on `draft-mtp` when the model has MTP layers. For vLLM, it computes context, memory utilization and tensor parallelism from `config.json` and the VRAM, then asks whether you want to run autotuning. Not available for Strata.
 - **Calcular valores automáticos** (Compute automatic values, GGUF only) runs `llama-fit-params`, which ships with the official package, and shows in the Auto fields what `-fit` would choose: GPU layers, context, share per GPU and how many expert layers would stay on the CPU. It runs by itself when you open a GGUF profile and takes a few seconds.
 - **Otimizar automaticamente** (Optimize automatically) searches for the fastest values within the chosen **Tempo** (time: 5, 10, 20 or 30 minutes) and **Prioridade** (priority): **Geração** (generation, the default; generation tokens/s), **Prompt longo** (long prompt; prompt tokens/s) or **Equilíbrio** (balance). **Cancelar** stops the test and applies the best so far. The result goes into the fields, but the profile is saved only when you click **Save**. **Medições do autotuning** lists every attempt, including failures and their reasons.
-  - **llama.cpp:** first `llama-fit-params` sets the memory ceiling. Then `llama-bench` tests, one at a time, experts on CPU (MoE), Flash Attention, K/V cache (`f16`, `q8_0`, `q4_0`), microbatch, threads (when the CPU does work) and GPU split. If time is left, a short `llama-server` run measures what `llama-bench` cannot: speculative decoding (with the draft acceptance rate), prompt threads and the expert cache on the GPU. What does not fit in memory or is not supported (a quantized V cache without Flash Attention, for example) is dropped. A value replaces the current one only with a gain of at least 2%.
+  - **llama.cpp:** first `llama-fit-params` sets the memory ceiling. Then `llama-bench` tests, one at a time, experts on CPU (MoE), Flash Attention, K/V cache (`f16`, `q8_0`, `q4_0`), microbatch, threads (when the CPU does work) and GPU split. If time is left, a short `llama-server` run measures what `llama-bench` cannot: speculative decoding (with the draft acceptance rate) and prompt threads. For MoE models with experts on the CPU, it then measures the expert cache the same way as llama.cpp's `moe-cache-tune.py`: no cache, two sizes × CPU shares 0, 0.5 and 0.95 (1024 generated tokens each, so the cache fills), then the `dio` load mode with the winning size. It keeps the lowest share within 5% of the fastest run, because a small cache with share 0 can be slower than no cache and the best share depends on the machine. What does not fit in memory or is not supported (a quantized V cache without Flash Attention, for example) is dropped. A value replaces the current one only with a gain of at least 2%.
   - **vLLM:** each attempt starts the server again (on Windows, a container) and reloads the model, so each attempt takes several minutes: prefer 20 or 30 minutes. It tests GPU memory utilization, KV cache type, tokens per batch and speculative decoding.
   - **Strata/PolyStrata:** there is no autotuning.
 
@@ -306,5 +317,7 @@ Stop the server and close the app first. On Windows, use **Settings > Installed 
 ## 13. Credits
 
 [llama.cpp](https://github.com/ggml-org/llama.cpp) was started by [Georgi Gerganov](https://github.com/ggerganov) and is maintained by the [ggml-org contributors](https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS) under the [MIT license](https://github.com/ggml-org/llama.cpp/blob/master/LICENSE). [vLLM](https://github.com/vllm-project/vllm) belongs to the vllm-project, under the [Apache 2.0 license](https://github.com/vllm-project/vllm/blob/main/LICENSE). [Strata](https://github.com/Niko1221/Strata) was created by Niko1221 and contributors under the [MIT license](https://github.com/Niko1221/Strata/blob/main/LICENSE). [PolyStrata](https://github.com/simplexai-labs/PolyStrata) was created by VecSzn and contributors, based on Strata, under the [MIT license](https://github.com/simplexai-labs/PolyStrata/blob/main/LICENSE).
+
+[Avalon](https://github.com/freriadoc/Avalon) is by freriadoc and contributors, under the MIT license; [tandem.cpp](https://github.com/ewhacc/tandem.cpp) is by ewhacc and declares no license. The launcher only uses a folder the user built and redistributes neither.
 
 This independent launcher was developed for Célio with Codex, based on the previous WinForms launcher, and is released under the [MIT license](../LICENSE), copyright Célio. It does not redistribute these engines: it downloads the official llama.cpp package, installs the official vLLM package or image, and only starts Strata and PolyStrata installations made by their official installers. The authors of those projects do not participate in or endorse this application. Each model has its own license.

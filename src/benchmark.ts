@@ -13,10 +13,10 @@ const params=require('./params');
 
 const exe=(dir: string,name: string)=>path.join(dir,process.platform==='win32'?`${name}.exe`:name);
 type RunResult = {stdout: string; stderr: string};
-function execute(file: string,args: string[],{timeoutMs=600000,signal,cwd}: {timeoutMs?: number; signal?: AbortSignal; cwd?: string}={}): Promise<RunResult> {
+function execute(file: string,args: string[],{timeoutMs=600000,signal,cwd,env}: {timeoutMs?: number; signal?: AbortSignal; cwd?: string; env?: Record<string, string>}={}): Promise<RunResult> {
   return new Promise((resolve,reject)=>{
     if(signal?.aborted){reject(Error('Teste cancelado.'));return;}
-    const p=spawn(file,args,{cwd:cwd||path.dirname(file),windowsHide:true});
+    const p=spawn(file,args,{cwd:cwd||path.dirname(file),env:env?{...process.env,...env}:process.env,windowsHide:true});
     let stdout='',stderr='',done=false;
     const finish=(error: Error | null)=>{if(done)return;done=true;clearTimeout(timer);signal?.removeEventListener('abort',onAbort);error?reject(error):resolve({stdout,stderr});};
     const onAbort=()=>{try{p.kill();}catch{}finish(Error('Teste cancelado.'));};
@@ -41,7 +41,7 @@ async function fitParams(engineDir: string,model: any,settings: any,{info=null,r
   const file=exe(engineDir,'llama-fit-params');
   if(!fs.existsSync(file)) throw Error('Este pacote do llama.cpp não inclui llama-fit-params.');
   core.validateSettings(settings);
-  const out=await run(file,['-m',model.path,...params.llamaArgs(settings,'fit')],{timeoutMs:180000,signal});
+  const out=await run(file,['-m',model.path,...params.llamaArgs(settings,'fit')],{timeoutMs:180000,signal,env:params.llamaEnv(settings)});
   const fit=params.parseFitOutput(out.stdout,info?.blockCount||null);
   if(!fit) throw Error(`llama-fit-params não informou os valores: ${(out.stderr||out.stdout).slice(-400)}`);
   return fit;
@@ -75,7 +75,7 @@ function parseBench(stdout: string) {
 }
 async function runBench(engineDir: string,model: any,settings: any,{signal,timeoutMs=600000,run=execute}: any={}) {
   const file=exe(engineDir,'llama-bench');
-  return parseBench((await run(file,benchArgs(model,settings),{timeoutMs,signal})).stdout);
+  return parseBench((await run(file,benchArgs(model,settings),{timeoutMs,signal,env:params.llamaEnv(settings)})).stdout);
 }
 
 // Servidor curto: sobe, espera /health, mede e encerra (esperando o processo sair para liberar a VRAM).
@@ -123,11 +123,13 @@ async function probeServer({command,port,timeoutMs,signal,measure,stop,spawnProc
 const PROBE_PROMPT='Escreva em Python uma função que recebe uma lista de pedidos (id, cliente, valor, status) e devolve o total por cliente só dos pedidos pagos. '+
   'Depois escreva testes com pytest para listas vazias, um cliente, vários clientes e status diferentes. Explique cada passo em uma frase.';
 // llama-server: os timings da resposta trazem tokens/s de prompt e de geração e a aceitação do rascunho.
-async function measureLlamaServer(port: number,signal?: AbortSignal) {
+// generate: tokens medidos. O cache de especialistas MoE só mostra o efeito depois de cheio, então a
+// etapa dele gera mais (aquecimento de 256 e medição de MOE_GENERATE_TOKENS, como o moe-cache-tune.py).
+async function measureLlamaServer(port: number,signal?: AbortSignal,{generate=160}: {generate?: number}={}) {
   // Aquecimento com o mesmo tamanho de prompt: o primeiro lote paga compilação de shaders e grafos.
   const prompt=PROBE_PROMPT.repeat(4);
-  await requestJson(port,'/completion',{prompt,n_predict:8,cache_prompt:false},300000,signal);
-  const r=await requestJson(port,'/completion',{prompt,n_predict:160,cache_prompt:false,temperature:0},300000,signal);
+  await requestJson(port,'/completion',{prompt,n_predict:generate>160?256:8,cache_prompt:false},300000,signal);
+  const r=await requestJson(port,'/completion',{prompt,n_predict:generate,cache_prompt:false,temperature:0,ignore_eos:generate>160},300000,signal);
   const t=r.timings||{};
   if(!Number.isFinite(t.predicted_per_second)) throw Error('O servidor não informou os tempos.');
   return {promptTps:t.prompt_per_second,generationTps:t.predicted_per_second,draftAcceptance:t.draft_n?t.draft_n_accepted/t.draft_n:null};
@@ -143,10 +145,23 @@ async function measureOpenAi(port: number,signal?: AbortSignal,model=core.apiMod
   const genSeconds=(Date.now()-t)/1000;
   return {promptTps:(prefill.usage?.prompt_tokens||0)/Math.max(promptSeconds,0.001),generationTps:(gen.usage?.completion_tokens||0)/Math.max(genSeconds,0.001)};
 }
-async function probeLlamaServer(engineDir: string,model: any,settings: any,{signal,timeoutMs=600000,spawnProcess}: any={}) {
+async function probeLlamaServer(engineDir: string,model: any,settings: any,{signal,timeoutMs=600000,spawnProcess,generate=160}: any={}) {
   const port=await freePort();
   const args=core.argsForModel(model,settings,'server',port,{host:'127.0.0.1',parallel:1});
-  return probeServer({command:{file:exe(engineDir,'llama-server'),args,cwd:engineDir},port,timeoutMs,signal,spawnProcess,measure:(p: number)=>measureLlamaServer(p,signal)});
+  return probeServer({command:{file:exe(engineDir,'llama-server'),args,cwd:engineDir,env:params.llamaEnv(settings)},port,timeoutMs,signal,spawnProcess,measure:(p: number)=>measureLlamaServer(p,signal,{generate})});
+}
+
+// Cache de especialistas MoE: mesmo critério do scripts/moe-cache-tune.py do llama.cpp 1.0. Entre as
+// medições a até 5% da mais rápida, fica a de menor fração de CPU (e, empatando, a mais rápida). "Sem
+// cache" entra como fração 0: um cache pequeno com fração 0 pode ser mais lento que nenhum cache.
+const MOE_GENERATE_TOKENS=1024;
+const MOE_TOLERANCE=0.95;
+function pickMoeCache(rows: any[]) {
+  const ok=rows.filter(r=>Number.isFinite(r?.score));
+  if(!ok.length) return null;
+  const top=Math.max(...ok.map(r=>r.score));
+  const share=(r: any)=>Number(r.settings?.moeCacheCpuShare||0);
+  return ok.filter(r=>r.score>=top*MOE_TOLERANCE).sort((a,b)=>share(a)-share(b)||b.score-a.score)[0];
 }
 
 function scoreOf(r: {promptTps: number; generationTps: number},priority='generation') {
@@ -204,10 +219,14 @@ async function tune(engineDir: string,model: any,settings: any,onProgress?: (tex
   const {budgetMinutes=10,priority='generation',info=null,devices=null,hw=core.detectHardware(),deps={}}=options;
   if(!PRIORITIES.includes(priority)) throw Error('Prioridade inválida.');
   if(!(Number(budgetMinutes)>=1&&Number(budgetMinutes)<=120)) throw Error('Orçamento de tempo inválido.');
-  const bench=deps.bench||((s: any,t: number)=>runBench(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000)}));
-  if(!deps.bench&&!fs.existsSync(exe(engineDir,'llama-bench'))) throw Error('Este pacote não inclui llama-bench.');
-  const server=deps.server||(fs.existsSync(exe(engineDir,'llama-server'))?(s: any,t: number)=>probeLlamaServer(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000)}):null);
+  const server=deps.server||(fs.existsSync(exe(engineDir,'llama-server'))?(s: any,t: number,o: any={})=>probeLlamaServer(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000),generate:o.generate}):null);
   const fitRun=deps.fit||((s: any)=>fitParams(engineDir,model,s,{info,signal}));
+  // Forks como Avalon e tandem.cpp compilam só o llama-server: sem llama-bench, as etapas do llama-bench
+  // medem com um llama-server curto (mais lento: cada medição recarrega o modelo).
+  const hasBench=!!deps.bench||fs.existsSync(exe(engineDir,'llama-bench'));
+  if(!hasBench&&!server) throw Error('Esta pasta do motor não tem llama-bench nem llama-server.');
+  if(!hasBench) onProgress?.('Este motor não inclui llama-bench: as medições usam o llama-server (cada uma recarrega o modelo).');
+  const bench=deps.bench||(hasBench?((s: any,t: number)=>runBench(engineDir,model,s,{signal,timeoutMs:Math.min(t,600000)})):server);
   const deadline=Date.now()+Number(budgetMinutes)*60000;
   const search=createSearch({priority,deadline,signal,onProgress});
   const known=info&&!info.error?info:{};
@@ -261,7 +280,6 @@ async function tune(engineDir: string,model: any,settings: any,onProgress?: (tex
   const specs=['none','ngram-mod',...(known.nextnLayers>0?['draft-mtp']:[])];
   serverKeys.push(specs.map(v=>({specType:v==='none'?'':v})));
   if(cpuWork) serverKeys.push(uniq([String(base.threadsBatch||''),String(base.threads||physical),String(logical)]).map(v=>({threadsBatch:v})));
-  if(moe&&gpu&&Number(base.cpuMoe||0)>0) serverKeys.push(['0','1024','2048','4096'].map(v=>({moeCacheMib:v==='0'?'':v})));
   if(server&&!search.stopped) {
     const describe=(c: Record<string, string>)=>c.specType!==undefined?`Especulativa: ${c.specType||'none'}${c.draftMax?` · ${c.draftMax} tokens`:''}`:c.threadsBatch!==undefined?`Threads de prompt: ${c.threadsBatch||'= geração'}`:c.moeCacheMib!==undefined?`Cache MoE na GPU: ${c.moeCacheMib||0} MiB`:'Servidor';
     let serverBase=base;
@@ -273,6 +291,38 @@ async function tune(engineDir: string,model: any,settings: any,onProgress?: (tex
     for(const candidates of serverKeys){if(search.stopped)break;await serverStage(candidates);}
     if(!search.stopped&&String(serverBase.specType||'').startsWith('draft-')) await serverStage(['2','3','4'].map(v=>({specType:serverBase.specType,draftMax:v})));
     base=serverBase;
+  }
+
+  // 3. Cache de especialistas MoE: só com especialistas na CPU e GPU. Dois tamanhos × frações 0, 0,5 e
+  // 0,95, mais "sem cache"; depois, com o vencedor, o modo de carga dio (especialistas fixados na
+  // memória, que a GPU envia na velocidade total do PCIe). O ganho depende da máquina: mede, não fixa.
+  if(server&&moe&&gpu&&Number(base.cpuMoe||0)>0&&!search.stopped) {
+    const method='llama-server · cache MoE';
+    const run=(s: any,t: number)=>server(s,t,{generate:MOE_GENERATE_TOKENS});
+    const describe=(c: Record<string, string>)=>(Number(c.moeCacheMib)>0?`Cache MoE: ${c.moeCacheMib} MiB · CPU ${c.moeCacheCpuShare||'0'}`:'Cache MoE: desligado')+(c.loadMode?` · carga ${c.loadMode}`:'');
+    const rows: any[]=[];
+    const measureMoe=async(changes: Record<string, string>)=>{
+      if(search.stopped) return;
+      const s={...base,...changes};
+      try{core.validateSettings(s);}catch(error){search.results.push({label:describe(changes),method,changes,error:error.message});return;}
+      const row=await search.measure(s,changes,method,describe(changes),run);
+      if(row&&Number.isFinite(row.score)) rows.push({...row,settings:s});
+    };
+    const current=Number(base.moeCacheMib||0);
+    const sizes=uniq((current>0?[current,current*2]:[2048,4096]).map(String));
+    await measureMoe({moeCacheMib:'',moeCacheCpuShare:''});
+    for(const size of sizes) for(const share of ['0','0.5','0.95']) await measureMoe({moeCacheMib:size,moeCacheCpuShare:share});
+    let pick=pickMoeCache(rows);
+    if(pick&&Number(pick.settings.moeCacheMib||0)>0&&['','auto','mmap'].includes(String(base.loadMode||''))) {
+      for(const share of ['0','0.5','0.95']) await measureMoe({moeCacheMib:String(pick.settings.moeCacheMib),moeCacheCpuShare:share,loadMode:'dio'});
+      pick=pickMoeCache(rows);
+    }
+    if(pick) {
+      const on=Number(pick.settings.moeCacheMib||0)>0;
+      base={...base,moeCacheMib:on?String(pick.settings.moeCacheMib):'',moeCacheCpuShare:on?String(pick.settings.moeCacheCpuShare||'0'):''};
+      tuned.add('moeCacheMib');tuned.add('moeCacheCpuShare');
+      if(pick.settings.loadMode==='dio'){base.loadMode='dio';tuned.add('loadMode');}
+    }
   }
 
   const valid=search.results.filter(r=>Number.isFinite(r.score));
@@ -317,4 +367,4 @@ async function tuneVllm(model: any,settings: any,{probe,info=null,gpuCount=null,
   return {settings:result,results:search.results,best:valid.reduce((a,b)=>b.score>a.score?b:a),priority,stopped:search.stopped||'done'};
 }
 
-module.exports={execute,listDevices,fitParams,benchArgs,parseBench,runBench,probeServer,measureLlamaServer,measureOpenAi,probeLlamaServer,freePort,scoreOf,PRIORITIES,tune,tuneVllm};
+module.exports={execute,listDevices,fitParams,benchArgs,parseBench,runBench,probeServer,measureLlamaServer,measureOpenAi,probeLlamaServer,freePort,scoreOf,PRIORITIES,MOE_GENERATE_TOKENS,MOE_TOLERANCE,pickMoeCache,tune,tuneVllm};

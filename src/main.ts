@@ -10,6 +10,7 @@ const {spawn}=require('node:child_process');
 const core=require('./core');
 const engine=require('./engine');
 const engines=require('./engines');
+const engineBuild=require('./engine_build');
 const benchmark=require('./benchmark');
 const network=require('./network');
 const cli=require('./cli');
@@ -61,7 +62,7 @@ function engineStatus() {
     const strata=info.id==='strata'?engines.detectStrata(configuration.strataDir):null;
     const detail=info.id==='llamacpp'?(configuration.engineDir||''):info.id==='strata'?(strata?`${strata.distribution} · ${configuration.strataDir}`:configuration.strataDir||''):
       info.mode==='venv'?(configuration.vllmDir||''):info.mode==='docker'?(docker.checked?(docker.daemon?(docker.image?`Imagem ${engines.VLLM_IMAGE} pronta`:`Docker pronto; falta baixar ${engines.VLLM_IMAGE}`):'Docker Desktop não encontrado ou parado'):'Verificando Docker…'):'';
-    return {...info,ready:info.supported&&engineReady(info.id),detail,version:info.id==='vllm'?engines.VLLM_VERSION:info.id==='llamacpp'?(configuration.engineVersion||engine.ENGINE_TAG):null};
+    return {...info,ready:info.supported&&engineReady(info.id),detail,version:info.id==='vllm'?engines.VLLM_VERSION:info.id==='llamacpp'?(engineBuild.describeBuild(currentBuild(),engine.ENGINE_TAG)||configuration.engineVersion||engine.ENGINE_TAG):null,build:info.id==='llamacpp'?currentBuild():null};
   });
 }
 function allModels() {
@@ -89,6 +90,15 @@ function llamaDevices() {
   return devicesProbe.promise;
 }
 function nvidiaGpus() {nvidiaProbe ||= hardware.detectNvidiaGpus().catch(()=>[]);return nvidiaProbe;}
+// Build do llama-server da pasta do motor (oficial, Avalon, tandem.cpp), lido com --version e --help.
+function currentBuild() {const b=configuration.engineBuild;return b&&b.dir===configuration.engineDir?b:null;}
+let buildProbe: Promise<any> | null=null;
+function refreshBuild(force=false) {
+  const dir=configuration.engineDir;
+  if(!dir||(!force&&currentBuild())) return Promise.resolve(currentBuild());
+  buildProbe=engineBuild.probeBuild(dir).then((b: any)=>{if(b&&configuration.engineDir===dir){configuration.engineBuild={...b,dir};save();send('engines-changed',null);}return currentBuild();}).catch(()=>null);
+  return buildProbe;
+}
 function draftModelsFor(model: any) {return allModels().filter((m: any)=>m.engine==='llamacpp'&&m.path!==model.path&&(!model.size||m.size<model.size)).map((m: any)=>({path:m.path,name:m.name}));}
 async function paramContext(model: any,settings: any={}) {
   const info=modelInfo.modelInfo(model,{strataDir:configuration.strataDir});
@@ -146,7 +156,7 @@ async function installUpdate() {
     return {action:'package',file,command:updater.installHint(file)};
   } finally {updateBusy=false;}
 }
-app.whenReady().then(()=>{load();createWindow();refreshDocker().then(()=>send('engines-changed',null)).catch(()=>{});app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
+app.whenReady().then(()=>{load();createWindow();refreshBuild().catch(()=>{});refreshDocker().then(()=>send('engines-changed',null)).catch(()=>{});app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin') app.quit();});
 app.on('before-quit',()=>{tuneAbort?.abort();shareProxy?.close();shareProxy=null;proxy?.close();conversation?.stop();stopContainer();if(server)server.kill();});
 
@@ -156,11 +166,11 @@ ipcMain.handle('install-update',e=>{validateSender(e);return installUpdate();});
 ipcMain.handle('set-update-check',(e,enabled)=>{validateSender(e);if(typeof enabled!=='boolean')throw Error('Valor inválido.');configuration.updateCheck=enabled;save();return state();});
 ipcMain.handle('select-model',(e,modelPath)=>{validateSender(e);selectedModel(modelPath);configuration.selectedModelPath=modelPath;save();return state();});
 ipcMain.handle('complete-setup',e=>{validateSender(e);configuration.firstRun=false;save();return state();});
-ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(server||conversation||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');if(!['engine','models','strata','vllm'].includes(kind))throw Error('Tipo de pasta inválido.');if((kind==='strata'||kind==='vllm')&&(server||engineBusy))throw Error('Pare o servidor antes de trocar o motor.');if(kind==='vllm'&&engines.vllmMode()!=='venv')throw Error('No Windows o vLLM roda pelo Docker Desktop; não há pasta para escolher.');if(kind==='strata'&&!engines.engineInfo('strata').supported)throw Error(engines.engineInfo('strata').unsupportedReason);const titles={engine:'Pasta dos binários llama.cpp',models:'Pasta de modelos (GGUF ou Hugging Face)',strata:'Pasta do Strata ou do PolyStrata',vllm:'Ambiente Python com vLLM (contém bin/vllm)'};const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:titles[kind]});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';devicesProbe=null;fitCache.clear();}else if(kind==='strata'){if(!engines.detectStrata(dir))throw Error('A pasta precisa ser uma instalação do Strata ou do PolyStrata já configurada (serve/server.py e .venv). Rode o instalador deles primeiro.');configuration.strataDir=dir;}else if(kind==='vllm'){if(!engines.vllmVenvReady(dir))throw Error('A pasta precisa conter bin/vllm.');configuration.vllmDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
+ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(server||conversation||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');if(!['engine','models','strata','vllm'].includes(kind))throw Error('Tipo de pasta inválido.');if((kind==='strata'||kind==='vllm')&&(server||engineBusy))throw Error('Pare o servidor antes de trocar o motor.');if(kind==='vllm'&&engines.vllmMode()!=='venv')throw Error('No Windows o vLLM roda pelo Docker Desktop; não há pasta para escolher.');if(kind==='strata'&&!engines.engineInfo('strata').supported)throw Error(engines.engineInfo('strata').unsupportedReason);const titles={engine:'Pasta dos binários llama.cpp',models:'Pasta de modelos (GGUF ou Hugging Face)',strata:'Pasta do Strata ou do PolyStrata',vllm:'Ambiente Python com vLLM (contém bin/vllm)'};const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:titles[kind]});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';configuration.engineVersion='';refreshBuild(true);devicesProbe=null;fitCache.clear();}else if(kind==='strata'){if(!engines.detectStrata(dir))throw Error('A pasta precisa ser uma instalação do Strata ou do PolyStrata já configurada (serve/server.py e .venv). Rode o instalador deles primeiro.');configuration.strataDir=dir;}else if(kind==='vllm'){if(!engines.vllmVenvReady(dir))throw Error('A pasta precisa conter bin/vllm.');configuration.vllmDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
 ipcMain.handle('clear-dir',(e,index)=>{validateSender(e);if(index!==1)throw Error('A primeira localização é obrigatória.');configuration.modelDirs[1]='';save();return state();});
 ipcMain.handle('install-engine',async(e,backend)=>{validateSender(e);if(server||conversation||tuneAbort)throw Error('Pare a execução atual antes de trocar o motor.');if(!engine.backendOptions().some(item=>item.id===backend))throw Error('Backend inválido para este sistema.');const dir=path.join(app.getPath('userData'),'engines',Date.now().toString());let result;try{result=await engine.installEngine(dir,backend,(percent,label)=>send('progress',{percent,label}));}catch(error){log(`
 [launcher] Falha ao instalar o llama.cpp (${backend}): ${error.message}
-`);throw error;}configuration.engineDir=result.path;configuration.engineVersion=result.release;configuration.engineBackend=result.backend;save();return state();});
+`);throw error;}configuration.engineDir=result.path;configuration.engineVersion=result.release;configuration.engineBackend=result.backend;save();await refreshBuild(true);return state();});
 ipcMain.handle('refresh-engines',async e=>{validateSender(e);await refreshDocker();return state();});
 ipcMain.handle('install-vllm',async e=>{
   validateSender(e);
@@ -187,7 +197,8 @@ ipcMain.handle('install-vllm',async e=>{
 [launcher] Falha ao preparar o vLLM: ${error.message}
 `);throw error;} finally {engineBusy=false;}
 });
-ipcMain.handle('open-engine-link',async(e,kind)=>{validateSender(e);const url=Object.hasOwn(engines.links,kind)?engines.links[kind]:Object.hasOwn(guidance.engineLinks,kind)?guidance.engineLinks[kind]:null;if(!url)throw Error('Link inválido.');await shell.openExternal(url);return url;});
+ipcMain.handle('engine-recipe',async(e,modelPath)=>{validateSender(e);const model=selectedModel(modelPath);if(model.engine!=='llamacpp')return null;return engineBuild.recipeFor(currentBuild()||await refreshBuild(),model,draftModelsFor(model));});
+ipcMain.handle('open-engine-link',async(e,kind)=>{validateSender(e);const url=Object.hasOwn(engineBuild.links,kind)?engineBuild.links[kind]:Object.hasOwn(engines.links,kind)?engines.links[kind]:Object.hasOwn(guidance.engineLinks,kind)?guidance.engineLinks[kind]:null;if(!url)throw Error('Link inválido.');await shell.openExternal(url);return url;});
 ipcMain.handle('save-profile',async(e,modelPath,settings)=>{validateSender(e);const model=selectedModel(modelPath);await checkSettings(model,settings);configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};save();return state();});
 ipcMain.handle('parameter-schema',async(e,modelPath,settings)=>{validateSender(e);const model=selectedModel(modelPath);const ctx=await paramContext(model,settings||{});
   const fit=ctx.engine==='llamacpp'?fitCache.get(fitKey(model,settings||{}))||null:null;return params.schemaFor(ctx,fit);});
@@ -271,7 +282,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
   let command: any;
   if(model.engine==='llamacpp') {
     const executable=path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server');
-    command={file:executable,args:core.argsForModel(model,settings,'server',port,{host:access.host,parallel,keyPath:key?apiKeyPath():null}),env:{},cwd:configuration.engineDir};
+    command={file:executable,args:core.argsForModel(model,settings,'server',port,{host:access.host,parallel,keyPath:key?apiKeyPath():null}),env:params.llamaEnv(settings),cwd:configuration.engineDir};
   } else {
     command=engines.serverCommand(model,settings,{host:access.host,port,parallel,key,vllmDir:configuration.vllmDir,strataDir:configuration.strataDir,
       containerName:engines.VLLM_CONTAINER_PREFIX+crypto.randomBytes(6).toString('hex')});
@@ -387,7 +398,7 @@ async function diagnosticData() {
     system:{platform:process.platform,arch:process.arch,release:os.release(),version:typeof os.version==='function'?os.version():''},
     hardware:s.hardware,gpu:await gpuDetails(),
     engines:s.engines,
-    llama:{backend:configuration.engineBackend||'',release:configuration.engineVersion||'',pinned:engine.ENGINE_TAG},
+    llama:{backend:configuration.engineBackend||'',release:configuration.engineVersion||'',pinned:engine.ENGINE_TAG,build:engineBuild.describeBuild(currentBuild(),engine.ENGINE_TAG)},
     docker:engines.vllmMode()==='docker'?docker:null,
     paths:{userData:app.getPath('userData'),modelDirs:configuration.modelDirs.map((dir: string)=>({path:dir,exists:!!dir&&fs.existsSync(dir)})),apiKeySaved:!!apiKey},
     models:{total:s.models.length,byEngine,selected:selected?{name:selected.name,engine:selected.engine,size:selected.size,path:selected.path,profile:configuration.profiles[selected.path]||null}:null},

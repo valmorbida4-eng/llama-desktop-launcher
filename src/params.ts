@@ -1,7 +1,7 @@
 'use strict';
 // Esquema dos parâmetros de cada motor: quais existem, quando se aplicam ao modelo e ao hardware, como
 // validar e como viram argumentos. Valor '' = automático (o launcher não passa a opção e o motor decide).
-// Conferido em common/arg.cpp do llama.cpp b12211, vllm/engine/arg_utils.py do vLLM 0.32.0 e no
+// Conferido em common/arg.cpp do llama.cpp b12359 (v1.0.0), vllm/engine/arg_utils.py do vLLM 0.32.0 e no
 // serve/server.py do Strata e do PolyStrata. Ver docs/adr/model-parameters-per-engine.md.
 
 const PROFILE_VERSION=2;
@@ -9,6 +9,8 @@ const CACHE_TYPES=['f16','q8_0','q4_0','q5_0','q4_1','q5_1','f32','bf16','iq4_nl
 const QUANTIZED_CACHE=new Set(['q8_0','q4_0','q5_0','q4_1','q5_1','iq4_nl']);
 const SPEC_TYPES=['none','ngram-mod','ngram-simple','ngram-map-k','draft-simple','draft-eagle3','draft-mtp'];
 const DRAFT_SPEC=new Set(['draft-simple','draft-eagle3']);
+// Cabeça MTP em arquivo separado (Avalon, tandem.cpp): um GGUF das pastas de modelos com "mtp" no nome.
+function hasMtpHead(c: any) {return (c.draftModels||[]).some((m: any)=>/mtp/i.test(String(m.path).split(/[\\/]/).pop()||''));}
 const VLLM_KV_DTYPES=['auto','float16','bfloat16','fp8','fp8_e4m3','fp8_e5m2'];
 const DEVICE_NAME=/^[A-Za-z][A-Za-z0-9:_-]{0,63}$/;
 
@@ -51,8 +53,10 @@ const FIELDS: Field[]=[
   {key:'cpuMoe',engine:'llamacpp',group:'Especialistas MoE',label:'Camadas de especialistas na CPU',flag:'-ncmoe',kind:'int',min:0,max:4096,
     when:c=>isMoe(c)===false?'Modelo denso: não tem especialistas MoE.':null},
   {key:'moeCacheMib',engine:'llamacpp',group:'Especialistas MoE',label:'Cache de especialistas na GPU (MiB)',flag:'--moe-cache-mib',kind:'int',min:0,max:1048576,
+    hint:'Só ajuda com especialistas na CPU. Um cache pequeno com fração de CPU 0 pode ficar mais lento que sem cache: prefira o autotuning. Deixe VRAM livre para o projetor de visão (mmproj).',
     when:c=>isMoe(c)===false?'Modelo denso: não tem especialistas MoE.':!hasGpu(c)?noGpu:null},
   {key:'moeCacheCpuShare',engine:'llamacpp',group:'Especialistas MoE',label:'Fração das faltas do cache feita na CPU',flag:'--moe-cache-cpu-share',kind:'float',min:0,max:1,step:0.05,
+    hint:'Automático: 0,95 com os especialistas em mmap (padrão de carga) e 0 com eles fixados na memória (-lm none, mlock ou dio). O melhor valor depende da máquina; o autotuning mede.',
     when:c=>isMoe(c)===false?'Modelo denso: não tem especialistas MoE.':!hasGpu(c)?noGpu:Number(val(c,'moeCacheMib'))>0?null:'Só com o cache de especialistas ligado (MiB > 0).'},
   // llama.cpp · modelo denso
   {key:'cpuFfn',engine:'llamacpp',group:'Modelo denso',label:'Camadas com FFN na CPU',flag:'-ncffn',kind:'int',min:0,max:4096,
@@ -75,13 +79,18 @@ const FIELDS: Field[]=[
     when:c=>(c.parallel||1)>=2?null:'Só faz diferença com 2 ou mais sessões simultâneas.'},
   // llama.cpp · especulativa
   {key:'specType',engine:'llamacpp',group:'Decodificação especulativa',label:'Tipo',flag:'--spec-type',kind:'select',modes:['server','cli'],
-    options:c=>SPEC_TYPES.filter(t=>t!=='draft-mtp'||!knownInfo(c)||c.info.nextnLayers>0).filter(t=>!DRAFT_SPEC.has(t)||c.draftModels==null||c.draftModels.length>0),
-    hint:'draft-mtp usa as camadas MTP do próprio modelo; draft-simple usa um modelo rascunho menor.'},
+    options:c=>SPEC_TYPES.filter(t=>t!=='draft-mtp'||!knownInfo(c)||c.info.nextnLayers>0||hasMtpHead(c)).filter(t=>!DRAFT_SPEC.has(t)||c.draftModels==null||c.draftModels.length>0),
+    hint:'draft-mtp usa as camadas MTP do próprio modelo ou uma cabeça MTP separada (arquivo com mtp no nome, como no Avalon e no tandem.cpp); draft-simple usa um modelo rascunho menor.'},
   {key:'draftModel',engine:'llamacpp',group:'Decodificação especulativa',label:'Modelo rascunho',flag:'-md',kind:'model',modes:['server','cli'],
-    options:c=>(c.draftModels||[]).map(m=>m.path),when:c=>DRAFT_SPEC.has(val(c,'specType'))?null:'Só para os tipos draft-simple e draft-eagle3.'},
+    options:c=>(c.draftModels||[]).map(m=>m.path),when:c=>DRAFT_SPEC.has(val(c,'specType'))||val(c,'specType')==='draft-mtp'?null:'Só para os tipos draft-simple, draft-eagle3 e draft-mtp (cabeça MTP separada).'},
   {key:'draftMax',engine:'llamacpp',group:'Decodificação especulativa',label:'Tokens por rascunho',flag:'--spec-draft-n-max',kind:'int',min:1,max:64,modes:['server','cli'],
     when:c=>val(c,'specType').startsWith('draft-')?null:'Só para os tipos draft-* (os tipos n-gram usam o próprio limite).'},
 
+  // llama.cpp · avançado: opções e variáveis de forks (Avalon, tandem.cpp) ou de builds mais novos.
+  {key:'extraArgs',engine:'llamacpp',group:'Avançado',label:'Argumentos extras do llama-server',flag:'(extra)',kind:'text',modes:['server'],
+    hint:'Separados por espaço; aspas para valores com espaço. Ex.: --moe-cache-cpu-overlap 2 -ubd 256. Rede, porta, chave, modelo e sessões ficam com o launcher.'},
+  {key:'extraEnv',engine:'llamacpp',group:'Avançado',label:'Variáveis de ambiente',flag:'(env)',kind:'text',
+    hint:'NOME=valor separados por ";". Só variáveis GGML_, LLAMA_, AVALON_, TANDEM_, CUDA_, HIP_, HSA_ ou ROCR_. Ex.: GGML_CUDA_MOE_TAIL_SKIP=0'},
   // vLLM
   {key:'context',engine:'vllm',group:'Memória',label:'Contexto (tokens)',flag:'--max-model-len',kind:'int',min:1,max:4194304},
   {key:'gpuMemoryUtilization',engine:'vllm',group:'Memória',label:'Uso de memória da GPU',flag:'--gpu-memory-utilization',kind:'float',min:0.05,max:0.99,step:0.01},
@@ -131,16 +140,50 @@ function validateField(field: Field,value: unknown,c: Ctx) {
   if(field.kind==='float'){const n=Number(text);if(!/^\d+(\.\d+)?$/.test(text)||!Number.isFinite(n)||n<(field.min??0)||n>(field.max??Infinity))throw Error(`${label}: valor inválido.`);return;}
   if(field.kind==='toggle'){if(!['on','off'].includes(text))throw Error(`${label}: use ligado ou desligado.`);return;}
   if(field.kind==='select'){const options=optionsOf(field,c)||[];if(!options.includes(text))throw Error(`${label}: opção não disponível para este modelo.`);return;}
+  if(field.key==='extraArgs'){splitExtraArgs(text);return;}
+  if(field.key==='extraEnv'){parseExtraEnv(text);return;}
   if(field.kind==='text'){if(field.pattern&&!field.pattern.test(text))throw Error(`${label}: valor inválido.`);return;}
   if(field.kind==='model'){if(c.draftModels&&!c.draftModels.some(m=>m.path===text))throw Error(`${label}: escolha um GGUF das pastas de modelos.`);if(!c.draftModels&&/[\0\r\n]/.test(text))throw Error(`${label}: valor inválido.`);return;}
 }
+// Argumentos extras: o launcher monta o processo sem shell, então só divide em palavras (aspas agrupam).
+// Opções que o launcher controla (rede, porta, chave, modelo, sessões) ou que abrem o servidor a
+// ferramentas e URLs privadas ficam de fora: valeriam sobre as do launcher.
+const MANAGED_ARGS=new Set(['-m','--model','-mu','--model-url','-hf','--hf-repo','--host','--port','--api-key','--api-key-file','-a','--alias',
+  '-np','--parallel','-mm','--mmproj','--mmproj-url','--ssl-key-file','--ssl-cert-file','--path','--tools','--agent',
+  '--allow-unauthenticated-tools','--media-allow-private-urls','--cors-origin','--cors-origins']);
+function splitExtraArgs(text: string) {
+  const value=String(text??'').trim();
+  if(!value) return [];
+  if(value.length>2000) throw Error('Argumentos extras: no máximo 2000 caracteres.');
+  if(/[\u0000-\u001f\u007f]/.test(value)) throw Error('Argumentos extras: caracteres de controle não são aceitos.');
+  const out: string[]=[];const re=/"([^"]*)"|'([^']*)'|(\S+)/g;let m: RegExpExecArray | null;
+  while((m=re.exec(value))) out.push(m[1]??m[2]??m[3]);
+  for(const token of out) {
+    const name=token.split('=')[0];
+    if(MANAGED_ARGS.has(name)) throw Error(`Argumentos extras: ${name} é controlado pelo launcher.`);
+  }
+  return out;
+}
+const ENV_NAME=/^(GGML|LLAMA|AVALON|TANDEM|CUDA|HIP|HSA|ROCR)_[A-Z0-9_]{1,64}$/;
+function parseExtraEnv(text: string) {
+  const env: Record<string, string>={};
+  for(const part of String(text??'').split(';').map(s=>s.trim()).filter(Boolean)) {
+    const at=part.indexOf('=');
+    const name=at>0?part.slice(0,at).trim():'',value=at>0?part.slice(at+1).trim():'';
+    if(!ENV_NAME.test(name)) throw Error(`Variáveis de ambiente: "${name||part}" não é permitida. Use NOME=valor com prefixo GGML_, LLAMA_, AVALON_, TANDEM_, CUDA_, HIP_, HSA_ ou ROCR_.`);
+    if(value.length>256||/[\u0000-\u001f\u007f]/.test(value)) throw Error(`Variáveis de ambiente: valor inválido em ${name}.`);
+    env[name]=value;
+  }
+  return env;
+}
+function llamaEnv(settings: any) {return parseExtraEnv(settings?.extraEnv||'');}
 // Valida os campos do motor. Sem informações do modelo (ctx.info ausente) valida só o formato; com elas,
 // também recusa o que o modelo não suporta (ex.: draft-mtp sem camadas MTP).
 function validateParams(settings: any,c: Ctx) {
   if(!settings||typeof settings!=='object') throw Error('Ajustes ausentes.');
   const ctx={...c,settings};
   // Motivos específicos antes da checagem genérica de cada campo.
-  if(c.engine==='llamacpp'&&settings.specType==='draft-mtp'&&knownInfo(c)&&!c.info.nextnLayers) throw Error('Este modelo não tem camadas MTP (draft-mtp).');
+  if(c.engine==='llamacpp'&&settings.specType==='draft-mtp'&&!settings.draftModel&&knownInfo(c)&&!c.info.nextnLayers) throw Error('Este modelo não tem camadas MTP (draft-mtp).');
   if(c.engine==='vllm'&&settings.vllmSpec==='mtp'&&knownInfo(c)&&!c.info.nextnLayers) throw Error('Este modelo não tem camadas MTP.');
   for(const field of fieldsFor(c.engine)) validateField(field,settings[field.key],ctx);
   if(c.engine==='llamacpp') {
@@ -148,7 +191,7 @@ function validateParams(settings: any,c: Ctx) {
     if(Number(ubatch)>Number(batch||2048)&&ubatch!=='') throw Error('Microbatch não pode exceder batch.');
     if(QUANTIZED_CACHE.has(String(settings.cacheV||''))&&settings.flash==='off') throw Error('Cache V quantizado exige Flash Attention ligado ou automático.');
     if(DRAFT_SPEC.has(String(settings.specType||''))&&!settings.draftModel) throw Error('Escolha o modelo rascunho para a decodificação especulativa.');
-    if(settings.specType==='draft-mtp'&&knownInfo(c)&&!c.info.nextnLayers) throw Error('Este modelo não tem camadas MTP (draft-mtp).');
+    if(settings.specType==='draft-mtp'&&!settings.draftModel&&knownInfo(c)&&!c.info.nextnLayers) throw Error('Este modelo não tem camadas MTP (draft-mtp).');
   }
   if(c.engine==='vllm') {
     const tp=Number(settings.tensorParallel||1);
@@ -161,7 +204,7 @@ function validateParams(settings: any,c: Ctx) {
 
 // Argumentos do llama.cpp. mode: 'server' | 'cli' | 'fit' (llama-fit-params aceita só as opções comuns).
 function llamaArgs(settings: any,mode='server') {
-  const a: string[]=[];
+  const a: string[]=[];let extra: string[]=[];
   for(const field of fieldsFor('llamacpp')) {
     const value=settings?.[field.key];
     if(isAuto(field,value)) continue;
@@ -174,10 +217,21 @@ function llamaArgs(settings: any,mode='server') {
       continue;
     }
     if(field.key==='specType'&&text==='none') continue;
+    if(field.key==='extraEnv') continue;
+    if(field.key==='extraArgs') {extra=splitExtraArgs(text);continue;}
     a.push(field.flag,text);
   }
-  return a;
+  // Fração de CPU automática do cache MoE: o padrão do llama.cpp é 0, mas com os especialistas em mmap
+  // (não fixados) a CPU costuma calcular as faltas mais rápido do que o PCIe as envia.
+  if(mode!=='fit'&&Number(settings?.moeCacheMib)>0) {
+    const shareField=fieldsFor('llamacpp').find(f=>f.key==='moeCacheCpuShare');
+    if(isAuto(shareField,settings?.moeCacheCpuShare)) a.push('--moe-cache-cpu-share',autoMoeCpuShare(settings));
+  }
+  return [...a,...extra];
 }
+// Especialistas fixados na memória (-lm none, mlock, dio): a GPU os envia na velocidade total do PCIe.
+const PINNED_LOAD_MODES=new Set(['none','mlock','dio']);
+function autoMoeCpuShare(settings: any) {return PINNED_LOAD_MODES.has(String(settings?.loadMode||'').trim())?'0':'0.95';}
 function vllmArgs(settings: any) {
   const a: string[]=[];
   for(const field of fieldsFor('vllm')) {
@@ -221,7 +275,8 @@ function autoValues(c: Ctx,fit: any=null) {
     put('splitMode','layer','padrão do llama.cpp');put('tensorSplit',fit?.ts||'proporcional à memória livre',fit?.ts?'ajuste automático (fit)':'padrão do llama.cpp');
     put('noKvOffload','off','padrão do llama.cpp');put('loadMode','auto (mmap)','padrão do llama.cpp');
     if(info.expertCount>0)put('cpuMoe',fit?fit.cpuMoe??0:null,'ajuste automático (fit)');
-    put('moeCacheMib',0,'desligado');put('moeCacheCpuShare','0','padrão do llama.cpp');put('cpuFfn',0,'padrão do llama.cpp');
+    put('moeCacheMib',0,'desligado');
+    put('moeCacheCpuShare',autoMoeCpuShare(c.settings),PINNED_LOAD_MODES.has(String(c.settings?.loadMode||'').trim())?'especialistas fixados na memória':'especialistas em mmap (escolha do launcher)');put('cpuFfn',0,'padrão do llama.cpp');
     put('threads',physical,'núcleos físicos');put('threadsBatch',c.settings?.threads||physical,'igual às threads de geração');
     put('batch',2048,'padrão do llama.cpp');put('ubatch',512,'padrão do llama.cpp');
     put('cacheK','f16','padrão do llama.cpp');put('cacheV','f16','padrão do llama.cpp');put('flash','auto','o llama.cpp liga quando o backend suporta');
@@ -322,5 +377,5 @@ function parseRuntimeLog(engine: string,text: string) {
   }
   return out;
 }
-module.exports={parseRuntimeLog,PROFILE_VERSION,CACHE_TYPES,QUANTIZED_CACHE,SPEC_TYPES,VLLM_KV_DTYPES,FIELDS,fieldsFor,isAuto,migrateProfile,validateParams,llamaArgs,vllmArgs,strataArgs,
+module.exports={splitExtraArgs,parseExtraEnv,llamaEnv,MANAGED_ARGS,autoMoeCpuShare,PINNED_LOAD_MODES,parseRuntimeLog,PROFILE_VERSION,CACHE_TYPES,QUANTIZED_CACHE,SPEC_TYPES,VLLM_KV_DTYPES,FIELDS,fieldsFor,isAuto,migrateProfile,validateParams,llamaArgs,vllmArgs,strataArgs,
   autoValues,schemaFor,parseFitOutput,parseDevices};
