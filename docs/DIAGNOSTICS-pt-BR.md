@@ -25,8 +25,8 @@ O registro fica **só na memória** enquanto o launcher está aberto: a janela m
 | Preferências, pastas e perfis | `settings.json` na pasta de dados |
 | Chave permanente da API | `server-api-key.txt` na pasta de dados (não envie a ninguém) |
 | llama.cpp baixado | `engines/` na pasta de dados, um subdiretório por download |
-| vLLM no Linux | `engines/vllm-0.32.0-…` na pasta de dados (ou o ambiente que você escolheu) |
-| vLLM no Windows | Imagem `vllm/vllm-openai:v0.32.0` no Docker Desktop; contêineres `llama-desktop-vllm-…` |
+| vLLM no Linux | `engines/vllm-0.34.0-…` na pasta de dados (ou o ambiente que você escolheu) |
+| vLLM no Windows | Imagem `vllm/vllm-openai:v0.34.0` no Docker Desktop; contêineres `llama-desktop-vllm-…` |
 | Strata / PolyStrata | A pasta onde o instalador deles foi executado |
 | Pacotes de atualização | `updates/` na pasta de dados |
 | Modelos | As pastas escolhidas em **02 · Pastas** |

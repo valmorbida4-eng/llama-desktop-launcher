@@ -359,7 +359,7 @@ async function tuneVllm(model: any,settings: any,{probe,info=null,gpuCount=null,
   await step([{}],()=>'Medição inicial (vLLM)');
   if(!search.results.some(r=>Number.isFinite(r.score))&&!search.stopped)
     throw Error(`A configuração atual não subiu no vLLM: ${search.results.map(r=>r.error).filter(Boolean).join('; ')}`);
-  await step(uniq([String(base.gpuMemoryUtilization||''),'0.85','0.95']).map(v=>({gpuMemoryUtilization:v})),c=>`Uso de memória da GPU: ${c.gpuMemoryUtilization||'0.9'}`);
+  await step(uniq([String(base.gpuMemoryUtilization||''),'0.85','0.95']).map(v=>({gpuMemoryUtilization:v})),c=>`Uso de memória da GPU: ${c.gpuMemoryUtilization||'auto (cache KV extensível)'}`);
   await step(uniq([String(base.kvCacheDtype||''),'fp8']).map(v=>({kvCacheDtype:v})),c=>`Cache KV: ${c.kvCacheDtype||'auto'}`);
   await step(uniq([String(base.maxNumBatchedTokens||''),'2048','8192']).map(v=>({maxNumBatchedTokens:v})),c=>`Tokens por lote: ${c.maxNumBatchedTokens||'auto'}`);
   await step(['','ngram',...(known.nextnLayers>0?['mtp']:[])].map(v=>({vllmSpec:v})),c=>`Especulativa: ${c.vllmSpec||'none'}`);

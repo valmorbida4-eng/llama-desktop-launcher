@@ -9,7 +9,7 @@ Este é o primeiro de três guias. O **Guia de integração** (`INTEGRATION-pt-B
 O Llama Desktop Launcher prepara e inicia um servidor de modelos de linguagem no seu computador e o expõe como uma API compatível com OpenAI. Ele trabalha com três motores:
 
 - **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (versão testada `b12359`) para arquivos **GGUF**. É o motor principal: tem conversa integrada, CLI no terminal, sugestão de ajustes e benchmark.
-- **[vLLM](https://github.com/vllm-project/vllm)** `0.32.0` para **pastas Hugging Face** (`config.json` e pesos `.safetensors`, incluindo AWQ e GPTQ). Roda no Linux por um ambiente Python do launcher e no Windows pelo Docker Desktop.
+- **[vLLM](https://github.com/vllm-project/vllm)** `0.34.0` para **pastas Hugging Face** (`config.json` e pesos `.safetensors`, incluindo AWQ e GPTQ). Roda no Linux por um ambiente Python do launcher e no Windows pelo Docker Desktop.
 - **[Strata](https://github.com/Niko1221/Strata) e [PolyStrata](https://github.com/simplexai-labs/PolyStrata)** para os modelos que esses projetos instalam. Você instala com o instalador oficial deles, e o launcher só inicia o servidor.
 
 Você escolhe o acesso: somente este computador, rede interna (LAN) ou Tailscale. Fora do próprio computador, a API exige uma chave, e você pode compartilhar o modelo com links e comandos que podem ser revogados.
@@ -134,7 +134,7 @@ O vLLM serve modelos em formato Hugging Face: uma pasta com `config.json` e peso
 ### Linux
 
 1. Instale `python3` e `python3-venv` (Python 3.10 a 3.13) e o driver NVIDIA com CUDA.
-2. Em **Configurações > 01B · Outros motores**, clique em **Instalar vLLM**. O launcher cria um ambiente Python na pasta de dados e roda `pip install vllm==0.32.0` (vários GB). O andamento aparece no **Registro do motor**, na tela **Llama**.
+2. Em **Configurações > 01B · Outros motores**, clique em **Instalar vLLM**. O launcher cria um ambiente Python na pasta de dados e roda `pip install vllm==0.34.0` (vários GB). O andamento aparece no **Registro do motor**, na tela **Llama**.
 3. Se você já tem um ambiente com o vLLM, use **Usar ambiente existente** e escolha a pasta que contém `bin/vllm`.
 
 O pacote do pip só traz suporte a NVIDIA CUDA. Para AMD (ROCm), instale o vLLM pela [documentação oficial](https://docs.vllm.ai/en/latest/getting_started/installation/gpu.html) e aponte o ambiente pronto.
@@ -142,7 +142,7 @@ O pacote do pip só traz suporte a NVIDIA CUDA. Para AMD (ROCm), instale o vLLM 
 ### Windows
 
 1. Instale o [Docker Desktop](https://docs.docker.com/desktop/features/gpu/) com o backend WSL2 e suporte a GPU NVIDIA, e deixe-o aberto.
-2. Em **01B · Outros motores**, clique em **Baixar imagem do vLLM**. O launcher baixa `vllm/vllm-openai:v0.32.0` (cerca de 10 GB). Use **Verificar de novo** depois de abrir o Docker Desktop.
+2. Em **01B · Outros motores**, clique em **Baixar imagem do vLLM**. O launcher baixa `vllm/vllm-openai:v0.34.0` (cerca de 10 GB). Use **Verificar de novo** depois de abrir o Docker Desktop.
 3. Ao iniciar o servidor, o modelo é montado no contêiner **só para leitura** e sem acesso à internet (`HF_HUB_OFFLINE=1`): a pasta precisa estar completa. O contêiner é parado junto com o servidor.
 
 ### O que vale no vLLM
@@ -265,7 +265,7 @@ O launcher sempre passa `-fit on`: com campos em Auto, o llama.cpp ajusta camada
 | Campo | Argumento | Aparece quando |
 | --- | --- | --- |
 | Contexto | `--max-model-len` | Sempre. Em Auto, vale o `max_position_embeddings` do modelo. |
-| Uso de memória da GPU | `--gpu-memory-utilization` | Sempre (0,05 a 0,99; padrão 0,9). |
+| Uso de memória da GPU | `--gpu-memory-utilization` | Só quando informado (0,05 a 0,99). Vazio usa a memória livre após o aquecimento; no vLLM 0.34 qualquer valor desliga o cache KV extensível. |
 | Tipo do cache KV | `--kv-cache-dtype` | Sempre: `auto`, `float16`, `bfloat16`, `fp8`, `fp8_e4m3`, `fp8_e5m2`. fp8 depende da GPU. |
 | Pesos na RAM / Cache KV na RAM (GiB) | `--cpu-offload-gb` / `--kv-offloading-size` | Sempre. |
 | Tokens por lote | `--max-num-batched-tokens` | Sempre. |

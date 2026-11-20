@@ -27,8 +27,8 @@ The log lives **in memory only** while the launcher is open: the window shows th
 | Preferences, folders and profiles | `settings.json` in the data folder |
 | Permanent API key | `server-api-key.txt` in the data folder (never send it to anyone) |
 | Downloaded llama.cpp | `engines/` in the data folder, one subfolder per download |
-| vLLM on Linux | `engines/vllm-0.32.0-…` in the data folder (or the environment you chose) |
-| vLLM on Windows | The `vllm/vllm-openai:v0.32.0` image in Docker Desktop; `llama-desktop-vllm-…` containers |
+| vLLM on Linux | `engines/vllm-0.34.0-…` in the data folder (or the environment you chose) |
+| vLLM on Windows | The `vllm/vllm-openai:v0.34.0` image in Docker Desktop; `llama-desktop-vllm-…` containers |
 | Strata / PolyStrata | The folder where their installer ran |
 | Update packages | `updates/` in the data folder |
 | Models | The folders chosen in **02 · Pastas** |

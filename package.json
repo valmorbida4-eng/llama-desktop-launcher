@@ -1,6 +1,6 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "private": true,
   "license": "MIT",
   "author": "Célio <valmorbida4@gmail.com>",
@@ -26,9 +26,9 @@
     "smoke:engines": "npm run build && electron scripts/smoke-engines-ui.js"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "electron": "44.9.1",
-    "electron-builder": "26.15.3",
+    "@types/node": "^22.20.5",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
     "typescript": "^7.0.2"
   },
   "build": {

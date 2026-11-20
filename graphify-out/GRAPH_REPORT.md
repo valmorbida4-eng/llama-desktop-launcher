@@ -1,7 +1,7 @@
 # Graph Report - llama-desktop-launcher  (2026-11-20)
 
 ## Corpus Check
-- 109 files · ~78,206 words
+- 109 files · ~78,291 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 5, .toml 1, .css 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e3d71af0`
+- Built from commit: `163fba1c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

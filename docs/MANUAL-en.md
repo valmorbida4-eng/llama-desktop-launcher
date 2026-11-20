@@ -9,7 +9,7 @@ This is the first of three guides. The **Integration guide** (`INTEGRATION-en`) 
 Llama Desktop Launcher prepares and starts a language model server on your computer and exposes it as an OpenAI-compatible API. It works with three engines:
 
 - **[llama.cpp](https://github.com/ggml-org/llama.cpp)** (tested build `b12359`) for **GGUF** files. It is the main engine: it has the integrated chat, the terminal CLI, settings suggestions and the benchmark.
-- **[vLLM](https://github.com/vllm-project/vllm)** `0.32.0` for **Hugging Face folders** (`config.json` and `.safetensors` weights, including AWQ and GPTQ). It runs on Linux through a launcher-managed Python environment and on Windows through Docker Desktop.
+- **[vLLM](https://github.com/vllm-project/vllm)** `0.34.0` for **Hugging Face folders** (`config.json` and `.safetensors` weights, including AWQ and GPTQ). It runs on Linux through a launcher-managed Python environment and on Windows through Docker Desktop.
 - **[Strata](https://github.com/Niko1221/Strata) and [PolyStrata](https://github.com/simplexai-labs/PolyStrata)** for the models those projects install. You install them with their official installer; the launcher only starts the server.
 
 You choose the access: this computer only, local network (LAN) or Tailscale. Outside this computer the API requires a key, and you can share the model with revocable links and commands.
@@ -134,7 +134,7 @@ vLLM serves models in Hugging Face format: a folder with `config.json` and `.saf
 ### Linux
 
 1. Install `python3` and `python3-venv` (Python 3.10 to 3.13) and the NVIDIA driver with CUDA.
-2. In **Settings > 01B · Outros motores**, click **Instalar vLLM**. The launcher creates a Python environment in the data folder and runs `pip install vllm==0.32.0` (several GB). Progress appears in the **Registro do motor** (engine log) on the **Llama** screen.
+2. In **Settings > 01B · Outros motores**, click **Instalar vLLM**. The launcher creates a Python environment in the data folder and runs `pip install vllm==0.34.0` (several GB). Progress appears in the **Registro do motor** (engine log) on the **Llama** screen.
 3. If you already have an environment with vLLM, use **Usar ambiente existente** and choose the folder that contains `bin/vllm`.
 
 The pip package only supports NVIDIA CUDA. For AMD (ROCm), install vLLM following the [official documentation](https://docs.vllm.ai/en/latest/getting_started/installation/gpu.html) and point to that environment.
@@ -142,7 +142,7 @@ The pip package only supports NVIDIA CUDA. For AMD (ROCm), install vLLM followin
 ### Windows
 
 1. Install [Docker Desktop](https://docs.docker.com/desktop/features/gpu/) with the WSL2 backend and NVIDIA GPU support, and keep it running.
-2. In **01B · Outros motores**, click **Baixar imagem do vLLM**. The launcher pulls `vllm/vllm-openai:v0.32.0` (about 10 GB). Use **Verificar de novo** (Check again) after opening Docker Desktop.
+2. In **01B · Outros motores**, click **Baixar imagem do vLLM**. The launcher pulls `vllm/vllm-openai:v0.34.0` (about 10 GB). Use **Verificar de novo** (Check again) after opening Docker Desktop.
 3. When the server starts, the model is mounted in the container **read-only** and without internet access (`HF_HUB_OFFLINE=1`): the folder must be complete. The container stops with the server.
 
 ### What vLLM uses
@@ -265,7 +265,7 @@ The launcher always passes `-fit on`: with fields on Auto, llama.cpp fits layers
 | Field | Argument | Shown when |
 | --- | --- | --- |
 | Context | `--max-model-len` | Always. On Auto, the model's `max_position_embeddings` applies. |
-| GPU memory utilization | `--gpu-memory-utilization` | Always (0.05 to 0.99; default 0.9). |
+| GPU memory utilization | `--gpu-memory-utilization` | Only when set (0.05 to 0.99). Empty uses the memory free after warmup; in vLLM 0.34 any value turns off the extensible KV cache. |
 | KV cache type | `--kv-cache-dtype` | Always: `auto`, `float16`, `bfloat16`, `fp8`, `fp8_e4m3`, `fp8_e5m2`. fp8 depends on the GPU. |
 | Weights in RAM / KV cache in RAM (GiB) | `--cpu-offload-gb` / `--kv-offloading-size` | Always. |
 | Tokens per batch | `--max-num-batched-tokens` | Always. |
