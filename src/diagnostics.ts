@@ -91,6 +91,7 @@ function buildReport(data: any) {
     add(`- Motor ${a.engineLabel} · ${a.scope} ${a.host}:${a.port} · ID do modelo na API ${a.modelId} · contexto ${a.context} · sessões ${a.parallel}`);
     add(`- Compartilhamento: ${a.sharing?'ativo':'inativo'}${a.container?` · contêiner ${a.container}`:''}`);
   }
+  if(data.decider) add(`- Decisor ativo: ${data.decider.name} (${data.decider.type}) · ${data.decider.scope} porta ${data.decider.port} · dispositivo ${data.decider.device||'automático'} · contexto ${data.decider.context}`);
   add();
   add('## Atualizações');
   add(`- Verificação automática: ${yes(data.update.enabled)} · última verificação: ${data.update.lastCheck||'nunca'}`);

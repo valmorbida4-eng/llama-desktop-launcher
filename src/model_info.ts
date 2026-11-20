@@ -81,7 +81,7 @@ function ggufInfo(kv: Record<string, any>) {
   const recurrent=Object.keys(kv).some(k=>k.startsWith(`${arch}.ssm.`)||k.startsWith(`${arch}.wkv.`)||k.startsWith(`${arch}.shortconv.`));
   return {format:'gguf',architecture:arch,name:typeof kv['general.name']==='string'?kv['general.name']:'',blockCount:get('block_count'),contextLength:get('context_length'),
     expertCount,expertUsedCount:get('expert_used_count')||0,leadingDenseBlocks:get('leading_dense_block_count')||0,nextnLayers:get('nextn_predict_layers')||0,
-    slidingWindow,recurrent,fileType:num(kv['general.file_type'])};
+    slidingWindow,recurrent,fileType:num(kv['general.file_type']),decision:require('./decider').decisionType(kv)};
 }
 // Tipo 'model.kind' derivado: denso, MoE, SWA, híbrido/recorrente, com camadas MTP.
 function hfInfo(config: any) {

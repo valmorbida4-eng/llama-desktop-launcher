@@ -66,6 +66,13 @@ interface RendererApi {
   onStopped(callback: (value: number | null) => void): void;
   onChatOutput(callback: (value: ChatOutput) => void): void;
   onChatStopped(callback: (value: ProcessExit) => void): void;
+  deciderDevices(): Promise<{ name: string; description: string; totalMiB: number; freeMiB: number }[]>;
+  startDecider(modelPath: string, options: { device: string; context: string; host: string }): Promise<any>;
+  stopDecider(): Promise<boolean>;
+  copyDeciderEndpoint(): Promise<string>;
+  testDecider(input: { state: string; question: string; options: string }): Promise<{ headline: string; rows: [string, number][]; ms: number }>;
+  onDeciderLog(callback: (value: string) => void): void;
+  onDeciderStopped(callback: (value: number | string | null) => void): void;
 }
 
 declare global {
