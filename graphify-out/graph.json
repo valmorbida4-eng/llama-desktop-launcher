@@ -1074,7 +1074,7 @@
       "file_type": "code",
       "norm_label": "launchserver()",
       "source_file": "src/renderer.ts",
-      "source_location": "L226"
+      "source_location": "L229"
     },
     {
       "id": "src_renderer_loadguidance",
@@ -1338,7 +1338,7 @@
       "file_type": "code",
       "norm_label": "updateclient()",
       "source_file": "src/renderer.ts",
-      "source_location": "L218"
+      "source_location": "L221"
     },
     {
       "id": "src_renderer_updateenginecontrols",
@@ -21203,7 +21203,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L227",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -21215,7 +21215,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L228",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -21227,7 +21227,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L231",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -21239,7 +21239,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L234",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
@@ -21251,7 +21251,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L236",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -22547,7 +22547,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L218",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -22559,7 +22559,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L226",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
@@ -38848,5 +38848,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "738040c8c1730b81a522e03827eec8e6244afcf5"
+  "built_at_commit": "197b68b6887bd507cdaabb3284cd3d7dc0ea25bb"
 }

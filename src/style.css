@@ -13,3 +13,4 @@
 .runtime-values{background:#13261f;border:1px solid #2f5544;border-radius:9px;color:#bfe8d1;padding:8px 12px;font-size:12px;margin:-6px 0 12px}
 @media(max-width:850px){.tuning-actions{grid-template-columns:1fr}}
 .fork-info{margin:10px 0;padding:8px 10px;border:1px solid #34454b;background:#0e191e;border-radius:9px;color:#bed0d5;font-size:12px}.fork-info summary{cursor:pointer;font-weight:600}.fork-info p,.fork-info ul{margin:8px 0}.fork-info li{margin:4px 0}.fork-info code{font-size:11px}
+.save-message{font-size:13px;color:#9fe0bd}.save-message.error{color:#e7a9ae}

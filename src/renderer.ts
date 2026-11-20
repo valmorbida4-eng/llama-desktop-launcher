@@ -111,7 +111,7 @@ function updateModelDetail(){const m=selected();if(!m){const count=snapshot?.mod
   const engine=engineOf(m),engineText=engine?` · ${engine.label}${engine.ready?'':' (motor pendente)'}`:'';
   const note=m.engine==='strata'?` · contexto, quantização e GPU vêm da configuração do Strata${m.distribution==='PolyStrata'?`; Sessões simultâneas não se aplicam ao PolyStrata (a configuração dele usa ${m.parallel||1})`:''}`:'';
   const detail=`${m.size?`${(m.size/1024**3).toFixed(2)} GB · `:''}${m.path}${m.projector?' · projetor multimodal':''}${engineText}${note}`;$('model-detail').textContent=detail;$('settings-model-detail').textContent=`${m.name} · ajustes salvos só para este modelo.`;updateEngineControls();const changed=activePath!==m.path;activePath=m.path;
-  if(changed||schemaPath!==m.path){schemaPath=m.path;schema=null;values=normalized(snapshot.config.profiles[m.path]||defaultProfiles[m.engine||'llamacpp']||{});$('tune-results').hidden=true;loadSchema(true).catch(e=>message(e.message,true));}}
+  if(changed||schemaPath!==m.path){schemaPath=m.path;schema=null;values=normalized(snapshot.config.profiles[m.path]||defaultProfiles[m.engine||'llamacpp']||{});$('tune-results').hidden=true;$('save-message').textContent='';loadSchema(true).catch(e=>message(e.message,true));}}
 function bytes(value){if(value==null||!Number.isFinite(Number(value)))return '—';const n=Number(value);if(n<=0)return '0 B';const units=['B','KB','MB','GB','TB'];let x=n,unit=0;while(x>=1024&&unit<units.length-1){x/=1024;unit++;}return `${x.toFixed(unit?1:0)} ${units[unit]}`;}
 function renderGuidance(data){guidance=data||null;if(!data){$('guidance-summary').textContent='Não foi possível carregar as recomendações agora.';$('suggestions').replaceChildren();return;}
   const h=data.hardware||{};$('models-memory').textContent=bytes(h.memoryBytes);$('models-cpu').textContent=`${h.logicalCores||'—'} threads`;$('disk-space').textContent=bytes(data.availableDiskBytes);$('guidance-summary').textContent=data.summary||`Sugestões com base em ${h.cpu||'este hardware'} (${h.platform||''} ${h.arch||''}).`;
@@ -209,7 +209,10 @@ $('tune').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)thr
     $('tuning-message').textContent=`Melhor: ${b.label} · geração ${b.generationTps.toFixed(1)} tokens/s · prompt ${b.promptTps.toFixed(1)} tokens/s.${end} Confira os campos e salve o perfil.`;}
   finally{$('cancel-tune').hidden=true;updateEngineControls();}});
 $('cancel-tune').onclick=()=>action(async()=>{$('tuning-message').textContent='Cancelando o teste…';await window.llama.cancelTune();});
-$('save-settings-profile').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para salvar os ajustes.');await window.llama.saveProfile(m.path,settings());$('settings-message').textContent='Ajustes salvos para este modelo.';$('message').textContent='Ajustes salvos para este modelo.';});
+$('save-settings-profile').onclick=()=>action(async()=>{const box=$('save-message');box.classList.remove('error');box.textContent='Salvando…';
+  try{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para salvar os ajustes.');await window.llama.saveProfile(m.path,settings());}
+  catch(error){box.textContent=error.message;box.classList.add('error');throw error;}
+  const text=`Ajustes salvos para este modelo às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`;box.textContent=text;$('settings-message').textContent=text;$('message').textContent=text;});
 $('access-host').onchange=updateNetwork;
 $('show-key').onclick=()=>action(async()=>{if(!$('key-value').hidden){$('key-value').hidden=true;$('key-value').textContent='';return;}$('key-value').textContent=await window.llama.getKey();$('key-value').hidden=false;});
 $('copy-key').onclick=()=>action(async()=>{await window.llama.copyKey();message('Chave copiada. Evite colá-la em locais públicos.');});$('rotate-key').onclick=()=>action(async()=>{$('key-value').textContent=await window.llama.rotateKey();$('key-value').hidden=false;message('Nova chave criada. A anterior deixou de funcionar.');});
