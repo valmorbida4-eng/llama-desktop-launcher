@@ -9,6 +9,7 @@ test('identifica llama.cpp oficial, Avalon e tandem.cpp pelo --version e por uma
   assert.equal(build.identifyBuild(version,'--moe-cache-cpu-overlap N').flavor,'avalon');
   assert.equal(build.identifyBuild('','--moe-cache-margin-mib N').label,'tandem.cpp');
   assert.equal(build.identifyBuild('sem versão','').build,null);
+  assert.deepEqual(build.parseVersion('Version: 0.9.0-dev (build 12110, commit cd959bae9)\nbuilt with Clang 20.1.8 for Windows x86_64'),{build:12110,commit:'cd959bae9'});
 });
 
 test('descrição: aponta a versão testada só no llama.cpp oficial e a falta do llama-bench',()=>{

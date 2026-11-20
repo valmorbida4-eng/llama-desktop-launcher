@@ -95,7 +95,7 @@ function currentBuild() {const b=configuration.engineBuild;return b&&b.dir===con
 let buildProbe: Promise<any> | null=null;
 function refreshBuild(force=false) {
   const dir=configuration.engineDir;
-  if(!dir||(!force&&currentBuild())) return Promise.resolve(currentBuild());
+  if(!dir||(!force&&currentBuild()?.build)) return Promise.resolve(currentBuild());
   buildProbe=engineBuild.probeBuild(dir).then((b: any)=>{if(b&&configuration.engineDir===dir){configuration.engineBuild={...b,dir};save();send('engines-changed',null);}return currentBuild();}).catch(()=>null);
   return buildProbe;
 }

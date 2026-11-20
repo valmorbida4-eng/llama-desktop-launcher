@@ -29,7 +29,7 @@ function buildGuidance({ hardware, gpu = {}, availableDiskBytes = null, model = 
   const suggestions = [
     { title: 'Modelos Quantizados', detail: `Inicie com modelos de ${fit.quantized}. Sugerimos a quantização Q4_K_M (até cerca de ${fit.maxFileGiB} GB) pelo equilíbrio de memória, mas você pode optar por Q5 ou Q8 se sua RAM permitir. Exemplo sugerido: ${fit.example}.`, kind: 'quantized', exampleUrl: fit.exampleUrl, exampleName: fit.example, buttonText: 'Buscar quantizados no HF ↗' },
     { title: 'Modelos MoE (Mixture of Experts)', detail: `Modelos com especialistas esparsos. O arquivo total no disco e na RAM precisa comportar todos os especialistas (sugerimos arquivos de até cerca de ${fit.maxFileGiB} GB). Também disponíveis em Q4_K_M, Q5, Q8, etc.`, kind: 'moe', buttonText: 'Buscar MoE no HF ↗' },
-    { title: 'Modelos Densos (sem quantização)', detail: `Modelos originais sem quantização (F16/BF16); preservam a fidelidade máxima, mas exigem muito mais RAM e espaço em disco (comece com até ${fit.full}).`, kind: 'dense', buttonText: 'Buscar densos F16 ↗' },
+    { title: 'Modelos Densos (sem quantização)', detail: `Modelos originais sem quantização (F16/BF16); preservam a fidelidade máxima, mas exigem muito mais RAM e espaço em disco (comece com ${fit.full}).`, kind: 'dense', buttonText: 'Buscar densos F16 ↗' },
   ];
   const current = model ? `Modelo atual: ${model.name || 'GGUF selecionado'} (${(model.size / GIB).toFixed(2)} GB).` : 'Nenhum modelo foi instalado ainda.';
   const currentSettings = settings ? `Ajustes atuais: ${JSON.stringify(settings)}.` : '';
