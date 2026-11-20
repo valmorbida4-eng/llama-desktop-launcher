@@ -2,7 +2,7 @@
 
 Status: **aprovada com ajustes em 2026-11-08** (seção 5). Fontes conferidas: `common/arg.cpp`, `common/common.h`,
 `common/speculative.cpp`, `tools/llama-bench/llama-bench.cpp` e `tools/fit-params/fit-params.cpp` do llama.cpp
-**b12211**; `vllm/engine/arg_utils.py`, `vllm/config/cache.py` e `vllm/config/speculative.py` do vLLM **v0.32.0**;
+**b12211**; `vllm/engine/arg_utils.py`, `vllm/config/cache.py` e `vllm/config/speculative.py` do vLLM **v0.34.0**;
 `serve/server.py` atual do Strata (Niko1221) e do PolyStrata (simplexai-labs).
 
 ## Correções ao pedido original, achadas nas fontes
@@ -52,12 +52,12 @@ valor automático pode ser conhecido, ele aparece ao lado: `auto · 28 camadas (
 Fora do esquema: opções de amostragem, RPC, `-ot` manual e as dezenas de ajustes finos de n-gram. `-fit on`
 continua sempre ligado.
 
-### vLLM 0.32.0 (pasta Hugging Face)
+### vLLM 0.34.0 (pasta Hugging Face)
 
 | Campo | Opção | Aparece quando | Valor automático mostrado |
 |---|---|---|---|
 | Contexto | `--max-model-len` | sempre | `max_position_embeddings` do config.json |
-| Uso de memória da GPU | `--gpu-memory-utilization` | sempre | 0,90 |
+| Uso de memória da GPU | `--gpu-memory-utilization` | só quando informado (um valor desliga o cache KV extensível do 0.34) | automático: memória livre após o aquecimento |
 | Tipo do cache KV | `--kv-cache-dtype auto/float16/bfloat16/fp8/fp8_e4m3/fp8_e5m2` | sempre | auto (tipo do modelo) |
 | Tokens por lote | `--max-num-batched-tokens` | sempre | o vLLM decide |
 | Cache de prefixo | `--enable-prefix-caching` / `--no-enable-prefix-caching` | sempre | ligado |

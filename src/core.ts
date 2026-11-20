@@ -54,7 +54,7 @@ function recommendVllm(model: any, info: any, gpus: any[]=[]) {
   const free=Math.max(0,single*tp*0.9-weights);
   const byMemory=free>=24?32768:free>=8?16384:free>=3?8192:4096;
   const context=known.contextLength?Math.min(known.contextLength,byMemory):byMemory;
-  const result: Record<string, any>={context,gpuMemoryUtilization:'0.9',tensorParallel:tp>1?String(tp):''};
+  const result: Record<string, any>={context,gpuMemoryUtilization:'',tensorParallel:tp>1?String(tp):''};
   if (tp>1 && known.expertCount>0) result.expertParallel='on';
   if (known.nextnLayers>0) Object.assign(result,{vllmSpec:'mtp',vllmSpecTokens:String(Math.max(1,known.nextnLayers))});
   return result;

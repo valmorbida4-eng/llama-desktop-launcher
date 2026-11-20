@@ -1,7 +1,7 @@
 'use strict';
 // Esquema dos parâmetros de cada motor: quais existem, quando se aplicam ao modelo e ao hardware, como
 // validar e como viram argumentos. Valor '' = automático (o launcher não passa a opção e o motor decide).
-// Conferido em common/arg.cpp do llama.cpp b12359 (v1.0.0), vllm/engine/arg_utils.py do vLLM 0.32.0 e no
+// Conferido em common/arg.cpp do llama.cpp b12359 (v1.0.0), vllm/engine/arg_utils.py do vLLM 0.34.0 e no
 // serve/server.py do Strata e do PolyStrata. Ver docs/adr/model-parameters-per-engine.md.
 
 const PROFILE_VERSION=2;
@@ -93,7 +93,7 @@ const FIELDS: Field[]=[
     hint:'NOME=valor separados por ";". Só variáveis GGML_, LLAMA_, AVALON_, TANDEM_, CUDA_, HIP_, HSA_ ou ROCR_. Ex.: GGML_CUDA_MOE_TAIL_SKIP=0'},
   // vLLM
   {key:'context',engine:'vllm',group:'Memória',label:'Contexto (tokens)',flag:'--max-model-len',kind:'int',min:1,max:4194304},
-  {key:'gpuMemoryUtilization',engine:'vllm',group:'Memória',label:'Uso de memória da GPU',flag:'--gpu-memory-utilization',kind:'float',min:0.05,max:0.99,step:0.01},
+  {key:'gpuMemoryUtilization',engine:'vllm',group:'Memória',label:'Uso de memória da GPU',flag:'--gpu-memory-utilization',kind:'float',min:0.05,max:0.99,step:0.01,hint:'No vLLM 0.34, informar um valor desliga o cache KV extensível; deixe em Auto salvo se a latência por token subir'},
   {key:'kvCacheDtype',engine:'vllm',group:'Memória',label:'Tipo do cache KV',flag:'--kv-cache-dtype',kind:'select',options:VLLM_KV_DTYPES,hint:'fp8 depende da GPU.'},
   {key:'cpuOffloadGb',engine:'vllm',group:'Memória',label:'Pesos na RAM (GiB)',flag:'--cpu-offload-gb',kind:'float',min:0,max:4096,step:0.5},
   {key:'kvOffloadGb',engine:'vllm',group:'Memória',label:'Cache KV na RAM (GiB)',flag:'--kv-offloading-size',kind:'float',min:0,max:4096,step:0.5},
@@ -284,7 +284,7 @@ function autoValues(c: Ctx,fit: any=null) {
     put('kvUnified','off','o launcher fixa as sessões');put('specType','none','padrão do llama.cpp');put('draftMax',3,'padrão do llama.cpp');
   }
   if(c.engine==='vllm') {
-    put('context',info.contextLength,'max_position_embeddings do modelo');put('gpuMemoryUtilization','0.9','padrão do vLLM');
+    put('context',info.contextLength,'max_position_embeddings do modelo');put('gpuMemoryUtilization','memória livre após o aquecimento','cache KV extensível do vLLM 0.34');
     put('kvCacheDtype',info.dtype?`auto (${info.dtype})`:'auto','tipo do modelo');put('cpuOffloadGb',0,'padrão do vLLM');put('kvOffloadGb',0,'padrão do vLLM');
     put('maxNumBatchedTokens','o vLLM decide','padrão do vLLM');put('prefixCaching','on','padrão do vLLM');put('enforceEager','off','padrão do vLLM');
     put('dtype',info.dtype?`auto (${info.dtype})`:'auto','config.json');put('tensorParallel',1,'padrão do vLLM');put('expertParallel','off','padrão do vLLM');

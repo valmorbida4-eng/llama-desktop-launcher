@@ -10,7 +10,7 @@ const params=require('./params');
 const modelInfo=require('./model_info');
 
 // Versão do vLLM testada com o launcher (pip no Linux, imagem Docker no Windows).
-const VLLM_VERSION='0.32.0';
+const VLLM_VERSION='0.34.0';
 const VLLM_IMAGE=`vllm/vllm-openai:v${VLLM_VERSION}`;
 const VLLM_CONTAINER_PREFIX='llama-desktop-vllm-';
 const ENGINE_IDS=['llamacpp','vllm','strata'];
