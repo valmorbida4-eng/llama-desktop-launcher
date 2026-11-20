@@ -19,7 +19,9 @@ const links=Object.freeze({
 });
 
 function parseVersion(text: string) {
-  const m=/version:\s*(\d+)\s*\(([0-9a-f]{6,40})\)/i.exec(String(text||''));
+  // Formato antigo: "version: 12110 (cd959bae9)"; novo: "Version: 0.9.0-dev (build 12110, commit cd959bae9)".
+  const t=String(text||'');
+  const m=/version:\s*(\d+)\s*\(([0-9a-f]{6,40})\)/i.exec(t)||/\(build\s+(\d+),\s*commit\s+([0-9a-f]{6,40})\)/i.exec(t);
   return m?{build:Number(m[1]),commit:m[2]}:{build:null,commit:null};
 }
 function identifyBuild(versionText: string,helpText: string) {

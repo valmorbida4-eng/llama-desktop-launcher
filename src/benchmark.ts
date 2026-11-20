@@ -30,6 +30,7 @@ function execute(file: string,args: string[],{timeoutMs=600000,signal,cwd,env}: 
 }
 
 // Dispositivos que o llama.cpp instalado enxerga (nome, memória total e livre).
+const ROW_SPLIT_DEVICE=/^(CUDA|ROCm|HIP|MUSA|SYCL)\d+$/i;
 async function listDevices(engineDir: string,{run=execute}: any={}) {
   const file=exe(engineDir,'llama-server');
   if(!fs.existsSync(file)) return null;
@@ -273,7 +274,8 @@ async function tune(engineDir: string,model: any,settings: any,onProgress?: (tex
   await benchStage(uniq([String(base.ubatch||''),'','256','1024']).filter(v=>v===''||Number(v)<=batch).map(v=>({ubatch:v})),c=>`Microbatch: ${c.ubatch||'512 (auto)'}`);
   const cpuWork=!gpu||Number(base.cpuMoe||0)>0||(blocks&&base.gpuLayers!=='all'&&Number(base.gpuLayers)<blocks);
   if(cpuWork) await benchStage(uniq([String(base.threads||''),String(physical),String(Math.max(1,physical-2)),String(Math.max(1,Math.ceil(physical/2))),String(logical)]).map(v=>({threads:v})),c=>`Threads: ${c.threads||physical}`);
-  if(devices&&devices.length>=2) await benchStage(uniq([base.splitMode||'','','row']).map(v=>({splitMode:v})),c=>`Divisão entre GPUs: ${c.splitMode||'layer (auto)'}`);
+  // -sm row exige buffers divididos, que só CUDA/ROCm/MUSA/SYCL oferecem; no Vulkan o modelo nem carrega.
+  if(devices&&devices.length>=2&&devices.every((d: any)=>ROW_SPLIT_DEVICE.test(d?.name||''))) await benchStage(uniq([base.splitMode||'','','row']).map(v=>({splitMode:v})),c=>`Divisão entre GPUs: ${c.splitMode||'layer (auto)'}`);
 
   // 2. llama-server curto, só com tempo sobrando e quando há o que medir.
   const serverKeys: Record<string, string>[][]=[];

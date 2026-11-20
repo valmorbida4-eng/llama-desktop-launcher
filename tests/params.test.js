@@ -306,3 +306,11 @@ test('autotuning do cache MoE: tamanhos × frações, depois dio com o vencedor 
   assert.equal(moeRuns.length,1+2*3+3,'sem cache, 2 tamanhos × 3 frações e 3 frações com dio');
   assert.equal(result.settings.moeCacheMib,'2048');assert.equal(result.settings.moeCacheCpuShare,'0.5');assert.equal(result.settings.loadMode,'dio');
 });
+
+test('autotuning: divisão row só é testada em GPUs que suportam buffers divididos',async()=>{
+  const labels=async devices=>{const deps={fit:async()=>({ngl:'all',ctx:4096,cpuMoe:0}),bench:async()=>({promptTps:100,generationTps:10}),server:null};
+    const r=await benchmark.tune('/x',{path:'m.gguf'},{},()=>{},undefined,{budgetMinutes:30,info:{expertCount:0,blockCount:30},devices,hw:{physicalCores:4,logicalCores:8},deps});
+    return r.results.map(row=>row.label);};
+  assert.ok(!(await labels([{name:'Vulkan0'},{name:'Vulkan1'}])).some(l=>/Divisão entre GPUs/.test(l)));
+  assert.ok((await labels([{name:'CUDA0'},{name:'CUDA1'}])).includes('Divisão entre GPUs: row'));
+});
