@@ -259,7 +259,7 @@ The **Diagnostics guide** covers each case and the app's messages in detail.
 
 ## 11. Local control API (DevTools)
 
-Since version 0.12.0, another program on this computer (such as DevTools) can control the launcher: list models, start and stop the main server and the decider, and close the launcher. The API stays off until you turn it on.
+Since version 0.12.1, another program on this computer (such as DevTools) can control the launcher: list models, start and stop the main server and the decider, and close the launcher. The API stays off until you turn it on.
 
 ### Turn it on
 

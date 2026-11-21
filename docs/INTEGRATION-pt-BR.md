@@ -257,7 +257,7 @@ O **Guia de diagnóstico** detalha cada caso e as mensagens do aplicativo.
 
 ## 11. API de controle local (DevTools)
 
-A partir da versão 0.12.0, outro programa deste computador (como o DevTools) pode controlar o launcher: listar os modelos, iniciar e parar o servidor principal e o decisor e fechar o launcher. A API fica desligada até você ativá-la.
+A partir da versão 0.12.1, outro programa deste computador (como o DevTools) pode controlar o launcher: listar os modelos, iniciar e parar o servidor principal e o decisor e fechar o launcher. A API fica desligada até você ativá-la.
 
 ### Ativar
 

@@ -12,4 +12,4 @@ O DevTools precisa abrir o launcher pelo atalho do Windows, escolher modelos e l
 - **Respostas síncronas.** `start` responde quando o modelo carregou (ou com o erro do motor) e `stop` quando o processo terminou, para o cliente não precisar consultar o estado em laço. Um segundo `start` do mesmo papel durante o carregamento recebe 409; `stop` interrompe o carregamento.
 - **Uma instância só** (`requestSingleInstanceLock`): abrir pelo atalho com o launcher aberto foca a janela existente em vez de criar outra que disputaria a porta 8787 e as portas dos servidores.
 
-É funcionalidade nova compatível: versão 0.12.0 conforme SemVer.
+É funcionalidade nova compatível (MINOR). Sai como 0.12.1 porque a tag `v0.12.0` foi criada por engano no commit da 0.11.1; o build dela parou no `version:check` e não publicou release. As regras do repositório impedem apagar tags, então ela fica sem release.

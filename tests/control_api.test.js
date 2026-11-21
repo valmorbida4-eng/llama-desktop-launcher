@@ -150,7 +150,9 @@ test('rotas, métodos, conflitos e falhas devolvem o status HTTP certo', async (
     assert.equal((await request('POST', '/v1/control/state', { body: {} })).status, 405);
     const failed = await request('POST', '/v1/control/start', { body: { role: 'chat', model_id: failing.id } });
     assert.equal(failed.status, 500);
+    assert.equal(failed.json.error.code, 'start_failed');
     assert.match(failed.json.error.message, /encerrou/);
+    assert.ok(!/\bat\s/.test(failed.json.error.message), 'sem pilha na resposta');
     assert.equal((await request('POST', '/v1/control/start', { body: { role: 'chat', model_id: busy.id } })).status, 409);
 
     const first = request('POST', '/v1/control/start', { body: { role: 'chat', model_id: slow.id } });

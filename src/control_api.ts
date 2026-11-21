@@ -86,9 +86,15 @@ function send(res: any,status: number,payload: any,extra: Record<string,string>=
   res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Content-Length':Buffer.byteLength(body),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extra});
   res.end(body);
 }
+// Só mensagens de ControlError saem para o cliente; qualquer outra falha vira um erro interno genérico.
 function sendError(res: any,error: any) {
-  const status=error instanceof ControlError?error.status:500;
-  send(res,status,{error:{code:error instanceof ControlError?error.code:'internal_error',message:String(error?.message||error)}},status===401?{'WWW-Authenticate':'Bearer'}:{});
+  if(!(error instanceof ControlError)){send(res,500,{error:{code:'internal_error',message:'Erro interno do launcher.'}});return;}
+  send(res,error.status,{error:{code:error.code,message:error.message}},error.status===401?{'WWW-Authenticate':'Bearer'}:{});
+}
+// Falhas do motor ao iniciar levam o motivo (texto do launcher), sem pilha.
+function startFailure(error: any) {
+  if(error instanceof ControlError)return error;
+  return new ControlError(500,'start_failed',typeof error?.message==='string'&&error.message?error.message.slice(0,500):'Falha ao iniciar o serviço.');
 }
 function readBody(req: any): Promise<string> {
   return new Promise((resolve,reject)=>{
@@ -128,7 +134,7 @@ function createHandler(options: {token: () => string | null; port?: number; hand
       const target=resolveStart(body,h.models());
       if(busy.has(target.role))throw new ControlError(409,'busy',`Já existe um início em andamento para ${target.role}.`);
       busy.add(target.role);
-      try{await h.start(target.role,target.model);}finally{busy.delete(target.role);}
+      try{await h.start(target.role,target.model);}catch(error){throw startFailure(error);}finally{busy.delete(target.role);}
       send(res,200,state());
     } catch(error) {
       if(!res.headersSent)sendError(res,error);
