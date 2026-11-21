@@ -278,9 +278,11 @@ function fillDecider(s: any){
   const hostSelect=$('decider-host'),host=d.active?.host||hostSelect.value||cfg.host||'127.0.0.1';
   hostSelect.replaceChildren(...(s.accessOptions||[]).map((x: any)=>option(x.host,x.name)));hostSelect.value=(s.accessOptions||[]).some((x: any)=>x.host===host)?host:'127.0.0.1';
   for(const id of ['decider-model','decider-device','decider-context','decider-host'])$(id).disabled=running;
-  $('start-decider').hidden=running;$('start-decider').disabled=!models.length||!s.engineReady;$('stop-decider').hidden=!running;$('copy-decider-endpoint').hidden=!running;$('test-decider').disabled=!running;
-  $('decider-badge').textContent=running?`Ativo · ${d.active?.scope||''}`:'Parado';
-  $('decider-endpoint').hidden=!running;$('decider-endpoint').textContent=running?`API: ${d.active.endpoint} · ${d.active.name} · dispositivo ${d.active.device==='cpu'?'CPU':d.active.device||'automático'} · contexto ${d.active.context}`:'';
+  // O processo existe antes de o modelo carregar: até lá não há endereço (active), só "Carregando…".
+  const ready=running&&!!d.active;
+  $('start-decider').hidden=running;$('start-decider').disabled=!models.length||!s.engineReady;$('stop-decider').hidden=!running;$('copy-decider-endpoint').hidden=!ready;$('test-decider').disabled=!ready;
+  $('decider-badge').textContent=ready?`Ativo · ${d.active.scope||''}`:running?'Carregando…':'Parado';
+  $('decider-endpoint').hidden=!ready;$('decider-endpoint').textContent=ready?`API: ${d.active.endpoint} · ${d.active.name} · dispositivo ${d.active.device==='cpu'?'CPU':d.active.device||'automático'} · contexto ${d.active.context}`:'';
   const mainDevice=String(s.config?.profiles?.[s.config?.selectedModelPath]?.device||'');
   $('decider-hint').textContent=!s.engineReady?'Instale o llama.cpp em Configurações para usar o decisor.':!models.length?'Nenhum GGUF de decisão nas pastas de modelos. Baixe um dos modelos sugeridos abaixo para uma das pastas e clique em Atualizar lista.':
     mainDevice&&mainDevice===deviceSelect.value?`O modelo principal também usa ${mainDevice}: os dois dividem a memória dessa placa. Prefira outra GPU (como a integrada) ou Só CPU.`:'Escolha uma placa que o modelo principal não usa (a GPU integrada, por exemplo) ou Só CPU, para os dois rodarem juntos sem disputar memória.';
@@ -298,7 +300,7 @@ $('test-decider').onclick=()=>deciderAction(async()=>{$('test-decider').disabled
   try{const r=await window.llama.testDecider({state:$('decider-state').value,question:$('decider-question').value,options:$('decider-options').value});
     const box=$('decider-result');const head=document.createElement('strong');head.textContent=r.headline;box.replaceChildren(head,...r.rows.map(([label,p])=>{const row=document.createElement('div');row.className='decider-row';const name=document.createElement('span');name.textContent=label;const bar=document.createElement('span');const fill=document.createElement('i');fill.style.width=`${Math.max(1,Math.round(p*100))}%`;bar.append(fill);const value=document.createElement('span');value.textContent=`${(p*100).toFixed(1)}%`;row.append(name,bar,value);return row;}));box.hidden=false;
     deciderMessage(`Resposta em ${r.ms} ms.`);}
-  finally{$('test-decider').disabled=!snapshot?.decider?.running;}});
+  finally{$('test-decider').disabled=!snapshot?.decider?.active;}});
 window.llama.onDeciderLog(line=>{const box=$('decider-log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
 function fillControlApi(s: any){const c=s.controlApi||{};$('control-api').checked=!!c.enabled;
   const badge=$('control-api-badge');badge.textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';badge.classList.toggle('off',!c.enabled);badge.classList.toggle('error',!!c.enabled&&!c.running);

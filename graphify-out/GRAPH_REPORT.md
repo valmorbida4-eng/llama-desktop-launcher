@@ -1,7 +1,7 @@
 # Graph Report - llama-desktop-launcher  (2026-11-21)
 
 ## Corpus Check
-- 112 files · ~83,524 words
+- 112 files · ~83,609 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 5, .toml 1, .css 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fb61289e`
+- Built from commit: `94514ad9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -723,11 +723,11 @@ Nodes (7): checkUpdates(), createWindow(), defaultConfig(), load(), migrateProfi
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ADR: API local de controle para o DevTools` connect `ADR: API local de controle para o DevTools` to `startServer`?**
-  _High betweenness centrality (0.237) - this node is a cross-community bridge._
+  _High betweenness centrality (0.233) - this node is a cross-community bridge._
 - **Why does `startServer()` connect `startServer` to `profile_import.ts`, `main.ts`, `save`, `engines.ts`, `terminal_cli.ts`, `network.ts`, `params.ts`, `diagnosticData`, `ADR: API local de controle para o DevTools`, `allModels`?**
-  _High betweenness centrality (0.129) - this node is a cross-community bridge._
+  _High betweenness centrality (0.127) - this node is a cross-community bridge._
 - **Why does `stopServer()` connect `ADR: API local de controle para o DevTools` to `main.ts`?**
-  _High betweenness centrality (0.095) - this node is a cross-community bridge._
+  _High betweenness centrality (0.093) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
   _691 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `firewall.test.js` be split into smaller, more focused modules?**

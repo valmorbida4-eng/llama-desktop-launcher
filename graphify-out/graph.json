@@ -1099,7 +1099,7 @@
       "file_type": "code",
       "norm_label": "applytheme()",
       "source_file": "src/renderer.ts",
-      "source_location": "L330"
+      "source_location": "L332"
     },
     {
       "id": "src_renderer_autotext",
@@ -1159,7 +1159,7 @@
       "file_type": "code",
       "norm_label": "controlaction()",
       "source_file": "src/renderer.ts",
-      "source_location": "L309"
+      "source_location": "L311"
     },
     {
       "id": "src_renderer_decideraction",
@@ -1219,7 +1219,7 @@
       "file_type": "code",
       "norm_label": "fillcontrolapi()",
       "source_file": "src/renderer.ts",
-      "source_location": "L303"
+      "source_location": "L305"
     },
     {
       "id": "src_renderer_filldecider",
@@ -1483,7 +1483,7 @@
       "file_type": "code",
       "norm_label": "setupdescriptions()",
       "source_file": "src/renderer.ts",
-      "source_location": "L316"
+      "source_location": "L318"
     },
     {
       "id": "src_renderer_showconnection",
@@ -7986,7 +7986,7 @@
       "node_kind": "heading",
       "norm_label": "criadores e creditos",
       "source_file": "README.md",
-      "source_location": "L97"
+      "source_location": "L98"
     },
     {
       "id": "readme_desinstala\u00e7\u00e3o_segura",
@@ -23391,7 +23391,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L287",
+      "source_location": "L289",
       "weight": 1.0
     },
     {
@@ -23403,7 +23403,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L288",
+      "source_location": "L290",
       "weight": 1.0
     },
     {
@@ -24951,7 +24951,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L303",
+      "source_location": "L305",
       "weight": 1.0
     },
     {
@@ -24963,7 +24963,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L309",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
@@ -24975,7 +24975,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L316",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -24987,7 +24987,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L330",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -33730,7 +33730,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L97",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -40353,17 +40353,6 @@
     },
     {
       "source": "readme",
-      "target": "docs_adr_control_api",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L79",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
       "target": "docs_integration_en",
       "relation": "references",
       "_origin": "ast",
@@ -40386,18 +40375,18 @@
     },
     {
       "source": "readme",
-      "target": "docs_adr_model_parameters_per_engine",
+      "target": "docs_adr_control_api",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L82",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
       "source": "readme",
-      "target": "docs_adr_engine_version_pin",
+      "target": "docs_adr_model_parameters_per_engine",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -40408,13 +40397,24 @@
     },
     {
       "source": "readme",
+      "target": "docs_adr_engine_version_pin",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
       "target": "docs_adr_diagnostic_report",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L85",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -40425,7 +40425,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -40458,7 +40458,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L90",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -40469,7 +40469,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -42562,5 +42562,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fb61289e93b57d25222bbde2e723fffce5893673"
+  "built_at_commit": "94514ad9b036c12f1824e71dddf68754ef4474bd"
 }
