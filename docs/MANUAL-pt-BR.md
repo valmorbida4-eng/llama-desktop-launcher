@@ -76,6 +76,8 @@ Roteiro sugerido:
 3. **Obtenha um modelo.** A tela **Modelos** mostra o que cabe no seu hardware e abre a busca no Hugging Face. Baixe pelo navegador para uma das pastas e clique em **Atualizar lista**.
 4. **Selecione o modelo** na tela **Llama** e clique em **Conversar aqui** (GGUF) ou **Iniciar servidor**.
 
+A janela não tem menu nativo (Arquivo, Editar…): tudo fica nas abas **Llama**, **Modelos** e **Configurações**. O botão de tema no canto superior direito alterna entre **Sistema** (segue o Windows), **Claro** e **Escuro**; a escolha fica salva neste computador. Em cada card, a seta ▸ ao lado do título abre a descrição.
+
 ## 5. Motor llama.cpp
 
 Em **Configurações > 01 · Motor**, escolha uma das opções:
