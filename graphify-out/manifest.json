@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1795277230.3402476,
-    "seen": 1795277337.067487,
-    "ast_hash": "bdc17dddfcabfc4de10632c7bbbd1dea",
+    "mtime": 1795292008.2931159,
+    "seen": 1795292031.5058002,
+    "ast_hash": "a4c1423f1fb0c779d5465097a861ff17",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -78,8 +78,8 @@
     "semantic_hash": ""
   },
   "scripts/smoke-ui.js": {
-    "mtime": 1794156074.8976724,
-    "seen": 1794744573.909523,
+    "mtime": 1795291739.8321404,
+    "seen": 1795291897.671458,
     "ast_hash": "05dcfe58a6ad211eb82a6429ce9f3a13",
     "semantic_hash": ""
   },
@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1795264529.0778224,
-    "seen": 1795277337.0684886,
-    "ast_hash": "ee32cbd7461d23505aeec5d7b66e172b",
+    "mtime": 1795291865.9533348,
+    "seen": 1795291897.671458,
+    "ast_hash": "3ba7059ac5d20ab54b3c2c467fddc2d6",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795277231.7902164,
-    "seen": 1795277337.0684886,
-    "ast_hash": "21ac9208d91682ccaf4c57c82730fb31",
+    "mtime": 1795292013.8348513,
+    "seen": 1795292031.5058002,
+    "ast_hash": "77f486aa4ca821e9aa386c412b2246a1",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "requirements.txt": {
-    "mtime": 1795277218.9326427,
-    "seen": 1795277337.0684886,
-    "ast_hash": "4c797b9e5221269369559a1280c237e4",
+    "mtime": 1795277426.542304,
+    "seen": 1795291897.671458,
+    "ast_hash": "7781e49ae771eb459ac3b0c54fd7683f",
     "semantic_hash": ""
   }
 }
