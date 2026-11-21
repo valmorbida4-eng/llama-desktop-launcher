@@ -27,6 +27,7 @@ Aplicativo instalável para executar modelos de linguagem locais no Windows, Lin
 - Configurações prontas para OpenCode, Aider, Pi, Hermes, Continue, Cline, Codex (experimental) e clientes OpenAI Compatible genéricos.
 - No Windows, regra de firewall opcional limitada ao executável do motor, à porta ativa e à faixa privada informada, e botão para remover todas as regras criadas pelo launcher.
 - Verificação de atualizações com conferência do `SHA256SUMS.txt`.
+- **API de controle local** (opcional, desligada por padrão) em `127.0.0.1:8787`: o DevTools lista os modelos, inicia e para o servidor principal e o decisor e fecha o launcher, com token próprio (`DEVTOOLS_LAUNCHER_TOKEN`). Contrato na seção 11 do guia de integração.
 - **Relatório de diagnóstico** copiável, com versões, motores, pastas, servidor ativo e o fim do registro do motor, sem chaves nem tokens.
 
 ## Obter o aplicativo sem o código-fonte
@@ -72,6 +73,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.12.1:** API de controle local para o DevTools (`GET /v1/control/state`, `POST /v1/control/start`, `stop` e `quit`), ativada em **Configurações > 08 · API de controle**: só loopback, sem CORS, com Bearer dedicado e IDs do catálogo em vez de caminhos; os serviços iniciados por ela escutam só em `127.0.0.1`. O launcher passa a ter uma instância só: abrir pelo atalho com ele aberto traz a janela existente. Veja [o ADR](docs/adr/control-api.md). A tag `v0.12.0` foi criada por engano no código da 0.11.1 e não tem release.
 - **v0.10.1:** o cartão do motor explica que o Avalon e o tandem.cpp não têm download (é preciso compilar), com requisitos de cada um; passo a passo "Compilar um fork" nos manuais; PDFs dos manuais regenerados.
 - **v0.10.0:** llama.cpp **v1.0.0** (`b12359`, de novo no canal estável). O autotuning mede o cache de especialistas MoE como o `moe-cache-tune.py` do llama.cpp: sem cache, dois tamanhos × frações de CPU 0, 0,5 e 0,95, e depois o modo de carga `dio`; fica a menor fração a até 5% da mais rápida. Com o cache ligado e a fração em Auto, o launcher usa 0,95 com os especialistas em mmap e 0 com eles fixados na memória. Forks compatíveis (Avalon, tandem.cpp): identificação do build, receitas para o Qwen3.8-Flash-Next, autotuning sem `llama-bench`, `draft-mtp` com cabeça MTP separada e campos de argumentos extras e variáveis de ambiente.
 - **v0.9.0:** parâmetros por motor e por modelo, com estado Auto e valores automáticos do `llama-fit-params`; detecção de MoE, MTP, SWA e modelos híbridos pelo cabeçalho GGUF e pelo `config.json`; opções do vLLM 0.34.0 e do Strata; autotuning do llama.cpp em etapas (`llama-bench` e `llama-server`) e do vLLM; linha **Em uso** com os valores reais do servidor. Perfis antigos são migrados sem mudar o comportamento. Veja [o ADR](docs/adr/model-parameters-per-engine.md).

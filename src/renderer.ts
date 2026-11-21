@@ -155,7 +155,7 @@ async function refresh(preferred?: string){snapshot=await window.llama.state();c
   $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor nesta pasta: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
   fillModelSelectors(s.models.filter(m=>!m.decision),old);$('setup-hint').hidden=anyEngineReady(s)&&s.models.length>0;updateModelDetail();fillEngines(s);
   $('stop').hidden=!s.running;updateEngineControls();$('save-settings-profile').disabled=!s.models.length;$('stop-chat').hidden=!s.chatRunning;$('send-chat').disabled=!s.chatRunning;
-  $('access-host').replaceChildren(...s.accessOptions.map(item=>{const o=document.createElement('option');o.value=item.host;o.textContent=item.name;return o;}));$('access-host').value=s.accessOptions.some(x=>x.host===s.config.accessHost)?s.config.accessHost:'127.0.0.1';$('parallel').value=s.config.parallel||1;$('access-host').disabled=s.running;$('parallel').disabled=s.running;$('rotate-key').disabled=s.running;updateNetwork();showConnection(s.active);fillDecider(s);
+  $('access-host').replaceChildren(...s.accessOptions.map(item=>{const o=document.createElement('option');o.value=item.host;o.textContent=item.name;return o;}));$('access-host').value=s.accessOptions.some(x=>x.host===s.config.accessHost)?s.config.accessHost:'127.0.0.1';$('parallel').value=s.config.parallel||1;$('access-host').disabled=s.running;$('parallel').disabled=s.running;$('rotate-key').disabled=s.running;updateNetwork();showConnection(s.active);fillDecider(s);fillControlApi(s);
   await loadGuidance();
 }
 
@@ -300,6 +300,15 @@ $('test-decider').onclick=()=>deciderAction(async()=>{$('test-decider').disabled
     deciderMessage(`Resposta em ${r.ms} ms.`);}
   finally{$('test-decider').disabled=!snapshot?.decider?.running;}});
 window.llama.onDeciderLog(line=>{const box=$('decider-log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
+function fillControlApi(s: any){const c=s.controlApi||{};$('control-api').checked=!!c.enabled;
+  $('control-api-badge').textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';
+  $('control-api-detail').textContent=c.error?c.error:c.running?`Escutando em ${c.address}/v1/control. Token: ${c.tokenSource==='env'?`variável ${c.envVar} deste computador`:'arquivo gerado pelo launcher; copie-o para a variável '+c.envVar+' do DevTools'}.`:'Desligada: nenhuma porta aberta.';
+  $('rotate-control-token').disabled=c.tokenSource==='env';}
+async function controlAction(fn){const box=$('control-api-message');box.classList.remove('error');box.textContent='';try{await fn();}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}}
+$('control-api').onchange=()=>controlAction(async()=>{try{fillControlApi((snapshot=await window.llama.setControlApi($('control-api').checked)));}finally{await refresh();}});
+$('copy-control-token').onclick=()=>controlAction(async()=>{const source=await window.llama.copyControlToken();$('control-api-message').textContent=source==='env'?'Token copiado (o mesmo da variável DEVTOOLS_LAUNCHER_TOKEN).':'Token copiado. Defina-o na variável DEVTOOLS_LAUNCHER_TOKEN do DevTools; não o compartilhe.';});
+$('rotate-control-token').onclick=()=>controlAction(async()=>{await window.llama.rotateControlToken();await refresh();$('control-api-message').textContent='Novo token gerado; o anterior deixou de valer. Atualize DEVTOOLS_LAUNCHER_TOKEN no DevTools.';});
+window.llama.onControlChanged(()=>{refresh().catch(e=>message(e.message,true));});
 window.llama.onDeciderStopped(code=>{deciderMessage(`Decisor encerrado (${code??'sem código'}).`);$('decider-result').hidden=true;refresh().catch(e=>message(e.message,true));});
 refresh().catch(e=>message(e.message,true));
 })();

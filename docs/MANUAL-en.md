@@ -315,9 +315,13 @@ On the network, use **Mostrar chave** (Show key), **Copiar chave** (Copy key) or
 
 Whoever receives a link or command with access can use the model, but cannot reach the files on your computer. On Windows, the **Firewall do Windows** section creates the inbound rule for the active port. The rule stays after the server stops; remove it in **Settings > 07 · Firewall do Windows**. Ports, keys, clients and firewall details are in the **Integration guide**.
 
+### Local control API
+
+In **Settings > 08 · API de controle**, the **Ativar a API de controle local** box lets another program on this computer (such as DevTools) list models, start and stop the main server and the decider, and close the launcher through `http://127.0.0.1:8787`. Requests need the control token: copy it with **Copiar token** or set the `DEVTOOLS_LAUNCHER_TOKEN` variable. Services started this way listen only on `127.0.0.1` and use the saved profile. The full contract is in section 11 of the **Integration guide**.
+
 ## 12. Data, updates and uninstalling
 
-Preferences and profiles are stored in `settings.json`, in the app data folder. The same folder holds the API key (`server-api-key.txt`), the downloaded engines (`engines/`) and update packages (`updates/`). The Diagnostics guide lists the path on each system. Models stay in the folders you chose.
+Preferences and profiles are stored in `settings.json`, in the app data folder. The same folder holds the API key (`server-api-key.txt`), the control API token (`control-api-token.txt`), the downloaded engines (`engines/`) and update packages (`updates/`). The Diagnostics guide lists the path on each system. Models stay in the folders you chose.
 
 ### Update the application
 

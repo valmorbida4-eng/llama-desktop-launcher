@@ -26,6 +26,7 @@ The log lives **in memory only** while the launcher is open: the window shows th
 | --- | --- |
 | Preferences, folders and profiles | `settings.json` in the data folder |
 | Permanent API key | `server-api-key.txt` in the data folder (never send it to anyone) |
+| Control API token | `control-api-token.txt` in the data folder, or the `DEVTOOLS_LAUNCHER_TOKEN` variable when set |
 | Downloaded llama.cpp | `engines/` in the data folder, one subfolder per download |
 | vLLM on Linux | `engines/vllm-0.34.0-…` in the data folder (or the environment you chose) |
 | vLLM on Windows | The `vllm/vllm-openai:v0.34.0` image in Docker Desktop; `llama-desktop-vllm-…` containers |
@@ -148,6 +149,9 @@ vLLM can take several minutes on the first load. The launcher waits up to 30 min
 | The firewall rule is not created | The administrator prompt was denied or closed. Click again and accept. |
 | Old rules are still open | `LlamaDesktopLauncher-…` rules stay in Windows after the server stops. For Strata/PolyStrata they allow the system-wide `python.exe`, used by every Python program. Use **Settings > 07 · Firewall do Windows > Remover regras do launcher**, `wf.msc` or, in an administrator PowerShell, `Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' \| Remove-NetFirewallRule`. |
 | “ID de modelo inválido.” when copying | The Strata `model_name` is empty, longer than 128 characters, starts with `-` or contains a line break or another control character. Spaces and symbols are accepted. Fix the name in the `strata-*.json` config. |
+| “A porta 8787 já está em uso por outro programa.” in **08 · API de controle** | Another program holds the control API port. Close it (find it with `Get-NetTCPConnection -LocalPort 8787`), then uncheck and check **Ativar a API de controle local** again. |
+| DevTools gets 401 from the control API | The tokens differ. Copy the current one with **Copiar token**, or make sure `DEVTOOLS_LAUNCHER_TOKEN` has the same value for both programs; the launcher reads the variable only when it opens. |
+| “DEVTOOLS_LAUNCHER_TOKEN inválido…” | The variable is shorter than 32 characters or has spaces. Generate another value, store it with `setx` and reopen the launcher. |
 
 ## 9. Updates
 
