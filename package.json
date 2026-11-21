@@ -1,6 +1,6 @@
 {
   "name": "llama-desktop-launcher",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "private": true,
   "license": "MIT",
   "author": "Célio <valmorbida4@gmail.com>",
@@ -99,5 +99,8 @@
       "category": "public.app-category.utilities"
     }
   },
-  "homepage": "https://github.com/valmorbida4-eng/llama-desktop-launcher"
+  "homepage": "https://github.com/valmorbida4-eng/llama-desktop-launcher",
+  "overrides": {
+    "minimatch@>=7.0.0 <11.0.1": "^11.0.9"
+  }
 }

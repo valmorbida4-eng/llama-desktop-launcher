@@ -1,0 +1,6 @@
+# Dependências Python dos scripts de manutenção (não fazem parte do aplicativo):
+# - scripts/build_manual_pdfs.py e docs/security-audit/gerar_relatorio.py geram os PDFs.
+# - scripts/fix-linux-tar.py usa só a biblioteca padrão.
+# Instale com: python -m pip install -r requirements.txt
+# Ou rode sem instalar: uv run --no-project --with-requirements requirements.txt python scripts/build_manual_pdfs.py
+reportlab>=5.1,<6

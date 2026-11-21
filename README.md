@@ -59,7 +59,7 @@ npm start
 
 Para gerar instaladores, use `npm run dist:win` no Windows, `npm run dist:linux` no Linux ou `npm run dist:mac` no macOS. O workflow `.github/workflows/build.yml` prepara builds Windows x64, Linux x64/arm64 e macOS x64/arm64 em runners nativos. Uma tag `v*` gera os checksums `SHA256SUMS.txt` e publica os instaladores na GitHub Release correspondente. O despacho manual apenas valida os builds. Para verificações pontuais de macOS, o workflow `.github/workflows/build-macos-preview.yml` pode ser acionado manualmente.
 
-Os PDFs dos guias são gerados a partir dos Markdown com `python scripts/build_manual_pdfs.py` (requer `reportlab` e as fontes Arial do Windows). Rode o script sempre que mudar um guia.
+Os PDFs dos guias são gerados a partir dos Markdown com `python scripts/build_manual_pdfs.py` (requer as dependências de [`requirements.txt`](requirements.txt), hoje só o `reportlab`, e as fontes Arial do Windows). Rode o script sempre que mudar um guia.
 
 O projeto usa [Semantic Versioning](https://semver.org/). `npm run version:check` exige uma versão SemVer válida e igual em `package.json` e `package-lock.json`. Para preparar uma nova versão, use `npm version patch|minor|major --no-git-tag-version`, confira os instaladores e crie a tag `vX.Y.Z`. Antes de `1.0.0`, recursos compatíveis incrementam MINOR e correções incrementam PATCH.
 
@@ -73,6 +73,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.13.1:** correção de segurança nas ferramentas de build: o `minimatch` usado pelo electron-builder sobe para a 11.0.9 (GHSA-g3hv-75wg-m249, negação de serviço com padrões glob), via `overrides`; `npm audit` fica sem alertas. O aplicativo instalado não usa essa biblioteca. As dependências Python dos scripts de manutenção ficam em `requirements.txt`.
 - **v0.13.0:** tema claro, além do escuro: o botão no canto superior direito alterna entre **Sistema** (segue o Windows), **Claro** e **Escuro**, e a escolha fica salva. A janela deixa de mostrar o menu nativo (Arquivo, Editar, Exibir…), que não tinha função no launcher.
 - **v0.12.2:** interface mais enxuta: cada card mostra só o título, e a descrição abre pela seta ao lado dele. Os cards **01 · Motor** e **02 · Pastas** voltam a ficar lado a lado na largura toda. Os campos dentro de rótulos (Decisor, Acesso e sessões) voltam ao tamanho normal de fonte, e o endereço do decisor deixa de ser cortado. O card **08 · API de controle** mostra o endereço ou o erro num campo próprio e a origem do token numa linha separada.
 - **v0.12.1:** API de controle local para o DevTools (`GET /v1/control/state`, `POST /v1/control/start`, `stop` e `quit`), ativada em **Configurações > 08 · API de controle**: só loopback, sem CORS, com Bearer dedicado e IDs do catálogo em vez de caminhos; os serviços iniciados por ela escutam só em `127.0.0.1`. O launcher passa a ter uma instância só: abrir pelo atalho com ele aberto traz a janela existente. Veja [o ADR](docs/adr/control-api.md). A tag `v0.12.0` foi criada por engano no código da 0.11.1 e não tem release.
