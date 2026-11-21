@@ -1147,7 +1147,7 @@
       "file_type": "code",
       "norm_label": "controlaction()",
       "source_file": "src/renderer.ts",
-      "source_location": "L307"
+      "source_location": "L309"
     },
     {
       "id": "src_renderer_decideraction",
@@ -7896,7 +7896,7 @@
       "node_kind": "heading",
       "norm_label": "criadores e creditos",
       "source_file": "README.md",
-      "source_location": "L94"
+      "source_location": "L95"
     },
     {
       "id": "readme_desinstala\u00e7\u00e3o_segura",
@@ -24917,7 +24917,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/renderer.ts",
-      "source_location": "L307",
+      "source_location": "L309",
       "weight": 1.0
     },
     {
@@ -33638,7 +33638,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L94",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -40267,18 +40267,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L76",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_adr_model_parameters_per_engine",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L79",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -40305,7 +40294,7 @@
     },
     {
       "source": "readme",
-      "target": "docs_adr_engine_version_pin",
+      "target": "docs_adr_model_parameters_per_engine",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -40316,13 +40305,24 @@
     },
     {
       "source": "readme",
+      "target": "docs_adr_engine_version_pin",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
       "target": "docs_adr_diagnostic_report",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L82",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -40333,7 +40333,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L84",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -40344,7 +40344,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -40377,7 +40377,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -42470,5 +42470,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0d085e3079a336e79941c1d95156fcb5eaedd42d"
+  "built_at_commit": "ccc544c85cbd5de26415fc6ad3943d4eb8627dc3"
 }

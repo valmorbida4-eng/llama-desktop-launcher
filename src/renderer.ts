@@ -301,8 +301,10 @@ $('test-decider').onclick=()=>deciderAction(async()=>{$('test-decider').disabled
   finally{$('test-decider').disabled=!snapshot?.decider?.running;}});
 window.llama.onDeciderLog(line=>{const box=$('decider-log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
 function fillControlApi(s: any){const c=s.controlApi||{};$('control-api').checked=!!c.enabled;
-  $('control-api-badge').textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';
-  $('control-api-detail').textContent=c.error?c.error:c.running?`Escutando em ${c.address}/v1/control. Token: ${c.tokenSource==='env'?`variável ${c.envVar} deste computador`:'arquivo gerado pelo launcher; copie-o para a variável '+c.envVar+' do DevTools'}.`:'Desligada: nenhuma porta aberta.';
+  const badge=$('control-api-badge');badge.textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';badge.classList.toggle('off',!c.enabled);badge.classList.toggle('error',!!c.enabled&&!c.running);
+  const address=$('control-api-address');address.classList.toggle('error',!!c.error);
+  address.textContent=c.error?c.error:c.running?`${c.address}/v1/control`:'Desligada: nenhuma porta aberta.';
+  $('control-api-detail').textContent=c.tokenSource==='env'?`Token: variável ${c.envVar} deste usuário (o DevTools lê a mesma). Para trocar, mude a variável e reabra o launcher.`:`Token: gerado pelo launcher. Copie-o e defina ${c.envVar} com esse valor no DevTools.`;
   $('rotate-control-token').disabled=c.tokenSource==='env';}
 async function controlAction(fn){const box=$('control-api-message');box.classList.remove('error');box.textContent='';try{await fn();}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}}
 $('control-api').onchange=()=>controlAction(async()=>{try{fillControlApi((snapshot=await window.llama.setControlApi($('control-api').checked)));}finally{await refresh();}});

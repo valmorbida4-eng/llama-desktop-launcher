@@ -1,7 +1,7 @@
 # Graph Report - llama-desktop-launcher  (2026-11-21)
 
 ## Corpus Check
-- 112 files · ~83,036 words
+- 112 files · ~83,098 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 5, .toml 1, .css 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0d085e30`
+- Built from commit: `ccc544c8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -713,11 +713,11 @@ Nodes (8): checkUpdates(), createWindow(), defaultConfig(), load(), migrateProfi
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ADR: API local de controle para o DevTools` connect `controlStop` to `startServer`?**
-  _High betweenness centrality (0.221) - this node is a cross-community bridge._
+  _High betweenness centrality (0.219) - this node is a cross-community bridge._
 - **Why does `startServer()` connect `startServer` to `main.ts`, `save`, `engines.ts`, `params.ts`, `network.ts`, `state`, `controlStop`, `allModels`?**
-  _High betweenness centrality (0.121) - this node is a cross-community bridge._
+  _High betweenness centrality (0.120) - this node is a cross-community bridge._
 - **Why does `stopServer()` connect `controlStop` to `main.ts`?**
-  _High betweenness centrality (0.089) - this node is a cross-community bridge._
+  _High betweenness centrality (0.088) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
   _690 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `firewall.test.js` be split into smaller, more focused modules?**
