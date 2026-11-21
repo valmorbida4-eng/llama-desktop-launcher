@@ -325,6 +325,18 @@ function setupDescriptions(){
     button.onclick=()=>show(desc.hidden!==false);show(false);title.append(button);
   }
 }
+// Tema: Sistema (segue o Windows) → Claro → Escuro; a escolha fica salva neste computador.
+const THEMES=[['system','◐ Sistema'],['light','☀ Claro'],['dark','☾ Escuro']];
+function applyTheme(theme: string){
+  const index=Math.max(0,THEMES.findIndex(([id])=>id===theme)),[id,label]=THEMES[index];
+  if(id==='system')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=id;
+  const button=$('theme-toggle');button.textContent=label;button.title=`Tema: ${label.slice(2)}. Clique para trocar.`;
+  try{localStorage.setItem('theme',id);}catch{}
+  return id;
+}
+let theme='system';try{theme=localStorage.getItem('theme')||'system';}catch{}
+theme=applyTheme(theme);
+$('theme-toggle').onclick=()=>{theme=applyTheme(THEMES[(THEMES.findIndex(([id])=>id===theme)+1)%THEMES.length][0]);};
 setupDescriptions();
 refresh().catch(e=>message(e.message,true));
 })();

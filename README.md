@@ -73,6 +73,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.13.0:** tema claro, além do escuro: o botão no canto superior direito alterna entre **Sistema** (segue o Windows), **Claro** e **Escuro**, e a escolha fica salva. A janela deixa de mostrar o menu nativo (Arquivo, Editar, Exibir…), que não tinha função no launcher.
 - **v0.12.2:** interface mais enxuta: cada card mostra só o título, e a descrição abre pela seta ao lado dele. Os cards **01 · Motor** e **02 · Pastas** voltam a ficar lado a lado na largura toda. Os campos dentro de rótulos (Decisor, Acesso e sessões) voltam ao tamanho normal de fonte, e o endereço do decisor deixa de ser cortado. O card **08 · API de controle** mostra o endereço ou o erro num campo próprio e a origem do token numa linha separada.
 - **v0.12.1:** API de controle local para o DevTools (`GET /v1/control/state`, `POST /v1/control/start`, `stop` e `quit`), ativada em **Configurações > 08 · API de controle**: só loopback, sem CORS, com Bearer dedicado e IDs do catálogo em vez de caminhos; os serviços iniciados por ela escutam só em `127.0.0.1`. O launcher passa a ter uma instância só: abrir pelo atalho com ele aberto traz a janela existente. Veja [o ADR](docs/adr/control-api.md). A tag `v0.12.0` foi criada por engano no código da 0.11.1 e não tem release.
 - **v0.10.1:** o cartão do motor explica que o Avalon e o tandem.cpp não têm download (é preciso compilar), com requisitos de cada um; passo a passo "Compilar um fork" nos manuais; PDFs dos manuais regenerados.

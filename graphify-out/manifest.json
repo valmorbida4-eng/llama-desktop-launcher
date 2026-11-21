@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1795234973.9711564,
-    "seen": 1795235001.313045,
-    "ast_hash": "5594849803903137a465fa952e1ae56d",
+    "mtime": 1795264334.0123541,
+    "seen": 1795264394.6125314,
+    "ast_hash": "046b1abe802278c9703e1a8d6d039513",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1795234635.757921,
-    "seen": 1795235001.313045,
-    "ast_hash": "1dc589cf8f88f60f95ac9b6892968049",
+    "mtime": 1795264193.1470847,
+    "seen": 1795264394.6125314,
+    "ast_hash": "2969f3517b007b7c7e5780d067fd4002",
     "semantic_hash": ""
   },
   "src/network.ts": {
@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1795235231.7809496,
-    "seen": 1795235337.9242587,
-    "ast_hash": "ad533e30215007f16d2b30c5c3f9d464",
+    "mtime": 1795264203.2064004,
+    "seen": 1795264394.6125314,
+    "ast_hash": "ee32cbd7461d23505aeec5d7b66e172b",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -366,27 +366,27 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795235295.606709,
-    "seen": 1795235337.9242587,
-    "ast_hash": "d04a5b124b99e702ec135eb949395da4",
+    "mtime": 1795264332.648573,
+    "seen": 1795264394.6125314,
+    "ast_hash": "62cc1734be6d0c87e5d7a7e529a3b503",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
-    "mtime": 1795234635.7252345,
-    "seen": 1795235001.313045,
-    "ast_hash": "67207d45fba6eddc9d1a7ec5cd1011c6",
+    "mtime": 1795264342.7550397,
+    "seen": 1795264394.6125314,
+    "ast_hash": "628f6f47b1991a1a934b8af6dbe251bf",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.md": {
-    "mtime": 1795234635.7282412,
-    "seen": 1795235001.313045,
-    "ast_hash": "25f97cda1378c9910e7e1dcb60e45a59",
+    "mtime": 1795264332.6455798,
+    "seen": 1795264394.6125314,
+    "ast_hash": "4cfc24280d0070930e857e3ba89929c6",
     "semantic_hash": ""
   },
   "src/index.html": {
-    "mtime": 1795234914.161942,
-    "seen": 1795235001.313045,
-    "ast_hash": "153bf0f91a2f817a9c942546f8579765",
+    "mtime": 1795264193.1450844,
+    "seen": 1795264394.6125314,
+    "ast_hash": "2671bbfce556432754d9edf35f2f45ce",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {

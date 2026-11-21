@@ -76,6 +76,8 @@ Suggested route:
 3. **Get a model.** The **Models** screen shows what fits your hardware and opens the Hugging Face search. Download through the browser into one of the folders and click **Atualizar lista** (Refresh list).
 4. **Select the model** on the **Llama** screen and click **Conversar aqui** (Chat here, GGUF only) or **Iniciar servidor** (Start server).
 
+The window has no native menu (File, Edit…): everything lives in the **Llama**, **Models** and **Settings** tabs. The theme button in the top-right corner cycles through **Sistema** (System, follows the OS), **Claro** (Light) and **Escuro** (Dark); the choice is saved on this computer. In each card, the ▸ arrow next to the title opens its description.
+
 ## 5. llama.cpp engine
 
 In **Settings > 01 · Motor**, choose one option:
