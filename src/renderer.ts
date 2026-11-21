@@ -312,5 +312,19 @@ $('copy-control-token').onclick=()=>controlAction(async()=>{const source=await w
 $('rotate-control-token').onclick=()=>controlAction(async()=>{await window.llama.rotateControlToken();await refresh();$('control-api-message').textContent='Novo token gerado; o anterior deixou de valer. Atualize DEVTOOLS_LAUNCHER_TOKEN no DevTools.';});
 window.llama.onControlChanged(()=>{refresh().catch(e=>message(e.message,true));});
 window.llama.onDeciderStopped(code=>{deciderMessage(`Decisor encerrado (${code??'sem código'}).`);$('decider-result').hidden=true;refresh().catch(e=>message(e.message,true));});
+// Cada card mostra só o título (a função); a descrição abre pela seta ao lado do título.
+function setupDescriptions(){
+  for(const title of Array.from(document.querySelectorAll<HTMLElement>('.card h2, .tune-head h3'))){
+    const card=title.closest('.card');if(!card||title.querySelector('.desc-toggle'))continue;
+    if(title.tagName==='H2'&&card.querySelector('h2')!==title)continue;
+    const holder=title.parentElement;
+    const candidates=[...(title.tagName==='H2'?Array.from(card.children):[]),...(holder&&holder!==card?Array.from(holder.children):[])];
+    const desc=candidates.find(el=>el.tagName==='P'&&!el.id) as HTMLElement|undefined;if(!desc)continue;
+    const button=document.createElement('button');button.type='button';button.className='desc-toggle';
+    const show=(open: boolean)=>{desc.hidden=!open;button.textContent=open?'▾':'▸';button.setAttribute('aria-expanded',String(open));const label=open?'Esconder descrição':'Mostrar descrição';button.setAttribute('aria-label',label);button.title=label;};
+    button.onclick=()=>show(desc.hidden!==false);show(false);title.append(button);
+  }
+}
+setupDescriptions();
 refresh().catch(e=>message(e.message,true));
 })();

@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1795234914.1650755,
-    "seen": 1795235001.313045,
-    "ast_hash": "f7a14a1433b86503268d7aa2e14e51fe",
+    "mtime": 1795235231.7809496,
+    "seen": 1795235337.9242587,
+    "ast_hash": "ad533e30215007f16d2b30c5c3f9d464",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795234975.1975408,
-    "seen": 1795235001.313045,
-    "ast_hash": "c678a3cfbef838aa7389a922dc3b0ee4",
+    "mtime": 1795235295.606709,
+    "seen": 1795235337.9242587,
+    "ast_hash": "d04a5b124b99e702ec135eb949395da4",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
