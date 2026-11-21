@@ -301,8 +301,10 @@ $('test-decider').onclick=()=>deciderAction(async()=>{$('test-decider').disabled
   finally{$('test-decider').disabled=!snapshot?.decider?.running;}});
 window.llama.onDeciderLog(line=>{const box=$('decider-log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
 function fillControlApi(s: any){const c=s.controlApi||{};$('control-api').checked=!!c.enabled;
-  $('control-api-badge').textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';
-  $('control-api-detail').textContent=c.error?c.error:c.running?`Escutando em ${c.address}/v1/control. Token: ${c.tokenSource==='env'?`variável ${c.envVar} deste computador`:'arquivo gerado pelo launcher; copie-o para a variável '+c.envVar+' do DevTools'}.`:'Desligada: nenhuma porta aberta.';
+  const badge=$('control-api-badge');badge.textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';badge.classList.toggle('off',!c.enabled);badge.classList.toggle('error',!!c.enabled&&!c.running);
+  const address=$('control-api-address');address.classList.toggle('error',!!c.error);
+  address.textContent=c.error?c.error:c.running?`${c.address}/v1/control`:'Desligada: nenhuma porta aberta.';
+  $('control-api-detail').textContent=c.tokenSource==='env'?`Token: variável ${c.envVar} deste usuário (o DevTools lê a mesma). Para trocar, mude a variável e reabra o launcher.`:`Token: gerado pelo launcher. Copie-o e defina ${c.envVar} com esse valor no DevTools.`;
   $('rotate-control-token').disabled=c.tokenSource==='env';}
 async function controlAction(fn){const box=$('control-api-message');box.classList.remove('error');box.textContent='';try{await fn();}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}}
 $('control-api').onchange=()=>controlAction(async()=>{try{fillControlApi((snapshot=await window.llama.setControlApi($('control-api').checked)));}finally{await refresh();}});
@@ -310,5 +312,19 @@ $('copy-control-token').onclick=()=>controlAction(async()=>{const source=await w
 $('rotate-control-token').onclick=()=>controlAction(async()=>{await window.llama.rotateControlToken();await refresh();$('control-api-message').textContent='Novo token gerado; o anterior deixou de valer. Atualize DEVTOOLS_LAUNCHER_TOKEN no DevTools.';});
 window.llama.onControlChanged(()=>{refresh().catch(e=>message(e.message,true));});
 window.llama.onDeciderStopped(code=>{deciderMessage(`Decisor encerrado (${code??'sem código'}).`);$('decider-result').hidden=true;refresh().catch(e=>message(e.message,true));});
+// Cada card mostra só o título (a função); a descrição abre pela seta ao lado do título.
+function setupDescriptions(){
+  for(const title of Array.from(document.querySelectorAll<HTMLElement>('.card h2, .tune-head h3'))){
+    const card=title.closest('.card');if(!card||title.querySelector('.desc-toggle'))continue;
+    if(title.tagName==='H2'&&card.querySelector('h2')!==title)continue;
+    const holder=title.parentElement;
+    const candidates=[...(title.tagName==='H2'?Array.from(card.children):[]),...(holder&&holder!==card?Array.from(holder.children):[])];
+    const desc=candidates.find(el=>el.tagName==='P'&&!el.id) as HTMLElement|undefined;if(!desc)continue;
+    const button=document.createElement('button');button.type='button';button.className='desc-toggle';
+    const show=(open: boolean)=>{desc.hidden=!open;button.textContent=open?'▾':'▸';button.setAttribute('aria-expanded',String(open));const label=open?'Esconder descrição':'Mostrar descrição';button.setAttribute('aria-label',label);button.title=label;};
+    button.onclick=()=>show(desc.hidden!==false);show(false);title.append(button);
+  }
+}
+setupDescriptions();
 refresh().catch(e=>message(e.message,true));
 })();

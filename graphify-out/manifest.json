@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1795234506.407204,
-    "seen": 1795234528.9723206,
-    "ast_hash": "0936cec24e57b6118513181e2701619a",
+    "mtime": 1795234973.9711564,
+    "seen": 1795235001.313045,
+    "ast_hash": "5594849803903137a465fa952e1ae56d",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -102,8 +102,8 @@
     "semantic_hash": ""
   },
   "src/electron-api.d.ts": {
-    "mtime": 1795234480.3513489,
-    "seen": 1795234528.9723206,
+    "mtime": 1795234635.7539115,
+    "seen": 1795235001.313045,
     "ast_hash": "17a1fb625913cd36351b56f35bc1d024",
     "semantic_hash": ""
   },
@@ -132,8 +132,8 @@
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1795234480.3553467,
-    "seen": 1795234528.9723206,
+    "mtime": 1795234635.757921,
+    "seen": 1795235001.313045,
     "ast_hash": "1dc589cf8f88f60f95ac9b6892968049",
     "semantic_hash": ""
   },
@@ -144,8 +144,8 @@
     "semantic_hash": ""
   },
   "src/preload.ts": {
-    "mtime": 1795234480.3564112,
-    "seen": 1795234528.9723206,
+    "mtime": 1795234635.7589295,
+    "seen": 1795235001.313045,
     "ast_hash": "aa1e3c73be483eb4a2cbd311ff70a835",
     "semantic_hash": ""
   },
@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1795234480.3589246,
-    "seen": 1795234528.9723206,
-    "ast_hash": "90ce48ad38e31304bb39c14a7c7ec876",
+    "mtime": 1795235231.7809496,
+    "seen": 1795235337.9242587,
+    "ast_hash": "ad533e30215007f16d2b30c5c3f9d464",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -366,38 +366,38 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795234505.2698474,
-    "seen": 1795234528.9733202,
-    "ast_hash": "1756f3a06080a1833d14399227909a55",
+    "mtime": 1795235295.606709,
+    "seen": 1795235337.9242587,
+    "ast_hash": "d04a5b124b99e702ec135eb949395da4",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
-    "mtime": 1795234480.3247695,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7252345,
+    "seen": 1795235001.313045,
     "ast_hash": "67207d45fba6eddc9d1a7ec5cd1011c6",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.md": {
-    "mtime": 1795234480.3280435,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7282412,
+    "seen": 1795235001.313045,
     "ast_hash": "25f97cda1378c9910e7e1dcb60e45a59",
     "semantic_hash": ""
   },
   "src/index.html": {
-    "mtime": 1795234480.3523488,
-    "seen": 1795234528.9733202,
-    "ast_hash": "05c3e27b914e852bdcf700cc8036f7a8",
+    "mtime": 1795234914.161942,
+    "seen": 1795235001.313045,
+    "ast_hash": "153bf0f91a2f817a9c942546f8579765",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {
-    "mtime": 1795234509.162184,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.727242,
+    "seen": 1795235001.313045,
     "ast_hash": "c35d85c8c03560cfedfaca426941feec",
     "semantic_hash": ""
   },
   "docs/MANUAL-pt-BR.pdf": {
-    "mtime": 1795234508.9464445,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7292433,
+    "seen": 1795235001.313045,
     "ast_hash": "93226bdd0dcd8b051ccb8825498c1bee",
     "semantic_hash": ""
   },
@@ -612,26 +612,26 @@
     "semantic_hash": ""
   },
   "docs/DIAGNOSTICS-en.md": {
-    "mtime": 1795234480.3101935,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7135694,
+    "seen": 1795235001.313045,
     "ast_hash": "819fa00ccb78d942251ef8fe52d66f37",
     "semantic_hash": ""
   },
   "docs/DIAGNOSTICS-pt-BR.md": {
-    "mtime": 1795234480.313724,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7162094,
+    "seen": 1795235001.313045,
     "ast_hash": "b1afef87066011908ed4d60a01503623",
     "semantic_hash": ""
   },
   "docs/INTEGRATION-en.md": {
-    "mtime": 1795234505.168571,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7192106,
+    "seen": 1795235001.313045,
     "ast_hash": "705105ed9faf60811e0fd555e88a176c",
     "semantic_hash": ""
   },
   "docs/INTEGRATION-pt-BR.md": {
-    "mtime": 1795234505.1652865,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.722728,
+    "seen": 1795235001.313045,
     "ast_hash": "1ff9f524e3e8fed15428c14bad286f26",
     "semantic_hash": ""
   },
@@ -642,26 +642,26 @@
     "semantic_hash": ""
   },
   "docs/DIAGNOSTICS-en.pdf": {
-    "mtime": 1795234509.6744533,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.715202,
+    "seen": 1795235001.313045,
     "ast_hash": "7d3ccd9f805da66e488166cc767e0f04",
     "semantic_hash": ""
   },
   "docs/DIAGNOSTICS-pt-BR.pdf": {
-    "mtime": 1795234509.5433414,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7182088,
+    "seen": 1795235001.313045,
     "ast_hash": "b99370842e3a0c755a953e6d0252a531",
     "semantic_hash": ""
   },
   "docs/INTEGRATION-en.pdf": {
-    "mtime": 1795234509.4028654,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7217288,
+    "seen": 1795235001.313045,
     "ast_hash": "f69b292606df4ac95279d6e1fc46a000",
     "semantic_hash": ""
   },
   "docs/INTEGRATION-pt-BR.pdf": {
-    "mtime": 1795234509.2826228,
-    "seen": 1795234528.9733202,
+    "mtime": 1795234635.7237284,
+    "seen": 1795235001.313045,
     "ast_hash": "cd00a88fdfa1dec7452e1df68efdf67d",
     "semantic_hash": ""
   },
@@ -726,21 +726,21 @@
     "semantic_hash": ""
   },
   "src/control_api.ts": {
-    "mtime": 1795234490.370952,
-    "seen": 1795234528.9723206,
+    "mtime": 1795234635.7519083,
+    "seen": 1795235001.313045,
     "ast_hash": "98581313ac7a3db17f05d11d45a03cba",
     "semantic_hash": ""
   },
   "tests/control_api.test.js": {
-    "mtime": 1795234491.014284,
-    "seen": 1795234528.9723206,
+    "mtime": 1795234635.7614381,
+    "seen": 1795235001.313045,
     "ast_hash": "de46c5bf1fa55d6e691d69009ab7ab45",
     "semantic_hash": ""
   },
   "docs/adr/control-api.md": {
-    "mtime": 1795234507.6296246,
-    "seen": 1795234528.9733202,
-    "ast_hash": "f9eba1f1f6a3a8e5ea4641e9bcda2127",
+    "mtime": 1795234635.7317598,
+    "seen": 1795235001.313045,
+    "ast_hash": "90df8fd1e411d207e2fca01fa953bd55",
     "semantic_hash": ""
   }
 }
