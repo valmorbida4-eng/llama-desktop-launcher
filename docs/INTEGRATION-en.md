@@ -256,3 +256,69 @@ If the macOS firewall is on, the system asks whether `llama-server` may accept c
 | Client doesn't recognize the new model | Check `/v1/models`, restart the conversation and update the ID, limit and credential. |
 
 The **Diagnostics guide** covers each case and the app's messages in detail.
+
+## 11. Local control API (DevTools)
+
+Since version 0.12.0, another program on this computer (such as DevTools) can control the launcher: list models, start and stop the main server and the decider, and close the launcher. The API stays off until you turn it on.
+
+### Turn it on
+
+1. In **Configurações > 08 · API de controle**, check **Ativar a API de controle local**. The launcher listens on `http://127.0.0.1:8787` and remembers the choice the next time it opens.
+2. Give the launcher and the client the same token, in one of two ways:
+   - **Launcher token:** click **Copiar token** and store it in the client's `DEVTOOLS_LAUNCHER_TOKEN` variable. The token is kept in `control-api-token.txt` in the data folder; **Gerar outro token** invalidates the previous one immediately.
+   - **Your own token:** set `DEVTOOLS_LAUNCHER_TOKEN` (32 to 256 characters, no spaces) for your Windows user, for example with `setx DEVTOOLS_LAUNCHER_TOKEN "<token>"`, and reopen the launcher. When the variable exists, the launcher uses its value and ignores the file.
+3. The client may open the launcher through its Windows shortcut. If it is already open, the shortcut only brings the window to the front: there is a single instance.
+
+### Contract
+
+Every route requires `Authorization: Bearer <DEVTOOLS_LAUNCHER_TOKEN>` and a `Host` header of `127.0.0.1:8787` or `localhost:8787`. The API does not answer CORS: browsers cannot call it from other pages. POST requests use `Content-Type: application/json`.
+
+| Route | Body | Response |
+| --- | --- | --- |
+| `GET /v1/control/state` | — | `200` with the state |
+| `POST /v1/control/start` | `{"role":"chat"\|"decider","model_id":"m_…"}` | `200` with the state, once the model has loaded |
+| `POST /v1/control/stop` | `{"role":"chat"\|"decider"}` | `200` with the state, once the process has exited |
+| `POST /v1/control/quit` | `{}` | `202 {"quitting":true}`; the launcher then closes and stops both services |
+
+State:
+
+```json
+{
+  "version": 1,
+  "models": [{"id": "m_d24f26eed365cd44", "name": "gemma-4-E4B-it-heretic.Q4_K_M.gguf", "role": "chat"}],
+  "servers": {
+    "chat": {"model_id": "m_d24f26eed365cd44", "port": 8080, "api_model": "modelo-local", "host": "127.0.0.1"},
+    "decider": null
+  }
+}
+```
+
+- `id` is a stable hash of the model path: it only changes if the file moves. The API never accepts paths.
+- `role` is `decider` for decision models (GGUF with `decision` metadata) and `chat` for everything else.
+- `servers.chat` and `servers.decider` are `null` while the service is stopped or still loading. `api_model` is the ID for the `model` field of requests (`modelo-local`, or the model name on Strata). `host` is an extra field: services started from the window may be on the network.
+- Services started through the API listen only on `127.0.0.1`, without a key. The main server uses the model's saved profile (or the automatic values) and the session count from Settings; the decider uses the device and context saved in the Decider card. The API never writes to Settings.
+- `start` for the model that is already running on `127.0.0.1` returns `200` without restarting. `stop` for a stopped service returns `200`. `stop` also interrupts a start in progress; that `start` gets `500`.
+
+Errors return `{"error":{"code":"…","message":"…"}}`:
+
+| Status | When |
+| --- | --- |
+| `400` | Invalid JSON, `role` other than `chat`/`decider`, or malformed `model_id` |
+| `401` | Missing or wrong token, or no token configured |
+| `403` | `Host` header other than `127.0.0.1:8787` or `localhost:8787` |
+| `404` | Unknown route or `model_id` not in the catalog |
+| `405` | Wrong method (the `Allow` header names the right one) |
+| `409` | Service already running another model or on the network, another `start` for the same role in progress, chat or benchmark running, engine not installed |
+| `413` / `415` | Body over 16 KB / `Content-Type` other than JSON |
+| `422` | Decision model requested as `chat`, or the opposite |
+| `500` | The engine failed to load the model; the message gives the reason |
+
+### PowerShell example
+
+```powershell
+$h = @{ Authorization = "Bearer $env:DEVTOOLS_LAUNCHER_TOKEN" }
+$s = Invoke-RestMethod http://127.0.0.1:8787/v1/control/state -Headers $h
+$id = ($s.models | Where-Object role -eq 'chat' | Select-Object -First 1).id
+Invoke-RestMethod http://127.0.0.1:8787/v1/control/start -Method Post -Headers $h -ContentType 'application/json' -Body (@{ role = 'chat'; model_id = $id } | ConvertTo-Json)
+Invoke-RestMethod http://127.0.0.1:8787/v1/control/stop -Method Post -Headers $h -ContentType 'application/json' -Body '{"role":"chat"}'
+```

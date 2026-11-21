@@ -11,6 +11,10 @@ interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt'
 interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
 interface RendererApi {
   state(): Promise<any>;
+  setControlApi(enabled: boolean): Promise<any>;
+  copyControlToken(): Promise<'env' | 'file'>;
+  rotateControlToken(): Promise<any>;
+  onControlChanged(callback: () => void): void;
   checkUpdate(): Promise<UpdateInfo>;
   installUpdate(): Promise<UpdateResult>;
   setUpdateCheck(enabled: boolean): Promise<any>;

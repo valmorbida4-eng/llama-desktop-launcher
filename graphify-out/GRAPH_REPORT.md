@@ -1,17 +1,17 @@
-# Graph Report - llama-desktop-launcher  (2026-11-20)
+# Graph Report - llama-desktop-launcher  (2026-11-21)
 
 ## Corpus Check
-- 109 files · ~78,291 words
+- 112 files · ~82,931 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 5, .toml 1, .css 1)
 
 ## Summary
-- 1526 nodes · 1906 edges · 285 communities (90 shown, 195 thin omitted)
-- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 157 edges (avg confidence: 0.85)
+- 1595 nodes · 2059 edges · 292 communities (98 shown, 194 thin omitted)
+- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 174 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `163fba1c`
+- Built from commit: `fdf6742b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,9 +22,9 @@
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_engines_vllm_strata_539322_build_app_core_iswithin
 - scripts
 - User manual — Llama Desktop Launcher
-- core.ts
+- control_api.ts
 - build
-- cli.ts
+- refreshControlApi
 - build_manual_pdfs.py
 - renderer.ts
 - engine.ts
@@ -51,8 +51,8 @@
 - ai-memory routing install
 - Guia de integração — Llama Desktop Launcher
 - guidance.test.js
-- ref_node_assert
-- smoke-external-cli-linux.js
+- ref_node_test
+- benchmark.ts
 - Plano simples da interface
 - Guia de diagnóstico — Llama Desktop Launcher
 - engine-install.test.js
@@ -110,7 +110,7 @@
 - params.ts
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_cli
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_client_commands
-- hardware.test.js
+- ref_node_assert
 - params.test.js
 - core.test.js
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core
@@ -166,7 +166,7 @@
 - linux
 - Diagnostics guide — Llama Desktop Launcher
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_core_argsformodel
-- ref_node_os
+- diagnosticData
 - Llama Desktop Launcher
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_guidance_links
 - check-engine-release.js
@@ -248,12 +248,12 @@
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_psquote
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_shquote
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_manuais_uso_integracao_diagnostico_b0a445_build_app_terminal_cli_terminalcommand
-- engine_build.test.js
+- startServer
 - terminal_cli.ts
 - decider.ts
 - devDependencies
 - ref_node_child_process
-- ADR: versão fixa do motor llama.cpp
+- smoke-engines-ui.js
 - guidance.ts
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_benchmark_tune
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_client_commands_clientcommand
@@ -294,41 +294,48 @@
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_shquote
 - c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_claude_worktrees_dazzling_roentgen_50179e_build_app_terminal_cli_terminalcommand
 - ADR: forks compatíveis do llama.cpp (Avalon, tandem.cpp)
-- client_commands.ts
+- control_api.test.js
 - decider.test.js
 - createShareProxy
 - gguf
 - profile_import.test.js
-- stopCommand
+- controlStop
+- smoke-ui.js
+- profile_import.ts
+- allModels
+- ref_node_os
+- fitParams
+- tune
+- save
 
 ## God Nodes (most connected - your core abstractions)
-1. `RendererApi` - 64 edges
-2. `scripts` - 18 edges
-3. `FileReader` - 15 edges
-4. `readValue()` - 15 edges
-5. `refresh()` - 14 edges
-6. `User manual — Llama Desktop Launcher` - 14 edges
-7. `Manual de uso — Llama Desktop Launcher` - 14 edges
-8. `tune()` - 13 edges
-9. `serverCommand()` - 13 edges
-10. `compilerOptions` - 13 edges
+1. `RendererApi` - 68 edges
+2. `startServer()` - 24 edges
+3. `scripts` - 18 edges
+4. `FileReader` - 15 edges
+5. `readValue()` - 15 edges
+6. `refresh()` - 15 edges
+7. `serverCommand()` - 14 edges
+8. `User manual — Llama Desktop Launcher` - 14 edges
+9. `Manual de uso — Llama Desktop Launcher` - 14 edges
+10. `tune()` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `llamaDevices()` --calls--> `listDevices()`  [EXTRACTED]
-  src/main.ts → src/benchmark.ts
-- `fitParams()` --calls--> `parseFitOutput()`  [EXTRACTED]
-  src/benchmark.ts → src/params.ts
-- `tune()` --calls--> `detectHardware()`  [EXTRACTED]
+- `ADR: API local de controle para o DevTools` --references--> `startServer()`  [INFERRED]
+  docs/adr/control-api.md → src/main.ts
+- `ADR: API local de controle para o DevTools` --references--> `stopServer()`  [INFERRED]
+  docs/adr/control-api.md → src/main.ts
+- `startServer()` --calls--> `validateParallel()`  [EXTRACTED]
+  src/main.ts → src/network.ts
+- `startServer()` --calls--> `parseRuntimeLog()`  [EXTRACTED]
+  src/main.ts → src/params.ts
+- `fitParams()` --calls--> `validateSettings()`  [EXTRACTED]
   src/benchmark.ts → src/core.ts
-- `openExternalCli()` --calls--> `executableName()`  [EXTRACTED]
-  src/terminal_cli.ts → src/cli.ts
-- `openExternalCli()` --calls--> `executablePath()`  [EXTRACTED]
-  src/terminal_cli.ts → src/cli.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (285 total, 195 thin omitted)
+## Communities (292 total, 194 thin omitted)
 
 ### Community 0 - "firewall.test.js"
 Cohesion: 0.13
@@ -336,7 +343,7 @@ Nodes (15): build_app_firewall, c_users_celio_onedrive_app_e_projetos_llama_desk
 
 ### Community 2 - "main.ts"
 Cohesion: 0.05
-Nodes (42): {app,BrowserWindow,ipcMain,dialog,shell,clipboard}, benchmark, checkUpdates(), cli, clientCommands, core, createWindow(), crypto (+34 more)
+Nodes (32): {app,BrowserWindow,ipcMain,dialog,shell,clipboard}, benchmark, cli, clientCommands, control, core, crypto, deciderLog (+24 more)
 
 ### Community 4 - "scripts"
 Cohesion: 0.11
@@ -344,19 +351,19 @@ Nodes (18): scripts, build, dist:linux, dist:mac, dist:win, smoke:bench, smoke:c
 
 ### Community 5 - "User manual — Llama Desktop Launcher"
 Cohesion: 0.06
-Nodes (33): 10. Per-model profiles, 11. Network access and sharing, 12. Data, updates and uninstalling, 13. Credits, 1. What the application does, 2. Requirements, 3. Install the application, 4. First use (+25 more)
+Nodes (34): 10. Per-model profiles, 11. Network access and sharing, 12. Data, updates and uninstalling, 13. Credits, 1. What the application does, 2. Requirements, 3. Install the application, 4. First use (+26 more)
 
-### Community 6 - "core.ts"
-Cohesion: 0.20
-Nodes (9): defaults, fs, hfDisplayName(), os, params, path, scanModels(), walkModels() (+1 more)
+### Community 6 - "control_api.ts"
+Cohesion: 0.15
+Nodes (23): catalog(), ControlError, createControlServer(), createHandler(), crypto, ensureToken(), fs, http (+15 more)
 
 ### Community 7 - "build"
 Cohesion: 0.15
 Nodes (13): build, appId, directories, extraResources, files, mac, productName, win (+5 more)
 
-### Community 8 - "cli.ts"
-Cohesion: 0.21
-Nodes (10): ref_node_string_decoder, argsForConversation(), core, createSession(), executableName(), executablePath(), fs, path (+2 more)
+### Community 8 - "refreshControlApi"
+Cohesion: 0.40
+Nodes (5): stop(), controlApiState(), controlServers(), controlTokenPath(), refreshControlApi()
 
 ### Community 9 - "build_manual_pdfs.py"
 Cohesion: 0.10
@@ -364,15 +371,15 @@ Nodes (21): html, pathlib, re, reportlab_lib, reportlab_lib_enums, reportlab_lib
 
 ### Community 10 - "renderer.ts"
 Cohesion: 0.10
-Nodes (40): action(), anyEngineReady(), applySettings(), autoText(), buildControl(), computeFit(), deciderAction(), deciderMessage() (+32 more)
+Nodes (41): action(), anyEngineReady(), applySettings(), autoText(), buildControl(), computeFit(), deciderAction(), deciderMessage() (+33 more)
 
 ### Community 11 - "engine.ts"
 Cohesion: 0.10
-Nodes (33): assetFor(), assetsFor(), backendOptions(), copyRuntimeLibraries(), crypto, download(), findExecutable(), fs (+25 more)
+Nodes (34): ref_node_stream, assetFor(), assetsFor(), backendOptions(), copyRuntimeLibraries(), crypto, download(), findExecutable() (+26 more)
 
 ### Community 12 - "firewall.ts"
-Cohesion: 0.11
-Nodes (31): ref_node_util, ALLOWED_RANGES, buildFirewallScript(), buildListRulesScript(), buildRemoveRulesScript(), createRule(), createRules(), crypto (+23 more)
+Cohesion: 0.17
+Nodes (24): ALLOWED_RANGES, buildFirewallScript(), buildListRulesScript(), buildRemoveRulesScript(), createRule(), createRules(), crypto, elevatedPowerShellScript() (+16 more)
 
 ### Community 13 - "compilerOptions"
 Cohesion: 0.12
@@ -384,7 +391,7 @@ Nodes (6): build_app_benchmark, build_app_core, c_users_celio_onedrive_app_e_pro
 
 ### Community 15 - "network.ts"
 Cohesion: 0.19
-Nodes (10): allowLocalRequest(), createProxy(), crypto, ensureKey(), fs, http, net, os (+2 more)
+Nodes (11): allowLocalRequest(), createProxy(), crypto, ensureKey(), fs, http, net, os (+3 more)
 
 ### Community 16 - "compilerOptions"
 Cohesion: 0.13
@@ -408,7 +415,7 @@ Nodes (8): build_app_terminal_cli, c_users_celio_onedrive_app_e_projetos_llama_d
 
 ### Community 22 - "Manual de uso — Llama Desktop Launcher"
 Cohesion: 0.06
-Nodes (33): 10. Perfis por modelo, 11. Acesso pela rede e compartilhamento, 12. Dados, atualização e desinstalação, 13. Créditos, 1. O que o aplicativo faz, 2. Requisitos, 3. Instalar o aplicativo, 4. Primeiro uso (+25 more)
+Nodes (34): 10. Perfis por modelo, 11. Acesso pela rede e compartilhamento, 12. Dados, atualização e desinstalação, 13. Créditos, 1. O que o aplicativo faz, 2. Requisitos, 3. Instalar o aplicativo, 4. Primeiro uso (+26 more)
 
 ### Community 23 - "What You Must Do When Invoked"
 Cohesion: 0.08
@@ -419,12 +426,12 @@ Cohesion: 0.22
 Nodes (8): ai-memory durable pages, Architectural decisions get ADR structure and a pin, Deleting durable memory, Project rules belong in instructions first, Project scope, Standing user/team preferences go to the global scope, Tools in this cluster, Writing durable memory
 
 ### Community 25 - "Integration guide — Llama Desktop Launcher"
-Cohesion: 0.10
-Nodes (20): 10. Quick check, 1. Overview, 2. Endpoint and ports, 3. Model ID per engine, 4. Keys and credentials, 5. Ready-made client setups, 6. Integrate your own application, 7. Examples (+12 more)
+Cohesion: 0.08
+Nodes (24): 10. Quick check, 11. Local control API (DevTools), 1. Overview, 2. Endpoint and ports, 3. Model ID per engine, 4. Keys and credentials, 5. Ready-made client setups, 6. Integrate your own application (+16 more)
 
 ### Community 26 - "terminal_cli.test.js"
-Cohesion: 0.17
-Nodes (11): c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand, assert, { EventEmitter }, fs, { openExternalCli }, os (+3 more)
+Cohesion: 0.10
+Nodes (19): c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_posixscript, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_psquote, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_terminalcommand, assert, { defaults }, fs (+11 more)
 
 ### Community 27 - "graphify reference: extra exports and benchmark"
 Cohesion: 0.22
@@ -447,20 +454,20 @@ Cohesion: 0.29
 Nodes (6): ai-memory routing install, Managed instruction marker, Managed skill marker, Refresh guidance, Skill install targets, Tools in this cluster
 
 ### Community 33 - "Guia de integração — Llama Desktop Launcher"
-Cohesion: 0.10
-Nodes (20): 10. Verificação rápida, 1. Visão geral, 2. Endpoint e portas, 3. ID do modelo por motor, 4. Chaves e credenciais, 5. Clientes prontos, 6. Integrar o seu aplicativo, 7. Exemplos (+12 more)
+Cohesion: 0.08
+Nodes (24): 10. Verificação rápida, 11. API de controle local (DevTools), 1. Visão geral, 2. Endpoint e portas, 3. ID do modelo por motor, 4. Chaves e credenciais, 5. Clientes prontos, 6. Integrar o seu aplicativo (+16 more)
 
 ### Community 34 - "guidance.test.js"
 Cohesion: 0.20
 Nodes (9): build_app_guidance, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_buildguidance, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_engineadvice, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_enginelinks, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_gpuvendor, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_guidance_links, assert, { buildGuidance, links } (+1 more)
 
-### Community 35 - "ref_node_assert"
-Cohesion: 0.20
-Nodes (9): ref_node_assert, ref_node_test, assert, engine, release, test, assert, pkg (+1 more)
+### Community 35 - "ref_node_test"
+Cohesion: 0.33
+Nodes (5): ref_node_test, assert, engine, release, test
 
-### Community 36 - "smoke-external-cli-linux.js"
-Cohesion: 0.20
-Nodes (8): c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_openexternalcli, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_terminal_cli_shquote, assert, { defaults }, fs, { openExternalCli, shQuote }, os, path
+### Community 36 - "benchmark.ts"
+Cohesion: 0.14
+Nodes (17): core, freePort(), fs, http, measureLlamaServer(), measureOpenAi(), net, params (+9 more)
 
 ### Community 37 - "Plano simples da interface"
 Cohesion: 0.29
@@ -471,8 +478,8 @@ Cohesion: 0.13
 Nodes (15): 10. Mensagens do aplicativo, 11. Antes de abrir uma issue, 1. Por onde começar, 2. Onde ficam os dados, 3. Relatório de diagnóstico, 4. Problemas gerais, 5. llama.cpp, 6. vLLM (+7 more)
 
 ### Community 39 - "engine-install.test.js"
-Cohesion: 0.13
-Nodes (13): ref_node_https, ref_node_stream, assert, crypto, engine, {EventEmitter}, {execFileSync}, fs (+5 more)
+Cohesion: 0.14
+Nodes (12): ref_node_https, assert, crypto, engine, {EventEmitter}, {execFileSync}, fs, https (+4 more)
 
 ### Community 40 - "graphify reference: query, path, explain"
 Cohesion: 0.33
@@ -523,12 +530,12 @@ Cohesion: 0.18
 Nodes (15): cache, cached(), FileReader, fs, ggufInfo(), hfInfo(), modelInfo(), num() (+7 more)
 
 ### Community 92 - "params.ts"
-Cohesion: 0.05
-Nodes (67): benchArgs(), core, createSearch(), measure(), stage(), exe(), fitParams(), freePort() (+59 more)
+Cohesion: 0.10
+Nodes (30): fitKey(), autoMoeCpuShare(), autoValues(), CACHE_TYPES, Ctx, DRAFT_SPEC, Field, FIELDS (+22 more)
 
-### Community 95 - "hardware.test.js"
-Cohesion: 0.29
-Nodes (5): build_app_hardware, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu, assert, { detectGpu }, test
+### Community 95 - "ref_node_assert"
+Cohesion: 0.25
+Nodes (6): build_app_hardware, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_hardware_detectgpu, ref_node_assert, assert, { detectGpu }, test
 
 ### Community 96 - "params.test.js"
 Cohesion: 0.11
@@ -543,16 +550,16 @@ Cohesion: 0.17
 Nodes (11): author, description, homepage, license, main, name, private, version (+3 more)
 
 ### Community 100 - "engines.ts"
-Cohesion: 0.12
-Nodes (30): isWithin(), {apiModelId,isWithin,walkModels}, contextFromArgs(), detectStrata(), dockerModelMount(), dockerStatus(), ENGINE_IDS, engineCatalog() (+22 more)
+Cohesion: 0.07
+Nodes (48): {apiModelId}, applications, bashQuote(), clientCommand(), clientConfiguration(), modelIdOf(), openCodeCommand(), psQuote() (+40 more)
 
 ### Community 101 - "smoke-engine.js"
 Cohesion: 0.22
 Nodes (10): c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_core_argsformodel, check(), {defaults,argsForModel}, freePort(), fs, http, main(), net (+2 more)
 
 ### Community 103 - "smoke-server-buttons.js"
-Cohesion: 0.05
-Nodes (35): electron, {app,BrowserWindow}, engineDir, fs, gguf, main(), modelDir, os (+27 more)
+Cohesion: 0.12
+Nodes (14): {app,BrowserWindow,shell}, assert, engineDir, {EventEmitter}, executable, fs, http, modelDir (+6 more)
 
 ### Community 104 - "Parâmetros por motor, detecção por modelo e autotuning (proposta para a v0.9.0)"
 Cohesion: 0.18
@@ -610,9 +617,9 @@ Nodes (4): linux, category, maintainer, target
 Cohesion: 0.13
 Nodes (15): 10. App messages, 11. Before opening an issue, 1. Where to start, 2. Where data is stored, 3. Diagnostic report, 4. General problems, 5. llama.cpp, 6. vLLM (+7 more)
 
-### Community 151 - "ref_node_os"
-Cohesion: 0.14
-Nodes (18): ref_node_os, detectHardware(), describeBuild(), allModels(), apiKeyPath(), availableModelDiskBytes(), deciderState(), diagnosticData() (+10 more)
+### Community 151 - "diagnosticData"
+Cohesion: 0.22
+Nodes (9): detectHardware(), describeBuild(), apiKeyPath(), availableModelDiskBytes(), currentBuild(), diagnosticData(), gpuDetails(), modelGuidance() (+1 more)
 
 ### Community 152 - "Llama Desktop Launcher"
 Cohesion: 0.25
@@ -627,12 +634,12 @@ Cohesion: 0.29
 Nodes (6): ref_node_crypto, ref_node_http, crypto, http, net, network
 
 ### Community 156 - "README.md"
-Cohesion: 0.18
-Nodes (3): ADR: motores vLLM, Strata e PolyStrata ao lado do llama.cpp, ADR: aviso de atualização do aplicativo, ADR: relatório de diagnóstico copiável e guias separados
+Cohesion: 0.13
+Nodes (7): ADR: motores vLLM, Strata e PolyStrata ao lado do llama.cpp, ADR: aviso de atualização do aplicativo, ADR: relatório de diagnóstico copiável e guias separados, ADR: versão fixa do motor llama.cpp, Atualização em 2026-11-08: canal estável semver, Atualização em 2026-11-08: fixação à frente do canal estável, Atualização em 2026-11-15: llama.cpp v1.0.0
 
 ### Community 188 - "ref_node_fs"
-Cohesion: 0.14
-Nodes (12): ref_node_fs, ref_node_path, cwd, file, fs, path, pkg, fs (+4 more)
+Cohesion: 0.11
+Nodes (17): build_app_engine_build, ref_node_fs, ref_node_path, cwd, file, fs, path, pkg (+9 more)
 
 ### Community 189 - "diagnostics.ts"
 Cohesion: 0.48
@@ -642,13 +649,13 @@ Nodes (5): buildReport(), escapeRegExp(), gib(), redact(), yes()
 Cohesion: 0.20
 Nodes (9): build_app_params, assert, benchmark, core, fs, os, params, path (+1 more)
 
-### Community 233 - "engine_build.test.js"
+### Community 233 - "startServer"
 Cohesion: 0.25
-Nodes (7): build_app_engine_build, assert, build, fs, os, path, test
+Nodes (14): controlConflict(), controlStart(), deciderLogText(), deciderState(), freePort(), llamaReady(), log(), requireGenerative() (+6 more)
 
 ### Community 234 - "terminal_cli.ts"
-Cohesion: 0.24
-Nodes (12): cli, fs, onPath(), openExternalCli(), os, path, posixScript(), powershellScript() (+4 more)
+Cohesion: 0.13
+Nodes (22): ref_node_string_decoder, argsForConversation(), core, createSession(), executableName(), executablePath(), fs, path (+14 more)
 
 ### Community 235 - "decider.ts"
 Cohesion: 0.18
@@ -662,9 +669,9 @@ Nodes (5): devDependencies, electron, electron-builder, @types/node, typescript
 Cohesion: 0.20
 Nodes (9): ref_node_child_process, compiler, fs, output, path, renderer, result, root (+1 more)
 
-### Community 238 - "ADR: versão fixa do motor llama.cpp"
-Cohesion: 0.40
-Nodes (4): ADR: versão fixa do motor llama.cpp, Atualização em 2026-11-08: canal estável semver, Atualização em 2026-11-08: fixação à frente do canal estável, Atualização em 2026-11-15: llama.cpp v1.0.0
+### Community 238 - "smoke-engines-ui.js"
+Cohesion: 0.17
+Nodes (12): {app,BrowserWindow}, engineDir, fs, gguf, main(), modelDir, os, path (+4 more)
 
 ### Community 239 - "guidance.ts"
 Cohesion: 0.43
@@ -674,9 +681,9 @@ Nodes (6): buildGuidance(), engineAdvice(), engineLinks, gpuVendor(), links, tie
 Cohesion: 0.40
 Nodes (4): ADR: forks compatíveis do llama.cpp (Avalon, tandem.cpp), Consequências, Contexto, Decisão
 
-### Community 279 - "client_commands.ts"
-Cohesion: 0.40
-Nodes (9): {apiModelId}, applications, bashQuote(), clientCommand(), clientConfiguration(), modelIdOf(), openCodeCommand(), psQuote() (+1 more)
+### Community 279 - "control_api.test.js"
+Cohesion: 0.17
+Nodes (9): build_app_control_api, assert, control, fs, http, MODELS, os, path (+1 more)
 
 ### Community 280 - "decider.test.js"
 Cohesion: 0.25
@@ -690,25 +697,57 @@ Nodes (5): gguf(), encode(), str(), u32(), u64()
 Cohesion: 0.29
 Nodes (5): build_app_profile_import, c_users_celio_onedrive_app_e_projetos_llama_desktop_launcher_build_app_profile_import_parselegacyprofiles, assert, { parseLegacyProfiles }, test
 
+### Community 284 - "controlStop"
+Cohesion: 0.22
+Nodes (7): ADR: API local de controle para o DevTools, stopCommand(), controlStop(), stopContainer(), stopDecider(), stopServer(), waitExit()
+
+### Community 285 - "smoke-ui.js"
+Cohesion: 0.17
+Nodes (9): electron, {app,BrowserWindow}, fs, os, path, temporary, withModel, {contextBridge,ipcRenderer} (+1 more)
+
+### Community 286 - "profile_import.ts"
+Cohesion: 0.24
+Nodes (9): ref_node_util, argsForModel(), validateSettings(), decodeProfilePath(), parseLegacyProfiles(), path, SETTINGS_FIELDS, { TextDecoder } (+1 more)
+
+### Community 287 - "allModels"
+Cohesion: 0.25
+Nodes (9): listDevices(), allModels(), checkSettings(), draftModelsFor(), llamaDevices(), modelInfo, paramContext(), selectedModel() (+1 more)
+
+### Community 288 - "ref_node_os"
+Cohesion: 0.25
+Nodes (6): ref_node_os, fs, mountpoint, os, path, { spawnSync }
+
+### Community 289 - "fitParams"
+Cohesion: 0.29
+Nodes (8): benchArgs(), exe(), fitParams(), parseBench(), runBench(), llamaEnv(), parseExtraEnv(), parseFitOutput()
+
+### Community 290 - "tune"
+Cohesion: 0.43
+Nodes (8): createSearch(), measure(), stage(), pickMoeCache(), scoreOf(), tune(), tuneVllm(), uniq()
+
+### Community 291 - "save"
+Cohesion: 0.33
+Nodes (7): checkUpdates(), createWindow(), defaultConfig(), load(), migrateProfiles(), save(), migrateProfile()
+
 ## Knowledge Gaps
-- **668 isolated node(s):** `name`, `version`, `private`, `license`, `author` (+663 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1059 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **195 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **690 isolated node(s):** `name`, `version`, `private`, `license`, `author` (+685 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1083 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **194 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `settings()` connect `renderer.ts` to `main.ts`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `build` connect `build` to `package.json`, `linux`, `nsis`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **Why does `electron` connect `smoke-server-buttons.js` to `main.ts`, `package.json`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `ADR: API local de controle para o DevTools` connect `controlStop` to `startServer`?**
+  _High betweenness centrality (0.226) - this node is a cross-community bridge._
+- **Why does `startServer()` connect `startServer` to `fitParams`, `main.ts`, `save`, `engines.ts`, `network.ts`, `params.ts`, `diagnosticData`, `controlStop`, `profile_import.ts`, `allModels`?**
+  _High betweenness centrality (0.123) - this node is a cross-community bridge._
+- **Why does `stopServer()` connect `controlStop` to `main.ts`?**
+  _High betweenness centrality (0.092) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _668 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _690 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `firewall.test.js` be split into smaller, more focused modules?**
   _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
 - **Should `RendererApi` be split into smaller, more focused modules?**
-  _Cohesion score 0.03125 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.029850746268656716 - nodes in this community are weakly interconnected._
 - **Should `main.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.04979591836734694 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05405405405405406 - nodes in this community are weakly interconnected._

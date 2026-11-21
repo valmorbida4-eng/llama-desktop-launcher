@@ -315,9 +315,13 @@ Na rede, use **Mostrar chave**, **Copiar chave** ou **Nova chave** (pare o servi
 
 Quem recebe um link ou comando com acesso pode usar o modelo, mas não acessa os arquivos do seu computador. No Windows, a seção **Firewall do Windows** cria a regra de entrada para a porta ativa. A regra continua depois que o servidor para; remova-a em **Configurações > 07 · Firewall do Windows**. Detalhes de portas, chaves, clientes e firewall estão no **Guia de integração**.
 
+### API de controle local
+
+Em **Configurações > 08 · API de controle**, a caixa **Ativar a API de controle local** deixa outro programa deste computador (como o DevTools) listar os modelos, iniciar e parar o servidor principal e o decisor e fechar o launcher, por `http://127.0.0.1:8787`. Os pedidos precisam do token de controle: copie-o com **Copiar token** ou defina a variável `DEVTOOLS_LAUNCHER_TOKEN`. Os serviços iniciados assim escutam só em `127.0.0.1` e usam o perfil salvo. O contrato completo está na seção 11 do **Guia de integração**.
+
 ## 12. Dados, atualização e desinstalação
 
-As preferências e os perfis ficam em `settings.json`, na pasta de dados do aplicativo. Nessa mesma pasta ficam a chave da API (`server-api-key.txt`), os motores baixados (`engines/`) e os pacotes de atualização (`updates/`). O Guia de diagnóstico mostra o caminho em cada sistema. Os modelos ficam nas pastas que você escolheu.
+As preferências e os perfis ficam em `settings.json`, na pasta de dados do aplicativo. Nessa mesma pasta ficam a chave da API (`server-api-key.txt`), o token da API de controle (`control-api-token.txt`), os motores baixados (`engines/`) e os pacotes de atualização (`updates/`). O Guia de diagnóstico mostra o caminho em cada sistema. Os modelos ficam nas pastas que você escolheu.
 
 ### Atualizar o aplicativo
 

@@ -27,6 +27,9 @@ const {parseLegacyProfiles}=require('./profile_import');
 const params=require('./params');
 const modelInfo=require('./model_info');
 const decisions=require('./decider');
+const control=require('./control_api');
+// API local de controle (DevTools): desligada por padrão; liga pelas Configurações ou por DEVTOOLS_LAUNCHER_TOKEN.
+let controlServer: any=null,controlError: string | null=null;
 // Decisor: segundo llama-server, independente do principal, para modelos de decisão (/v1/systemone).
 let deciderProcess: any=null,deciderActive: any=null;
 const deciderLog=diagnostics.createLogBuffer();
@@ -82,7 +85,7 @@ async function refreshDocker() {if(engines.vllmMode()!=='docker')return docker;d
 function requireLlama(model: any,action: string) {if(model.engine!=='llamacpp')throw Error(`${action} está disponível só para modelos GGUF no llama.cpp.`);}
 function requireGenerative(model: any) {if(model.decision)throw Error('Este é um modelo de decisão: ele não gera texto. Inicie-o no card Decisor da tela Llama.');}
 function deciderState() {return {running:!!deciderProcess,active:deciderActive,config:{...decisions.DEFAULTS,...(configuration.decider||{})},models:decisions.MODELS};}
-function state() {return {appVersion:app.getVersion(),config:configuration,models:allModels(),engines:engineStatus(),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:llamaReady(),running:!!server,chatRunning:!!conversation,accessOptions:network.accessOptions(),active,update:updateInfo,decider:deciderState()};}
+function state() {return {appVersion:app.getVersion(),controlApi:controlApiState(),config:configuration,models:allModels(),engines:engineStatus(),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:llamaReady(),running:!!server,chatRunning:!!conversation,accessOptions:network.accessOptions(),active,update:updateInfo,decider:deciderState()};}
 function freePort(host: string='127.0.0.1',first=0,last=0): Promise<number> {return new Promise<number>((resolve,reject)=>{let port=first;const tryNext=()=>{const s=net.createServer();s.once('error',e=>{if(e.code==='EADDRINUSE'&&port<last){port++;tryNext();}else reject(e);});s.listen(port,host,()=>{const found=s.address().port;s.close(()=>resolve(found));});};tryNext();});}
 function waitReady(host: string,port: number,child: any,key: string | null,limitSeconds=300): Promise<void> {return new Promise<void>((resolve,reject)=>{let count=0,done=false;const finish=(error?: Error)=>{if(done)return;done=true;clearInterval(timer);error?reject(error):resolve();};child.once('error',(e: Error)=>finish(e));const timer=setInterval(()=>{if(child.exitCode!==null){finish(Error('O motor encerrou antes de ficar pronto.'));return;}http.get({hostname:host,port,path:'/health',headers:key?{Authorization:`Bearer ${key}`}:{},timeout:3000},r=>{r.resume();if(r.statusCode===200)finish();}).on('error',()=>{});if(++count>limitSeconds)finish(Error('Tempo esgotado ao carregar o modelo.'));},1000);});}
 function apiKeyPath(){return path.join(app.getPath('userData'),'server-api-key.txt');}
@@ -163,9 +166,13 @@ async function installUpdate() {
     return {action:'package',file,command:updater.installHint(file)};
   } finally {updateBusy=false;}
 }
-app.whenReady().then(()=>{load();createWindow();refreshBuild().catch(()=>{});refreshDocker().then(()=>send('engines-changed',null)).catch(()=>{});app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
+// Uma instância só: abrir pelo atalho com o launcher aberto traz a janela existente (e a API de controle dela).
+const singleInstance=app.requestSingleInstanceLock();
+if(!singleInstance)app.quit();
+else app.on('second-instance',()=>{if(win&&!win.isDestroyed()){if(win.isMinimized())win.restore();win.focus();}});
+app.whenReady().then(()=>{if(!singleInstance)return;load();createWindow();refreshControlApi().catch(()=>{});refreshBuild().catch(()=>{});refreshDocker().then(()=>send('engines-changed',null)).catch(()=>{});app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow();});});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin') app.quit();});
-app.on('before-quit',()=>{tuneAbort?.abort();shareProxy?.close();shareProxy=null;proxy?.close();conversation?.stop();stopContainer();if(server)server.kill();if(deciderProcess)deciderProcess.kill();});
+app.on('before-quit',()=>{controlServer?.close();controlServer=null;tuneAbort?.abort();shareProxy?.close();shareProxy=null;proxy?.close();conversation?.stop();stopContainer();if(server)server.kill();if(deciderProcess)deciderProcess.kill();});
 
 ipcMain.handle('state',e=>{validateSender(e);return state();});
 ipcMain.handle('check-update',e=>{validateSender(e);return checkUpdates();});
@@ -271,8 +278,9 @@ ipcMain.handle('tune',async(e,modelPath,settings,options: {budgetMinutes?: numbe
     return await benchmark.tune(configuration.engineDir,model,settings,progress,controller.signal,{budgetMinutes,priority,info:ctx.info,devices:ctx.devices,hw:ctx.hw});
   }finally{tuneAbort=null;}
 });
-ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; parallel?: number; openBrowser?: boolean}={})=>{
-  validateSender(e);
+ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; parallel?: number; openBrowser?: boolean}={})=>{validateSender(e);return startServer(modelPath,settings,options);});
+// persist:false (API de controle) não grava perfil, endereço nem sessões escolhidos na tela.
+async function startServer(modelPath: string,settings: any,options: {host?: string; parallel?: number; openBrowser?: boolean; persist?: boolean}={}) {
   if(server&&active){if(options.openBrowser!==false)await shell.openExternal(active.browserUrl);return active;}
   if(server||conversation||tuneAbort||engineBusy)throw Error('Pare a execução atual antes de iniciar outra.');
   const model=selectedModel(modelPath);requireGenerative(model);await checkSettings(model,settings);
@@ -284,7 +292,7 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
   if(model.engine==='vllm'&&info.mode==='docker'&&!docker.image)await refreshDocker();
   if(!engineReady(model.engine))throw Error(model.engine==='llamacpp'?'Instale ou selecione o llama.cpp primeiro.':model.engine==='vllm'?'Prepare o vLLM em Configurações primeiro.':'Escolha a pasta do Strata ou do PolyStrata em Configurações primeiro.');
   const key=access.scope==='Local'?null:network.ensureKey(apiKeyPath());
-  configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};configuration.firstRun=false;configuration.accessHost=access.host;configuration.parallel=parallel;save();
+  if(options.persist!==false){configuration.profiles[modelPath]={...settings,version:params.PROFILE_VERSION};configuration.firstRun=false;configuration.accessHost=access.host;configuration.parallel=parallel;save();}
   const port=await freePort(access.host,8080,8180);
   let command: any;
   if(model.engine==='llamacpp') {
@@ -327,22 +335,23 @@ ipcMain.handle('launch',async(e,modelPath,settings,options: {host?: string; para
     const context=model.engine==='strata'?(model.context||Number(settings.context)||null):Number(runtime.context||settings.context)||null;
     // PolyStrata não aceita --parallel: vale o número de sessões da configuração dele.
     const effectiveParallel=command.parallel??(model.engine==='strata'?model.parallel||1:parallel);
-    active={engine:model.engine,engineLabel:info.label,containerName,sharingEndpoint:shareProxy?.endpoint||null,context,modelId,host:access.host,scope:access.scope,port,parallel:effectiveParallel,runtime,executable:containerName?null:command.file,firewallProgram:containerName?null:(command.firewallProgram===undefined?command.file:command.firewallProgram),browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}${info.browserPath}`};
+    active={modelPath,engine:model.engine,engineLabel:info.label,containerName,sharingEndpoint:shareProxy?.endpoint||null,context,modelId,host:access.host,scope:access.scope,port,parallel:effectiveParallel,runtime,executable:containerName?null:command.file,firewallProgram:containerName?null:(command.firewallProgram===undefined?command.file:command.firewallProgram),browserUrl,endpoint:`http://${access.host}:${port}/v1`,remoteUrl:`http://${access.host}:${port}${info.browserPath}`};
     if(options.openBrowser!==false)await shell.openExternal(browserUrl);
     return active;
   }catch(e){log(`
 [launcher] Falha ao iniciar ${info.label}: ${e.message}
 `);shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;cleanupServer(null);stopContainer(containerName);try{child.kill();}catch{}throw e;}
-});
+}
 function stopContainer(name: string | null=serverContainer) {
   if(!name)return;
   try{const command=engines.stopCommand({containerName:name});spawn(command.file,command.args,{windowsHide:true,stdio:'ignore'}).on('error',()=>{});}catch{}
 }
-ipcMain.handle('stop',e=>{validateSender(e);shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;stopContainer();server?.kill();return true;});
+function stopServer() {shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;stopContainer();server?.kill();}
+ipcMain.handle('stop',e=>{validateSender(e);stopServer();return true;});
 function deciderLogText(text: string) {deciderLog.append(text);send('decider-log',text);}
 ipcMain.handle('decider-devices',async e=>{validateSender(e);return (await llamaDevices())||[];});
-ipcMain.handle('decider-start',async(e,modelPath,options: any={})=>{
-  validateSender(e);
+ipcMain.handle('decider-start',async(e,modelPath,options: any={})=>{validateSender(e);return startDecider(modelPath,options);});
+async function startDecider(modelPath: string,options: any={},persist=true) {
   if(deciderProcess)throw Error('O decisor já está em execução.');
   if(!llamaReady())throw Error('Instale ou selecione o llama.cpp primeiro.');
   const model=selectedModel(modelPath);
@@ -354,7 +363,7 @@ ipcMain.handle('decider-start',async(e,modelPath,options: any={})=>{
   const port=await freePort(access.host,decisions.PORTS.first,decisions.PORTS.last);
   const executable=path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server');
   const args=decisions.serverArgs(model,opts,port,key?apiKeyPath():null);
-  configuration.decider={modelPath,...opts};save();
+  if(persist){configuration.decider={modelPath,...opts};save();}
   const child=spawn(executable,args,{cwd:configuration.engineDir,env:process.env,windowsHide:true,stdio:['ignore','pipe','pipe']});deciderProcess=child;
   deciderLog.clear();deciderLogText(`[launcher] Iniciando o decisor · ${model.name} · ${access.scope} ${access.host}:${port}\n`);
   child.stdout.on('data',(d: Buffer)=>deciderLogText(String(d).slice(-3000)));
@@ -368,8 +377,9 @@ ipcMain.handle('decider-start',async(e,modelPath,options: any={})=>{
       endpoint:`http://${access.host}:${port}/v1/systemone`};
     return state();
   } catch(error) {deciderLogText(`\n[launcher] Falha ao iniciar o decisor: ${error.message}\n`);try{child.kill();}catch{}cleanup(null);throw error;}
-});
-ipcMain.handle('decider-stop',e=>{validateSender(e);deciderProcess?.kill();return true;});
+}
+function stopDecider() {deciderProcess?.kill();}
+ipcMain.handle('decider-stop',e=>{validateSender(e);stopDecider();return true;});
 ipcMain.handle('copy-decider-endpoint',e=>{validateSender(e);if(!deciderActive)throw Error('Inicie o decisor primeiro.');clipboard.writeText(deciderActive.endpoint);return deciderActive.endpoint;});
 // Teste da tela: o renderer não acessa a rede (CSP), então o pedido sai daqui, com a chave quando na rede.
 ipcMain.handle('decider-test',async(e,input)=>{
@@ -466,3 +476,64 @@ async function diagnosticData() {
   };
 }
 ipcMain.handle('copy-diagnostic-report',async e=>{validateSender(e);const report=diagnostics.buildReport(await diagnosticData());clipboard.writeText(report);return report;});
+
+// ---- API local de controle (DevTools) ----
+// Liga só pela caixa das Configurações. O token vem de DEVTOOLS_LAUNCHER_TOKEN quando definida; senão, de
+// control-api-token.txt, gerado pelo launcher. Os dois serviços sempre iniciam em 127.0.0.1.
+function controlTokenPath() {return path.join(app.getPath('userData'),'control-api-token.txt');}
+function controlApiState() {
+  const token=configuration?control.resolveToken(controlTokenPath()):{source:'file'};
+  return {enabled:configuration?.controlApi===true,running:!!controlServer,address:`http://${control.HOST}:${control.PORT}`,tokenSource:token.source,envVar:control.TOKEN_ENV,error:controlError||token.error||null};
+}
+async function refreshControlApi() {
+  const stop=()=>{if(controlServer){controlServer.close();controlServer.closeAllConnections?.();controlServer=null;}};
+  if(configuration.controlApi!==true){stop();controlError=null;return;}
+  const token=control.ensureToken(controlTokenPath());
+  if(!token.token){stop();controlError=token.error||'Token da API de controle indisponível.';return;}
+  if(controlServer){controlError=null;return;}
+  try {
+    controlServer=await control.createControlServer({token:()=>control.resolveToken(controlTokenPath()).token,
+      handlers:{models:()=>control.catalog(allModels()),servers:controlServers,start:controlStart,stop:controlStop,quit:()=>app.quit()}});
+    controlError=null;
+  } catch(error) {controlError=error.code==='EADDRINUSE'?`A porta ${control.PORT} já está em uso por outro programa.`:String(error.message||error);}
+}
+function controlServers() {
+  return {
+    chat:server&&active?{model_id:control.modelId(active.modelPath),port:active.port,api_model:active.modelId,host:active.host}:null,
+    decider:deciderProcess&&deciderActive?{model_id:control.modelId(deciderActive.modelPath),port:deciderActive.port,host:deciderActive.host}:null,
+  };
+}
+function waitExit(child: any,ms=15000): Promise<void> {
+  return new Promise<void>(resolve=>{if(!child||child.exitCode!==null||child.signalCode!==null){resolve();return;}const timer=setTimeout(resolve,ms);child.once('exit',()=>{clearTimeout(timer);resolve();});});
+}
+const controlConflict=(message: string)=>new control.ControlError(409,'conflict',message);
+// Reaproveita startServer/startDecider (mesma validação e ciclo de vida da tela), sempre em loopback e sem
+// gravar escolhas da tela. O mesmo modelo já ativo em 127.0.0.1 devolve sucesso sem reiniciar.
+async function controlStart(role: string,model: any) {
+  try {
+    if(role==='decider') {
+      if(deciderProcess){if(deciderActive?.modelPath===model.path&&deciderActive.host===control.HOST)return;throw controlConflict(deciderActive?'O decisor já está em execução com outro modelo ou na rede. Pare-o antes.':'O decisor está iniciando.');}
+      if(!llamaReady())throw controlConflict('Instale ou selecione o llama.cpp no launcher primeiro.');
+      const saved=configuration.decider||{};
+      await startDecider(model.path,{device:saved.device??decisions.DEFAULTS.device,context:saved.context??decisions.DEFAULTS.context,host:control.HOST},false);
+    } else {
+      if(server){if(active?.modelPath===model.path&&active.host===control.HOST)return;throw controlConflict(active?'O servidor principal já está em execução com outro modelo ou na rede. Pare-o antes.':'O servidor principal está iniciando.');}
+      if(conversation||tuneAbort||engineBusy)throw controlConflict('Pare a conversa, o teste de desempenho ou a preparação do motor no launcher antes.');
+      if(model.engine==='llamacpp'&&!llamaReady())throw controlConflict('Instale ou selecione o llama.cpp no launcher primeiro.');
+      const {version: _version,...settings}=configuration.profiles[model.path]||{};
+      await startServer(model.path,settings,{host:control.HOST,parallel:Number(configuration.parallel)||1,openBrowser:false,persist:false});
+    }
+  } catch(error) {
+    if(error instanceof control.ControlError)throw error;
+    throw new control.ControlError(500,'start_failed',String(error?.message||error));
+  } finally {send('control-changed',null);}
+}
+async function controlStop(role: string) {
+  const child=role==='decider'?deciderProcess:server;
+  if(role==='decider')stopDecider();else stopServer();
+  await waitExit(child);
+  send('control-changed',null);
+}
+ipcMain.handle('set-control-api',async(e,enabled)=>{validateSender(e);if(typeof enabled!=='boolean')throw Error('Valor inválido.');configuration.controlApi=enabled;save();await refreshControlApi();return state();});
+ipcMain.handle('copy-control-token',e=>{validateSender(e);const token=control.ensureToken(controlTokenPath());if(!token.token)throw Error(token.error||'Token indisponível.');clipboard.writeText(token.token);return token.source;});
+ipcMain.handle('rotate-control-token',e=>{validateSender(e);if(control.resolveToken(controlTokenPath()).source==='env')throw Error(`O token vem da variável ${control.TOKEN_ENV}; troque o valor dela e reabra o launcher.`);control.rotateToken(controlTokenPath());return state();});
