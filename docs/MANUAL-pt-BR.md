@@ -336,7 +336,7 @@ Quem recebe um link ou comando com acesso pode usar o modelo, mas não acessa os
 
 ### API de controle local
 
-Em **Configurações > 08 · API de controle**, a caixa **Ativar a API de controle local** deixa outro programa deste computador (como o DevTools) listar os modelos, iniciar e parar o servidor principal, o revisor e o decisor e fechar o launcher, por `http://127.0.0.1:8787`. Os pedidos precisam do token de controle: copie-o com **Copiar token** ou defina a variável `DEVTOOLS_LAUNCHER_TOKEN`. Os serviços iniciados assim escutam só em `127.0.0.1` e usam o perfil salvo. O contrato completo está na seção 11 do **Guia de integração**.
+Em **Configurações > 08 · API de controle**, a caixa **Ativar a API de controle local** deixa outro programa deste computador (como o DepTriagem, antigo DevTools) listar os modelos, iniciar e parar o servidor principal, o revisor e o decisor e fechar o launcher, por `http://127.0.0.1:8787`. Os pedidos precisam do token de controle: copie-o com **Copiar token** ou defina a variável `DEPTRIAGEM_LAUNCHER_TOKEN` (o nome antigo, `DEVTOOLS_LAUNCHER_TOKEN`, ainda é aceito). Os serviços iniciados assim escutam só em `127.0.0.1` e usam o perfil salvo. O contrato completo está na seção 11 do **Guia de integração**.
 
 ## 12. Dados, atualização e desinstalação
 

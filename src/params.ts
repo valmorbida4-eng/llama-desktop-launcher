@@ -85,7 +85,7 @@ const FIELDS: Field[]=[
     when:c=>(c.parallel||1)>=2?null:'Só faz diferença com 2 ou mais sessões simultâneas.'},
   // llama.cpp · raciocínio
   {key:'effort',engine:'llamacpp',group:'Raciocínio',label:'Esforço',flag:'--reasoning-effort',kind:'select',modes:['server','cli'],options:effortOptions,
-    hint:'Só as opções que o template deste modelo aceita; vale também para ele como revisor. O cliente pode mudar a cada pedido: no DevTools, o esforço do modelo precisa ser o do servidor',
+    hint:'Só as opções que o template deste modelo aceita; vale também para ele como revisor. O cliente pode mudar a cada pedido: no DepTriagem, o esforço do modelo precisa ser o do servidor',
     when:c=>effortOptions(c).length?null:c.reasoning===false?'Este llama.cpp não aceita --reasoning-effort: atualize o motor.':'O template deste modelo não tem ajuste de esforço.'},
   // llama.cpp · especulativa
   {key:'specType',engine:'llamacpp',group:'Decodificação especulativa',label:'Tipo',flag:'--spec-type',kind:'select',modes:['server','cli'],

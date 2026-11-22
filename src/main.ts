@@ -33,7 +33,7 @@ const control=require('./control_api');
 const review=require('./reviewer');
 const {createPlanner}=require('./admission');
 const {createStarts,untilAborted}=require('./starts');
-// API local de controle (DevTools): desligada por padrão; liga pelas Configurações ou por DEVTOOLS_LAUNCHER_TOKEN.
+// API local de controle (DepTriagem): desligada por padrão; liga só pelas Configurações.
 let controlServer: any=null,controlError: string | null=null;
 // Decisor: segundo llama-server, independente do principal, para modelos de decisão (/v1/systemone).
 let deciderProcess: any=null,deciderActive: any=null;
@@ -612,13 +612,13 @@ async function diagnosticData() {
 }
 ipcMain.handle('copy-diagnostic-report',async e=>{validateSender(e);const report=diagnostics.buildReport(await diagnosticData());clipboard.writeText(report);return report;});
 
-// ---- API local de controle (DevTools) ----
-// Liga só pela caixa das Configurações. O token vem de DEVTOOLS_LAUNCHER_TOKEN quando definida; senão, de
+// ---- API local de controle (DepTriagem) ----
+// Liga só pela caixa das Configurações. O token vem de DEPTRIAGEM_LAUNCHER_TOKEN (ou DEVTOOLS_LAUNCHER_TOKEN, o nome antigo) quando definida; senão, de
 // control-api-token.txt, gerado pelo launcher. Os três serviços sempre iniciam em 127.0.0.1.
 function controlTokenPath() {return path.join(app.getPath('userData'),'control-api-token.txt');}
 function controlApiState() {
   const token=configuration?control.resolveToken(controlTokenPath()):{source:'file'};
-  return {enabled:configuration?.controlApi===true,running:!!controlServer,address:`http://${control.HOST}:${control.PORT}`,tokenSource:token.source,envVar:control.TOKEN_ENV,error:controlError||token.error||null};
+  return {enabled:configuration?.controlApi===true,running:!!controlServer,address:`http://${control.HOST}:${control.PORT}`,tokenSource:token.source,envVar:token.envVar||control.TOKEN_ENV,error:controlError||token.error||null};
 }
 async function refreshControlApi() {
   const stop=()=>{if(controlServer){controlServer.close();controlServer.closeAllConnections?.();controlServer=null;}};
@@ -678,4 +678,4 @@ async function controlStop(role: string) {
 }
 ipcMain.handle('set-control-api',async(e,enabled)=>{validateSender(e);if(typeof enabled!=='boolean')throw Error('Valor inválido.');configuration.controlApi=enabled;save();await refreshControlApi();return state();});
 ipcMain.handle('copy-control-token',e=>{validateSender(e);const token=control.ensureToken(controlTokenPath());if(!token.token)throw Error(token.error||'Token indisponível.');clipboard.writeText(token.token);return token.source;});
-ipcMain.handle('rotate-control-token',e=>{validateSender(e);if(control.resolveToken(controlTokenPath()).source==='env')throw Error(`O token vem da variável ${control.TOKEN_ENV}; troque o valor dela e reabra o launcher.`);control.rotateToken(controlTokenPath());return state();});
+ipcMain.handle('rotate-control-token',e=>{validateSender(e);const current=control.resolveToken(controlTokenPath());if(current.source==='env')throw Error(`O token vem da variável ${current.envVar}; troque o valor dela e reabra o launcher.`);control.rotateToken(controlTokenPath());return state();});

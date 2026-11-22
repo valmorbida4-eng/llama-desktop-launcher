@@ -336,7 +336,7 @@ Whoever receives a link or command with access can use the model, but cannot rea
 
 ### Local control API
 
-In **Settings > 08 · API de controle**, the **Ativar a API de controle local** box lets another program on this computer (such as DevTools) list models, start and stop the main server, the reviewer and the decider, and close the launcher through `http://127.0.0.1:8787`. Requests need the control token: copy it with **Copiar token** or set the `DEVTOOLS_LAUNCHER_TOKEN` variable. Services started this way listen only on `127.0.0.1` and use the saved profile. The full contract is in section 11 of the **Integration guide**.
+In **Settings > 08 · API de controle**, the **Ativar a API de controle local** box lets another program on this computer (such as DepTriagem, formerly DevTools) list models, start and stop the main server, the reviewer and the decider, and close the launcher through `http://127.0.0.1:8787`. Requests need the control token: copy it with **Copiar token** or set the `DEPTRIAGEM_LAUNCHER_TOKEN` variable (the old name, `DEVTOOLS_LAUNCHER_TOKEN`, is still accepted). Services started this way listen only on `127.0.0.1` and use the saved profile. The full contract is in section 11 of the **Integration guide**.
 
 ## 12. Data, updates and uninstalling
 

@@ -1,6 +1,6 @@
 # ADR: revisor e checagem de memória
 
-Status: implementado em 2026-11-22 (0.14.0)
+Status: implementado em 2026-11-22 (0.14.0). O cliente citado como DevTools passa a se chamar DepTriagem.
 
 O launcher rodava um modelo de texto e um decisor. O pedido foi um segundo modelo, revisor, desde que a máquina comporte os três.
 
