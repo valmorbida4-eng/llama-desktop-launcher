@@ -1,4 +1,4 @@
-# ADR: API local de controle para o DevTools
+# ADR: API local de controle para o DepTriagem (antigo DevTools)
 
 Status: aceito em 2026-11-21
 
@@ -13,5 +13,6 @@ O DevTools precisa abrir o launcher pelo atalho do Windows, escolher modelos e l
 - **Uma instância só** (`requestSingleInstanceLock`): abrir pelo atalho com o launcher aberto foca a janela existente em vez de criar outra que disputaria a porta 8787 e as portas dos servidores.
 
 - **Revisor (0.14.0).** `reviewer` entrou como papel de serviço e como `servers.reviewer`, sem papel novo em `models` e sem mudar `version`: o DevTools rejeita modelos com papel desconhecido e ignora chaves a mais em `servers`. Recusa por memória é `409 insufficient_resources`.
+- **Renomeação (0.15.0).** O DevTools passa a se chamar DepTriagem. `DEPTRIAGEM_LAUNCHER_TOKEN` tem preferência e `DEVTOOLS_LAUNCHER_TOKEN` segue como reserva, para não quebrar clientes e configurações existentes. Uma variável preferida inválida é erro, sem queda silenciosa para a antiga. Onde esta ADR diz DevTools, leia DepTriagem.
 
 É funcionalidade nova compatível (MINOR). Sai como 0.12.1 porque a tag `v0.12.0` foi criada por engano no commit da 0.11.1; o build dela parou no `version:check` e não publicou release. As regras do repositório impedem apagar tags, então ela fica sem release.

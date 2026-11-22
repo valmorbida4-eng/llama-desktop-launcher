@@ -402,7 +402,7 @@ $('reviewer-context').oninput=()=>scheduleReviewerCheck();
 $('check-reviewer').onclick=()=>{reviewerCheck.key='';scheduleReviewerCheck();};
 $('start-reviewer').onclick=()=>reviewerAction(async()=>{const path=$('reviewer-model').value;if(!path)throw Error('Escolha o modelo revisor.');
   $('start-reviewer').disabled=true;reviewerMessage('Conferindo a memória e carregando o revisor…');$('reviewer-log').textContent='';
-  try{await window.llama.startReviewer(path,reviewerOptions());reviewerMessage('Revisor pronto. Use o link da API no seu cliente (no DevTools, campo Revisor local).');}
+  try{await window.llama.startReviewer(path,reviewerOptions());reviewerMessage('Revisor pronto. Use o link da API no seu cliente (no DepTriagem, campo Revisor local).');}
   finally{reviewerCheck.key='';await refresh();}});
 $('stop-reviewer').onclick=()=>reviewerAction(async()=>{await window.llama.stopReviewer();reviewerMessage('Encerrando o revisor…');});
 $('copy-reviewer-endpoint').onclick=()=>reviewerAction(async()=>{await window.llama.copyReviewerEndpoint();reviewerMessage('Link da API copiado. O nome do modelo na API é modelo-revisor.');});
@@ -428,12 +428,12 @@ function fillControlApi(s: any){const c=s.controlApi||{};$('control-api').checke
   const badge=$('control-api-badge');badge.textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';badge.classList.toggle('off',!c.enabled);badge.classList.toggle('error',!!c.enabled&&!c.running);
   const address=$('control-api-address');address.classList.toggle('error',!!c.error);
   address.textContent=c.error?c.error:c.running?`${c.address}/v1/control`:'Desligada: nenhuma porta aberta.';
-  $('control-api-detail').textContent=c.tokenSource==='env'?`Token: variável ${c.envVar} deste usuário (o DevTools lê a mesma). Para trocar, mude a variável e reabra o launcher.`:`Token: gerado pelo launcher. Copie-o e defina ${c.envVar} com esse valor no DevTools.`;
+  $('control-api-detail').textContent=c.tokenSource==='env'?`Token: variável ${c.envVar} deste usuário (o cliente precisa ter o mesmo valor). Para trocar, mude a variável e reabra o launcher.`:`Token: gerado pelo launcher. Copie-o e defina ${c.envVar} com esse valor no DepTriagem.`;
   $('rotate-control-token').disabled=c.tokenSource==='env';}
 async function controlAction(fn){const box=$('control-api-message');box.classList.remove('error');box.textContent='';try{await fn();}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}}
 $('control-api').onchange=()=>controlAction(async()=>{try{fillControlApi((snapshot=await window.llama.setControlApi($('control-api').checked)));}finally{await refresh();}});
-$('copy-control-token').onclick=()=>controlAction(async()=>{const source=await window.llama.copyControlToken();$('control-api-message').textContent=source==='env'?'Token copiado (o mesmo da variável DEVTOOLS_LAUNCHER_TOKEN).':'Token copiado. Defina-o na variável DEVTOOLS_LAUNCHER_TOKEN do DevTools; não o compartilhe.';});
-$('rotate-control-token').onclick=()=>controlAction(async()=>{await window.llama.rotateControlToken();await refresh();$('control-api-message').textContent='Novo token gerado; o anterior deixou de valer. Atualize DEVTOOLS_LAUNCHER_TOKEN no DevTools.';});
+$('copy-control-token').onclick=()=>controlAction(async()=>{const source=await window.llama.copyControlToken();$('control-api-message').textContent=source==='env'?'Token copiado (o mesmo da variável de ambiente).':'Token copiado. Defina-o na variável DEPTRIAGEM_LAUNCHER_TOKEN do DepTriagem; não o compartilhe.';});
+$('rotate-control-token').onclick=()=>controlAction(async()=>{await window.llama.rotateControlToken();await refresh();$('control-api-message').textContent='Novo token gerado; o anterior deixou de valer. Atualize DEPTRIAGEM_LAUNCHER_TOKEN no DepTriagem.';});
 window.llama.onControlChanged(()=>{refresh().catch(e=>message(e.message,true));});
 window.llama.onDeciderStopped(code=>{deciderMessage(`Decisor encerrado (${code??'sem código'}).`);$('decider-result').hidden=true;refresh().catch(e=>message(e.message,true));});
 // Cada card mostra só o título (a função); a descrição abre pela seta ao lado do título.

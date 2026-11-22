@@ -24,7 +24,7 @@ O registro fica **só na memória** enquanto o launcher está aberto: a janela m
 | --- | --- |
 | Preferências, pastas e perfis | `settings.json` na pasta de dados |
 | Chave permanente da API | `server-api-key.txt` na pasta de dados (não envie a ninguém) |
-| Token da API de controle | `control-api-token.txt` na pasta de dados, ou a variável `DEVTOOLS_LAUNCHER_TOKEN` quando definida |
+| Token da API de controle | `control-api-token.txt` na pasta de dados, ou a variável `DEPTRIAGEM_LAUNCHER_TOKEN` (nome antigo aceito: `DEVTOOLS_LAUNCHER_TOKEN`) quando definida |
 | llama.cpp baixado | `engines/` na pasta de dados, um subdiretório por download |
 | vLLM no Linux | `engines/vllm-0.34.0-…` na pasta de dados (ou o ambiente que você escolheu) |
 | vLLM no Windows | Imagem `vllm/vllm-openai:v0.34.0` no Docker Desktop; contêineres `llama-desktop-vllm-…` |
@@ -77,7 +77,7 @@ Monte o relatório à mão: sistema e versão, versão do launcher (nome do inst
 | Um início parece parado | Os inícios esperam em fila, e a checagem de memória leva tempo (cerca de um minuto no teste mais lento). Aguarde o anterior ou clique em **Parar**. |
 | O autotuning fica desabilitado com o servidor parado | Pare também o revisor e o decisor. |
 | **Esforço** não se aplica | O template do modelo não tem esse ajuste, ou o motor é antigo. O motivo aparece no campo. |
-| O modelo pensa diferente do Esforço escolhido | O pedido do cliente vale mais. No DevTools, use o esforço do servidor. Confira também os argumentos extras. No automático, alguns modelos não pensam em pergunta fácil. |
+| O modelo pensa diferente do Esforço escolhido | O pedido do cliente vale mais. No DepTriagem, use o esforço do servidor. Confira também os argumentos extras. No automático, alguns modelos não pensam em pergunta fácil. |
 | Resposta vazia com raciocínio ligado | O raciocínio gastou o `max_tokens`. Aumente o limite no cliente, escolha um esforço menor ou **Desligado**. |
 
 ## 5. llama.cpp
@@ -161,8 +161,8 @@ O vLLM pode levar vários minutos na primeira carga. O launcher espera até 30 m
 | Regras antigas continuam liberadas | As regras `LlamaDesktopLauncher-…` ficam no Windows depois que o servidor para. No Strata/PolyStrata elas liberam o `python.exe` do sistema, usado por qualquer programa Python. Use **Configurações > 07 · Firewall do Windows > Remover regras do launcher**, o `wf.msc` ou, em um PowerShell como administrador, `Get-NetFirewallRule -Name 'LlamaDesktopLauncher-*' \| Remove-NetFirewallRule`. |
 | “ID de modelo inválido.” ao copiar | O `model_name` do Strata está vazio, tem mais de 128 caracteres, começa com `-` ou contém quebra de linha ou outro caractere de controle. Espaços e símbolos são aceitos. Corrija o nome na configuração `strata-*.json`. |
 | “A porta 8787 já está em uso por outro programa.” em **08 · API de controle** | Outro programa ocupa a porta da API de controle. Feche-o (veja qual com `Get-NetTCPConnection -LocalPort 8787`) e desmarque e marque de novo **Ativar a API de controle local**. |
-| O DevTools recebe 401 da API de controle | Tokens diferentes. Copie o atual com **Copiar token** ou confira se `DEVTOOLS_LAUNCHER_TOKEN` tem o mesmo valor nos dois programas; o launcher lê a variável só ao abrir. |
-| “DEVTOOLS_LAUNCHER_TOKEN inválido…” | A variável tem menos de 32 caracteres ou espaços. Gere outro valor, grave com `setx` e reabra o launcher. |
+| O DepTriagem recebe 401 da API de controle | Tokens diferentes. Copie o atual com **Copiar token** ou confira se a variável tem o mesmo valor nos dois programas. Com `DEPTRIAGEM_LAUNCHER_TOKEN` e `DEVTOOLS_LAUNCHER_TOKEN` definidas, o launcher usa a primeira, e clientes com o nome DevTools, a segunda: deixe as duas iguais; o launcher lê a variável só ao abrir. |
+| “DEPTRIAGEM_LAUNCHER_TOKEN inválido…” ou “DEVTOOLS_LAUNCHER_TOKEN inválido…” | A variável tem menos de 32 caracteres ou espaços. Gere outro valor, grave com `setx` e reabra o launcher. |
 
 ## 9. Atualizações
 

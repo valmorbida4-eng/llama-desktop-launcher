@@ -33,10 +33,19 @@ test('token vem da variável quando definida, senão do arquivo do launcher', ()
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'control-token-'));
   const file = path.join(dir, 'control-api-token.txt');
   try {
-    assert.deepEqual(control.resolveToken(file, { DEVTOOLS_LAUNCHER_TOKEN: TOKEN }), { token: TOKEN, source: 'env' });
-    const short = control.resolveToken(file, { DEVTOOLS_LAUNCHER_TOKEN: 'curto' });
+    assert.deepEqual(control.resolveToken(file, { DEPTRIAGEM_LAUNCHER_TOKEN: TOKEN }), { token: TOKEN, source: 'env', envVar: 'DEPTRIAGEM_LAUNCHER_TOKEN' });
+    const short = control.resolveToken(file, { DEPTRIAGEM_LAUNCHER_TOKEN: 'curto' });
     assert.equal(short.token, null);
-    assert.match(short.error, /DEVTOOLS_LAUNCHER_TOKEN/);
+    assert.match(short.error, /DEPTRIAGEM_LAUNCHER_TOKEN/);
+    const old = 'C'.repeat(40);
+    const legacy = { token: old, source: 'env', envVar: 'DEVTOOLS_LAUNCHER_TOKEN' };
+    assert.deepEqual(control.resolveToken(file, { DEVTOOLS_LAUNCHER_TOKEN: old }), legacy, 'o nome antigo continua aceito');
+    assert.deepEqual(control.resolveToken(file, { DEPTRIAGEM_LAUNCHER_TOKEN: '', DEVTOOLS_LAUNCHER_TOKEN: old }), legacy, 'vazia não esconde a antiga');
+    assert.deepEqual(control.ensureToken(file, { DEVTOOLS_LAUNCHER_TOKEN: old }), legacy);
+    assert.ok(!fs.existsSync(file), 'com variável, não gera arquivo');
+    assert.equal(control.resolveToken(file, { DEPTRIAGEM_LAUNCHER_TOKEN: TOKEN, DEVTOOLS_LAUNCHER_TOKEN: old }).token, TOKEN, 'o nome novo tem preferência');
+    assert.equal(control.resolveToken(file, { DEPTRIAGEM_LAUNCHER_TOKEN: 'curto', DEVTOOLS_LAUNCHER_TOKEN: old }).token, null, 'nova inválida não cai para a antiga');
+    assert.match(control.resolveToken(file, { DEVTOOLS_LAUNCHER_TOKEN: 'curto' }).error, /DEVTOOLS_LAUNCHER_TOKEN/);
     assert.deepEqual(control.resolveToken(file, {}), { token: null, source: 'file' });
     const created = control.ensureToken(file, {});
     assert.equal(created.source, 'file');
@@ -147,7 +156,7 @@ test('reviewer é um serviço: o modelo continua com papel chat', async () => {
     assert.equal(started.status, 200);
     assert.deepEqual(calls.start, [['reviewer', 'C:\\Models\\gemma.gguf']]);
     assert.deepEqual(started.json.servers.reviewer, { model_id: chat.id, port: 8081, api_model: 'modelo-revisor' });
-    assert.ok(started.json.models.every((m) => ['chat', 'decider'].includes(m.role) && !('engine' in m)), 'o DevTools rejeita papéis novos em models');
+    assert.ok(started.json.models.every((m) => ['chat', 'decider'].includes(m.role) && !('engine' in m)), 'o DepTriagem rejeita papéis novos em models');
     assert.equal((await request('POST', '/v1/control/stop', { body: { role: 'reviewer' } })).status, 200);
     assert.deepEqual(calls.stop, ['reviewer']);
   });

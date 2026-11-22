@@ -27,7 +27,7 @@ Escolha o **Endereço de acesso** antes de clicar em **Iniciar servidor**. Depoi
 Logo abaixo, a linha **Em uso** mostra os valores reais do servidor, como `Em uso: contexto 32768 · camadas na GPU 25/25 · sessões 2`. Com o contexto em Auto, o motor escolhe o tamanho; use o número dessa linha (dividido pelas sessões simultâneas) como limite de contexto no cliente. Decodificação especulativa e os demais ajustes do perfil não mudam a API.
 
 - **API direta:** a porta **8080** no endereço escolhido ou, se ela estiver ocupada, a primeira livre entre **8100 e 8180**. **Copiar link da API** copia o endereço terminado em `/v1`.
-- **Revisor:** a primeira porta livre entre **8081 e 8089**, sempre em `127.0.0.1` e sem chave, com o modelo `modelo-revisor`. No DevTools, use o campo **Revisor local**.
+- **Revisor:** a primeira porta livre entre **8081 e 8089**, sempre em `127.0.0.1` e sem chave, com o modelo `modelo-revisor`. No DepTriagem, use o campo **Revisor local**.
 - **Decisor:** a primeira porta livre entre **8090 e 8098**.
 - **API compartilhada:** com LAN ou Tailscale, uma segunda porta entre **8181 e 8280**, mostrada como **API compartilhada**.
 - **Ponte local:** quando você clica em **Abrir no navegador** com acesso em rede, o launcher abre a interface por uma porta local de `127.0.0.1` que já autentica. Ela só serve para este computador.
@@ -257,21 +257,22 @@ Se o firewall do macOS estiver ligado, o sistema pergunta se o `llama-server` po
 
 O **Guia de diagnóstico** detalha cada caso e as mensagens do aplicativo.
 
-## 11. API de controle local (DevTools)
+## 11. API de controle local (DepTriagem)
 
-A partir da versão 0.12.1, outro programa deste computador (como o DevTools) pode controlar o launcher: listar os modelos, iniciar e parar o servidor principal, o revisor (a partir da 0.14.0) e o decisor e fechar o launcher. A API fica desligada até você ativá-la.
+A partir da versão 0.12.1, outro programa deste computador (como o DepTriagem, antigo DevTools) pode controlar o launcher: listar os modelos, iniciar e parar o servidor principal, o revisor (a partir da 0.14.0) e o decisor e fechar o launcher. A API fica desligada até você ativá-la.
 
 ### Ativar
 
 1. Em **Configurações > 08 · API de controle**, marque **Ativar a API de controle local**. O launcher passa a escutar em `http://127.0.0.1:8787` e lembra a escolha nas próximas aberturas.
 2. Defina o mesmo token no launcher e no cliente, de um destes jeitos:
-   - **Token do launcher:** clique em **Copiar token** e grave-o na variável `DEVTOOLS_LAUNCHER_TOKEN` do cliente. O token fica em `control-api-token.txt`, na pasta de dados; **Gerar outro token** invalida o anterior na hora.
-   - **Token próprio:** defina `DEVTOOLS_LAUNCHER_TOKEN` (de 32 a 256 caracteres, sem espaços) para o seu usuário do Windows, por exemplo com `setx DEVTOOLS_LAUNCHER_TOKEN "<token>"`, e reabra o launcher. Quando a variável existe, o launcher usa o valor dela e ignora o arquivo.
+   - **Token do launcher:** clique em **Copiar token** e grave-o na variável `DEPTRIAGEM_LAUNCHER_TOKEN` do cliente. O token fica em `control-api-token.txt`, na pasta de dados; **Gerar outro token** invalida o anterior na hora.
+   - **Token próprio:** defina `DEPTRIAGEM_LAUNCHER_TOKEN` (de 32 a 256 caracteres, sem espaços) para o seu usuário do Windows, por exemplo com `setx DEPTRIAGEM_LAUNCHER_TOKEN "<token>"`, e reabra o launcher. Quando a variável existe, o launcher usa o valor dela e ignora o arquivo.
+   - **Nome antigo:** `DEVTOOLS_LAUNCHER_TOKEN` segue aceito quando `DEPTRIAGEM_LAUNCHER_TOKEN` não existe ou está vazia. Clientes com o nome DevTools e o launcher até a 0.14.0 leem só esse nome. Com as duas variáveis definidas, vale `DEPTRIAGEM_LAUNCHER_TOKEN`; se ela for inválida, o launcher mostra o erro em vez de usar a antiga.
 3. O cliente pode abrir o launcher pelo atalho do Windows. Se ele já estiver aberto, o atalho só traz a janela para a frente: existe uma instância só.
 
 ### Contrato
 
-Todas as rotas exigem `Authorization: Bearer <DEVTOOLS_LAUNCHER_TOKEN>` e o cabeçalho `Host` `127.0.0.1:8787` ou `localhost:8787`. A API não responde a CORS: navegadores não conseguem chamá-la de outras páginas. Os POST usam `Content-Type: application/json`.
+Todas as rotas exigem `Authorization: Bearer <DEPTRIAGEM_LAUNCHER_TOKEN>` e o cabeçalho `Host` `127.0.0.1:8787` ou `localhost:8787`. A API não responde a CORS: navegadores não conseguem chamá-la de outras páginas. Os POST usam `Content-Type: application/json`.
 
 | Rota | Corpo | Resposta |
 | --- | --- | --- |
@@ -299,7 +300,7 @@ Estado:
 - `reviewer` é um papel de serviço, não de modelo: em `models` o `role` continua só `chat` ou `decider`, e o revisor aceita qualquer modelo `chat` GGUF do llama.cpp. A versão do contrato continua 1.
 - `servers.chat`, `servers.decider` e `servers.reviewer` ficam `null` enquanto o serviço está parado ou ainda carregando. `api_model` é o ID a usar no campo `model` dos pedidos (`modelo-local`, ou o nome do modelo no Strata). `host` é um campo extra: serviços iniciados pela tela podem estar na rede.
 - Os serviços iniciados pela API escutam só em `127.0.0.1`, sem chave. O servidor principal usa o perfil salvo do modelo (ou os valores automáticos) e o número de sessões das Configurações; o decisor usa o dispositivo e o contexto salvos no card Decisor, e o revisor, os do card Revisor. Os inícios passam pela checagem de memória e acontecem um de cada vez: o pedido espera o início anterior terminar, então use um tempo limite de alguns minutos. A API não grava nada nas Configurações.
-- O contrato não tem campo de esforço: o principal e o revisor usam o do perfil do modelo. O pedido de chat vale mais que o servidor: `chat_template_kwargs` com `enable_thinking` liga ou desliga o raciocínio. O DevTools envia `enable_thinking:false`, a menos que o esforço do modelo lá seja o do servidor. Com raciocínio ligado, reserve `max_tokens` para ele: um limite curto devolve resposta vazia.
+- O contrato não tem campo de esforço: o principal e o revisor usam o do perfil do modelo. O pedido de chat vale mais que o servidor: `chat_template_kwargs` com `enable_thinking` liga ou desliga o raciocínio. O DepTriagem envia `enable_thinking:false`, a menos que o esforço do modelo lá seja o do servidor. Com raciocínio ligado, reserve `max_tokens` para ele: um limite curto devolve resposta vazia.
 - Não há consulta prévia de memória na API: o cliente sabe que não cabe ao receber o `409` do `start`.
 - Pedir `start` do mesmo modelo que já roda em `127.0.0.1` devolve `200` sem reiniciar. `stop` de um serviço parado devolve `200`. `stop` também interrompe um início em andamento; esse `start` recebe `500`.
 
@@ -320,7 +321,7 @@ Erros devolvem `{"error":{"code":"…","message":"…"}}`:
 ### Exemplo em PowerShell
 
 ```powershell
-$h = @{ Authorization = "Bearer $env:DEVTOOLS_LAUNCHER_TOKEN" }
+$h = @{ Authorization = "Bearer $env:DEPTRIAGEM_LAUNCHER_TOKEN" }
 $s = Invoke-RestMethod http://127.0.0.1:8787/v1/control/state -Headers $h
 $id = ($s.models | Where-Object role -eq 'chat' | Select-Object -First 1).id
 Invoke-RestMethod http://127.0.0.1:8787/v1/control/start -Method Post -Headers $h -ContentType 'application/json' -Body (@{ role = 'chat'; model_id = $id } | ConvertTo-Json)

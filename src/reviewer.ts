@@ -4,7 +4,7 @@
 const params=require('./params');
 
 const ALIAS='modelo-revisor';
-// 8081 é o padrão do campo "Revisor local" do DevTools.
+// 8081 é o padrão do campo "Revisor local" do DepTriagem.
 const PORTS=Object.freeze({first:8081,last:8089});
 const HOST='127.0.0.1';
 const DEFAULTS=Object.freeze({device:'',context:'8192'});

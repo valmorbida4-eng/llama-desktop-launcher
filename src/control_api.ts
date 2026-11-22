@@ -1,14 +1,16 @@
 'use strict';
-// API local de controle (DevTools): lista os modelos do catálogo, inicia e para o servidor principal, o
+// API local de controle (DepTriagem): lista os modelos do catálogo, inicia e para o servidor principal, o
 // revisor e o decisor e encerra o launcher. Escuta só em 127.0.0.1:8787, sem CORS, com um Bearer dedicado
-// (DEVTOOLS_LAUNCHER_TOKEN). O launcher injeta as ações; este módulo só valida e roteia os pedidos.
+// (DEPTRIAGEM_LAUNCHER_TOKEN). O launcher injeta as ações; este módulo só valida e roteia os pedidos.
 const http=require('node:http');
 const crypto=require('node:crypto');
 const fs=require('node:fs');
 const path=require('node:path');
 
 const HOST='127.0.0.1',PORT=8787,VERSION=1;
-const TOKEN_ENV='DEVTOOLS_LAUNCHER_TOKEN';
+const TOKEN_ENV='DEPTRIAGEM_LAUNCHER_TOKEN';
+// Nome usado até a 0.14.0 e pelo DevTools, antigo nome do DepTriagem: segue aceito como reserva.
+const LEGACY_TOKEN_ENV='DEVTOOLS_LAUNCHER_TOKEN';
 const TOKEN=/^[A-Za-z0-9._~+/=-]{32,256}$/;
 const MODEL_ID=/^m_[0-9a-f]{16}$/;
 // Papéis de serviço. Um modelo continua sendo só chat ou decider: o revisor usa um modelo chat.
@@ -37,12 +39,13 @@ function publicState(models: any[],servers: {chat: any; decider: any; reviewer?:
 }
 
 function validToken(value: unknown) {return typeof value==='string'&&TOKEN.test(value);}
-// O token vem da variável DEVTOOLS_LAUNCHER_TOKEN, quando válida; senão, do arquivo gerado pelo launcher.
+// O token vem da primeira variável preenchida (a atual, depois a antiga); sem nenhuma, do arquivo gerado pelo
+// launcher. Variável preenchida e inválida é erro: cair para outro token esconderia a configuração errada.
 function resolveToken(file: string,env: Record<string,string|undefined>=process.env) {
-  const fromEnv=env[TOKEN_ENV];
-  if(fromEnv!==undefined&&fromEnv!=='') {
-    if(validToken(fromEnv.trim()))return {token:fromEnv.trim(),source:'env'};
-    return {token:null,source:'env',error:`${TOKEN_ENV} inválido: use de 32 a 256 caracteres sem espaços.`};
+  const envVar=env[TOKEN_ENV]?TOKEN_ENV:LEGACY_TOKEN_ENV,fromEnv=env[envVar];
+  if(fromEnv) {
+    if(validToken(fromEnv.trim()))return {token:fromEnv.trim(),source:'env',envVar};
+    return {token:null,source:'env',envVar,error:`${envVar} inválido: use de 32 a 256 caracteres sem espaços.`};
   }
   try{const saved=fs.readFileSync(file,'utf8').trim();if(validToken(saved))return {token:saved,source:'file'};}catch{}
   return {token:null,source:'file'};
@@ -157,4 +160,4 @@ function createControlServer(options: {token: () => string | null; port?: number
   return new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,HOST,()=>{server.off('error',reject);resolve(server);});});
 }
 
-module.exports={HOST,PORT,VERSION,TOKEN_ENV,ROLES,ControlError,modelId,catalog,publicState,validToken,resolveToken,rotateToken,ensureToken,resolveStart,createHandler,createControlServer};
+module.exports={HOST,PORT,VERSION,TOKEN_ENV,LEGACY_TOKEN_ENV,ROLES,ControlError,modelId,catalog,publicState,validToken,resolveToken,rotateToken,ensureToken,resolveStart,createHandler,createControlServer};

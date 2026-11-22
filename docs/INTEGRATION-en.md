@@ -29,7 +29,7 @@ Choose the **Endereço de acesso** (access address) before clicking **Iniciar se
 Right below it, the **Em uso** (In use) line shows the server's real values, such as `Em uso: contexto 32768 · camadas na GPU 25/25 · sessões 2`. With context on Auto, the engine picks the size; use the number from that line (divided by the simultaneous sessions) as the client's context limit. Speculative decoding and the other profile settings do not change the API.
 
 - **Direct API:** port **8080** on the chosen address or, if it is busy, the first free one between **8100 and 8180**. **Copiar link da API** copies the address ending in `/v1`.
-- **Reviewer:** the first free port between **8081 and 8089**, always on `127.0.0.1` and without a key, with the model `modelo-revisor`. In DevTools, use the **Revisor local** field.
+- **Reviewer:** the first free port between **8081 and 8089**, always on `127.0.0.1` and without a key, with the model `modelo-revisor`. In DepTriagem, use the **Revisor local** field.
 - **Decider:** the first free port between **8090 and 8098**.
 - **Shared API:** with LAN or Tailscale, a second port between **8181 and 8280**, shown as **API compartilhada**.
 - **Local bridge:** when you click **Abrir no navegador** (Open in browser) with network access, the launcher opens the interface through a `127.0.0.1` port that is already authenticated. It only serves this computer.
@@ -259,21 +259,22 @@ If the macOS firewall is on, the system asks whether `llama-server` may accept c
 
 The **Diagnostics guide** covers each case and the app's messages in detail.
 
-## 11. Local control API (DevTools)
+## 11. Local control API (DepTriagem)
 
-Since version 0.12.1, another program on this computer (such as DevTools) can control the launcher: list models, start and stop the main server, the reviewer (since 0.14.0) and the decider, and close the launcher. The API stays off until you turn it on.
+Since version 0.12.1, another program on this computer (such as DepTriagem, formerly DevTools) can control the launcher: list models, start and stop the main server, the reviewer (since 0.14.0) and the decider, and close the launcher. The API stays off until you turn it on.
 
 ### Turn it on
 
 1. In **Configurações > 08 · API de controle**, check **Ativar a API de controle local**. The launcher listens on `http://127.0.0.1:8787` and remembers the choice the next time it opens.
 2. Give the launcher and the client the same token, in one of two ways:
-   - **Launcher token:** click **Copiar token** and store it in the client's `DEVTOOLS_LAUNCHER_TOKEN` variable. The token is kept in `control-api-token.txt` in the data folder; **Gerar outro token** invalidates the previous one immediately.
-   - **Your own token:** set `DEVTOOLS_LAUNCHER_TOKEN` (32 to 256 characters, no spaces) for your Windows user, for example with `setx DEVTOOLS_LAUNCHER_TOKEN "<token>"`, and reopen the launcher. When the variable exists, the launcher uses its value and ignores the file.
+   - **Launcher token:** click **Copiar token** and store it in the client's `DEPTRIAGEM_LAUNCHER_TOKEN` variable. The token is kept in `control-api-token.txt` in the data folder; **Gerar outro token** invalidates the previous one immediately.
+   - **Your own token:** set `DEPTRIAGEM_LAUNCHER_TOKEN` (32 to 256 characters, no spaces) for your Windows user, for example with `setx DEPTRIAGEM_LAUNCHER_TOKEN "<token>"`, and reopen the launcher. When the variable exists, the launcher uses its value and ignores the file.
+   - **Old name:** `DEVTOOLS_LAUNCHER_TOKEN` is still accepted when `DEPTRIAGEM_LAUNCHER_TOKEN` is missing or empty. Clients named DevTools and launchers up to 0.14.0 read only that name. With both variables set, `DEPTRIAGEM_LAUNCHER_TOKEN` wins; if it is invalid, the launcher shows the error instead of using the old one.
 3. The client may open the launcher through its Windows shortcut. If it is already open, the shortcut only brings the window to the front: there is a single instance.
 
 ### Contract
 
-Every route requires `Authorization: Bearer <DEVTOOLS_LAUNCHER_TOKEN>` and a `Host` header of `127.0.0.1:8787` or `localhost:8787`. The API does not answer CORS: browsers cannot call it from other pages. POST requests use `Content-Type: application/json`.
+Every route requires `Authorization: Bearer <DEPTRIAGEM_LAUNCHER_TOKEN>` and a `Host` header of `127.0.0.1:8787` or `localhost:8787`. The API does not answer CORS: browsers cannot call it from other pages. POST requests use `Content-Type: application/json`.
 
 | Route | Body | Response |
 | --- | --- | --- |
@@ -301,7 +302,7 @@ State:
 - `reviewer` is a service role, not a model role: in `models`, `role` is still only `chat` or `decider`, and the reviewer accepts any llama.cpp GGUF `chat` model. The contract version is still 1.
 - `servers.chat`, `servers.decider` and `servers.reviewer` are `null` while the service is stopped or still loading. `api_model` is the ID for the `model` field of requests (`modelo-local`, or the model name on Strata). `host` is an extra field: services started from the window may be on the network.
 - Services started through the API listen only on `127.0.0.1`, without a key. The main server uses the model's saved profile (or the automatic values) and the session count from Settings; the decider uses the device and context saved in the Decider card, and the reviewer those of the Reviewer card. Starts go through the memory check and happen one at a time: a request waits for the previous start to finish, so use a timeout of a few minutes. The API never writes to Settings.
-- The contract has no effort field: the main server and the reviewer use the one in the model's profile. The chat request wins over the server: `chat_template_kwargs` with `enable_thinking` turns thinking on or off. DevTools sends `enable_thinking:false` unless the model's effort there is set to the server's. With thinking on, leave `max_tokens` room for it: a short limit returns an empty answer.
+- The contract has no effort field: the main server and the reviewer use the one in the model's profile. The chat request wins over the server: `chat_template_kwargs` with `enable_thinking` turns thinking on or off. DepTriagem sends `enable_thinking:false` unless the model's effort there is set to the server's. With thinking on, leave `max_tokens` room for it: a short limit returns an empty answer.
 - The API has no memory pre-check: the client learns that a model does not fit from the `409` of `start`.
 - `start` for the model that is already running on `127.0.0.1` returns `200` without restarting. `stop` for a stopped service returns `200`. `stop` also interrupts a start in progress; that `start` gets `500`.
 
@@ -322,7 +323,7 @@ Errors return `{"error":{"code":"…","message":"…"}}`:
 ### PowerShell example
 
 ```powershell
-$h = @{ Authorization = "Bearer $env:DEVTOOLS_LAUNCHER_TOKEN" }
+$h = @{ Authorization = "Bearer $env:DEPTRIAGEM_LAUNCHER_TOKEN" }
 $s = Invoke-RestMethod http://127.0.0.1:8787/v1/control/state -Headers $h
 $id = ($s.models | Where-Object role -eq 'chat' | Select-Object -First 1).id
 Invoke-RestMethod http://127.0.0.1:8787/v1/control/start -Method Post -Headers $h -ContentType 'application/json' -Body (@{ role = 'chat'; model_id = $id } | ConvertTo-Json)
