@@ -25,6 +25,11 @@ test('instalador Windows mantém a escolha do atalho em instalações silenciosa
  assert.match(macro('customInstall'),/CreateShortcut "\$DESKTOP\\Llama Desktop Launcher\.lnk" "\$INSTDIR\\\$\{APP_EXECUTABLE_FILENAME\}" "" "\$INSTDIR\\\$\{APP_EXECUTABLE_FILENAME\}" 0/);
  assert.match(macro('customInstall'),/WinShell::SetLnkAUMI "\$DESKTOP\\Llama Desktop Launcher\.lnk" "\$\{APP_ID\}"/);
 });
+test('o desinstalador apaga cada recurso extra e os arquivos gerados pelo empacotador',()=>{
+ const script=require('node:fs').readFileSync(require('node:path').join(__dirname,'..','build','installer.nsh'),'utf8');
+ const files=['electron_wer.dll','resources/app-update.yml',...pkg.build.extraResources.map(item=>`resources/${item.to}`)];
+ for(const file of files)assert.ok(script.includes(`Delete "$INSTDIR\\${file.replaceAll('/','\\')}"`),file);
+});
 test('cada guia PDF empacotado existe nos dois idiomas, com o Markdown de origem',()=>{
  const fs=require('node:fs'),path=require('node:path');
  for(const doc of ['MANUAL','INTEGRATION','DIAGNOSTICS'])for(const lang of ['pt-BR','en']){

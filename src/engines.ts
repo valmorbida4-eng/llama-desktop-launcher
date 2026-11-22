@@ -44,10 +44,11 @@ function vllmExecutable(dir) {return path.join(dir,'bin','vllm');}
 function vllmVenvReady(dir) {return !!dir && fs.existsSync(vllmExecutable(dir));}
 function vllmInstallSteps(dir,python='python3') {
   const pip=path.join(dir,'bin','python');
+  // -I: sem ele, o python -m importa primeiro um venv.py ou pip.py que esteja na pasta atual.
   return [
-    {label:'Criando ambiente Python',file:python,args:['-m','venv',dir]},
-    {label:'Atualizando pip',file:pip,args:['-m','pip','install','--upgrade','pip']},
-    {label:`Instalando vLLM ${VLLM_VERSION}`,file:pip,args:['-m','pip','install',`vllm==${VLLM_VERSION}`]}
+    {label:'Criando ambiente Python',file:python,args:['-I','-m','venv',dir]},
+    {label:'Atualizando pip',file:pip,args:['-I','-m','pip','install','--upgrade','pip']},
+    {label:`Instalando vLLM ${VLLM_VERSION}`,file:pip,args:['-I','-m','pip','install',`vllm==${VLLM_VERSION}`]}
   ];
 }
 

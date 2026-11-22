@@ -73,6 +73,19 @@ function readGgufMetadata(file: string) {
   } finally {r.close();}
 }
 const num=(v: any)=>typeof v==='number'&&Number.isFinite(v)?v:Array.isArray(v)&&v.length&&v.every(x=>typeof x==='number')?Math.max(...v):null;
+const EFFORT_LEVELS=['none','minimal','low','medium','high','xhigh','max'];
+// Esforço que o template do modelo aceita. Nível fora da lista dele quebra todos os pedidos (o Qwen3.8 recusa
+// 'high') ou não faz nada (gemma e Qwen3.5 só ligam e desligam). Sem template legível: null.
+function templateEffort(template: unknown): {off: boolean; levels: string[]}|null {
+  if(typeof template!=='string'||!template)return null;
+  let levels: string[]=[];
+  if(/\breasoning_effort\b/.test(template)) {
+    const accepted=/reasoning_effort\s+(?:not\s+)?in\s*[([]([^)\]]*)[)\]]/.exec(template)?.[1];
+    const named=accepted?[...accepted.matchAll(/['"](\w+)['"]/g)].map(m=>m[1]):['low','medium','high'];
+    levels=EFFORT_LEVELS.filter(level=>named.includes(level));
+  }
+  return {off:/\benable_thinking\b/.test(template),levels};
+}
 function ggufInfo(kv: Record<string, any>) {
   const arch=typeof kv['general.architecture']==='string'?kv['general.architecture']:'';
   const get=(suffix: string)=>num(kv[`${arch}.${suffix}`]);
@@ -81,7 +94,7 @@ function ggufInfo(kv: Record<string, any>) {
   const recurrent=Object.keys(kv).some(k=>k.startsWith(`${arch}.ssm.`)||k.startsWith(`${arch}.wkv.`)||k.startsWith(`${arch}.shortconv.`));
   return {format:'gguf',architecture:arch,name:typeof kv['general.name']==='string'?kv['general.name']:'',blockCount:get('block_count'),contextLength:get('context_length'),
     expertCount,expertUsedCount:get('expert_used_count')||0,leadingDenseBlocks:get('leading_dense_block_count')||0,nextnLayers:get('nextn_predict_layers')||0,
-    slidingWindow,recurrent,fileType:num(kv['general.file_type']),decision:require('./decider').decisionType(kv)};
+    slidingWindow,recurrent,effort:templateEffort(kv['tokenizer.chat_template']),fileType:num(kv['general.file_type']),decision:require('./decider').decisionType(kv)};
 }
 // Tipo 'model.kind' derivado: denso, MoE, SWA, híbrido/recorrente, com camadas MTP.
 function hfInfo(config: any) {
@@ -124,4 +137,4 @@ function modelInfo(model: any,{strataDir=''}: any={}) {
   if(model.engine==='strata') return {...strataConfig(model.path),server:strataDir?strataServerOptions(strataDir):{options:[]}};
   return cached(model.path,()=>ggufInfo(readGgufMetadata(model.path)));
 }
-module.exports={readGgufMetadata,ggufInfo,hfInfo,modelInfo,strataServerOptions,strataConfig};
+module.exports={readGgufMetadata,ggufInfo,templateEffort,hfInfo,modelInfo,strataServerOptions,strataConfig};

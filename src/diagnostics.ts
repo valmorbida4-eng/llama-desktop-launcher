@@ -92,6 +92,11 @@ function buildReport(data: any) {
     add(`- Compartilhamento: ${a.sharing?'ativo':'inativo'}${a.container?` · contêiner ${a.container}`:''}`);
   }
   if(data.decider) add(`- Decisor ativo: ${data.decider.name} (${data.decider.type}) · ${data.decider.scope} porta ${data.decider.port} · dispositivo ${data.decider.device||'automático'} · contexto ${data.decider.context}`);
+  if(data.reviewer) {
+    const r=data.reviewer;
+    add(`- Revisor ativo: ${r.name} · Local porta ${r.port} · dispositivo ${r.device||'automático'} · contexto ${r.context}${r.effort?` · esforço ${r.effort}`:''}`);
+    if(r.memory) add(`  - Memória na hora do início: ${r.memory}`);
+  }
   add();
   add('## Atualizações');
   add(`- Verificação automática: ${yes(data.update.enabled)} · última verificação: ${data.update.lastCheck||'nunca'}`);

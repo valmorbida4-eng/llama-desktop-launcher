@@ -9,6 +9,10 @@ const ALIAS='decisor';
 const PORTS=Object.freeze({first:8090,last:8098});
 const DEFAULTS=Object.freeze({device:'',context:'4096',host:'127.0.0.1'});
 const DEVICE=/^(?:|cpu|[A-Za-z][A-Za-z0-9_-]{0,62}\d)$/;
+// Até este tamanho de arquivo (o Julia-1 tem 160 MiB) o decisor responde a tempo só na CPU. Medido no Ryzen 4650G
+// com texto longo: Julia-1 1,6 s; d1-Omni 600M 10 s; Laya 17 s; Kev-4B 65 s.
+const CPU_MAX_BYTES=256*1024**2;
+function runsWellOnCpu(model: any) {return model.size>0&&model.size<=CPU_MAX_BYTES;}
 
 // Modelos de decisão gravam metadados <arquitetura>.decision.* no GGUF (tipo, rótulos, cabeças).
 function decisionType(kv: Record<string, any>) {
@@ -30,13 +34,15 @@ function validateOptions(options: any={}) {
   return {device,context:String(context),host};
 }
 
+function deviceArgs(device: string) {return device==='cpu'?['-dev','none','-ngl','0']:[...(device?['-dev',device]:[]),'-ngl','99'];}
+// O que define o consumo de memória; a checagem de recursos usa os mesmos argumentos.
+function memoryArgs(options: any) {const o=validateOptions(options);return ['-c',o.context,'-b',o.context,'-ub',o.context,...deviceArgs(o.device)];}
 // A pergunta e as opções precisam caber num único lote: batch e microbatch acompanham o contexto.
 function serverArgs(model: any, options: any, port: number, keyPath: string | null=null) {
   const o=validateOptions(options);
   if(!Number.isInteger(port)||port<1||port>65535) throw Error('Porta do decisor inválida.');
   const a=['-m',model.path,'-c',o.context,'-b',o.context,'-ub',o.context,'--alias',ALIAS,'--host',o.host,'--port',String(port)];
-  if(o.device==='cpu') a.push('-dev','none','-ngl','0');
-  else {if(o.device) a.push('-dev',o.device);a.push('-ngl','99');}
+  a.push(...deviceArgs(o.device));
   if(model.projector) a.push('--mmproj',model.projector);
   if(o.host!=='127.0.0.1') {if(!keyPath) throw Error('Chave de API obrigatória na rede.');a.push('--api-key-file',keyPath);}
   return a;
@@ -84,4 +90,4 @@ const links=Object.freeze({
   deciderAll:'https://huggingface.co/blog/ggml-org/decision-models-in-llamacpp',
 });
 
-module.exports={ALIAS,PORTS,DEFAULTS,decisionType,validateOptions,serverArgs,testRequest,describeAnswer,MODELS,links};
+module.exports={ALIAS,PORTS,DEFAULTS,CPU_MAX_BYTES,runsWellOnCpu,decisionType,validateOptions,memoryArgs,serverArgs,testRequest,describeAnswer,MODELS,links};

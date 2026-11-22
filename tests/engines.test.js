@@ -34,9 +34,9 @@ test('catálogo oferece vLLM no Linux (venv) e no Windows (Docker), e nenhum mot
 
 test('vLLM é instalado numa versão fixa, num ambiente Python só do launcher',()=>{
   const steps=engines.vllmInstallSteps('/data/vllm');
-  assert.deepEqual(steps[0].args,['-m','venv','/data/vllm']);
+  assert.deepEqual(steps[0].args,['-I','-m','venv','/data/vllm']);
   assert.equal(steps.at(-1).file,path.join('/data/vllm','bin','python'));
-  assert.deepEqual(steps.at(-1).args,['-m','pip','install',`vllm==${engines.VLLM_VERSION}`]);
+  assert.deepEqual(steps.at(-1).args,['-I','-m','pip','install',`vllm==${engines.VLLM_VERSION}`]);
   assert.equal(engines.VLLM_IMAGE,`vllm/vllm-openai:v${engines.VLLM_VERSION}`);
   assert.match(engines.VLLM_VERSION,/^\d+\.\d+\.\d+$/);
 });

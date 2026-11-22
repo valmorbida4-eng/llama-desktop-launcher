@@ -15,7 +15,7 @@ const VLLM_KV_DTYPES=['auto','float16','bfloat16','fp8','fp8_e4m3','fp8_e5m2'];
 const DEVICE_NAME=/^[A-Za-z][A-Za-z0-9:_-]{0,63}$/;
 
 type Ctx = {
-  engine: string; info?: any; settings?: Record<string, any>;
+  engine: string; info?: any; settings?: Record<string, any>; reasoning?: boolean;
   devices?: {name: string; description?: string; totalMiB?: number; freeMiB?: number}[] | null;
   gpuCount?: number | null; parallel?: number; hw?: any; draftModels?: {path: string; name: string}[];
   distribution?: string; strataOptions?: string[];
@@ -34,6 +34,12 @@ const isMoe=(c: Ctx)=>knownInfo(c)?c.info.expertCount>0:null;
 const val=(c: Ctx,key: string)=>String(c.settings?.[key]??'');
 const noGpu='Nenhuma GPU encontrada: o modelo roda na CPU.';
 const needMulti='Só com 2 ou mais GPUs.';
+// Motor que se sabe antigo ou template sem ajuste: nada a oferecer. Template desconhecido: as opções comuns.
+function effortOptions(c: Ctx) {
+  if(c.reasoning===false)return [];
+  const effort=knownInfo(c)?c.info.effort:null;
+  return effort?[...effort.levels,...(effort.off?['off']:[])]:['low','medium','high','off'];
+}
 const strataHas=(flag: string)=>(c: Ctx)=>(c.strataOptions||[]).includes(flag)?null:`A versão instalada do ${c.distribution||'Strata'} não aceita ${flag}.`;
 
 const FIELDS: Field[]=[
@@ -77,6 +83,10 @@ const FIELDS: Field[]=[
   {key:'cacheReuse',engine:'llamacpp',group:'Cache KV e atenção',label:'Reuso de cache por deslocamento (tokens)',flag:'--cache-reuse',kind:'int',min:0,max:1048576,modes:['server']},
   {key:'kvUnified',engine:'llamacpp',group:'Cache KV e atenção',label:'Cache KV unificado entre sessões',flag:'-kvu',kind:'toggle',modes:['server'],
     when:c=>(c.parallel||1)>=2?null:'Só faz diferença com 2 ou mais sessões simultâneas.'},
+  // llama.cpp · raciocínio
+  {key:'effort',engine:'llamacpp',group:'Raciocínio',label:'Esforço',flag:'--reasoning-effort',kind:'select',modes:['server','cli'],options:effortOptions,
+    hint:'Só as opções que o template deste modelo aceita; vale também para ele como revisor. O cliente pode mudar a cada pedido: no DevTools, o esforço do modelo precisa ser o do servidor',
+    when:c=>effortOptions(c).length?null:c.reasoning===false?'Este llama.cpp não aceita --reasoning-effort: atualize o motor.':'O template deste modelo não tem ajuste de esforço.'},
   // llama.cpp · especulativa
   {key:'specType',engine:'llamacpp',group:'Decodificação especulativa',label:'Tipo',flag:'--spec-type',kind:'select',modes:['server','cli'],
     options:c=>SPEC_TYPES.filter(t=>t!=='draft-mtp'||!knownInfo(c)||c.info.nextnLayers>0||hasMtpHead(c)).filter(t=>!DRAFT_SPEC.has(t)||c.draftModels==null||c.draftModels.length>0),
@@ -139,6 +149,8 @@ function validateField(field: Field,value: unknown,c: Ctx) {
   if(field.kind==='int'){const n=Number(text);if(!/^\d+$/.test(text)||!Number.isSafeInteger(n)||n<(field.min??0)||n>(field.max??Number.MAX_SAFE_INTEGER))throw Error(`${label}: valor inválido.`);return;}
   if(field.kind==='float'){const n=Number(text);if(!/^\d+(\.\d+)?$/.test(text)||!Number.isFinite(n)||n<(field.min??0)||n>(field.max??Infinity))throw Error(`${label}: valor inválido.`);return;}
   if(field.kind==='toggle'){if(!['on','off'].includes(text))throw Error(`${label}: use ligado ou desligado.`);return;}
+  // Sem o modelo só dá para conferir o formato: os níveis mudam de um template para outro.
+  if(field.key==='effort'&&!knownInfo(c)&&c.reasoning!==false){if(!EFFORT_VALUE.test(text))throw Error(`${label}: valor inválido.`);return;}
   if(field.kind==='select'){const options=optionsOf(field,c)||[];if(!options.includes(text))throw Error(`${label}: opção não disponível para este modelo.`);return;}
   if(field.key==='extraArgs'){splitExtraArgs(text);return;}
   if(field.key==='extraEnv'){parseExtraEnv(text);return;}
@@ -176,6 +188,15 @@ function parseExtraEnv(text: string) {
   }
   return env;
 }
+const EFFORT_VALUE=/^[a-z]{2,16}$/;
+function effortArgs(settings: any): string[] {
+  const value=String(settings?.effort??'').trim();
+  if(!value)return [];
+  if(!EFFORT_VALUE.test(value))throw Error('Esforço inválido.');
+  return value==='off'?['--reasoning','off']:['--reasoning-effort',value];
+}
+function validateEffort(settings: any,c: Ctx) {validateField(fieldsFor('llamacpp').find(f=>f.key==='effort'),settings?.effort,{...c,settings});}
+const EFFORT_FLAGS=new Set(['-rea','--reasoning','--reasoning-effort']);
 function llamaEnv(settings: any) {return parseExtraEnv(settings?.extraEnv||'');}
 // Valida os campos do motor. Sem informações do modelo (ctx.info ausente) valida só o formato; com elas,
 // também recusa o que o modelo não suporta (ex.: draft-mtp sem camadas MTP).
@@ -219,6 +240,12 @@ function llamaArgs(settings: any,mode='server') {
     if(field.key==='specType'&&text==='none') continue;
     if(field.key==='extraEnv') continue;
     if(field.key==='extraArgs') {extra=splitExtraArgs(text);continue;}
+    if(field.key==='effort') {
+      // A mesma opção nos argumentos extras vale mais: os dois juntos poderiam se contradizer.
+      const typed=mode==='server'&&settings.extraArgs?splitExtraArgs(settings.extraArgs):[];
+      if(!typed.some(token=>EFFORT_FLAGS.has(token.split('=')[0])))a.push(...effortArgs(settings));
+      continue;
+    }
     a.push(field.flag,text);
   }
   // Fração de CPU automática do cache MoE: o padrão do llama.cpp é 0, mas com os especialistas em mmap
@@ -281,7 +308,7 @@ function autoValues(c: Ctx,fit: any=null) {
     put('batch',2048,'padrão do llama.cpp');put('ubatch',512,'padrão do llama.cpp');
     put('cacheK','f16','padrão do llama.cpp');put('cacheV','f16','padrão do llama.cpp');put('flash','auto','o llama.cpp liga quando o backend suporta');
     put('swaFull','off','padrão do llama.cpp');put('ctxCheckpoints',32,'padrão do llama.cpp');put('cacheReuse',0,'desligado');
-    put('kvUnified','off','o launcher fixa as sessões');put('specType','none','padrão do llama.cpp');put('draftMax',3,'padrão do llama.cpp');
+    put('effort','padrão do modelo','template');put('kvUnified','off','o launcher fixa as sessões');put('specType','none','padrão do llama.cpp');put('draftMax',3,'padrão do llama.cpp');
   }
   if(c.engine==='vllm') {
     put('context',info.contextLength,'max_position_embeddings do modelo');put('gpuMemoryUtilization','memória livre após o aquecimento','cache KV extensível do vLLM 0.34');
@@ -377,5 +404,5 @@ function parseRuntimeLog(engine: string,text: string) {
   }
   return out;
 }
-module.exports={splitExtraArgs,parseExtraEnv,llamaEnv,MANAGED_ARGS,autoMoeCpuShare,PINNED_LOAD_MODES,parseRuntimeLog,PROFILE_VERSION,CACHE_TYPES,QUANTIZED_CACHE,SPEC_TYPES,VLLM_KV_DTYPES,FIELDS,fieldsFor,isAuto,migrateProfile,validateParams,llamaArgs,vllmArgs,strataArgs,
+module.exports={effortArgs,validateEffort,splitExtraArgs,parseExtraEnv,llamaEnv,MANAGED_ARGS,autoMoeCpuShare,PINNED_LOAD_MODES,parseRuntimeLog,PROFILE_VERSION,CACHE_TYPES,QUANTIZED_CACHE,SPEC_TYPES,VLLM_KV_DTYPES,FIELDS,fieldsFor,isAuto,migrateProfile,validateParams,llamaArgs,vllmArgs,strataArgs,
   autoValues,schemaFor,parseFitOutput,parseDevices};

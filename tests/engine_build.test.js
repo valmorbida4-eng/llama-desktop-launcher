@@ -28,6 +28,9 @@ test('probeBuild roda --version e --help do llama-server da pasta e registra as 
   const b=await build.probeBuild(dir,{run:async(file,args)=>{calls.push(args[0]);return args[0]==='--version'?'version: 12400 (deadbeef)':'--moe-cache-cpu-overlap';}});
   assert.deepEqual(calls.sort(),['--help','--version']);
   assert.equal(b.flavor,'avalon');assert.equal(b.build,12400);assert.equal(b.hasBench,false);assert.equal(b.hasFit,false);
+  assert.equal(b.reasoning,false);
+  assert.equal((await build.probeBuild(dir,{run:async()=>'--reasoning-effort LEVEL'})).reasoning,true);
+  assert.equal((await build.probeBuild(dir,{run:async()=>''})).reasoning,undefined,'sem --help não bloqueia');
 });
 
 test('receitas: Avalon e tandem.cpp só para o Qwen3.8-Flash-Next, com a cabeça MTP das pastas de modelos',()=>{

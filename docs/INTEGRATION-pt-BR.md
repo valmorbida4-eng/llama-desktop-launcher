@@ -26,7 +26,9 @@ Escolha o **Endereço de acesso** antes de clicar em **Iniciar servidor**. Depoi
 
 Logo abaixo, a linha **Em uso** mostra os valores reais do servidor, como `Em uso: contexto 32768 · camadas na GPU 25/25 · sessões 2`. Com o contexto em Auto, o motor escolhe o tamanho; use o número dessa linha (dividido pelas sessões simultâneas) como limite de contexto no cliente. Decodificação especulativa e os demais ajustes do perfil não mudam a API.
 
-- **API direta:** a primeira porta livre entre **8080 e 8180** no endereço escolhido. **Copiar link da API** copia o endereço terminado em `/v1`.
+- **API direta:** a porta **8080** no endereço escolhido ou, se ela estiver ocupada, a primeira livre entre **8100 e 8180**. **Copiar link da API** copia o endereço terminado em `/v1`.
+- **Revisor:** a primeira porta livre entre **8081 e 8089**, sempre em `127.0.0.1` e sem chave, com o modelo `modelo-revisor`. No DevTools, use o campo **Revisor local**.
+- **Decisor:** a primeira porta livre entre **8090 e 8098**.
 - **API compartilhada:** com LAN ou Tailscale, uma segunda porta entre **8181 e 8280**, mostrada como **API compartilhada**.
 - **Ponte local:** quando você clica em **Abrir no navegador** com acesso em rede, o launcher abre a interface por uma porta local de `127.0.0.1` que já autentica. Ela só serve para este computador.
 
@@ -257,7 +259,7 @@ O **Guia de diagnóstico** detalha cada caso e as mensagens do aplicativo.
 
 ## 11. API de controle local (DevTools)
 
-A partir da versão 0.12.1, outro programa deste computador (como o DevTools) pode controlar o launcher: listar os modelos, iniciar e parar o servidor principal e o decisor e fechar o launcher. A API fica desligada até você ativá-la.
+A partir da versão 0.12.1, outro programa deste computador (como o DevTools) pode controlar o launcher: listar os modelos, iniciar e parar o servidor principal, o revisor (a partir da 0.14.0) e o decisor e fechar o launcher. A API fica desligada até você ativá-la.
 
 ### Ativar
 
@@ -274,9 +276,9 @@ Todas as rotas exigem `Authorization: Bearer <DEVTOOLS_LAUNCHER_TOKEN>` e o cabe
 | Rota | Corpo | Resposta |
 | --- | --- | --- |
 | `GET /v1/control/state` | — | `200` com o estado |
-| `POST /v1/control/start` | `{"role":"chat"\|"decider","model_id":"m_…"}` | `200` com o estado, depois que o modelo carregou |
-| `POST /v1/control/stop` | `{"role":"chat"\|"decider"}` | `200` com o estado, depois que o processo terminou |
-| `POST /v1/control/quit` | `{}` | `202 {"quitting":true}`; em seguida o launcher fecha e encerra os dois serviços |
+| `POST /v1/control/start` | `{"role":"chat"\|"decider"\|"reviewer","model_id":"m_…"}` | `200` com o estado, depois que o modelo carregou |
+| `POST /v1/control/stop` | `{"role":"chat"\|"decider"\|"reviewer"}` | `200` com o estado, depois que o processo terminou |
+| `POST /v1/control/quit` | `{}` | `202 {"quitting":true}`; em seguida o launcher fecha e encerra os três serviços |
 
 Estado:
 
@@ -286,30 +288,34 @@ Estado:
   "models": [{"id": "m_d24f26eed365cd44", "name": "gemma-4-E4B-it-heretic.Q4_K_M.gguf", "role": "chat"}],
   "servers": {
     "chat": {"model_id": "m_d24f26eed365cd44", "port": 8080, "api_model": "modelo-local", "host": "127.0.0.1"},
-    "decider": null
+    "decider": null,
+    "reviewer": {"model_id": "m_d24f26eed365cd44", "port": 8081, "api_model": "modelo-revisor", "host": "127.0.0.1"}
   }
 }
 ```
 
 - `id` é um hash estável do caminho do modelo: muda só se o arquivo mudar de lugar. A API não aceita caminhos.
 - `role` é `decider` para os modelos de decisão (GGUF com metadados `decision`) e `chat` para os demais.
-- `servers.chat` e `servers.decider` ficam `null` enquanto o serviço está parado ou ainda carregando. `api_model` é o ID a usar no campo `model` dos pedidos (`modelo-local`, ou o nome do modelo no Strata). `host` é um campo extra: serviços iniciados pela tela podem estar na rede.
-- Os serviços iniciados pela API escutam só em `127.0.0.1`, sem chave. O servidor principal usa o perfil salvo do modelo (ou os valores automáticos) e o número de sessões das Configurações; o decisor usa o dispositivo e o contexto salvos no card Decisor. A API não grava nada nas Configurações.
+- `reviewer` é um papel de serviço, não de modelo: em `models` o `role` continua só `chat` ou `decider`, e o revisor aceita qualquer modelo `chat` GGUF do llama.cpp. A versão do contrato continua 1.
+- `servers.chat`, `servers.decider` e `servers.reviewer` ficam `null` enquanto o serviço está parado ou ainda carregando. `api_model` é o ID a usar no campo `model` dos pedidos (`modelo-local`, ou o nome do modelo no Strata). `host` é um campo extra: serviços iniciados pela tela podem estar na rede.
+- Os serviços iniciados pela API escutam só em `127.0.0.1`, sem chave. O servidor principal usa o perfil salvo do modelo (ou os valores automáticos) e o número de sessões das Configurações; o decisor usa o dispositivo e o contexto salvos no card Decisor, e o revisor, os do card Revisor. Os inícios passam pela checagem de memória e acontecem um de cada vez: o pedido espera o início anterior terminar, então use um tempo limite de alguns minutos. A API não grava nada nas Configurações.
+- O contrato não tem campo de esforço: o principal e o revisor usam o do perfil do modelo. O pedido de chat vale mais que o servidor: `chat_template_kwargs` com `enable_thinking` liga ou desliga o raciocínio. O DevTools envia `enable_thinking:false`, a menos que o esforço do modelo lá seja o do servidor. Com raciocínio ligado, reserve `max_tokens` para ele: um limite curto devolve resposta vazia.
+- Não há consulta prévia de memória na API: o cliente sabe que não cabe ao receber o `409` do `start`.
 - Pedir `start` do mesmo modelo que já roda em `127.0.0.1` devolve `200` sem reiniciar. `stop` de um serviço parado devolve `200`. `stop` também interrompe um início em andamento; esse `start` recebe `500`.
 
 Erros devolvem `{"error":{"code":"…","message":"…"}}`:
 
 | Status | Quando |
 | --- | --- |
-| `400` | JSON inválido, `role` fora de `chat`/`decider` ou `model_id` mal formado |
+| `400` | JSON inválido, `role` fora de `chat`/`decider`/`reviewer` ou `model_id` mal formado |
 | `401` | Token ausente ou errado, ou API sem token configurado |
 | `403` | Cabeçalho `Host` diferente de `127.0.0.1:8787` ou `localhost:8787` |
 | `404` | Rota desconhecida ou `model_id` fora do catálogo |
 | `405` | Método errado (o cabeçalho `Allow` indica o certo) |
-| `409` | Serviço já ativo com outro modelo ou na rede, outro `start` do mesmo papel em andamento, conversa ou teste de desempenho em execução, motor não instalado |
+| `409` | Serviço já ativo com outro modelo ou na rede, outro `start` do mesmo papel em andamento, conversa ou teste de desempenho em execução, motor não instalado ou memória insuficiente (`code` `insufficient_resources`, com a conta na mensagem) |
 | `413` / `415` | Corpo acima de 16 KB / `Content-Type` diferente de JSON |
-| `422` | Modelo de decisão pedido como `chat`, ou o contrário |
-| `500` | O motor falhou ao carregar o modelo; a mensagem traz o motivo |
+| `422` | Modelo de decisão pedido como `chat` ou `reviewer`, modelo de texto como `decider`, ou `reviewer` fora do llama.cpp |
+| `500` | O motor falhou ao carregar o modelo, ou o perfil tem um ajuste inválido para ele (como um esforço que o template não aceita); a mensagem traz o motivo |
 
 ### Exemplo em PowerShell
 

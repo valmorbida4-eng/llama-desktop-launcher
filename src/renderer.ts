@@ -20,6 +20,7 @@ async function action(fn){try{await fn();}catch(e){message(e.message||String(e),
 // Valor '' = automático. Campos que não se aplicam ficam recolhidos, com o motivo, e vão vazios ao salvar.
 let schema: ParameterSchema | null=null,values: Record<string, string>={},schemaPath='',schemaSeq=0,fitRunning=false;
 const toggleText={on:'ligado',off:'desligado'};
+const effortText: Record<string, string>={off:'Desligado',none:'Nenhum',minimal:'Mínimo',low:'Baixo',medium:'Médio',high:'Alto',xhigh:'Muito alto',max:'Máximo'};
 const defaultProfiles: Record<string, Record<string, string>>={llamacpp:{context:'4096'},vllm:{context:'4096'},strata:{}};
 function normalized(v: any){const out: Record<string, string>={};for(const [k,x] of Object.entries(v||{}))out[k]=x==null?'':String(x);if(out.gpuLayers==='auto')out.gpuLayers='';if(out.flash==='auto')out.flash='';return out;}
 function settings(): Record<string, string> {
@@ -28,7 +29,7 @@ function settings(): Record<string, string> {
   return v;
 }
 function applySettings(v: any){values={...values,...normalized(v)};if(schema)renderParams(schema);}
-function optionLabel(f: ParameterField,value: string){if(f.kind==='toggle')return toggleText[value]||value;if(f.kind==='model'){const m=snapshot?.models?.find(x=>x.path===value);return m?m.name:value.split(/[\\/]/).pop();}return value;}
+function optionLabel(f: ParameterField,value: string){if(f.kind==='toggle')return toggleText[value]||value;if(f.key==='effort')return effortText[value]||value;if(f.kind==='model'){const m=snapshot?.models?.find(x=>x.path===value);return m?m.name:value.split(/[\\/]/).pop();}return value;}
 function autoText(f: ParameterField){if(!f.auto)return 'Automático: o motor decide.';const shown=f.kind==='toggle'?(toggleText[f.auto.value]||f.auto.value):f.auto.value;return `Automático: ${shown} · ${f.auto.source}`;}
 function buildControl(f: ParameterField,value: string,blank=false){
   let control: HTMLInputElement|HTMLSelectElement;
@@ -51,11 +52,12 @@ function renderParams(s: ParameterSchema){
     const note=document.createElement('small');note.className='param-note';
     if(!f.applicable){box.classList.add('disabled');const control=buildControl(f,'',true);control.value='';control.disabled=true;note.textContent=f.reason||'Não se aplica.';box.append(head,control,note);unavailable.append(box);missing++;continue;}
     const autoLabel=document.createElement('label');autoLabel.className='auto-toggle';const auto=document.createElement('input');auto.type='checkbox';auto.id='a-'+f.key;auto.checked=value==='';autoLabel.append(auto,' Auto');head.append(autoLabel);
-    const control=buildControl(f,value);
+    // Esforço não tem um padrão conhecido: em Auto fica '—', sem parecer que é a primeira opção.
+    const control=buildControl(f,value,f.key==='effort');
     const sync=()=>{control.disabled=auto.checked;note.textContent=[autoText(f),f.hint,f.serverOnly?'Só no servidor.':''].filter(Boolean).map(t=>t.replace(/[.]?$/,'.')).join(' ');
       if(auto.checked&&f.auto&&!(control instanceof HTMLSelectElement))(control as HTMLInputElement).placeholder=f.auto.value;
       if(auto.checked&&control instanceof HTMLSelectElement){const match=[...control.options].find(o=>o.value===f.auto?.value);control.value=match?match.value:control.options[0]?.value||'';}};
-    auto.onchange=()=>{if(!auto.checked&&control instanceof HTMLInputElement&&!control.value&&f.auto&&/^[\d.]+$/.test(f.auto.value))control.value=f.auto.value;sync();paramsChanged();};
+    auto.onchange=()=>{if(!auto.checked&&f.key==='effort'&&!control.value)(control as HTMLSelectElement).selectedIndex=1;if(!auto.checked&&control instanceof HTMLInputElement&&!control.value&&f.auto&&/^[\d.]+$/.test(f.auto.value))control.value=f.auto.value;sync();paramsChanged();};
     control.addEventListener('change',()=>paramsChanged());
     sync();box.append(head,control,note);
     let group=byGroup.get(f.group);if(!group){const set=document.createElement('fieldset');set.className='param-group';const legend=document.createElement('legend');legend.textContent=f.group;const grid=document.createElement('div');grid.className='fields';set.append(legend,grid);groups.append(set);byGroup.set(f.group,grid);group=grid;}
@@ -102,8 +104,9 @@ function updateEngineControls(){
   $('start-server').disabled=!readyFor(m)||busy;$('launch').disabled=s.running?!s.active:!readyFor(m)||s.chatRunning;
   $('start-chat').disabled=!llama||!s.engineReady||!s.models.length||busy;$('open-cli-terminal').disabled=!llama||!s.engineReady||!s.models.length||busy;
   const sm=selectedSettingsModel(),engineId=sm?.engine||'llamacpp',tuning=!$('cancel-tune').hidden;
-  $('recommend').disabled=!sm||engineId==='strata';$('tune').disabled=!sm||engineId==='strata'||tuning||busy||!readyFor(sm);$('fit-values').disabled=!sm||engineId!=='llamacpp'||!s.engineReady||fitRunning||tuning;
-  $('tune-description').textContent=engineId==='strata'?'O Strata e o PolyStrata não têm autotuning: quantização, contexto e GPU vêm da configuração do instalador deles.':engineId==='vllm'?'Sobe o vLLM várias vezes com valores diferentes e mede tokens/s. Cada tentativa recarrega o modelo: leva vários minutos.':'Mede com llama-bench e, se sobrar tempo, com um llama-server curto (especulativa, threads de prompt, cache MoE).';
+  const beside=!!(s.decider?.running||s.reviewer?.running);
+  $('recommend').disabled=!sm||engineId==='strata';$('tune').disabled=!sm||engineId==='strata'||tuning||busy||beside||!readyFor(sm);$('fit-values').disabled=!sm||engineId!=='llamacpp'||!s.engineReady||fitRunning||tuning;
+  $('tune-description').textContent=beside&&engineId!=='strata'?'Pare o revisor e o decisor antes do autotuning: modelos ao lado falseiam a medição e podem derrubar os dois.':engineId==='strata'?'O Strata e o PolyStrata não têm autotuning: quantização, contexto e GPU vêm da configuração do instalador deles.':engineId==='vllm'?'Sobe o vLLM várias vezes com valores diferentes e mede tokens/s. Cada tentativa recarrega o modelo: leva vários minutos.':'Mede com llama-bench e, se sobrar tempo, com um llama-server curto (especulativa, threads de prompt, cache MoE).';
   $('fit-values-card').hidden=engineId!=='llamacpp';
 }
 function fillModelSelectors(models,preferred){for(const id of ['model','settings-model']){const select=$(id),previous=preferred||$('model').value;const empty=document.createElement('option');empty.value='';empty.textContent=models.length?'Selecione um modelo':'Nenhum modelo instalado';select.replaceChildren(empty,...models.map(m=>{const o=document.createElement('option');o.value=m.path;o.textContent=m.name;return o;}));if(models.some(m=>m.path===previous))select.value=previous;else select.value='';}}
@@ -154,15 +157,18 @@ async function refresh(preferred?: string){snapshot=await window.llama.state();c
   $('memory').textContent=bytes(s.hardware.memoryBytes);$('cpu').textContent=`${s.hardware.logicalCores} threads`;$('models-memory').textContent=bytes(s.hardware.memoryBytes);$('models-cpu').textContent=`${s.hardware.logicalCores} threads`;$('local-count').textContent=String(s.models.length);
   $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor nesta pasta: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
   fillModelSelectors(s.models.filter(m=>!m.decision),old);$('setup-hint').hidden=anyEngineReady(s)&&s.models.length>0;updateModelDetail();fillEngines(s);
-  $('stop').hidden=!s.running;updateEngineControls();$('save-settings-profile').disabled=!s.models.length;$('stop-chat').hidden=!s.chatRunning;$('send-chat').disabled=!s.chatRunning;
-  $('access-host').replaceChildren(...s.accessOptions.map(item=>{const o=document.createElement('option');o.value=item.host;o.textContent=item.name;return o;}));$('access-host').value=s.accessOptions.some(x=>x.host===s.config.accessHost)?s.config.accessHost:'127.0.0.1';$('parallel').value=s.config.parallel||1;$('access-host').disabled=s.running;$('parallel').disabled=s.running;$('rotate-key').disabled=s.running;updateNetwork();showConnection(s.active);fillDecider(s);fillControlApi(s);
+  $('stop').hidden=!s.running;updateEngineControls();$('save-settings-profile').disabled=!s.models.length;$('stop-chat').hidden=!s.chatRunning;if(!s.chatRunning)$('stop-chat').disabled=false;$('send-chat').disabled=!s.chatReady;
+  // Um refresh no meio (outro modelo iniciando) não apaga o endereço e as sessões escolhidos e ainda não usados.
+  const access=$('access-host'),typedHost=access.value,savedAccess=`${s.config.accessHost}|${s.config.parallel}`,keepTyped=access.dataset.saved===savedAccess;access.dataset.saved=savedAccess;
+  const wantedHost=keepTyped?typedHost:s.config.accessHost;
+  $('access-host').replaceChildren(...s.accessOptions.map(item=>{const o=document.createElement('option');o.value=item.host;o.textContent=item.name;return o;}));$('access-host').value=s.accessOptions.some(x=>x.host===wantedHost)?wantedHost:'127.0.0.1';if(!keepTyped)$('parallel').value=s.config.parallel||1;$('access-host').disabled=s.running;$('parallel').disabled=s.running;$('rotate-key').disabled=s.running;updateNetwork();showConnection(s.active);showVerdict('main-resources',s.active?.resources);fillReviewer(s);fillDecider(s);fillControlApi(s);
   await loadGuidance();
 }
 
 $('nav-llama').onclick=()=>showView('llama');$('nav-models').onclick=()=>showView('models');$('nav-settings').onclick=()=>showView('settings');$('open-settings').onclick=()=>showView('settings');$('open-models').onclick=()=>showView('models');
 $('finish-setup').onclick=()=>action(async()=>{await window.llama.completeSetup();await refresh();showView('llama');});
 $('model').addEventListener('change',()=>{const path=$('model').value;$('settings-model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});$('settings-model').addEventListener('change',()=>{const path=$('settings-model').value;$('model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});
-$('refresh').onclick=()=>action(()=>refresh());$('refresh-settings-models').onclick=()=>action(()=>refresh());$('refresh-guidance').onclick=()=>action(async()=>{guidance=null;await loadGuidance();});
+$('refresh').onclick=()=>action(()=>{reviewerCheck.key='';return refresh();});$('refresh-settings-models').onclick=()=>action(()=>refresh());$('refresh-guidance').onclick=()=>action(async()=>{guidance=null;await loadGuidance();});
 document.querySelectorAll<HTMLElement>('[data-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.chooseDir('models',Number(b.dataset.folder));await refresh();}));
 document.querySelectorAll<HTMLElement>('[data-clear-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.clearDir(Number(b.dataset.clearFolder));await refresh();}));
 document.querySelectorAll<HTMLElement>('[data-open-folder]').forEach(b=>b.onclick=()=>action(()=>window.llama.openModelDir(Number(b.dataset.openFolder))));
@@ -210,7 +216,7 @@ $('tune').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)thr
   finally{$('cancel-tune').hidden=true;updateEngineControls();}});
 $('cancel-tune').onclick=()=>action(async()=>{$('tuning-message').textContent='Cancelando o teste…';await window.llama.cancelTune();});
 $('save-settings-profile').onclick=()=>action(async()=>{const box=$('save-message');box.classList.remove('error');box.textContent='Salvando…';
-  try{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para salvar os ajustes.');await window.llama.saveProfile(m.path,settings());}
+  try{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para salvar os ajustes.');snapshot.config=(await window.llama.saveProfile(m.path,settings())).config;fillReviewerEffort(snapshot);}
   catch(error){box.textContent=error.message;box.classList.add('error');throw error;}
   const text=`Ajustes salvos para este modelo às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`;box.textContent=text;$('settings-message').textContent=text;$('message').textContent=text;});
 $('access-host').onchange=updateNetwork;
@@ -258,6 +264,9 @@ let deciderDevices: {name: string; description: string; totalMiB: number; freeMi
 function deciderMessage(text: string,error=false){const box=$('decider-message');box.textContent=text;box.classList.toggle('error',error);}
 async function deciderAction(fn: () => Promise<any>){try{await fn();}catch(e){deciderMessage(e.message||String(e),true);}}
 function option(value: string,text: string){const o=document.createElement('option');o.value=value;o.textContent=text;return o;}
+// O "free" do --list-devices ignora o que os outros processos usam: aqui vai só o total.
+function deviceOptions(){return [option('','Automático'),...(deciderDevices||[]).map(x=>option(x.name,`${x.name} — ${x.description} (${(x.totalMiB/1024).toFixed(1)} GB no total)`)),option('cpu','Só CPU')];}
+function showVerdict(id: string,result?: {level: string; text: string} | null,prefix=''){const box=$(id);box.hidden=!result;box.className=`resources${result?` ${result.level}`:''}`;box.textContent=result?prefix+result.text:'';}
 function renderDeciderModels(container: HTMLElement,s: any){
   const local=(s.models||[]).filter((m: any)=>m.decision);container.replaceChildren();
   for(const item of s.decider?.models||[]){const card=document.createElement('article');card.className='suggestion';const title=document.createElement('strong');title.textContent=item.name;
@@ -272,9 +281,9 @@ function fillDecider(s: any){
   modelSelect.replaceChildren(...(models.length?models.map((m: any)=>option(m.path,`${m.name} · ${(m.size/1024**3).toFixed(1)} GB`)):[option('','Nenhum modelo de decisão nas pastas')]));
   if(models.some((m: any)=>m.path===(d.active?.modelPath||previous)))modelSelect.value=d.active?.modelPath||previous;
   const deviceSelect=$('decider-device'),wanted=deviceSelect.dataset.ready?deviceSelect.value:String(cfg.device||'');deviceSelect.dataset.ready='1';
-  deviceSelect.replaceChildren(option('','Automático'),...(deciderDevices||[]).map(x=>option(x.name,`${x.name} — ${x.description} (${(x.freeMiB/1024).toFixed(1)} GB livres)`)),option('cpu','Só CPU'));
+  deviceSelect.replaceChildren(...deviceOptions());
   if(wanted&&![...deviceSelect.options].some(o=>o.value===wanted))deviceSelect.append(option(wanted,wanted));deviceSelect.value=d.active?.device??wanted;
-  if(!$('decider-context').value||running)$('decider-context').value=d.active?.context||cfg.context||'4096';
+  if(!$('decider-context').value||d.active)$('decider-context').value=d.active?.context||cfg.context||'4096';
   const hostSelect=$('decider-host'),host=d.active?.host||hostSelect.value||cfg.host||'127.0.0.1';
   hostSelect.replaceChildren(...(s.accessOptions||[]).map((x: any)=>option(x.host,x.name)));hostSelect.value=(s.accessOptions||[]).some((x: any)=>x.host===host)?host:'127.0.0.1';
   for(const id of ['decider-model','decider-device','decider-context','decider-host'])$(id).disabled=running;
@@ -283,12 +292,16 @@ function fillDecider(s: any){
   $('start-decider').hidden=running;$('start-decider').disabled=!models.length||!s.engineReady;$('stop-decider').hidden=!running;$('copy-decider-endpoint').hidden=!ready;$('test-decider').disabled=!ready;
   $('decider-badge').textContent=ready?`Ativo · ${d.active.scope||''}`:running?'Carregando…':'Parado';
   $('decider-endpoint').hidden=!ready;$('decider-endpoint').textContent=ready?`API: ${d.active.endpoint} · ${d.active.name} · dispositivo ${d.active.device==='cpu'?'CPU':d.active.device||'automático'} · contexto ${d.active.context}`:'';
+  showVerdict('decider-resources',d.active?.resources);
   const mainDevice=String(s.config?.profiles?.[s.config?.selectedModelPath]?.device||'');
+  const chosen=models.find((m: any)=>m.path===modelSelect.value),small=!!chosen&&chosen.size<=(d.cpuMaxBytes||0);
   $('decider-hint').textContent=!s.engineReady?'Instale o llama.cpp em Configurações para usar o decisor.':!models.length?'Nenhum GGUF de decisão nas pastas de modelos. Baixe um dos modelos sugeridos abaixo para uma das pastas e clique em Atualizar lista.':
+    small?(deviceSelect.value==='cpu'?'Modelo muito pequeno: responde rápido na CPU e deixa as GPUs para o principal e o revisor.':'Este modelo é muito pequeno: escolha Só CPU. Ele responde rápido e deixa as GPUs para o principal e o revisor.'):
     mainDevice&&mainDevice===deviceSelect.value?`O modelo principal também usa ${mainDevice}: os dois dividem a memória dessa placa. Prefira outra GPU (como a integrada) ou Só CPU.`:'Escolha uma placa que o modelo principal não usa (a GPU integrada, por exemplo) ou Só CPU, para os dois rodarem juntos sem disputar memória.';
   renderDeciderModels($('decider-models'),s);renderDeciderModels($('models-decider-list'),s);
-  if(!deciderDevices&&!deciderDevicesLoading&&s.engineReady){deciderDevicesLoading=true;window.llama.deciderDevices().then(list=>{deciderDevices=list||[];}).catch(()=>{deciderDevices=[];}).finally(()=>{deciderDevicesLoading=false;if(snapshot)fillDecider(snapshot);});}
+  if(!deciderDevices&&!deciderDevicesLoading&&s.engineReady){deciderDevicesLoading=true;window.llama.deciderDevices().then(list=>{deciderDevices=list||[];}).catch(()=>{deciderDevices=[];}).finally(()=>{deciderDevicesLoading=false;if(snapshot){fillDecider(snapshot);fillReviewer(snapshot);}});}
 }
+for(const id of ['decider-model','decider-device'])$(id).addEventListener('change',()=>{if(snapshot)fillDecider(snapshot);});
 $('start-decider').onclick=()=>deciderAction(async()=>{const path=$('decider-model').value;if(!path)throw Error('Escolha um modelo de decisão.');
   $('start-decider').disabled=true;deciderMessage('Carregando o modelo de decisão…');$('decider-log').textContent='';
   try{await window.llama.startDecider(path,{device:$('decider-device').value,context:$('decider-context').value.trim(),host:$('decider-host').value});deciderMessage('Decisor pronto. Use o link da API ou teste uma decisão abaixo.');$('decider-test-box').open=true;}
@@ -302,6 +315,115 @@ $('test-decider').onclick=()=>deciderAction(async()=>{$('test-decider').disabled
     deciderMessage(`Resposta em ${r.ms} ms.`);}
   finally{$('test-decider').disabled=!snapshot?.decider?.active;}});
 window.llama.onDeciderLog(line=>{const box=$('decider-log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
+// Revisor: segundo modelo que gera texto, com a conta de memória antes de iniciar.
+let reviewerCheck: {key: string; result: {level: string; text: string} | null}={key:'',result:null},reviewerTimer: any=null,trio: any=null,trioLoading=false;
+function plainError(e: any){return String(e?.message||e).replace(/^Error invoking remote method '[^']+': (?:Error: )?/,'');}
+function reviewerMessage(text: string,error=false){const box=$('reviewer-message');box.textContent=text;box.classList.toggle('error',error);}
+async function reviewerAction(fn: () => Promise<any>){try{await fn();}catch(e){reviewerMessage(plainError(e),true);}}
+function reviewerOptions(){return {device:$('reviewer-device').value,context:$('reviewer-context').value.trim()};}
+function deviceName(device: string){const found=deciderDevices?.find(x=>x.name===device);return device==='cpu'?'CPU':found?`${found.name} (${found.description})`:device||'automático';}
+function updateReviewerStart(){
+  const s=snapshot;if(!s)return;
+  $('start-reviewer').disabled=!$('reviewer-model').value||!s.engineReady||reviewerCheck.result?.level==='no';
+}
+// Mede de novo só quando muda o que entra na conta: modelo, dispositivo, contexto ou o que está rodando.
+function scheduleReviewerCheck(){
+  const s=snapshot;if(!s)return;
+  if(s.reviewer?.running){clearTimeout(reviewerTimer);reviewerCheck={key:'',result:null};showVerdict('reviewer-resources',s.reviewer.active?.resources);updateReviewerStart();return;}
+  const path=$('reviewer-model').value,options=reviewerOptions();
+  const key=JSON.stringify([path,options,s.engineReady,s.running,s.active?.modelPath,s.chatRunning,s.decider?.running,s.decider?.active?.modelPath,s.config?.engineDir]);
+  if(key===reviewerCheck.key){updateReviewerStart();return;}
+  clearTimeout(reviewerTimer);reviewerCheck={key,result:null};updateReviewerStart();
+  if(!path||!s.engineReady){showVerdict('reviewer-resources',null);return;}
+  showVerdict('reviewer-resources',{level:'checking',text:'Medindo a memória…'});
+  reviewerTimer=setTimeout(async()=>{
+    try{const r=await window.llama.checkReviewer(path,options);if(reviewerCheck.key!==key)return;reviewerCheck.result=r.result;
+      showVerdict('reviewer-resources',r.result,options.device||r.result.level==='no'?'':`${deviceName(r.device)} · `);}
+    catch(e){if(reviewerCheck.key!==key)return;showVerdict('reviewer-resources',{level:'unknown',text:`Sem medição: ${plainError(e)}`});}
+    updateReviewerStart();
+  },400);
+}
+function fillReviewer(s: any){
+  const r=s.reviewer||{},cfg=r.config||{},running=!!r.running,ready=running&&!!r.active;
+  const models=(s.models||[]).filter((m: any)=>!m.decision&&(m.engine||'llamacpp')==='llamacpp');
+  const modelSelect=$('reviewer-model'),wantedModel=r.active?.modelPath||(modelSelect.dataset.ready?modelSelect.value:cfg.modelPath)||'';modelSelect.dataset.ready='1';
+  modelSelect.replaceChildren(option('',models.length?'Selecione um modelo':'Nenhum GGUF nas pastas'),...models.map((m: any)=>option(m.path,`${m.name} · ${(m.size/1024**3).toFixed(1)} GB`)));
+  modelSelect.value=models.some((m: any)=>m.path===wantedModel)?wantedModel:'';
+  // O campo guarda o que foi pedido; com Automático, o dispositivo escolhido aparece no endereço.
+  const deviceSelect=$('reviewer-device'),wanted=deviceSelect.dataset.ready?deviceSelect.value:String(cfg.device||'');deviceSelect.dataset.ready='1';
+  deviceSelect.replaceChildren(...deviceOptions());
+  if(wanted&&![...deviceSelect.options].some(o=>o.value===wanted))deviceSelect.append(option(wanted,wanted));deviceSelect.value=wanted;
+  if(!$('reviewer-context').value||r.active)$('reviewer-context').value=r.active?.context||cfg.context||'8192';
+  for(const id of ['reviewer-model','reviewer-device','reviewer-context'])$(id).disabled=running;
+  fillReviewerEffort(s);
+  $('start-reviewer').hidden=running;$('check-reviewer').hidden=running;$('stop-reviewer').hidden=!running;$('copy-reviewer-endpoint').hidden=!ready;
+  $('reviewer-badge').textContent=ready?'Ativo · Local':running?'Carregando…':'Parado';
+  $('reviewer-endpoint').hidden=!ready;$('reviewer-endpoint').textContent=ready?`API: ${r.active.endpoint} · Modelo API: ${r.active.modelId} · ${r.active.name} · ${deviceName(r.active.device)} · contexto ${r.active.context}${r.active.effort?` · esforço ${effortText[r.active.effort]||r.active.effort}`:''}`:'';
+  scheduleReviewerCheck();fillTrio(s);
+}
+// O esforço é do perfil do modelo: o card só dá acesso ao perfil de quem é o revisor, sem trocar o principal.
+let effortSeq=0;
+async function fillReviewerEffort(s: any){
+  const select=$('reviewer-effort'),path=$('reviewer-model').value,seq=++effortSeq;
+  const saved=String(s.config?.profiles?.[path]?.effort||''),running=!!s.reviewer?.running;
+  let field: ParameterField|undefined;
+  if(path&&s.engineReady)try{field=(await window.llama.parameterSchema(path,s.config?.profiles?.[path]||{})).fields.find(f=>f.key==='effort');}catch{}
+  if(seq!==effortSeq)return;
+  const choices=field?.applicable?field.options||[]:[];
+  select.replaceChildren(option('',field&&!field.applicable?'Não se aplica':'Automático'),...choices.map(x=>option(x,effortText[x]||x)));
+  if(saved&&!choices.includes(saved))select.append(option(saved,`${effortText[saved]||saved} (não aceito)`));
+  select.value=saved;select.disabled=running||!field||(!field.applicable&&!saved);
+  select.title=(field?.applicable?field.hint:field?.reason)||'';
+}
+$('reviewer-effort').onchange=()=>reviewerAction(async()=>{
+  const path=$('reviewer-model').value,effort=$('reviewer-effort').value;if(!path)return;
+  try{
+    // Lê o perfil na hora: o principal pode ter salvado outros ajustes do mesmo modelo.
+    const now=(await window.llama.state()).config.profiles[path],saved=await window.llama.saveProfile(path,{...normalized(now||defaultProfiles.llamacpp),effort});
+    snapshot.config=saved.config;
+    if(selectedSettingsModel()?.path===path){values={...settings(),effort};if(schema)renderParams(schema);}
+    reviewerMessage('Esforço salvo no perfil deste modelo. Vale no próximo início dele.');
+  }finally{await fillReviewerEffort(snapshot);}
+});
+function fillTrio(s: any){
+  $('suggest-trio').disabled=trioLoading||!s.engineReady;
+  $('trio').hidden=!trio;if(!trio)return;
+  const row=(role: string,text: string)=>{const line=document.createElement('div');line.className='trio-row';const b=document.createElement('b');b.textContent=role;const span=document.createElement('span');span.textContent=text;line.append(b,span);return line;};
+  $('trio-lines').replaceChildren(row('Principal',trio.main.name),row('Revisor',`${trio.reviewer.name} · ${deviceName(trio.reviewer.device)}`),row('Decisor',trio.decider?`${trio.decider.name} · ${deviceName(trio.decider.device)}${trio.decider.small?' (muito pequeno: basta a CPU)':''}`:'nenhum modelo de decisão coube'));
+  const light=trio.cpuDecider;$('use-trio-cpu').hidden=!light;
+  if(light)$('trio-lines').append(row('Ou na CPU',`${light.name} como decisor: é muito pequeno, responde rápido e deixa as GPUs para o principal e o revisor. ${light.result.text}`));
+  showVerdict('trio-resources',trio.result);
+  const busy=!!(s.running||s.chatRunning||s.decider?.running||s.reviewer?.running);
+  $('use-trio').disabled=busy;$('use-trio-cpu').disabled=busy;
+  $('trio-note').textContent=busy?'A conta considera parados os modelos do launcher em execução. Pare-os para usar este trio.':'Usar este trio só preenche os campos; inicie o principal, o revisor e o decisor quando quiser.';
+}
+for(const id of ['reviewer-model','reviewer-device'])$(id).onchange=()=>{scheduleReviewerCheck();if(id==='reviewer-model'&&snapshot)fillReviewerEffort(snapshot);};
+$('reviewer-context').oninput=()=>scheduleReviewerCheck();
+$('check-reviewer').onclick=()=>{reviewerCheck.key='';scheduleReviewerCheck();};
+$('start-reviewer').onclick=()=>reviewerAction(async()=>{const path=$('reviewer-model').value;if(!path)throw Error('Escolha o modelo revisor.');
+  $('start-reviewer').disabled=true;reviewerMessage('Conferindo a memória e carregando o revisor…');$('reviewer-log').textContent='';
+  try{await window.llama.startReviewer(path,reviewerOptions());reviewerMessage('Revisor pronto. Use o link da API no seu cliente (no DevTools, campo Revisor local).');}
+  finally{reviewerCheck.key='';await refresh();}});
+$('stop-reviewer').onclick=()=>reviewerAction(async()=>{await window.llama.stopReviewer();reviewerMessage('Encerrando o revisor…');});
+$('copy-reviewer-endpoint').onclick=()=>reviewerAction(async()=>{await window.llama.copyReviewerEndpoint();reviewerMessage('Link da API copiado. O nome do modelo na API é modelo-revisor.');});
+$('suggest-trio').onclick=()=>reviewerAction(async()=>{
+  trio=null;trioLoading=true;fillTrio(snapshot);reviewerMessage('Calculando os trios que cabem juntos… pode levar um minuto.');
+  try{trio=await window.llama.suggestTrio();reviewerMessage(trio?'':'Nenhum trio dos modelos das suas pastas cabe junto neste computador. Tente modelos ou contextos menores.',!trio);}
+  finally{trioLoading=false;fillTrio(snapshot);}});
+const applyTrio=(cpu: boolean)=>reviewerAction(async()=>{
+  if(!trio)return;
+  const t={...trio,decider:cpu?trio.cpuDecider:trio.decider};
+  $('model').value=t.main.path;$('settings-model').value=t.main.path;updateModelDetail();await window.llama.selectModel(t.main.path);
+  snapshot.config.selectedModelPath=t.main.path;
+  const pick=(id: string,value: string)=>{const select=$(id);if(![...select.options].some(o=>o.value===value))select.append(option(value,value));select.value=value;};
+  pick('reviewer-model',t.reviewer.path);pick('reviewer-device',t.reviewer.device);$('reviewer-context').value=t.reviewer.context;
+  if(t.decider){pick('decider-model',t.decider.path);pick('decider-device',t.decider.device);$('decider-context').value=t.decider.context;}
+  fillDecider(snapshot);fillReviewerEffort(snapshot);
+  scheduleReviewerCheck();reviewerMessage('Campos preenchidos. Inicie o principal, o revisor e o decisor.');});
+$('use-trio').onclick=()=>applyTrio(false);
+$('use-trio-cpu').onclick=()=>applyTrio(true);
+window.llama.onReviewerLog(line=>{const box=$('reviewer-log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
+window.llama.onReviewerStopped(code=>{reviewerMessage(code==null?'Revisor encerrado.':`Revisor encerrado (${code}).`);refresh().catch(e=>message(e.message,true));});
 function fillControlApi(s: any){const c=s.controlApi||{};$('control-api').checked=!!c.enabled;
   const badge=$('control-api-badge');badge.textContent=c.running?'Ativa':c.enabled?'Com erro':'Desligada';badge.classList.toggle('off',!c.enabled);badge.classList.toggle('error',!!c.enabled&&!c.running);
   const address=$('control-api-address');address.classList.toggle('error',!!c.error);

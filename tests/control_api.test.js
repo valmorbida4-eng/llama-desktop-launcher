@@ -107,7 +107,7 @@ test('state segue o contrato e start/stop usam só IDs do catálogo', async () =
   const [chat, decider] = control.catalog(MODELS);
   await withServer(handlers, async (request) => {
     const state = await request('GET', '/v1/control/state');
-    assert.deepEqual(state.json, { version: 1, models: [{ id: chat.id, name: 'gemma', role: 'chat' }, { id: decider.id, name: 'Kev-4B', role: 'decider' }], servers: { chat: null, decider: null } });
+    assert.deepEqual(state.json, { version: 1, models: [{ id: chat.id, name: 'gemma', role: 'chat' }, { id: decider.id, name: 'Kev-4B', role: 'decider' }], servers: { chat: null, decider: null, reviewer: null } });
 
     assert.equal((await request('POST', '/v1/control/start', { body: { role: 'chat', model_id: 'C:\\Models\\gemma.gguf' } })).json.error.code, 'invalid_model_id');
     assert.equal((await request('POST', '/v1/control/start', { body: { role: 'chat', model_id: 'm_0000000000000000' } })).status, 404);
@@ -133,6 +133,33 @@ test('state segue o contrato e start/stop usam só IDs do catálogo', async () =
     assert.ok(stopped.json.servers.decider);
     assert.equal((await request('POST', '/v1/control/stop', { body: {} })).status, 400);
     assert.deepEqual(calls.stop, ['chat']);
+  });
+});
+
+test('reviewer é um serviço: o modelo continua com papel chat', async () => {
+  const { handlers, calls } = fakeLauncher();
+  const list = control.catalog([...MODELS, { path: 'C:\\Models\\hf', name: 'hf', engine: 'vllm', decision: null }]);
+  const [chat, decider, vllm] = list;
+  await withServer({ ...handlers, models: () => list, servers: () => ({ chat: null, decider: null, reviewer: calls.start.length ? { model_id: chat.id, port: 8081, api_model: 'modelo-revisor' } : null }) }, async (request) => {
+    for (const id of [decider.id, vllm.id]) assert.equal((await request('POST', '/v1/control/start', { body: { role: 'reviewer', model_id: id } })).status, 422);
+    assert.equal(calls.start.length, 0);
+    const started = await request('POST', '/v1/control/start', { body: { role: 'reviewer', model_id: chat.id } });
+    assert.equal(started.status, 200);
+    assert.deepEqual(calls.start, [['reviewer', 'C:\\Models\\gemma.gguf']]);
+    assert.deepEqual(started.json.servers.reviewer, { model_id: chat.id, port: 8081, api_model: 'modelo-revisor' });
+    assert.ok(started.json.models.every((m) => ['chat', 'decider'].includes(m.role) && !('engine' in m)), 'o DevTools rejeita papéis novos em models');
+    assert.equal((await request('POST', '/v1/control/stop', { body: { role: 'reviewer' } })).status, 200);
+    assert.deepEqual(calls.stop, ['reviewer']);
+  });
+});
+
+test('memória insuficiente chega ao cliente como 409 com o motivo', async () => {
+  const { handlers } = fakeLauncher();
+  const [chat] = control.catalog(MODELS);
+  await withServer({ ...handlers, start: async () => { throw new control.ControlError(409, 'insufficient_resources', 'Não cabe: VRAM'); } }, async (request) => {
+    const refused = await request('POST', '/v1/control/start', { body: { role: 'reviewer', model_id: chat.id } });
+    assert.equal(refused.status, 409);
+    assert.deepEqual(refused.json.error, { code: 'insufficient_resources', message: 'Não cabe: VRAM' });
   });
 });
 

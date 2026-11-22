@@ -52,7 +52,7 @@ function onPath(name, env = process.env) {
 function terminalCommand(platform, scriptPath, env = process.env) {
   if (platform === 'win32') {
     const args = ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', '"' + scriptPath + '"'];
-    const bootstrap = "Start-Process -FilePath 'powershell.exe' -ArgumentList @(" + args.map(psQuote).join(', ') + ") -WindowStyle Normal -ErrorAction Stop";
+    const bootstrap = "Start-Process -FilePath (Join-Path $PSHOME 'powershell.exe') -ArgumentList @(" + args.map(psQuote).join(', ') + ") -WindowStyle Normal -ErrorAction Stop";
     return { file: 'powershell.exe', args: ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-EncodedCommand', Buffer.from(bootstrap, 'utf16le').toString('base64')], waitForExit: true };
   }
   if (platform === 'darwin') return { file: 'open', args: ['-a', 'Terminal', scriptPath] };
