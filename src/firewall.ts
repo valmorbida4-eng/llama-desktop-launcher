@@ -104,7 +104,7 @@ function elevatedPowerShellScript(innerScript) {
   return [
     "$ErrorActionPreference = 'Stop'",
     `$arguments = @('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-EncodedCommand','${encoded}')`,
-    "$process = Start-Process -FilePath 'powershell.exe' -Verb RunAs -Wait -PassThru -ArgumentList $arguments",
+    "$process = Start-Process -FilePath (Join-Path $PSHOME 'powershell.exe') -Verb RunAs -Wait -PassThru -ArgumentList $arguments",
     'exit $process.ExitCode',
   ].join('\n');
 }

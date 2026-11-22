@@ -136,7 +136,7 @@ test('sem regras do launcher, nada é elevado; com regras, uma única elevação
   assert.deepEqual(await firewall.removeRules({ platform: 'win32', run: some.run }), { removed: 2, remaining: 0 });
   assert.equal(some.calls.length, 3);
   const elevated = some.calls[1];
-  assert.match(elevated, /Start-Process -FilePath 'powershell\.exe' -Verb RunAs/);
+  assert.match(elevated, /Start-Process -FilePath \(Join-Path \$PSHOME 'powershell\.exe'\) -Verb RunAs/);
   const inner = Buffer.from(elevated.match(/'-EncodedCommand','([^']+)'/)[1], 'base64').toString('utf16le');
   assert.match(inner, new RegExp(`Remove-NetFirewallRule -Name @\\('${nameA}','${nameB}'\\)`));
 });

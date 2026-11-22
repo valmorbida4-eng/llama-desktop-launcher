@@ -1,4 +1,6 @@
 'use strict';
+// Antes de qualquer outro módulo: nada é executado da pasta de onde o app foi aberto.
+require('./safe_exec').hardenExecutableSearch();
 const {app,BrowserWindow,ipcMain,dialog,shell,clipboard}=require('electron');
 const fs=require('node:fs');
 const path=require('node:path');
