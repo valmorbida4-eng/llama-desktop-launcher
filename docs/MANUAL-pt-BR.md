@@ -18,7 +18,7 @@ O instalador do aplicativo **não inclui modelos nem motores**. O llama.cpp é b
 
 A interface tem três telas, acessíveis pela navegação no topo:
 
-- **Llama:** escolher o modelo, iniciar o servidor, conversar e copiar as configurações dos clientes.
+- **Llama:** escolher o modelo, iniciar o servidor, o revisor e o decisor, conversar e copiar as configurações dos clientes.
 - **Modelos:** recomendações pelo seu hardware e links para encontrar modelos de cada motor.
 - **Configurações:** motores, pastas de modelos, perfis, importação, atualizações, diagnóstico e, no Windows, as regras de firewall criadas pelo launcher.
 
@@ -199,9 +199,25 @@ As estimativas da tela **Modelos** usam RAM, CPU, GPU/VRAM detectável e espaço
 - **Abrir no navegador:** inicia, se preciso, e abre a interface do motor. Com o servidor ativo, só abre a página.
 - **Parar servidor:** encerra o servidor, o compartilhamento e, no vLLM do Windows, o contêiner.
 
-Só uma execução por vez: pare o servidor, a conversa ou o teste de desempenho antes de iniciar outro. Fechar a aba do navegador não para o servidor; fechar o launcher para.
+O servidor principal e a conversa não rodam juntos: pare um antes de iniciar o outro. O revisor e o decisor rodam ao lado deles, e o teste de desempenho só roda com tudo parado. Fechar a aba do navegador não para o servidor; fechar o launcher para.
 
 O **Registro do motor**, abaixo dos botões, mostra a saída do motor e as mensagens do launcher. Ele é a primeira fonte para entender uma falha (veja o Guia de diagnóstico).
+
+### Revisor: um segundo modelo
+
+O card **Modelo revisor** roda um segundo GGUF que gera texto, para revisar o que o principal escreveu. Ele escuta só em `127.0.0.1`, na primeira porta livre entre 8081 e 8089, e responde na API do OpenAI com o modelo `modelo-revisor`.
+
+1. Escolha o modelo, o dispositivo e o contexto (8192 por padrão). Em **Automático**, o launcher prefere a placa dedicada, depois a GPU integrada e, por último, a CPU, conforme a folga de memória.
+2. Leia a linha de memória. **Cabe**: há folga. **No limite**: inicia, mas pode ficar lento. **Não cabe**: o botão fica desligado e o launcher recusa o início. **Sem medição**: avisa e deixa iniciar. **Medir de novo** refaz a conta depois que você fecha outros programas.
+3. Clique em **Iniciar revisor**. **Copiar link da API** copia o endereço.
+
+O revisor roda inteiro no dispositivo escolhido. Do perfil do modelo ele usa só batch, microbatch, cache KV, Flash Attention, threads e esforço. **Esforço**, no card, grava no perfil do modelo escolhido e vale também quando ele for o principal; mude com o revisor parado. No Vulkan, o microbatch fica em até 128, porque lotes maiores com o modelo inteiro na placa podem fazer o driver da AMD reiniciar.
+
+**Sugerir trio** procura, entre os modelos já baixados, um principal que cabe inteiro na GPU, um revisor e um decisor que cabem juntos. A busca pode levar um minuto e prefere famílias de modelo diferentes e, fora da placa dedicada, um revisor de até 6 GB, que responde mais rápido. **Usar este trio** só preenche os campos: não inicia nem para nada.
+
+Um decisor muito pequeno (arquivo de até 256 MiB, como o Julia-1) é sugerido só na CPU, porque responde rápido nela e deixa as GPUs livres. O decisor salvo continua tendo preferência: se ele for maior, o pequeno aparece na linha **Ou na CPU**, com o botão **Usar com o decisor na CPU**. Os muito pequenos acertam menos em casos vagos: teste com as suas perguntas antes de trocar.
+
+Com outro modelo do launcher carregado, o principal, a conversa, a CLI e o decisor também passam pela checagem. Nesse caso o principal pode iniciar com menos camadas na GPU para caber ao lado dos outros; o perfil salvo não muda. Os inícios acontecem um de cada vez: o seguinte espera o anterior terminar de carregar, e **Parar** cancela um início que está na fila. A checagem é uma foto do momento: não conta programas abertos depois, nem modelos na CLI do terminal separado.
 
 ### O que cada motor oferece
 
@@ -254,6 +270,7 @@ O launcher descobre o que o modelo suporta sem carregar os pesos: lê o cabeçal
 | | Checkpoints de contexto por sessão | `-ctxcp` | Modelo SWA, híbrido ou recorrente. |
 | | Reuso de cache por deslocamento | `--cache-reuse` | Só no servidor. |
 | | Cache KV unificado entre sessões | `-kvu` | Servidor com 2 ou mais sessões simultâneas. |
+| Raciocínio | Esforço | `--reasoning-effort` / `--reasoning off` | O template do modelo tem ajuste e o motor aceita a opção. Lista só o que o template aceita: em alguns modelos, só **Desligado**; em outros, só os níveis. Vale para o servidor, a conversa e o revisor. Um pedido do cliente pode mudar, e a mesma opção nos argumentos extras vale mais no servidor principal. |
 | Decodificação especulativa | Tipo | `--spec-type` | Sempre: `none`, `ngram-mod`, `ngram-simple`, `ngram-map-k`; `draft-mtp` só se o GGUF tiver camadas MTP; `draft-simple`/`draft-eagle3` com um modelo rascunho. |
 | | Modelo rascunho | `-md` | Tipos `draft-simple`, `draft-eagle3` e `draft-mtp` com cabeça MTP separada. Lista os GGUF menores das pastas. |
 | | Tokens por rascunho | `--spec-draft-n-max` | Tipos `draft-*`. |
@@ -286,7 +303,7 @@ Contexto, quantização e GPU vêm da configuração `strata-*.json` e aparecem 
 
 - **Aplicar sugestão inicial** preenche os campos pela RAM, CPU, GPU/VRAM e pelos dados do modelo. No GGUF, liga `draft-mtp` quando o modelo tem camadas MTP. No vLLM, calcula contexto, uso de memória e paralelismo de tensor pelo `config.json` e pela VRAM, e pergunta se você quer rodar o autotuning. Não existe no Strata.
 - **Calcular valores automáticos** (só GGUF) roda o `llama-fit-params`, que vem no pacote oficial, e mostra nos campos em Auto o que o `-fit` escolheria: camadas na GPU, contexto, proporção por GPU e quantas camadas de especialistas ficariam na CPU. Roda sozinho ao abrir o perfil de um GGUF e leva alguns segundos.
-- **Otimizar automaticamente** procura os valores mais rápidos dentro do **Tempo** escolhido (5, 10, 20 ou 30 minutos) e da **Prioridade**: **Geração** (padrão; tokens/s de geração), **Prompt longo** (tokens/s de prompt) ou **Equilíbrio**. **Cancelar** para o teste e aplica o melhor até ali. O resultado vai para os campos, mas o perfil só é salvo quando você clicar em **Salvar**. **Medições do autotuning** mostra cada tentativa, inclusive as que falharam e o motivo.
+- **Otimizar automaticamente** só roda com o servidor, a conversa, o revisor e o decisor parados. Ele procura os valores mais rápidos dentro do **Tempo** escolhido (5, 10, 20 ou 30 minutos) e da **Prioridade**: **Geração** (padrão; tokens/s de geração), **Prompt longo** (tokens/s de prompt) ou **Equilíbrio**. **Cancelar** para o teste e aplica o melhor até ali. O resultado vai para os campos, mas o perfil só é salvo quando você clicar em **Salvar**. **Medições do autotuning** mostra cada tentativa, inclusive as que falharam e o motivo.
   - **llama.cpp:** primeiro o `llama-fit-params` define o teto de memória. Depois o `llama-bench` testa, um de cada vez, especialistas na CPU (MoE), Flash Attention, cache K/V (`f16`, `q8_0`, `q4_0`), microbatch, threads (quando a CPU trabalha) e divisão entre GPUs. Se sobrar tempo, um `llama-server` curto mede o que o `llama-bench` não mede: decodificação especulativa (com a taxa de aceitação do rascunho) e threads de prompt. Em modelos MoE com especialistas na CPU, mede em seguida o cache de especialistas como o `moe-cache-tune.py` do llama.cpp: sem cache, dois tamanhos × frações de CPU 0, 0,5 e 0,95 (1024 tokens gerados em cada, para o cache encher) e, com o tamanho vencedor, o modo de carga `dio`. Fica a menor fração a até 5% da mais rápida, porque um cache pequeno com fração 0 pode ser mais lento que nenhum cache e a melhor fração depende da máquina. O que não cabe na memória ou não é suportado (cache V quantizado sem Flash Attention, por exemplo) sai da lista. Um valor só troca o atual com ganho de pelo menos 2%.
   - **vLLM:** cada tentativa sobe o servidor de novo (no Windows, um contêiner) e recarrega o modelo, então leva vários minutos por tentativa: prefira 20 ou 30 minutos. Testa uso de memória da GPU, tipo do cache KV, tokens por lote e decodificação especulativa.
   - **Strata/PolyStrata:** não há autotuning.
@@ -319,7 +336,7 @@ Quem recebe um link ou comando com acesso pode usar o modelo, mas não acessa os
 
 ### API de controle local
 
-Em **Configurações > 08 · API de controle**, a caixa **Ativar a API de controle local** deixa outro programa deste computador (como o DevTools) listar os modelos, iniciar e parar o servidor principal e o decisor e fechar o launcher, por `http://127.0.0.1:8787`. Os pedidos precisam do token de controle: copie-o com **Copiar token** ou defina a variável `DEVTOOLS_LAUNCHER_TOKEN`. Os serviços iniciados assim escutam só em `127.0.0.1` e usam o perfil salvo. O contrato completo está na seção 11 do **Guia de integração**.
+Em **Configurações > 08 · API de controle**, a caixa **Ativar a API de controle local** deixa outro programa deste computador (como o DevTools) listar os modelos, iniciar e parar o servidor principal, o revisor e o decisor e fechar o launcher, por `http://127.0.0.1:8787`. Os pedidos precisam do token de controle: copie-o com **Copiar token** ou defina a variável `DEVTOOLS_LAUNCHER_TOKEN`. Os serviços iniciados assim escutam só em `127.0.0.1` e usam o perfil salvo. O contrato completo está na seção 11 do **Guia de integração**.
 
 ## 12. Dados, atualização e desinstalação
 

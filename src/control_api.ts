@@ -1,6 +1,6 @@
 'use strict';
-// API local de controle (DevTools): lista os modelos do catálogo, inicia e para o servidor principal e o
-// decisor e encerra o launcher. Escuta só em 127.0.0.1:8787, sem CORS, com um Bearer dedicado
+// API local de controle (DevTools): lista os modelos do catálogo, inicia e para o servidor principal, o
+// revisor e o decisor e encerra o launcher. Escuta só em 127.0.0.1:8787, sem CORS, com um Bearer dedicado
 // (DEVTOOLS_LAUNCHER_TOKEN). O launcher injeta as ações; este módulo só valida e roteia os pedidos.
 const http=require('node:http');
 const crypto=require('node:crypto');
@@ -11,7 +11,8 @@ const HOST='127.0.0.1',PORT=8787,VERSION=1;
 const TOKEN_ENV='DEVTOOLS_LAUNCHER_TOKEN';
 const TOKEN=/^[A-Za-z0-9._~+/=-]{32,256}$/;
 const MODEL_ID=/^m_[0-9a-f]{16}$/;
-const ROLES=Object.freeze(['chat','decider']);
+// Papéis de serviço. Um modelo continua sendo só chat ou decider: o revisor usa um modelo chat.
+const ROLES=Object.freeze(['chat','decider','reviewer']);
 const MAX_BODY=16*1024;
 const ROUTES: Record<string,string>={'/v1/control/state':'GET','/v1/control/start':'POST','/v1/control/stop':'POST','/v1/control/quit':'POST'};
 
@@ -27,12 +28,12 @@ function modelId(modelPath: string,platform: string=process.platform) {
 }
 function catalog(models: any[],platform: string=process.platform) {
   const seen=new Set<string>(),list: any[]=[];
-  for(const m of models||[]){const id=modelId(m.path,platform);if(seen.has(id))continue;seen.add(id);list.push({id,name:String(m.name||path.basename(m.path)),role:m.decision?'decider':'chat',path:m.path});}
+  for(const m of models||[]){const id=modelId(m.path,platform);if(seen.has(id))continue;seen.add(id);list.push({id,name:String(m.name||path.basename(m.path)),role:m.decision?'decider':'chat',engine:m.engine||'llamacpp',path:m.path});}
   return list;
 }
-// Estado no formato do contrato: {version, models, servers:{chat, decider}}.
-function publicState(models: any[],servers: {chat: any; decider: any}) {
-  return {version:VERSION,models:models.map(({id,name,role})=>({id,name,role})),servers:{chat:servers.chat||null,decider:servers.decider||null}};
+// Estado no formato do contrato: {version, models, servers:{chat, decider, reviewer}}.
+function publicState(models: any[],servers: {chat: any; decider: any; reviewer?: any}) {
+  return {version:VERSION,models:models.map(({id,name,role})=>({id,name,role})),servers:{chat:servers.chat||null,decider:servers.decider||null,reviewer:servers.reviewer||null}};
 }
 
 function validToken(value: unknown) {return typeof value==='string'&&TOKEN.test(value);}
@@ -68,7 +69,7 @@ function parseBody(raw: string) {
   return body;
 }
 function validRole(role: unknown) {
-  if(typeof role!=='string'||!ROLES.includes(role))throw new ControlError(400,'invalid_role','role deve ser "chat" ou "decider".');
+  if(typeof role!=='string'||!ROLES.includes(role))throw new ControlError(400,'invalid_role','role deve ser "chat", "decider" ou "reviewer".');
   return role;
 }
 // Valida o pedido de início contra o catálogo: ID desconhecido → 404, papel trocado → 422.
@@ -77,6 +78,11 @@ function resolveStart(body: any,models: any[]) {
   if(typeof body.model_id!=='string'||!MODEL_ID.test(body.model_id))throw new ControlError(400,'invalid_model_id','model_id inválido: use um ID de /v1/control/state.');
   const model=models.find(m=>m.id===body.model_id);
   if(!model)throw new ControlError(404,'model_not_found','Modelo não encontrado no catálogo.');
+  if(role==='reviewer') {
+    if(model.role!=='chat')throw new ControlError(422,'role_mismatch','O revisor precisa de um modelo que gere texto, não de decisão.');
+    if((model.engine||'llamacpp')!=='llamacpp')throw new ControlError(422,'role_mismatch','O revisor aceita só modelos GGUF do llama.cpp.');
+    return {role,model};
+  }
   if(model.role!==role)throw new ControlError(422,'role_mismatch',role==='chat'?'Este é um modelo de decisão: use role "decider".':'Este modelo não é de decisão: use role "chat".');
   return {role,model};
 }
@@ -105,7 +111,7 @@ function readBody(req: any): Promise<string> {
   });
 }
 
-// handlers: models() → catálogo; servers() → {chat, decider}; start(role, model); stop(role); quit().
+// handlers: models() → catálogo; servers() → {chat, decider, reviewer}; start(role, model); stop(role); quit().
 // Um início por papel de cada vez: outro início do mesmo papel enquanto o primeiro carrega recebe 409.
 function createHandler(options: {token: () => string | null; port?: number; handlers: any}) {
   const port=options.port??PORT,h=options.handlers,busy=new Set<string>();

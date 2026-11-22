@@ -67,6 +67,19 @@ Monte o relatório à mão: sistema e versão, versão do launcher (nome do inst
 | A pasta de modelos é recusada | Ela não pode ficar dentro da instalação nem da pasta de dados do aplicativo. |
 | GPU ou VRAM aparecem como “não medida” | O sistema não informou um valor confiável. As sugestões usam só a RAM; ajuste à mão. |
 
+### Revisor e memória
+
+| Sintoma | O que fazer |
+| --- | --- |
+| “Não cabe” no revisor ou ao iniciar outro modelo | A mensagem mostra o que falta (VRAM ou RAM). Feche programas e clique em **Medir de novo**, escolha outro dispositivo, reduza o modelo ou o contexto, pare outro modelo ou use **Sugerir trio**. |
+| “Sem medição” no revisor | O motor não estimou este arquivo ou o sistema não informou a memória livre. O início não é bloqueado; se falhar, veja o **Registro do revisor**. Um GGUF que este motor não abre também aparece assim. |
+| O cliente não acha o revisor na 8081 | Outro programa ocupa a porta: o revisor usa a próxima livre até 8089. Copie o endereço do card. |
+| Um início parece parado | Os inícios esperam em fila, e a checagem de memória leva tempo (cerca de um minuto no teste mais lento). Aguarde o anterior ou clique em **Parar**. |
+| O autotuning fica desabilitado com o servidor parado | Pare também o revisor e o decisor. |
+| **Esforço** não se aplica | O template do modelo não tem esse ajuste, ou o motor é antigo. O motivo aparece no campo. |
+| O modelo pensa diferente do Esforço escolhido | O pedido do cliente vale mais. No DevTools, use o esforço do servidor. Confira também os argumentos extras. No automático, alguns modelos não pensam em pergunta fácil. |
+| Resposta vazia com raciocínio ligado | O raciocínio gastou o `max_tokens`. Aumente o limite no cliente, escolha um esforço menor ou **Desligado**. |
+
 ## 5. llama.cpp
 
 | Sintoma | Causa provável e solução |

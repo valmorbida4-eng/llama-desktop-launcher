@@ -9,6 +9,9 @@ interface ParameterField { key: string; group: string; label: string; flag: stri
 interface ParameterSchema { engine: string; version: number; fields: ParameterField[]; info: any; readOnly: { label: string; value: string }[] }
 interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced' }
 interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
+interface MemoryVerdict { level: 'ok' | 'tight' | 'unknown' | 'no'; label: string; text: string }
+interface TrioSuggestion { main: { path: string; name: string }; reviewer: { path: string; name: string; device: string; context: string }; decider: { path: string; name: string; device: string; context: string; small: boolean } | null;
+  cpuDecider: { path: string; name: string; device: string; context: string; small: boolean; result: any } | null; result: MemoryVerdict; running: boolean }
 interface RendererApi {
   state(): Promise<any>;
   setControlApi(enabled: boolean): Promise<any>;
@@ -77,6 +80,13 @@ interface RendererApi {
   testDecider(input: { state: string; question: string; options: string }): Promise<{ headline: string; rows: [string, number][]; ms: number }>;
   onDeciderLog(callback: (value: string) => void): void;
   onDeciderStopped(callback: (value: number | string | null) => void): void;
+  startReviewer(modelPath: string, options: { device: string; context: string }): Promise<any>;
+  stopReviewer(): Promise<boolean>;
+  checkReviewer(modelPath: string, options: { device: string; context: string }): Promise<{ device: string; result: MemoryVerdict }>;
+  copyReviewerEndpoint(): Promise<string>;
+  suggestTrio(): Promise<TrioSuggestion | null>;
+  onReviewerLog(callback: (value: string) => void): void;
+  onReviewerStopped(callback: (value: number | string | null) => void): void;
 }
 
 declare global {

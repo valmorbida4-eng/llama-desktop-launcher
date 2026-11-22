@@ -27,7 +27,9 @@ Aplicativo instalável para executar modelos de linguagem locais no Windows, Lin
 - Configurações prontas para OpenCode, Aider, Pi, Hermes, Continue, Cline, Codex (experimental) e clientes OpenAI Compatible genéricos.
 - No Windows, regra de firewall opcional limitada ao executável do motor, à porta ativa e à faixa privada informada, e botão para remover todas as regras criadas pelo launcher.
 - Verificação de atualizações com conferência do `SHA256SUMS.txt`.
-- **API de controle local** (opcional, desligada por padrão) em `127.0.0.1:8787`: o DevTools lista os modelos, inicia e para o servidor principal e o decisor e fecha o launcher, com token próprio (`DEVTOOLS_LAUNCHER_TOKEN`). Contrato na seção 11 do guia de integração.
+- **Revisor:** um segundo modelo GGUF que gera texto, ao lado do principal e do decisor, em `127.0.0.1:8081` com o nome `modelo-revisor`. O launcher mede RAM e VRAM livres, diz se **cabe**, está **no limite** ou **não cabe**, bloqueia o último caso e sugere um trio entre os modelos já baixados que cabem juntos; um decisor muito pequeno, como o Julia-1, é sugerido só na CPU.
+- **Esforço de raciocínio** por modelo, para o principal, a conversa e o revisor: só as opções que o template do modelo aceita.
+- **API de controle local** (opcional, desligada por padrão) em `127.0.0.1:8787`: o DevTools lista os modelos, inicia e para o servidor principal, o revisor e o decisor e fecha o launcher, com token próprio (`DEVTOOLS_LAUNCHER_TOKEN`). Contrato na seção 11 do guia de integração.
 - **Relatório de diagnóstico** copiável, com versões, motores, pastas, servidor ativo e o fim do registro do motor, sem chaves nem tokens.
 
 ## Obter o aplicativo sem o código-fonte
@@ -73,6 +75,7 @@ As versões oficiais de Linux são construídas em Ubuntu; a compatibilidade com
 
 ## Histórico de versões
 
+- **v0.14.0:** card **Revisor**, com um segundo modelo de texto em `127.0.0.1:8081`, checagem de memória antes de iniciar (a VRAM livre vem do sistema, porque o número do llama.cpp ignora os outros processos) e **Sugerir trio**. Com outro modelo do launcher carregado, o principal, a conversa, a CLI e o decisor também passam pela conta, e os inícios acontecem um de cada vez. A API de controle aceita `role:"reviewer"` e devolve `servers.reviewer`. Campo **Esforço** no perfil de cada modelo e no card Revisor, e decisor de até 256 MiB sugerido na CPU. Correções: com a 8080 ocupada o servidor principal usa 8100–8180, sem tomar as portas do revisor e do decisor; o autotuning não roda com o revisor ou o decisor ligado; um motor encerrado por sinal durante a carga é percebido na hora, sem esperar 5 minutos; a desinstalação no Windows não deixa mais guias e arquivos do empacotador para trás.
 - **v0.13.2:** correção no decisor: se a tela fosse atualizada enquanto o modelo de decisão ainda carregava (por **Atualizar lista** ou por um comando do DevTools), aparecia o erro "Cannot read properties of null (reading 'endpoint')" e o selo ficava "Ativo" sem endereço. Agora o selo mostra **Carregando…** até o modelo ficar pronto, e o endereço da API e o botão **Testar** só aparecem depois disso.
 - **v0.13.1:** correção de segurança nas ferramentas de build: o `minimatch` usado pelo electron-builder sobe para a 11.0.9 (GHSA-g3hv-75wg-m249, negação de serviço com padrões glob), via `overrides`; `npm audit` fica sem alertas. O aplicativo instalado não usa essa biblioteca. As dependências Python dos scripts de manutenção ficam em `requirements.txt`.
 - **v0.13.0:** tema claro, além do escuro: o botão no canto superior direito alterna entre **Sistema** (segue o Windows), **Claro** e **Escuro**, e a escolha fica salva. A janela deixa de mostrar o menu nativo (Arquivo, Editar, Exibir…), que não tinha função no launcher.

@@ -69,6 +69,19 @@ Build the report by hand: system and version, launcher version (installer name),
 | The model folder is rejected | It cannot be inside the installation or inside the app data folder. |
 | GPU or VRAM shows as “não medida” (not measured) | The system did not report a reliable value. Suggestions use RAM only; adjust by hand. |
 
+### Reviewer and memory
+
+| Symptom | What to do |
+| --- | --- |
+| “Não cabe” (does not fit) on the reviewer or when starting another model | The message shows what is missing (VRAM or RAM). Close programs and click **Medir de novo**, choose another device, use a smaller model or context, stop another model or use **Sugerir trio**. |
+| “Sem medição” (not measured) on the reviewer | The engine could not estimate this file or the system did not report free memory. The start is not blocked; if it fails, see **Registro do revisor**. A GGUF this engine cannot open also shows up like this. |
+| The client cannot find the reviewer on 8081 | Another program holds the port: the reviewer uses the next free one up to 8089. Copy the address from the card. |
+| A start seems stuck | Starts wait in a queue, and the memory check adds time (about a minute in the slowest test). Wait for the previous one or click **Parar**. |
+| Autotuning is disabled with the server stopped | Stop the reviewer and the decider too. |
+| **Esforço** (effort) does not apply | The model's template has no such setting, or the engine is old. The field shows the reason. |
+| The model thinks differently from the chosen effort | The client's request wins. In DevTools, use the server's effort. Check the extra arguments too. On automatic, some models do not think for easy questions. |
+| Empty answer with thinking on | Thinking used up `max_tokens`. Raise the limit in the client, choose a lower effort or **Desligado** (off). |
+
 ## 5. llama.cpp
 
 | Symptom | Likely cause and fix |

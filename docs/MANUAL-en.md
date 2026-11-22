@@ -18,7 +18,7 @@ The application installer **does not include models or engines**. The app downlo
 
 The interface has three screens, reachable from the top navigation:
 
-- **Llama:** choose the model, start the server, chat and copy client setups.
+- **Llama:** choose the model, start the server, the reviewer and the decider, chat and copy client setups.
 - **Models:** recommendations for your hardware and links to find models for each engine.
 - **Settings:** engines, model folders, profiles, import, updates, diagnostics and, on Windows, the firewall rules created by the launcher.
 
@@ -199,9 +199,25 @@ The **Models** screen estimates use RAM, CPU, detectable GPU/VRAM and free space
 - **Abrir no navegador:** starts the server if needed and opens the engine's interface. With the server running, it only opens the page.
 - **Parar servidor:** stops the server, sharing and, for vLLM on Windows, the container.
 
-Only one run at a time: stop the server, chat or benchmark before starting another. Closing the browser tab does not stop the server; closing the launcher does.
+The main server and the chat do not run together: stop one before starting the other. The reviewer and the decider run alongside them, and the benchmark only runs with everything stopped. Closing the browser tab does not stop the server; closing the launcher does.
 
 The **Registro do motor** (engine log), below the buttons, shows the engine output and the launcher's messages. It is the first place to look when something fails (see the Diagnostics guide).
+
+### Reviewer: a second model
+
+The **Modelo revisor** (reviewer model) card runs a second text-generating GGUF to review what the main model wrote. It listens only on `127.0.0.1`, on the first free port between 8081 and 8089, and answers on the OpenAI API as `modelo-revisor`.
+
+1. Choose the model, the device and the context (8192 by default). With **Automático** (automatic), the launcher prefers the dedicated card, then the integrated GPU and finally the CPU, according to the memory headroom.
+2. Read the memory line. **Cabe** (fits): there is headroom. **No limite** (tight): it starts but may be slow. **Não cabe** (does not fit): the button is disabled and the launcher refuses to start it. **Sem medição** (not measured): it warns and lets you start. **Medir de novo** (measure again) repeats the check after you close other programs.
+3. Click **Iniciar revisor** (start reviewer). **Copiar link da API** copies the address.
+
+The reviewer runs entirely on the chosen device. From the model's profile it only uses batch, microbatch, KV cache, Flash Attention, threads and effort. **Esforço** (effort), on the card, is saved to the chosen model's profile and also applies when it is the main model; change it while the reviewer is stopped. On Vulkan the microbatch is capped at 128, because larger batches with the whole model on the card can make the AMD driver reset.
+
+**Sugerir trio** (suggest a trio) searches the downloaded models for a main model that fits entirely on the GPU, a reviewer and a decider that fit together. The search can take a minute and prefers different model families and, off the dedicated card, a reviewer of up to 6 GB, which answers faster. **Usar este trio** (use this trio) only fills in the fields: it starts and stops nothing.
+
+A very small decider (file of up to 256 MiB, such as Julia-1) is suggested on the CPU only, because it answers quickly there and leaves the GPUs free. Your saved decider still has priority: if it is larger, the small one appears on the **Ou na CPU** (or on CPU) line, with the **Usar com o decisor na CPU** (use with the decider on CPU) button. Very small models are less accurate on vague cases: test your own questions before switching.
+
+With another launcher model loaded, the main model, the chat, the CLI and the decider also go through the check. The main model may then start with fewer GPU layers to fit beside the others; the saved profile does not change. Starts happen one at a time: the next waits for the previous one to finish loading, and **Parar** (stop) cancels a queued start. The check is a snapshot: it does not count programs opened later, or models in the separate terminal CLI.
 
 ### What each engine offers
 
@@ -254,6 +270,7 @@ The launcher finds out what the model supports without loading the weights: it r
 | | Context checkpoints per session | `-ctxcp` | SWA, hybrid or recurrent model. |
 | | Cache reuse by shifting | `--cache-reuse` | Server only. |
 | | Unified KV cache across sessions | `-kvu` | Server with 2 or more simultaneous sessions. |
+| Reasoning | Effort (**Esforço**) | `--reasoning-effort` / `--reasoning off` | The model's template has the setting and the engine accepts the option. Only what the template accepts is listed: for some models just **Desligado** (off), for others just the levels. Used by the server, chat and reviewer. A client request can change it, and the same option in the extra arguments wins on the main server. |
 | Speculative decoding | Type | `--spec-type` | Always: `none`, `ngram-mod`, `ngram-simple`, `ngram-map-k`; `draft-mtp` only if the GGUF has MTP layers; `draft-simple`/`draft-eagle3` with a draft model. |
 | | Draft model | `-md` | Types `draft-simple`, `draft-eagle3`, and `draft-mtp` with a separate MTP head. Lists the smaller GGUFs in your folders. |
 | | Tokens per draft | `--spec-draft-n-max` | `draft-*` types. |
@@ -286,7 +303,7 @@ Context, quantization and GPU come from the `strata-*.json` configuration and ar
 
 - **Aplicar sugestão inicial** (Apply initial suggestion) fills the fields from RAM, CPU, GPU/VRAM and the model data. For a GGUF, it turns on `draft-mtp` when the model has MTP layers. For vLLM, it computes context, memory utilization and tensor parallelism from `config.json` and the VRAM, then asks whether you want to run autotuning. Not available for Strata.
 - **Calcular valores automáticos** (Compute automatic values, GGUF only) runs `llama-fit-params`, which ships with the official package, and shows in the Auto fields what `-fit` would choose: GPU layers, context, share per GPU and how many expert layers would stay on the CPU. It runs by itself when you open a GGUF profile and takes a few seconds.
-- **Otimizar automaticamente** (Optimize automatically) searches for the fastest values within the chosen **Tempo** (time: 5, 10, 20 or 30 minutes) and **Prioridade** (priority): **Geração** (generation, the default; generation tokens/s), **Prompt longo** (long prompt; prompt tokens/s) or **Equilíbrio** (balance). **Cancelar** stops the test and applies the best so far. The result goes into the fields, but the profile is saved only when you click **Save**. **Medições do autotuning** lists every attempt, including failures and their reasons.
+- **Otimizar automaticamente** (Optimize automatically) only runs with the server, chat, reviewer and decider stopped. It searches for the fastest values within the chosen **Tempo** (time: 5, 10, 20 or 30 minutes) and **Prioridade** (priority): **Geração** (generation, the default; generation tokens/s), **Prompt longo** (long prompt; prompt tokens/s) or **Equilíbrio** (balance). **Cancelar** stops the test and applies the best so far. The result goes into the fields, but the profile is saved only when you click **Save**. **Medições do autotuning** lists every attempt, including failures and their reasons.
   - **llama.cpp:** first `llama-fit-params` sets the memory ceiling. Then `llama-bench` tests, one at a time, experts on CPU (MoE), Flash Attention, K/V cache (`f16`, `q8_0`, `q4_0`), microbatch, threads (when the CPU does work) and GPU split. If time is left, a short `llama-server` run measures what `llama-bench` cannot: speculative decoding (with the draft acceptance rate) and prompt threads. For MoE models with experts on the CPU, it then measures the expert cache the same way as llama.cpp's `moe-cache-tune.py`: no cache, two sizes × CPU shares 0, 0.5 and 0.95 (1024 generated tokens each, so the cache fills), then the `dio` load mode with the winning size. It keeps the lowest share within 5% of the fastest run, because a small cache with share 0 can be slower than no cache and the best share depends on the machine. What does not fit in memory or is not supported (a quantized V cache without Flash Attention, for example) is dropped. A value replaces the current one only with a gain of at least 2%.
   - **vLLM:** each attempt starts the server again (on Windows, a container) and reloads the model, so each attempt takes several minutes: prefer 20 or 30 minutes. It tests GPU memory utilization, KV cache type, tokens per batch and speculative decoding.
   - **Strata/PolyStrata:** there is no autotuning.
@@ -319,7 +336,7 @@ Whoever receives a link or command with access can use the model, but cannot rea
 
 ### Local control API
 
-In **Settings > 08 · API de controle**, the **Ativar a API de controle local** box lets another program on this computer (such as DevTools) list models, start and stop the main server and the decider, and close the launcher through `http://127.0.0.1:8787`. Requests need the control token: copy it with **Copiar token** or set the `DEVTOOLS_LAUNCHER_TOKEN` variable. Services started this way listen only on `127.0.0.1` and use the saved profile. The full contract is in section 11 of the **Integration guide**.
+In **Settings > 08 · API de controle**, the **Ativar a API de controle local** box lets another program on this computer (such as DevTools) list models, start and stop the main server, the reviewer and the decider, and close the launcher through `http://127.0.0.1:8787`. Requests need the control token: copy it with **Copiar token** or set the `DEVTOOLS_LAUNCHER_TOKEN` variable. Services started this way listen only on `127.0.0.1` and use the saved profile. The full contract is in section 11 of the **Integration guide**.
 
 ## 12. Data, updates and uninstalling
 

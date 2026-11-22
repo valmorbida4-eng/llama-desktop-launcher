@@ -28,7 +28,9 @@ Choose the **Endereço de acesso** (access address) before clicking **Iniciar se
 
 Right below it, the **Em uso** (In use) line shows the server's real values, such as `Em uso: contexto 32768 · camadas na GPU 25/25 · sessões 2`. With context on Auto, the engine picks the size; use the number from that line (divided by the simultaneous sessions) as the client's context limit. Speculative decoding and the other profile settings do not change the API.
 
-- **Direct API:** the first free port between **8080 and 8180** on the chosen address. **Copiar link da API** copies the address ending in `/v1`.
+- **Direct API:** port **8080** on the chosen address or, if it is busy, the first free one between **8100 and 8180**. **Copiar link da API** copies the address ending in `/v1`.
+- **Reviewer:** the first free port between **8081 and 8089**, always on `127.0.0.1` and without a key, with the model `modelo-revisor`. In DevTools, use the **Revisor local** field.
+- **Decider:** the first free port between **8090 and 8098**.
 - **Shared API:** with LAN or Tailscale, a second port between **8181 and 8280**, shown as **API compartilhada**.
 - **Local bridge:** when you click **Abrir no navegador** (Open in browser) with network access, the launcher opens the interface through a `127.0.0.1` port that is already authenticated. It only serves this computer.
 
@@ -259,7 +261,7 @@ The **Diagnostics guide** covers each case and the app's messages in detail.
 
 ## 11. Local control API (DevTools)
 
-Since version 0.12.1, another program on this computer (such as DevTools) can control the launcher: list models, start and stop the main server and the decider, and close the launcher. The API stays off until you turn it on.
+Since version 0.12.1, another program on this computer (such as DevTools) can control the launcher: list models, start and stop the main server, the reviewer (since 0.14.0) and the decider, and close the launcher. The API stays off until you turn it on.
 
 ### Turn it on
 
@@ -276,9 +278,9 @@ Every route requires `Authorization: Bearer <DEVTOOLS_LAUNCHER_TOKEN>` and a `Ho
 | Route | Body | Response |
 | --- | --- | --- |
 | `GET /v1/control/state` | — | `200` with the state |
-| `POST /v1/control/start` | `{"role":"chat"\|"decider","model_id":"m_…"}` | `200` with the state, once the model has loaded |
-| `POST /v1/control/stop` | `{"role":"chat"\|"decider"}` | `200` with the state, once the process has exited |
-| `POST /v1/control/quit` | `{}` | `202 {"quitting":true}`; the launcher then closes and stops both services |
+| `POST /v1/control/start` | `{"role":"chat"\|"decider"\|"reviewer","model_id":"m_…"}` | `200` with the state, once the model has loaded |
+| `POST /v1/control/stop` | `{"role":"chat"\|"decider"\|"reviewer"}` | `200` with the state, once the process has exited |
+| `POST /v1/control/quit` | `{}` | `202 {"quitting":true}`; the launcher then closes and stops all three services |
 
 State:
 
@@ -288,30 +290,34 @@ State:
   "models": [{"id": "m_d24f26eed365cd44", "name": "gemma-4-E4B-it-heretic.Q4_K_M.gguf", "role": "chat"}],
   "servers": {
     "chat": {"model_id": "m_d24f26eed365cd44", "port": 8080, "api_model": "modelo-local", "host": "127.0.0.1"},
-    "decider": null
+    "decider": null,
+    "reviewer": {"model_id": "m_d24f26eed365cd44", "port": 8081, "api_model": "modelo-revisor", "host": "127.0.0.1"}
   }
 }
 ```
 
 - `id` is a stable hash of the model path: it only changes if the file moves. The API never accepts paths.
 - `role` is `decider` for decision models (GGUF with `decision` metadata) and `chat` for everything else.
-- `servers.chat` and `servers.decider` are `null` while the service is stopped or still loading. `api_model` is the ID for the `model` field of requests (`modelo-local`, or the model name on Strata). `host` is an extra field: services started from the window may be on the network.
-- Services started through the API listen only on `127.0.0.1`, without a key. The main server uses the model's saved profile (or the automatic values) and the session count from Settings; the decider uses the device and context saved in the Decider card. The API never writes to Settings.
+- `reviewer` is a service role, not a model role: in `models`, `role` is still only `chat` or `decider`, and the reviewer accepts any llama.cpp GGUF `chat` model. The contract version is still 1.
+- `servers.chat`, `servers.decider` and `servers.reviewer` are `null` while the service is stopped or still loading. `api_model` is the ID for the `model` field of requests (`modelo-local`, or the model name on Strata). `host` is an extra field: services started from the window may be on the network.
+- Services started through the API listen only on `127.0.0.1`, without a key. The main server uses the model's saved profile (or the automatic values) and the session count from Settings; the decider uses the device and context saved in the Decider card, and the reviewer those of the Reviewer card. Starts go through the memory check and happen one at a time: a request waits for the previous start to finish, so use a timeout of a few minutes. The API never writes to Settings.
+- The contract has no effort field: the main server and the reviewer use the one in the model's profile. The chat request wins over the server: `chat_template_kwargs` with `enable_thinking` turns thinking on or off. DevTools sends `enable_thinking:false` unless the model's effort there is set to the server's. With thinking on, leave `max_tokens` room for it: a short limit returns an empty answer.
+- The API has no memory pre-check: the client learns that a model does not fit from the `409` of `start`.
 - `start` for the model that is already running on `127.0.0.1` returns `200` without restarting. `stop` for a stopped service returns `200`. `stop` also interrupts a start in progress; that `start` gets `500`.
 
 Errors return `{"error":{"code":"…","message":"…"}}`:
 
 | Status | When |
 | --- | --- |
-| `400` | Invalid JSON, `role` other than `chat`/`decider`, or malformed `model_id` |
+| `400` | Invalid JSON, `role` other than `chat`/`decider`/`reviewer`, or malformed `model_id` |
 | `401` | Missing or wrong token, or no token configured |
 | `403` | `Host` header other than `127.0.0.1:8787` or `localhost:8787` |
 | `404` | Unknown route or `model_id` not in the catalog |
 | `405` | Wrong method (the `Allow` header names the right one) |
-| `409` | Service already running another model or on the network, another `start` for the same role in progress, chat or benchmark running, engine not installed |
+| `409` | Service already running another model or on the network, another `start` for the same role in progress, chat or benchmark running, engine not installed, or not enough memory (`code` `insufficient_resources`, with the numbers in the message) |
 | `413` / `415` | Body over 16 KB / `Content-Type` other than JSON |
-| `422` | Decision model requested as `chat`, or the opposite |
-| `500` | The engine failed to load the model; the message gives the reason |
+| `422` | Decision model requested as `chat` or `reviewer`, text model as `decider`, or a non-llama.cpp `reviewer` |
+| `500` | The engine failed to load the model, or the profile has a setting that is invalid for it (such as an effort the template does not accept); the message gives the reason |
 
 ### PowerShell example
 

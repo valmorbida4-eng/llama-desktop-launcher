@@ -48,7 +48,9 @@ async function probeBuild(engineDir: string,{run=capture,platform=process.platfo
   const server=exe(engineDir,'llama-server',platform);
   if(!engineDir||!fs.existsSync(server)) return null;
   const [version,help]=await Promise.all([run(server,['--version']),run(server,['--help'])]);
-  return {...identifyBuild(version,help),hasBench:fs.existsSync(exe(engineDir,'llama-bench',platform)),
+  // Sem --help legível fica indefinido: só um motor que comprovadamente não tem a opção desliga o Esforço.
+  const reasoning=help?String(help).includes('--reasoning-effort'):undefined;
+  return {...identifyBuild(version,help),reasoning,hasBench:fs.existsSync(exe(engineDir,'llama-bench',platform)),
     hasFit:fs.existsSync(exe(engineDir,'llama-fit-params',platform)),checkedAt:new Date().toISOString()};
 }
 // Texto curto para a interface e o relatório de diagnóstico.
