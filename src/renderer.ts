@@ -260,12 +260,35 @@ window.llama.onStopped(code=>{message(`Servidor encerrado (${code??'sem código'
 window.llama.onChatOutput(data=>{const box=$('chat-output');box.textContent=(box.textContent+data.text).slice(-100000);box.scrollTop=box.scrollHeight;});
 window.llama.onChatStopped(result=>{$('chat-output').textContent+=`\n[Conversa encerrada: ${result.code??result.signal??'sem código'}]\n`;$('stop-chat').hidden=true;$('stop-chat').disabled=false;$('send-chat').disabled=true;$('start-chat').disabled=false;$('launch').disabled=false;refresh().catch(e=>message(e.message,true));});
 // Decisor: segundo llama-server para modelos de decisão (d1-Omni, Julia-1, Kev-4B…), ao lado do principal.
-let deciderDevices: {name: string; description: string; totalMiB: number; freeMiB: number}[] | null=null,deciderDevicesLoading=false;
+// Cada papel pode usar outro motor llama.cpp: a lista de dispositivos é a do motor de cada um.
+type EngineDevice={name: string; description: string; totalMiB: number; freeMiB: number};
+type Role='reviewer'|'decider';
+const roleDevices: Record<Role,{dir: string; list: EngineDevice[] | null; loading: boolean}>={reviewer:{dir:'',list:null,loading:false},decider:{dir:'',list:null,loading:false}};
+function roleEngineDir(s: any,role: Role){return String(s?.roleEngines?.[role]?.dir||s?.config?.engineDir||'');}
+function loadRoleDevices(s: any,role: Role){
+  const dir=roleEngineDir(s,role),entry=roleDevices[role];
+  if(entry.dir!==dir){entry.dir=dir;entry.list=null;}
+  if(entry.list||entry.loading||!s.engineReady)return;
+  entry.loading=true;
+  window.llama.deciderDevices(role).then(list=>{if(entry.dir===dir)entry.list=list||[];}).catch(()=>{if(entry.dir===dir)entry.list=[];})
+    .finally(()=>{entry.loading=false;if(snapshot){fillDecider(snapshot);fillReviewer(snapshot);}});
+}
+// "Mesmo do principal" e os outros motores já baixados (cada download fica na própria pasta).
+function fillRoleEngine(s: any,role: Role,running: boolean){
+  const select=$(`${role}-engine`),engines=s.llamaEngines||[],main=engines.find((e: any)=>e.main);
+  const others=engines.filter((e: any)=>!e.main);
+  select.replaceChildren(option('',`Mesmo motor do principal${main?` (${main.label})`:''}`),...others.map((e: any)=>option(e.dir,e.label)));
+  const info=s.roleEngines?.[role]||{};
+  select.value=info.same?'':String(info.dir||'');
+  select.disabled=running||!others.length;
+  select.title=!others.length?'Só há um motor instalado. Para usar outro aqui (ex.: Vulkan para a GPU integrada), baixe-o em Configurações e volte o principal para o que preferir: os dois ficam disponíveis.':
+    info.missing?'O motor escolhido não existe mais: usando o do principal.':'';
+}
 function deciderMessage(text: string,error=false){const box=$('decider-message');box.textContent=text;box.classList.toggle('error',error);}
 async function deciderAction(fn: () => Promise<any>){try{await fn();}catch(e){deciderMessage(e.message||String(e),true);}}
 function option(value: string,text: string){const o=document.createElement('option');o.value=value;o.textContent=text;return o;}
 // O "free" do --list-devices ignora o que os outros processos usam: aqui vai só o total.
-function deviceOptions(){return [option('','Automático'),...(deciderDevices||[]).map(x=>option(x.name,`${x.name} — ${x.description} (${(x.totalMiB/1024).toFixed(1)} GB no total)`)),option('cpu','Só CPU')];}
+function deviceOptions(role: Role){return [option('','Automático'),...(roleDevices[role].list||[]).map(x=>option(x.name,`${x.name} — ${x.description} (${(x.totalMiB/1024).toFixed(1)} GB no total)`)),option('cpu','Só CPU')];}
 function showVerdict(id: string,result?: {level: string; text: string} | null,prefix=''){const box=$(id);box.hidden=!result;box.className=`resources${result?` ${result.level}`:''}`;box.textContent=result?prefix+result.text:'';}
 function renderDeciderModels(container: HTMLElement,s: any){
   const local=(s.models||[]).filter((m: any)=>m.decision);container.replaceChildren();
@@ -281,7 +304,8 @@ function fillDecider(s: any){
   modelSelect.replaceChildren(...(models.length?models.map((m: any)=>option(m.path,`${m.name} · ${(m.size/1024**3).toFixed(1)} GB`)):[option('','Nenhum modelo de decisão nas pastas')]));
   if(models.some((m: any)=>m.path===(d.active?.modelPath||previous)))modelSelect.value=d.active?.modelPath||previous;
   const deviceSelect=$('decider-device'),wanted=deviceSelect.dataset.ready?deviceSelect.value:String(cfg.device||'');deviceSelect.dataset.ready='1';
-  deviceSelect.replaceChildren(...deviceOptions());
+  fillRoleEngine(s,'decider',running);loadRoleDevices(s,'decider');
+  deviceSelect.replaceChildren(...deviceOptions('decider'));
   if(wanted&&![...deviceSelect.options].some(o=>o.value===wanted))deviceSelect.append(option(wanted,wanted));deviceSelect.value=d.active?.device??wanted;
   if(!$('decider-context').value||d.active)$('decider-context').value=d.active?.context||cfg.context||'4096';
   const hostSelect=$('decider-host'),host=d.active?.host||hostSelect.value||cfg.host||'127.0.0.1';
@@ -299,7 +323,6 @@ function fillDecider(s: any){
     small?(deviceSelect.value==='cpu'?'Modelo muito pequeno: responde rápido na CPU e deixa as GPUs para o principal e o revisor.':'Este modelo é muito pequeno: escolha Só CPU. Ele responde rápido e deixa as GPUs para o principal e o revisor.'):
     mainDevice&&mainDevice===deviceSelect.value?`O modelo principal também usa ${mainDevice}: os dois dividem a memória dessa placa. Prefira outra GPU (como a integrada) ou Só CPU.`:'Escolha uma placa que o modelo principal não usa (a GPU integrada, por exemplo) ou Só CPU, para os dois rodarem juntos sem disputar memória.';
   renderDeciderModels($('decider-models'),s);renderDeciderModels($('models-decider-list'),s);
-  if(!deciderDevices&&!deciderDevicesLoading&&s.engineReady){deciderDevicesLoading=true;window.llama.deciderDevices().then(list=>{deciderDevices=list||[];}).catch(()=>{deciderDevices=[];}).finally(()=>{deciderDevicesLoading=false;if(snapshot){fillDecider(snapshot);fillReviewer(snapshot);}});}
 }
 for(const id of ['decider-model','decider-device'])$(id).addEventListener('change',()=>{if(snapshot)fillDecider(snapshot);});
 $('start-decider').onclick=()=>deciderAction(async()=>{const path=$('decider-model').value;if(!path)throw Error('Escolha um modelo de decisão.');
@@ -321,7 +344,7 @@ function plainError(e: any){return String(e?.message||e).replace(/^Error invokin
 function reviewerMessage(text: string,error=false){const box=$('reviewer-message');box.textContent=text;box.classList.toggle('error',error);}
 async function reviewerAction(fn: () => Promise<any>){try{await fn();}catch(e){reviewerMessage(plainError(e),true);}}
 function reviewerOptions(){return {device:$('reviewer-device').value,context:$('reviewer-context').value.trim()};}
-function deviceName(device: string){const found=deciderDevices?.find(x=>x.name===device);return device==='cpu'?'CPU':found?`${found.name} (${found.description})`:device||'automático';}
+function deviceName(device: string,role: Role='reviewer'){const found=roleDevices[role].list?.find(x=>x.name===device);return device==='cpu'?'CPU':found?`${found.name} (${found.description})`:device||'automático';}
 function updateReviewerStart(){
   const s=snapshot;if(!s)return;
   $('start-reviewer').disabled=!$('reviewer-model').value||!s.engineReady||reviewerCheck.result?.level==='no';
@@ -331,7 +354,7 @@ function scheduleReviewerCheck(){
   const s=snapshot;if(!s)return;
   if(s.reviewer?.running){clearTimeout(reviewerTimer);reviewerCheck={key:'',result:null};showVerdict('reviewer-resources',s.reviewer.active?.resources);updateReviewerStart();return;}
   const path=$('reviewer-model').value,options=reviewerOptions();
-  const key=JSON.stringify([path,options,s.engineReady,s.running,s.active?.modelPath,s.chatRunning,s.decider?.running,s.decider?.active?.modelPath,s.config?.engineDir]);
+  const key=JSON.stringify([path,options,s.engineReady,s.running,s.active?.modelPath,s.chatRunning,s.decider?.running,s.decider?.active?.modelPath,s.config?.engineDir,roleEngineDir(s,'reviewer')]);
   if(key===reviewerCheck.key){updateReviewerStart();return;}
   clearTimeout(reviewerTimer);reviewerCheck={key,result:null};updateReviewerStart();
   if(!path||!s.engineReady){showVerdict('reviewer-resources',null);return;}
@@ -351,7 +374,8 @@ function fillReviewer(s: any){
   modelSelect.value=models.some((m: any)=>m.path===wantedModel)?wantedModel:'';
   // O campo guarda o que foi pedido; com Automático, o dispositivo escolhido aparece no endereço.
   const deviceSelect=$('reviewer-device'),wanted=deviceSelect.dataset.ready?deviceSelect.value:String(cfg.device||'');deviceSelect.dataset.ready='1';
-  deviceSelect.replaceChildren(...deviceOptions());
+  fillRoleEngine(s,'reviewer',running);loadRoleDevices(s,'reviewer');
+  deviceSelect.replaceChildren(...deviceOptions('reviewer'));
   if(wanted&&![...deviceSelect.options].some(o=>o.value===wanted))deviceSelect.append(option(wanted,wanted));deviceSelect.value=wanted;
   if(!$('reviewer-context').value||r.active)$('reviewer-context').value=r.active?.context||cfg.context||'8192';
   for(const id of ['reviewer-model','reviewer-device','reviewer-context'])$(id).disabled=running;
@@ -389,7 +413,7 @@ function fillTrio(s: any){
   $('suggest-trio').disabled=trioLoading||!s.engineReady;
   $('trio').hidden=!trio;if(!trio)return;
   const row=(role: string,text: string)=>{const line=document.createElement('div');line.className='trio-row';const b=document.createElement('b');b.textContent=role;const span=document.createElement('span');span.textContent=text;line.append(b,span);return line;};
-  $('trio-lines').replaceChildren(row('Principal',trio.main.name),row('Revisor',`${trio.reviewer.name} · ${deviceName(trio.reviewer.device)}`),row('Decisor',trio.decider?`${trio.decider.name} · ${deviceName(trio.decider.device)}${trio.decider.small?' (muito pequeno: basta a CPU)':''}`:'nenhum modelo de decisão coube'));
+  $('trio-lines').replaceChildren(row('Principal',trio.main.name),row('Revisor',`${trio.reviewer.name} · ${deviceName(trio.reviewer.device)}`),row('Decisor',trio.decider?`${trio.decider.name} · ${deviceName(trio.decider.device,'decider')}${trio.decider.small?' (muito pequeno: basta a CPU)':''}`:'nenhum modelo de decisão coube'));
   const light=trio.cpuDecider;$('use-trio-cpu').hidden=!light;
   if(light)$('trio-lines').append(row('Ou na CPU',`${light.name} como decisor: é muito pequeno, responde rápido e deixa as GPUs para o principal e o revisor. ${light.result.text}`));
   showVerdict('trio-resources',trio.result);
@@ -397,6 +421,13 @@ function fillTrio(s: any){
   $('use-trio').disabled=busy;$('use-trio-cpu').disabled=busy;
   $('trio-note').textContent=busy?'A conta considera parados os modelos do launcher em execução. Pare-os para usar este trio.':'Usar este trio só preenche os campos; inicie o principal, o revisor e o decisor quando quiser.';
 }
+// Trocar o motor muda os nomes dos dispositivos (CUDA0, Vulkan1…): o campo volta para Automático.
+for(const role of ['reviewer','decider'] as Role[])$(`${role}-engine`).onchange=()=>(role==='decider'?deciderAction:reviewerAction)(async()=>{
+  const next=await window.llama.setRoleEngine(role,$(`${role}-engine`).value);snapshot=next;
+  roleDevices[role].list=null;roleDevices[role].dir='';const device=$(`${role}-device`);if(device.value!=='cpu')device.value='';device.dataset.ready='1';
+  if(role==='decider')fillDecider(next);else{reviewerCheck.key='';fillReviewer(next);}
+  (role==='decider'?deciderMessage:reviewerMessage)('Motor salvo. Confira o dispositivo: os nomes mudam de um motor para outro (Só CPU continua valendo).');
+});
 for(const id of ['reviewer-model','reviewer-device'])$(id).onchange=()=>{scheduleReviewerCheck();if(id==='reviewer-model'&&snapshot)fillReviewerEffort(snapshot);};
 $('reviewer-context').oninput=()=>scheduleReviewerCheck();
 $('check-reviewer').onclick=()=>{reviewerCheck.key='';scheduleReviewerCheck();};
