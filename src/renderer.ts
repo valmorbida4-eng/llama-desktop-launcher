@@ -3,7 +3,6 @@
 type DomControl = HTMLElement & HTMLInputElement & HTMLSelectElement & HTMLTextAreaElement & HTMLDetailsElement;
 const $=(id: string): DomControl => { const element=document.getElementById(id); if(!element) throw Error("Elemento não encontrado: " + id); return element as DomControl; };
 let snapshot,activePath='',currentView=null,guidance=null,updateState=null;
-const tuning=$('tuning-panel');
 
 function showView(view){
   currentView=view;
@@ -11,8 +10,6 @@ function showView(view){
   $('nav-llama').classList.toggle('active',view==='llama');
   $('nav-models').classList.toggle('active',view==='models');
   $('nav-settings').classList.toggle('active',view==='settings');
-  if(view==='settings'){$('tuning-settings-content').append(tuning);$('tuning-settings-content').hidden=false;$('save-settings-profile').hidden=false;$('tuning-accordion').open=true;}
-  else{$('tuning-content').append(tuning);$('tuning-settings-content').hidden=true;$('save-settings-profile').hidden=false;$('tuning-accordion').open=false;}
 }
 function message(text,error=false){const box=currentView==='settings'?$('settings-message'):$('message');box.textContent=text;box.classList.toggle('error',error);}
 async function action(fn){try{await fn();}catch(e){message(e.message||String(e),true);}}
@@ -23,6 +20,17 @@ const toggleText={on:'ligado',off:'desligado'};
 const effortText: Record<string, string>={off:'Desligado',none:'Nenhum',minimal:'Mínimo',low:'Baixo',medium:'Médio',high:'Alto',xhigh:'Muito alto',max:'Máximo'};
 const defaultProfiles: Record<string, Record<string, string>>={llamacpp:{context:'4096'},vllm:{context:'4096'},strata:{}};
 function normalized(v: any){const out: Record<string, string>={};for(const [k,x] of Object.entries(v||{}))out[k]=x==null?'':String(x);if(out.gpuLayers==='auto')out.gpuLayers='';if(out.flash==='auto')out.flash='';return out;}
+// Perfis por modelo e tipo de motor (config.engineProfiles[caminho][tipo]). Sem perfil salvo, vale o padrão do motor.
+type EngineEntry={dir: string; key: string; keyLabel: string; label: string; release?: string; main: boolean};
+function installedEngines(): EngineEntry[]{return snapshot?.llamaEngines||[];}
+function engineKeyOf(dir: string){const found=installedEngines().find(e=>e.dir===dir);return found?found.key:dir&&dir===snapshot?.config?.engineDir?String(snapshot?.mainEngineKey||''):'';}
+function profileKeyFor(m: any,dir: string){return (m?.engine||'llamacpp')==='llamacpp'?engineKeyOf(dir):String(m.engine);}
+function keyLabel(key: string){return installedEngines().find(e=>e.key===key)?.keyLabel||({vllm:'vLLM',strata:'Strata'} as Record<string,string>)[key]||key.toUpperCase();}
+function savedProfileFor(m: any,dir: string){const key=profileKeyFor(m,dir);return key&&snapshot?.config?.engineProfiles?.[m.path]?.[key]||null;}
+function defaultProfile(m: any){const engine=m?.engine||'llamacpp';return snapshot?.profileDefaults?.[engine]||defaultProfiles[engine]||{};}
+function profileOrDefault(m: any,dir: string){return normalized(savedProfileFor(m,dir)||defaultProfile(m));}
+function mainEngineDir(){return String(snapshot?.config?.engineDir||'');}
+function settingsEngineDir(){const m=selectedSettingsModel();if((m?.engine||'llamacpp')!=='llamacpp')return '';return $('settings-engine').value||mainEngineDir();}
 function settings(): Record<string, string> {
   const v: Record<string, string>={...values};
   for(const f of schema?.fields||[]){if(!f.applicable){v[f.key]='';continue;}const auto=document.getElementById('a-'+f.key) as HTMLInputElement|null,control=document.getElementById('p-'+f.key) as HTMLInputElement|null;if(!auto||!control)continue;v[f.key]=auto.checked?'':control.value.trim();}
@@ -71,16 +79,16 @@ function paramsChanged(){values=settings();clearTimeout(changeTimer);changeTimer
 // Receita do fork (Avalon, tandem.cpp) para o modelo escolhido: preenche os campos; o usuário salva.
 let recipe: {title: string; note: string; settings: Record<string, string>} | null=null;
 async function loadRecipe(m: any){
-  recipe=typeof window.llama.engineRecipe==='function'&&(m.engine||'llamacpp')==='llamacpp'?await window.llama.engineRecipe(m.path):null;
+  recipe=typeof window.llama.engineRecipe==='function'&&(m.engine||'llamacpp')==='llamacpp'?await window.llama.engineRecipe(m.path,settingsEngineDir()):null;
   if(m.path!==selectedSettingsModel()?.path)return;
   $('recipe-card').hidden=!recipe;if(recipe){$('recipe-title').textContent=recipe.title;$('recipe-note').textContent=recipe.note;}
 }
 async function loadSchema(withFit: boolean){
   const m=selectedSettingsModel();if(!m){schema=null;$('param-groups').replaceChildren();$('param-unavailable').hidden=true;$('model-facts').hidden=true;return;}
-  const seq=++schemaSeq;const current=settings();
-  const next=await window.llama.parameterSchema(m.path,current);
+  const seq=++schemaSeq;const current=settings(),dir=settingsEngineDir();
+  const next=await window.llama.parameterSchema(m.path,current,dir);
   loadRecipe(m).catch(()=>{});
-  if(seq!==schemaSeq||m.path!==selectedSettingsModel()?.path)return;
+  if(seq!==schemaSeq||m.path!==selectedSettingsModel()?.path||dir!==settingsEngineDir())return;
   const before=JSON.stringify((schema?.fields||[]).map(f=>[f.key,f.applicable,f.auto?.value,(f.options||[]).join()]));
   schema=next;values=current;
   if(before!==JSON.stringify(next.fields.map(f=>[f.key,f.applicable,f.auto?.value,(f.options||[]).join()])))renderParams(next);
@@ -89,7 +97,7 @@ async function loadSchema(withFit: boolean){
 async function computeFit(explicit: boolean){
   const m=selectedSettingsModel();if(!m||(m.engine||'llamacpp')!=='llamacpp'||fitRunning)return;
   fitRunning=true;$('fit-values').disabled=true;if(explicit)$('tuning-message').textContent='Calculando os valores automáticos com llama-fit-params…';
-  try{const next=await window.llama.fitValues(m.path,settings());if(m.path===selectedSettingsModel()?.path){schema=next;renderParams(next);if(explicit)$('tuning-message').textContent='Valores automáticos atualizados: aparecem nos campos marcados como Auto.';}}
+  try{const dir=settingsEngineDir(),next=await window.llama.fitValues(m.path,settings(),dir);if(m.path===selectedSettingsModel()?.path&&dir===settingsEngineDir()){schema=next;renderParams(next);if(explicit)$('tuning-message').textContent='Valores automáticos atualizados: aparecem nos campos marcados como Auto.';}}
   catch(e){if(explicit)throw e;}
   finally{fitRunning=false;updateEngineControls();}
 }
@@ -113,8 +121,35 @@ function fillModelSelectors(models,preferred){for(const id of ['model','settings
 function updateModelDetail(){const m=selected();if(!m){const count=snapshot?.models?.length||0;const hint=count?`Escolha um dos ${count} modelos encontrados na lista acima.`:'Nenhum GGUF encontrado. Configure uma pasta ou veja as sugestões compatíveis.';$('model-detail').textContent=hint;$('settings-model-detail').textContent=hint;activePath='';schemaPath='';schema=null;values={};loadSchema(false).catch(()=>{});updateEngineControls();return;}
   const engine=engineOf(m),engineText=engine?` · ${engine.label}${engine.ready?'':' (motor pendente)'}`:'';
   const note=m.engine==='strata'?` · contexto, quantização e GPU vêm da configuração do Strata${m.distribution==='PolyStrata'?`; Sessões simultâneas não se aplicam ao PolyStrata (a configuração dele usa ${m.parallel||1})`:''}`:'';
-  const detail=`${m.size?`${(m.size/1024**3).toFixed(2)} GB · `:''}${m.path}${m.projector?' · projetor multimodal':''}${engineText}${note}`;$('model-detail').textContent=detail;$('settings-model-detail').textContent=`${m.name} · ajustes salvos só para este modelo.`;updateEngineControls();const changed=activePath!==m.path;activePath=m.path;
-  if(changed||schemaPath!==m.path){schemaPath=m.path;schema=null;values=normalized(snapshot.config.profiles[m.path]||defaultProfiles[m.engine||'llamacpp']||{});$('tune-results').hidden=true;$('save-message').textContent='';loadSchema(true).catch(e=>message(e.message,true));}}
+  const detail=`${m.size?`${(m.size/1024**3).toFixed(2)} GB · `:''}${m.path}${m.projector?' · projetor multimodal':''}${engineText}${note}`;$('model-detail').textContent=detail;fillEngineSelects();updateEngineControls();activePath=m.path;
+  const dir=settingsEngineDir(),target=`${m.path}|${dir}`,key=profileKeyFor(m,dir),saved=!!savedProfileFor(m,dir);
+  $('settings-model-detail').textContent=`${m.name} · ${key?`perfil para ${keyLabel(key)}${saved?' (salvo)':': ainda não salvo, os campos mostram o ajuste padrão deste motor'}`:'instale um motor llama.cpp para salvar o perfil'}.`;
+  if(schemaPath!==target){schemaPath=target;schema=null;values=profileOrDefault(m,dir);$('param-groups').replaceChildren();$('param-unavailable').hidden=true;$('tune-results').hidden=true;$('save-message').textContent='';loadSchema(true).catch(e=>message(e.message,true));}}
+// Motor do principal (tela Llama) e motor do perfil editado (Configurações). vLLM e Strata têm um motor só.
+function engineOptionsFor(m: any){
+  if((m?.engine||'llamacpp')!=='llamacpp'){const label=engineOf(m)?.label||m.engine;return [option('',label)];}
+  const list=installedEngines();
+  if(!list.length)return [option('','Nenhum motor llama.cpp instalado')];
+  // Curto para caber ao lado do modelo: tipo, build e se há perfil salvo. O caminho fica no título.
+  return list.map(e=>{const o=option(e.dir,`${e.keyLabel||e.label}${e.release?` · ${e.release}`:''}${m&&snapshot?.config?.engineProfiles?.[m.path]?.[e.key]?' · perfil salvo':m?' · ajuste padrão':''}`);o.title=`${e.label} · ${e.dir}`;return o;});
+}
+function fillEngineSelects(){
+  const s=snapshot;if(!s)return;
+  const main=$('main-engine'),m=selected(),llama=(m?.engine||'llamacpp')==='llamacpp';
+  main.replaceChildren(...engineOptionsFor(m));main.value=llama?mainEngineDir():'';
+  main.disabled=!llama||installedEngines().length<2||!!(s.running||s.chatRunning);
+  main.title=!llama?'Este modelo roda no próprio motor.':installedEngines().length<2?'Só há um motor llama.cpp instalado. Baixe outro tipo em Configurações › 01.':s.running||s.chatRunning?'Pare o servidor e a conversa antes de trocar o motor.':'';
+  const sm=selectedSettingsModel(),box=$('settings-engine'),previous=box.value,smLlama=(sm?.engine||'llamacpp')==='llamacpp';
+  box.replaceChildren(...engineOptionsFor(sm));
+  box.value=smLlama?(installedEngines().some(e=>e.dir===previous)?previous:mainEngineDir()):'';
+  box.disabled=!smLlama||installedEngines().length<2;
+  // Nota da tela Llama: qual perfil vai valer ao iniciar.
+  const note=$('main-profile');note.hidden=!m;if(!m)return;
+  const dir=llama?mainEngineDir():'',key=profileKeyFor(m,dir),saved=savedProfileFor(m,dir);
+  note.classList.toggle('default',!saved);
+  $('main-profile-text').textContent=!key?'Instale um motor llama.cpp em Configurações para iniciar este modelo.':saved?`Usa o perfil salvo para ${keyLabel(key)}${profileSummary(saved)}.`:`Sem perfil salvo para ${keyLabel(key)}: usa o ajuste padrão deste motor${profileSummary(defaultProfile(m))||' (o motor decide tudo)'}.`;
+}
+function profileSummary(p: any){const v=normalized(p),parts=[v.context?`contexto ${v.context}`:'',v.device?`dispositivo ${v.device==='cpu'?'CPU':v.device}`:'',v.gpuLayers?`${v.gpuLayers} camadas na GPU`:'',v.ubatch?`microbatch ${v.ubatch}`:'',v.cpuMoe?`${v.cpuMoe} camadas MoE na CPU`:''].filter(Boolean);return parts.length?` · ${parts.join(' · ')}`:'';}
 function bytes(value){if(value==null||!Number.isFinite(Number(value)))return '—';const n=Number(value);if(n<=0)return '0 B';const units=['B','KB','MB','GB','TB'];let x=n,unit=0;while(x>=1024&&unit<units.length-1){x/=1024;unit++;}return `${x.toFixed(unit?1:0)} ${units[unit]}`;}
 function renderGuidance(data){guidance=data||null;if(!data){$('guidance-summary').textContent='Não foi possível carregar as recomendações agora.';$('suggestions').replaceChildren();return;}
   const h=data.hardware||{};$('models-memory').textContent=bytes(h.memoryBytes);$('models-cpu').textContent=`${h.logicalCores||'—'} threads`;$('disk-space').textContent=bytes(data.availableDiskBytes);$('guidance-summary').textContent=data.summary||`Sugestões com base em ${h.cpu||'este hardware'} (${h.platform||''} ${h.arch||''}).`;
@@ -140,6 +175,15 @@ async function loadGuidance(){if(typeof window.llama.modelGuidance!=='function')
 function updateNetwork(){$('network-controls').hidden=$('access-host').value==='127.0.0.1';$('key-value').hidden=true;$('key-value').textContent='';}
 function updateBackendHint(){const id=$('engine-backend').value;$('engine-backend-hint').textContent=id.startsWith('cuda-')?'Para placas NVIDIA. O download inclui as bibliotecas CUDA; é necessário um driver NVIDIA compatível.':id.startsWith('rocm-')?'Para placas AMD compatíveis com ROCm; requer driver e runtime compatíveis.':id.startsWith('sycl')?'Para GPUs Intel compatíveis com SYCL; pode exigir runtime Intel.':id==='cpu'?'Executa sem aceleração de GPU.':id==='metal'?'Aceleração Apple Metal.':'Aceleração Vulkan; requer driver compatível.';}
 function fillBackends(s){const select=$('engine-backend'),previous=select.value,options=s.backendOptions||[];select.replaceChildren(...options.map(item=>{const option=document.createElement('option');option.value=item.id;option.textContent=item.label;return option;}));const desired=options.find(item=>item.id===previous)||options.find(item=>item.id===s.config.engineBackend)||options[0];select.value=desired?.id||'';select.disabled=s.running||s.chatRunning||!options.length;updateBackendHint();}
+// Motores llama.cpp baixados (um por tipo) e o escolhido pelo usuário, com acesso à pasta de cada um.
+function fillInstalledEngines(s: any){
+  const list=$('installed-engines'),engines: EngineEntry[]=s.llamaEngines||[];
+  if(!engines.length){const empty=document.createElement('small');empty.textContent='Nenhum motor instalado ainda.';list.replaceChildren(empty);return;}
+  list.replaceChildren(...engines.map(e=>{const row=document.createElement('div');row.className='folder engine-row';const data=document.createElement('div');data.className='folder-data';
+    const title=document.createElement('strong');title.textContent=e.label+(e.main?' · principal':'');const where=document.createElement('small');where.textContent=e.dir;data.append(title,where);
+    const open=document.createElement('button');open.type='button';open.className='ghost small';open.textContent='Abrir';open.onclick=()=>action(()=>window.llama.openEngineDir(e.dir));
+    row.append(data,open);return row;}));
+}
 function fillEngines(s){
   const vllm=s.engines?.find(e=>e.id==='vllm'),strata=s.engines?.find(e=>e.id==='strata'),busy=s.running||s.chatRunning;
   if(vllm){$('vllm-version').textContent=vllm.version?`· ${vllm.version}`:'';$('vllm-badge').textContent=!vllm.supported?'Indisponível':vllm.ready?'Pronto':'Pendente';
@@ -155,7 +199,7 @@ function showConnection(result){$('sharing-controls').hidden=!result?.sharingEnd
 async function refresh(preferred?: string){snapshot=await window.llama.state();const s=snapshot;$('app-version').textContent='· v'+s.appVersion;$('update-check').checked=s.config.updateCheck!==false;showUpdate(s.update);const old=preferred||s.config.selectedModelPath||$('model').value;
   if(currentView===null)showView((!anyEngineReady(s)||!s.models.length||!s.config.selectedModelPath)?'settings':'llama');
   $('memory').textContent=bytes(s.hardware.memoryBytes);$('cpu').textContent=`${s.hardware.logicalCores} threads`;$('models-memory').textContent=bytes(s.hardware.memoryBytes);$('models-cpu').textContent=`${s.hardware.logicalCores} threads`;$('local-count').textContent=String(s.models.length);
-  $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor nesta pasta: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
+  $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor nesta pasta: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);fillInstalledEngines(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
   fillModelSelectors(s.models.filter(m=>!m.decision),old);$('setup-hint').hidden=anyEngineReady(s)&&s.models.length>0;updateModelDetail();fillEngines(s);
   $('stop').hidden=!s.running;updateEngineControls();$('save-settings-profile').disabled=!s.models.length;$('stop-chat').hidden=!s.chatRunning;if(!s.chatRunning)$('stop-chat').disabled=false;$('send-chat').disabled=!s.chatReady;
   // Um refresh no meio (outro modelo iniciando) não apaga o endereço e as sessões escolhidos e ainda não usados.
@@ -167,7 +211,14 @@ async function refresh(preferred?: string){snapshot=await window.llama.state();c
 
 $('nav-llama').onclick=()=>showView('llama');$('nav-models').onclick=()=>showView('models');$('nav-settings').onclick=()=>showView('settings');$('open-settings').onclick=()=>showView('settings');$('open-models').onclick=()=>showView('models');
 $('finish-setup').onclick=()=>action(async()=>{await window.llama.completeSetup();await refresh();showView('llama');});
-$('model').addEventListener('change',()=>{const path=$('model').value;$('settings-model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});$('settings-model').addEventListener('change',()=>{const path=$('settings-model').value;$('model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});
+$('model').addEventListener('change',()=>{const path=$('model').value;$('settings-model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});$('settings-model').addEventListener('change',()=>{const path=$('settings-model').value;$('model').value=path;$('settings-engine').value='';updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});
+$('settings-engine').addEventListener('change',()=>updateModelDetail());
+$('main-engine').addEventListener('change',()=>action(async()=>{const dir=$('main-engine').value;if(!dir||dir===mainEngineDir())return;
+  try{await window.llama.setMainEngine(dir);}finally{await refresh();}
+  $('settings-engine').value=mainEngineDir();updateModelDetail();
+  const m=selected();message(`Motor do principal: ${keyLabel(engineKeyOf(dir))}. ${m&&savedProfileFor(m,dir)?'Usa o perfil salvo deste modelo para ele.':'Este modelo ainda não tem perfil para ele: usa o ajuste padrão.'}`);}));
+$('edit-profile').onclick=()=>{const m=selected();if(m){$('settings-model').value=m.path;$('settings-engine').value=(m.engine||'llamacpp')==='llamacpp'?mainEngineDir():'';updateModelDetail();}showView('settings');$('settings-model').scrollIntoView({behavior:'smooth',block:'center'});};
+$('open-engines-root').onclick=()=>action(()=>window.llama.openEngineDir());
 $('refresh').onclick=()=>action(()=>{reviewerCheck.key='';return refresh();});$('refresh-settings-models').onclick=()=>action(()=>refresh());$('refresh-guidance').onclick=()=>action(async()=>{guidance=null;await loadGuidance();});
 document.querySelectorAll<HTMLElement>('[data-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.chooseDir('models',Number(b.dataset.folder));await refresh();}));
 document.querySelectorAll<HTMLElement>('[data-clear-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.clearDir(Number(b.dataset.clearFolder));await refresh();}));
@@ -181,7 +232,8 @@ $('engine-models-link').onclick=()=>{showView('models');$('engine-models').scrol
 $('install-vllm').onclick=()=>action(async()=>{message('Preparando o vLLM. O registro do motor mostra o andamento.');$('install-vllm').disabled=true;$('engine-progress').hidden=false;try{await window.llama.installVllm();message('vLLM pronto.');await refresh();}finally{$('install-vllm').disabled=false;$('engine-progress').hidden=true;}});
 $('import-profiles').onclick=()=>action(async()=>{const result=await window.llama.importLegacyProfiles();if(!result)return;await refresh();message(`Perfis importados: ${result.imported}. Sem modelo no local configurado: ${result.missing}. Já existentes: ${result.existing}. Linhas inválidas: ${result.invalid}.`);});
 $('engine-backend').onchange=updateBackendHint;
-$('install-engine').onclick=()=>action(async()=>{message('Buscando release oficial do llama.cpp…');$('install-engine').disabled=true;$('engine-backend').disabled=true;$('download-progress').hidden=false;try{await window.llama.installEngine($('engine-backend').value);message('Motor instalado.');await refresh();}finally{$('install-engine').disabled=false;$('engine-backend').disabled=false;$('download-progress').hidden=true;}});
+$('install-engine').onclick=()=>action(async()=>{message('Buscando release oficial do llama.cpp…');$('install-engine').disabled=true;$('engine-backend').disabled=true;$('download-progress').hidden=false;try{const result=await window.llama.installEngine($('engine-backend').value),done=result?.installed;await refresh();
+    message(!done?'Motor instalado.':`Motor ${done.label} instalado${done.replaced?'; o anterior do mesmo tipo foi substituído e os perfis continuam valendo':''}.${done.main?'':' Ele ficou disponível: escolha-o em Motor, na tela Llama, ou no revisor e no decisor.'}${done.failed?.length?` Não foi possível apagar a pasta antiga (${done.failed.join(', ')}); apague-a pelo botão Abrir pasta dos motores.`:''}`,!!done?.failed?.length);}finally{$('install-engine').disabled=false;$('engine-backend').disabled=false;$('download-progress').hidden=true;}});
 $('hf-moe').onclick=()=>action(()=>window.llama.openHF('moe'));$('hf-dense').onclick=()=>action(()=>window.llama.openHF('dense'));$('hf-full').onclick=()=>action(()=>window.llama.openHF('full'));const hfQuantized=$('hf-quantized');if(hfQuantized)hfQuantized.onclick=()=>action(()=>window.llama.openHF('quantized'));const hfAll=$('hf-all');if(hfAll)hfAll.onclick=()=>action(()=>window.llama.openHF('all'));
 $('update-available').onclick=()=>{showView('settings');$('update-card').scrollIntoView({behavior:'smooth'});};
 $('check-update').onclick=()=>updateAction(async()=>{$('check-update').disabled=true;$('update-message').textContent='Consultando releases…';try{showUpdate(await window.llama.checkUpdate());$('update-message').textContent='';}finally{$('check-update').disabled=false;}});
@@ -209,16 +261,17 @@ function tuneRow(r){const tr=document.createElement('tr');const cells=[r.label,r
 $('tune').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo.');
   const vllm=(m.engine||'llamacpp')==='vllm',options={budgetMinutes:Number($('tune-budget').value),priority:$('tune-priority').value as TuneOptions['priority']};
   $('cancel-tune').hidden=false;updateEngineControls();$('tuning-message').textContent=vllm?'Otimizando o vLLM: cada tentativa recarrega o modelo.':'Otimizando: primeiro o teto de memória, depois o llama-bench.';
-  try{const result=await window.llama.tune(m.path,settings(),options);applySettings(result.settings);await loadSchema(false);
+  try{const result=await window.llama.tune(m.path,settings(),{...options,engineDir:settingsEngineDir()});applySettings(result.settings);await loadSchema(false);
     $('tune-results-body').replaceChildren(...result.results.map(tuneRow));$('tune-results').hidden=false;
     const b=result.best,end=result.stopped==='budget'?' O tempo acabou antes de testar tudo.':result.stopped==='cancelled'?' Cancelado: aplicado o melhor até aqui.':'';
     $('tuning-message').textContent=`Melhor: ${b.label} · geração ${b.generationTps.toFixed(1)} tokens/s · prompt ${b.promptTps.toFixed(1)} tokens/s.${end} Confira os campos e salve o perfil.`;}
   finally{$('cancel-tune').hidden=true;updateEngineControls();}});
 $('cancel-tune').onclick=()=>action(async()=>{$('tuning-message').textContent='Cancelando o teste…';await window.llama.cancelTune();});
 $('save-settings-profile').onclick=()=>action(async()=>{const box=$('save-message');box.classList.remove('error');box.textContent='Salvando…';
-  try{const m=selectedSettingsModel();if(!m)throw Error('Selecione um modelo para salvar os ajustes.');snapshot.config=(await window.llama.saveProfile(m.path,settings())).config;fillReviewerEffort(snapshot);}
+  const m=selectedSettingsModel(),dir=settingsEngineDir();
+  try{if(!m)throw Error('Selecione um modelo para salvar os ajustes.');snapshot.config=(await window.llama.saveProfile(m.path,settings(),dir)).config;fillReviewerEffort(snapshot);fillEngineSelects();updateModelDetail();}
   catch(error){box.textContent=error.message;box.classList.add('error');throw error;}
-  const text=`Ajustes salvos para este modelo às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`;box.textContent=text;$('settings-message').textContent=text;$('message').textContent=text;});
+  const text=`Perfil de ${m.name} para ${keyLabel(profileKeyFor(m,dir))} salvo às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`;box.textContent=text;$('settings-message').textContent=text;$('message').textContent=text;});
 $('access-host').onchange=updateNetwork;
 $('show-key').onclick=()=>action(async()=>{if(!$('key-value').hidden){$('key-value').hidden=true;$('key-value').textContent='';return;}$('key-value').textContent=await window.llama.getKey();$('key-value').hidden=false;});
 $('copy-key').onclick=()=>action(async()=>{await window.llama.copyKey();message('Chave copiada. Evite colá-la em locais públicos.');});$('rotate-key').onclick=()=>action(async()=>{$('key-value').textContent=await window.llama.rotateKey();$('key-value').hidden=false;message('Nova chave criada. A anterior deixou de funcionar.');});
@@ -240,7 +293,7 @@ async function launchServer(openBrowser: boolean){
     message(wasRunning?'Abrindo interface…':'Carregando modelo…');
     if(!wasRunning)$('log').textContent=`[launcher] Carregando modelo ${m.name} no servidor...\n`;
     try {
-      await window.llama.launch(m?.path||'',settings(),{host:$('access-host').value,parallel:Number($('parallel').value),openBrowser});
+      await window.llama.launch(m?.path||'',null,{host:$('access-host').value,parallel:Number($('parallel').value),openBrowser});
       message(openBrowser?'Interface aberta. O servidor permanece ativo.':'Servidor iniciado. Use o link da API para conectar seu cliente.');
     } finally {await refresh();}
   });
@@ -248,11 +301,11 @@ async function launchServer(openBrowser: boolean){
 $('start-server').onclick=()=>launchServer(false);
 $('launch').onclick=()=>launchServer(true);
 $('stop').onclick=()=>action(async()=>{await window.llama.stop();message('Encerrando servidor…');});
-$('start-chat').onclick=()=>action(async()=>{const m=selected();if(!m)throw Error('Escolha um modelo.');$('chat-output').textContent='Carregando modelo…\n';$('start-chat').disabled=true;$('stop-chat').hidden=false;$('send-chat').disabled=false;$('launch').disabled=true;$('start-server').disabled=true;try{await window.llama.startChat(m.path,settings());}catch(e){$('start-chat').disabled=false;$('stop-chat').hidden=true;$('send-chat').disabled=true;$('launch').disabled=false;$('start-server').disabled=false;throw e;}});
-$('open-cli-terminal').onclick=()=>action(async()=>{const m=selected();if(!m)throw Error('Escolha um modelo.');await window.llama.openCliTerminal(m.path,settings());message('CLI aberto em um terminal separado. Encerre-o nessa janela quando terminar.');});
+$('start-chat').onclick=()=>action(async()=>{const m=selected();if(!m)throw Error('Escolha um modelo.');$('chat-output').textContent='Carregando modelo…\n';$('start-chat').disabled=true;$('stop-chat').hidden=false;$('send-chat').disabled=false;$('launch').disabled=true;$('start-server').disabled=true;try{await window.llama.startChat(m.path,null);}catch(e){$('start-chat').disabled=false;$('stop-chat').hidden=true;$('send-chat').disabled=true;$('launch').disabled=false;$('start-server').disabled=false;throw e;}});
+$('open-cli-terminal').onclick=()=>action(async()=>{const m=selected();if(!m)throw Error('Escolha um modelo.');await window.llama.openCliTerminal(m.path,null);message('CLI aberto em um terminal separado. Encerre-o nessa janela quando terminar.');});
 $('send-chat').onclick=()=>action(async()=>{const value=$('chat-input').value;if(!value.trim())return;await window.llama.sendChat(value);$('chat-input').value='';});$('chat-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();$('send-chat').click();}});$('stop-chat').onclick=()=>action(async()=>{await window.llama.stopChat();$('stop-chat').disabled=true;});
 $('copy-guidance-prompt').onclick=()=>action(async()=>{const prompt=await window.llama.copyGuidancePrompt();$('prompt-text').textContent=prompt||guidance?.prompt||'';$('prompt-text').hidden=!$('prompt-text').textContent; $('guidance-message').textContent='Prompt copiado. Você pode colá-lo em qualquer conversa com um modelo.';});
-$('analyze-model').onclick=()=>action(async()=>{const m=selected()||snapshot?.models?.[0];if(!m)throw Error('Instale um modelo GGUF antes de pedir a análise.');$('model').value=m.path;$('settings-model').value=m.path;updateModelDetail();await window.llama.selectModel(m.path);showView('llama');$('chat-output').textContent='Análise de hardware e ajustes sugeridos. Revise a resposta antes de alterar configurações.\n\n';$('start-chat').disabled=true;$('stop-chat').hidden=false;$('send-chat').disabled=true;$('launch').disabled=true;$('start-server').disabled=true;try{await window.llama.analyzeWithModel(m.path,settings());}catch(e){$('start-chat').disabled=false;$('stop-chat').hidden=true;$('send-chat').disabled=true;$('launch').disabled=false;$('start-server').disabled=false;throw e;}});
+$('analyze-model').onclick=()=>action(async()=>{const m=selected()||snapshot?.models?.[0];if(!m)throw Error('Instale um modelo GGUF antes de pedir a análise.');$('model').value=m.path;$('settings-model').value=m.path;updateModelDetail();await window.llama.selectModel(m.path);showView('llama');$('chat-output').textContent='Análise de hardware e ajustes sugeridos. Revise a resposta antes de alterar configurações.\n\n';$('start-chat').disabled=true;$('stop-chat').hidden=false;$('send-chat').disabled=true;$('launch').disabled=true;$('start-server').disabled=true;try{await window.llama.analyzeWithModel(m.path,null);}catch(e){$('start-chat').disabled=false;$('stop-chat').hidden=true;$('send-chat').disabled=true;$('launch').disabled=false;$('start-server').disabled=false;throw e;}});
 window.llama.onProgress(p=>{for(const [bar,text] of [['progress-bar','progress-text'],['engine-progress-bar','engine-progress-text']]){$(bar).style.width=`${Math.min(100,p.percent)}%`;$(text).textContent=`${p.label}: ${p.percent}%`;}});window.llama.onEnginesChanged(()=>{refresh().catch(()=>{});});window.llama.onTuneProgress(text=>{$('tuning-message').textContent=text;});
 window.llama.onUpdateAvailable(info=>showUpdate(info));window.llama.onUpdateProgress(p=>{$('update-progress-bar').style.width=`${Math.min(100,p.percent)}%`;$('update-progress-text').textContent=`${p.label}: ${p.percent}%`;});
 window.llama.onLog(line=>{const box=$('log');const current=box.textContent.startsWith('Nenhum registro ainda')?'':box.textContent;box.textContent=(current+line).slice(-30000);box.scrollTop=box.scrollHeight;});
@@ -317,7 +370,7 @@ function fillDecider(s: any){
   $('decider-badge').textContent=ready?`Ativo · ${d.active.scope||''}`:running?'Carregando…':'Parado';
   $('decider-endpoint').hidden=!ready;$('decider-endpoint').textContent=ready?`API: ${d.active.endpoint} · ${d.active.name} · dispositivo ${d.active.device==='cpu'?'CPU':d.active.device||'automático'} · contexto ${d.active.context}`:'';
   showVerdict('decider-resources',d.active?.resources);
-  const mainDevice=String(s.config?.profiles?.[s.config?.selectedModelPath]?.device||'');
+  const mainDevice=String(s.config?.engineProfiles?.[s.config?.selectedModelPath]?.[s.mainEngineKey]?.device||'');
   const chosen=models.find((m: any)=>m.path===modelSelect.value),small=!!chosen&&chosen.size<=(d.cpuMaxBytes||0);
   $('decider-hint').textContent=!s.engineReady?'Instale o llama.cpp em Configurações para usar o decisor.':!models.length?'Nenhum GGUF de decisão nas pastas de modelos. Baixe um dos modelos sugeridos abaixo para uma das pastas e clique em Atualizar lista.':
     small?(deviceSelect.value==='cpu'?'Modelo muito pequeno: responde rápido na CPU e deixa as GPUs para o principal e o revisor.':'Este modelo é muito pequeno: escolha Só CPU. Ele responde rápido e deixa as GPUs para o principal e o revisor.'):
@@ -389,9 +442,10 @@ function fillReviewer(s: any){
 let effortSeq=0;
 async function fillReviewerEffort(s: any){
   const select=$('reviewer-effort'),path=$('reviewer-model').value,seq=++effortSeq;
-  const saved=String(s.config?.profiles?.[path]?.effort||''),running=!!s.reviewer?.running;
+  const key=String(s.roleEngines?.reviewer?.key||''),dir=String(s.roleEngines?.reviewer?.dir||''),profile=s.config?.engineProfiles?.[path]?.[key]||null;
+  const saved=String(profile?.effort||''),running=!!s.reviewer?.running;
   let field: ParameterField|undefined;
-  if(path&&s.engineReady)try{field=(await window.llama.parameterSchema(path,s.config?.profiles?.[path]||{})).fields.find(f=>f.key==='effort');}catch{}
+  if(path&&s.engineReady)try{field=(await window.llama.parameterSchema(path,profile||{},dir)).fields.find(f=>f.key==='effort');}catch{}
   if(seq!==effortSeq)return;
   const choices=field?.applicable?field.options||[]:[];
   select.replaceChildren(option('',field&&!field.applicable?'Não se aplica':'Automático'),...choices.map(x=>option(x,effortText[x]||x)));
@@ -403,10 +457,11 @@ $('reviewer-effort').onchange=()=>reviewerAction(async()=>{
   const path=$('reviewer-model').value,effort=$('reviewer-effort').value;if(!path)return;
   try{
     // Lê o perfil na hora: o principal pode ter salvado outros ajustes do mesmo modelo.
-    const now=(await window.llama.state()).config.profiles[path],saved=await window.llama.saveProfile(path,{...normalized(now||defaultProfiles.llamacpp),effort});
+    const fresh=await window.llama.state(),key=String(fresh.roleEngines?.reviewer?.key||''),dir=String(fresh.roleEngines?.reviewer?.dir||'');
+    const now=fresh.config.engineProfiles?.[path]?.[key],saved=await window.llama.saveProfile(path,{...normalized(now||fresh.profileDefaults?.llamacpp||defaultProfiles.llamacpp),effort},dir);
     snapshot.config=saved.config;
-    if(selectedSettingsModel()?.path===path){values={...settings(),effort};if(schema)renderParams(schema);}
-    reviewerMessage('Esforço salvo no perfil deste modelo. Vale no próximo início dele.');
+    if(selectedSettingsModel()?.path===path&&engineKeyOf(settingsEngineDir())===key){values={...settings(),effort};if(schema)renderParams(schema);}
+    reviewerMessage(`Esforço salvo no perfil deste modelo para ${keyLabel(key)}. Vale no próximo início dele.`);
   }finally{await fillReviewerEffort(snapshot);}
 });
 function fillTrio(s: any){

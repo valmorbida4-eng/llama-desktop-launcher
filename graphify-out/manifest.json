@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1795485552.9759357,
-    "seen": 1795485659.2010033,
-    "ast_hash": "443423acbae57f34457a0c698cc7f369",
+    "mtime": 1795513343.2929845,
+    "seen": 1795513357.9479058,
+    "ast_hash": "6dacf81ce9d77637e4d7d91f2847b8bc",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "scripts/smoke-ui.js": {
-    "mtime": 1795291739.8321404,
-    "seen": 1795291897.671458,
-    "ast_hash": "05dcfe58a6ad211eb82a6429ce9f3a13",
+    "mtime": 1795512983.1039057,
+    "seen": 1795513357.9479058,
+    "ast_hash": "7a59850ef6e60f9d4356f3cae9d71617",
     "semantic_hash": ""
   },
   "src/benchmark.ts": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "src/electron-api.d.ts": {
-    "mtime": 1795485453.2475977,
-    "seen": 1795485659.2010033,
-    "ast_hash": "c8231d1c30d7c2f7da8930bc38e62ac7",
+    "mtime": 1795512874.5005271,
+    "seen": 1795513357.9479058,
+    "ast_hash": "a1ab0d112619a19fd47efc89c00861d2",
     "semantic_hash": ""
   },
   "src/engine.ts": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1795485512.6095958,
-    "seen": 1795485659.2010033,
-    "ast_hash": "a0339ac43fec1227296b3a86dab28355",
+    "mtime": 1795513256.8902736,
+    "seen": 1795513357.9479058,
+    "ast_hash": "dc060b72cd9545949ab546700d462907",
     "semantic_hash": ""
   },
   "src/network.ts": {
@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "src/preload.ts": {
-    "mtime": 1795485453.246591,
-    "seen": 1795485659.2010033,
-    "ast_hash": "9157eb1a5bf58189032269760f651467",
+    "mtime": 1795512874.501525,
+    "seen": 1795513357.9479058,
+    "ast_hash": "a3a3781cfc15f8448753b1b2c68bcb02",
     "semantic_hash": ""
   },
   "src/profile_import.ts": {
@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1795485624.699586,
-    "seen": 1795485659.2010033,
-    "ast_hash": "c05c2ec96627cf4e5b7b677795c2d138",
+    "mtime": 1795513328.0624774,
+    "seen": 1795513357.9479058,
+    "ast_hash": "9d0ec8b3d03d0316f2118877b5d8298f",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795485551.6466742,
-    "seen": 1795485659.2010033,
-    "ast_hash": "bc162c87ebc728fe2db29d1ba031e460",
+    "mtime": 1795513342.2697093,
+    "seen": 1795513357.9479058,
+    "ast_hash": "f5b43447b3c742c0d3270544d062239e",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
@@ -384,9 +384,9 @@
     "semantic_hash": ""
   },
   "src/index.html": {
-    "mtime": 1795485468.120994,
-    "seen": 1795485659.2010033,
-    "ast_hash": "72c3076381066a3ce06ab2b95641de87",
+    "mtime": 1795512900.8595538,
+    "seen": 1795513357.9479058,
+    "ast_hash": "df7acfef6450974ae4f66cdcb67e59cc",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {
@@ -750,8 +750,8 @@
     "semantic_hash": ""
   },
   "src/admission.ts": {
-    "mtime": 1795485446.600905,
-    "seen": 1795485659.2010033,
+    "mtime": 1795486581.6824532,
+    "seen": 1795513357.9479058,
     "ast_hash": "3054e52680399bad38ecb9a65516365e",
     "semantic_hash": ""
   },
@@ -816,15 +816,27 @@
     "semantic_hash": ""
   },
   "src/role_engines.ts": {
-    "mtime": 1795485600.749946,
-    "seen": 1795485659.2010033,
-    "ast_hash": "0946dffd30d600a9920ed34944e2993a",
+    "mtime": 1795513237.3551638,
+    "seen": 1795513357.9479058,
+    "ast_hash": "bc92766203356a394c2572cdae94e664",
     "semantic_hash": ""
   },
   "tests/role_engines.test.js": {
-    "mtime": 1795485535.7305498,
-    "seen": 1795485659.2010033,
-    "ast_hash": "514409b4c5792ad400f094dff0772d45",
+    "mtime": 1795513249.5499377,
+    "seen": 1795513357.9479058,
+    "ast_hash": "7729a12822c85b1bec50a89ded86549a",
+    "semantic_hash": ""
+  },
+  "src/profiles.ts": {
+    "mtime": 1795512850.9477265,
+    "seen": 1795513357.9479058,
+    "ast_hash": "3661c4cff72d1a3041928842ad42c720",
+    "semantic_hash": ""
+  },
+  "tests/profiles.test.js": {
+    "mtime": 1795513080.6394997,
+    "seen": 1795513357.9479058,
+    "ast_hash": "bbfd6d67b0b88021b6a1d804d4760316",
     "semantic_hash": ""
   }
 }

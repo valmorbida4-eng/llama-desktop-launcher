@@ -34,6 +34,25 @@ function installedAt(dir: string) {
   if(Number.isFinite(stamp)&&stamp>1e12)return new Date(stamp).toISOString();
   try{return fs.statSync(dir).mtime.toISOString();}catch{return '';}
 }
+// Tipo do motor (vulkan, cuda, rocm, sycl, cpu, metal…): é o que liga um perfil de modelo ao motor e o que decide
+// se um download novo substitui o antigo. Builds e versões de CUDA diferentes do mesmo tipo contam como o mesmo motor.
+const FAMILIES=['cuda','rocm','sycl','vulkan','metal','opencl','musa','cann','cpu'];
+const FAMILY_LABELS: Record<string,string>=Object.freeze({cuda:'CUDA',rocm:'ROCm',sycl:'SYCL',vulkan:'Vulkan',metal:'Metal',opencl:'OpenCL',musa:'MUSA',cann:'CANN',cpu:'CPU',vllm:'vLLM',strata:'Strata'});
+function familyOf(backend: string) {
+  const id=String(backend||'').trim().toLowerCase();
+  if(!id||id==='external')return '';
+  if(id==='hip')return 'rocm';
+  return FAMILIES.find(family=>id===family||id.startsWith(family+'-'))||id;
+}
+function familyLabel(key: string) {return String(key||'').split('+').filter(Boolean).map(k=>FAMILY_LABELS[k]||k).join(' + ');}
+// O manifesto do download vale primeiro; sem ele, as bibliotecas da pasta. Sem biblioteca de GPU: CPU.
+function engineKey(dir: string,platform=process.platform) {
+  if(!dir)return '';
+  const fromManifest=familyOf(readManifest(dir)?.backend);
+  if(fromManifest)return fromManifest;
+  const found=detectBackends(dir,platform).map(name=>familyOf(name)).sort();
+  return found.length?found.join('+'):'cpu';
+}
 function describe(dir: string,{main='',mainRelease='',platform=process.platform}: any={}) {
   const manifest=readManifest(dir),backends=detectBackends(dir,platform);
   const release=String(manifest?.release||(samePath(dir,main)?mainRelease:'')||'');
@@ -41,20 +60,34 @@ function describe(dir: string,{main='',mainRelease='',platform=process.platform}
   const when=installedAt(dir);
   const date=when?when.slice(0,10):'';
   const label=[kind,release,date&&`instalado em ${date}`].filter(Boolean).join(' · ');
-  return {dir,backends,release,installedAt:when,label};
+  const key=engineKey(dir,platform);
+  return {dir,backends,release,installedAt:when,label,key,keyLabel:familyLabel(key)};
 }
 function samePath(a: string,b: string) {
   if(!a||!b)return false;
   const norm=(p: string)=>{const r=path.resolve(p);return process.platform==='win32'?r.toLowerCase():r;};
   return norm(a)===norm(b);
 }
-// Motores instalados (os mais novos primeiro) e o do principal, mesmo fora de <userData>/engines.
-function listInstalled(root: string,main: string,{mainRelease='',platform=process.platform}: any={}) {
+// Motores instalados (os mais novos primeiro), o do principal e as pastas escolhidas pelo usuário (extra), que ficam
+// fora de <userData>/engines e continuam na lista depois que o principal passa para outro motor.
+function listInstalled(root: string,main: string,{mainRelease='',platform=process.platform,extra=[]}: any={}) {
   const dirs: string[]=[];
   try{for(const entry of fs.readdirSync(root,{withFileTypes:true}))if((entry.isDirectory()||entry.isSymbolicLink())&&!entry.name.startsWith('.'))dirs.push(path.join(root,entry.name));}catch{}
-  if(main&&!dirs.some(d=>samePath(d,main)))dirs.push(main);
+  for(const dir of [main,...(Array.isArray(extra)?extra:[])])if(typeof dir==='string'&&dir&&!dirs.some(d=>samePath(d,dir)))dirs.push(dir);
   return dirs.filter(d=>hasServer(d,platform)).map(d=>({...describe(d,{main,mainRelease,platform}),main:samePath(d,main)}))
     .sort((a,b)=>Number(b.main)-Number(a.main)||String(b.installedAt).localeCompare(String(a.installedAt)));
+}
+// Motores que um download novo substitui: os do mesmo tipo que o launcher baixou em <root>. Nunca a pasta
+// escolhida pelo usuário fora dali, nem um link (junção), que apontaria para fora.
+function replaceable(installed: {dir: string; key: string}[],fresh: string,root: string) {
+  const real=(p: string)=>{try{return fs.realpathSync.native(p);}catch{return path.resolve(p);}};
+  const base=real(root),key=engineKey(fresh);
+  return installed.filter(item=>{
+    if(!key||item.key!==key||samePath(item.dir,fresh))return false;
+    try{if(!fs.lstatSync(item.dir).isDirectory())return false;}catch{return false;}
+    const relative=path.relative(base,real(item.dir));
+    return !!relative&&!relative.startsWith('..')&&!path.isAbsolute(relative)&&!relative.includes(path.sep);
+  }).map(item=>item.dir);
 }
 // Pasta que o papel usa: a escolhida, se ainda tiver o llama-server; senão a do principal.
 function resolve(roleEngines: any,role: string,main: string,platform=process.platform) {
@@ -76,4 +109,4 @@ function validateChoice(role: string,dir: any,installed: {dir: string}[]) {
   return found.dir;
 }
 
-module.exports={ROLES,MANIFEST,detectBackends,readManifest,writeManifest,describe,listInstalled,resolve,normalizeRoles,validateChoice,samePath,hasServer};
+module.exports={ROLES,MANIFEST,familyOf,familyLabel,engineKey,replaceable,detectBackends,readManifest,writeManifest,describe,listInstalled,resolve,normalizeRoles,validateChoice,samePath,hasServer};

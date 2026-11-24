@@ -54,6 +54,10 @@ test('o motor fora da pasta do launcher (escolhido pelo usuário) entra na lista
     const list = roles.listInstalled(root, external);
     assert.equal(list[0].dir, external);
     assert.match(list[0].label, /CUDA \+ Vulkan|Vulkan \+ CUDA/);
+    // Com o principal em outro motor, a pasta escolhida continua na lista (extra).
+    const vulkan = path.join(root, '1795188385480');
+    assert.deepEqual(roles.listInstalled(root, vulkan, { extra: [external, 7, ''] }).map(e => e.dir), [vulkan, external]);
+    assert.deepEqual(roles.listInstalled(root, vulkan).map(e => e.dir), [vulkan]);
   } finally { fs.rmSync(root, { recursive: true, force: true }); fs.rmSync(outside, { recursive: true, force: true }); }
 });
 
