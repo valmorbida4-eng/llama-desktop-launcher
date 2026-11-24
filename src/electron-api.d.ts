@@ -7,7 +7,7 @@ interface UpdateInfo { currentVersion: string; version: string; available: boole
 interface UpdateResult { action: 'installer' | 'opened' | 'appimage' | 'package' | 'cancelled'; file: string; command?: string | null }
 interface ParameterField { key: string; group: string; label: string; flag: string; kind: 'int' | 'float' | 'select' | 'toggle' | 'text' | 'model' | 'info'; min?: number; max?: number; step?: number; options: string[] | null; hint: string | null; applicable: boolean; reason: string | null; auto: { value: string; source: string } | null; serverOnly: boolean }
 interface ParameterSchema { engine: string; version: number; fields: ParameterField[]; info: any; readOnly: { label: string; value: string }[] }
-interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced' }
+interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced'; engineDir?: string }
 interface ImportedProfiles { imported: number; missing: number; existing: number; invalid: number }
 interface MemoryVerdict { level: 'ok' | 'tight' | 'unknown' | 'no'; label: string; text: string }
 interface TrioSuggestion { main: { path: string; name: string }; reviewer: { path: string; name: string; device: string; context: string }; decider: { path: string; name: string; device: string; context: string; small: boolean } | null;
@@ -31,22 +31,22 @@ interface RendererApi {
   installVllm(): Promise<any>;
   refreshEngines(): Promise<any>;
   openEngineLink(kind: string): Promise<string>;
-  engineRecipe(modelPath: string): Promise<{title: string; note: string; settings: Record<string, string>} | null>;
+  engineRecipe(modelPath: string, engineDir?: string): Promise<{title: string; note: string; settings: Record<string, string>} | null>;
   onEnginesChanged(callback: () => void): void;
-  saveProfile(modelPath: string, settings: ModelSettings): Promise<any>;
+  saveProfile(modelPath: string, settings: ModelSettings, engineDir?: string): Promise<any>;
   importLegacyProfiles(): Promise<ImportedProfiles | null>;
   recommend(modelPath: string): Promise<ModelSettings>;
   modelGuidance(): Promise<any>;
   copyGuidancePrompt(): Promise<string>;
-  analyzeWithModel(modelPath: string, settings: ModelSettings): Promise<{ prompt: string }>;
+  analyzeWithModel(modelPath: string, settings: ModelSettings | null): Promise<{ prompt: string }>;
   tune(modelPath: string, settings: ModelSettings, options?: TuneOptions): Promise<any>;
   cancelTune(): Promise<boolean>;
-  parameterSchema(modelPath: string, settings: ModelSettings): Promise<ParameterSchema>;
-  fitValues(modelPath: string, settings: ModelSettings): Promise<ParameterSchema>;
-  launch(modelPath: string, settings: ModelSettings, options: { host: string; parallel: number; openBrowser?: boolean }): Promise<any>;
+  parameterSchema(modelPath: string, settings: ModelSettings, engineDir?: string): Promise<ParameterSchema>;
+  fitValues(modelPath: string, settings: ModelSettings, engineDir?: string): Promise<ParameterSchema>;
+  launch(modelPath: string, settings: ModelSettings | null, options: { host: string; parallel: number; openBrowser?: boolean }): Promise<any>;
   stop(): Promise<boolean>;
-  startChat(modelPath: string, settings: ModelSettings): Promise<boolean>;
-  openCliTerminal(modelPath: string, settings: ModelSettings): Promise<boolean>;
+  startChat(modelPath: string, settings: ModelSettings | null): Promise<boolean>;
+  openCliTerminal(modelPath: string, settings: ModelSettings | null): Promise<boolean>;
   sendChat(value: string): Promise<any>;
   stopChat(): Promise<boolean>;
   getKey(): Promise<string>;
@@ -74,6 +74,8 @@ interface RendererApi {
   onChatOutput(callback: (value: ChatOutput) => void): void;
   onChatStopped(callback: (value: ProcessExit) => void): void;
   setRoleEngine(role: 'reviewer' | 'decider', dir: string): Promise<any>;
+  setMainEngine(dir: string): Promise<any>;
+  openEngineDir(dir?: string): Promise<boolean>;
   deciderDevices(role?: 'reviewer' | 'decider'): Promise<{ name: string; description: string; totalMiB: number; freeMiB: number }[]>;
   startDecider(modelPath: string, options: { device: string; context: string; host: string }): Promise<any>;
   stopDecider(): Promise<boolean>;
@@ -94,7 +96,7 @@ declare global {
   interface ModelSettings { [key: string]: string | number }
   interface ParameterField { key: string; group: string; label: string; flag: string; kind: 'int' | 'float' | 'select' | 'toggle' | 'text' | 'model' | 'info'; min?: number; max?: number; step?: number; options: string[] | null; hint: string | null; applicable: boolean; reason: string | null; auto: { value: string; source: string } | null; serverOnly: boolean }
   interface ParameterSchema { engine: string; version: number; fields: ParameterField[]; info: any; readOnly: { label: string; value: string }[] }
-  interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced' }
+  interface TuneOptions { budgetMinutes: number; priority: 'generation' | 'prompt' | 'balanced'; engineDir?: string }
   interface Window { llama: RendererApi }
 }
 

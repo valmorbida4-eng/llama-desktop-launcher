@@ -47,12 +47,13 @@ async function main(){
     const engineAdvice=document.querySelectorAll('#engine-advice article').length===3&&document.querySelectorAll('#engine-advice button').length>=6;
     document.getElementById('nav-llama').click();
     const llamaVisible=!document.getElementById('llama-view').hidden;
-    const tuningInAccordion=document.getElementById('tuning-content').contains(document.getElementById('tuning-panel'));
-    const accordionClosed=!document.getElementById('tuning-accordion').open;
-    const saveInAccordion=!document.getElementById('save-settings-profile').hidden;
+    // A tela Llama só escolhe modelo e motor: os parâmetros ficam em Configurações › 03.
+    const llamaOnlyPicks=!document.getElementById('llama-view').contains(document.getElementById('tuning-panel'))&&!!document.getElementById('main-engine')&&!document.getElementById('tuning-accordion');
+    const engineListed=!!document.getElementById('installed-engines')&&!!document.getElementById('open-engines-root');
+    const settingsEngine=!!document.getElementById('settings-engine');
     document.getElementById('nav-settings').click();
     const tuningInSettings=document.getElementById('tuning-settings-content').contains(document.getElementById('tuning-panel'));
-    return {versionVisible,updateCard,firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,serverButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,engineAdvice,llamaVisible,tuningInAccordion,accordionClosed,saveInAccordion,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
+    return {versionVisible,updateCard,firstRun:state.config.firstRun,settingsVisible,llamaInitiallyVisible,importButton,serverButton,chatButton,firewallButton,backendReady,tuningInSettings,modelsVisible,hardwareSuggestions,modelFilters,engineAdvice,llamaVisible,llamaOnlyPicks,engineListed,settingsEngine,settingsAfterReturn:!document.getElementById('settings-view').hidden,selectedModel:document.getElementById('model').value===state.config.selectedModelPath};
   })()`);
   const expected=withModel?{firstRun:false,settingsVisible:false,llamaInitiallyVisible:true,selectedModel:true}:{firstRun:true,settingsVisible:true,llamaInitiallyVisible:false,selectedModel:true};
   if(Object.entries(result).some(([key,value])=>value!==(key in expected?expected[key]:true)))throw Error(`Estado da interface inesperado: ${JSON.stringify(result)}`);
