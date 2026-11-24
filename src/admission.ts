@@ -17,12 +17,13 @@ function createPlanner({engineDir,run=benchmark.execute,measure=resources.measur
   const stamp=(file: string)=>{try{const s=fs.statSync(file);return `${s.size}:${s.mtimeMs}`;}catch{return '';}};
   const sizeMiB=(file: string|null)=>{if(!file)return 0;try{return fs.statSync(file).size/resources.MIB;}catch{return 0;}};
 
-  async function snapshot(pids: number[]=[]) {
-    const [listed,cards]=await Promise.all([listDevices(engineDir()).then((list: any)=>list||[]).catch(()=>[]),nvidia()]);
+  // dir: motor do papel (revisor ou decisor podem usar outro llama.cpp); sem ele, o do principal.
+  async function snapshot(pids: number[]=[],dir: string=engineDir()) {
+    const [listed,cards]=await Promise.all([listDevices(dir).then((list: any)=>list||[]).catch(()=>[]),nvidia()]);
     return measure({listed,nvidia:cards,pids});
   }
-  async function print(model: any,args: string[],{signal,env}: any={}) {
-    const dir=engineDir(),identity=[dir,model.path,stamp(model.path)],version=identity.join('|'),key=JSON.stringify([...identity,args,env||{}]);
+  async function print(model: any,args: string[],{signal,env,dir=engineDir()}: any={}) {
+    const identity=[dir,model.path,stamp(model.path)],version=identity.join('|'),key=JSON.stringify([...identity,args,env||{}]);
     if(prints.has(key))return prints.get(key);
     if(unreadable.has(version))return null;
     const file=path.join(dir,process.platform==='win32'?'llama-fit-params.exe':'llama-fit-params');
@@ -39,8 +40,8 @@ function createPlanner({engineDir,run=benchmark.execute,measure=resources.measur
     if(rows){prints.set(key,rows);if(prints.size>300)prints.delete(prints.keys().next().value);}
     return rows;
   }
-  async function need(model: any,args: string[],measured: any,{projector=false,signal,env}: any={}) {
-    const rows=await print(model,args,{signal,env});
+  async function need(model: any,args: string[],measured: any,{projector=false,signal,env,dir}: any={}) {
+    const rows=await print(model,args,{signal,env,dir});
     return resources.needOf(rows,measured.devices,{file:(model.size||0)/resources.MIB,projector:projector?sizeMiB(model.projector):0});
   }
   // Ajustes do principal sem o que o -fit decide, para repetir o plano dele no --fit-print.
@@ -64,23 +65,23 @@ function createPlanner({engineDir,run=benchmark.execute,measure=resources.measur
     return {settings:effective,result:resources.assess([needed],measured)};
   }
 
-  async function decider(model: any,options: any,measured: any,signal?: AbortSignal) {
-    return resources.assess([await need(model,[...decisions.memoryArgs(options),'-fit','off'],measured,{projector:true,signal})],measured);
+  async function decider(model: any,options: any,measured: any,signal?: AbortSignal,dir?: string) {
+    return resources.assess([await need(model,[...decisions.memoryArgs(options),'-fit','off'],measured,{projector:true,signal,dir})],measured);
   }
 
-  async function reviewerOptions(model: any,options: any,profile: any,measured: any,signal?: AbortSignal) {
+  async function reviewerOptions(model: any,options: any,profile: any,measured: any,signal?: AbortSignal,dir?: string) {
     const wanted=review.validateOptions(options);
     const choices=wanted.device?[wanted.device]:[...measured.devices.map((d: any)=>d.name),'cpu'];
     const out: any[]=[];
     for(const device of choices) {
       const kind=device==='cpu'?'cpu':measured.devices.find((d: any)=>d.name===device)?.kind;
       if(!kind)throw Error(`O motor não encontrou o dispositivo ${device}.`);
-      out.push({device,kind,need:await need(model,review.memoryArgs({...wanted,device},profile),measured,{signal})});
+      out.push({device,kind,need:await need(model,review.memoryArgs({...wanted,device},profile),measured,{signal,dir})});
     }
     return out;
   }
-  async function reviewer(model: any,options: any,profile: any,measured: any,signal?: AbortSignal) {
-    const candidates=(await reviewerOptions(model,options,profile,measured,signal)).map((c: any)=>({...c,result:resources.assess([c.need],measured)}));
+  async function reviewer(model: any,options: any,profile: any,measured: any,signal?: AbortSignal,dir?: string) {
+    const candidates=(await reviewerOptions(model,options,profile,measured,signal,dir)).map((c: any)=>({...c,result:resources.assess([c.need],measured)}));
     const chosen=resources.chooseDevice(candidates);
     return {device:chosen.device,result:chosen.result};
   }

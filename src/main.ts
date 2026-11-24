@@ -31,6 +31,7 @@ const modelInfo=require('./model_info');
 const decisions=require('./decider');
 const control=require('./control_api');
 const review=require('./reviewer');
+const roleEngines=require('./role_engines');
 const {createPlanner}=require('./admission');
 const {createStarts,untilAborted}=require('./starts');
 // API local de controle (DepTriagem): desligada por padrão; liga só pelas Configurações.
@@ -59,7 +60,7 @@ function validateSender(event: any) {
 
 function defaultConfig() {return {modelDirs:[path.join(app.getPath('home'),'Models','GGUF'),''],engineDir:'',vllmDir:'',strataDir:'',profiles:{},selectedModelPath:'',firstRun:true,accessHost:'127.0.0.1',parallel:1,updateCheck:true};}
 function save() {fs.mkdirSync(path.dirname(configPath),{recursive:true});fs.writeFileSync(configPath,JSON.stringify(configuration,null,2));}
-function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}migrateProfiles();}
+function load() {configPath=path.join(app.getPath('userData'),'settings.json');try {configuration={...defaultConfig(),...JSON.parse(fs.readFileSync(configPath,'utf8'))};}catch{configuration=defaultConfig();save();}configuration.roleEngines=roleEngines.normalizeRoles(configuration.roleEngines);migrateProfiles();}
 // Perfis anteriores à v0.9.0 ganham version 2 sem mudar os valores salvos (ver params.migrateProfile).
 function migrateProfiles() {
   let changed=false;const profiles=configuration.profiles&&typeof configuration.profiles==='object'?configuration.profiles:{};
@@ -103,7 +104,7 @@ function deciderBusy() {return !!deciderProcess||starts.has('decider');}
 function reviewerBusy() {return !!reviewerProcess||starts.has('reviewer');}
 function reviewerState() {return {running:reviewerBusy(),active:reviewerActive,config:{...review.DEFAULTS,...(configuration.reviewer||{})}};}
 function deciderState() {return {running:deciderBusy(),active:deciderActive,config:{...decisions.DEFAULTS,...(configuration.decider||{})},models:decisions.MODELS,cpuMaxBytes:decisions.CPU_MAX_BYTES};}
-function state() {return {appVersion:app.getVersion(),controlApi:controlApiState(),config:configuration,models:allModels(),engines:engineStatus(),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:llamaReady(),running:serverBusy(),chatRunning:chatBusy(),chatReady:!!conversation,accessOptions:network.accessOptions(),active,update:updateInfo,decider:deciderState(),reviewer:reviewerState()};}
+function state() {return {appVersion:app.getVersion(),llamaEngines:installedEngines(),roleEngines:roleEngineState(),controlApi:controlApiState(),config:configuration,models:allModels(),engines:engineStatus(),hardware:core.detectHardware(),platform:process.platform,backendOptions:engine.backendOptions(),engineReady:llamaReady(),running:serverBusy(),chatRunning:chatBusy(),chatReady:!!conversation,accessOptions:network.accessOptions(),active,update:updateInfo,decider:deciderState(),reviewer:reviewerState()};}
 function freePort(host: string='127.0.0.1',first=0,last=0): Promise<number> {return new Promise<number>((resolve,reject)=>{let port=first;const tryNext=()=>{const s=net.createServer();s.once('error',e=>{if(e.code==='EADDRINUSE'&&port<last){port++;tryNext();}else reject(e);});s.listen(port,host,()=>{const found=s.address().port;s.close(()=>resolve(found));});};tryNext();});}
 // 8081–8089 são do revisor e 8090–8098 do decisor: com a 8080 ocupada, o principal vai para 8100–8180.
 async function mainPort(host: string) {
@@ -117,8 +118,8 @@ function waitExit(child: any,ms=15000): Promise<void> {
 }
 function waitReady(host: string,port: number,child: any,key: string | null,limitSeconds=300): Promise<void> {return new Promise<void>((resolve,reject)=>{let count=0,done=false;const finish=(error?: Error)=>{if(done)return;done=true;clearInterval(timer);error?reject(error):resolve();};child.once('error',(e: Error)=>finish(e));const timer=setInterval(()=>{if(hasExited(child)){finish(Error('O motor encerrou antes de ficar pronto.'));return;}http.get({hostname:host,port,path:'/health',headers:key?{Authorization:`Bearer ${key}`}:{},timeout:3000},r=>{r.resume();if(r.statusCode===200)finish();}).on('error',()=>{});if(++count>limitSeconds)finish(Error('Tempo esgotado ao carregar o modelo.'));},1000);});}
 // Checagem de memória antes de iniciar: só "não cabe" impede; sem medição o launcher avisa e segue.
-async function admit(signal: AbortSignal,check: (measured: any) => Promise<any>) {
-  const measured=await untilAborted(planner.snapshot(),signal);
+async function admit(signal: AbortSignal,check: (measured: any) => Promise<any>,dir: string=configuration.engineDir) {
+  const measured=await untilAborted(planner.snapshot([],dir),signal);
   const admitted=await check(measured);
   signal.throwIfAborted();
   if(admitted.result.level==='no')throw Object.assign(Error(`${admitted.result.text}. Escolha outro dispositivo, um modelo ou contexto menor, ou pare outro modelo.`),{code:'insufficient_resources'});
@@ -133,12 +134,28 @@ function apiKeyPath(){return path.join(app.getPath('userData'),'server-api-key.t
 function addressInRange(address: string,range: string){const [networkAddress,prefixText]=range.split('/');const prefix=prefixText===undefined?32:Number(prefixText);const toInt=(value: string)=>value.split('.').reduce((number,octet)=>(number*256+Number(octet))>>>0,0);const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;return (toInt(address)&mask)===(toInt(networkAddress)&mask);}
 function selectedModel(modelPath) {const model=allModels().find(m=>m.path===modelPath);if(!model) throw Error('Modelo não encontrado nas pastas configuradas.');return model;}
 function availableModelDiskBytes() {for(const configured of configuration.modelDirs){if(!configured)continue;let dir=configured;while(!fs.existsSync(dir)){const parent=path.dirname(dir);if(parent===dir)break;dir=parent;}try{const stat=fs.statfsSync(dir);return Number(stat.bavail)*Number(stat.bsize);}catch{}}return null;}
-let devicesProbe: {dir: string; promise: Promise<any>} | null=null,nvidiaProbe: Promise<any[]> | null=null;
+let nvidiaProbe: Promise<any[]> | null=null;
+const devicesProbes=new Map<string, Promise<any>>();
 const fitCache=new Map<string, any>();
-function llamaDevices() {
-  if(!llamaReady())return Promise.resolve(null);
-  if(devicesProbe?.dir!==configuration.engineDir)devicesProbe={dir:configuration.engineDir,promise:benchmark.listDevices(configuration.engineDir).catch(()=>null)};
-  return devicesProbe.promise;
+// Dispositivos que cada motor enxerga. Lista vazia ou falha não fica guardada: na próxima consulta mede de novo
+// (a GPU dedicada de notebook pode demorar a acordar na primeira vez).
+function llamaDevices(dir: string=configuration.engineDir) {
+  if(!dir||!roleEngines.hasServer(dir))return Promise.resolve(null);
+  if(!devicesProbes.has(dir))devicesProbes.set(dir,benchmark.listDevices(dir).catch(()=>null).then((list: any)=>{if(!list?.length)devicesProbes.delete(dir);return list;}));
+  return devicesProbes.get(dir);
+}
+function enginesRoot() {return path.join(app.getPath('userData'),'engines');}
+function installedEngines() {return roleEngines.listInstalled(enginesRoot(),configuration.engineDir,{mainRelease:configuration.engineVersion||''});}
+// Motor do revisor ou do decisor: o escolhido para o papel ou, sem escolha, o do principal.
+function roleEngineDir(role: string) {return roleEngines.resolve(configuration.roleEngines,role,configuration.engineDir);}
+function roleEngineState() {
+  const out: Record<string, any>={};
+  for(const role of roleEngines.ROLES){const dir=roleEngineDir(role),chosen=configuration.roleEngines?.[role]||'';out[role]={dir,chosen,same:roleEngines.samePath(dir,configuration.engineDir),missing:!!chosen&&!roleEngines.samePath(chosen,dir)};}
+  return out;
+}
+function roleEngineNote(role: string) {
+  const dir=roleEngineDir(role);
+  return roleEngines.samePath(dir,configuration.engineDir)?'':` · motor ${roleEngines.describe(dir,{main:configuration.engineDir}).label}`;
 }
 function nvidiaGpus() {nvidiaProbe ||= hardware.detectNvidiaGpus().catch(()=>[]);return nvidiaProbe;}
 // Build do llama-server da pasta do motor (oficial, Avalon, tandem.cpp), lido com --version e --help.
@@ -223,11 +240,11 @@ ipcMain.handle('install-update',e=>{validateSender(e);return installUpdate();});
 ipcMain.handle('set-update-check',(e,enabled)=>{validateSender(e);if(typeof enabled!=='boolean')throw Error('Valor inválido.');configuration.updateCheck=enabled;save();return state();});
 ipcMain.handle('select-model',(e,modelPath)=>{validateSender(e);selectedModel(modelPath);configuration.selectedModelPath=modelPath;save();return state();});
 ipcMain.handle('complete-setup',e=>{validateSender(e);configuration.firstRun=false;save();return state();});
-ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(anythingRunning()||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');if(!['engine','models','strata','vllm'].includes(kind))throw Error('Tipo de pasta inválido.');if((kind==='strata'||kind==='vllm')&&(serverBusy()||engineBusy))throw Error('Pare o servidor antes de trocar o motor.');if(kind==='vllm'&&engines.vllmMode()!=='venv')throw Error('No Windows o vLLM roda pelo Docker Desktop; não há pasta para escolher.');if(kind==='strata'&&!engines.engineInfo('strata').supported)throw Error(engines.engineInfo('strata').unsupportedReason);const titles={engine:'Pasta dos binários llama.cpp',models:'Pasta de modelos (GGUF ou Hugging Face)',strata:'Pasta do Strata ou do PolyStrata',vllm:'Ambiente Python com vLLM (contém bin/vllm)'};const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:titles[kind]});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';configuration.engineVersion='';refreshBuild(true);devicesProbe=null;fitCache.clear();}else if(kind==='strata'){if(!engines.detectStrata(dir))throw Error('A pasta precisa ser uma instalação do Strata ou do PolyStrata já configurada (serve/server.py e .venv). Rode o instalador deles primeiro.');configuration.strataDir=dir;}else if(kind==='vllm'){if(!engines.vllmVenvReady(dir))throw Error('A pasta precisa conter bin/vllm.');configuration.vllmDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
+ipcMain.handle('choose-dir',async(e,kind,index)=>{validateSender(e);if(kind==='engine'&&(anythingRunning()||tuneAbort))throw Error('Pare a execução atual antes de trocar o motor.');if(!['engine','models','strata','vllm'].includes(kind))throw Error('Tipo de pasta inválido.');if((kind==='strata'||kind==='vllm')&&(serverBusy()||engineBusy))throw Error('Pare o servidor antes de trocar o motor.');if(kind==='vllm'&&engines.vllmMode()!=='venv')throw Error('No Windows o vLLM roda pelo Docker Desktop; não há pasta para escolher.');if(kind==='strata'&&!engines.engineInfo('strata').supported)throw Error(engines.engineInfo('strata').unsupportedReason);const titles={engine:'Pasta dos binários llama.cpp',models:'Pasta de modelos (GGUF ou Hugging Face)',strata:'Pasta do Strata ou do PolyStrata',vllm:'Ambiente Python com vLLM (contém bin/vllm)'};const result=await dialog.showOpenDialog(win,{properties:['openDirectory','createDirectory'],title:titles[kind]});if(result.canceled)return state();const dir=result.filePaths[0];const installRoot=app.isPackaged?path.dirname(process.execPath):null;if(installRoot&&core.isWithin(installRoot,dir))throw Error('Escolha uma pasta fora da instalação do aplicativo; ela será removida na desinstalação.');if(kind==='engine'){const executable=path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server');if(!fs.existsSync(executable))throw Error('A pasta precisa conter llama-server.');configuration.engineDir=dir;configuration.engineBackend='external';configuration.engineVersion='';refreshBuild(true);devicesProbes.delete(dir);fitCache.clear();}else if(kind==='strata'){if(!engines.detectStrata(dir))throw Error('A pasta precisa ser uma instalação do Strata ou do PolyStrata já configurada (serve/server.py e .venv). Rode o instalador deles primeiro.');configuration.strataDir=dir;}else if(kind==='vllm'){if(!engines.vllmVenvReady(dir))throw Error('A pasta precisa conter bin/vllm.');configuration.vllmDir=dir;}else {if(index!==0&&index!==1)throw Error('Local de modelos inválido.');if(core.isWithin(app.getPath('userData'),dir))throw Error('Escolha uma pasta de modelos fora dos dados internos do aplicativo.');configuration.modelDirs[index]=dir;}save();return state();});
 ipcMain.handle('clear-dir',(e,index)=>{validateSender(e);if(index!==1)throw Error('A primeira localização é obrigatória.');configuration.modelDirs[1]='';save();return state();});
 ipcMain.handle('install-engine',async(e,backend)=>{validateSender(e);if(anythingRunning()||tuneAbort)throw Error('Pare a execução atual antes de trocar o motor.');if(!engine.backendOptions().some(item=>item.id===backend))throw Error('Backend inválido para este sistema.');const dir=path.join(app.getPath('userData'),'engines',Date.now().toString());let result;try{result=await engine.installEngine(dir,backend,(percent,label)=>send('progress',{percent,label}));}catch(error){log(`
 [launcher] Falha ao instalar o llama.cpp (${backend}): ${error.message}
-`);throw error;}configuration.engineDir=result.path;configuration.engineVersion=result.release;configuration.engineBackend=result.backend;save();await refreshBuild(true);return state();});
+`);throw error;}try{roleEngines.writeManifest(result.path,result);}catch{}configuration.engineDir=result.path;configuration.engineVersion=result.release;configuration.engineBackend=result.backend;save();await refreshBuild(true);return state();});
 ipcMain.handle('refresh-engines',async e=>{validateSender(e);await refreshDocker();return state();});
 ipcMain.handle('install-vllm',async e=>{
   validateSender(e);
@@ -406,7 +423,18 @@ function stopContainer(name: string | null=serverContainer) {
 function stopServer(): Promise<void> {const pending=starts.cancel('chat');shareProxy?.close();shareProxy=null;proxy?.close();proxy=null;stopContainer();server?.kill();return pending;}
 ipcMain.handle('stop',e=>{validateSender(e);stopServer();return true;});
 function deciderLogText(text: string) {deciderLog.append(text);send('decider-log',text);}
-ipcMain.handle('decider-devices',async e=>{validateSender(e);return (await llamaDevices())||[];});
+ipcMain.handle('decider-devices',async(e,role='decider')=>{validateSender(e);if(!roleEngines.ROLES.includes(role))throw Error('Papel inválido.');return (await llamaDevices(roleEngineDir(role)))||[];});
+ipcMain.handle('set-role-engine',(e,role,dir)=>{
+  validateSender(e);
+  if(!roleEngines.ROLES.includes(role))throw Error('Papel inválido.');
+  if(role==='decider'?deciderBusy():reviewerBusy())throw Error(`Pare o ${role==='decider'?'decisor':'revisor'} antes de trocar o motor dele.`);
+  const chosen=roleEngines.validateChoice(role,dir,installedEngines());
+  const next=roleEngines.samePath(chosen,configuration.engineDir)?'':chosen;
+  // Os nomes dos dispositivos são do motor (CUDA0, Vulkan1…): ao trocar de motor, o salvo volta para Automático (Só CPU vale em qualquer motor).
+  if(!roleEngines.samePath(roleEngineDir(role),next||configuration.engineDir)&&configuration[role])configuration[role]={...configuration[role],device:configuration[role].device==='cpu'?'cpu':''};
+  configuration.roleEngines={...roleEngines.normalizeRoles(configuration.roleEngines),[role]:next};
+  save();return state();
+});
 ipcMain.handle('decider-start',async(e,modelPath,options: any={})=>{validateSender(e);return startDecider(modelPath,options);});
 async function startDecider(modelPath: string,options: any={},persist=true) {
   if(deciderBusy())throw Error('O decisor já está em execução.');
@@ -422,15 +450,17 @@ async function startDecider(modelPath: string,options: any={},persist=true) {
 }
 async function launchDecider(model: any,opts: any,access: any,persist: boolean,signal: AbortSignal) {
   const modelPath=model.path;
-  const checked=modelsLoaded()?await admit(signal,async measured=>({result:await planner.decider(model,opts,measured,signal)})):{result:null};
+  const dir=roleEngineDir('decider');
+  const checked=modelsLoaded()?await admit(signal,async measured=>({result:await planner.decider(model,opts,measured,signal,dir)}),dir):{result:null};
   const key=access.scope==='Local'?null:network.ensureKey(apiKeyPath());
   const port=await freePort(access.host,decisions.PORTS.first,decisions.PORTS.last);
   signal.throwIfAborted();
-  const executable=path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server');
+  const executable=roleEngines.hasServer(dir)?path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server'):'';
+  if(!executable)throw Error('O motor do decisor não foi encontrado. Escolha outro em Motor, no card do decisor.');
   const args=decisions.serverArgs(model,opts,port,key?apiKeyPath():null);
   if(persist){configuration.decider={modelPath,...opts};save();}
-  const child=spawn(executable,args,{cwd:configuration.engineDir,env:process.env,windowsHide:true,stdio:['ignore','pipe','pipe']});deciderProcess=child;
-  deciderLog.clear();deciderLogText(`[launcher] Iniciando o decisor · ${model.name} · ${access.scope} ${access.host}:${port}\n${memoryLine(checked.result)}`);
+  const child=spawn(executable,args,{cwd:dir,env:process.env,windowsHide:true,stdio:['ignore','pipe','pipe']});deciderProcess=child;
+  deciderLog.clear();deciderLogText(`[launcher] Iniciando o decisor · ${model.name} · ${access.scope} ${access.host}:${port}${roleEngineNote('decider')}\n${memoryLine(checked.result)}`);
   child.stdout.on('data',(d: Buffer)=>deciderLogText(String(d).slice(-3000)));
   child.stderr.on('data',(d: Buffer)=>deciderLogText(String(d).slice(-3000)));
   const cleanup=(code: any)=>{if(deciderProcess===child){deciderProcess=null;deciderActive=null;send('decider-stopped',code);}};
@@ -475,15 +505,17 @@ async function startReviewer(modelPath: string,options: any={},persist=true) {
 async function launchReviewer(model: any,opts: any,persist: boolean,signal: AbortSignal) {
   const profile=configuration.profiles[model.path]||{};
   params.validateEffort(profile,await paramContext(model,profile));
-  const {device,result}=await admit(signal,measured=>planner.reviewer(model,opts,profile,measured,signal));
+  const dir=roleEngineDir('reviewer');
+  const {device,result}=await admit(signal,measured=>planner.reviewer(model,opts,profile,measured,signal,dir),dir);
   const port=await freePort(review.HOST,review.PORTS.first,review.PORTS.last);
   signal.throwIfAborted();
-  const executable=path.join(configuration.engineDir,process.platform==='win32'?'llama-server.exe':'llama-server');
+  const executable=roleEngines.hasServer(dir)?path.join(dir,process.platform==='win32'?'llama-server.exe':'llama-server'):'';
+  if(!executable)throw Error('O motor do revisor não foi encontrado. Escolha outro em Motor, no card do revisor.');
   const args=review.serverArgs(model,{...opts,device},port,profile);
   // Guarda o que foi pedido: com Automático, o dispositivo é escolhido de novo a cada início.
   if(persist){configuration.reviewer={modelPath:model.path,...opts};save();}
-  const child=spawn(executable,args,{cwd:configuration.engineDir,env:process.env,windowsHide:true,stdio:['ignore','pipe','pipe']});reviewerProcess=child;
-  reviewerLog.clear();reviewerLogText(`[launcher] Iniciando o revisor · ${model.name} · ${device} · ${review.HOST}:${port}\n${memoryLine(result)}`);
+  const child=spawn(executable,args,{cwd:dir,env:process.env,windowsHide:true,stdio:['ignore','pipe','pipe']});reviewerProcess=child;
+  reviewerLog.clear();reviewerLogText(`[launcher] Iniciando o revisor · ${model.name} · ${device} · ${review.HOST}:${port}${roleEngineNote('reviewer')}\n${memoryLine(result)}`);
   child.stdout.on('data',(d: Buffer)=>reviewerLogText(String(d).slice(-3000)));
   child.stderr.on('data',(d: Buffer)=>reviewerLogText(String(d).slice(-3000)));
   const cleanup=(code: any)=>{if(reviewerProcess===child){reviewerProcess=null;reviewerActive=null;send('reviewer-stopped',code);}};
@@ -503,13 +535,16 @@ ipcMain.handle('reviewer-stop',e=>{validateSender(e);stopReviewer();return true;
 ipcMain.handle('reviewer-check',async(e,modelPath,options: any={})=>{
   validateSender(e);requireLlamaReady();
   const model=selectedModel(modelPath);review.requireModel(model);
-  return planner.reviewer(model,options,configuration.profiles[model.path]||{},await planner.snapshot());
+  const dir=roleEngineDir('reviewer');
+  return planner.reviewer(model,options,configuration.profiles[model.path]||{},await planner.snapshot([],dir),undefined,dir);
 });
 ipcMain.handle('copy-reviewer-endpoint',e=>{validateSender(e);if(!reviewerActive)throw Error('Inicie o revisor primeiro.');clipboard.writeText(reviewerActive.endpoint);return reviewerActive.endpoint;});
 ipcMain.handle('suggest-trio',async e=>{
   validateSender(e);requireLlamaReady();
   if(tuneAbort||starts.any())throw Error('Aguarde o início ou o teste em andamento.');
   if(conversation||serverContainer)throw Error('Pare a conversa integrada e o vLLM antes de pedir a sugestão: o launcher não mede a memória deles.');
+  if(roleEngines.ROLES.some((role: string)=>!roleEngines.samePath(roleEngineDir(role),configuration.engineDir)))
+    throw Error('A sugestão de trio usa um motor só. No revisor e no decisor, escolha "Mesmo motor do principal" em Motor para pedir a sugestão.');
   const pids=[server,deciderProcess,reviewerProcess].map((child: any)=>child?.pid).filter(Boolean);
   const deciderOrder=[deciderActive?.modelPath,configuration.decider?.modelPath].filter(Boolean);
   return planner.trio({models:allModels(),profiles:configuration.profiles,deciderOrder,pids,architecture:(model: any)=>modelInfo.modelInfo(model)?.architecture||''});
@@ -596,7 +631,7 @@ async function diagnosticData() {
     system:{platform:process.platform,arch:process.arch,release:os.release(),version:typeof os.version==='function'?os.version():''},
     hardware:s.hardware,gpu:await gpuDetails(),
     engines:s.engines,
-    llama:{backend:configuration.engineBackend||'',release:configuration.engineVersion||'',pinned:engine.ENGINE_TAG,build:engineBuild.describeBuild(currentBuild(),engine.ENGINE_TAG)},
+    llama:{backend:configuration.engineBackend||'',release:configuration.engineVersion||'',roleEngines:Object.fromEntries(roleEngines.ROLES.map((role: string)=>[role,roleEngineNote(role).replace(/^ · motor /,'')||'mesmo do principal'])),pinned:engine.ENGINE_TAG,build:engineBuild.describeBuild(currentBuild(),engine.ENGINE_TAG)},
     docker:engines.vllmMode()==='docker'?docker:null,
     paths:{userData:app.getPath('userData'),modelDirs:configuration.modelDirs.map((dir: string)=>({path:dir,exists:!!dir&&fs.existsSync(dir)})),apiKeySaved:!!apiKey},
     models:{total:s.models.length,byEngine,selected:selected?{name:selected.name,engine:selected.engine,size:selected.size,path:selected.path,profile:configuration.profiles[selected.path]||null}:null},
