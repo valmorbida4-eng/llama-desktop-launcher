@@ -36,7 +36,13 @@ function settings(): Record<string, string> {
   for(const f of schema?.fields||[]){if(!f.applicable){v[f.key]='';continue;}const auto=document.getElementById('a-'+f.key) as HTMLInputElement|null,control=document.getElementById('p-'+f.key) as HTMLInputElement|null;if(!auto||!control)continue;v[f.key]=auto.checked?'':control.value.trim();}
   return v;
 }
-function applySettings(v: any){values={...values,...normalized(v)};if(schema)renderParams(schema);}
+function applySettings(v: any){values={...values,...normalized(v)};dirty=true;if(schema)renderParams(schema);}
+// Ajustes de 03 ainda não salvos: trocar de modelo ou de motor pergunta antes de descartar.
+let dirty=false,editing='',picks: Record<string, string>={};
+const PICKS=['model','settings-model','settings-engine','main-engine'];
+function rememberPicks(){picks=Object.fromEntries(PICKS.map(id=>[id,$(id).value]));}
+function restorePicks(){for(const id of PICKS)if(id in picks)$(id).value=picks[id];}
+function discardEdits(){return !dirty||confirm(`Os ajustes de ${editing||'este modelo'} em Configurações › 03 ainda não foram salvos. Descartar e trocar?`);}
 function optionLabel(f: ParameterField,value: string){if(f.kind==='toggle')return toggleText[value]||value;if(f.key==='effort')return effortText[value]||value;if(f.kind==='model'){const m=snapshot?.models?.find(x=>x.path===value);return m?m.name:value.split(/[\\/]/).pop();}return value;}
 function autoText(f: ParameterField){if(!f.auto)return 'Automático: o motor decide.';const shown=f.kind==='toggle'?(toggleText[f.auto.value]||f.auto.value):f.auto.value;return `Automático: ${shown} · ${f.auto.source}`;}
 function buildControl(f: ParameterField,value: string,blank=false){
@@ -75,7 +81,7 @@ function renderParams(s: ParameterSchema){
 }
 // Recalcula o esquema quando um valor muda (alguns campos dependem de outros, como -fitc do contexto).
 let changeTimer: any=null;
-function paramsChanged(){values=settings();clearTimeout(changeTimer);changeTimer=setTimeout(()=>loadSchema(false).catch(e=>message(e.message,true)),200);}
+function paramsChanged(){values=settings();dirty=true;clearTimeout(changeTimer);changeTimer=setTimeout(()=>loadSchema(false).catch(e=>message(e.message,true)),200);}
 // Receita do fork (Avalon, tandem.cpp) para o modelo escolhido: preenche os campos; o usuário salva.
 let recipe: {title: string; note: string; settings: Record<string, string>} | null=null;
 async function loadRecipe(m: any){
@@ -117,14 +123,15 @@ function updateEngineControls(){
   $('tune-description').textContent=beside&&engineId!=='strata'?'Pare o revisor e o decisor antes do autotuning: modelos ao lado falseiam a medição e podem derrubar os dois.':engineId==='strata'?'O Strata e o PolyStrata não têm autotuning: quantização, contexto e GPU vêm da configuração do instalador deles.':engineId==='vllm'?'Sobe o vLLM várias vezes com valores diferentes e mede tokens/s. Cada tentativa recarrega o modelo: leva vários minutos.':'Mede com llama-bench e, se sobrar tempo, com um llama-server curto (especulativa, threads de prompt, cache MoE).';
   $('fit-values-card').hidden=engineId!=='llamacpp';
 }
-function fillModelSelectors(models,preferred){for(const id of ['model','settings-model']){const select=$(id),previous=preferred||$('model').value;const empty=document.createElement('option');empty.value='';empty.textContent=models.length?'Selecione um modelo':'Nenhum modelo instalado';select.replaceChildren(empty,...models.map(m=>{const o=document.createElement('option');o.value=m.path;o.textContent=m.name;return o;}));if(models.some(m=>m.path===previous))select.value=previous;else select.value='';}}
-function updateModelDetail(){const m=selected();if(!m){const count=snapshot?.models?.length||0;const hint=count?`Escolha um dos ${count} modelos encontrados na lista acima.`:'Nenhum GGUF encontrado. Configure uma pasta ou veja as sugestões compatíveis.';$('model-detail').textContent=hint;$('settings-model-detail').textContent=hint;activePath='';schemaPath='';schema=null;values={};loadSchema(false).catch(()=>{});updateEngineControls();return;}
+function fillModelSelectors(models,preferred,keepSettings=false){for(const id of ['model','settings-model']){const select=$(id),own=id==='settings-model'&&keepSettings&&dirty?select.value:'',previous=own||preferred||$('model').value;const empty=document.createElement('option');empty.value='';empty.textContent=models.length?'Selecione um modelo':'Nenhum modelo instalado';select.replaceChildren(empty,...models.map(m=>{const o=document.createElement('option');o.value=m.path;o.textContent=m.name;return o;}));if(models.some(m=>m.path===previous))select.value=previous;else select.value='';}}
+function updateModelDetail(){const m=selected();if(!m){const count=snapshot?.models?.length||0;const hint=count?`Escolha um dos ${count} modelos encontrados na lista acima.`:'Nenhum GGUF encontrado. Configure uma pasta ou veja as sugestões compatíveis.';$('model-detail').textContent=hint;$('settings-model-detail').textContent=hint;activePath='';schemaPath='';schema=null;values={};dirty=false;editing='';rememberPicks();loadSchema(false).catch(()=>{});updateEngineControls();return;}
   const engine=engineOf(m),engineText=engine?` · ${engine.label}${engine.ready?'':' (motor pendente)'}`:'';
   const note=m.engine==='strata'?` · contexto, quantização e GPU vêm da configuração do Strata${m.distribution==='PolyStrata'?`; Sessões simultâneas não se aplicam ao PolyStrata (a configuração dele usa ${m.parallel||1})`:''}`:'';
   const detail=`${m.size?`${(m.size/1024**3).toFixed(2)} GB · `:''}${m.path}${m.projector?' · projetor multimodal':''}${engineText}${note}`;$('model-detail').textContent=detail;fillEngineSelects();updateEngineControls();activePath=m.path;
   const dir=settingsEngineDir(),target=`${m.path}|${dir}`,key=profileKeyFor(m,dir),saved=!!savedProfileFor(m,dir);
   $('settings-model-detail').textContent=`${m.name} · ${key?`perfil para ${keyLabel(key)}${saved?' (salvo)':': ainda não salvo, os campos mostram o ajuste padrão deste motor'}`:'instale um motor llama.cpp para salvar o perfil'}.`;
-  if(schemaPath!==target){schemaPath=target;schema=null;values=profileOrDefault(m,dir);$('param-groups').replaceChildren();$('param-unavailable').hidden=true;$('tune-results').hidden=true;$('save-message').textContent='';loadSchema(true).catch(e=>message(e.message,true));}}
+  if(schemaPath!==target){schemaPath=target;schema=null;values=profileOrDefault(m,dir);dirty=false;editing=`${m.name}${key?` · ${keyLabel(key)}`:''}`;$('param-groups').replaceChildren();$('param-unavailable').hidden=true;$('tune-results').hidden=true;$('save-message').textContent='';loadSchema(true).catch(e=>message(e.message,true));}
+  rememberPicks();}
 // Motor do principal (tela Llama) e motor do perfil editado (Configurações). vLLM e Strata têm um motor só.
 function engineOptionsFor(m: any){
   if((m?.engine||'llamacpp')!=='llamacpp'){const label=engineOf(m)?.label||m.engine;return [option('',label)];}
@@ -136,18 +143,22 @@ function engineOptionsFor(m: any){
 function fillEngineSelects(){
   const s=snapshot;if(!s)return;
   const main=$('main-engine'),m=selected(),llama=(m?.engine||'llamacpp')==='llamacpp';
-  main.replaceChildren(...engineOptionsFor(m));main.value=llama?mainEngineDir():'';
-  main.disabled=!llama||installedEngines().length<2||!!(s.running||s.chatRunning);
-  main.title=!llama?'Este modelo roda no próprio motor.':installedEngines().length<2?'Só há um motor llama.cpp instalado. Baixe outro tipo em Configurações › 01.':s.running||s.chatRunning?'Pare o servidor e a conversa antes de trocar o motor.':'';
+  // Pasta do principal sem llama-server (apagada, antivírus): mostra o aviso e deixa escolher outro motor instalado.
+  const lost=llama&&!!mainEngineDir()&&!installedEngines().some(e=>e.dir===mainEngineDir()),choices=installedEngines().length+(lost?1:0);
+  main.replaceChildren(...(lost&&installedEngines().length?[option('','Motor do principal não encontrado: escolha outro')]:[]),...engineOptionsFor(m));main.value=llama&&!lost?mainEngineDir():'';
+  main.disabled=!llama||choices<2||!!(s.running||s.chatRunning);
+  main.title=!llama?'Este modelo roda no próprio motor.':choices<2?'Só há um motor llama.cpp instalado. Baixe outro tipo em Configurações › 01.':s.running||s.chatRunning?'Pare o servidor e a conversa antes de trocar o motor.':'';
   const sm=selectedSettingsModel(),box=$('settings-engine'),previous=box.value,smLlama=(sm?.engine||'llamacpp')==='llamacpp';
   box.replaceChildren(...engineOptionsFor(sm));
   box.value=smLlama?(installedEngines().some(e=>e.dir===previous)?previous:mainEngineDir()):'';
   box.disabled=!smLlama||installedEngines().length<2;
+  box.title=!smLlama?'Este modelo roda no próprio motor.':installedEngines().length<2?'Só há um motor llama.cpp instalado. Baixe outro tipo em Configurações › 01 para ter um perfil para ele.':'';
+  for(const select of [main,box])explainDisabled(select);
   // Nota da tela Llama: qual perfil vai valer ao iniciar.
   const note=$('main-profile');note.hidden=!m;if(!m)return;
   const dir=llama?mainEngineDir():'',key=profileKeyFor(m,dir),saved=savedProfileFor(m,dir);
   note.classList.toggle('default',!saved);
-  $('main-profile-text').textContent=!key?'Instale um motor llama.cpp em Configurações para iniciar este modelo.':saved?`Usa o perfil salvo para ${keyLabel(key)}${profileSummary(saved)}.`:`Sem perfil salvo para ${keyLabel(key)}: usa o ajuste padrão deste motor${profileSummary(defaultProfile(m))||' (o motor decide tudo)'}.`;
+  $('main-profile-text').textContent=lost&&installedEngines().length?'O motor do principal não foi encontrado nesta pasta: escolha outro em Motor.':!key?'Instale um motor llama.cpp em Configurações para iniciar este modelo.':saved?`Usa o perfil salvo para ${keyLabel(key)}${profileSummary(saved)}.`:`Sem perfil salvo para ${keyLabel(key)}: usa o ajuste padrão deste motor${profileSummary(defaultProfile(m))||' (o motor decide tudo)'}.`;
 }
 function profileSummary(p: any){const v=normalized(p),parts=[v.context?`contexto ${v.context}`:'',v.device?`dispositivo ${v.device==='cpu'?'CPU':v.device}`:'',v.gpuLayers?`${v.gpuLayers} camadas na GPU`:'',v.ubatch?`microbatch ${v.ubatch}`:'',v.cpuMoe?`${v.cpuMoe} camadas MoE na CPU`:''].filter(Boolean);return parts.length?` · ${parts.join(' · ')}`:'';}
 function bytes(value){if(value==null||!Number.isFinite(Number(value)))return '—';const n=Number(value);if(n<=0)return '0 B';const units=['B','KB','MB','GB','TB'];let x=n,unit=0;while(x>=1024&&unit<units.length-1){x/=1024;unit++;}return `${x.toFixed(unit?1:0)} ${units[unit]}`;}
@@ -173,14 +184,17 @@ function showUpdate(info?){
 async function updateAction(fn){const box=$('update-message');box.classList.remove('error');try{await fn();}catch(e){box.textContent=e.message||String(e);box.classList.add('error');}}
 async function loadGuidance(){if(typeof window.llama.modelGuidance!=='function')return;try{renderGuidance(await window.llama.modelGuidance());}catch(e){$('guidance-summary').textContent=`Falha ao ler o hardware: ${e.message||e}`;}}
 function updateNetwork(){$('network-controls').hidden=$('access-host').value==='127.0.0.1';$('key-value').hidden=true;$('key-value').textContent='';}
-function updateBackendHint(){const id=$('engine-backend').value;$('engine-backend-hint').textContent=id.startsWith('cuda-')?'Para placas NVIDIA. O download inclui as bibliotecas CUDA; é necessário um driver NVIDIA compatível.':id.startsWith('rocm-')?'Para placas AMD compatíveis com ROCm; requer driver e runtime compatíveis.':id.startsWith('sycl')?'Para GPUs Intel compatíveis com SYCL; pode exigir runtime Intel.':id==='cpu'?'Executa sem aceleração de GPU.':id==='metal'?'Aceleração Apple Metal.':'Aceleração Vulkan; requer driver compatível.';}
+function updateReplaceNote(){const id=String($('engine-backend').value||''),family=id.replace(/-.*$/,''),root=String(snapshot?.enginesRoot||'').toLowerCase().replace(/[\\/]+$/,'');
+  const old=installedEngines().filter(e=>e.key===family&&root&&e.dir.toLowerCase().startsWith(root)&&/^[\\/]/.test(e.dir.slice(root.length)));
+  const note=$('engine-replace-note');note.textContent=old.length?`Substitui ${old.map(e=>e.label).join(', ')}: a pasta antiga é apagada e os perfis continuam valendo.`:'';note.hidden=!old.length;}
+function updateBackendHint(){updateReplaceNote();const id=$('engine-backend').value;$('engine-backend-hint').textContent=id.startsWith('cuda-')?'Para placas NVIDIA. O download inclui as bibliotecas CUDA; é necessário um driver NVIDIA compatível.':id.startsWith('rocm-')?'Para placas AMD compatíveis com ROCm; requer driver e runtime compatíveis.':id.startsWith('sycl')?'Para GPUs Intel compatíveis com SYCL; pode exigir runtime Intel.':id==='cpu'?'Executa sem aceleração de GPU.':id==='metal'?'Aceleração Apple Metal.':'Aceleração Vulkan; requer driver compatível.';}
 function fillBackends(s){const select=$('engine-backend'),previous=select.value,options=s.backendOptions||[];select.replaceChildren(...options.map(item=>{const option=document.createElement('option');option.value=item.id;option.textContent=item.label;return option;}));const desired=options.find(item=>item.id===previous)||options.find(item=>item.id===s.config.engineBackend)||options[0];select.value=desired?.id||'';select.disabled=s.running||s.chatRunning||!options.length;updateBackendHint();}
 // Motores llama.cpp baixados (um por tipo) e o escolhido pelo usuário, com acesso à pasta de cada um.
 function fillInstalledEngines(s: any){
-  const list=$('installed-engines'),engines: EngineEntry[]=s.llamaEngines||[];
+  const list=$('installed-engines'),engines: EngineEntry[]=s.llamaEngines||[];$('engine-path').hidden=engines.some(e=>e.main);updateReplaceNote();
   if(!engines.length){const empty=document.createElement('small');empty.textContent='Nenhum motor instalado ainda.';list.replaceChildren(empty);return;}
   list.replaceChildren(...engines.map(e=>{const row=document.createElement('div');row.className='folder engine-row';const data=document.createElement('div');data.className='folder-data';
-    const title=document.createElement('strong');title.textContent=e.label+(e.main?' · principal':'');const where=document.createElement('small');where.textContent=e.dir;data.append(title,where);
+    if(e.main)row.classList.add('main');const title=document.createElement('strong');title.textContent=e.label+(e.main?' · principal':'');const where=document.createElement('small');where.textContent=e.dir;data.append(title,where);
     const open=document.createElement('button');open.type='button';open.className='ghost small';open.textContent='Abrir';open.onclick=()=>action(()=>window.llama.openEngineDir(e.dir));
     row.append(data,open);return row;}));
 }
@@ -199,8 +213,8 @@ function showConnection(result){$('sharing-controls').hidden=!result?.sharingEnd
 async function refresh(preferred?: string){snapshot=await window.llama.state();const s=snapshot;$('app-version').textContent='· v'+s.appVersion;$('update-check').checked=s.config.updateCheck!==false;showUpdate(s.update);const old=preferred||s.config.selectedModelPath||$('model').value;
   if(currentView===null)showView((!anyEngineReady(s)||!s.models.length||!s.config.selectedModelPath)?'settings':'llama');
   $('memory').textContent=bytes(s.hardware.memoryBytes);$('cpu').textContent=`${s.hardware.logicalCores} threads`;$('models-memory').textContent=bytes(s.hardware.memoryBytes);$('models-cpu').textContent=`${s.hardware.logicalCores} threads`;$('local-count').textContent=String(s.models.length);
-  $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor nesta pasta: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);fillInstalledEngines(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
-  fillModelSelectors(s.models.filter(m=>!m.decision),old);$('setup-hint').hidden=anyEngineReady(s)&&s.models.length>0;updateModelDetail();fillEngines(s);
+  $('firewall-rules-card').hidden=s.platform!=='win32';$('platform').textContent=({win32:'Windows',linux:'Linux',darwin:'macOS'})[s.platform]||s.platform;$('engine-status').textContent=s.engineReady?'Pronto':'Pendente';$('settings-engine-status').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('engine-badge').textContent=s.engineReady?'Motor pronto':'Motor pendente';$('settings-engine-badge').textContent=s.engineReady?'Pronto':'Pendente';$('engine-path').textContent=s.config.engineDir||'Nenhuma pasta selecionada';{const llama=s.engines?.find(e=>e.id==='llamacpp');$('engine-build').textContent=llama?.build?`Motor principal: ${llama.version}`:'';$('engine-build').hidden=!llama?.build;}fillBackends(s);fillInstalledEngines(s);$('folder-0').textContent=s.config.modelDirs[0]||'Não configurado';$('folder-1').textContent=s.config.modelDirs[1]||'Não configurado';
+  fillModelSelectors(s.models.filter(m=>!m.decision),old,!preferred);$('setup-hint').hidden=anyEngineReady(s)&&s.models.length>0;updateModelDetail();fillEngines(s);
   $('stop').hidden=!s.running;updateEngineControls();$('save-settings-profile').disabled=!s.models.length;$('stop-chat').hidden=!s.chatRunning;if(!s.chatRunning)$('stop-chat').disabled=false;$('send-chat').disabled=!s.chatReady;
   // Um refresh no meio (outro modelo iniciando) não apaga o endereço e as sessões escolhidos e ainda não usados.
   const access=$('access-host'),typedHost=access.value,savedAccess=`${s.config.accessHost}|${s.config.parallel}`,keepTyped=access.dataset.saved===savedAccess;access.dataset.saved=savedAccess;
@@ -211,13 +225,13 @@ async function refresh(preferred?: string){snapshot=await window.llama.state();c
 
 $('nav-llama').onclick=()=>showView('llama');$('nav-models').onclick=()=>showView('models');$('nav-settings').onclick=()=>showView('settings');$('open-settings').onclick=()=>showView('settings');$('open-models').onclick=()=>showView('models');
 $('finish-setup').onclick=()=>action(async()=>{await window.llama.completeSetup();await refresh();showView('llama');});
-$('model').addEventListener('change',()=>{const path=$('model').value;$('settings-model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});$('settings-model').addEventListener('change',()=>{const path=$('settings-model').value;$('model').value=path;$('settings-engine').value='';updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});
-$('settings-engine').addEventListener('change',()=>updateModelDetail());
-$('main-engine').addEventListener('change',()=>action(async()=>{const dir=$('main-engine').value;if(!dir||dir===mainEngineDir())return;
+$('model').addEventListener('change',()=>{if(!discardEdits()){restorePicks();return;}const path=$('model').value;$('settings-model').value=path;updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});$('settings-model').addEventListener('change',()=>{if(!discardEdits()){restorePicks();return;}const path=$('settings-model').value;$('model').value=path;$('settings-engine').value='';updateModelDetail();if(path)action(()=>window.llama.selectModel(path));});
+$('settings-engine').addEventListener('change',()=>{if(!discardEdits()){restorePicks();return;}updateModelDetail();});
+$('main-engine').addEventListener('change',()=>action(async()=>{const dir=$('main-engine').value;if(!dir||dir===mainEngineDir())return;if(!discardEdits()){restorePicks();return;}
   try{await window.llama.setMainEngine(dir);}finally{await refresh();}
   $('settings-engine').value=mainEngineDir();updateModelDetail();
   const m=selected();message(`Motor do principal: ${keyLabel(engineKeyOf(dir))}. ${m&&savedProfileFor(m,dir)?'Usa o perfil salvo deste modelo para ele.':'Este modelo ainda não tem perfil para ele: usa o ajuste padrão.'}`);}));
-$('edit-profile').onclick=()=>{const m=selected();if(m){$('settings-model').value=m.path;$('settings-engine').value=(m.engine||'llamacpp')==='llamacpp'?mainEngineDir():'';updateModelDetail();}showView('settings');$('settings-model').scrollIntoView({behavior:'smooth',block:'center'});};
+$('edit-profile').onclick=()=>{const m=selected();if(m&&discardEdits()){$('settings-model').value=m.path;$('settings-engine').value=(m.engine||'llamacpp')==='llamacpp'?mainEngineDir():'';updateModelDetail();}showView('settings');$('settings-model').scrollIntoView({behavior:'smooth',block:'center'});};
 $('open-engines-root').onclick=()=>action(()=>window.llama.openEngineDir());
 $('refresh').onclick=()=>action(()=>{reviewerCheck.key='';return refresh();});$('refresh-settings-models').onclick=()=>action(()=>refresh());$('refresh-guidance').onclick=()=>action(async()=>{guidance=null;await loadGuidance();});
 document.querySelectorAll<HTMLElement>('[data-folder]').forEach(b=>b.onclick=()=>action(async()=>{await window.llama.chooseDir('models',Number(b.dataset.folder));await refresh();}));
@@ -269,7 +283,7 @@ $('tune').onclick=()=>action(async()=>{const m=selectedSettingsModel();if(!m)thr
 $('cancel-tune').onclick=()=>action(async()=>{$('tuning-message').textContent='Cancelando o teste…';await window.llama.cancelTune();});
 $('save-settings-profile').onclick=()=>action(async()=>{const box=$('save-message');box.classList.remove('error');box.textContent='Salvando…';
   const m=selectedSettingsModel(),dir=settingsEngineDir();
-  try{if(!m)throw Error('Selecione um modelo para salvar os ajustes.');snapshot.config=(await window.llama.saveProfile(m.path,settings(),dir)).config;fillReviewerEffort(snapshot);fillEngineSelects();updateModelDetail();}
+  try{if(!m)throw Error('Selecione um modelo para salvar os ajustes.');snapshot.config=(await window.llama.saveProfile(m.path,settings(),dir)).config;dirty=false;fillReviewerEffort(snapshot);fillEngineSelects();updateModelDetail();}
   catch(error){box.textContent=error.message;box.classList.add('error');throw error;}
   const text=`Perfil de ${m.name} para ${keyLabel(profileKeyFor(m,dir))} salvo às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`;box.textContent=text;$('settings-message').textContent=text;$('message').textContent=text;});
 $('access-host').onchange=updateNetwork;
@@ -330,13 +344,17 @@ function loadRoleDevices(s: any,role: Role){
 function fillRoleEngine(s: any,role: Role,running: boolean){
   const select=$(`${role}-engine`),engines=s.llamaEngines||[],main=engines.find((e: any)=>e.main);
   const others=engines.filter((e: any)=>!e.main);
-  select.replaceChildren(option('',`Mesmo motor do principal${main?` (${main.label})`:''}`),...others.map((e: any)=>option(e.dir,e.label)));
+  const same=option('',`Igual ao principal${main?` (${main.keyLabel||main.label})`:''}`);same.title=main?`Mesmo motor do principal: ${main.label}`:'Mesmo motor do principal';
+  select.replaceChildren(same,...others.map((e: any)=>{const item=option(e.dir,e.label);item.title=e.label;return item;}));
   const info=s.roleEngines?.[role]||{};
   select.value=info.same?'':String(info.dir||'');
   select.disabled=running||!others.length;
   select.title=!others.length?'Só há um motor instalado. Para usar outro aqui (ex.: Vulkan para a GPU integrada), baixe-o em Configurações e volte o principal para o que preferir: os dois ficam disponíveis.':
     info.missing?'O motor escolhido não existe mais: usando o do principal.':'';
+  explainDisabled(select);
 }
+// Campo desativado não mostra a dica ao passar o mouse: a etiqueta em volta dele repete o motivo.
+function explainDisabled(select: HTMLElement){const label=select.closest('label');if(label)label.title=(select as HTMLSelectElement).disabled?select.title:'';}
 function deciderMessage(text: string,error=false){const box=$('decider-message');box.textContent=text;box.classList.toggle('error',error);}
 async function deciderAction(fn: () => Promise<any>){try{await fn();}catch(e){deciderMessage(e.message||String(e),true);}}
 function option(value: string,text: string){const o=document.createElement('option');o.value=value;o.textContent=text;return o;}

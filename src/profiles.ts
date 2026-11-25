@@ -25,19 +25,21 @@ function legacyKind(modelPath: string,mainKey: string) {
   if(/^strata-.+\.json$/i.test(name))return 'strata';
   return 'vllm';
 }
-// Copia os perfis antigos para o tipo do motor em uso. Só roda uma vez (engineProfiles ainda não existe) e espera
-// haver motor: sem ele não dá para saber de qual tipo eram os perfis de GGUF.
+// Copia os perfis antigos para o tipo do motor em uso, uma vez só (profilesMigrated). Espera haver motor: sem ele
+// não dá para saber de qual tipo eram os perfis de GGUF. Só copia modelos sem nenhum perfil novo, então um perfil
+// salvo antes da migração (ex.: de vLLM, com o motor sumido) não impede os outros de migrar nem é sobrescrito.
 function migrate(configuration: any,mainKey: string) {
-  if(configuration.engineProfiles!==undefined)return {store:normalize(configuration.engineProfiles),changed:false};
+  const current=normalize(configuration.engineProfiles);
+  if(configuration.profilesMigrated===true)return {store:current,done:false};
   const legacy=isObject(configuration.profiles)?configuration.profiles:{};
   const hasGguf=Object.keys(legacy).some(modelPath=>/\.gguf$/i.test(modelPath));
-  if(hasGguf&&!mainKey)return {store:undefined,changed:false};
-  const store: Store={};
+  if(hasGguf&&!mainKey)return {store:current,done:false};
+  const store: Store={...current};
   for(const [modelPath,profile] of Object.entries(legacy)){
-    if(!isObject(profile))continue;
+    if(!isObject(profile)||store[modelPath])continue;
     store[modelPath]={[legacyKind(modelPath,mainKey)]:params.migrateProfile(profile)};
   }
-  return {store,changed:true};
+  return {store,done:true};
 }
 function get(store: any,modelPath: string,key: string) {
   const profile=key?store?.[modelPath]?.[key]:null;
