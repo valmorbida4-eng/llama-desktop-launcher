@@ -84,14 +84,30 @@ test('sem perfil salvo para o motor escolhido vale o ajuste padrão desse motor,
 test('os perfis antigos vão para o tipo do motor em uso, uma vez só', () => {
   const legacy = { [gguf]: { context: 8192, gpuLayers: 'auto' }, 'C:/hf/Qwen-AWQ': { context: '4096', version: 2 }, 'C:/strata/strata-a.json': { version: 2 } };
   const first = profiles.migrate({ profiles: legacy }, 'vulkan');
-  assert.equal(first.changed, true);
+  assert.equal(first.done, true);
   assert.deepEqual(first.store[gguf], { vulkan: { context: '8192', gpuLayers: '', version: 2 } });
   assert.deepEqual(Object.keys(first.store['C:/hf/Qwen-AWQ']), ['vllm']);
   assert.deepEqual(Object.keys(first.store['C:/strata/strata-a.json']), ['strata']);
-  assert.equal(profiles.migrate({ profiles: legacy }, '').store, undefined, 'sem motor, espera para saber o tipo');
-  const again = profiles.migrate({ profiles: legacy, engineProfiles: first.store }, 'cuda');
-  assert.equal(again.changed, false);
+  const waiting = profiles.migrate({ profiles: legacy }, '');
+  assert.equal(waiting.done, false, 'sem motor, espera para saber o tipo');
+  assert.deepEqual(waiting.store, {});
+  const again = profiles.migrate({ profiles: legacy, engineProfiles: first.store, profilesMigrated: true }, 'cuda');
+  assert.equal(again.done, false);
   assert.deepEqual(Object.keys(again.store[gguf]), ['vulkan']);
+  // Quem migrou na v0.17.0 (sem a marca) não ganha cópia dos perfis antigos no tipo do motor atual.
+  const fromOld = profiles.migrate({ profiles: legacy, engineProfiles: first.store }, 'cuda');
+  assert.deepEqual(Object.keys(fromOld.store[gguf]), ['vulkan']);
+});
+
+test('um perfil salvo enquanto a migração espera o motor não impede os perfis antigos de migrar', () => {
+  const legacy = { [gguf]: { context: '8192', version: 2 }, 'C:/hf/Qwen-AWQ': { context: '2048', version: 2 } };
+  const configuration = { profiles: legacy };
+  assert.equal(profiles.migrate(configuration, '').done, false);
+  configuration.engineProfiles = profiles.set(configuration.engineProfiles, 'C:/hf/Qwen-AWQ', 'vllm', { context: '16384' });
+  const later = profiles.migrate(configuration, 'cuda');
+  assert.equal(later.done, true);
+  assert.deepEqual(later.store[gguf], { cuda: { context: '8192', version: 2 } });
+  assert.equal(later.store['C:/hf/Qwen-AWQ'].vllm.context, '16384', 'o perfil salvo depois não é sobrescrito');
 });
 
 test('a sugestão de trio recebe um perfil por modelo, do tipo do principal', () => {

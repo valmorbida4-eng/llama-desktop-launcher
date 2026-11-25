@@ -1,8 +1,8 @@
 {
   "package.json": {
-    "mtime": 1795513343.2929845,
-    "seen": 1795513357.9479058,
-    "ast_hash": "6dacf81ce9d77637e4d7d91f2847b8bc",
+    "mtime": 1795561829.1748216,
+    "seen": 1795563031.7575388,
+    "ast_hash": "d7dc6e5d3e510566896ab277fa84843e",
     "semantic_hash": ""
   },
   "scripts/build.js": {
@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "scripts/smoke-ui.js": {
-    "mtime": 1795512983.1039057,
-    "seen": 1795513357.9479058,
-    "ast_hash": "7a59850ef6e60f9d4356f3cae9d71617",
+    "mtime": 1795514590.7680476,
+    "seen": 1795563031.7575388,
+    "ast_hash": "8f4b137ac7c119c9bd1ee79a06cde05f",
     "semantic_hash": ""
   },
   "src/benchmark.ts": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "src/electron-api.d.ts": {
-    "mtime": 1795512874.5005271,
-    "seen": 1795513357.9479058,
-    "ast_hash": "a1ab0d112619a19fd47efc89c00861d2",
+    "mtime": 1795514590.770045,
+    "seen": 1795563031.7575388,
+    "ast_hash": "677c6699587ec55f81565242772f34b4",
     "semantic_hash": ""
   },
   "src/engine.ts": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1795513256.8902736,
-    "seen": 1795513357.9479058,
-    "ast_hash": "dc060b72cd9545949ab546700d462907",
+    "mtime": 1795561888.713569,
+    "seen": 1795563031.7575388,
+    "ast_hash": "4e3b32709bb8cfe9339b491d5d5508af",
     "semantic_hash": ""
   },
   "src/network.ts": {
@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "src/preload.ts": {
-    "mtime": 1795512874.501525,
-    "seen": 1795513357.9479058,
-    "ast_hash": "a3a3781cfc15f8448753b1b2c68bcb02",
+    "mtime": 1795514590.7745628,
+    "seen": 1795563031.7575388,
+    "ast_hash": "c27ee2b9c039502806a3ae4cdeed86d4",
     "semantic_hash": ""
   },
   "src/profile_import.ts": {
@@ -156,9 +156,9 @@
     "semantic_hash": "ecc6e7aad0ce2dd942b233d7d8cae4ce"
   },
   "src/renderer.ts": {
-    "mtime": 1795513328.0624774,
-    "seen": 1795513357.9479058,
-    "ast_hash": "9d0ec8b3d03d0316f2118877b5d8298f",
+    "mtime": 1795562672.6224725,
+    "seen": 1795563031.7575388,
+    "ast_hash": "a4e9bf244882bcc11f3b1d378df97df5",
     "semantic_hash": ""
   },
   "src/terminal_cli.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795513342.2697093,
-    "seen": 1795513357.9479058,
-    "ast_hash": "f5b43447b3c742c0d3270544d062239e",
+    "mtime": 1795563003.2475934,
+    "seen": 1795563031.7575388,
+    "ast_hash": "5055e86870f0d2c59d8ed483fe952764",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.md": {
@@ -384,9 +384,9 @@
     "semantic_hash": ""
   },
   "src/index.html": {
-    "mtime": 1795512900.8595538,
-    "seen": 1795513357.9479058,
-    "ast_hash": "df7acfef6450974ae4f66cdcb67e59cc",
+    "mtime": 1795562672.6199677,
+    "seen": 1795563031.7575388,
+    "ast_hash": "6f793e49a59ec09ae793f0aa49be785a",
     "semantic_hash": ""
   },
   "docs/MANUAL-en.pdf": {
@@ -816,27 +816,27 @@
     "semantic_hash": ""
   },
   "src/role_engines.ts": {
-    "mtime": 1795513237.3551638,
-    "seen": 1795513357.9479058,
+    "mtime": 1795514590.7775664,
+    "seen": 1795563031.7575388,
     "ast_hash": "bc92766203356a394c2572cdae94e664",
     "semantic_hash": ""
   },
   "tests/role_engines.test.js": {
-    "mtime": 1795513249.5499377,
-    "seen": 1795513357.9479058,
+    "mtime": 1795514590.7799575,
+    "seen": 1795563031.7575388,
     "ast_hash": "7729a12822c85b1bec50a89ded86549a",
     "semantic_hash": ""
   },
   "src/profiles.ts": {
-    "mtime": 1795512850.9477265,
-    "seen": 1795513357.9479058,
-    "ast_hash": "3661c4cff72d1a3041928842ad42c720",
+    "mtime": 1795561798.7515092,
+    "seen": 1795563031.7575388,
+    "ast_hash": "2eede4a26f373e34296995f7f043ae73",
     "semantic_hash": ""
   },
   "tests/profiles.test.js": {
-    "mtime": 1795513080.6394997,
-    "seen": 1795513357.9479058,
-    "ast_hash": "bbfd6d67b0b88021b6a1d804d4760316",
+    "mtime": 1795561814.190642,
+    "seen": 1795563031.7575388,
+    "ast_hash": "44e146b2ebaa273ca3769aa650f3017f",
     "semantic_hash": ""
   }
 }

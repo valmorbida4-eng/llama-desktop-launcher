@@ -74,8 +74,9 @@ function migrateProfiles() {
   for(const [key,profile] of Object.entries(profiles)){const next=params.migrateProfile(profile);if(next!==profile){profiles[key]=next;changed=true;}}
   configuration.profiles=profiles;
   // v0.17.0: um perfil por modelo e tipo de motor. Os antigos vão para o tipo do motor em uso (ver profiles.migrate).
-  const moved=profileStore.migrate(configuration,mainKey());
-  if(moved.store!==undefined){configuration.engineProfiles=moved.store;changed||=moved.changed;}
+  // Sem a pasta do motor (apagada, antivírus), vale o tipo do último download: foi com ele que os perfis foram feitos.
+  const moved=profileStore.migrate(configuration,mainKey()||roleEngines.familyOf(configuration.engineBackend));
+  if(moved.done){configuration.engineProfiles=moved.store;configuration.profilesMigrated=true;changed=true;}
   if(changed)save();
 }
 // Tipo do motor (vulkan, cuda, cpu…) que identifica o perfil. vLLM e Strata usam o próprio nome.
@@ -89,7 +90,7 @@ function savedProfile(model: any,dir: string=configuration.engineDir) {return pr
 function storeProfile(model: any,settings: any,dir: string=configuration.engineDir) {configuration.engineProfiles=profileStore.set(configuration.engineProfiles,model.path,profileKey(model,dir),settings);}
 // Pasta de motor pedida pela tela: vazia = a do principal; outra precisa ser um dos motores instalados.
 function engineDirFor(dir: any) {
-  if(!dir)return configuration.engineDir;
+  if(!dir||roleEngines.samePath(dir,configuration.engineDir))return configuration.engineDir;
   if(typeof dir!=='string')throw Error('Motor inválido.');
   const found=installedEngines().find((item: any)=>roleEngines.samePath(item.dir,dir));
   if(!found)throw Error('Este motor não está mais instalado. Atualize a lista ou escolha outro.');
@@ -280,9 +281,10 @@ ipcMain.handle('clear-dir',(e,index)=>{validateSender(e);if(index!==1)throw Erro
 ipcMain.handle('install-engine',async(e,backend)=>{validateSender(e);if(anythingRunning()||tuneAbort)throw Error('Pare a execução atual antes de trocar o motor.');if(!engine.backendOptions().some(item=>item.id===backend))throw Error('Backend inválido para este sistema.');const dir=path.join(enginesRoot(),Date.now().toString());let result;try{result=await engine.installEngine(dir,backend,(percent,label)=>send('progress',{percent,label}));}catch(error){log(`
 [launcher] Falha ao instalar o llama.cpp (${backend}): ${error.message}
 `);throw error;}try{roleEngines.writeManifest(result.path,result);}catch{}
-  const outcome=replaceSameType(result.path);
+  // O tipo do principal é lido antes de apagar a pasta antiga: depois dela sumir, não dá mais para saber se mudou.
+  const previousKey=mainKey(),outcome=replaceSameType(result.path);
   // O novo vira o principal quando substitui o principal ou quando ainda não havia motor; senão fica disponível na lista.
-  if(outcome.mainReplaced||!llamaReady())useMainEngine(result.path);
+  if(outcome.mainReplaced||!llamaReady())useMainEngine(result.path,previousKey);
   save();await refreshBuild(true);
   return {...state(),installed:{dir:result.path,key:roleEngines.engineKey(result.path),label:roleEngines.familyLabel(roleEngines.engineKey(result.path)),main:roleEngines.samePath(configuration.engineDir,result.path),replaced:outcome.replaced.length,failed:outcome.failed}};});
 // Um download do mesmo tipo (outro Vulkan, outro CUDA…) substitui o anterior: só pastas que o launcher baixou em
@@ -301,8 +303,8 @@ function replaceSameType(fresh: string) {
 }
 // Troca o motor do principal por outro já instalado. Os papéis em "Mesmo motor do principal" mudam junto: se o tipo
 // mudou, o dispositivo salvo deles volta para Automático (Só CPU fica), como ao trocar o motor do papel.
-function useMainEngine(dir: string) {
-  const before=mainKey(),manifest=roleEngines.readManifest(dir);
+function useMainEngine(dir: string,before: string=mainKey()) {
+  const manifest=roleEngines.readManifest(dir);
   configuration.engineDir=dir;configuration.engineVersion=String(manifest?.release||'');configuration.engineBackend=String(manifest?.backend||'external');
   const after=mainKey();
   for(const role of roleEngines.ROLES){
